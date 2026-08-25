@@ -1,0 +1,2694 @@
+{
+  "schemaVersion": "portfolio-handoff-1.0",
+  "figmaFileKey": "rabzg12ypNFDTsDPCth2HG",
+  "routes": {
+    "cloudchipr": "/cloudchipr/",
+    "material-exchange": "/material-exchange/",
+    "securion": "/securion/",
+    "material-exchange-photo-lab": "/material-exchange-photo-lab/",
+    "hotel-apartments": "/hotel-apartments/"
+  },
+  "projects": [
+    {
+      "schemaVersion": "2.0.0-alpha.2",
+      "project": {
+        "title": "CloudChipr",
+        "slug": "cloudchipr",
+        "source": {
+          "fileKey": "rabzg12ypNFDTsDPCth2HG",
+          "nodeId": "331:27645"
+        }
+      },
+      "tokens": {
+        "pageWidth": "1920px",
+        "containerWidth": "1048px",
+        "wideWidth": "1800px",
+        "displayFont": "Syne, sans-serif",
+        "bodyFont": "Syne, sans-serif",
+        "displayTitle": "80px",
+        "bodyLarge": "32px",
+        "bodyLineHeight": "1.6"
+      },
+      "assets": {
+        "hero": {
+          "packagePath": "assets/cloudchipr/hero-collage.png",
+          "sourceNode": "331:27652",
+          "kind": "image",
+          "width": 1088,
+          "height": 1304,
+          "alt": "CloudChipr product interface collage"
+        },
+        "brand-construction": {
+          "packagePath": "assets/cloudchipr/brand-construction.png",
+          "sourceNode": "331:28124",
+          "kind": "image",
+          "width": 1788,
+          "height": 708,
+          "alt": "CloudChipr logo construction and wordmark"
+        },
+        "identity-mockup": {
+          "packagePath": "assets/cloudchipr/identity-mockup.png",
+          "sourceNode": "331:27646",
+          "kind": "image",
+          "width": 1800,
+          "height": 1025,
+          "alt": "CloudChipr brand identity on stationery and merchandise"
+        },
+        "brand-items-composition": {
+          "packagePath": "assets/cloudchipr/brand-items-composition.png",
+          "sourceNode": "reference-screenshot",
+          "kind": "image",
+          "width": 1578,
+          "height": 1032,
+          "alt": "CloudChipr branded badge, bottle, and business cards"
+        },
+        "brand-badge": {
+          "packagePath": "assets/cloudchipr/brand-badge.png",
+          "sourceNode": "provided-layer",
+          "kind": "image",
+          "width": 1498,
+          "height": 1959,
+          "alt": "CloudChipr employee badge mockup"
+        },
+        "brand-card-details": {
+          "packagePath": "assets/cloudchipr/brand-card-details.png",
+          "sourceNode": "provided-layer",
+          "kind": "image",
+          "width": 1632,
+          "height": 1412,
+          "alt": "CloudChipr business card contact side"
+        },
+        "brand-card-logo": {
+          "packagePath": "assets/cloudchipr/brand-card-logo.png",
+          "sourceNode": "provided-layer",
+          "kind": "image",
+          "width": 1052,
+          "height": 1415,
+          "alt": "CloudChipr business card logo side"
+        },
+        "field-study-photo": {
+          "packagePath": "assets/cloudchipr/field-study-photo.png",
+          "sourceNode": "331:28245",
+          "kind": "image",
+          "width": 1800,
+          "height": 830,
+          "alt": "Field study with SRE and DevOps engineers"
+        },
+        "field-card-1": {
+          "packagePath": "assets/cloudchipr/field-card-1.png",
+          "sourceNode": "331:28183",
+          "kind": "image",
+          "width": 722,
+          "height": 558,
+          "alt": "Field study research artifact"
+        },
+        "field-card-2": {
+          "packagePath": "assets/cloudchipr/field-card-2.png",
+          "sourceNode": "331:28184",
+          "kind": "image",
+          "width": 719,
+          "height": 534,
+          "alt": "Field study research artifact"
+        },
+        "field-card-3": {
+          "packagePath": "assets/cloudchipr/field-card-3.png",
+          "sourceNode": "331:28185",
+          "kind": "image",
+          "width": 721,
+          "height": 442,
+          "alt": "Field study research artifact"
+        },
+        "aws-course": {
+          "packagePath": "assets/cloudchipr/aws-course.png",
+          "sourceNode": "331:28176",
+          "kind": "image",
+          "width": 1759,
+          "height": 947,
+          "alt": "AWS Certified Cloud Practitioner course"
+        },
+        "sre-quote": {
+          "packagePath": "assets/cloudchipr/sre-quote.png",
+          "sourceNode": "331:28187",
+          "kind": "image",
+          "width": 1260,
+          "height": 391,
+          "alt": "Quote from an SRE interview in Slack"
+        },
+        "product-overview": {
+          "packagePath": "assets/cloudchipr/product-overview.png",
+          "sourceNode": "331:28072",
+          "kind": "image",
+          "width": 1800,
+          "height": 1192,
+          "alt": "CloudChipr automated cloud cost optimization interface"
+        },
+        "product-strip": {
+          "packagePath": "assets/cloudchipr/product-strip.png",
+          "sourceNode": "331:28073",
+          "kind": "image",
+          "width": 1801,
+          "height": 500,
+          "alt": "CloudChipr cloud operations workflow interface"
+        },
+        "feature-save": {
+          "packagePath": "assets/cloudchipr/feature-save.png",
+          "sourceNode": "331:28233",
+          "kind": "icon",
+          "width": 192,
+          "height": 192,
+          "alt": "Cloud savings icon"
+        },
+        "feature-rbac": {
+          "packagePath": "assets/cloudchipr/feature-rbac.png",
+          "sourceNode": "331:28234",
+          "kind": "icon",
+          "width": 192,
+          "height": 192,
+          "alt": "RBAC integration icon"
+        },
+        "feature-accountability": {
+          "packagePath": "assets/cloudchipr/feature-accountability.png",
+          "sourceNode": "331:28235",
+          "kind": "icon",
+          "width": 192,
+          "height": 192,
+          "alt": "Accountability icon"
+        },
+        "feature-automation": {
+          "packagePath": "assets/cloudchipr/feature-automation.png",
+          "sourceNode": "331:28236",
+          "kind": "icon",
+          "width": 192,
+          "height": 192,
+          "alt": "Automation icon"
+        },
+        "feature-ticket": {
+          "packagePath": "assets/cloudchipr/feature-ticket.png",
+          "sourceNode": "331:28237",
+          "kind": "icon",
+          "width": 192,
+          "height": 192,
+          "alt": "Ticket assignment icon"
+        },
+        "feature-tagging": {
+          "packagePath": "assets/cloudchipr/feature-tagging.png",
+          "sourceNode": "331:28238",
+          "kind": "icon",
+          "width": 192,
+          "height": 192,
+          "alt": "Tagging policy icon"
+        },
+        "achievements-background": {
+          "packagePath": "assets/cloudchipr/achievements-background.png",
+          "sourceNode": "331:28082",
+          "kind": "background",
+          "width": 4096,
+          "height": 1695,
+          "alt": ""
+        },
+        "metric-saved": {
+          "packagePath": "assets/cloudchipr/metric-saved.png",
+          "sourceNode": "331:28089",
+          "kind": "icon",
+          "width": 56,
+          "height": 56,
+          "alt": "Total savings icon"
+        },
+        "metric-customers": {
+          "packagePath": "assets/cloudchipr/metric-customers.png",
+          "sourceNode": "331:28090",
+          "kind": "icon",
+          "width": 56,
+          "height": 56,
+          "alt": "Customer savings icon"
+        },
+        "metric-engineers": {
+          "packagePath": "assets/cloudchipr/metric-engineers.png",
+          "sourceNode": "331:28091",
+          "kind": "icon",
+          "width": 56,
+          "height": 56,
+          "alt": "Engineering time icon"
+        },
+        "viktor-avatar": {
+          "packagePath": "assets/cloudchipr/viktor-harutyunyan.png",
+          "sourceNode": "331:27980",
+          "kind": "image",
+          "width": 208,
+          "height": 208,
+          "alt": "Viktor Harutyunyan"
+        },
+        "navigation-background": {
+          "packagePath": "assets/cloudchipr/navigation-background.png",
+          "sourceNode": "331:37272",
+          "kind": "background",
+          "width": 474,
+          "height": 1024,
+          "alt": ""
+        },
+        "concept-favorite": {
+          "packagePath": "assets/cloudchipr/concept-favorite.png",
+          "sourceNode": "331:28113",
+          "kind": "image",
+          "width": 293,
+          "height": 180,
+          "alt": "CloudChipr logo concept preferred by the designer"
+        },
+        "concept-selected": {
+          "packagePath": "assets/cloudchipr/concept-selected.png",
+          "sourceNode": "331:28117",
+          "kind": "image",
+          "width": 259,
+          "height": 147,
+          "alt": "CloudChipr logo concept selected by the client"
+        },
+        "concept-variant-a": {
+          "packagePath": "assets/cloudchipr/concept-variant-a.png",
+          "sourceNode": "331:28107",
+          "kind": "image",
+          "width": 212,
+          "height": 164,
+          "alt": "Rejected CloudChipr logo variant"
+        },
+        "concept-variant-b": {
+          "packagePath": "assets/cloudchipr/concept-variant-b.png",
+          "sourceNode": "331:28110",
+          "kind": "image",
+          "width": 187,
+          "height": 202,
+          "alt": "Rejected CloudChipr logo variant"
+        },
+        "concept-rejected": {
+          "packagePath": "assets/cloudchipr/concept-rejected.png",
+          "sourceNode": "331:28099",
+          "kind": "image",
+          "width": 864,
+          "height": 66,
+          "alt": "Rejected CloudChipr color variants"
+        },
+        "competitor-roi": {
+          "packagePath": "assets/cloudchipr/competitor-roi.png",
+          "sourceNode": "331:28012",
+          "kind": "image",
+          "width": 1208,
+          "height": 653,
+          "alt": "Competitor comparison and ROI research"
+        },
+        "competitor-map": {
+          "packagePath": "assets/cloudchipr/competitor-map.png",
+          "sourceNode": "331:28018",
+          "kind": "image",
+          "width": 1380,
+          "height": 1191,
+          "alt": "CloudChipr competitor analysis map"
+        },
+        "design-system-screen": {
+          "packagePath": "assets/cloudchipr/design-system-screen.png",
+          "sourceNode": "331:28076",
+          "kind": "image",
+          "width": 915,
+          "height": 968,
+          "alt": "MUI design system screen"
+        },
+        "design-system-mobile": {
+          "packagePath": "assets/cloudchipr/design-system-mobile.png",
+          "sourceNode": "331:28077",
+          "kind": "image",
+          "width": 514,
+          "height": 647,
+          "alt": "MUI mobile component example"
+        },
+        "design-system-logo": {
+          "packagePath": "assets/cloudchipr/design-system-logo.png",
+          "sourceNode": "331:28078",
+          "kind": "image",
+          "width": 300,
+          "height": 259,
+          "alt": "MUI logo"
+        },
+        "product-screen-left": {
+          "packagePath": "assets/cloudchipr/product-screen-left.png",
+          "sourceNode": "331:28093",
+          "kind": "image",
+          "width": 880,
+          "height": 780,
+          "alt": "CloudChipr product workflow screen"
+        },
+        "product-screen-right": {
+          "packagePath": "assets/cloudchipr/product-screen-right.png",
+          "sourceNode": "331:28094",
+          "kind": "image",
+          "width": 880,
+          "height": 780,
+          "alt": "CloudChipr product analytics screen"
+        },
+        "product-screen-wide": {
+          "packagePath": "assets/cloudchipr/product-screen-wide.png",
+          "sourceNode": "331:28095",
+          "kind": "image",
+          "width": 1800,
+          "height": 780,
+          "alt": "CloudChipr product overview screen"
+        }
+      },
+      "sections": [
+        {
+          "id": "intro",
+          "type": "intro",
+          "sourceNode": "331:27645",
+          "layout": "wide",
+          "background": {
+            "gradient": "linear-gradient(41.269deg, rgb(32,65,235) 8.3056%, rgb(115,52,241) 73.616%)",
+            "scope": "inner",
+            "radius": "30px"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "57px",
+          "paddingBottom": "0px",
+          "title": "CloudChipr",
+          "subtitle": "Brand Identity and A Cloud Cost Management and Analytics Platform Design",
+          "metadata": [
+            {
+              "label": "Client:",
+              "value": "CloudChipr"
+            },
+            {
+              "label": "Categories:",
+              "value": "FinOps, SaaS, B2B, CCMS"
+            },
+            {
+              "label": "Duration:",
+              "value": "18 Months"
+            },
+            {
+              "label": "Services:",
+              "value": "Brand Identity, Problem Discovery, User research, MVP, Usability testing"
+            },
+            {
+              "label": "Projects:",
+              "value": "Platform MVP, Scheduling tool, AWS, GCP, Azure Cost Optimisation"
+            },
+            {
+              "label": "Tools:",
+              "value": "Figma, Miro, Maze"
+            },
+            {
+              "label": "Co-Designers:",
+              "value": "Bella Hayrapetyan, Habet Ayvazyan, Zhanna Voskanyan"
+            }
+          ],
+          "media": "hero"
+        },
+        {
+          "id": "about",
+          "type": "prose",
+          "sourceNode": "331:28123",
+          "layout": "contained",
+          "headingGradient": "linear-gradient(93.372deg, rgb(32,65,235) 29.211%, rgb(115,52,241) 91.828%)",
+          "paddingTop": "203px",
+          "paddingBottom": "190px",
+          "title": "About the project",
+          "body": "<p>Cloudchipr is a cloud costs <strong>observability, management and automation platform.</strong></p><p>It helps engineering and finance teams save time and money by <strong>automating cloud operations.</strong> With Cloudchipr, teams can <strong>schedule different automated workflows</strong> that send Slack alerts, build <strong>Tableau charts</strong>, create Jira tickets, and <strong>deactivate unused resources</strong> across all major cloud platforms. It’s like Zapier for cloud ops.</p>"
+        },
+        {
+          "id": "brand-construction",
+          "type": "media",
+          "sourceNode": "331:28124",
+          "layout": "wide",
+          "paddingBottom": "117px",
+          "asset": "brand-construction"
+        },
+        {
+          "id": "concept-selection",
+          "type": "prose",
+          "sourceNode": "331:28096",
+          "layout": "contained",
+          "paddingTop": "60px",
+          "paddingBottom": "90px",
+          "title": "Concept Selection",
+          "body": "<p>This is one of those scenarios, where my design preferences <strong>did not align with the client's.</strong> However \"the client is always right.\"</p>"
+        },
+        {
+          "id": "concept-options",
+          "type": "gallery",
+          "sourceNode": "331:28113",
+          "layout": "contained",
+          "columns": 4,
+          "paddingBottom": "70px",
+          "items": [
+            {
+              "asset": "concept-favorite",
+              "caption": "My favorite"
+            },
+            {
+              "asset": "concept-selected",
+              "caption": "Selected by client"
+            },
+            {
+              "asset": "concept-variant-a",
+              "caption": "Rejected variant"
+            },
+            {
+              "asset": "concept-variant-b",
+              "caption": "Rejected variant"
+            }
+          ]
+        },
+        {
+          "id": "concept-rejected-variants",
+          "type": "media",
+          "sourceNode": "331:28099",
+          "layout": "contained",
+          "paddingBottom": "130px",
+          "asset": "concept-rejected",
+          "caption": "Rejected variants"
+        },
+        {
+          "id": "identity-mockup",
+          "type": "media",
+          "sourceNode": "331:27646",
+          "layout": "wide",
+          "paddingBottom": "190px",
+          "asset": "identity-mockup"
+        },
+        {
+          "id": "how-it-started",
+          "type": "prose",
+          "sourceNode": "331:28174",
+          "layout": "contained",
+          "paddingTop": "70px",
+          "paddingBottom": "80px",
+          "title": "How it started",
+          "body": "<p>Imagine being a UX designer exploring the world of cloud systems like AWS, GCP, and Azure. Sounds hard ha?</p><p>I joined a team of expert SRE and DevOps engineers when the project was <strong>just starting</strong>, moving from being a solo designer. Back then, all we had were <strong>a concept and a few rough mockups.</strong> As I was relatively new to this field, I decided to start with the basics – fundamental learning. This study covered a series of important steps that I needed to work through.</p>"
+        },
+        {
+          "id": "field-study-photo",
+          "type": "media",
+          "sourceNode": "331:28245",
+          "layout": "wide",
+          "asset": "field-study-photo",
+          "caption": "Zenelys. SRE and DevOps engineers office. Shadowing process."
+        },
+        {
+          "id": "field-study",
+          "type": "prose",
+          "sourceNode": "331:28175",
+          "layout": "contained",
+          "paddingTop": "170px",
+          "paddingBottom": "70px",
+          "title": "Field Study",
+          "body": "<p>I went on a quest, scouring <strong>industry reports, articles, and whitepapers</strong> all about cloud cost optimization and management, SREs and DevOpses job, daily routine etc.</p>"
+        },
+        {
+          "id": "field-study-gallery",
+          "type": "gallery",
+          "sourceNode": "331:28183",
+          "layout": "wide",
+          "columns": 3,
+          "caption": "Get more information on this report: Request Sample Pages.",
+          "captionUrl": "https://www.precedenceresearch.com/enterprise-software-market",
+          "items": [
+            {
+              "asset": "field-card-1"
+            },
+            {
+              "asset": "field-card-2"
+            },
+            {
+              "asset": "field-card-3"
+            }
+          ]
+        },
+        {
+          "id": "aws-learning",
+          "type": "prose",
+          "sourceNode": "331:28230",
+          "layout": "contained",
+          "paddingTop": "85px",
+          "paddingBottom": "50px",
+          "body": "<p>I enrolled in a <strong>course on Udemy</strong> (218 lectures in total). Think of it as a crash course in cloud language and landscape. It helped me understand the jargon and navigate the territory better.</p>"
+        },
+        {
+          "id": "aws-course",
+          "type": "media",
+          "sourceNode": "331:28176",
+          "layout": "wide",
+          "asset": "aws-course",
+          "caption": "AWS Certified Cloud Practitioner - AWS Certification",
+          "captionUrl": "https://www.udemy.com/course/aws-certified-cloud-practitioner-step-by-step/"
+        },
+        {
+          "id": "stakeholder-interviews",
+          "type": "prose",
+          "sourceNode": "331:28172",
+          "layout": "contained",
+          "paddingTop": "80px",
+          "paddingBottom": "50px",
+          "body": "<p>Then came the <strong>interviews</strong> – I sat down with stakeholders like Engineers and CPO. Particularly I collected all the keywords, mimics and notes to understand their vision, pain points and needs.</p>"
+        },
+        {
+          "id": "sre-quote",
+          "type": "media",
+          "sourceNode": "331:28187",
+          "layout": "contained",
+          "asset": "sre-quote",
+          "caption": "Quote from SRE interview in Slack."
+        },
+        {
+          "id": "interview-keywords-intro",
+          "type": "prose",
+          "sourceNode": "331:28173",
+          "layout": "contained",
+          "paddingTop": "80px",
+          "paddingBottom": "30px",
+          "body": "<p>Keywords highlighted from the interview with site reliable engineer. Short answer with lot of insights.</p>"
+        },
+        {
+          "id": "interview-keywords",
+          "type": "chips",
+          "sourceNode": "331:28201",
+          "layout": "contained",
+          "paddingBottom": "190px",
+          "ariaLabel": "Keywords from the SRE interview",
+          "items": [
+            "challenge of resource wastage",
+            "cloud systems",
+            "unused resources",
+            "unnecessary expenses",
+            "anomalies",
+            "efficient cleanup after tests",
+            "ongoing struggle",
+            "lingering costs",
+            "Automation tools",
+            "temperamental",
+            "resources hanging and unmonitored",
+            "lack of clarity",
+            "growing cloud costs",
+            "genuine increase or wasteful spending"
+          ]
+        },
+        {
+          "id": "problem",
+          "type": "prose",
+          "sourceNode": "331:27991",
+          "layout": "contained",
+          "background": {
+            "color": "#ffffff"
+          },
+          "paddingTop": "160px",
+          "paddingBottom": "140px",
+          "title": "The Problem",
+          "body": "<p>We have seen 1000s of 💸 per Hour of cloud waste paid for years just because:</p><p>Companies waste a large percentage of their cloud cost to pay for resources that are never used.<br>Developers forget to cleanup after tests.<br>Automation tools fail in the middle of execution and leave the cloud resources.<br>Finances and business do not have context whether the growing cloud cost is a waste.</p><p>Based on the personal research and information gathered from interviewing company’s founders and key stakeholders there is a clear need for a strong cost optimization platform that can effectively address the issue of wasting thousands of dollars per hour.</p>"
+        },
+        {
+          "id": "problem-discovered",
+          "type": "prose",
+          "sourceNode": "331:28000",
+          "layout": "contained",
+          "paddingTop": "110px",
+          "paddingBottom": "130px",
+          "title": "Problem Discovered During User Research",
+          "body": "<p>Every day, SRE and DevOps teams face a common issue - the considerable effort they put into cost optimization. This involves a lot of work to make sure things are efficient and cost-effective in the cloud. However, there's also the challenge of human errors that comes into play. Sometimes, mistakes happen, like setting things up wrong or not managing resources properly. These errors can undo the hard work of cost optimization, making the job more complicated for SRE and DevOps teams.</p>"
+        },
+        {
+          "id": "competitor-analysis",
+          "type": "prose",
+          "sourceNode": "331:28003",
+          "layout": "contained",
+          "paddingTop": "100px",
+          "paddingBottom": "110px",
+          "title": "Competitor Analysis",
+          "body": "<p>When looking at other companies in the field, I did two kinds of analysis: direct and indirect competitors. For direct competitors, I checked out companies with similar products or services as ours. I looked at what they offer, how much they charge, and who they target. This helped me see how we compare in terms of strengths and weaknesses.</p><p>Indirect competitors were a bit different. These are companies that might not do exactly what we do, but they could still take customers away. I researched them to understand their potential impact on our market.</p><p>I did a lot of research, reading reports, and checking what customers say online. This gave me a good sense of what people like and don't like about our competitors. And I didn't just stop at that. I also looked into the technology they use and any unique things they offer. In the end, all this info helped me figure out where we stand compared to others and how we can stand out.</p>"
+        },
+        {
+          "id": "competitor-roi-visual",
+          "type": "media",
+          "sourceNode": "331:28012",
+          "layout": "contained",
+          "paddingBottom": "90px",
+          "asset": "competitor-roi"
+        },
+        {
+          "id": "competitor-map-visual",
+          "type": "media",
+          "sourceNode": "331:28018",
+          "layout": "contained",
+          "paddingBottom": "120px",
+          "asset": "competitor-map"
+        },
+        {
+          "id": "design-system-decision",
+          "type": "prose",
+          "sourceNode": "331:28061",
+          "layout": "contained",
+          "paddingTop": "120px",
+          "paddingBottom": "120px",
+          "title": "To Design or Not to Design system?",
+          "body": "<p>The company has tasked me with determining whether to purchase license of on of the existing design systems or to create a new one. Beyond the pros and cons that contribute to this decision, there's an effective approach I've undertaken – calculating the Return on Investment (ROI) for developing our own design system. This analytical method provides a clear and strategic means of comprehending the optimal direction to take.</p><p><strong>Total ROI for One Project</strong><br>ROI = Cost Savings - Cost of Design System Implementation<br>$8000 - $20,000 = -$12,000</p><p>The decision was clear-cut. After thorough research among various available solutions, we concluded that MUI was the ideal choice.</p>"
+        },
+        {
+          "id": "design-system-visuals",
+          "type": "gallery",
+          "sourceNode": "331:28076",
+          "layout": "wide",
+          "columns": 3,
+          "paddingBottom": "150px",
+          "items": [
+            {
+              "asset": "design-system-logo"
+            },
+            {
+              "asset": "design-system-mobile"
+            },
+            {
+              "asset": "design-system-screen"
+            }
+          ]
+        },
+        {
+          "id": "product-direction-one",
+          "type": "prose",
+          "sourceNode": "331:28079",
+          "layout": "contained",
+          "background": {
+            "color": "#0e0a3e"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "150px",
+          "paddingBottom": "80px",
+          "title": "Automatically optimize cloud costs using FinOps best practices"
+        },
+        {
+          "id": "product-overview",
+          "type": "media",
+          "sourceNode": "331:28072",
+          "layout": "wide",
+          "background": {
+            "color": "#0e0a3e"
+          },
+          "paddingBottom": "40px",
+          "asset": "product-overview"
+        },
+        {
+          "id": "product-strip",
+          "type": "media",
+          "sourceNode": "331:28073",
+          "layout": "wide",
+          "background": {
+            "color": "#0e0a3e"
+          },
+          "paddingBottom": "130px",
+          "asset": "product-strip"
+        },
+        {
+          "id": "product-direction-two",
+          "type": "prose",
+          "sourceNode": "331:28080",
+          "layout": "contained",
+          "paddingTop": "130px",
+          "paddingBottom": "130px",
+          "title": "Remove Friction around costs between Engineering and Finance"
+        },
+        {
+          "id": "product-screen-pair",
+          "type": "gallery",
+          "sourceNode": "331:28093",
+          "layout": "wide",
+          "columns": 2,
+          "paddingBottom": "40px",
+          "items": [
+            {
+              "asset": "product-screen-left"
+            },
+            {
+              "asset": "product-screen-right"
+            }
+          ]
+        },
+        {
+          "id": "product-screen-wide",
+          "type": "media",
+          "sourceNode": "331:28095",
+          "layout": "wide",
+          "paddingBottom": "130px",
+          "asset": "product-screen-wide"
+        },
+        {
+          "id": "product-benefits",
+          "type": "feature-grid",
+          "sourceNode": "331:28232",
+          "layout": "wide",
+          "paddingTop": "100px",
+          "paddingBottom": "180px",
+          "items": [
+            {
+              "icon": "feature-save",
+              "text": "<strong>Save 30%-65%</strong> of cloud costs with 1 click"
+            },
+            {
+              "icon": "feature-rbac",
+              "text": "3 Minutes integration <strong>with RBAC</strong>"
+            },
+            {
+              "icon": "feature-accountability",
+              "text": "<strong>Increase the accountability</strong> about the cloud costs"
+            },
+            {
+              "icon": "feature-automation",
+              "text": "<strong>Automation workflows</strong> with 1 click"
+            },
+            {
+              "icon": "feature-ticket",
+              "text": "Automatically <strong>create a ticket</strong> and assign it to the right team"
+            },
+            {
+              "icon": "feature-tagging",
+              "text": "<strong>Tagging policies</strong> enforcement"
+            }
+          ]
+        },
+        {
+          "id": "headline-achievements",
+          "type": "metrics",
+          "sourceNode": "331:28081",
+          "layout": "wide",
+          "background": {
+            "asset": "achievements-background",
+            "position": "center"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "300px",
+          "paddingBottom": "270px",
+          "title": "On the moment I Left the company",
+          "items": [
+            {
+              "icon": "metric-saved",
+              "value": "$50M+",
+              "label": "Saved in total so far"
+            },
+            {
+              "icon": "metric-customers",
+              "value": "$1.2M/per year",
+              "label": "Customers save on average"
+            },
+            {
+              "icon": "metric-engineers",
+              "value": "200h+",
+              "label": "Engineers sаve on average"
+            }
+          ]
+        },
+        {
+          "id": "overall-achievements",
+          "type": "prose",
+          "sourceNode": "331:27975",
+          "layout": "contained",
+          "paddingTop": "180px",
+          "paddingBottom": "180px",
+          "title": "Overall Achievements",
+          "body": "<p>During 18 month working in CloudChipr:</p><p>Overall $500K saved during testing for companies such are SuperAnnotate, ActiveLoop, Flux etc.<br>(95k ARR in less than 1month of operations.)<br>Successfully reduced cloud spending by 30% for a client during beta testing (The goal was 8-15% ).<br>Started as a solo designer and finished as a design lead.<br>Grew a team of 4 talented designers.<br>Understood and designed the entire product’s MVP in just 6month.<br>Nailed all design operations inside the company.<br>Company became profitable in just 8 months<br>Cloudchipr has raised a total of $1.3M in funding over 4 rounds.</p>"
+        },
+        {
+          "id": "feedback",
+          "type": "testimonial",
+          "sourceNode": "331:27976",
+          "layout": "contained",
+          "background": {
+            "color": "#0e0a3e"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "165px",
+          "paddingBottom": "130px",
+          "title": "Feedback",
+          "quote": "Davit's journey within our company is impressive. He started as a solo designer and quickly rose to the position of Design Lead by recruiting and mentoring junior designers. He also took charge of creating the MVP for CloudChipr, showcasing his comprehensive understanding of the product. In his two years here, Davit consistently exhibited patience and responsibility. Truly invaluable member of our team.",
+          "avatar": "viktor-avatar",
+          "person": {
+            "name": "Viktor Harutyunyan",
+            "role": "Co-Founder and CPO at CloudChipr",
+            "url": "https://www.linkedin.com/in/victorharutyunyan/"
+          }
+        },
+        {
+          "id": "portfolio-navigation",
+          "type": "navigation",
+          "sourceNode": "331:37271",
+          "layout": "wide",
+          "background": {
+            "asset": "navigation-background",
+            "position": "center"
+          },
+          "paddingTop": "75px",
+          "paddingBottom": "120px",
+          "title": "Take a look my other projects",
+          "back": {
+            "label": "BACK",
+            "url": "/"
+          },
+          "items": [
+            {
+              "label": "Material Exchange",
+              "url": "/material-exchange/"
+            },
+            {
+              "label": "Securion",
+              "url": "/securion/"
+            },
+            {
+              "label": "ME Photo Lab",
+              "url": "/material-exchange-photo-lab/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0-alpha.2",
+      "project": {
+        "title": "Material Exchange",
+        "slug": "material-exchange",
+        "source": {
+          "fileKey": "rabzg12ypNFDTsDPCth2HG",
+          "nodeId": "331:24438"
+        }
+      },
+      "tokens": {
+        "pageWidth": "1920px",
+        "containerWidth": "1048px",
+        "wideWidth": "1800px",
+        "displayFont": "Syne, sans-serif",
+        "bodyFont": "Syne, sans-serif",
+        "displayTitle": "80px",
+        "bodyLarge": "32px",
+        "bodyLineHeight": "1.6"
+      },
+      "assets": {
+        "hero-product": {
+          "packagePath": "assets/material-exchange/hero-product.png",
+          "sourceNode": "331:24438",
+          "kind": "image",
+          "width": 900,
+          "height": 860,
+          "alt": "Material Exchange marketplace displayed on a laptop"
+        },
+        "initial-wireframes": {
+          "packagePath": "assets/material-exchange/initial-wireframes.png",
+          "sourceNode": "331:24486",
+          "kind": "image",
+          "width": 1827,
+          "height": 1053,
+          "alt": "Initial wireframes of the single material page"
+        },
+        "warehouse": {
+          "packagePath": "assets/material-exchange/warehouse.png",
+          "sourceNode": "331:24475",
+          "kind": "image",
+          "width": 1802,
+          "height": 900,
+          "alt": "Goodwill Outlet warehouse and retail store"
+        },
+        "deadstock": {
+          "packagePath": "assets/material-exchange/deadstock.png",
+          "sourceNode": "331:24466",
+          "kind": "image",
+          "width": 1509,
+          "height": 944,
+          "alt": "Deadstock Depot online marketplace"
+        },
+        "user-research": {
+          "packagePath": "assets/material-exchange/user-research.png",
+          "sourceNode": "331:24487",
+          "kind": "image",
+          "width": 1845,
+          "height": 1037,
+          "alt": "Material Exchange user survey findings and charts"
+        },
+        "platform-users": {
+          "packagePath": "assets/material-exchange/platform-users.png",
+          "sourceNode": "331:25251",
+          "kind": "image",
+          "width": 1666,
+          "height": 762,
+          "alt": "Authorization flow, header navigation, and top-level navigation"
+        },
+        "navigation-anatomy": {
+          "packagePath": "assets/material-exchange/navigation-anatomy.png",
+          "sourceNode": "331:24603",
+          "kind": "image",
+          "width": 1780,
+          "height": 1233,
+          "alt": "Material Exchange navigation anatomy"
+        },
+        "visual-language": {
+          "packagePath": "assets/material-exchange/visual-language.png",
+          "sourceNode": "331:24705",
+          "kind": "image",
+          "width": 1920,
+          "height": 1144,
+          "alt": "Material Exchange visual language and product components"
+        },
+        "iconography": {
+          "packagePath": "assets/material-exchange/iconography.png",
+          "sourceNode": "331:25262",
+          "kind": "image",
+          "width": 1920,
+          "height": 830,
+          "alt": "Material Exchange iconography system"
+        },
+        "design-system-map": {
+          "packagePath": "assets/material-exchange/design-system-map.png",
+          "sourceNode": "331:27304",
+          "kind": "image",
+          "width": 1920,
+          "height": 935,
+          "alt": "Material Exchange design-system architecture map"
+        },
+        "design-system-showcase": {
+          "packagePath": "assets/material-exchange/design-system-showcase.png",
+          "sourceNode": "331:24445",
+          "kind": "image",
+          "width": 1920,
+          "height": 1471,
+          "alt": "Material Exchange cross-device design-system showcase"
+        },
+        "ideation-matrix": {
+          "packagePath": "assets/material-exchange/ideation-matrix.png",
+          "sourceNode": "331:27186",
+          "kind": "image",
+          "width": 1750,
+          "height": 916,
+          "alt": "User Value and Satisfaction Matrix ideation session"
+        },
+        "personalized-dashboard": {
+          "packagePath": "assets/material-exchange/personalized-dashboard.png",
+          "sourceNode": "331:27234",
+          "kind": "image",
+          "width": 1211,
+          "height": 1055,
+          "alt": "Personalized Material Exchange dashboard"
+        },
+        "smart-search": {
+          "packagePath": "assets/material-exchange/smart-search.png",
+          "sourceNode": "331:27244",
+          "kind": "image",
+          "width": 1072,
+          "height": 931,
+          "alt": "Material Exchange smart search experience"
+        },
+        "product-collage": {
+          "packagePath": "assets/material-exchange/product-collage.png",
+          "sourceNode": "331:27553",
+          "kind": "image",
+          "width": 1920,
+          "height": 1207,
+          "alt": "Material Exchange product screens"
+        },
+        "dropzone": {
+          "packagePath": "assets/material-exchange/dropzone.png",
+          "sourceNode": "331:25178",
+          "kind": "image",
+          "width": 1639,
+          "height": 996,
+          "alt": "Material Exchange Dropzone workflow"
+        },
+        "save-search": {
+          "packagePath": "assets/material-exchange/save-search.png",
+          "sourceNode": "331:27566",
+          "kind": "image",
+          "width": 1611,
+          "height": 1246,
+          "alt": "Material Exchange Save Search workflow"
+        },
+        "dejan-avatar": {
+          "packagePath": "assets/material-exchange/dejan-zvekic.png",
+          "sourceNode": "331:24645",
+          "kind": "image",
+          "width": 208,
+          "height": 208,
+          "alt": "Dejan Zvekić"
+        },
+        "navigation-background": {
+          "packagePath": "assets/material-exchange/navigation-background.png",
+          "sourceNode": "331:37332",
+          "kind": "background",
+          "width": 474,
+          "height": 1024,
+          "alt": ""
+        }
+      },
+      "sections": [
+        {
+          "id": "intro",
+          "type": "intro",
+          "sourceNode": "331:24438",
+          "layout": "wide",
+          "background": {
+            "color": "#f5faf6",
+            "scope": "inner",
+            "radius": "30px"
+          },
+          "textColor": "#202020",
+          "paddingTop": "57px",
+          "paddingBottom": "0px",
+          "title": "Material Exchange",
+          "subtitle": "Digital Asset Management Platform and Marketplace",
+          "metadata": [
+            {
+              "label": "Client:",
+              "value": "<a href=\"https://material-exchange.com/\" target=\"_blank\" rel=\"noopener\">Material Exchange</a>"
+            },
+            {
+              "label": "Categories:",
+              "value": "SaaS, B2B/B2C, DAMS"
+            },
+            {
+              "label": "Duration:",
+              "value": "2 Years"
+            },
+            {
+              "label": "Services:",
+              "value": "Problem Discovery, Team management, Design System Development"
+            },
+            {
+              "label": "Projects:",
+              "value": "Marketplace, Showroom, Design System, White Label, Back Office, Mobile App."
+            },
+            {
+              "label": "Tools:",
+              "value": "Figma, Confluence, Overflow"
+            },
+            {
+              "label": "Co-Designers:",
+              "value": "Ani Atanesyan, Vladimir Popov, Gohar Aleksanyan"
+            }
+          ],
+          "media": "hero-product"
+        },
+        {
+          "id": "about",
+          "type": "prose",
+          "sourceNode": "331:24476",
+          "layout": "contained",
+          "paddingTop": "190px",
+          "paddingBottom": "120px",
+          "title": "About project",
+          "body": "<p>Material Exchange is a digital platform that facilitates the efficient and streamlined exchange of material information between brands, manufacturers, and suppliers in the fashion and footwear industry.</p>"
+        },
+        {
+          "id": "initial-wireframes",
+          "type": "media",
+          "sourceNode": "331:24486",
+          "layout": "wide",
+          "paddingBottom": "170px",
+          "asset": "initial-wireframes",
+          "caption": "Initial wireframes of single material page."
+        },
+        {
+          "id": "discovery-problem-one",
+          "type": "prose",
+          "sourceNode": "331:24479",
+          "layout": "contained",
+          "background": {
+            "color": "#5968e9"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
+          "eyebrow": "Problem N1",
+          "title": "Discovery Phase",
+          "body": "<p>Imagine Nike's material manager journeying to Vietnam, seeking sustainable materials to be used as a small peace for Air Jordans. Collaborating with local suppliers, they usually assess quality, recycling, and sustainability, incurring costs of $15,000 for travel and $10,000 for testing. This risk underscores Nike's commitment to responsible sourcing (only 15% of positive findings).</p><p>Companies like Nike spend millions on such research, but just a fraction proves valuable. So, material digitalization is needed for cost savings. The potential to revolutionize sourcing and sustainability drives ongoing innovation.</p>"
+        },
+        {
+          "id": "warehouse",
+          "type": "media",
+          "sourceNode": "331:24475",
+          "layout": "wide",
+          "paddingTop": "120px",
+          "paddingBottom": "30px",
+          "asset": "warehouse",
+          "caption": "A tour of the Goodwill Outlet warehouse and retail store in St. Paul, MN, in April 2019."
+        },
+        {
+          "id": "discovery-problem-two",
+          "type": "prose",
+          "sourceNode": "331:24483",
+          "layout": "contained",
+          "paddingTop": "130px",
+          "paddingBottom": "110px",
+          "eyebrow": "Problem N2",
+          "body": "<p>Fashion is responsible for 10 percent of human-caused greenhouse gas emissions and 20 percent of global wastewater, and uses more energy than the aviation and shipping sectors combined. Global fashion also consumes 93 billion metric tons of clean water each year, about half of what Americans drink annually.</p><p>Since the 2000s, fashion production has doubled and it will likely triple by 2050, according to the American Chemical Society. Ninety-two million tonnes of unwanted fabrics are disposed of each year, and 14.5 million tons of textiles were landfilled and incinerated in 2018.</p><p>Leftover fabrics have already been produced, so there is no expenditure of water, energy, or virgin raw materials to create something new. With Material Exchange, they are available and accessible on a global level for brands to use in upcoming collections.</p>"
+        },
+        {
+          "id": "deadstock",
+          "type": "media",
+          "sourceNode": "331:24466",
+          "layout": "contained",
+          "paddingBottom": "170px",
+          "asset": "deadstock",
+          "caption": "Screenshot of “Deadstock Depot”. Online services allows to sell purchase deadstock fabrics."
+        },
+        {
+          "id": "user-research",
+          "type": "prose",
+          "sourceNode": "331:24593",
+          "layout": "contained",
+          "paddingTop": "130px",
+          "paddingBottom": "90px",
+          "title": "User Research",
+          "body": "<p>To ensure a user-centered approach to our decisions, I conducted a comprehensive survey to validate our assumptions about Material Exchange. With an impressive participation of 160 individuals from 24 different countries, we gained valuable insights into the needs and preferences of our user base. Analyzing the survey data allowed us to confirm our assumptions, identify common trends, and prioritize improvements based on user feedback.</p>"
+        },
+        {
+          "id": "user-research-findings",
+          "type": "media",
+          "sourceNode": "331:24487",
+          "layout": "wide",
+          "paddingBottom": "120px",
+          "asset": "user-research"
+        },
+        {
+          "id": "iterative-research",
+          "type": "prose",
+          "sourceNode": "331:24596",
+          "layout": "contained",
+          "paddingTop": "60px",
+          "paddingBottom": "110px",
+          "body": "<p>We made it a practice to conduct iterative user interview and testing sessions at least twice a month. This involved engaging both new users and maintaining connections with existing ones. At first, we experimented with recruiting users through the usertesting.com platform. However, we soon realized that custom user recruitment is significantly more effective. Platform users often exhibit strong biases that can impact the quality of our insights.</p>"
+        },
+        {
+          "id": "personas",
+          "type": "prose",
+          "sourceNode": "331:24598",
+          "layout": "contained",
+          "paddingTop": "60px",
+          "paddingBottom": "80px",
+          "body": "<p>Combining insights from various sources—company strategy, user research, quantitative surveys, and competitive analyses—we crafted our initial hypothetical personas. This marked the beginning of our ongoing process to discover new user archetypes throughout the journey.</p>"
+        },
+        {
+          "id": "platform-users-heading",
+          "type": "prose",
+          "sourceNode": "331:24636",
+          "layout": "contained",
+          "paddingTop": "70px",
+          "paddingBottom": "70px",
+          "title": "Platform users"
+        },
+        {
+          "id": "platform-users",
+          "type": "media",
+          "sourceNode": "331:25251",
+          "layout": "wide",
+          "paddingBottom": "160px",
+          "asset": "platform-users"
+        },
+        {
+          "id": "navigation-anatomy-heading",
+          "type": "prose",
+          "sourceNode": "331:24600",
+          "layout": "contained",
+          "background": {
+            "color": "#090909"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "145px",
+          "paddingBottom": "80px",
+          "title": "Navigation Anatomy"
+        },
+        {
+          "id": "navigation-anatomy",
+          "type": "media",
+          "sourceNode": "331:24603",
+          "layout": "wide",
+          "background": {
+            "color": "#090909"
+          },
+          "paddingBottom": "160px",
+          "asset": "navigation-anatomy"
+        },
+        {
+          "id": "visual-language-heading",
+          "type": "prose",
+          "sourceNode": "331:24653",
+          "layout": "contained",
+          "paddingTop": "140px",
+          "paddingBottom": "80px",
+          "title": "Building the Visual Language",
+          "body": "<p>To create the complete Design language of the product, we initially concentrated on designing specific components unique to the product, such are material swatches and folders.</p>"
+        },
+        {
+          "id": "visual-language",
+          "type": "media",
+          "sourceNode": "331:24705",
+          "layout": "wide",
+          "paddingBottom": "150px",
+          "asset": "visual-language",
+          "caption": "Specific components style selection"
+        },
+        {
+          "id": "iconography-heading",
+          "type": "prose",
+          "sourceNode": "331:25289",
+          "layout": "contained",
+          "paddingTop": "120px",
+          "paddingBottom": "80px",
+          "title": "Iconography",
+          "body": "<p>Due to time constraints and the absence of a dedicated graphic designer on the team, we gathered icons from various collections and then harmonized them into a unified style. As a result we made a font of 350 pixel perfect linear icons including 43 industry specific.</p>"
+        },
+        {
+          "id": "iconography",
+          "type": "media",
+          "sourceNode": "331:25262",
+          "layout": "wide",
+          "paddingBottom": "140px",
+          "asset": "iconography"
+        },
+        {
+          "id": "design-system-intro",
+          "type": "prose",
+          "sourceNode": "331:27185",
+          "layout": "contained",
+          "paddingTop": "100px",
+          "paddingBottom": "80px",
+          "body": "<p>After 2.5 months of dedicated effort, the <strong>Mat-EX design system was baked</strong> and handed over to the development team.</p>"
+        },
+        {
+          "id": "design-system-map",
+          "type": "media",
+          "sourceNode": "331:27304",
+          "layout": "wide",
+          "paddingBottom": "120px",
+          "asset": "design-system-map",
+          "caption": "Screenshot of “Design system architecture diagram”."
+        },
+        {
+          "id": "design-system-showcase",
+          "type": "media",
+          "sourceNode": "331:24445",
+          "layout": "wide",
+          "paddingBottom": "170px",
+          "asset": "design-system-showcase"
+        },
+        {
+          "id": "ideation",
+          "type": "prose",
+          "sourceNode": "331:24639",
+          "layout": "contained",
+          "paddingTop": "140px",
+          "paddingBottom": "80px",
+          "title": "Ideation Phase",
+          "body": "<p>As a design lead, I often took part in ideation sessions. These sessions involved more than just coming up with user-centered solutions; I also facilitated prioritization discussions, design sprints and other related activities.</p>"
+        },
+        {
+          "id": "ideation-matrix",
+          "type": "media",
+          "sourceNode": "331:27186",
+          "layout": "wide",
+          "paddingBottom": "170px",
+          "asset": "ideation-matrix",
+          "caption": "Screenshot of “User Value/Satisfaction Matrix” building session."
+        },
+        {
+          "id": "hmw-statements",
+          "type": "prose",
+          "sourceNode": "331:27230",
+          "layout": "contained",
+          "background": {
+            "color": "#fff4f4"
+          },
+          "textColor": "#4f4f4f",
+          "paddingTop": "140px",
+          "paddingBottom": "70px",
+          "title": "HMW Statements"
+        },
+        {
+          "id": "hmw-columns",
+          "type": "split",
+          "sourceNode": "331:27225",
+          "layout": "wide",
+          "background": {
+            "color": "#fff4f4"
+          },
+          "textColor": "#4f4f4f",
+          "paddingBottom": "150px",
+          "columns": [
+            {
+              "body": "<p>How might we effectively centralize and organize digital materials and assets, providing easy searchability and accessibility for brands, manufacturers, and suppliers within the Material Exchange platform?</p><p>How might we enhance collaboration and communication between teams by integrating feedback and approval processes seamlessly within the Material Exchange platform, ensuring efficient collaboration and minimizing miscommunication?</p><p>How might we assist brands in maintaining consistent and cohesive material usage across different teams and stakeholders, leveraging the Material Exchange platform’s capabilities?</p>"
+            },
+            {
+              "body": "<p>How might we automate manual tasks and streamline workflows within the Material Exchange platform to significantly improve efficiency, saving valuable time for all users involved?</p><p>How might we ensure robust access controls and permissions within the Material Exchange platform, prioritizing data security and confidentiality to protect sensitive information?</p><p>How might we provide valuable analytics and insights on material usage and performance within the Material Exchange platform, empowering data-driven decision-making for brands, manufacturers, and suppliers?</p><p>How might we guarantee seamless scalability and integration of the Material Exchange platform with other tools and systems used by brands, manufacturers, and suppliers, ensuring smooth operations and compatibility?</p>"
+            }
+          ]
+        },
+        {
+          "id": "personalized-approach",
+          "type": "prose",
+          "sourceNode": "331:27242",
+          "layout": "contained",
+          "paddingTop": "140px",
+          "paddingBottom": "80px",
+          "title": "Personalized Approach"
+        },
+        {
+          "id": "personalized-dashboard",
+          "type": "split",
+          "sourceNode": "331:27234",
+          "layout": "wide",
+          "paddingBottom": "130px",
+          "columns": [
+            {
+              "asset": "personalized-dashboard"
+            },
+            {
+              "title": "Personalized Dashboard",
+              "body": "<p>Centralized interface that offers users an instant overview of their material assets. It provides real-time insights into the status, location, and usage of materials, streamlining inventory management and enhancing decision-making.</p>"
+            }
+          ]
+        },
+        {
+          "id": "smart-search",
+          "type": "split",
+          "sourceNode": "331:27244",
+          "layout": "wide",
+          "paddingBottom": "150px",
+          "columns": [
+            {
+              "title": "Smart Search",
+              "body": "<p>Smart Search empowers users to quickly and intelligently locate specific materials within their inventory. Using advanced search algorithms and filters, it understands user queries and offers real-time suggestions as users type, making the search process highly efficient.</p>"
+            },
+            {
+              "asset": "smart-search"
+            }
+          ]
+        },
+        {
+          "id": "product-collage",
+          "type": "media",
+          "sourceNode": "331:27553",
+          "layout": "wide",
+          "background": {
+            "color": "#f4f5f8"
+          },
+          "paddingTop": "70px",
+          "paddingBottom": "120px",
+          "asset": "product-collage"
+        },
+        {
+          "id": "testing-heading",
+          "type": "prose",
+          "sourceNode": "331:24638",
+          "layout": "contained",
+          "paddingTop": "150px",
+          "paddingBottom": "90px",
+          "title": "User testing & findings"
+        },
+        {
+          "id": "hypothesis-one",
+          "type": "prose",
+          "sourceNode": "331:24694",
+          "layout": "contained",
+          "paddingTop": "40px",
+          "paddingBottom": "90px",
+          "eyebrow": "Hypothesis N 1",
+          "title": "Material managers straggle spending too much time on adding materials to the folders.",
+          "body": "<p><strong>🕒 Exp. Duration - 45min</strong><br><strong>❌ Act. Result- 61min</strong></p><p>In a usability test, a material manager was asked to create a winter-fall collection of materials. This involved making folders for different categories and then finding and adding materials to these folders. Interestingly, a lot of time was spent on opening and closing folders repeatedly. The manager also had to add each material one by one to the folders, which took up a big portion of the time. Surprisingly, about 60% of the total time was used just for managing folders and adding materials individually. This left only 40% of the time for more important tasks like making decisions and evaluating materials.</p>"
+        },
+        {
+          "id": "dropzone-solution",
+          "type": "prose",
+          "sourceNode": "331:24695",
+          "layout": "contained",
+          "paddingTop": "60px",
+          "paddingBottom": "80px",
+          "eyebrow": "The Solution",
+          "body": "<p>As a solution, we introduced a innovative feature named <strong>“Dropezone”</strong>. Drawing inspiration from people's familiarity with operating system folders, Dropezone enables users to effortlessly drag and drop files, mirroring a natural experience.</p>"
+        },
+        {
+          "id": "dropzone",
+          "type": "media",
+          "sourceNode": "331:25178",
+          "layout": "wide",
+          "paddingBottom": "90px",
+          "asset": "dropzone"
+        },
+        {
+          "id": "dropzone-result",
+          "type": "prose",
+          "sourceNode": "331:24690",
+          "layout": "contained",
+          "paddingTop": "50px",
+          "paddingBottom": "150px",
+          "body": "<p><strong>🕒 Exp. Duration - 45min</strong><br><strong>🎉 Act. Result- 23min</strong></p><p>To enhance efficiency, we added the capability to select multiple items and utilize multiple dropzones, streamlining the process of managing up to 4 folders within a single task. This approach not only simplifies the user experience but also significantly accelerates the material management process.</p>"
+        },
+        {
+          "id": "hypothesis-two",
+          "type": "prose",
+          "sourceNode": "331:25250",
+          "layout": "contained",
+          "background": {
+            "color": "#f4f5f8"
+          },
+          "paddingTop": "140px",
+          "paddingBottom": "100px",
+          "eyebrow": "Hypothesis N 2",
+          "body": "<p>Users frequently conduct similar searches, resulting in repetitive manual entry of search criteria and potential frustration due to redundancy.</p>"
+        },
+        {
+          "id": "save-search-solution",
+          "type": "prose",
+          "sourceNode": "331:24696",
+          "layout": "contained",
+          "background": {
+            "color": "#f4f5f8"
+          },
+          "paddingTop": "30px",
+          "paddingBottom": "80px",
+          "eyebrow": "The Solution",
+          "body": "<p>Easier grouping of search criteria would simplify repetitive operations by enabling users to execute the same search with a single click. So, to address this need, we introduced and the tested the <strong>“Save Search”</strong> feature.</p>"
+        },
+        {
+          "id": "save-search",
+          "type": "media",
+          "sourceNode": "331:27566",
+          "layout": "wide",
+          "background": {
+            "color": "#f4f5f8"
+          },
+          "paddingBottom": "150px",
+          "asset": "save-search"
+        },
+        {
+          "id": "achievements",
+          "type": "prose",
+          "sourceNode": "331:24637",
+          "layout": "contained",
+          "paddingTop": "160px",
+          "paddingBottom": "170px",
+          "title": "About Achievements",
+          "body": "<p>After working hard for 2 years, here are some things I'm proud of:</p><ul><li>We created the Mat-EX cross-devices design system.</li><li>Our design team grew from 1 to 5 talented designers.</li><li>Improved entire company’s design processes.</li><li>Made it easier collaboration between different teams.</li><li>We finished 5 projects.</li><li>And the big news: <a href=\"https://material-exchange.com/\" target=\"_blank\" rel=\"noopener\">Material Exchange Raises €25 Million to Lead Sustainable Material Sourcing</a></li></ul>"
+        },
+        {
+          "id": "feedback",
+          "type": "testimonial",
+          "sourceNode": "331:24641",
+          "layout": "contained",
+          "background": {
+            "color": "#b6b9dc"
+          },
+          "textColor": "#202457",
+          "paddingTop": "165px",
+          "paddingBottom": "135px",
+          "title": "Feedback",
+          "quote": "Davit's commitment has made a meaningful impact on our organization. His keen eye for detail and strong leadership were instrumental during a critical phase when we were struggling to develop our MVP. Thanks to his dedication, we successfully navigated through challenges and reached our goal. A valuable asset to our team.",
+          "avatar": "dejan-avatar",
+          "person": {
+            "name": "Dejan Zvekić",
+            "role": "Chief Product Officer at Material Exchange"
+          }
+        },
+        {
+          "id": "portfolio-navigation",
+          "type": "navigation",
+          "sourceNode": "331:37332",
+          "layout": "wide",
+          "background": {
+            "asset": "navigation-background",
+            "position": "center"
+          },
+          "paddingTop": "75px",
+          "paddingBottom": "120px",
+          "title": "Take a look my other projects",
+          "back": {
+            "label": "BACK",
+            "url": "/"
+          },
+          "items": [
+            {
+              "label": "CloudChipr",
+              "url": "/cloudchipr/"
+            },
+            {
+              "label": "Securion",
+              "url": "/securion/"
+            },
+            {
+              "label": "ME Photo Lab",
+              "url": "/material-exchange-photo-lab/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0-alpha.2",
+      "project": {
+        "title": "Securion",
+        "slug": "securion",
+        "source": {
+          "fileKey": "rabzg12ypNFDTsDPCth2HG",
+          "nodeId": "331:28246"
+        }
+      },
+      "tokens": {
+        "pageWidth": "1920px",
+        "containerWidth": "1048px",
+        "wideWidth": "1800px",
+        "displayFont": "Syne, sans-serif",
+        "bodyFont": "Syne, sans-serif",
+        "displayTitle": "80px",
+        "bodyLarge": "32px",
+        "bodyLineHeight": "1.6"
+      },
+      "assets": {
+        "hero": {
+          "packagePath": "assets/securion/hero-wallet.png",
+          "sourceNode": "331:28275",
+          "kind": "image",
+          "width": 1920,
+          "height": 1200,
+          "alt": "Securion mobile crypto wallet interface"
+        },
+        "logo-construction": {
+          "packagePath": "assets/securion/logo-construction.png",
+          "sourceNode": "331:28266",
+          "kind": "image",
+          "width": 1800,
+          "height": 1198,
+          "alt": "Securion logo construction"
+        },
+        "brand-book": {
+          "packagePath": "assets/securion/brand-book.png",
+          "sourceNode": "331:28247",
+          "kind": "image",
+          "width": 1920,
+          "height": 1171,
+          "alt": "Securion brand book"
+        },
+        "identity-mockup": {
+          "packagePath": "assets/securion/identity-mockup.png",
+          "sourceNode": "331:28396",
+          "kind": "image",
+          "width": 1800,
+          "height": 1126,
+          "alt": "Securion identity mockups"
+        },
+        "logo-strip": {
+          "packagePath": "assets/securion/logo-strip.png",
+          "sourceNode": "331:28400",
+          "kind": "image",
+          "width": 1589,
+          "height": 262,
+          "alt": "Securion logo variations"
+        },
+        "color-system": {
+          "packagePath": "assets/securion/color-system.png",
+          "sourceNode": "331:28594",
+          "kind": "image",
+          "width": 1602,
+          "height": 707,
+          "alt": "Securion color system"
+        },
+        "secure-screens": {
+          "packagePath": "assets/securion/secure-screens.png",
+          "sourceNode": "331:28574",
+          "kind": "image",
+          "width": 1800,
+          "height": 1267,
+          "alt": "Securion secure wallet product screens"
+        },
+        "grid-system": {
+          "packagePath": "assets/securion/grid-system.png",
+          "sourceNode": "331:28431",
+          "kind": "image",
+          "width": 1920,
+          "height": 1887,
+          "alt": "Securion mobile grid system"
+        },
+        "mobile-01": {
+          "packagePath": "assets/securion/mobile-01.png",
+          "sourceNode": "331:28585",
+          "kind": "image",
+          "width": 664,
+          "height": 1214,
+          "alt": "Securion mobile screen"
+        },
+        "mobile-02": {
+          "packagePath": "assets/securion/mobile-02.png",
+          "sourceNode": "331:28586",
+          "kind": "image",
+          "width": 664,
+          "height": 1214,
+          "alt": "Securion mobile screen"
+        },
+        "mobile-03": {
+          "packagePath": "assets/securion/mobile-03.png",
+          "sourceNode": "331:28587",
+          "kind": "image",
+          "width": 664,
+          "height": 1212,
+          "alt": "Securion mobile screen"
+        },
+        "mobile-04": {
+          "packagePath": "assets/securion/mobile-04.png",
+          "sourceNode": "331:28588",
+          "kind": "image",
+          "width": 664,
+          "height": 1213,
+          "alt": "Securion mobile screen"
+        },
+        "mobile-05": {
+          "packagePath": "assets/securion/mobile-05.png",
+          "sourceNode": "331:28589",
+          "kind": "image",
+          "width": 664,
+          "height": 1212,
+          "alt": "Securion mobile screen"
+        },
+        "mobile-06": {
+          "packagePath": "assets/securion/mobile-06.png",
+          "sourceNode": "331:28590",
+          "kind": "image",
+          "width": 664,
+          "height": 1278,
+          "alt": "Securion mobile screen"
+        },
+        "mobile-07": {
+          "packagePath": "assets/securion/mobile-07.png",
+          "sourceNode": "331:28591",
+          "kind": "image",
+          "width": 664,
+          "height": 1215,
+          "alt": "Securion mobile screen"
+        },
+        "mobile-08": {
+          "packagePath": "assets/securion/mobile-08.png",
+          "sourceNode": "331:28592",
+          "kind": "image",
+          "width": 664,
+          "height": 1215,
+          "alt": "Securion mobile screen"
+        },
+        "mobile-09": {
+          "packagePath": "assets/securion/mobile-09.png",
+          "sourceNode": "331:28593",
+          "kind": "image",
+          "width": 664,
+          "height": 1215,
+          "alt": "Securion mobile screen"
+        },
+        "shaunt-avatar": {
+          "packagePath": "assets/securion/shaunt-sarkissian.png",
+          "sourceNode": "331:28580",
+          "kind": "image",
+          "width": 208,
+          "height": 208,
+          "alt": "Shaunt Sarkissian"
+        },
+        "navigation-background": {
+          "packagePath": "assets/securion/navigation-background.png",
+          "sourceNode": "331:37289",
+          "kind": "background",
+          "width": 474,
+          "height": 1024,
+          "alt": ""
+        }
+      },
+      "sections": [
+        {
+          "id": "intro",
+          "type": "intro",
+          "sourceNode": "331:28246",
+          "layout": "wide",
+          "background": {
+            "color": "#13102f",
+            "scope": "inner",
+            "radius": "30px"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "57px",
+          "paddingBottom": "0px",
+          "title": "Securion 2018",
+          "subtitle": "Mobile Crypto Wallet and Exchange.",
+          "metadata": [
+            {
+              "label": "Client:",
+              "value": "The Bank of London"
+            },
+            {
+              "label": "Categories:",
+              "value": "FinTech, Blockchain, SaaS, B2C"
+            },
+            {
+              "label": "Duration:",
+              "value": "8 Months"
+            },
+            {
+              "label": "Services:",
+              "value": "Brand Identity, UI Design, Usability testing"
+            },
+            {
+              "label": "Projects:",
+              "value": "Mobile Crypto Wallet, Crypto Exchange"
+            }
+          ],
+          "media": "hero"
+        },
+        {
+          "id": "about",
+          "type": "prose",
+          "sourceNode": "331:28289",
+          "layout": "contained",
+          "paddingTop": "190px",
+          "paddingBottom": "180px",
+          "title": "About the Project",
+          "body": "<p>Securion is a revolutionary blockchain project aimed at providing the most secure cryptocurrency wallet and exchange platform in the fintech industry. The goal is to set a new standard for security and user experience in the world of digital currencies.</p>"
+        },
+        {
+          "id": "brand-identity",
+          "type": "prose",
+          "sourceNode": "331:28297",
+          "layout": "contained",
+          "paddingTop": "120px",
+          "paddingBottom": "90px",
+          "title": "Brand Identity",
+          "body": "<p>Securion's brand essence revolves around <strong>trust, security, and innovation.</strong> It represents the unwavering commitment to safeguarding users' digital assets while delivering an innovative and user-centric crypto experience.</p>"
+        },
+        {
+          "id": "logo-construction",
+          "type": "media",
+          "sourceNode": "331:28266",
+          "layout": "wide",
+          "paddingBottom": "130px",
+          "asset": "logo-construction"
+        },
+        {
+          "id": "simple-laws",
+          "type": "prose",
+          "sourceNode": "331:28392",
+          "layout": "contained",
+          "paddingTop": "110px",
+          "paddingBottom": "100px",
+          "title": "Simple Laws to create a great logo.",
+          "body": "<p><strong>Simplicity:</strong> Logo is characterized by its simplicity, ensuring it is easily recognizable and memorable. Its straightforward design maintains clarity, even when scaled to different sizes.</p><p><strong>Memorability:</strong> It is inherently memorable, leaving a lasting impression on viewers.</p><p><strong>Relevance:</strong> Logo is deeply relevant to the brand's identity. It reflects Securion's unwavering commitment to security, innovation, and user-friendliness. The Logo as made in 2018, but it still looks up to date comparing with other logos.</p><p><strong>Distinctiveness:</strong> It stands out with unique features, shapes, or elements that differentiate it from competitors or other logos in its category.</p>"
+        },
+        {
+          "id": "logo-strip",
+          "type": "media",
+          "sourceNode": "331:28400",
+          "layout": "contained",
+          "paddingBottom": "110px",
+          "asset": "logo-strip"
+        },
+        {
+          "id": "brand-book",
+          "type": "media",
+          "sourceNode": "331:28247",
+          "layout": "wide",
+          "paddingBottom": "80px",
+          "asset": "brand-book"
+        },
+        {
+          "id": "identity-mockup",
+          "type": "media",
+          "sourceNode": "331:28396",
+          "layout": "wide",
+          "paddingBottom": "150px",
+          "asset": "identity-mockup"
+        },
+        {
+          "id": "color-theory",
+          "type": "prose",
+          "sourceNode": "331:28654",
+          "layout": "contained",
+          "paddingTop": "120px",
+          "paddingBottom": "80px",
+          "title": "Color Theory"
+        },
+        {
+          "id": "color-system",
+          "type": "media",
+          "sourceNode": "331:28594",
+          "layout": "wide",
+          "paddingBottom": "160px",
+          "asset": "color-system"
+        },
+        {
+          "id": "secure-product",
+          "type": "prose",
+          "sourceNode": "331:28575",
+          "layout": "contained",
+          "background": {
+            "color": "#13102f"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "150px",
+          "paddingBottom": "90px",
+          "title": "High Secure, and functional Multi-Factor and Multi-Signature solution for all of your Digital Assets."
+        },
+        {
+          "id": "secure-screens",
+          "type": "media",
+          "sourceNode": "331:28574",
+          "layout": "wide",
+          "background": {
+            "color": "#13102f"
+          },
+          "paddingBottom": "150px",
+          "asset": "secure-screens"
+        },
+        {
+          "id": "grid-system",
+          "type": "media",
+          "sourceNode": "331:28431",
+          "layout": "wide",
+          "paddingTop": "120px",
+          "paddingBottom": "140px",
+          "asset": "grid-system"
+        },
+        {
+          "id": "mobile-screens",
+          "type": "gallery",
+          "sourceNode": "331:28585",
+          "layout": "wide",
+          "columns": 3,
+          "paddingBottom": "180px",
+          "items": [
+            {
+              "asset": "mobile-01"
+            },
+            {
+              "asset": "mobile-02"
+            },
+            {
+              "asset": "mobile-03"
+            },
+            {
+              "asset": "mobile-04"
+            },
+            {
+              "asset": "mobile-05"
+            },
+            {
+              "asset": "mobile-06"
+            },
+            {
+              "asset": "mobile-07"
+            },
+            {
+              "asset": "mobile-08"
+            },
+            {
+              "asset": "mobile-09"
+            }
+          ]
+        },
+        {
+          "id": "feedback",
+          "type": "testimonial",
+          "sourceNode": "331:28576",
+          "layout": "contained",
+          "background": {
+            "color": "#171341"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "165px",
+          "paddingBottom": "130px",
+          "title": "Feedback",
+          "quote": "Alright, so Davit's been quite the design maestro. I mean, seriously, this guy's a one-man show. He's tackled it all - design, markup, and even worked his magic on WordPress building our marketing website. Davit, keep pushing those design boundaries, you're in a league of your own!",
+          "avatar": "shaunt-avatar",
+          "person": {
+            "name": "Shaunt Sarkissian",
+            "role": "Chief Markets Officer at TBOL (The Bank of London)"
+          }
+        },
+        {
+          "id": "portfolio-navigation",
+          "type": "navigation",
+          "sourceNode": "331:37289",
+          "layout": "wide",
+          "background": {
+            "asset": "navigation-background",
+            "position": "center"
+          },
+          "paddingTop": "75px",
+          "paddingBottom": "120px",
+          "title": "Take a look my other projects",
+          "back": {
+            "label": "BACK",
+            "url": "/"
+          },
+          "items": [
+            {
+              "label": "CloudChipr",
+              "url": "/cloudchipr/"
+            },
+            {
+              "label": "ME Photo Lab",
+              "url": "/material-exchange-photo-lab/"
+            },
+            {
+              "label": "Hotel Apartments",
+              "url": "/hotel-apartments/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0-alpha.2",
+      "project": {
+        "title": "ME Photo Lab",
+        "slug": "material-exchange-photo-lab",
+        "source": {
+          "fileKey": "rabzg12ypNFDTsDPCth2HG",
+          "nodeId": "331:28665"
+        }
+      },
+      "tokens": {
+        "pageWidth": "1920px",
+        "containerWidth": "1048px",
+        "wideWidth": "1800px",
+        "displayFont": "Syne, sans-serif",
+        "bodyFont": "Syne, sans-serif",
+        "displayTitle": "80px",
+        "bodyLarge": "32px",
+        "bodyLineHeight": "1.6"
+      },
+      "assets": {
+        "hero": {
+          "packagePath": "assets/material-exchange-photo-lab/hero-cover.png",
+          "sourceNode": "331:28667",
+          "kind": "image",
+          "width": 1920,
+          "height": 1441,
+          "alt": "ME Photo Lab cross-platform editor"
+        },
+        "marketplace": {
+          "packagePath": "assets/material-exchange-photo-lab/marketplace.png",
+          "sourceNode": "331:32589",
+          "kind": "image",
+          "width": 1296,
+          "height": 844,
+          "alt": "Material Exchange marketplace"
+        },
+        "problem-flow": {
+          "packagePath": "assets/material-exchange-photo-lab/problem-flow.png",
+          "sourceNode": "331:32600",
+          "kind": "image",
+          "width": 1327,
+          "height": 261,
+          "alt": "Problem flow from low quality content to user drop-off"
+        },
+        "value-proposition": {
+          "packagePath": "assets/material-exchange-photo-lab/value-proposition.png",
+          "sourceNode": "331:30186",
+          "kind": "image",
+          "width": 1920,
+          "height": 1820,
+          "alt": "ME Photo Lab value proposition canvas"
+        },
+        "user-stories": {
+          "packagePath": "assets/material-exchange-photo-lab/user-stories.png",
+          "sourceNode": "331:32545",
+          "kind": "image",
+          "width": 1783,
+          "height": 1319,
+          "alt": "ME Photo Lab user stories"
+        },
+        "mobile-first": {
+          "packagePath": "assets/material-exchange-photo-lab/mobile-first.png",
+          "sourceNode": "331:32572",
+          "kind": "image",
+          "width": 1768,
+          "height": 1539,
+          "alt": "ME Photo Lab mobile-first design"
+        },
+        "product-editor": {
+          "packagePath": "assets/material-exchange-photo-lab/product-editor.png",
+          "sourceNode": "331:32623",
+          "kind": "image",
+          "width": 1652,
+          "height": 1160,
+          "alt": "ME Photo Lab product editor"
+        },
+        "product-collage": {
+          "packagePath": "assets/material-exchange-photo-lab/product-collage.png",
+          "sourceNode": "331:30295",
+          "kind": "image",
+          "width": 1920,
+          "height": 1772,
+          "alt": "ME Photo Lab product screens"
+        },
+        "sergey-avatar": {
+          "packagePath": "assets/material-exchange-photo-lab/sergey-tonoyan.png",
+          "sourceNode": "331:32941",
+          "kind": "image",
+          "width": 208,
+          "height": 208,
+          "alt": "Sergey Tonoyan"
+        },
+        "navigation-background": {
+          "packagePath": "assets/material-exchange-photo-lab/navigation-background.png",
+          "sourceNode": "331:37311",
+          "kind": "background",
+          "width": 474,
+          "height": 1024,
+          "alt": ""
+        }
+      },
+      "sections": [
+        {
+          "id": "intro",
+          "type": "intro",
+          "sourceNode": "331:28665",
+          "layout": "wide",
+          "background": {
+            "color": "#ecfff8",
+            "scope": "inner",
+            "radius": "30px"
+          },
+          "textColor": "#202020",
+          "paddingTop": "57px",
+          "paddingBottom": "0px",
+          "title": "ME Photo Lab",
+          "subtitle": "Cross-platform photo editing extension.",
+          "metadata": [
+            {
+              "label": "Client:",
+              "value": "Material Exchange"
+            },
+            {
+              "label": "Categories:",
+              "value": "B2B, SaaS"
+            },
+            {
+              "label": "Duration:",
+              "value": "2 Months"
+            },
+            {
+              "label": "Services:",
+              "value": "Competitive analyses, UI Design, Usability testing"
+            },
+            {
+              "label": "Projects:",
+              "value": "ME Photo Lab"
+            }
+          ],
+          "media": "hero"
+        },
+        {
+          "id": "project",
+          "type": "prose",
+          "sourceNode": "331:30165",
+          "layout": "contained",
+          "paddingTop": "190px",
+          "paddingBottom": "170px",
+          "title": "the Project",
+          "body": "<p>ME Photo Lab is a flexible, cross-platform photo editor designed mostly for material suppliers and resellers. Effortlessly edit and standardize scanned and captured material images. It allows users to elevate their materials and make image management in Material Exchange platform easy.</p>"
+        },
+        {
+          "id": "problem-intro",
+          "type": "prose",
+          "sourceNode": "331:32581",
+          "layout": "contained",
+          "paddingTop": "100px",
+          "paddingBottom": "80px",
+          "eyebrow": "the Problem",
+          "title": "Why Are Some Materials Overlooked by Brands? The Influence of Image Editing Knowledge and Budget Constraints",
+          "body": "<p>During my regular observations and interviews with users from various backgrounds, I noticed a consistent pattern: Brands paid more attention to materials that looked good with attractive images and well-designed cards. This phenomenon is known as the <strong>Aesthetic Usability Effect</strong>, where people tend to judge content based on its appearance.</p><p>And here's the catch: Because of this phenomenon, brands didn't seem to pay as much attention to materials that didn't meet their visual standards. To understand why, I dug deeper.</p>"
+        },
+        {
+          "id": "marketplace",
+          "type": "media",
+          "sourceNode": "331:32589",
+          "layout": "contained",
+          "paddingBottom": "100px",
+          "asset": "marketplace"
+        },
+        {
+          "id": "root-cause",
+          "type": "prose",
+          "sourceNode": "331:32584",
+          "layout": "contained",
+          "paddingTop": "70px",
+          "paddingBottom": "70px",
+          "body": "<p>After engaging in discussions with users, I understood the root cause of this unexpected behavior. It became obvious that many suppliers, especially smaller ones and individuals, faced significant challenges due to their limited image editing skills and budget constraints. These constraints prevented them from effectively utilizing quality image editing tools.</p><p>It's important to note that image editing softwares like Photoshop are quite complex for basic operations, such are crop or resize an image, and many material managers either aren't familiar with it or lack access due to licensing limitations.</p>"
+        },
+        {
+          "id": "problem-flow",
+          "type": "media",
+          "sourceNode": "331:32600",
+          "layout": "contained",
+          "paddingBottom": "120px",
+          "asset": "problem-flow"
+        },
+        {
+          "id": "objective",
+          "type": "prose",
+          "sourceNode": "331:32588",
+          "layout": "contained",
+          "paddingTop": "110px",
+          "paddingBottom": "100px",
+          "title": "Objective",
+          "body": "<p>Our objective is to enhance the Material Exchange Marketplace's image presentation capabilities by providing easy and intuitive design tool for material managers.</p>"
+        },
+        {
+          "id": "value-proposition",
+          "type": "media",
+          "sourceNode": "331:30186",
+          "layout": "wide",
+          "paddingBottom": "150px",
+          "asset": "value-proposition"
+        },
+        {
+          "id": "user-stories",
+          "type": "media",
+          "sourceNode": "331:32545",
+          "layout": "wide",
+          "paddingBottom": "150px",
+          "asset": "user-stories"
+        },
+        {
+          "id": "mobile-first-heading",
+          "type": "prose",
+          "sourceNode": "331:32572",
+          "layout": "contained",
+          "paddingTop": "100px",
+          "paddingBottom": "75px",
+          "title": "Mobile First"
+        },
+        {
+          "id": "mobile-first",
+          "type": "media",
+          "sourceNode": "331:32572",
+          "layout": "wide",
+          "paddingBottom": "140px",
+          "asset": "mobile-first"
+        },
+        {
+          "id": "anticipated-transformations",
+          "type": "prose",
+          "sourceNode": "331:32934",
+          "layout": "contained",
+          "paddingTop": "120px",
+          "paddingBottom": "100px",
+          "title": "Anticipated Transformations: The Impact of Our Image Editing Tool on Material Exchange",
+          "body": "<ul><li>With the implementation of our tool, we anticipate a substantial increase in material engagement. We predict that materials edited using our platform will experience a <strong>30% boost in engagement</strong>, piquing the interest of brands and users alike.</li><li>Our analysis suggests that materials with professionally edited images and well-designed cards will exhibit a <strong>20% improvement in conversion rates</strong> compared to non-enhanced materials.</li><li>With the tool now available, we anticipate attracting and onboarding a larger number of small suppliers and individuals. Our projections indicate a <strong>40% growth in our supplier base within the first year of tool implementation.</strong></li><li>We predict a significant enhancement in user satisfaction as a direct result of this tool. We anticipate that <strong>90% of our users will report an improved experience</strong>, noting that the tool makes it easier for them to create visually appealing materials.</li><li>Brands are expected to demonstrate heightened interest in materials from a more diverse set of suppliers, including smaller businesses and individuals. Our projections indicate a <strong>25% increase in brand interactions</strong> with these suppliers.</li></ul>"
+        },
+        {
+          "id": "product-editor",
+          "type": "media",
+          "sourceNode": "331:32623",
+          "layout": "wide",
+          "paddingBottom": "100px",
+          "asset": "product-editor"
+        },
+        {
+          "id": "product-collage",
+          "type": "media",
+          "sourceNode": "331:30295",
+          "layout": "wide",
+          "background": {
+            "color": "#161b2a"
+          },
+          "paddingTop": "70px",
+          "paddingBottom": "130px",
+          "asset": "product-collage"
+        },
+        {
+          "id": "unexpected-change",
+          "type": "prose",
+          "sourceNode": "331:32935",
+          "layout": "contained",
+          "paddingTop": "140px",
+          "paddingBottom": "160px",
+          "title": "When Hard Work Meets Unexpected Change",
+          "body": "<p>Despite two months of dedication and the creation of high-fidelity prototypes, a tough decision was made by the company to cut the project. It was determined that other critical priorities needed immediate attention.</p>"
+        },
+        {
+          "id": "feedback",
+          "type": "testimonial",
+          "sourceNode": "331:32936",
+          "layout": "contained",
+          "background": {
+            "color": "#183f3a"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "165px",
+          "paddingBottom": "130px",
+          "title": "Feedback",
+          "quote": "Davit was a great help on our project. Although the project had to change, I value Davit's contributions and hope to work together again.",
+          "avatar": "sergey-avatar",
+          "person": {
+            "name": "Sergey Tonoyan",
+            "role": "Product Director at Material Exchange"
+          }
+        },
+        {
+          "id": "portfolio-navigation",
+          "type": "navigation",
+          "sourceNode": "331:37311",
+          "layout": "wide",
+          "background": {
+            "asset": "navigation-background",
+            "position": "center"
+          },
+          "paddingTop": "75px",
+          "paddingBottom": "120px",
+          "title": "Take a look my other projects",
+          "back": {
+            "label": "BACK",
+            "url": "/"
+          },
+          "items": [
+            {
+              "label": "CloudChipr",
+              "url": "/cloudchipr/"
+            },
+            {
+              "label": "Securion",
+              "url": "/securion/"
+            },
+            {
+              "label": "Hotel Apartments",
+              "url": "/hotel-apartments/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": "2.0.0-alpha.2",
+      "project": {
+        "title": "HotelApartments",
+        "slug": "hotel-apartments",
+        "source": {
+          "fileKey": "rabzg12ypNFDTsDPCth2HG",
+          "nodeId": "474:9766"
+        }
+      },
+      "tokens": {
+        "pageWidth": "1920px",
+        "containerWidth": "1048px",
+        "wideWidth": "1800px",
+        "displayFont": "Syne, sans-serif",
+        "bodyFont": "Syne, sans-serif",
+        "displayTitle": "80px",
+        "bodyLarge": "32px",
+        "bodyLineHeight": "1.6"
+      },
+      "assets": {
+        "hero": {
+          "packagePath": "assets/hotel-apartments/hero-cover.png",
+          "sourceNode": "476:14199",
+          "kind": "image",
+          "width": 1920,
+          "height": 1406,
+          "alt": "HotelApartments premium accommodation booking design"
+        },
+        "migration-visual": {
+          "packagePath": "assets/hotel-apartments/migration-visual.png",
+          "sourceNode": "486:14243",
+          "kind": "image",
+          "width": 1800,
+          "height": 1102,
+          "alt": "Dubai relocation research visual"
+        },
+        "field-study": {
+          "packagePath": "assets/hotel-apartments/field-study.png",
+          "sourceNode": "487:14262",
+          "kind": "image",
+          "width": 1298,
+          "height": 1237,
+          "alt": "Hotel apartment field study"
+        },
+        "walking-users-shoes": {
+          "packagePath": "assets/hotel-apartments/walking-in-users-shoes.png",
+          "sourceNode": "540:9911",
+          "kind": "image",
+          "width": 1920,
+          "height": 1343,
+          "alt": "Walking in users' shoes research section"
+        },
+        "journey-map": {
+          "packagePath": "assets/hotel-apartments/journey-map.png",
+          "sourceNode": "491:9774",
+          "kind": "image",
+          "width": 1913,
+          "height": 1361,
+          "alt": "Hotel Apartments customer journey map"
+        },
+        "brand-logo": {
+          "packagePath": "assets/hotel-apartments/brand-logo.png",
+          "sourceNode": "540:9897",
+          "kind": "image",
+          "width": 742,
+          "height": 873,
+          "alt": "HotelApartments brand logo"
+        },
+        "brand-foundation": {
+          "packagePath": "assets/hotel-apartments/brand-foundation.png",
+          "sourceNode": "538:9876",
+          "kind": "image",
+          "width": 1800,
+          "height": 2560,
+          "alt": "HotelApartments brand foundation"
+        },
+        "brand-detail-01": {
+          "packagePath": "assets/hotel-apartments/brand-detail-01.png",
+          "sourceNode": "566:10114",
+          "kind": "image",
+          "width": 726,
+          "height": 756,
+          "alt": "HotelApartments brand detail"
+        },
+        "brand-applications": {
+          "packagePath": "assets/hotel-apartments/brand-applications.png",
+          "sourceNode": "538:9868",
+          "kind": "image",
+          "width": 1760,
+          "height": 1200,
+          "alt": "HotelApartments brand applications"
+        },
+        "brand-detail-02": {
+          "packagePath": "assets/hotel-apartments/brand-detail-02.png",
+          "sourceNode": "570:10129",
+          "kind": "image",
+          "width": 708,
+          "height": 629,
+          "alt": "HotelApartments identity detail"
+        },
+        "brand-collage": {
+          "packagePath": "assets/hotel-apartments/brand-collage.png",
+          "sourceNode": "594:10133",
+          "kind": "image",
+          "width": 1756,
+          "height": 1639,
+          "alt": "HotelApartments identity collage"
+        },
+        "web-overview": {
+          "packagePath": "assets/hotel-apartments/web-overview.png",
+          "sourceNode": "609:9998",
+          "kind": "image",
+          "width": 1759,
+          "height": 772,
+          "alt": "HotelApartments website overview"
+        },
+        "web-screens": {
+          "packagePath": "assets/hotel-apartments/web-screens.png",
+          "sourceNode": "609:10002",
+          "kind": "image",
+          "width": 1645,
+          "height": 1632,
+          "alt": "HotelApartments responsive website screens"
+        },
+        "rafayel-avatar": {
+          "packagePath": "assets/hotel-apartments/rafayel-papikyan.png",
+          "sourceNode": "535:9783",
+          "kind": "image",
+          "width": 141,
+          "height": 141,
+          "alt": "Rafayel Papikyan"
+        },
+        "navigation-background": {
+          "packagePath": "assets/hotel-apartments/navigation-background.png",
+          "sourceNode": "474:9766",
+          "kind": "background",
+          "width": 474,
+          "height": 1024,
+          "alt": ""
+        }
+      },
+      "sections": [
+        {
+          "id": "intro",
+          "type": "intro",
+          "sourceNode": "474:9766",
+          "layout": "wide",
+          "background": {
+            "color": "#f5f0eb",
+            "scope": "inner",
+            "radius": "30px"
+          },
+          "textColor": "#201d1a",
+          "paddingTop": "57px",
+          "paddingBottom": "0px",
+          "title": "HotelApartments",
+          "subtitle": "Premium Serviced Accommodations Across The Globe.",
+          "metadata": [
+            {
+              "label": "Client:",
+              "value": "Smart Stay technologies"
+            },
+            {
+              "label": "Categories:",
+              "value": "B2B, B2C, SaaS, VRS"
+            },
+            {
+              "label": "Duration:",
+              "value": "4 Months"
+            },
+            {
+              "label": "Services:",
+              "value": "Field Studies, User Research, Competitive analyses, UI Design, Usability testing"
+            },
+            {
+              "label": "Projects:",
+              "value": "Mobile first Website"
+            }
+          ],
+          "media": "hero"
+        },
+        {
+          "id": "project",
+          "type": "prose",
+          "sourceNode": "474:11266",
+          "layout": "contained",
+          "paddingTop": "190px",
+          "paddingBottom": "180px",
+          "title": "the Project",
+          "body": "<p>Hotel Apartments is a flexible online booking service specializing in extended-stay hotel room bookings. Easily browse and book carefully selected serviced apartments and villas, providing you with spacious, budget-friendly, and all-inclusive lodging options.</p>"
+        },
+        {
+          "id": "migration",
+          "type": "prose",
+          "sourceNode": "474:13682",
+          "layout": "contained",
+          "paddingTop": "110px",
+          "paddingBottom": "90px",
+          "title": "According to official statistics, the number of Russian citizens living in Dubai increased by 170% between February and June 2022.",
+          "body": "<p>Since the start of the Russian-Ukrainian War in February 2022, there has been a significant increase in the number of Russians moving to Dubai.</p><p>A number of companies have opened offices in Dubai and financed their employees’ relocation along with their families including:</p><ul><li>Visa</li><li>Alphabet Inc's Google</li><li>Talnet, a company matching tech workers from Eastern Europe with startups worldwide</li></ul><p>Hotel apartments offer them a flexible, convenient, and comfortable living arrangement as they navigate the challenges of relocation. With fully furnished spaces, on-site amenities, and services tailored to their needs, hotel apartments not only ease the transition but also foster a sense of community and support in a new and unfamiliar environment.</p>"
+        },
+        {
+          "id": "migration-visual",
+          "type": "media",
+          "sourceNode": "486:14243",
+          "layout": "wide",
+          "paddingBottom": "160px",
+          "asset": "migration-visual"
+        },
+        {
+          "id": "field-studies",
+          "type": "prose",
+          "sourceNode": "486:14244",
+          "layout": "contained",
+          "paddingTop": "120px",
+          "paddingBottom": "90px",
+          "title": "Field Studies",
+          "body": "<p>Since the hotel industry was new to me, I began with a field study. I embarked on a business trip where my client had invited me to their had office in Dubai. The objective was to immerse myself in the world of hotel apartment rental services, understand the competitive landscape, and conduct user research to document the primary pain points and challenges faced by potential and existing customers.</p><p>Upon arriving at the airport in Dubai, I was greeted by Shabahir Ibn Muhammad, the Guest Relations Officer (GRO): one of the key stakeholders in this business. During our one-hour trip to my apartment, I started interviewing him because I knew he had important insights. We talked about the challenges guests faced, their preferences, and how the company helped them. This was my first step in understanding the hotel apartment rental industry in Dubai.</p>"
+        },
+        {
+          "id": "field-study",
+          "type": "media",
+          "sourceNode": "487:14262",
+          "layout": "contained",
+          "paddingBottom": "150px",
+          "asset": "field-study"
+        },
+        {
+          "id": "walking-copy",
+          "type": "prose",
+          "sourceNode": "488:14265",
+          "layout": "contained",
+          "background": {
+            "color": "#29221f"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "145px",
+          "paddingBottom": "80px",
+          "title": "Walking a Mile in the User's Shoes",
+          "body": "<p>As the website already existed, one of my main goals was to understand the current customer experience and identify the issues that led to drop-offs (87%), as well as why some users chose competitors over our service. In meetings and interviews with users who visited our office in person, I asked them to replicate their actions on our website, offering them gifts that I had brought with me from Yerevan (magnets, candies, etc.).</p>"
+        },
+        {
+          "id": "walking-visual",
+          "type": "media",
+          "sourceNode": "540:9911",
+          "layout": "wide",
+          "background": {
+            "color": "#29221f"
+          },
+          "paddingBottom": "140px",
+          "asset": "walking-users-shoes"
+        },
+        {
+          "id": "journey-map",
+          "type": "media",
+          "sourceNode": "491:9774",
+          "layout": "wide",
+          "paddingTop": "120px",
+          "paddingBottom": "160px",
+          "asset": "journey-map"
+        },
+        {
+          "id": "findings",
+          "type": "prose",
+          "sourceNode": "495:9887",
+          "layout": "contained",
+          "paddingTop": "110px",
+          "paddingBottom": "150px",
+          "title": "Findings",
+          "body": "<ul><li>Many users found it frustrating that they couldn't book a hotel apartment instantly. Instead, they had to send an inquiry and wait for a response.</li><li>Users had trouble finding similar properties when they used specific filters that resulted in no search results.</li><li>People planning long stays cared a lot about knowing facilities around the place they're booking, especially if they have children and need to find schools. They were also concerned about extra costs, like transportation.</li><li>Users wanted to know exactly how much they'd be paying, including all bills, right from the start.</li></ul>"
+        },
+        {
+          "id": "brand",
+          "type": "prose",
+          "sourceNode": "538:9859",
+          "layout": "contained",
+          "paddingTop": "120px",
+          "paddingBottom": "80px",
+          "title": "The Brand",
+          "body": "<p>Even when you're reselling hotel apartments, it's important to have your own special style and appearance. This helps you create a distinct identity and attract customers.</p>"
+        },
+        {
+          "id": "brand-foundation",
+          "type": "media",
+          "sourceNode": "538:9876",
+          "layout": "wide",
+          "paddingBottom": "100px",
+          "asset": "brand-foundation"
+        },
+        {
+          "id": "client-preference",
+          "type": "split",
+          "sourceNode": "538:9867",
+          "layout": "contained",
+          "paddingTop": "90px",
+          "paddingBottom": "130px",
+          "columns": [
+            {
+              "asset": "brand-logo"
+            },
+            {
+              "title": "Client's preference",
+              "body": "<p>Once the concept is chosen, it's time to craft a clean and minimalistic design for specific elements like business cards, labels, door hangers, and more.</p>"
+            }
+          ]
+        },
+        {
+          "id": "brand-details",
+          "type": "gallery",
+          "sourceNode": "566:10114",
+          "layout": "wide",
+          "columns": 2,
+          "paddingBottom": "70px",
+          "items": [
+            {
+              "asset": "brand-detail-01"
+            },
+            {
+              "asset": "brand-detail-02"
+            }
+          ]
+        },
+        {
+          "id": "brand-applications",
+          "type": "media",
+          "sourceNode": "538:9868",
+          "layout": "wide",
+          "paddingBottom": "80px",
+          "asset": "brand-applications"
+        },
+        {
+          "id": "brand-collage",
+          "type": "media",
+          "sourceNode": "594:10133",
+          "layout": "wide",
+          "paddingBottom": "160px",
+          "asset": "brand-collage"
+        },
+        {
+          "id": "web-design-heading",
+          "type": "prose",
+          "sourceNode": "609:10003",
+          "layout": "contained",
+          "paddingTop": "120px",
+          "paddingBottom": "80px",
+          "title": "Web Design"
+        },
+        {
+          "id": "web-overview",
+          "type": "media",
+          "sourceNode": "609:9998",
+          "layout": "wide",
+          "paddingBottom": "70px",
+          "asset": "web-overview"
+        },
+        {
+          "id": "web-screens",
+          "type": "media",
+          "sourceNode": "609:10002",
+          "layout": "wide",
+          "paddingBottom": "180px",
+          "asset": "web-screens"
+        },
+        {
+          "id": "feedback",
+          "type": "testimonial",
+          "sourceNode": "535:9770",
+          "layout": "contained",
+          "background": {
+            "color": "#312720"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "165px",
+          "paddingBottom": "130px",
+          "title": "Feedback",
+          "quote": "Davit was a great help on our project. Although the project had to change, I value Davit's contributions and hope to work together again.",
+          "avatar": "rafayel-avatar",
+          "person": {
+            "name": "Rafayel Papikyan",
+            "role": "Managing Director/ Co-Founder"
+          }
+        },
+        {
+          "id": "portfolio-navigation",
+          "type": "navigation",
+          "sourceNode": "474:9766",
+          "layout": "wide",
+          "background": {
+            "asset": "navigation-background",
+            "position": "center"
+          },
+          "paddingTop": "75px",
+          "paddingBottom": "120px",
+          "title": "Take a look my other projects",
+          "back": {
+            "label": "BACK",
+            "url": "/"
+          },
+          "items": [
+            {
+              "label": "CloudChipr",
+              "url": "/cloudchipr/"
+            },
+            {
+              "label": "Securion",
+              "url": "/securion/"
+            },
+            {
+              "label": "ME Photo Lab",
+              "url": "/material-exchange-photo-lab/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

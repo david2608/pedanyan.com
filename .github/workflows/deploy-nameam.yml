@@ -1,0 +1,75 @@
+name: Deploy to Name.am
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Deployment target
+        required: true
+        type: choice
+        default: staging
+        options:
+          - staging
+          - production
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nameam-${{ inputs.environment }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production website
+        run: npm run build
+
+      - name: Verify deployable output
+        run: |
+          test -s dist/index.html
+          test -s dist/.htaccess
+          test -d dist/assets
+
+      - name: Install secure FTP client
+        run: sudo apt-get update && sudo apt-get install --yes lftp
+
+      - name: Deploy build to Name.am
+        env:
+          NAMEAM_FTP_HOST: ${{ secrets.NAMEAM_FTP_HOST }}
+          NAMEAM_FTP_USERNAME: ${{ secrets.NAMEAM_FTP_USERNAME }}
+          NAMEAM_FTP_PASSWORD: ${{ secrets.NAMEAM_FTP_PASSWORD }}
+          NAMEAM_FTP_PATH: ${{ secrets.NAMEAM_FTP_PATH }}
+        run: |
+          test -n "$NAMEAM_FTP_HOST"
+          test -n "$NAMEAM_FTP_USERNAME"
+          test -n "$NAMEAM_FTP_PASSWORD"
+          test -n "$NAMEAM_FTP_PATH"
+          lftp -c "
+            set cmd:fail-exit yes;
+            set net:max-retries 2;
+            set net:timeout 20;
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate yes;
+            open --user \"$NAMEAM_FTP_USERNAME\" --password \"$NAMEAM_FTP_PASSWORD\" \"$NAMEAM_FTP_HOST\";
+            mirror --reverse --delete --verbose --parallel=4 dist/ \"$NAMEAM_FTP_PATH\";
+            bye;
+          "

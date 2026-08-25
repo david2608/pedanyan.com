@@ -1,0 +1,461 @@
+{
+  "navigation": {
+    "logo": "PDNYN",
+    "primary": [
+      {
+        "label": "Portfolio",
+        "href": "/am/designer"
+      },
+      {
+        "label": "Public",
+        "href": "/am/public-work"
+      }
+    ],
+    "school": {
+      "label": "School",
+      "href": "/am/school"
+    },
+    "talk": {
+      "label": "Let's talk",
+      "href": "/am/lets-talk"
+    },
+    "socials": [
+      {
+        "label": "IN",
+        "href": "https://www.linkedin.com/"
+      },
+      {
+        "label": "IG",
+        "href": "https://www.instagram.com/"
+      },
+      {
+        "label": "FB",
+        "href": "https://www.facebook.com/"
+      }
+    ]
+  },
+  "home": {
+    "hero": {
+      "headline": [
+        "I build",
+        "products,",
+        "designers, and",
+        "creative culture."
+      ],
+      "snippets": [
+        "Design generalist",
+        "Educator",
+        "Community\nbuilder in Armenia",
+        "Product design",
+        "Public work"
+      ]
+    },
+    "pathCards": [
+      {
+        "title": "Need design help?",
+        "text": "I help founders and product teams define the design problem, find the right designer, and decide what to do next.",
+        "cta": "See how I can help",
+        "href": "/am/designer"
+      },
+      {
+        "title": "Want to learn design?",
+        "text": "I teach beginners to research, critique, design interfaces, and explain their decisions.",
+        "cta": "Explore the school",
+        "href": "/am/school"
+      },
+      {
+        "title": "Want to know my story?",
+        "text": "See the talks, workshops, critique sessions, and community events I run in Armenia.",
+        "cta": "See my public work",
+        "href": "/am/public-work"
+      }
+    ],
+    "talkRoutes": [
+      "Need design help?",
+      "Want to learn design?",
+      "Want to invite me or collaborate?",
+      "Want to know my story?"
+    ],
+    "talkCta": "Let's talk"
+  },
+  "sharedContactRoutes": [
+    "Need design help?",
+    "Want to learn design?",
+    "Want to invite me?",
+    "Want to collaborate?"
+  ],
+  "letsTalk": {
+    "headline": [
+      "LET'S TALK",
+      "ABOUT",
+      "WHAT YOU NEED"
+    ],
+    "routes": [
+      {
+        "label": "For companies",
+        "text": "Tell me what you are building and where design is stuck. I can define the role, find a designer, or set product direction.",
+        "cta": "Talk about the product",
+        "href": "/am/lets-talk",
+        "className": "dw-talk-route-companies"
+      },
+      {
+        "label": "For students",
+        "text": "Tell me what you want to learn and what experience you already have.",
+        "cta": "Ask about the school",
+        "href": "/am/lets-talk",
+        "className": "dw-talk-route-students"
+      },
+      {
+        "label": "For public work",
+        "text": "Invite me to speak, run a workshop, review work, or join a podcast.",
+        "cta": "Invite Davit",
+        "href": "/am/lets-talk",
+        "className": "dw-talk-route-public"
+      },
+      {
+        "label": "Direct contact",
+        "text": "Email / Instagram / LinkedIn",
+        "cta": "",
+        "href": "",
+        "className": "dw-talk-route-direct"
+      }
+    ]
+  },
+  "designer": {
+    "stats": [
+      {
+        "value": "20+ years",
+        "caption": "designing digital products, brands, interfaces, and design systems"
+      },
+      {
+        "value": "17 startups",
+        "caption": "building product direction, design systems, and shipped interfaces"
+      },
+      {
+        "value": "100+",
+        "caption": "consulting projects in product strategy, UX, branding, hiring, and design operations"
+      },
+      {
+        "value": "85",
+        "caption": "designers placed with product teams"
+      },
+      {
+        "value": "$27M",
+        "caption": "raised by founders whose products and pitches I helped shape"
+      }
+    ],
+    "next": {
+      "kicker": "I turn unclear product problems into decisions a team can design and ship.",
+      "headline": [
+        "What I can",
+        "do for",
+        "you"
+      ],
+      "text": "I can review your product, define the design role you need, or help your team choose a direction."
+    },
+    "experiences": [
+      {
+        "company": "Lynon",
+        "role": "Head of Design",
+        "years": "Current",
+        "type": "Design leadership",
+        "logoDomain": "lynon.com",
+        "description": "I lead product design across the product and its communication."
+      },
+      {
+        "company": "Armenian Code Academy",
+        "role": "Design Practice Lead",
+        "years": "4+ years",
+        "type": "Design education",
+        "logoDomain": "aca.am",
+        "description": "I built and led UX courses, workshops, UX Storm, and mentorship programs."
+      },
+      {
+        "company": "artmart",
+        "role": "Founder",
+        "years": "Current",
+        "type": "Creative education",
+        "logoDomain": "artmart.am",
+        "description": "I founded artmart, a contemporary art school in Armenia."
+      },
+      {
+        "company": "T-Bank / Tinkoff",
+        "role": "Product Designer",
+        "years": "Verify dates",
+        "type": "Product design",
+        "logoDomain": "tbank.ru",
+        "description": "I designed products with a large fintech team."
+      },
+      {
+        "company": "Material Exchange",
+        "role": "Product / Design Lead",
+        "years": "Feb 2020 - Feb 2022",
+        "type": "Product design leadership",
+        "logoDomain": "material-exchange.com",
+        "description": "I designed the product and its design system for an international materials platform."
+      },
+      {
+        "company": "Webb Fontaine",
+        "role": "Design Lead",
+        "years": "Verify dates",
+        "type": "Enterprise product design",
+        "logoDomain": "webbfontaine.com",
+        "description": "I led design systems and interface work for complex enterprise products."
+      },
+      {
+        "company": "CloudChipr",
+        "role": "Product Design Lead",
+        "years": "Verify dates",
+        "type": "Startup product design",
+        "logoDomain": "cloudchipr.com",
+        "description": "I designed the product from its first MVP through early growth."
+      },
+      {
+        "company": "Liga Insurance",
+        "role": "Product Designer",
+        "years": "Verify dates",
+        "type": "Insurance product design",
+        "logoDomain": "liga.am",
+        "description": "I designed mobile and web insurance products."
+      },
+      {
+        "company": "Uphold",
+        "role": "Senior UI/UX Designer",
+        "years": "Verify dates",
+        "type": "Fintech / crypto product",
+        "logoDomain": "uphold.com",
+        "description": "I designed mobile wallet and crypto-fintech products."
+      },
+      {
+        "company": "The Bank of London",
+        "role": "Product Designer",
+        "years": "Verify dates",
+        "type": "Fintech product design",
+        "logoDomain": "thebankoflondon.com",
+        "description": "I designed interfaces for digital banking products."
+      }
+    ]
+  },
+  "school": {
+    "hero": {
+      "eyebrow": "Pedanyan School",
+      "headline": [
+        "Learn design",
+        "through practice",
+        "and critique."
+      ],
+      "lead": "I teach beginners in Armenia to research problems, critique work, use modern tools, and build one product case they can defend."
+    },
+    "stats": [
+      {
+        "value": "4 months",
+        "label": "beginner program"
+      },
+      {
+        "value": "up to 12",
+        "label": "students per group"
+      },
+      {
+        "value": "offline first",
+        "label": "classes in our school space"
+      },
+      {
+        "value": "1 case",
+        "label": "finished portfolio case"
+      },
+      {
+        "value": "AI workflow",
+        "label": "AI inside the design process"
+      },
+      {
+        "value": "guest mentors",
+        "label": "sessions with invited designers"
+      }
+    ],
+    "actions": [
+      {
+        "label": "Ask about the school",
+        "href": "/am/lets-talk"
+      },
+      {
+        "label": "Book open lesson",
+        "href": "/am/lets-talk"
+      }
+    ],
+    "note": "Classes happen in person, with online support between sessions. Each group stays small so everyone gets direct critique.",
+    "standards": [
+      {
+        "title": "Thinking before screens",
+        "copy": "Students research the problem, ask useful questions, and explain each design choice."
+      },
+      {
+        "title": "Critique as a habit",
+        "copy": "We review work in the room, challenge weak choices, and revise until the reasoning holds."
+      },
+      {
+        "title": "Tools with taste",
+        "copy": "Figma and AI support the work. Judgment, structure, and visual clarity decide the result."
+      }
+    ],
+    "practice": {
+      "items": [
+        "Product thinking",
+        "Interface structure",
+        "Figma workflow",
+        "AI-assisted process",
+        "Critique sessions",
+        "Portfolio case"
+      ],
+      "copy": "Students repeat the work, get direct critique, and finish with a case that explains the thinking behind each screen."
+    },
+    "final": {
+      "headline": [
+        "want to",
+        "learn design?"
+      ],
+      "text": "Tell me what you have tried, what you want to learn, and how much time you can give the program.",
+      "cta": "Ask about the school",
+      "href": "/am/lets-talk"
+    }
+  },
+  "public": {
+    "intro": {
+      "headline": [
+        "public work,",
+        "formats,",
+        "and media."
+      ],
+      "text": "I host talks, workshops, UX Storm, Drunk Talks, and critique nights for designers in Armenia. I also speak, teach, and join public conversations about design."
+    },
+    "categories": [
+      {
+        "title": "UX Storm",
+        "description": "Recaps, speaker notes, mentor debates, and useful ideas from each UX Storm.",
+        "count": "event series"
+      },
+      {
+        "title": "Public speaking",
+        "description": "Talks, panels, and interviews about design, education, AI, and culture.",
+        "count": "talks / panels"
+      },
+      {
+        "title": "Workshops",
+        "description": "Sessions for students and product teams on product thinking, portfolios, critique, and design process.",
+        "count": "facilitation"
+      },
+      {
+        "title": "Design critiques",
+        "description": "Designers bring case studies, portfolios, unfinished work, and mistakes for an honest review.",
+        "count": "critique culture"
+      }
+    ],
+    "drunkTalks": {
+      "headline": [
+        "drinks,",
+        "designers,",
+        "open talk."
+      ],
+      "text": "I invite local and visiting designers for a drink and an unscripted conversation with the room.",
+      "gallery": [
+        {
+          "title": "Foreign designer night",
+          "note": "guest / drink / open conversation",
+          "size": "wide",
+          "tone": "blue"
+        },
+        {
+          "title": "Design after hours",
+          "note": "experimental format",
+          "size": "narrow",
+          "tone": "warm"
+        },
+        {
+          "title": "Community table",
+          "note": "everyone is welcome",
+          "size": "double",
+          "tone": "violet"
+        },
+        {
+          "title": "Unfiltered Q&A",
+          "note": "questions that do not fit formal events",
+          "size": "single",
+          "tone": "stage"
+        }
+      ]
+    },
+    "formats": [
+      {
+        "title": "UX Storm",
+        "description": "Speakers share a case, then mentors lead short discussions with the room."
+      },
+      {
+        "title": "Drunk Talks",
+        "description": "Local and visiting designers have a drink and answer questions from anyone who joins."
+      },
+      {
+        "title": "Design critiques",
+        "description": "Designers bring case studies, portfolios, unfinished work, and mistakes for group review."
+      },
+      {
+        "title": "Invited public work",
+        "description": "I speak on panels, run workshops, review work, and mentor designers at other events."
+      }
+    ],
+    "mediaProjects": [
+      {
+        "title": "UX Storm",
+        "category": "UX design event / speakers / speed discussions",
+        "size": "wide",
+        "tone": "deep"
+      },
+      {
+        "title": "Drunk Talks",
+        "category": "Experimental drinks-and-design conversations",
+        "size": "narrow",
+        "tone": "blue"
+      },
+      {
+        "title": "Design critique nights",
+        "category": "Case studies, portfolios, and honest failures",
+        "size": "wide",
+        "tone": "cyan"
+      },
+      {
+        "title": "Speaker appearances",
+        "category": "Talks, panels, public discussions",
+        "size": "single",
+        "tone": "violet"
+      },
+      {
+        "title": "Workshop facilitation",
+        "category": "Hands-on sessions for teams and students",
+        "size": "double",
+        "tone": "acid"
+      },
+      {
+        "title": "artmart public program",
+        "category": "Community, culture, and education formats",
+        "size": "double",
+        "tone": "warm"
+      },
+      {
+        "title": "Portfolio open reviews",
+        "category": "Designers discuss work in progress",
+        "size": "single",
+        "tone": "stage"
+      },
+      {
+        "title": "Foreign designer sessions",
+        "category": "Guests, exchange, informal learning",
+        "size": "narrow",
+        "tone": "mono"
+      },
+      {
+        "title": "Public education experiments",
+        "category": "New formats for design learning in Armenia",
+        "size": "triple",
+        "tone": "green"
+      }
+    ]
+  }
+}

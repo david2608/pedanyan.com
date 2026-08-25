@@ -1,0 +1,10 @@
+Options -MultiViews
+RewriteEngine On
+
+# Serve real files and folders without routing them through the React app.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Send direct portfolio routes such as /am/projects/cloudchipr to the SPA.
+RewriteRule ^ index.html [L]

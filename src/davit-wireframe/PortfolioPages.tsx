@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, type CSSProperties, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Undo2 } from "lucide-react";
+import { Skull, Undo2 } from "lucide-react";
 import portfolioManifest from "./portfolio-content.json";
 import "@fontsource/syne/400.css";
 import "@fontsource/syne/500.css";
@@ -515,6 +515,167 @@ function CloudChiprProblem({ project, section }: { project: PortfolioProject; se
   );
 }
 
+function CloudChiprCompetitorAnalysis({ section }: { section: PortfolioSection }) {
+  const directCompetitors = [
+    { className: "cloudhealth", label: "CloudHealth", detail: "by VMware" },
+    { className: "parkmycloud", label: "ParkMyCloud" },
+    { className: "densify", label: "Densify" },
+    { className: "cloudzero", label: "CLOUDZERO" },
+    { className: "cloudcheckr", label: "CloudCheckr", detail: "Now part of Spot by NetApp" }
+  ];
+  const indirectCompetitors = [
+    { className: "deloitte", label: "Deloitte." },
+    { className: "rightscale", label: "RIGHTSCALE" },
+    { className: "scalr", label: "SCALR", detail: "CLOUD MANAGEMENT" },
+    { className: "cloudbolt", label: "CloudBolt", detail: "software" },
+    { className: "aws", label: "aws" },
+    { className: "google-cloud", label: "Google Cloud" },
+    { className: "azure", label: "Azure" }
+  ];
+  const competitorLimits = [
+    "No self-service setup",
+    "No predictable price",
+    "Legacy, consulting-based approach",
+    "Focused mainly on one cloud provider",
+    "Deep engineering knowledge required to maintain and operate",
+    "Limited functionality"
+  ];
+  const cloudChiprAdvantages = [
+    "Easy to set up",
+    "Flat price",
+    "Set up and forget",
+    "Hybrid cloud",
+    "No engineering knowledge required",
+    "Open-source engine"
+  ];
+
+  const renderLogo = (competitor: { className: string; label: string; detail?: string }) => (
+    <li className={`dw-cloudchipr-wordmark dw-cloudchipr-wordmark-${competitor.className}`} key={competitor.label}>
+      <span className="dw-cloudchipr-wordmark-mark" aria-hidden="true" />
+      <span>
+        <strong>{competitor.label}</strong>
+        {competitor.detail ? <small>{competitor.detail}</small> : null}
+      </span>
+    </li>
+  );
+
+  return (
+    <section className="dw-case-section dw-cloudchipr-competitors" id={section.id} data-cloudchipr-competitors>
+      <div className="dw-cloudchipr-competitor-art" aria-hidden="true">
+        <span className="dw-cloudchipr-competitor-void" />
+        <span className="dw-cloudchipr-competitor-orb dw-cloudchipr-competitor-orb-one" />
+        <span className="dw-cloudchipr-competitor-orb dw-cloudchipr-competitor-orb-two" />
+        <span className="dw-cloudchipr-competitor-ribbon" />
+      </div>
+
+      <div className="dw-cloudchipr-competitor-inner">
+        <h2 className="dw-cloudchipr-competitor-title">{section.title}</h2>
+
+        <div className="dw-cloudchipr-competitor-block dw-cloudchipr-competitor-direct">
+          <p>
+            When looking at other companies in the field, I did two kinds of analysis: <strong>direct and indirect competitors.</strong>
+          </p>
+          <p>
+            For <strong>direct competitors</strong>, I looked at companies with products or services similar to ours: what they offer, how much they charge, and who they target. This showed where CloudChipr was stronger and where it still needed work.
+          </p>
+          <ul className="dw-cloudchipr-logo-cloud dw-cloudchipr-logo-cloud-direct" aria-label="Direct competitors">
+            {directCompetitors.map(renderLogo)}
+          </ul>
+        </div>
+
+        <div className="dw-cloudchipr-competitor-block dw-cloudchipr-competitor-indirect">
+          <p>
+            <strong>Indirect competitors</strong> were different. They might not do exactly what we do, but they can still pull customers away. I researched them to understand their potential impact on the market.
+          </p>
+          <ul className="dw-cloudchipr-logo-cloud dw-cloudchipr-logo-cloud-indirect" aria-label="Indirect competitors and cloud platforms">
+            {indirectCompetitors.map(renderLogo)}
+          </ul>
+        </div>
+
+        <div className="dw-cloudchipr-competitor-insights">
+          <p>
+            I read reports and studied <strong>what customers say online.</strong> That revealed what people value and what frustrates them about existing products.
+          </p>
+          <p>
+            I also reviewed <strong>the technology they use</strong> and the distinct features they offer.
+          </p>
+          <p>
+            Together, this helped define <strong>where CloudChipr could stand apart</strong> instead of becoming another generic cloud-cost tool.
+          </p>
+        </div>
+
+        <div className="dw-cloudchipr-competitor-comparison" aria-label="Competitor and CloudChipr comparison">
+          <div className="dw-cloudchipr-comparison-column dw-cloudchipr-comparison-competitors">
+            <h3>Competitors</h3>
+            <ul>
+              {competitorLimits.map((item) => <li key={item}><span aria-hidden="true">×</span>{item}</li>)}
+            </ul>
+          </div>
+          <div className="dw-cloudchipr-comparison-column dw-cloudchipr-comparison-cloudchipr">
+            <h3><span className="dw-cloudchipr-comparison-mark" aria-hidden="true" />cloudchipr</h3>
+            <ul>
+              {cloudChiprAdvantages.map((item) => <li key={item}><span aria-hidden="true">✓</span>{item}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CloudChiprDesignSystemDecision({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const metrics = [
+    { label: "Time saved per project", value: "200 hours", note: "No improvement assumed" },
+    { label: "MVP duration before a design system", value: "800 hours" },
+    { label: "Cost savings from time saved", value: "200 hours × $40/hour = $8,000" },
+    { label: "MVP duration after a design system", value: "600 hours", note: "No improvement assumed" },
+    { label: "Cost of a design system for one project", value: "$20,000" },
+    { label: "Average designer/developer rate", value: "$50/hour" }
+  ];
+
+  return (
+    <section className="dw-case-section dw-cloudchipr-design-decision" id={section.id} data-cloudchipr-design-decision>
+      <div className="dw-cloudchipr-design-decision-inner">
+        <div className="dw-cloudchipr-design-decision-main">
+          <header className="dw-cloudchipr-design-decision-heading">
+            <h2>To Design or Not to <span>Design system?</span></h2>
+            <Skull aria-hidden="true" strokeWidth={1.15} />
+          </header>
+
+          <p className="dw-cloudchipr-design-decision-copy">
+            The company asked me to determine whether <strong>to license an existing design system or create a new one.</strong> Beyond the usual pros and cons, I used a more concrete approach: calculating the <strong>Return on Investment (ROI)</strong> for building our own system. That gave us a <strong>clear, strategic way</strong> to choose the right direction.
+          </p>
+
+          <div className="dw-cloudchipr-roi-calculation">
+            <h3>ROI Calculation</h3>
+            <dl>
+              {metrics.map((metric) => (
+                <div key={metric.label}>
+                  <dt>{metric.label}</dt>
+                  <dd>{metric.value}{metric.note ? <small>{metric.note}</small> : null}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+
+        <div className="dw-cloudchipr-roi-result">
+          <div className="dw-cloudchipr-roi-equation">
+            <p>Total ROI for one project</p>
+            <h3>ROI = Cost savings − Cost of design-system implementation</h3>
+            <strong>$8,000 − $20,000 = <span>−$12,000</span></strong>
+          </div>
+
+          <div className="dw-cloudchipr-roi-comment">
+            <p>Holy hosting!<br />That’s a lot of wasted money.</p>
+            <ProjectImage project={project} assetKey="viktor-avatar" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function MediaSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   if (project.project.slug === "cloudchipr" && section.id === "brand-construction") {
     return (
@@ -684,6 +845,18 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   }
   if (project.project.slug === "cloudchipr" && section.id === "problem-discovered") {
     return null;
+  }
+  if (project.project.slug === "cloudchipr" && section.id === "competitor-analysis") {
+    return <CloudChiprCompetitorAnalysis section={section} />;
+  }
+  if (
+    project.project.slug === "cloudchipr" &&
+    ["competitor-roi-visual", "competitor-map-visual"].includes(section.id)
+  ) {
+    return null;
+  }
+  if (project.project.slug === "cloudchipr" && section.id === "design-system-decision") {
+    return <CloudChiprDesignSystemDecision project={project} section={section} />;
   }
   if (section.type === "intro") return <IntroSection project={project} section={section} />;
   if (section.type === "prose") return <ProseSection project={project} section={section} />;
@@ -1060,6 +1233,131 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
             if (caption) {
               stepTimeline.fromTo(caption, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.45 }, 0.92);
             }
+          });
+        }
+
+        const competitors = container.querySelector<HTMLElement>("[data-cloudchipr-competitors]");
+        if (competitors) {
+          const title = competitors.querySelector<HTMLElement>(".dw-cloudchipr-competitor-title");
+          const copy = competitors.querySelectorAll<HTMLElement>(".dw-cloudchipr-competitor-block > p, .dw-cloudchipr-competitor-insights > p");
+          const logos = competitors.querySelectorAll<HTMLElement>(".dw-cloudchipr-wordmark");
+          const comparison = competitors.querySelector<HTMLElement>(".dw-cloudchipr-competitor-comparison");
+          const orbs = competitors.querySelectorAll<HTMLElement>(".dw-cloudchipr-competitor-orb");
+
+          gsap.fromTo(title, { autoAlpha: 0, y: 28, filter: "blur(8px)" }, {
+            autoAlpha: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: { trigger: competitors, start: "top 82%", toggleActions: "play none none reverse" }
+          });
+
+          gsap.fromTo(copy, { autoAlpha: 0, y: 34, filter: "blur(7px)" }, {
+            autoAlpha: 1,
+            y: 0,
+            filter: "blur(0px)",
+            stagger: 0.1,
+            duration: 0.85,
+            ease: "power3.out",
+            scrollTrigger: { trigger: competitors, start: "top 76%", toggleActions: "play none none reverse" }
+          });
+
+          gsap.fromTo(logos, { autoAlpha: 0, y: 24, scale: 0.9, filter: "blur(5px)" }, {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            stagger: 0.055,
+            duration: 0.65,
+            ease: "back.out(1.25)",
+            scrollTrigger: { trigger: competitors, start: "top 66%", toggleActions: "play none none reverse" }
+          });
+
+          gsap.fromTo(comparison, { autoAlpha: 0, y: 70, scale: 0.97, filter: "blur(6px)" }, {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 0.95,
+            ease: "power3.out",
+            scrollTrigger: { trigger: comparison, start: "top 90%", toggleActions: "play none none reverse" }
+          });
+
+          gsap.to(orbs, {
+            yPercent: (index) => index === 0 ? -8 : 8,
+            rotation: (index) => index === 0 ? 5 : -5,
+            ease: "none",
+            scrollTrigger: { trigger: competitors, start: "top bottom", end: "bottom top", scrub: 0.85 }
+          });
+        }
+
+        const designDecision = container.querySelector<HTMLElement>("[data-cloudchipr-design-decision]");
+        if (designDecision) {
+          const heading = designDecision.querySelectorAll<HTMLElement>(".dw-cloudchipr-design-decision-heading > *");
+          const copy = designDecision.querySelector<HTMLElement>(".dw-cloudchipr-design-decision-copy");
+          const roiTitle = designDecision.querySelector<HTMLElement>(".dw-cloudchipr-roi-calculation h3");
+          const metrics = designDecision.querySelectorAll<HTMLElement>(".dw-cloudchipr-roi-calculation dl > div");
+          const result = designDecision.querySelector<HTMLElement>(".dw-cloudchipr-roi-result");
+          const equation = designDecision.querySelectorAll<HTMLElement>(".dw-cloudchipr-roi-equation > *");
+          const comment = designDecision.querySelector<HTMLElement>(".dw-cloudchipr-roi-comment");
+
+          gsap.fromTo(heading, { autoAlpha: 0, y: 30, filter: "blur(8px)" }, {
+            autoAlpha: 1,
+            y: 0,
+            filter: "blur(0px)",
+            stagger: 0.12,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: { trigger: designDecision, start: "top 84%", toggleActions: "play none none reverse" }
+          });
+
+          gsap.fromTo([copy, roiTitle], { autoAlpha: 0, y: 26, filter: "blur(7px)" }, {
+            autoAlpha: 1,
+            y: 0,
+            filter: "blur(0px)",
+            stagger: 0.14,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: { trigger: designDecision, start: "top 74%", toggleActions: "play none none reverse" }
+          });
+
+          gsap.fromTo(metrics, { autoAlpha: 0, y: 24 }, {
+            autoAlpha: 1,
+            y: 0,
+            stagger: 0.08,
+            duration: 0.62,
+            ease: "power2.out",
+            scrollTrigger: { trigger: metrics[0], start: "top 88%", toggleActions: "play none none reverse" }
+          });
+
+          gsap.fromTo(result, { autoAlpha: 0.4, y: 58, scale: 0.985 }, {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: { trigger: result, start: "top 92%", toggleActions: "play none none reverse" }
+          });
+
+          gsap.fromTo(equation, { autoAlpha: 0, x: -32, filter: "blur(6px)" }, {
+            autoAlpha: 1,
+            x: 0,
+            filter: "blur(0px)",
+            stagger: 0.12,
+            duration: 0.72,
+            ease: "power3.out",
+            scrollTrigger: { trigger: result, start: "top 78%", toggleActions: "play none none reverse" }
+          });
+
+          gsap.fromTo(comment, { autoAlpha: 0, x: 44, y: 26, scale: 0.9 }, {
+            autoAlpha: 1,
+            x: 0,
+            y: 0,
+            scale: 1,
+            duration: 0.85,
+            ease: "back.out(1.25)",
+            scrollTrigger: { trigger: result, start: "top 72%", toggleActions: "play none none reverse" }
           });
         }
       } else {

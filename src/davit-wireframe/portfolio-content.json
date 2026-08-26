@@ -915,11 +915,11 @@
           "alt": "Deadstock Depot online marketplace"
         },
         "user-research": {
-          "packagePath": "assets/material-exchange/user-research.png",
+          "packagePath": "assets/material-exchange/user-research-export.png",
           "sourceNode": "331:24487",
           "kind": "image",
           "width": 1845,
-          "height": 1037,
+          "height": 981,
           "alt": "Material Exchange user survey findings and charts"
         },
         "platform-users": {
@@ -2277,7 +2277,7 @@
     {
       "schemaVersion": "2.0.0-alpha.2",
       "project": {
-        "title": "HotelApartments",
+        "title": "Hotel Apartments",
         "slug": "hotel-apartments",
         "source": {
           "fileKey": "rabzg12ypNFDTsDPCth2HG",
@@ -2301,7 +2301,7 @@
           "kind": "image",
           "width": 1920,
           "height": 1406,
-          "alt": "HotelApartments premium accommodation booking design"
+          "alt": "Hotel Apartments booking experience shown across desktop product screens"
         },
         "migration-visual": {
           "packagePath": "assets/hotel-apartments/migration-visual.png",
@@ -2309,7 +2309,7 @@
           "kind": "image",
           "width": 1800,
           "height": 1102,
-          "alt": "Dubai relocation research visual"
+          "alt": "Sobha sales center development model in Dubai"
         },
         "field-study": {
           "packagePath": "assets/hotel-apartments/field-study.png",
@@ -2317,7 +2317,7 @@
           "kind": "image",
           "width": 1298,
           "height": 1237,
-          "alt": "Hotel apartment field study"
+          "alt": "Field study arrival and stakeholder interview in Dubai"
         },
         "walking-users-shoes": {
           "packagePath": "assets/hotel-apartments/walking-in-users-shoes.png",
@@ -2325,7 +2325,7 @@
           "kind": "image",
           "width": 1920,
           "height": 1343,
-          "alt": "Walking in users' shoes research section"
+          "alt": "Light woven background used for the user research chapter"
         },
         "journey-map": {
           "packagePath": "assets/hotel-apartments/journey-map.png",
@@ -2341,7 +2341,7 @@
           "kind": "image",
           "width": 742,
           "height": 873,
-          "alt": "HotelApartments brand logo"
+          "alt": "Hotel Apartments logo construction notes"
         },
         "brand-foundation": {
           "packagePath": "assets/hotel-apartments/brand-foundation.png",
@@ -2349,7 +2349,7 @@
           "kind": "image",
           "width": 1800,
           "height": 2560,
-          "alt": "HotelApartments brand foundation"
+          "alt": "Hotel Apartments brand foundation background"
         },
         "brand-detail-01": {
           "packagePath": "assets/hotel-apartments/brand-detail-01.png",
@@ -2357,7 +2357,7 @@
           "kind": "image",
           "width": 726,
           "height": 756,
-          "alt": "HotelApartments brand detail"
+          "alt": "Hotel Apartments branded table setting"
         },
         "brand-applications": {
           "packagePath": "assets/hotel-apartments/brand-applications.png",
@@ -2365,7 +2365,7 @@
           "kind": "image",
           "width": 1760,
           "height": 1200,
-          "alt": "HotelApartments brand applications"
+          "alt": "Hotel Apartments stationery and guest amenity applications"
         },
         "brand-detail-02": {
           "packagePath": "assets/hotel-apartments/brand-detail-02.png",
@@ -2373,7 +2373,7 @@
           "kind": "image",
           "width": 708,
           "height": 629,
-          "alt": "HotelApartments identity detail"
+          "alt": "Hotel Apartments branded linen set"
         },
         "brand-collage": {
           "packagePath": "assets/hotel-apartments/brand-collage.png",
@@ -2381,7 +2381,7 @@
           "kind": "image",
           "width": 1756,
           "height": 1639,
-          "alt": "HotelApartments identity collage"
+          "alt": "Hotel Apartments dark identity and business card composition"
         },
         "web-overview": {
           "packagePath": "assets/hotel-apartments/web-overview.png",
@@ -2389,7 +2389,7 @@
           "kind": "image",
           "width": 1759,
           "height": 772,
-          "alt": "HotelApartments website overview"
+          "alt": "Hotel Apartments website browser interface"
         },
         "web-screens": {
           "packagePath": "assets/hotel-apartments/web-screens.png",
@@ -2397,7 +2397,7 @@
           "kind": "image",
           "width": 1645,
           "height": 1632,
-          "alt": "HotelApartments responsive website screens"
+          "alt": "Hotel Apartments color and typography system"
         },
         "rafayel-avatar": {
           "packagePath": "assets/hotel-apartments/rafayel-papikyan.png",
@@ -2430,8 +2430,8 @@
           "textColor": "#201d1a",
           "paddingTop": "57px",
           "paddingBottom": "0px",
-          "title": "HotelApartments",
-          "subtitle": "Premium Serviced Accommodations Across The Globe.",
+          "title": "Hotel Apartments",
+          "subtitle": "online booking service specializing in extended-stay hotel room booking",
           "metadata": [
             {
               "label": "Client:",
@@ -2452,6 +2452,14 @@
             {
               "label": "Projects:",
               "value": "Mobile first Website"
+            },
+            {
+              "label": "Tools:",
+              "value": "Figma, Notion, Miro"
+            },
+            {
+              "label": "Co-design:",
+              "value": "Smart Stay product team"
             }
           ],
           "media": "hero"

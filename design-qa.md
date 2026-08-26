@@ -72,3 +72,29 @@ The global PDNYN site header remains above the project frame. This is intentiona
 ## Final Result
 
 final result: passed
+
+## Hotel Apartments Case Study
+
+- Source visual: `/tmp/pedanyan-handoff-inspect/portfolio-complete-handoff/references/hotel-apartments-figma-reference.png`
+- Implementation route: `/am/projects/hotel-apartments`
+- Desktop viewport: `1280 x 720`
+- Mobile viewport: `390 x 844`
+- State checked: hero, project metadata, brand construction, web-design mockup, color/type system, and client feedback.
+
+### Visual Comparison
+
+The implementation follows the original long-form Figma case-study sequence while keeping the current PDNYN site shell. It uses the supplied Hotel Apartments project art at its natural proportions, rebuilds the Project metadata as selectable text, restores the migration narrative and caption, treats the woven research image as a background, reconstructs the Brand stage and client-choice composition, and adds the missing Web Design mockup before a coded color/logo/typography system.
+
+### Findings
+
+- The requested hero title and subtitle are present verbatim and remain readable at both tested sizes.
+- The Project panel combines the source interface image with the original dark tonal treatment; metadata, tools, and co-design information are selectable HTML.
+- Captions are separate semantic text and no asset filename or alt string is printed over an image.
+- Brand applications retain their source aspect ratios and reflow into a single-column mobile sequence.
+- The client feedback layer no longer covers the Brand introduction on mobile.
+- No horizontal overflow or runtime console errors were found.
+- Production build completed successfully.
+
+### Final Result
+
+final result: passed

@@ -28,6 +28,7 @@ import figmaHeroCultureObject from "../assets/figma-hero/hover-culture.png";
 import { CosmicDustBackground } from "./CosmicDustBackground";
 import { RapierGlassCubes } from "./HomeRapierGlassBackground";
 import { CaseStudyContent, PortfolioIndexContent } from "./PortfolioPages";
+import { PortfolioMusicToggle } from "./PortfolioMusicToggle";
 import { siteData } from "./siteData";
 import { websiteContent } from "./websiteContent";
 
@@ -843,6 +844,7 @@ export function DavitNav({ activePage }: { activePage?: PageKey }) {
         {websiteContent.navigation.school.label}
       </NavAnchor>
       <div className="dw-right">
+        {activePage === "designer" || activePage === "designTalent" ? <PortfolioMusicToggle /> : null}
         <button
           className="dw-theme-toggle"
           type="button"

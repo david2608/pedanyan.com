@@ -1,0 +1,84 @@
+.dw-music-control {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: end;
+  flex: 0 0 auto;
+  gap: 0;
+  color: var(--dw-text);
+  font-family: "Archivo", sans-serif;
+  pointer-events: auto;
+}
+
+.dw-music-button {
+  position: relative;
+  display: flex;
+  min-width: 36px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity 180ms ease;
+}
+
+.dw-music-button:hover,
+.dw-music-button:focus-visible {
+  outline: none;
+  opacity: 0.62;
+}
+
+.dw-music-button:focus-visible {
+  box-shadow: 0 0 0 2px currentColor;
+}
+
+.dw-music-wave {
+  display: flex;
+  width: 22px;
+  height: 18px;
+  flex: 0 0 22px;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.dw-music-wave i {
+  display: block;
+  width: 1.5px;
+  height: 14px;
+  border-radius: 99px;
+  background: currentColor;
+  transform: scaleY(max(0.2, var(--bar-scale)));
+  transition: transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
+}
+
+@media (max-width: 680px) {
+  .dw-music-control {
+    position: relative;
+    inset: auto;
+  }
+
+  .dw-music-button,
+  .dw-music-button:hover,
+  .dw-music-button:focus-visible {
+    min-width: 36px;
+    height: 36px;
+    padding: 0;
+    transform: none;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-music-button,
+  .dw-music-wave i {
+    transition-duration: 0.01ms;
+  }
+}

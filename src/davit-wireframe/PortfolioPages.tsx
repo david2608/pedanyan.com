@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, type CSSProperties, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Skull, Undo2 } from "lucide-react";
+import { KeyRound, Shield, Skull, Undo2 } from "lucide-react";
 import portfolioManifest from "./portfolio-content.json";
 import "@fontsource/syne/400.css";
 import "@fontsource/syne/500.css";
@@ -114,6 +114,12 @@ function assetAlt(project: PortfolioProject, key?: string) {
   return project.assets[key]?.alt || `${project.project.title} project visual`;
 }
 
+function placeholderImage(label: string) {
+  const safeLabel = label.replace(/[&<>"']/g, " ");
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720"><rect width="1200" height="720" fill="#f2f2f0"/><text x="600" y="360" dominant-baseline="middle" text-anchor="middle" fill="#767670" font-family="Arial,sans-serif" font-size="34">${safeLabel}</text></svg>`;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
 function sectionStyle(project: PortfolioProject, section: PortfolioSection): CSSProperties {
   const backgroundAsset = section.background?.asset;
   return {
@@ -151,6 +157,11 @@ function ProjectImage({
       height={source.height}
       loading={eager ? "eager" : "lazy"}
       decoding="async"
+      onError={(event) => {
+        const image = event.currentTarget;
+        image.onerror = null;
+        image.src = placeholderImage(assetAlt(project, assetKey));
+      }}
     />
   );
 }
@@ -185,6 +196,7 @@ function SectionHeading({ project, section }: { project: PortfolioProject; secti
 function IntroSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   const style = sectionStyle(project, section);
   const isCloudChipr = project.project.slug === "cloudchipr";
+  const isSecurion = project.project.slug === "securion";
   if (section.background?.radius) style.borderRadius = section.background.radius;
 
   return (
@@ -215,10 +227,712 @@ function IntroSection({ project, section }: { project: PortfolioProject; section
             </div>
           ))}
         </dl>
+        {isSecurion ? (
+          <div className="dw-securion-tools" aria-label="Tools used: Sketch, Confluence, Slack, and Asana">
+            <span>Used tools</span>
+            <img src="/portfolio-assets/securion/tools.png" alt="Sketch, Confluence, Slack, and Asana" />
+          </div>
+        ) : null}
         <div className="dw-case-intro-media" data-portfolio-parallax>
           <ProjectImage project={project} assetKey={section.media} eager />
+          {isSecurion ? (
+            <img
+              className="dw-securion-hero-logo"
+              src="/portfolio-assets/securion/logo-mark.svg"
+              alt="Securion shield logo"
+              width="460"
+              height="460"
+            />
+          ) : null}
         </div>
         {isCloudChipr ? <span className="dw-case-project-rail" aria-hidden="true">Projects</span> : null}
+      </div>
+    </section>
+  );
+}
+
+function HotelMark({ label = true }: { label?: boolean }) {
+  return (
+    <span className="dw-hotel-mark-lockup" aria-label={label ? "Hotel Apartments" : undefined} aria-hidden={!label}>
+      <span className="dw-hotel-mark" aria-hidden="true">
+        <i /><i /><i /><i />
+      </span>
+      {label ? <span><small>Hotel</small><strong>Apartments</strong></span> : null}
+    </span>
+  );
+}
+
+function HotelIntro({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-case-section dw-hotel-intro" id={section.id} data-hotel-intro>
+      <div className="dw-hotel-intro-heading" data-portfolio-reveal>
+        <div>
+          <p>Selected case study / Hospitality</p>
+          <h1>{section.title}</h1>
+        </div>
+        <p className="dw-hotel-intro-subtitle">{section.subtitle}</p>
+      </div>
+      <div className="dw-hotel-intro-visual" data-portfolio-parallax>
+        <ProjectImage project={project} assetKey={section.media} eager />
+      </div>
+    </section>
+  );
+}
+
+function HotelProject({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const intro = project.sections.find((item) => item.type === "intro");
+  const metadata = intro?.metadata || [];
+  return (
+    <section
+      className="dw-case-section dw-hotel-project"
+      id={section.id}
+      style={{ "--hotel-project-image": `url(${assetUrl(project, "hero")})` } as CSSProperties}
+    >
+      <div className="dw-hotel-project-inner" data-portfolio-reveal>
+        <header>
+          <p>Hotel Apartments / Smart Stay technologies</p>
+          <h2>The Project</h2>
+        </header>
+        <Html html={section.body} className="dw-hotel-project-copy" />
+        <dl className="dw-hotel-project-meta">
+          {metadata.map((item) => (
+            <div key={item.label}>
+              <dt>{item.label.replace(/:$/, "")}</dt>
+              <dd>{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  );
+}
+
+function HotelMigration({ section }: { section: PortfolioSection }) {
+  return (
+    <section className="dw-case-section dw-hotel-migration" id={section.id}>
+      <div className="dw-hotel-reading" data-portfolio-reveal>
+        <p>
+          Since the start of the <strong>Russian-Ukrainian War in February 2022</strong>, there has been a
+          significant increase in the number of <strong>Russians moving to Dubai.</strong>
+        </p>
+        <h2>
+          According to official statistics, the number of Russian citizens living in Dubai increased by
+          <u>170% between February and June 2022.</u>
+        </h2>
+        <div className="dw-hotel-migration-columns">
+          <div>
+            <p>A number of companies have opened <strong>offices in Dubai</strong> and financed their employees&apos;
+              relocation along with their families including:</p>
+            <ul><li>Visa</li><li>Alphabet Inc&apos;s Google</li><li>Talnet, matching Eastern European tech workers with startups worldwide</li></ul>
+          </div>
+          <p>
+            Hotel apartments offer a flexible, convenient, and comfortable living arrangement during relocation.
+            Furnished spaces, on-site amenities, and tailored services ease the transition and create a sense of
+            community in an unfamiliar environment.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HotelMigrationVisual({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-case-section dw-hotel-captioned-media" id={section.id}>
+      <figure data-portfolio-reveal>
+        <span className="dw-hotel-captioned-image"><ProjectImage project={project} assetKey={section.asset} /></span>
+        <figcaption>Sobha&apos;s sales center planned development model. One of the largest hotel apartments in UAE.</figcaption>
+      </figure>
+    </section>
+  );
+}
+
+function HotelWalking({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section
+      className="dw-case-section dw-hotel-walking"
+      id={section.id}
+      style={{ "--hotel-walking-image": `url(${assetUrl(project, "walking-users-shoes")})` } as CSSProperties}
+    >
+      <div data-portfolio-reveal>
+        <p>Customer experience / observed in context</p>
+        <h2>{section.title}</h2>
+        <Html html={section.body} className="dw-hotel-walking-copy" />
+      </div>
+    </section>
+  );
+}
+
+const hotelColors = [
+  { name: "Olive", hex: "#767760", rgb: "118 119 96" },
+  { name: "Slate", hex: "#585D6E", rgb: "88 93 110" },
+  { name: "Sand", hex: "#C6BA9B", rgb: "198 186 155" },
+  { name: "Linen", hex: "#EAEADE", rgb: "234 234 222" },
+  { name: "Gold", hex: "#E6BC73", rgb: "230 188 115" }
+];
+
+function HotelBrand({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-case-section dw-hotel-brand" id={section.id} data-hotel-brand>
+      <div className="dw-hotel-brand-stage" style={{ "--hotel-brand-texture": `url(${assetUrl(project, "walking-users-shoes")})` } as CSSProperties}>
+        <header data-portfolio-reveal>
+          <p>Identity / hospitality</p>
+          <h2>{section.title}</h2>
+          <Html html={section.body} className="dw-hotel-brand-intro" />
+        </header>
+        <div className="dw-hotel-brand-construction" data-portfolio-reveal>
+          <HotelMark label={false} />
+          <span className="dw-hotel-brand-axis axis-one">Luxury villa windows</span>
+          <span className="dw-hotel-brand-axis axis-two">Letter H</span>
+          <span className="dw-hotel-brand-axis axis-three">Letter A</span>
+          <blockquote>“This one is really good. What do you think?”<small>Rafayel Papikyan / client feedback</small></blockquote>
+        </div>
+        <div className="dw-hotel-preference" data-portfolio-reveal>
+          <h3>Client&apos;s preference</h3>
+          <div>
+            <span><HotelMark label={false} /></span>
+            <span className="is-selected"><HotelMark label={false} /></span>
+            <span><HotelMark label={false} /></span>
+          </div>
+        </div>
+      </div>
+
+      <div className="dw-hotel-brand-applications">
+        <figure className="dw-hotel-brand-table" data-portfolio-reveal><ProjectImage project={project} assetKey="brand-detail-01" /></figure>
+        <p data-portfolio-reveal>Once the concept was chosen, I built a clean, minimal identity for the practical details guests touch: business cards, labels, door hangers, menus and room amenities.</p>
+        <figure className="dw-hotel-brand-suite" data-portfolio-parallax><ProjectImage project={project} assetKey="brand-applications" /></figure>
+        <p data-portfolio-reveal>The olive, linen and warm sand palette gives the service a quieter, more residential character than a conventional booking platform.</p>
+        <figure className="dw-hotel-brand-linen" data-portfolio-reveal><ProjectImage project={project} assetKey="brand-detail-02" /></figure>
+        <figure className="dw-hotel-brand-collage" data-portfolio-reveal><ProjectImage project={project} assetKey="brand-collage" /></figure>
+      </div>
+    </section>
+  );
+}
+
+function HotelWebDesign({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-case-section dw-hotel-web" id={section.id} data-hotel-web>
+      <div className="dw-hotel-web-inner">
+        <header data-portfolio-reveal><p>Product expression</p><h2>{section.title}</h2></header>
+        <figure className="dw-hotel-web-hero" data-portfolio-parallax>
+          <ProjectImage project={project} assetKey="hero" />
+        </figure>
+        <figure className="dw-hotel-web-browser" data-portfolio-reveal>
+          <ProjectImage project={project} assetKey="web-overview" />
+        </figure>
+
+        <div className="dw-hotel-system" data-portfolio-reveal>
+          <div className="dw-hotel-system-colors">
+            <h3>Color</h3>
+            {hotelColors.map((color) => (
+              <article key={color.hex} style={{ "--hotel-swatch": color.hex } as CSSProperties}>
+                <strong>{color.name}</strong><span>{color.hex}</span><small>RGB {color.rgb}</small>
+              </article>
+            ))}
+          </div>
+          <div className="dw-hotel-system-type">
+            <h3>Logo &amp; typography</h3>
+            <HotelMark />
+            <div><span>Hotel</span><strong>Poppins Light</strong><b>Ag</b></div>
+            <div><span>Apartments</span><strong>Poppins Semibold</strong><b>Ag</b></div>
+            <hr />
+            <p className="type-h1">A clever way to live in hotels</p>
+            <p className="type-h2">Extended stays, made simple.</p>
+            <p className="type-body">A flexible booking experience for serviced apartments and villas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HotelFeedback({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-case-section dw-hotel-feedback" id={section.id} data-hotel-feedback>
+      <div className="dw-hotel-feedback-inner" data-portfolio-reveal>
+        <p>Client perspective</p>
+        <h2>{section.title || "Feedback"}</h2>
+        <blockquote>“{section.quote}”</blockquote>
+        <div className="dw-hotel-feedback-person">
+          <span><ProjectImage project={project} assetKey={section.avatar} /></span>
+          <div><strong>{section.person?.name}</strong><small>{section.person?.role}</small></div>
+          <b aria-hidden="true">in</b>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SecurionConstructionMark() {
+  return (
+    <svg
+      className="dw-securion-construction-mark"
+      viewBox="0 0 240 260"
+      role="img"
+      aria-label="Securion logo construction"
+    >
+      <g className="dw-securion-construction-guides" aria-hidden="true">
+        <circle cx="120" cy="119" r="68" />
+        <ellipse cx="120" cy="119" rx="42" ry="84" />
+        <path d="M24 119H216M120 20V228M45 48L195 198M195 48L45 198" />
+      </g>
+      <path
+        className="dw-securion-construction-shield"
+        d="M120 25c24 18 47 28 75 34v68c0 52-29 86-75 111-46-25-75-59-75-111V59c28-6 51-16 75-34Z"
+      />
+      <path
+        className="dw-securion-construction-bolt"
+        d="M164 67 92 123h50l-66 67 75-57h-49l62-66Z"
+      />
+      <circle className="dw-securion-construction-keyhole" cx="120" cy="111" r="8" />
+      <path className="dw-securion-construction-keyhole" d="M120 119v23" />
+    </svg>
+  );
+}
+
+function SecurionBrandIdentity({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-case-section dw-securion-brand" id={section.id} data-securion-brand>
+      <div className="dw-securion-brand-copy">
+        <h2>{section.title}</h2>
+        <p>
+          Securion&apos;s brand essence revolves around <mark>trust</mark>, <mark>security</mark>, and
+          <mark> innovation</mark>. It represents the unwavering <mark>commitment</mark> to safeguarding
+          users&apos; <mark>digital assets</mark> while delivering an innovative and <mark>user-centric</mark>
+          <mark> crypto</mark> experience.
+        </p>
+      </div>
+
+      <div className="dw-securion-construction" data-portfolio-reveal>
+        <ProjectImage project={project} assetKey="logo-construction" />
+        <SecurionConstructionMark />
+        <div className="dw-securion-construction-notes">
+          <article>
+            <Shield aria-hidden="true" strokeWidth={1.7} />
+            <strong>shield</strong>
+            <p>Security, protection, safety, defence, trust, strength and safeguarding.</p>
+          </article>
+          <article>
+            <span className="dw-securion-letter" aria-hidden="true">S</span>
+            <strong>letter “S”</strong>
+            <p>The first letter of the brand name: Securion, as in “turn the security on”.</p>
+          </article>
+          <article>
+            <KeyRound aria-hidden="true" strokeWidth={1.7} />
+            <strong>keyhole</strong>
+            <p>Access, secrecy, opportunity, lock, entrance, privacy and revealing.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SecurionLogoLaws({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-case-section dw-securion-laws" id={section.id} data-securion-laws>
+      <div className="dw-securion-laws-inner">
+        <h2>{section.title}</h2>
+
+        <ol className="dw-securion-laws-list dw-securion-laws-list-top" start={1}>
+          <li>
+            <strong>Simplicity:</strong> The logo is simple, <b>recognizable and memorable</b>. It stays
+            clear when <b>scaled to different sizes</b>.
+          </li>
+          <li>
+            <strong>Memorability:</strong> Its compact silhouette leaves a clear and lasting impression.
+          </li>
+        </ol>
+
+        <div className="dw-securion-logo-landscape" aria-label="Securion among familiar digital product logos">
+          <img src="/portfolio-assets/securion/logo-laws-reference.png" alt="Logo comparison landscape" />
+        </div>
+
+        <ol className="dw-securion-laws-list dw-securion-laws-list-bottom" start={3}>
+          <li>
+            <strong>Relevance:</strong> The mark reflects Securion&apos;s <b>commitment to security,
+            innovation, and user-friendliness</b>. Designed in 2018, it still feels current.
+          </li>
+          <li>
+            <strong>Distinctiveness:</strong> Its shape separates the brand from competitors and other
+            crypto products in the category.
+          </li>
+        </ol>
+
+        <div className="dw-securion-scale-law">
+          <p><span>5.</span> The logo is <strong>highly scalable</strong>, maintaining clarity and recognition
+          from the smallest app icon to large-format use.</p>
+          <ProjectImage project={project} assetKey="logo-strip" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const securionBrandColors = [
+  { token: "‘.sc-primary’", hex: "#4245F6", rgb: "66, 69, 246", hsb: "239, 73, 96" },
+  { token: "‘.sc-secondary’", hex: "#002FBF", rgb: "0, 47, 191", hsb: "225, 100, 75" },
+  { token: "‘.sc-success’", hex: "#70C973", rgb: "112, 201, 115", hsb: "122, 44, 79" },
+  { token: "‘.sc-danger’", hex: "#DA471A", rgb: "218, 71, 26", hsb: "14, 88, 85" },
+  { token: "‘.sc-warning’", hex: "#DABA69", rgb: "218, 186, 105", hsb: "43, 52, 85" }
+];
+
+const securionTextColors = [
+  { token: "‘.sc-text-lighter’", hex: "#F4F6F6" },
+  { token: "‘.sc-text-light’", hex: "#D3D3D3" },
+  { token: "‘.sc-text-disabled’", hex: "#A3A3A3" },
+  { token: "‘.sc-text-darker’", hex: "#3E4A59" },
+  { token: "‘.sc-text-dark’", hex: "#000000" }
+];
+
+const securionBackgroundColors = [
+  { token: "‘.sc-bg-lighter’", hex: "#F4F6F6" },
+  { token: "‘.sc-bg-light’", hex: "#F0F1F1" },
+  { token: "‘.sc-bg-card’", hex: "#E1E2E2" },
+  { token: "‘.sc-bg-darker’", hex: "#9EA0A0" },
+  { token: "‘.sc-bg-dark’", hex: "#3E4A59" }
+];
+
+function SecurionColorTheory({ section }: { section: PortfolioSection }) {
+  return (
+    <section className="dw-case-section dw-securion-colors" id={section.id} data-securion-colors>
+      <div className="dw-securion-colors-inner">
+        <header>
+          <p>Identity system / coded tokens</p>
+          <h2>{section.title}</h2>
+        </header>
+
+        <div className="dw-securion-palette-group dw-securion-palette-brand">
+          <h3>Brand colors</h3>
+          <div>
+            {securionBrandColors.map((color) => (
+              <article
+                key={color.token}
+                style={{ "--swatch": color.hex } as CSSProperties}
+                className={color.hex === "#70C973" || color.hex === "#DABA69" ? "is-dark-copy" : ""}
+              >
+                <strong>{color.token}</strong>
+                <span>Hex: {color.hex}</span>
+                <span>RGB: {color.rgb}</span>
+                <span>HSB: {color.hsb}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="dw-securion-palette-group dw-securion-palette-compact">
+          <h3>Texts</h3>
+          <div>
+            {securionTextColors.map((color) => (
+              <article
+                key={color.token}
+                style={{ "--swatch": color.hex } as CSSProperties}
+                className={color.hex === "#3E4A59" || color.hex === "#000000" ? "is-light-copy" : ""}
+              >
+                <strong>{color.token}</strong>
+                <span>Hex: {color.hex}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="dw-securion-palette-group dw-securion-palette-compact">
+          <h3>Backgrounds</h3>
+          <div>
+            {securionBackgroundColors.map((color) => (
+              <article
+                key={color.token}
+                style={{ "--swatch": color.hex } as CSSProperties}
+                className={color.hex === "#3E4A59" ? "is-light-copy" : ""}
+              >
+                <strong>{color.token}</strong>
+                <span>Hex: {color.hex}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SecurionFeedback({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const person = section.person;
+  return (
+    <section className="dw-case-section dw-securion-feedback" id={section.id} data-securion-feedback>
+      <div className="dw-securion-feedback-inner">
+        <div className="dw-securion-feedback-heading">
+          <span>Client perspective</span>
+          <h2>{section.title || "Feedback"}</h2>
+        </div>
+        <blockquote>“{section.quote}”</blockquote>
+        {person ? (
+          <div className="dw-securion-feedback-person">
+            <span className="dw-securion-feedback-avatar"><ProjectImage project={project} assetKey={section.avatar} /></span>
+            <span><strong>{person.name}</strong><small>{person.role}</small></span>
+          </div>
+        ) : null}
+        <span className="dw-securion-feedback-mark" aria-hidden="true">”</span>
+      </div>
+    </section>
+  );
+}
+
+const materialCollaborators = [
+  { name: "Ani Atanesyan", href: "https://am.linkedin.com/in/ani-atanesyan-ux", avatar: "ani" },
+  { name: "Vladimir Popov", href: "https://rs.linkedin.com/in/vladimir-popov-40635388", avatar: "vladimir" },
+  { name: "Gohar Aleksanyan", href: "https://www.linkedin.com/search/results/people/?keywords=Gohar%20Aleksanyan", avatar: "gohar" }
+];
+
+function MaterialExchangeIntro({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const metadata = section.metadata?.filter((item) => !item.label.startsWith("Tools") && !item.label.startsWith("Co-Designers"));
+  const about = project.sections.find((item) => item.id === "about");
+  return (
+    <section className="dw-mex-opening" id={section.id} data-mex-intro>
+      <div className="dw-mex-intro">
+        <div className="dw-mex-intro-panel">
+        <header data-portfolio-reveal>
+          <p>Selected case study / Digital materials</p>
+          <h1>{section.title}</h1>
+          <h2>{section.subtitle}</h2>
+        </header>
+        <dl className="dw-mex-meta" data-portfolio-reveal>
+          {metadata?.map((item) => (
+            <div key={item.label}><dt>{item.label.replace(/:$/, "")}</dt><dd dangerouslySetInnerHTML={{ __html: item.value }} /></div>
+          ))}
+        </dl>
+        <div className="dw-mex-tools" data-portfolio-reveal>
+          <span>Tools</span>
+          <img src="/portfolio-assets/material-exchange/tools.png" alt="Figma, Confluence, and Overflow" />
+        </div>
+        <div className="dw-mex-collaborators" data-portfolio-reveal>
+          <span>Co-Designers</span>
+          <div>
+            {materialCollaborators.map((person) => (
+              <a href={person.href} target="_blank" rel="noreferrer" key={person.name}>
+                <i className={`dw-mex-avatar avatar-${person.avatar}`} aria-hidden="true" />
+                {person.name}
+              </a>
+            ))}
+          </div>
+        </div>
+        <div className="dw-mex-hero-product" data-portfolio-parallax>
+          <ProjectImage project={project} assetKey={section.media} eager />
+        </div>
+        </div>
+      </div>
+      <div className="dw-mex-about" id="about" data-portfolio-reveal>
+        <h2>{about?.title}</h2>
+        <Html html={about?.body} />
+      </div>
+      <figure className="dw-mex-initial-wireframes" id="initial-wireframes" data-portfolio-reveal>
+        <ProjectImage project={project} assetKey="initial-wireframes" />
+        <figcaption>Initial wireframes of single material page.</figcaption>
+      </figure>
+    </section>
+  );
+}
+
+function MaterialExchangeDiscovery({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-mex-discovery" id={section.id} data-mex-discovery>
+      <div className="dw-mex-reading" data-portfolio-reveal>
+        <h2>{section.title}</h2>
+        <h3>{section.eyebrow}</h3>
+        <p>
+          Imagine Nike&apos;s material manager journeying to Vietnam, seeking sustainable materials to be used as a
+          small piece for Air Jordans. Collaborating with local suppliers, they assess quality, recycling, and
+          sustainability, incurring costs of <strong>$15,000 for travel and $10,000 for testing</strong>. This risk
+          underscores Nike&apos;s commitment to responsible sourcing, with only 15% of findings proving useful.
+        </p>
+        <p>
+          Companies like Nike spend millions on such research, but just a fraction proves valuable. So,
+          <strong> material digitalization is needed for cost savings</strong>. The potential to revolutionize
+          sourcing and sustainability drives ongoing innovation.
+        </p>
+      </div>
+      <figure className="dw-mex-discovery-media" data-portfolio-parallax>
+        <ProjectImage project={project} assetKey="warehouse" />
+        <figcaption>A tour of the Goodwill Outlet warehouse and retail store in St. Paul, Minnesota.</figcaption>
+      </figure>
+    </section>
+  );
+}
+
+function MaterialExchangeProblemTwo({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-mex-problem-two" id={section.id}>
+      <div className="dw-mex-problem-two-copy" data-portfolio-reveal>
+        <span>{section.eyebrow}</span>
+        <p>Fashion is responsible for <strong>10% of human-caused greenhouse gas emissions</strong> and <strong>20% of global wastewater</strong>,</p>
+        <p>and uses more energy than the aviation and shipping sectors combined.</p>
+        <p>Global fashion also consumes <strong>93 billion metric tons of clean water each year</strong>, about half of what Americans drink annually.</p>
+        <ul>
+          <li><strong>Since the 2000s, fashion production has doubled and it will likely triple by 2050</strong>, according to the American Chemical Society.</li>
+          <li><strong>92 million tonnes</strong> of unwanted fabrics are disposed of each year.</li>
+          <li><strong>14.5 million tons</strong> of textiles were landfilled and incinerated in 2018.</li>
+        </ul>
+        <p>Leftover fabrics have already been produced, so there is no expenditure of water, energy, or virgin raw materials to create something new. With Material Exchange, <strong>they become globally available for brands to use in upcoming collections.</strong></p>
+      </div>
+      <figure data-portfolio-parallax>
+        <ProjectImage project={project} assetKey="deadstock" />
+        <figcaption>Deadstock Depot makes surplus fabrics available to purchase instead of discard.</figcaption>
+      </figure>
+    </section>
+  );
+}
+
+function MaterialExchangeResearch({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-mex-research" id={section.id}>
+      <header className="dw-mex-reading" data-portfolio-reveal>
+        <h2>{section.title}</h2>
+        <Html html={section.body} />
+      </header>
+      <figure className="dw-mex-research-stats" data-portfolio-reveal>
+        <div className="dw-mex-research-chart-frame"><ProjectImage project={project} assetKey="user-research" /></div>
+        <figcaption>Quantitative user research analytic report.</figcaption>
+      </figure>
+      <div className="dw-mex-research-columns">
+        <article data-portfolio-reveal>
+          <span>01</span>
+          <h3>Iterative research</h3>
+          <p>We made it a practice to conduct user interviews and testing sessions at least twice a month. This involved both new users and people we stayed connected with over time. Custom recruitment proved more useful than panel platforms, whose participants often introduced strong bias.</p>
+        </article>
+        <article data-portfolio-reveal>
+          <span>02</span>
+          <h3>Personas that evolved</h3>
+          <p>Company strategy, interviews, quantitative surveys, and competitive analysis shaped our first hypothetical personas. They remained working hypotheses and evolved as new user archetypes appeared.</p>
+        </article>
+      </div>
+      <div className="dw-mex-platform-users" data-portfolio-reveal>
+        <div><h2>Platform users</h2><p>Combining insights from various sources—company strategy, user research, quantitative surveys, and competitive analyses—we crafted our initial hypothetical personas. This marked the beginning of our ongoing process to discover new user archetypes throughout the journey.</p></div>
+        <figure>
+          <img
+            className="dw-mex-platform-role-legend"
+            src="/portfolio-assets/material-exchange/platform-user-roles.png"
+            alt="Platform roles: hosts, suppliers, customers, pavilion sponsors, certifying authorities, verification and service providers, Material Exchange staff, and anonymous users"
+          />
+          <ProjectImage project={project} assetKey="platform-users" />
+        </figure>
+      </div>
+    </section>
+  );
+}
+
+function MaterialExchangeNavigation({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-mex-navigation" id={section.id}>
+      <div className="dw-mex-navigation-copy" data-portfolio-reveal>
+        <p>Information architecture</p><h2>{section.title}</h2>
+        <p>A shared navigation model had to support very different professional roles without fragmenting the product.</p>
+      </div>
+      <figure data-portfolio-parallax><ProjectImage project={project} assetKey="navigation-anatomy" /></figure>
+    </section>
+  );
+}
+
+function MaterialExchangeVisualLanguage({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-mex-visual-language" id={section.id} data-mex-visual-language>
+      <div className="dw-mex-visual-heading" data-portfolio-reveal>
+        <span className="dw-mex-cursor cursor-davit">Davit</span>
+        <span className="dw-mex-cursor cursor-ani">Ani</span>
+        <span className="dw-mex-cursor cursor-gohar">Gohar</span>
+        <span className="dw-mex-cursor cursor-vlad">Vlad</span>
+        <h2>{section.title}</h2>
+        <Html html={section.body} />
+      </div>
+      <div className="dw-mex-component-stage" data-portfolio-reveal>
+        <ProjectImage project={project} assetKey="visual-language" />
+      </div>
+    </section>
+  );
+}
+
+function MaterialExchangeIconography({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-mex-iconography" id={section.id} data-mex-iconography>
+      <div className="dw-mex-reading" data-portfolio-reveal>
+        <p>Specific component style selection</p>
+        <h2>{section.title}</h2>
+        <Html html={section.body} />
+      </div>
+      <div className="dw-mex-icon-stage" data-portfolio-reveal>
+        <ProjectImage project={project} assetKey="iconography" />
+      </div>
+      <p className="dw-mex-icon-conclusion" data-portfolio-reveal>After 2.5 months of dedicated effort, the <strong>Mat-EX design system was baked</strong> and handed to the development team.</p>
+    </section>
+  );
+}
+
+function MaterialExchangeDesignSystem({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-mex-system" id={section.id} data-mex-system>
+      <header data-portfolio-reveal>
+        <Html html={section.body} />
+      </header>
+      <figure className="dw-mex-system-map" data-portfolio-reveal><ProjectImage project={project} assetKey="design-system-map" /></figure>
+      <figure className="dw-mex-system-showcase" data-portfolio-reveal><ProjectImage project={project} assetKey="design-system-showcase" /></figure>
+    </section>
+  );
+}
+
+function MaterialExchangeIdeation({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const matrix = project.sections.find((item) => item.id === "ideation-matrix");
+  const statements = project.sections.find((item) => item.id === "hmw-statements");
+  const columns = project.sections.find((item) => item.id === "hmw-columns");
+  return (
+    <section className="dw-mex-ideation" id={section.id}>
+      <header className="dw-mex-reading" data-portfolio-reveal><h2>{section.title}</h2><Html html={section.body} /></header>
+      <figure data-portfolio-reveal><ProjectImage project={project} assetKey={matrix?.asset} /><figcaption>{matrix?.caption}</figcaption></figure>
+      <div className="dw-mex-hmw" id="hmw-statements" data-portfolio-reveal>
+        <h2>{statements?.title}</h2>
+        <div>{Array.isArray(columns?.columns) ? columns.columns.map((column, index) => <Html html={column.body} key={index} />) : null}</div>
+      </div>
+    </section>
+  );
+}
+
+function MaterialExchangePersonalized({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const dashboard = project.sections.find((item) => item.id === "personalized-dashboard");
+  const search = project.sections.find((item) => item.id === "smart-search");
+  const collage = project.sections.find((item) => item.id === "product-collage");
+  const dashboardColumns = Array.isArray(dashboard?.columns) ? dashboard.columns : [];
+  const searchColumns = Array.isArray(search?.columns) ? search.columns : [];
+  return (
+    <section className="dw-mex-personalized" id={section.id}>
+      <h2 data-portfolio-reveal>{section.title}</h2>
+      <div className="dw-mex-personalized-row dashboard" data-portfolio-reveal>
+        <figure><ProjectImage project={project} assetKey={dashboardColumns[0]?.asset} /></figure>
+        <article><h3>{dashboardColumns[1]?.title}</h3><Html html={dashboardColumns[1]?.body} /></article>
+      </div>
+      <div className="dw-mex-personalized-row search" data-portfolio-reveal>
+        <article><h3>{searchColumns[0]?.title}</h3><Html html={searchColumns[0]?.body} /></article>
+        <figure><ProjectImage project={project} assetKey={searchColumns[1]?.asset} /></figure>
+      </div>
+      <figure className="dw-mex-product-collage" data-portfolio-reveal><ProjectImage project={project} assetKey={collage?.asset} /></figure>
+    </section>
+  );
+}
+
+function MaterialExchangeTesting({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const get = (id: string) => project.sections.find((item) => item.id === id);
+  const one = get("hypothesis-one");
+  const oneSolution = get("dropzone-solution");
+  const oneResult = get("dropzone-result");
+  const two = get("hypothesis-two");
+  const twoSolution = get("save-search-solution");
+  return (
+    <section className="dw-mex-testing" id={section.id}>
+      <h2 data-portfolio-reveal>{section.title}</h2>
+      <div className="dw-mex-test-copy" data-portfolio-reveal><p className="eyebrow">{one?.eyebrow}</p><h3>{one?.title}</h3><Html html={one?.body} /></div>
+      <div className="dw-mex-test-copy solution" data-portfolio-reveal><h4>{oneSolution?.eyebrow}</h4><Html html={oneSolution?.body} /></div>
+      <figure data-portfolio-reveal><ProjectImage project={project} assetKey="dropzone" /></figure>
+      <div className="dw-mex-test-copy result" data-portfolio-reveal><Html html={oneResult?.body} /></div>
+      <div className="dw-mex-test-two">
+        <div className="dw-mex-test-copy" data-portfolio-reveal><p className="eyebrow">{two?.eyebrow}</p><Html html={two?.body} /><h4>{twoSolution?.eyebrow}</h4><Html html={twoSolution?.body} /></div>
+        <figure data-portfolio-reveal><ProjectImage project={project} assetKey="save-search" /></figure>
       </div>
     </section>
   );
@@ -816,6 +1530,85 @@ function NavigationSection({ project, section }: { project: PortfolioProject; se
 }
 
 function ProjectSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  if (project.project.slug === "material-exchange" && section.id === "intro") {
+    return <MaterialExchangeIntro project={project} section={section} />;
+  }
+  if (project.project.slug === "material-exchange" && section.id === "discovery-problem-one") {
+    return <MaterialExchangeDiscovery project={project} section={section} />;
+  }
+  if (project.project.slug === "material-exchange" && section.id === "discovery-problem-two") {
+    return <MaterialExchangeProblemTwo project={project} section={section} />;
+  }
+  if (project.project.slug === "material-exchange" && section.id === "user-research") {
+    return <MaterialExchangeResearch project={project} section={section} />;
+  }
+  if (project.project.slug === "material-exchange" && section.id === "navigation-anatomy-heading") {
+    return <MaterialExchangeNavigation project={project} section={section} />;
+  }
+  if (project.project.slug === "material-exchange" && section.id === "visual-language-heading") {
+    return <MaterialExchangeVisualLanguage project={project} section={section} />;
+  }
+  if (project.project.slug === "material-exchange" && section.id === "iconography-heading") {
+    return <MaterialExchangeIconography project={project} section={section} />;
+  }
+  if (project.project.slug === "material-exchange" && section.id === "design-system-intro") {
+    return <MaterialExchangeDesignSystem project={project} section={section} />;
+  }
+  if (project.project.slug === "material-exchange" && section.id === "ideation") {
+    return <MaterialExchangeIdeation project={project} section={section} />;
+  }
+  if (project.project.slug === "material-exchange" && section.id === "personalized-approach") {
+    return <MaterialExchangePersonalized project={project} section={section} />;
+  }
+  if (project.project.slug === "material-exchange" && section.id === "testing-heading") {
+    return <MaterialExchangeTesting project={project} section={section} />;
+  }
+  if (
+    project.project.slug === "material-exchange" &&
+    [
+      "about", "warehouse", "deadstock", "user-research-findings", "iterative-research", "personas",
+      "platform-users-heading", "platform-users", "navigation-anatomy", "visual-language",
+      "iconography", "design-system-map", "design-system-showcase", "initial-wireframes",
+      "ideation-matrix", "hmw-statements", "hmw-columns", "personalized-dashboard", "smart-search",
+      "product-collage", "hypothesis-one", "dropzone-solution", "dropzone", "dropzone-result",
+      "hypothesis-two", "save-search-solution", "save-search"
+    ].includes(section.id)
+  ) {
+    return null;
+  }
+  if (project.project.slug === "hotel-apartments" && section.id === "intro") {
+    return <HotelIntro project={project} section={section} />;
+  }
+  if (project.project.slug === "hotel-apartments" && section.id === "project") {
+    return <HotelProject project={project} section={section} />;
+  }
+  if (project.project.slug === "hotel-apartments" && section.id === "migration") {
+    return <HotelMigration section={section} />;
+  }
+  if (project.project.slug === "hotel-apartments" && section.id === "migration-visual") {
+    return <HotelMigrationVisual project={project} section={section} />;
+  }
+  if (project.project.slug === "hotel-apartments" && section.id === "walking-copy") {
+    return <HotelWalking project={project} section={section} />;
+  }
+  if (project.project.slug === "hotel-apartments" && section.id === "brand") {
+    return <HotelBrand project={project} section={section} />;
+  }
+  if (
+    project.project.slug === "hotel-apartments" &&
+    ["walking-visual", "brand-foundation", "client-preference", "brand-details", "brand-applications", "brand-collage"].includes(section.id)
+  ) {
+    return null;
+  }
+  if (project.project.slug === "hotel-apartments" && section.id === "web-design-heading") {
+    return <HotelWebDesign project={project} section={section} />;
+  }
+  if (project.project.slug === "hotel-apartments" && ["web-overview", "web-screens"].includes(section.id)) {
+    return null;
+  }
+  if (project.project.slug === "hotel-apartments" && section.id === "feedback") {
+    return <HotelFeedback project={project} section={section} />;
+  }
   if (project.project.slug === "cloudchipr" && section.id === "field-study") {
     return <CloudChiprFieldStudy project={project} section={section} />;
   }
@@ -857,6 +1650,30 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   }
   if (project.project.slug === "cloudchipr" && section.id === "design-system-decision") {
     return <CloudChiprDesignSystemDecision project={project} section={section} />;
+  }
+  if (project.project.slug === "securion" && section.id === "brand-identity") {
+    return <SecurionBrandIdentity project={project} section={section} />;
+  }
+  if (project.project.slug === "securion" && section.id === "logo-construction") {
+    return null;
+  }
+  if (project.project.slug === "securion" && section.id === "simple-laws") {
+    return <SecurionLogoLaws project={project} section={section} />;
+  }
+  if (project.project.slug === "securion" && section.id === "logo-strip") {
+    return null;
+  }
+  if (project.project.slug === "securion" && section.id === "color-theory") {
+    return <SecurionColorTheory section={section} />;
+  }
+  if (project.project.slug === "securion" && section.id === "color-system") {
+    return null;
+  }
+  if (project.project.slug === "securion" && section.id === "grid-system") {
+    return null;
+  }
+  if (project.project.slug === "securion" && section.id === "feedback") {
+    return <SecurionFeedback project={project} section={section} />;
   }
   if (section.type === "intro") return <IntroSection project={project} section={section} />;
   if (section.type === "prose") return <ProseSection project={project} section={section} />;
@@ -1360,6 +2177,126 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
             scrollTrigger: { trigger: result, start: "top 72%", toggleActions: "play none none reverse" }
           });
         }
+
+        const securionBrand = container.querySelector<HTMLElement>("[data-securion-brand]");
+        if (securionBrand) {
+          const copy = securionBrand.querySelectorAll<HTMLElement>(".dw-securion-brand-copy > *");
+          const highlights = securionBrand.querySelectorAll<HTMLElement>("mark");
+          const construction = securionBrand.querySelector<HTMLElement>(".dw-securion-construction");
+          const logo = securionBrand.querySelector<HTMLElement>(".dw-securion-construction-logo");
+          const notes = securionBrand.querySelectorAll<HTMLElement>(".dw-securion-construction-notes article");
+
+          gsap.fromTo(copy, { autoAlpha: 0, y: 32, filter: "blur(8px)" }, {
+            autoAlpha: 1,
+            y: 0,
+            filter: "blur(0px)",
+            stagger: 0.12,
+            duration: 0.85,
+            ease: "power3.out",
+            scrollTrigger: { trigger: securionBrand, start: "top 82%", toggleActions: "play none none reverse" }
+          });
+          gsap.fromTo(highlights, { backgroundSize: "0% 100%" }, {
+            backgroundSize: "100% 100%",
+            stagger: 0.08,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: { trigger: securionBrand, start: "top 68%", toggleActions: "play none none reverse" }
+          });
+          gsap.fromTo(construction, { autoAlpha: 0.35, y: 54, scale: 0.98, filter: "blur(5px)" }, {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: { trigger: construction, start: "top 88%", toggleActions: "play none none reverse" }
+          });
+          gsap.fromTo(logo, { autoAlpha: 0, scale: 0.56, rotation: -8 }, {
+            autoAlpha: 1,
+            scale: 1,
+            rotation: 0,
+            duration: 0.9,
+            ease: "back.out(1.2)",
+            scrollTrigger: { trigger: construction, start: "top 70%", toggleActions: "play none none reverse" }
+          });
+          gsap.fromTo(notes, { autoAlpha: 0, y: 26 }, {
+            autoAlpha: 1,
+            y: 0,
+            stagger: 0.12,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: { trigger: construction, start: "center 76%", toggleActions: "play none none reverse" }
+          });
+        }
+
+        const securionLaws = container.querySelector<HTMLElement>("[data-securion-laws]");
+        if (securionLaws) {
+          const items = securionLaws.querySelectorAll<HTMLElement>(".dw-securion-laws-list li");
+          const landscape = securionLaws.querySelector<HTMLElement>(".dw-securion-logo-landscape");
+          const scaleLaw = securionLaws.querySelector<HTMLElement>(".dw-securion-scale-law");
+
+          gsap.fromTo(items, { autoAlpha: 0, y: 28, filter: "blur(7px)" }, {
+            autoAlpha: 1,
+            y: 0,
+            filter: "blur(0px)",
+            stagger: 0.14,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: { trigger: securionLaws, start: "top 80%", toggleActions: "play none none reverse" }
+          });
+          gsap.fromTo(landscape, { autoAlpha: 0, scale: 0.94, y: 42 }, {
+            autoAlpha: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: { trigger: landscape, start: "top 88%", toggleActions: "play none none reverse" }
+          });
+          gsap.fromTo(scaleLaw, { autoAlpha: 0, y: 36, filter: "blur(6px)" }, {
+            autoAlpha: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: { trigger: scaleLaw, start: "top 86%", toggleActions: "play none none reverse" }
+          });
+        }
+
+        const securionColors = container.querySelector<HTMLElement>("[data-securion-colors]");
+        if (securionColors) {
+          const swatches = securionColors.querySelectorAll<HTMLElement>(".dw-securion-palette-group article");
+          gsap.fromTo(swatches, { autoAlpha: 0, y: 30, scale: 0.94 }, {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            stagger: 0.055,
+            duration: 0.62,
+            ease: "back.out(1.15)",
+            scrollTrigger: { trigger: securionColors, start: "top 70%", toggleActions: "play none none reverse" }
+          });
+        }
+
+        const securionFeedback = container.querySelector<HTMLElement>("[data-securion-feedback]");
+        if (securionFeedback) {
+          const quote = securionFeedback.querySelector<HTMLElement>("blockquote");
+          const person = securionFeedback.querySelector<HTMLElement>(".dw-securion-feedback-person");
+          gsap.fromTo(quote, { autoAlpha: 0, y: 36, filter: "blur(8px)" }, {
+            autoAlpha: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: { trigger: securionFeedback, start: "top 78%", toggleActions: "play none none reverse" }
+          });
+          gsap.fromTo(person, { autoAlpha: 0, x: 32, scale: 0.94 }, {
+            autoAlpha: 1,
+            x: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: { trigger: securionFeedback, start: "top 66%", toggleActions: "play none none reverse" }
+          });
+        }
       } else {
         gsap.utils.toArray<HTMLElement>("[data-portfolio-reveal]").forEach((element) => {
           gsap.fromTo(element, { autoAlpha: 0, y: 56 }, {
@@ -1369,6 +2306,68 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
             ease: "power3.out",
             scrollTrigger: { trigger: element, start: "top 88%", once: true }
           });
+        });
+      }
+
+      const materialIntro = container.querySelector<HTMLElement>("[data-mex-intro]");
+      if (materialIntro) {
+        const floatingElements = materialIntro.querySelectorAll<HTMLElement>("[data-mex-float]");
+        if (floatingElements.length) {
+          gsap.fromTo(floatingElements, {
+            autoAlpha: 0,
+            y: 34,
+            scale: 0.86,
+            rotate: (index) => index % 2 ? 3 : -3
+          }, {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            rotate: 0,
+            stagger: 0.16,
+            duration: 1,
+            ease: "power3.out"
+          });
+        }
+      }
+
+      gsap.utils.toArray<HTMLElement>("[data-mex-note]").forEach((note, index) => {
+        gsap.fromTo(note, {
+          autoAlpha: 0,
+          x: index % 2 ? 70 : -70,
+          y: 30,
+          rotate: index % 2 ? 4 : -4
+        }, {
+          autoAlpha: 1,
+          x: 0,
+          y: 0,
+          rotate: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: { trigger: note, start: "top 88%", toggleActions: "play none none reverse" }
+        });
+      });
+
+      const materialIcons = container.querySelectorAll<HTMLElement>("[data-mex-icon]");
+      if (materialIcons.length) {
+        gsap.fromTo(materialIcons, { autoAlpha: 0, scale: 0.35, rotate: -18 }, {
+          autoAlpha: 1, scale: 1, rotate: 0, stagger: 0.14, duration: 0.75, ease: "back.out(1.8)",
+          scrollTrigger: { trigger: "[data-mex-iconography]", start: "top 70%", toggleActions: "play none none reverse" }
+        });
+      }
+
+      const materialBranches = container.querySelectorAll<HTMLElement>("[data-mex-branch]");
+      if (materialBranches.length) {
+        gsap.fromTo(materialBranches, { autoAlpha: 0, x: (index) => index < 3 ? -34 : 34 }, {
+          autoAlpha: 1, x: 0, stagger: 0.12, duration: 0.85, ease: "power3.out",
+          scrollTrigger: { trigger: "[data-mex-system]", start: "top 75%", toggleActions: "play none none reverse" }
+        });
+      }
+
+      const materialPaths = container.querySelectorAll<SVGPathElement>("[data-mex-system-path]");
+      if (materialPaths.length) {
+        gsap.fromTo(materialPaths, { strokeDasharray: 1, strokeDashoffset: 1 }, {
+          strokeDashoffset: 0, stagger: 0.08, duration: 1.15, ease: "power2.inOut",
+          scrollTrigger: { trigger: "[data-mex-system]", start: "top 72%", toggleActions: "play none none reverse" }
         });
       }
 

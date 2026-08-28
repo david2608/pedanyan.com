@@ -64,6 +64,7 @@ type PortfolioSection = {
     url?: string;
   } | string>;
   person?: { name: string; role: string; url?: string };
+  showLinkedin?: boolean;
   back?: { label: string; url: string };
 };
 
@@ -1739,14 +1740,34 @@ function TestimonialSection({ project, section }: { project: PortfolioProject; s
   const person = section.person;
   return (
     <section className={sectionClass(section, "dw-case-testimonial-section")} style={sectionStyle(project, section)} id={section.id}>
+      <h2 className="dw-case-testimonial-heading" data-portfolio-reveal>{section.title || "Feedback"}</h2>
       <div className="dw-case-testimonial" data-portfolio-reveal>
-        <p className="dw-case-eyebrow">{section.title || "Feedback"}</p>
         <blockquote>{section.quote}</blockquote>
         {person ? (
-          <a href={person.url || "#"} target={person.url ? "_blank" : undefined} rel="noreferrer">
-            <span className="dw-case-avatar"><ProjectImage project={project} assetKey={section.avatar} /></span>
-            <span><strong>{person.name}</strong><small>{person.role}</small></span>
-          </a>
+          <div className="dw-case-testimonial-person">
+            {person.url ? (
+              <a className="dw-case-testimonial-person-link" href={person.url} target="_blank" rel="noreferrer">
+                <span className="dw-case-avatar"><ProjectImage project={project} assetKey={section.avatar} /></span>
+                <span><strong>{person.name}</strong><small>{person.role}</small></span>
+              </a>
+            ) : (
+              <span className="dw-case-testimonial-person-link">
+                <span className="dw-case-avatar"><ProjectImage project={project} assetKey={section.avatar} /></span>
+                <span><strong>{person.name}</strong><small>{person.role}</small></span>
+              </span>
+            )}
+            {section.showLinkedin ? (
+              person.url ? (
+                <a className="dw-case-testimonial-linkedin" href={person.url} target="_blank" rel="noreferrer" aria-label={`${person.name} on LinkedIn`}>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.11 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V23h-4V8zm7 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.87c0-1.64-.03-3.75-2.28-3.75-2.28 0-2.63 1.78-2.63 3.62V23h-4V8z" /></svg>
+                </a>
+              ) : (
+                <span className="dw-case-testimonial-linkedin" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.11 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V23h-4V8zm7 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.87c0-1.64-.03-3.75-2.28-3.75-2.28 0-2.63 1.78-2.63 3.62V23h-4V8z" /></svg>
+                </span>
+              )
+            ) : null}
+          </div>
         ) : null}
       </div>
     </section>

@@ -1501,6 +1501,7 @@
         {
           "id": "feedback",
           "type": "testimonial",
+          "showLinkedin": true,
           "sourceNode": "331:24641",
           "layout": "contained",
           "background": {

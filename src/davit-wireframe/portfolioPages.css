@@ -192,9 +192,9 @@
 
 .dw-case-material-exchange .dw-case-testimonial-annotation {
   position: absolute;
-  right: 2%;
-  bottom: 78px;
-  width: 150px;
+  right: -9%;
+  bottom: 90px;
+  width: clamp(140px, 13vw, 220px);
   pointer-events: none;
 }
 
@@ -206,6 +206,8 @@
 
 .dw-case-material-exchange .dw-case-testimonial blockquote {
   font-weight: 500;
+  font-size: clamp(22px, 1.67vw, 32px);
+  line-height: 1.45;
 }
 
 .dw-case-material-exchange .dw-case-testimonial-heading {
@@ -213,31 +215,33 @@
 }
 
 .dw-case-material-exchange .dw-case-avatar {
-  width: 96px;
-  height: 96px;
+  width: clamp(96px, 8vw, 140px);
+  height: clamp(96px, 8vw, 140px);
 }
 
 .dw-case-material-exchange .dw-case-testimonial-person-link strong {
   color: #5849e0;
   font-weight: 700;
-  font-size: clamp(20px, 1.8vw, 32px);
+  font-size: clamp(26px, 2.5vw, 48px);
 }
 
 .dw-case-material-exchange .dw-case-testimonial-person-link small {
-  font-size: clamp(14px, 1.1vw, 18px);
+  font-size: clamp(16px, 1.25vw, 24px);
   opacity: 1;
   color: var(--mex-ink, #202020);
 }
 
 .dw-case-material-exchange .dw-case-testimonial-linkedin {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
+  width: clamp(64px, 5.5vw, 95px);
+  height: clamp(64px, 5.5vw, 95px);
+  border-radius: 22px;
   background: #5849e0;
 }
 
 .dw-case-material-exchange .dw-case-testimonial-linkedin svg {
   fill: #1c1c1c;
+  width: 45%;
+  height: 45%;
 }
 
 .dw-case-material-exchange {

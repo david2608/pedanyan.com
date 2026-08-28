@@ -181,6 +181,12 @@
 }
 
 /* Material Exchange keeps the source case study's own visual language. */
+.dw-case-material-exchange .dw-case-testimonial-heading {
+  max-width: 1050px;
+  margin: 0 auto 56px;
+  padding: 0 8%;
+}
+
 .dw-case-material-exchange .dw-case-testimonial {
   position: relative;
   background: #c3c6e8;

@@ -1745,17 +1745,10 @@ function TestimonialSection({ project, section }: { project: PortfolioProject; s
         <blockquote>{section.quote}</blockquote>
         {person ? (
           <div className="dw-case-testimonial-person">
-            {person.url ? (
-              <a className="dw-case-testimonial-person-link" href={person.url} target="_blank" rel="noreferrer">
-                <span className="dw-case-avatar"><ProjectImage project={project} assetKey={section.avatar} /></span>
-                <span><strong>{person.name}</strong><small>{person.role}</small></span>
-              </a>
-            ) : (
-              <span className="dw-case-testimonial-person-link">
-                <span className="dw-case-avatar"><ProjectImage project={project} assetKey={section.avatar} /></span>
-                <span><strong>{person.name}</strong><small>{person.role}</small></span>
-              </span>
-            )}
+            <span className="dw-case-testimonial-person-link">
+              <span className="dw-case-avatar"><ProjectImage project={project} assetKey={section.avatar} /></span>
+              <span><strong>{person.name}</strong><small>{person.role}</small></span>
+            </span>
             {section.showLinkedin ? (
               person.url ? (
                 <a className="dw-case-testimonial-linkedin" href={person.url} target="_blank" rel="noreferrer" aria-label={`${person.name} on LinkedIn`}>

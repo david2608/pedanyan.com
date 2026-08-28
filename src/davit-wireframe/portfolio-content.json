@@ -1505,7 +1505,7 @@
           "sourceNode": "331:24641",
           "layout": "contained",
           "background": {
-            "color": "#b6b9dc"
+            "color": "#b0b4d9"
           },
           "textColor": "#202457",
           "paddingTop": "165px",
@@ -1515,7 +1515,8 @@
           "avatar": "dejan-avatar",
           "person": {
             "name": "Dejan Zvekić",
-            "role": "Chief Product Officer at Material Exchange"
+            "role": "Chief Product Officer at Material Exchange",
+            "url": "https://www.linkedin.com/in/dejan-zveki%C4%87-15425b8a/"
           }
         },
         {

@@ -1253,34 +1253,14 @@
     width: 24.5%;
   }
 
-  .dw-case-material-exchange .dw-case-section-achievements .dw-case-prose,
-  .dw-case-material-exchange .dw-case-testimonial,
   .dw-case-material-exchange .dw-case-navigation > div {
     width: var(--mex-copy);
     max-width: none;
   }
-  .dw-case-material-exchange .dw-case-section-achievements h2,
-  .dw-case-material-exchange .dw-case-testimonial .dw-case-eyebrow,
   .dw-case-material-exchange .dw-case-navigation h2 {
     font-size: clamp(58px, 5vw, 96px);
     font-weight: 600;
     line-height: 1;
-  }
-  .dw-case-material-exchange .dw-case-section-achievements .dw-case-richtext,
-  .dw-case-material-exchange .dw-case-testimonial blockquote {
-    font-size: clamp(20px, 1.67vw, 32px);
-    line-height: 1.6;
-  }
-  .dw-case-material-exchange .dw-case-testimonial-section {
-    background: #b6b9dc !important;
-  }
-  .dw-case-material-exchange .dw-case-testimonial {
-    color: #111;
-  }
-  .dw-case-material-exchange .dw-case-testimonial blockquote {
-    padding: 4vw;
-    background: rgb(91 97 164 / 10%);
-    border-radius: 5vw;
   }
   .dw-case-material-exchange .dw-case-navigation {
     min-height: 56.25vw;

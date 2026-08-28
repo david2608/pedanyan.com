@@ -390,6 +390,84 @@
   display: none;
 }
 
+/* Securion feedback card is uniformly rounded in its Figma */
+.dw-case-securion .dw-case-section-feedback .dw-case-testimonial {
+  border-radius: 34px;
+}
+
+/* Photo Lab feedback: Figma green theme */
+.dw-case-material-exchange-photo-lab .dw-case-section-feedback .dw-case-testimonial {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 34px;
+}
+
+.dw-case-material-exchange-photo-lab .dw-case-section-feedback .dw-case-testimonial-person-link strong {
+  color: #fff;
+}
+
+.dw-case-material-exchange-photo-lab .dw-case-section-feedback .dw-case-testimonial-person-link small {
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+}
+
+.dw-case-material-exchange-photo-lab .dw-case-section-feedback .dw-case-testimonial-linkedin svg {
+  fill: #fff;
+}
+
+.dw-case-material-exchange-photo-lab .dw-case-section-feedback .dw-case-annotation-generic {
+  color: #fff;
+  right: -12%;
+  bottom: -40px;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.dw-case-material-exchange-photo-lab .dw-case-section-feedback .dw-case-annotation-arrow {
+  margin-left: 0;
+  margin-right: 8%;
+  transform: scale(-1, -1);
+}
+
+/* Photo Lab intro: only tools row like Figma */
+.dw-case-material-exchange-photo-lab .dw-case-meta dt {
+  display: none;
+}
+
+.dw-photo-lab-flow-title {
+  max-width: 1134px;
+  margin: 0 auto 24px;
+  padding: 0 clamp(24px, 4.53vw, 87px);
+  font-size: clamp(32px, 2.5vw, 48px);
+  font-weight: 500;
+  color: #111;
+}
+
+.dw-photo-lab-flow-step {
+  position: relative;
+}
+
+.dw-photo-lab-flow-emoji {
+  position: absolute;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.dw-photo-lab-flow-emoji.emoji-top-left {
+  top: 2%;
+  left: 2%;
+}
+
+.dw-photo-lab-flow-emoji.emoji-top-right {
+  top: 2%;
+  right: 2%;
+}
+
+.dw-photo-lab-flow-emoji.emoji-bottom-right {
+  bottom: 2%;
+  right: 2%;
+}
+
 
 /* Material Exchange keeps the source case study's own visual language. */
 .dw-case-material-exchange .dw-case-testimonial {
@@ -7209,4 +7287,4 @@ a.dw-case-testimonial-linkedin:hover {
 }
 .dw-photo-lab-tool-icons{display:flex;gap:10px;flex-wrap:wrap}.dw-photo-lab-tool{display:inline-flex;align-items:center;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #d7e8e2;font-size:12px;font-weight:600;color:#1b4238}.dw-photo-lab-problem-flow{padding-top:0}.dw-photo-lab-flow{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;padding:30px 0}.dw-photo-lab-flow-step{width:180px;height:180px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:#e9cfd2;color:#171717;font-size:18px;line-height:1.2;animation:photoLabStepIn .6s ease both}.dw-photo-lab-flow-step.step-1{background:#edb7bd;animation-delay:.25s}.dw-photo-lab-flow-step.step-2{background:#d98e98;animation-delay:.5s}.dw-photo-lab-flow-step.step-3{background:#b85d66;color:#fff;animation-delay:.75s}.dw-photo-lab-flow-arrow{font-size:34px;color:#c33b45;animation:photoLabStepIn .5s ease both}.dw-photo-lab-flow-arrow:nth-of-type(2){animation-delay:.35s}.dw-photo-lab-flow-arrow:nth-of-type(3){animation-delay:.6s}@keyframes photoLabStepIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
 .dw-case-section-problem-intro .dw-case-richtext,.dw-case-section-root-cause .dw-case-richtext,.dw-case-section-objective .dw-case-richtext,.dw-case-section-unexpected-change .dw-case-richtext{color:#666;line-height:1.6}.dw-case-section-problem-intro strong,.dw-case-section-root-cause strong,.dw-case-section-objective strong,.dw-case-section-unexpected-change strong{color:#111}.dw-case-section-anticipated-transformations{background:linear-gradient(135deg,#fff 0%,#f4fbf6 100%);border-radius:28px;margin:40px auto;padding-left:clamp(24px,6vw,90px);padding-right:clamp(24px,6vw,90px)}.dw-case-section-anticipated-transformations h2{color:#111}.dw-case-section-anticipated-transformations h2::first-line{color:#5cae55}.dw-case-section-anticipated-transformations li{color:#666;margin:18px 0}.dw-case-section-anticipated-transformations li strong{color:#111}.dw-case-section-product-editor{order:-1}
-.dw-securion-tool-icons img{width:220px;max-width:100%;height:auto;display:block}.dw-securion-feedback{background:#39b84b url('/portfolio-assets/securion/feedback-reference.png') center/cover no-repeat!important;position:relative;overflow:hidden}.dw-securion-feedback::before{content:"";position:absolute;inset:0;background:rgba(45,180,70,.62);mix-blend-mode:screen;pointer-events:none}.dw-securion-feedback-inner{position:relative;z-index:1;background:rgba(48,177,68,.72);border-radius:34px;padding:clamp(36px,6vw,90px)!important}.dw-securion-feedback-heading h2{color:#fff}.dw-securion-feedback blockquote{color:#fff;max-width:900px}
+.dw-securion-tool-icons img{width:220px;max-width:100%;height:auto;display:block}

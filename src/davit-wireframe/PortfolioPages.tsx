@@ -1637,9 +1637,15 @@ function CloudChiprFeedback({ project, section }: { project: PortfolioProject; s
 
 function MediaSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   if (project.project.slug === "material-exchange-photo-lab" && section.id === "problem-flow") {
-    const steps = ["low quality content", "low interest from suppliers", "low amount of sales", "drop users"];
+    const steps = [
+      { label: "low quality content", emoji: "\u{1F614}", emojiPos: "top-left" },
+      { label: "low Interest from suppliers", emoji: "\u{1F623}", emojiPos: "bottom-right" },
+      { label: "low amount of sales", emoji: "\u{1F625}", emojiPos: "top-right" },
+      { label: "drop users", emoji: "\u{1F62D}", emojiPos: "bottom-right" }
+    ];
     return <section className={sectionClass(section, "dw-photo-lab-problem-flow")} style={sectionStyle(project, section)} id={section.id}>
-      <div className="dw-photo-lab-flow" aria-label="Problem progression">{steps.map((step, index) => <React.Fragment key={step}><div className={`dw-photo-lab-flow-step step-${index}`}><span>{step}</span></div>{index < steps.length - 1 ? <span className="dw-photo-lab-flow-arrow" aria-hidden="true">→</span> : null}</React.Fragment>)}</div>
+      {section.title ? <h2 className="dw-photo-lab-flow-title" data-portfolio-reveal>{section.title}</h2> : null}
+      <div className="dw-photo-lab-flow" aria-label="Problem progression">{steps.map((step, index) => <React.Fragment key={step.label}><div className={`dw-photo-lab-flow-step step-${index}`}><span>{step.label}</span><span className={`dw-photo-lab-flow-emoji emoji-${step.emojiPos}`} aria-hidden="true">{step.emoji}</span></div>{index < steps.length - 1 ? <span className="dw-photo-lab-flow-arrow" aria-hidden="true">→</span> : null}</React.Fragment>)}</div>
     </section>;
   }
   if (project.project.slug === "cloudchipr" && section.id === "brand-construction") {

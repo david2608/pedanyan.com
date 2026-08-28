@@ -2097,6 +2097,24 @@
           "subtitle": "Cross-platform photo editing extension.",
           "metadata": [
             {
+              "label": "Tools:",
+              "value": "Figma, Sketch, Microsoft Teams, Jira"
+            }
+          ],
+          "media": "hero"
+        },
+        {
+          "id": "project",
+          "type": "about-card",
+          "sourceNode": "331:30165",
+          "layout": "contained",
+          "paddingTop": "190px",
+          "paddingBottom": "170px",
+          "title": "the Project",
+          "eyebrow": "Overview",
+          "body": "<p>ME Photo Lab is a <strong>flexible, cross-platform photo editor</strong> designed mostly for material <strong>suppliers and resellers</strong>. Effortlessly <strong>edit and standardize scanned and captured material images</strong>. It allows users to elevate their materials and make image management in <strong>Material Exchange</strong> platform easy.</p>",
+          "metadata": [
+            {
               "label": "Client:",
               "value": "Material Exchange"
             },
@@ -2120,18 +2138,7 @@
               "label": "Tools:",
               "value": "Figma, Sketch, Microsoft Teams, Jira"
             }
-          ],
-          "media": "hero"
-        },
-        {
-          "id": "project",
-          "type": "prose",
-          "sourceNode": "331:30165",
-          "layout": "contained",
-          "paddingTop": "190px",
-          "paddingBottom": "170px",
-          "title": "the Project",
-          "body": "<p>ME Photo Lab is a flexible, cross-platform photo editor designed mostly for material suppliers and resellers. Effortlessly edit and standardize scanned and captured material images. It allows users to elevate their materials and make image management in Material Exchange platform easy.</p>"
+          ]
         },
         {
           "id": "problem-intro",
@@ -2167,6 +2174,7 @@
           "sourceNode": "331:32600",
           "layout": "contained",
           "paddingBottom": "120px",
+          "title": "the Problem",
           "asset": "problem-flow"
         },
         {
@@ -2247,9 +2255,11 @@
           "id": "feedback",
           "type": "testimonial",
           "sourceNode": "331:32936",
+          "showLinkedin": true,
+          "annotationText": "Does Sergey really think I\u2019m good? Reach him out directly.",
           "layout": "contained",
           "background": {
-            "color": "#183f3a"
+            "color": "#44ae49"
           },
           "textColor": "#ffffff",
           "paddingTop": "165px",

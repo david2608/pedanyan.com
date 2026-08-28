@@ -568,11 +568,12 @@ function SecurionLogoLaws({ project, section }: { project: PortfolioProject; sec
 
         <ol className="dw-securion-laws-list dw-securion-laws-list-top" start={1}>
           <li>
-            <strong>Simplicity:</strong> The logo is simple, <b>recognizable and memorable</b>. It stays
-            clear when <b>scaled to different sizes</b>.
+            <strong>Simplicity:</strong> Logo is characterized by its simplicity, ensuring it is easily{" "}
+            <b>recognizable and memorable</b>. Its straightforward design maintains clarity, even{" "}
+            <b>when scaled to different sizes</b>.
           </li>
           <li>
-            <strong>Memorability:</strong> Its compact silhouette leaves a clear and lasting impression.
+            <strong>Memorability:</strong> It is inherently memorable, leaving a lasting impression on viewers.
           </li>
         </ol>
 
@@ -582,23 +583,37 @@ function SecurionLogoLaws({ project, section }: { project: PortfolioProject; sec
 
         <ol className="dw-securion-laws-list dw-securion-laws-list-bottom" start={3}>
           <li>
-            <strong>Relevance:</strong> The mark reflects Securion&apos;s <b>commitment to security,
-            innovation, and user-friendliness</b>. Designed in 2018, it still feels current.
+            <strong>Relevance:</strong> Logo is deeply relevant to the brand&apos;s identity. It reflects Securion&apos;s{" "}
+            <b>unwavering commitment to security, innovation, and user-friendliness</b>. The Logo was made in 2018,
+            but it still looks up to date comparing with other logos.
           </li>
           <li>
-            <strong>Distinctiveness:</strong> Its shape separates the brand from competitors and other
-            crypto products in the category.
+            <strong>Distinctiveness:</strong> It stands out with unique features, shapes, or elements that
+            differentiate it from competitors or other logos in its category.
           </li>
         </ol>
+      </div>
+    </section>
+  );
+}
 
-        <div className="dw-securion-scale-law">
-          <p><span>5.</span> The logo is <strong>highly scalable</strong>, maintaining clarity and recognition
-          from the smallest app icon to large-format use.</p>
-          <img src="/portfolio-assets/securion/logo-scale-reference.png" alt="Securion logo shown at 140, 100, 60 and 30 pixel sizes" />
-        </div>
-        <div className="dw-securion-brand-pair" aria-label="Securion brand application examples">
-          <img src="/portfolio-assets/securion/brand-lanyard.png" alt="Securion lanyard and access badge" />
-          <img src="/portfolio-assets/securion/brand-hoodie.png" alt="Securion hoodie application" />
+function SecurionScaleStrip({ section }: { section: PortfolioSection }) {
+  const sizes = [140, 100, 60, 30];
+  return (
+    <section className="dw-case-section dw-securion-scale" id={section.id}>
+      <div className="dw-securion-scale-inner">
+        <p className="dw-securion-scale-law-text">
+          <span>5.</span> Also, the logo is indeed <strong>highly scalable,</strong> maintaining its clarity
+          and recognizability across a <strong>wide range of sizes,</strong> from the smallest icons to
+          larger banners.
+        </p>
+        <div className="dw-securion-scale-marks" aria-label="Securion logo shown at 140, 100, 60 and 30 pixel sizes">
+          {sizes.map((size) => (
+            <figure key={size}>
+              <img src="/portfolio-assets/securion/logo-mark.svg" alt="" style={{ width: size, height: size }} />
+              <figcaption>{size}px</figcaption>
+            </figure>
+          ))}
         </div>
       </div>
     </section>
@@ -1105,6 +1120,30 @@ function MaterialExchangeTesting({ project, section }: { project: PortfolioProje
             alt="Save Smart Search and Delete actions"
           />
         </figure>
+      </div>
+    </section>
+  );
+}
+
+function AboutCardSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className={sectionClass(section, "dw-case-about-card-section")} style={sectionStyle(project, section)} id={section.id}>
+      <div className="dw-about-card" data-portfolio-reveal>
+        <h2>{section.title}</h2>
+        <div className="dw-about-card-grid">
+          <div className="dw-about-card-overview">
+            {section.eyebrow ? <p className="dw-about-card-eyebrow">{section.eyebrow}</p> : null}
+            <Html html={section.body} className="dw-about-card-body" />
+          </div>
+          <dl className="dw-about-card-details">
+            {section.metadata?.map((item) => (
+              <div key={item.label}>
+                <dt>{item.label}</dt>
+                <dd>{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );
@@ -1924,7 +1963,20 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
     return <SecurionLogoLaws project={project} section={section} />;
   }
   if (project.project.slug === "securion" && section.id === "logo-strip") {
-    return null;
+    return <SecurionScaleStrip section={section} />;
+  }
+  if (project.project.slug === "securion" && section.id === "identity-mockup") {
+    return (
+      <section className={sectionClass(section, "dw-securion-mockups")} style={sectionStyle(project, section)} id={section.id}>
+        <div className="dw-securion-brand-pair" data-portfolio-reveal aria-label="Securion brand application examples">
+          <img src="/portfolio-assets/securion/brand-lanyard.png" alt="Securion lanyard and access badge" />
+          <img src="/portfolio-assets/securion/brand-hoodie.png" alt="Securion hoodie application" />
+        </div>
+        <figure className="dw-case-media" data-portfolio-reveal data-portfolio-parallax>
+          <ProjectImage project={project} assetKey={section.asset} />
+        </figure>
+      </section>
+    );
   }
   if (project.project.slug === "securion" && section.id === "color-theory") {
     return <SecurionColorTheory section={section} />;
@@ -1932,9 +1984,8 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   if (project.project.slug === "securion" && section.id === "color-system") {
     return null;
   }
-  if (project.project.slug === "securion" && section.id === "grid-system") {
-    return null;
-  }
+
+  if (section.type === "about-card") return <AboutCardSection project={project} section={section} />;
   if (section.type === "intro") return <IntroSection project={project} section={section} />;
   if (section.type === "prose") return <ProseSection project={project} section={section} />;
   if (section.type === "media") return <MediaSection project={project} section={section} />;

@@ -1744,6 +1744,24 @@
           "subtitle": "Mobile Crypto Wallet and Exchange.",
           "metadata": [
             {
+              "label": "Tools:",
+              "value": "Figma, Sketch, Photoshop, Illustrator"
+            }
+          ],
+          "media": "hero"
+        },
+        {
+          "id": "about",
+          "type": "about-card",
+          "sourceNode": "331:28289",
+          "layout": "contained",
+          "paddingTop": "190px",
+          "paddingBottom": "180px",
+          "title": "About the Project",
+          "eyebrow": "Overview",
+          "body": "<p>Securion is a revolutionary blockchain project aimed at providing the <strong>most secure cryptocurrency wallet and exchange</strong> platform in the fintech industry. The goal is to set a new standard for <strong>security and user experience</strong> in the world of digital currencies.</p>",
+          "metadata": [
+            {
               "label": "Client:",
               "value": "The Bank of London"
             },
@@ -1762,23 +1780,8 @@
             {
               "label": "Projects:",
               "value": "Mobile Crypto Wallet, Crypto Exchange"
-            },
-            {
-              "label": "Tools:",
-              "value": "Figma, Sketch, Photoshop, Illustrator"
             }
-          ],
-          "media": "hero"
-        },
-        {
-          "id": "about",
-          "type": "prose",
-          "sourceNode": "331:28289",
-          "layout": "contained",
-          "paddingTop": "190px",
-          "paddingBottom": "180px",
-          "title": "About the Project",
-          "body": "<p>Securion is a revolutionary blockchain project aimed at providing the most secure cryptocurrency wallet and exchange platform in the fintech industry. The goal is to set a new standard for security and user experience in the world of digital currencies.</p>"
+          ]
         },
         {
           "id": "brand-identity",
@@ -1809,20 +1812,20 @@
           "body": "<p><strong>Simplicity:</strong> Logo is characterized by its simplicity, ensuring it is easily recognizable and memorable. Its straightforward design maintains clarity, even when scaled to different sizes.</p><p><strong>Memorability:</strong> It is inherently memorable, leaving a lasting impression on viewers.</p><p><strong>Relevance:</strong> Logo is deeply relevant to the brand's identity. It reflects Securion's unwavering commitment to security, innovation, and user-friendliness. The Logo as made in 2018, but it still looks up to date comparing with other logos.</p><p><strong>Distinctiveness:</strong> It stands out with unique features, shapes, or elements that differentiate it from competitors or other logos in its category.</p>"
         },
         {
-          "id": "logo-strip",
-          "type": "media",
-          "sourceNode": "331:28400",
-          "layout": "contained",
-          "paddingBottom": "110px",
-          "asset": "logo-strip"
-        },
-        {
           "id": "brand-book",
           "type": "media",
           "sourceNode": "331:28247",
           "layout": "wide",
           "paddingBottom": "80px",
           "asset": "brand-book"
+        },
+        {
+          "id": "logo-strip",
+          "type": "media",
+          "sourceNode": "331:28400",
+          "layout": "contained",
+          "paddingBottom": "110px",
+          "asset": "logo-strip"
         },
         {
           "id": "identity-mockup",

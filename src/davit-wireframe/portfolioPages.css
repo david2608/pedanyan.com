@@ -5897,41 +5897,40 @@ a.dw-case-testimonial-linkedin:hover {
 .dw-securion-construction-mark {
   position: absolute;
   z-index: 2;
-  top: 9%;
+  top: 12%;
   left: 50%;
-  width: clamp(150px, 17vw, 300px);
-  height: auto;
-  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(180px, 19.6vw, 353px);
+  aspect-ratio: 1;
   transform: translateX(-50%);
 }
 
-.dw-securion-construction-mark path,
-.dw-securion-construction-mark circle,
-.dw-securion-construction-mark ellipse {
-  fill: none;
-  vector-effect: non-scaling-stroke;
+.dw-securion-mark-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid #05ff00;
+  border-radius: 28.4%;
+  box-shadow: 0 14px 24px -6px rgb(0 42 135 / 14%);
 }
 
-.dw-securion-construction-guides {
-  color: rgb(255 255 255 / 58%);
-  stroke: currentColor;
-  stroke-width: 1;
-  stroke-dasharray: 4 7;
+.dw-securion-mark-dashed {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64.5%;
+  aspect-ratio: 1;
+  border: 2px dashed rgb(255 255 255 / 40%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.dw-securion-construction-shield,
-.dw-securion-construction-bolt,
-.dw-securion-construction-keyhole {
-  stroke: #67fa45;
-  stroke-width: 2;
-}
-
-.dw-securion-construction-bolt {
-  stroke-linejoin: round;
-}
-
-.dw-securion-construction-keyhole {
-  stroke-linecap: round;
+.dw-securion-construction-mark > img {
+  position: relative;
+  z-index: 1;
+  width: 85%;
+  height: 85%;
 }
 
 .dw-securion-construction-notes {
@@ -5980,17 +5979,21 @@ a.dw-case-testimonial-linkedin:hover {
 .dw-securion-construction-notes strong {
   display: block;
   margin-bottom: 12px;
-  color: #67fa45;
-  font-size: clamp(18px, 1.45vw, 28px);
+  color: #05ff00;
+  font-size: clamp(20px, 1.67vw, 32px);
   font-weight: 500;
 }
 
 .dw-securion-construction-notes p {
-  max-width: 34ch;
+  max-width: 426px;
   margin: 0 auto;
   color: rgb(255 255 255 / 70%);
-  font-size: clamp(13px, 1.05vw, 19px);
-  line-height: 1.5;
+  font-size: clamp(14px, 1.05vw, 20px);
+  line-height: 1.6;
+}
+
+.dw-securion-note-bright {
+  color: rgb(255 255 255 / 90%);
 }
 
 .dw-securion-laws {

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, type CSSProperties, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { KeyRound, Linkedin, Shield } from "lucide-react";
+import { Linkedin, Shield } from "lucide-react";
 import portfolioManifest from "./portfolio-content.json";
 import "@fontsource/syne/400.css";
 import "@fontsource/syne/500.css";
@@ -497,28 +497,11 @@ function HotelFeedback({ project, section }: { project: PortfolioProject; sectio
 
 function SecurionConstructionMark() {
   return (
-    <svg
-      className="dw-securion-construction-mark"
-      viewBox="0 0 240 260"
-      role="img"
-      aria-label="Securion logo construction"
-    >
-      <g className="dw-securion-construction-guides" aria-hidden="true">
-        <circle cx="120" cy="119" r="68" />
-        <ellipse cx="120" cy="119" rx="42" ry="84" />
-        <path d="M24 119H216M120 20V228M45 48L195 198M195 48L45 198" />
-      </g>
-      <path
-        className="dw-securion-construction-shield"
-        d="M120 25c24 18 47 28 75 34v68c0 52-29 86-75 111-46-25-75-59-75-111V59c28-6 51-16 75-34Z"
-      />
-      <path
-        className="dw-securion-construction-bolt"
-        d="M164 67 92 123h50l-66 67 75-57h-49l62-66Z"
-      />
-      <circle className="dw-securion-construction-keyhole" cx="120" cy="111" r="8" />
-      <path className="dw-securion-construction-keyhole" d="M120 119v23" />
-    </svg>
+    <div className="dw-securion-construction-mark" role="img" aria-label="Securion logo construction">
+      <span className="dw-securion-mark-dashed" aria-hidden="true" />
+      <span className="dw-securion-mark-ring" aria-hidden="true" />
+      <img src="/portfolio-assets/securion/logo-mark.svg" alt="" />
+    </div>
   );
 }
 
@@ -542,17 +525,21 @@ function SecurionBrandIdentity({ project, section }: { project: PortfolioProject
           <article>
             <Shield aria-hidden="true" strokeWidth={1.7} />
             <strong>shield</strong>
-            <p>Security, protection, safety, defence, trust, strength and safeguarding.</p>
+            <p>For Security, Protection, Safety, Defense, Trust, Strength, Resilience, Guardianship, Safeguarding, Fortification</p>
           </article>
           <article>
             <span className="dw-securion-letter" aria-hidden="true">S</span>
             <strong>letter “S”</strong>
-            <p>The first letter of the brand name: Securion, as in “turn the security on”.</p>
+            <p>The First Letter of the brand name.<br /><span className="dw-securion-note-bright">Securion = Turn the Security on</span></p>
           </article>
           <article>
-            <KeyRound aria-hidden="true" strokeWidth={1.7} />
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="10" r="2.4" fill="currentColor" stroke="none" />
+              <path d="M10.9 11.8 10 16h4l-0.9-4.2" fill="currentColor" stroke="none" />
+            </svg>
             <strong>keyhole</strong>
-            <p>Access, secrecy, opportunity, lock, entrance, privacy and revealing.</p>
+            <p>For Access, Secrecy, Mystery, Security, Opportunity, Lock, Entrance, Privacy, Hidden, Revealing</p>
           </article>
         </div>
       </div>

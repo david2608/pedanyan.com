@@ -5,6 +5,181 @@
   letter-spacing: 0;
 }
 
+/* CloudChipr layout tiers and browser-review refinements */
+.dw-case-cloudchipr {
+  --cloudchipr-full: 100%;
+  --cloudchipr-middle: min(calc(100% - 120px), 1788px);
+  --cloudchipr-small: min(50%, 900px);
+}
+
+.dw-cloudchipr-problem-inner,
+.dw-cloudchipr-competitor-inner,
+.dw-cloudchipr-field-study-inner,
+.dw-cloudchipr-concepts-inner,
+.dw-cloudchipr-construction,
+.dw-cloudchipr-brand-items-stage,
+.dw-case-section-product-overview .dw-case-media {
+  width: var(--cloudchipr-middle) !important;
+  max-width: none !important;
+}
+
+.dw-cloudchipr-started-inner,
+.dw-cloudchipr-field-study-heading,
+.dw-cloudchipr-field-step-copy {
+  width: var(--cloudchipr-small) !important;
+  max-width: none !important;
+}
+
+.dw-case-section-interview-keywords-intro .dw-case-prose {
+  width: var(--cloudchipr-middle) !important;
+  max-width: none !important;
+}
+
+.dw-cloudchipr-construction {
+  aspect-ratio: 1788 / 708 !important;
+  background: transparent !important;
+  border-radius: clamp(18px, 1.7vw, 30px) !important;
+}
+
+.dw-cloudchipr-construction > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.dw-cloudchipr-comparison-cloudchipr h3 img {
+  display: block;
+  width: min(203px, 100%);
+  height: auto;
+}
+
+.dw-cloudchipr-brand-items-stage {
+  aspect-ratio: 3600 / 2050 !important;
+  background: #f7e77d !important;
+}
+
+.dw-cloudchipr-brand-bottle {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dw-cloudchipr-brand-layer {
+  z-index: 2 !important;
+}
+
+.dw-cloudchipr-brand-layer-badge {
+  top: -13% !important;
+  left: -10% !important;
+  width: 38% !important;
+}
+
+.dw-cloudchipr-brand-layer-details {
+  top: 16% !important;
+  right: -8% !important;
+  width: 38% !important;
+}
+
+.dw-cloudchipr-field-study {
+  background: linear-gradient(
+    to bottom,
+    #f4f5f8 0,
+    #f4f5f8 calc(100% - 150px),
+    #fff calc(100% - 150px),
+    #fff 100%
+  ) !important;
+}
+
+.dw-case-section-interview-keywords-intro {
+  padding-top: clamp(90px, 8vw, 150px) !important;
+  padding-bottom: clamp(70px, 6vw, 120px) !important;
+}
+
+.dw-case-section-interview-keywords-intro .dw-case-richtext p {
+  margin: 0;
+  color: #646464;
+  font-size: clamp(38px, 4.1vw, 72px);
+  font-weight: 400;
+  line-height: 1.42;
+  letter-spacing: -0.025em;
+}
+
+.dw-case-cloudchipr .dw-case-section-product-direction-one {
+  display: flex;
+  align-items: center;
+  min-height: clamp(340px, 28vw, 520px);
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+.dw-case-cloudchipr .dw-case-section-product-direction-one .dw-case-prose {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 clamp(24px, 4vw, 72px);
+}
+
+.dw-case-section-product-overview .dw-case-media {
+  margin-top: -100px !important;
+}
+
+.dw-cloudchipr-roi-comment > img {
+  border-radius: 0 !important;
+  object-fit: contain !important;
+  object-position: right bottom !important;
+}
+
+@media (max-width: 760px) {
+  .dw-case-cloudchipr {
+    --cloudchipr-middle: calc(100% - 32px);
+    --cloudchipr-small: calc(100% - 32px);
+  }
+
+  .dw-cloudchipr-brand-items-stage {
+    aspect-ratio: 0.92 !important;
+  }
+
+  .dw-cloudchipr-brand-bottle {
+    object-position: center;
+  }
+
+  .dw-cloudchipr-brand-layer-badge {
+    top: 0 !important;
+    left: -20% !important;
+    width: 76% !important;
+  }
+
+  .dw-cloudchipr-brand-layer-details {
+    top: 52% !important;
+    right: -25% !important;
+    width: 82% !important;
+  }
+
+  .dw-cloudchipr-field-study {
+    background: linear-gradient(to bottom, #f4f5f8 0, #f4f5f8 calc(100% - 90px), #fff calc(100% - 90px), #fff 100%) !important;
+  }
+
+  .dw-case-section-interview-keywords-intro .dw-case-richtext p {
+    font-size: clamp(30px, 9.5vw, 44px);
+    line-height: 1.3;
+  }
+
+  .dw-case-section-product-overview .dw-case-media {
+    margin-top: -48px !important;
+  }
+
+  .dw-cloudchipr-roi-comment > img {
+    border-radius: 0;
+  }
+}
+
 /* Material Exchange keeps the source case study's own visual language. */
 .dw-case-material-exchange {
   --mex-blue: #5968e9;
@@ -88,6 +263,42 @@
 .dw-mex-meta dt { color: #7c837d; }
 .dw-mex-meta dd { font-weight: 500; }
 .dw-mex-meta a { color: inherit; text-underline-offset: 4px; }
+
+.dw-mex-meta-tools { align-items: center; }
+.dw-mex-meta-tools img {
+  display: block;
+  width: 118px;
+  height: auto;
+  opacity: 0.78;
+  filter: saturate(0.76);
+}
+
+.dw-mex-meta-collaborators { align-items: start; }
+.dw-mex-meta-collaborators dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.dw-mex-meta-collaborators a {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 11px 3px 4px;
+  color: #61705f;
+  background: #e9f1e6;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+}
+.dw-mex-meta-collaborators a:hover { color: #354633; background: #dfeadb; }
+.dw-mex-meta-collaborators .dw-mex-avatar {
+  width: 36px;
+  height: 36px;
+  flex-basis: 36px;
+}
 
 .dw-mex-tools {
   position: absolute;
@@ -232,6 +443,14 @@
 
 .dw-mex-problem-two-copy { max-width: 1420px; font-size: clamp(25px, 2.35vw, 47px); line-height: 1.52; }
 .dw-mex-problem-two-copy > span { display: block; margin-bottom: 72px; color: #aaa; font-size: 15px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; }
+.dw-mex-reading h3,
+.dw-mex-problem-two-copy > span {
+  font-size: clamp(23px, 2.1vw, 40px);
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: normal;
+  text-transform: none;
+}
 .dw-mex-problem-two-copy p { margin: 0 0 38px; }
 .dw-mex-problem-two-copy p:nth-of-type(2) { margin-left: 12%; }
 .dw-mex-problem-two-copy p:nth-of-type(3) { margin-left: 22%; }
@@ -259,7 +478,7 @@
 .dw-mex-research .dw-mex-reading > p:first-child { color: #5968e9; }
 .dw-mex-research .dw-mex-reading h2 { margin-bottom: 52px; }
 .dw-mex-research-stats { width: min(calc(100% - 64px), 1800px); margin: 100px auto 0; }
-.dw-mex-research-chart-frame { overflow: hidden; aspect-ratio: 1.9; background: #f0f2f7; border-radius: 18px; }
+.dw-mex-research-chart-frame { overflow: hidden; aspect-ratio: 1.9; background: #fff; border-radius: 18px; }
 .dw-mex-research-stats img { display: block; width: 100%; height: auto; transform: translateY(-1.2%); }
 .dw-mex-research-stats figcaption { color: var(--mex-muted); }
 .dw-mex-research-columns {
@@ -309,11 +528,85 @@
 .dw-mex-visual-heading h2 { max-width: 11ch; }
 .dw-mex-visual-heading > div { max-width: 840px; margin-top: 64px; color: var(--mex-muted); font-size: clamp(20px, 1.7vw, 32px); line-height: 1.55; }
 .dw-mex-visual-heading strong { color: #111; }
-.dw-mex-cursor { position: absolute; padding: 7px 12px; color: #fff; font-size: 15px; box-shadow: 0 8px 18px rgb(0 0 0 / 16%); }
-.cursor-davit { top: 140px; left: 12%; background: #ee4d3d; }
-.cursor-ani { top: 82px; right: 18%; background: #ef54ae; }
-.cursor-gohar { bottom: 100px; left: 6%; background: #43ae67; }
-.cursor-vlad { right: 8%; bottom: 80px; background: #4c6df0; }
+.dw-mex-cursor {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  color: #fff;
+  font-size: 15px;
+  filter: drop-shadow(0 3px 5px rgb(0 0 0 / 18%));
+  will-change: transform;
+  animation: mex-cursor-collaborate 9s ease-in-out infinite;
+  animation-delay: var(--cursor-delay, 0s);
+}
+.dw-mex-cursor-pointer {
+  width: 24px;
+  height: 29px;
+  flex: none;
+  margin-top: -9px;
+  margin-right: -4px;
+  overflow: visible;
+}
+.dw-mex-cursor-name {
+  display: block;
+  padding: 7px 12px;
+  color: #fff;
+  background: var(--cursor-color);
+  border-radius: 0;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+  font: inherit;
+  white-space: nowrap;
+}
+.dw-mex-cursor-pointer-fill { fill: var(--cursor-color); }
+.dw-mex-cursor-pointer-outline { fill: none; stroke: #fff; stroke-width: 1.55; stroke-linejoin: round; }
+.cursor-davit {
+  --cursor-color: #ee4d3d;
+  --cursor-delay: -1s;
+  --cursor-x-1: 58px;
+  --cursor-y-1: 32px;
+  --cursor-x-2: 22px;
+  --cursor-y-2: 74px;
+  top: 140px;
+  left: 12%;
+}
+.cursor-ani {
+  --cursor-color: #ef54ae;
+  --cursor-delay: -3.2s;
+  --cursor-x-1: -48px;
+  --cursor-y-1: 46px;
+  --cursor-x-2: -82px;
+  --cursor-y-2: 12px;
+  top: 82px;
+  right: 18%;
+}
+.cursor-gohar {
+  --cursor-color: #43ae67;
+  --cursor-delay: -5.4s;
+  --cursor-x-1: 48px;
+  --cursor-y-1: -42px;
+  --cursor-x-2: 96px;
+  --cursor-y-2: -18px;
+  bottom: 100px;
+  left: 6%;
+}
+.cursor-vlad {
+  --cursor-color: #4c6df0;
+  --cursor-delay: -7.6s;
+  --cursor-x-1: -56px;
+  --cursor-y-1: -38px;
+  --cursor-x-2: -98px;
+  --cursor-y-2: -10px;
+  right: 8%;
+  bottom: 80px;
+}
+@keyframes mex-cursor-collaborate {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  30% { transform: translate3d(var(--cursor-x-1), var(--cursor-y-1), 0); }
+  62% { transform: translate3d(var(--cursor-x-2), var(--cursor-y-2), 0); }
+  82% { transform: translate3d(calc(var(--cursor-x-1) * .35), calc(var(--cursor-y-2) * .45), 0); }
+}
 .dw-mex-component-stage { position: relative; width: min(calc(100% - 64px), 1800px); margin: 0 auto; padding-top: 90px; }
 .dw-mex-component-stage > img { display: block; width: 100%; height: auto; }
 .dw-mex-feedback-cover { position: absolute; z-index: 1; display: block; background: #f0f1f4; }
@@ -334,8 +627,60 @@
 .note-taron { top: 49%; left: 43%; }
 
 .dw-mex-iconography { padding: clamp(120px, 10vw, 190px) 0; background: #fff; }
-.dw-mex-icon-stage { position: relative; width: min(calc(100% - 64px), 1800px); margin: 90px auto 0; }
-.dw-mex-icon-stage > img { display: block; width: 100%; height: auto; }
+.dw-mex-icon-stage {
+  position: relative;
+  width: min(calc(100% - 64px), 1920px);
+  aspect-ratio: 1920 / 830;
+  margin: 90px auto 0;
+  overflow: hidden;
+  background: #090909;
+}
+.dw-mex-icon-stage iframe { display: block; width: 100%; height: 100%; border: 0; background: #090909; }
+.dw-mex-industry-icon-row {
+  position: absolute;
+  z-index: 2;
+  top: 18.8%;
+  left: 6.7%;
+  width: 86.25%;
+  overflow: hidden;
+}
+.dw-mex-industry-icon-row img { display: block; width: 100%; height: auto; }
+.dw-mex-icon-constructions { position: absolute; z-index: 3; inset: 0; pointer-events: none; }
+.dw-mex-icon-construction {
+  position: absolute;
+  width: 16.25%;
+  margin: 0;
+  transform-origin: 50% 62%;
+}
+.dw-mex-icon-construction > img { display: block; width: 100%; height: auto; }
+.construction-cookie { top: 33.9%; left: 21.9%; }
+.construction-yarn { top: 33.9%; left: 43.7%; width: 13.23%; }
+.construction-materials { top: 33.9%; left: 62.55%; width: 13.23%; }
+.dw-mex-icon-grid { opacity: .2; }
+.dw-mex-icon-line-art {
+  position: absolute;
+  z-index: 2;
+  top: 24.8%;
+  left: 9.5%;
+  width: 81%;
+  height: auto;
+  overflow: visible;
+}
+.dw-mex-icon-line-art [data-mex-icon-path] {
+  fill: none;
+  stroke: #5849e0;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  vector-effect: non-scaling-stroke;
+}
+.construction-cookie .dw-mex-icon-line-art {
+  top: 22%;
+  left: 18%;
+  width: 65%;
+}
 .dw-mex-icon-focus { position: absolute; top: 45.2%; display: block; width: 4.8%; aspect-ratio: 1; background: rgb(255 99 88 / 7%); border: 2px solid #ef665c; }
 .focus-one { left: 26.2%; }.focus-two { left: 65.2%; }.focus-three { left: 77.4%; }
 .dw-mex-icon-conclusion { width: min(calc(100% - 80px), 1048px); margin: 110px auto 0; color: var(--mex-muted); font-size: clamp(22px, 1.7vw, 32px); line-height: 1.5; }
@@ -347,6 +692,38 @@
 .dw-mex-system > header h2 { max-width: 12ch; margin: 20px 0 44px; font-size: clamp(52px, 6vw, 112px); font-weight: 500; line-height: 0.95; }
 .dw-mex-system > header > div { color: var(--mex-muted); font-size: clamp(20px, 1.6vw, 30px); line-height: 1.55; }
 .dw-mex-system-map { position: relative; width: min(100%, 1800px); min-height: 820px; margin: 0 auto; background: #fbfbfc; border-radius: 18px; }
+.dw-mex-system-map-animated {
+  aspect-ratio: 1920 / 935;
+  min-height: 0;
+  margin-bottom: 100px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 0;
+}
+.dw-mex-system-map-animated iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #fff;
+}
+.dw-mex-value-satisfaction {
+  width: min(calc(100% - 60px), 1800px);
+  margin: 0 auto clamp(110px, 9vw, 170px);
+}
+.dw-mex-value-satisfaction iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3316 / 1734;
+  border: 0;
+  background: #fff;
+}
+.dw-mex-value-satisfaction figcaption {
+  margin-top: 18px;
+  color: var(--mex-muted);
+  font-size: 14px;
+  text-align: center;
+}
 .dw-mex-system-core { position: absolute; z-index: 3; top: 50%; left: 50%; padding: 16px 28px; color: #fff; background: #5261ff; border-radius: 6px; font-size: 18px; transform: translate(-50%, -50%); }
 .dw-mex-system-branch { position: absolute; z-index: 2; display: flex; gap: 13px; width: min(37%, 590px); align-items: center; }
 .dw-mex-system-branch.side-left { flex-direction: row-reverse; text-align: right; }
@@ -384,6 +761,12 @@
   .dw-mex-research-categories { right: -24%; width: 100%; }
   .dw-mex-feedback-note { width: 220px; }
   .dw-mex-system-map { min-width: 1120px; transform-origin: top left; transform: scale(0.72); }
+  .dw-mex-system-map.dw-mex-system-map-animated {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    transform: none;
+  }
   .dw-mex-system { min-height: 760px; overflow-x: auto; }
 }
 
@@ -421,10 +804,10 @@
     line-height: 1.55;
   }
   .dw-mex-cursor { font-size: 11px; }
-  .cursor-davit { top: 42px; left: 24px; }
-  .cursor-ani { top: 42px; right: 24px; }
-  .cursor-gohar { bottom: 88px; left: 24px; }
-  .cursor-vlad { right: 24px; bottom: 88px; }
+  .cursor-davit { --cursor-x-1: 18px; --cursor-y-1: 12px; --cursor-x-2: 8px; --cursor-y-2: 24px; top: 42px; left: 24px; }
+  .cursor-ani { --cursor-x-1: -16px; --cursor-y-1: 15px; --cursor-x-2: -28px; --cursor-y-2: 5px; top: 42px; right: 24px; }
+  .cursor-gohar { --cursor-x-1: 16px; --cursor-y-1: -14px; --cursor-x-2: 30px; --cursor-y-2: -6px; bottom: 88px; left: 24px; }
+  .cursor-vlad { --cursor-x-1: -18px; --cursor-y-1: -13px; --cursor-x-2: -32px; --cursor-y-2: -4px; right: 24px; bottom: 88px; }
   .dw-mex-feedback-note { position: relative; inset: auto !important; width: auto; margin: 12px 8px; }
   .dw-mex-system > header { width: calc(100% - 20px); }
 }
@@ -451,12 +834,12 @@
     line-height: 1.05;
   }
   .dw-page .dw-mex-intro h2 {
-    max-width: 27ch;
-    margin-top: .35vw;
-    color: #000;
-    font-size: clamp(26px, 2.1vw, 40px);
-    font-weight: 500;
-    line-height: 1.12;
+    max-width: 35ch;
+    margin-top: .55vw;
+    color: #747b74;
+    font-size: clamp(20px, 1.45vw, 28px);
+    font-weight: 400;
+    line-height: 1.28;
   }
   .dw-mex-intro header > p { display: none; }
   .dw-mex-meta {
@@ -473,26 +856,13 @@
     font-size: clamp(13px, 1.04vw, 20px);
     line-height: 1.35;
   }
-  .dw-mex-tools { top: 7.2vw; right: 8.2vw; }
-  .dw-mex-tools > span,
-  .dw-mex-collaborators > span { display: none; }
-  .dw-mex-tools img { width: min(21vw, 410px); }
   .dw-mex-hero-product {
     right: 0;
     bottom: 5.5%;
     width: min(51vw, 980px);
   }
-  .dw-mex-collaborators {
-    right: 8.3vw;
-    bottom: 2.8vw;
-    max-width: 58%;
-  }
-  .dw-mex-collaborators a {
-    min-height: 38px;
-    padding: 4px 13px 4px 5px;
-    font-size: 13px;
-  }
-  .dw-mex-avatar { width: 30px; height: 30px; flex-basis: 30px; }
+  .dw-mex-meta-tools img { width: min(7.3vw, 140px); }
+  .dw-mex-meta-collaborators dd { flex-wrap: nowrap; width: max-content; }
 
   .dw-mex-about {
     width: var(--mex-copy);
@@ -525,6 +895,10 @@
     color: #666;
     font-size: 13px;
     text-align: center;
+  }
+  .dw-mex-initial-wireframes figcaption {
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 500;
   }
 
   .dw-mex-reading,
@@ -682,11 +1056,11 @@
   .dw-mex-ideation > figure { width: min(91.15vw, 1750px); margin: 6vw auto 7vw; }
   .dw-mex-ideation > figure img { display: block; width: 100%; height: auto; }
   .dw-mex-hmw {
-    width: min(96vw, 1845px);
+    width: 100%;
     margin: 0 auto;
-    padding: 6.5vw 5vw;
-    background: #f1f2f6;
-    border-radius: 18px;
+    padding: clamp(96px, 8vw, 154px) clamp(48px, 6.7vw, 128px) clamp(110px, 9vw, 174px);
+    color: #737373;
+    background: #eef0f3;
   }
   .dw-mex-hmw h2,
   .dw-mex-personalized > h2,
@@ -697,12 +1071,37 @@
     font-weight: 600;
     line-height: 1;
   }
-  .dw-mex-hmw h2 { width: auto; }
-  .dw-mex-hmw > div { display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; }
+  .dw-mex-hmw h2 {
+    width: auto;
+    margin-bottom: clamp(68px, 6vw, 112px);
+    color: #080808;
+    font-size: clamp(54px, 4.7vw, 90px);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .dw-mex-hmw > div {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(46px, 5vw, 96px);
+  }
   .dw-mex-hmw > div > div {
-    color: #686868;
-    font-size: clamp(17px, 1.2vw, 23px);
-    line-height: 1.55;
+    color: #737373;
+    font-size: clamp(19px, 1.42vw, 27px);
+    line-height: 1.5;
+  }
+  .dw-mex-hmw ul {
+    margin: 0;
+    padding: 0 0 0 1.1em;
+    list-style-type: square;
+  }
+  .dw-mex-hmw li {
+    margin: 0 0 0.36em;
+    padding-left: 0.18em;
+  }
+  .dw-mex-hmw li::marker { color: #737373; font-size: 0.65em; }
+  .dw-mex-hmw strong {
+    color: #111;
+    font-weight: 500;
   }
 
   .dw-mex-personalized { padding: 7vw 0 0; overflow: hidden; }
@@ -731,35 +1130,128 @@
   .dw-mex-product-collage img { display: block; width: 100%; height: auto; }
 
   .dw-mex-testing { padding: 7vw 0 0; }
-  .dw-mex-test-copy { width: var(--mex-copy); margin: 0 auto 4vw; }
+  .dw-mex-testing > h2 { margin-bottom: clamp(72px, 6vw, 118px); }
+  .dw-mex-test-copy { width: var(--mex-copy); margin: 0 auto clamp(54px, 4vw, 78px); }
+  .dw-mex-hypothesis-heading {
+    margin-bottom: clamp(38px, 3vw, 58px);
+    padding-left: clamp(18px, 1.25vw, 24px);
+    border-left: 4px solid #111;
+  }
   .dw-mex-test-copy .eyebrow {
-    margin: 0 0 .5vw;
-    color: #666;
-    font-size: clamp(20px, 1.67vw, 32px);
+    margin: 0 0 12px;
+    color: #6f6f6f;
+    font-size: clamp(18px, 1.35vw, 26px);
+    font-weight: 500;
+    line-height: 1.15;
   }
   .dw-mex-test-copy h3 {
-    margin: 0 0 2vw;
-    padding-left: 1vw;
-    border-left: 4px solid #111;
-    font-size: clamp(34px, 3vw, 58px);
-    font-weight: 600;
-    line-height: 1.05;
+    max-width: 24ch;
+    margin: 0;
+    font-size: clamp(36px, 2.7vw, 52px);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: 0;
   }
   .dw-mex-test-copy h4 {
-    margin: 4vw 0 2vw;
-    font-size: clamp(22px, 1.67vw, 32px);
+    margin: 0 0 22px;
+    font-size: clamp(24px, 1.55vw, 30px);
+    font-weight: 600;
+    line-height: 1.15;
   }
   .dw-mex-test-copy > div {
-    color: #666;
-    font-size: clamp(20px, 1.67vw, 32px);
-    line-height: 1.6;
+    color: #6d6d6d;
+    font-size: clamp(20px, 1.42vw, 27px);
+    line-height: 1.55;
   }
   .dw-mex-test-copy strong { color: #111; font-weight: 500; }
+  .dw-mex-hypothesis-body > p { margin: 0 0 clamp(30px, 2.4vw, 46px); }
+  .dw-mex-hypothesis-body > .dw-mex-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(20px, 3vw, 56px);
+    margin-bottom: clamp(48px, 4vw, 76px);
+    padding: clamp(20px, 1.6vw, 30px);
+    background: #f1f2f4;
+  }
+  .dw-mex-hypothesis-body > .dw-mex-metrics br { display: none; }
+  .dw-mex-hypothesis-body > .dw-mex-metrics strong {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    font-size: clamp(20px, 1.4vw, 27px);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .dw-mex-hypothesis-body > .dw-mex-metrics strong span { color: #696969; }
+  .dw-mex-hypothesis-title > p {
+    max-width: 24ch;
+    margin: 0;
+    color: #111;
+    font-size: clamp(36px, 2.7vw, 52px);
+    font-weight: 500;
+    line-height: 1.08;
+  }
+  .dw-mex-test-copy.solution { margin-top: 0; }
+  .dw-mex-test-copy.solution > div p { max-width: 38ch; margin: 0; }
+  .dw-mex-test-copy.result {
+    width: min(76vw, 1460px);
+    margin-top: clamp(52px, 4vw, 78px);
+  }
+  .dw-mex-test-copy.result .dw-mex-hypothesis-body > p:not(.dw-mex-metrics) {
+    max-width: none;
+    margin-bottom: clamp(44px, 3.5vw, 68px);
+    font-size: clamp(23px, 1.85vw, 36px);
+    line-height: 1.58;
+  }
+  .dw-mex-test-copy.result .dw-mex-metrics {
+    margin-bottom: 0;
+    padding: clamp(24px, 1.9vw, 36px) clamp(28px, 2.4vw, 46px);
+  }
+  .dw-mex-test-copy.result .dw-mex-metrics strong {
+    font-size: clamp(24px, 1.8vw, 35px);
+  }
   .dw-mex-testing > figure { width: min(82.3vw, 1580px); margin: 4vw auto; }
   .dw-mex-testing > figure img { display: block; width: 100%; height: auto; }
   .dw-mex-test-two { padding: 7vw 0 0; background: #f1f2f6; }
+  .dw-mex-test-two .dw-mex-hypothesis-heading { border-left-color: #111; }
   .dw-mex-test-two figure { width: min(67.5vw, 1296px); margin: 4vw auto 0; }
   .dw-mex-test-two figure img { display: block; width: 100%; height: auto; }
+  .dw-mex-test-two .dw-mex-test-copy.solution {
+    width: min(52vw, 1000px);
+  }
+  .dw-mex-test-two .dw-mex-test-copy.solution > div {
+    font-size: clamp(24px, 1.72vw, 33px);
+    line-height: 1.48;
+  }
+  .dw-mex-save-search-composition {
+    position: relative;
+    width: min(84vw, 1615px) !important;
+    aspect-ratio: 1.49;
+    margin-top: clamp(52px, 4vw, 78px) !important;
+    overflow: hidden;
+  }
+  .dw-mex-save-search-composition img {
+    position: absolute;
+    height: auto;
+    object-fit: contain;
+  }
+  .dw-mex-save-search-composition .dw-mex-save-search-tablet {
+    top: 0;
+    left: 13%;
+    width: 91%;
+  }
+  .dw-mex-save-search-composition .dw-mex-save-search-panel {
+    z-index: 2;
+    top: 22%;
+    left: 0;
+    width: 25%;
+  }
+  .dw-mex-save-search-composition .dw-mex-save-search-actions {
+    z-index: 3;
+    top: 67%;
+    left: 0;
+    width: 24.5%;
+  }
 
   .dw-case-material-exchange .dw-case-section-achievements .dw-case-prose,
   .dw-case-material-exchange .dw-case-testimonial,
@@ -805,6 +1297,16 @@
 }
 
 @media (max-width: 900px) {
+  .dw-page .dw-mex-intro h2 {
+    max-width: 28ch;
+    margin-top: 14px;
+    color: #747b74;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.32;
+  }
+  .dw-mex-meta-tools img { width: 104px; }
+  .dw-mex-meta-collaborators dd { gap: 6px; }
   .dw-mex-about,
   .dw-mex-ideation .dw-mex-reading,
   .dw-mex-personalized > h2,
@@ -841,8 +1343,20 @@
   .dw-mex-ideation { padding-top: 80px; }
   .dw-mex-ideation > figure { width: calc(100% - 20px); margin: 50px auto; }
   .dw-mex-ideation img { width: 100%; height: auto; }
-  .dw-mex-hmw { margin: 0 10px; padding: 50px 24px; background: #f1f2f6; border-radius: 14px; }
-  .dw-mex-hmw > div { display: block; }
+  .dw-mex-hmw {
+    width: 100%;
+    margin: 0;
+    padding: 64px 20px 76px;
+    background: #eef0f3;
+  }
+  .dw-mex-hmw h2 {
+    margin-bottom: 42px;
+    font-size: clamp(42px, 13vw, 58px);
+    font-weight: 500;
+  }
+  .dw-mex-hmw > div { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .dw-mex-hmw > div > div { font-size: 18px; line-height: 1.48; }
+  .dw-mex-hmw li { margin-bottom: 18px; }
   .dw-mex-personalized,
   .dw-mex-testing { padding-top: 80px; overflow: hidden; }
   .dw-mex-personalized-row,
@@ -854,6 +1368,90 @@
   .dw-mex-testing figure img { width: 100%; height: auto; }
   .dw-mex-testing > figure,
   .dw-mex-test-two figure { width: calc(100% - 20px); margin: 40px auto; }
+  .dw-mex-test-two .dw-mex-test-copy.solution { width: calc(100% - 36px); }
+  .dw-mex-test-two .dw-mex-test-copy.solution > div { font-size: 19px; line-height: 1.52; }
+  .dw-mex-save-search-composition {
+    width: 100% !important;
+    aspect-ratio: 0.92;
+    margin: 30px 0 0 !important;
+  }
+  .dw-mex-save-search-composition .dw-mex-save-search-tablet {
+    top: 8%;
+    left: 4%;
+    width: 116%;
+  }
+  .dw-mex-save-search-composition .dw-mex-save-search-panel {
+    top: 5%;
+    left: 2%;
+    width: 46%;
+  }
+  .dw-mex-save-search-composition .dw-mex-save-search-actions {
+    top: 49%;
+    left: 2%;
+    width: 45%;
+  }
+  .dw-mex-testing > h2 { margin-bottom: 56px; }
+  .dw-mex-test-copy { margin-bottom: 48px; }
+  .dw-mex-hypothesis-heading {
+    margin-bottom: 32px;
+    padding-left: 16px;
+    border-left: 3px solid #111;
+  }
+  .dw-mex-test-copy .eyebrow {
+    margin: 0 0 8px;
+    color: #6f6f6f;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .dw-mex-test-copy h3,
+  .dw-mex-hypothesis-title > p {
+    max-width: 22ch;
+    margin: 0;
+    color: #111;
+    font-size: clamp(28px, 8.5vw, 40px);
+    font-weight: 500;
+    line-height: 1.08;
+  }
+  .dw-mex-test-copy h4 {
+    margin: 0 0 18px;
+    color: #111;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .dw-mex-test-copy > div {
+    color: #6d6d6d;
+    font-size: 18px;
+    line-height: 1.52;
+  }
+  .dw-mex-test-copy strong { color: #111; font-weight: 500; }
+  .dw-mex-hypothesis-body > p { margin: 0 0 30px; }
+  .dw-mex-hypothesis-body > .dw-mex-metrics {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 38px;
+    padding: 18px;
+    background: #f1f2f4;
+  }
+  .dw-mex-hypothesis-body > .dw-mex-metrics br { display: none; }
+  .dw-mex-hypothesis-body > .dw-mex-metrics strong {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    align-items: baseline;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .dw-mex-hypothesis-body > .dw-mex-metrics strong span { color: #696969; }
+  .dw-mex-test-copy.solution { margin-top: 0; }
+  .dw-mex-test-copy.result { width: calc(100% - 36px); margin-top: 44px; }
+  .dw-mex-test-copy.result .dw-mex-hypothesis-body > p:not(.dw-mex-metrics) {
+    max-width: none;
+    margin-bottom: 36px;
+    font-size: 20px;
+    line-height: 1.55;
+  }
   .dw-mex-test-two { padding: 70px 0 1px; background: #f1f2f6; }
   .dw-case-material-exchange .dw-case-next-list { grid-template-columns: 1fr; }
 }
@@ -1715,15 +2313,6 @@
   overflow: hidden;
 }
 
-.dw-cloudchipr-competitor-void {
-  top: -12%;
-  right: -12%;
-  width: 58%;
-  height: 48%;
-  background: #050505;
-  clip-path: polygon(18% 0, 100% 0, 100% 100%, 34% 86%);
-}
-
 .dw-cloudchipr-competitor-orb {
   border-radius: 46% 54% 60% 40% / 42% 48% 52% 58%;
   background:
@@ -2155,20 +2744,29 @@
 }
 
 .dw-cloudchipr-design-decision {
-  padding: clamp(110px, 10vw, 180px) 0 clamp(120px, 10vw, 170px) !important;
+  z-index: 3;
+  overflow: visible;
+  padding: 0 !important;
   background: #f5f6fb;
 }
 
 .dw-cloudchipr-design-decision-inner {
-  width: min(1160px, calc(100% - 64px));
+  width: 100%;
   margin: 0 auto;
 }
 
 .dw-cloudchipr-design-decision-main {
   position: relative;
-  z-index: 2;
+  z-index: 3;
+  width: min(1160px, calc(100% - 64px));
+  margin: -100px auto;
   padding: clamp(54px, 6vw, 86px) clamp(48px, 7vw, 92px) clamp(64px, 7vw, 96px);
-  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 30px 90px rgba(28, 24, 88, 0.17);
+  backdrop-filter: blur(28px) saturate(145%);
+  -webkit-backdrop-filter: blur(28px) saturate(145%);
 }
 
 .dw-cloudchipr-design-decision-heading {
@@ -2192,11 +2790,11 @@
   color: #445ab5;
 }
 
-.dw-cloudchipr-design-decision-heading > svg {
+.dw-cloudchipr-design-decision-heading > img {
   width: clamp(70px, 8vw, 112px);
-  height: auto;
+  height: clamp(70px, 8vw, 112px);
   flex: 0 0 auto;
-  color: #0b0b0b;
+  object-fit: contain;
 }
 
 .dw-cloudchipr-design-decision-copy {
@@ -2217,7 +2815,7 @@
 }
 
 .dw-cloudchipr-roi-calculation h3 {
-  margin: 0 0 54px;
+  margin: 0 0 80px;
   color: #080808;
   font-size: clamp(26px, 2.25vw, 36px);
   font-weight: 600;
@@ -2265,17 +2863,18 @@
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 330px;
-  min-height: 430px;
-  margin-top: -1px;
+  width: 100%;
+  min-height: 540px;
+  margin-top: 0;
   overflow: hidden;
-  border-radius: 0 0 28px 28px;
+  border-radius: 0;
   background: linear-gradient(116deg, #254be4 0%, #4b36ed 50%, #7929e8 100%);
   color: #fff;
 }
 
 .dw-cloudchipr-roi-equation {
   align-self: center;
-  padding: 72px 0 74px clamp(48px, 7vw, 92px);
+  padding: 168px 0 82px max(clamp(48px, 7vw, 92px), calc((100vw - 1160px) / 2 + 92px));
 }
 
 .dw-cloudchipr-roi-equation p,
@@ -2312,7 +2911,7 @@
 .dw-cloudchipr-roi-comment {
   position: relative;
   align-self: end;
-  min-height: 360px;
+  min-height: 430px;
 }
 
 .dw-cloudchipr-roi-comment > p {
@@ -2345,25 +2944,169 @@
 
 .dw-cloudchipr-roi-comment > img {
   position: absolute;
-  right: 24px;
+  right: 0;
   bottom: 0;
-  width: 190px;
-  height: 190px;
-  object-fit: contain;
+  width: 235px;
+  height: 235px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 16%;
   filter: saturate(0.82) contrast(1.04);
 }
 
-@media (max-width: 760px) {
-  .dw-cloudchipr-design-decision {
-    padding: 88px 0 110px !important;
-  }
+.dw-case-cloudchipr .dw-case-section-product-direction-one .dw-case-prose,
+.dw-case-cloudchipr .dw-case-section-product-direction-two .dw-case-prose {
+  display: block;
+  width: min(calc(100% - 64px), 1240px);
+}
 
+.dw-case-cloudchipr .dw-case-section-product-direction-one .dw-case-prose h2,
+.dw-case-cloudchipr .dw-case-section-product-direction-two .dw-case-prose h2 {
+  max-width: 1160px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* CloudChipr review pass: match the Figma compositions at the three annotated
+   milestones while keeping the existing content and responsive breakpoints. */
+.dw-case-cloudchipr .dw-case-section-product-direction-one {
+  min-height: clamp(360px, 31vw, 560px);
+  background: #0e0a3e !important;
+}
+
+.dw-case-cloudchipr .dw-case-section-product-direction-one .dw-case-prose h2 {
+  max-width: 980px;
+  color: #fff;
+  font-size: clamp(38px, 4.2vw, 72px);
+  line-height: 1.08;
+}
+
+.dw-case-cloudchipr .dw-case-section-product-direction-two {
+  padding-top: clamp(90px, 9vw, 170px) !important;
+  padding-bottom: clamp(76px, 8vw, 140px) !important;
+  background: #f7f8fc !important;
+}
+
+.dw-case-cloudchipr .dw-case-section-product-direction-two .dw-case-prose h2 {
+  display: block;
+  visibility: visible;
+  color: #0b0b12;
+  font-size: clamp(38px, 4vw, 68px);
+  line-height: 1.08;
+}
+
+.dw-case-cloudchipr #product-benefits {
+  padding-top: 0 !important;
+  background: #f7f8fc !important;
+}
+
+.dw-case-cloudchipr #product-benefits::before {
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto clamp(70px, 7vw, 120px);
+  color: #0b0b12;
+  content: "Remove Friction around costs between Engineering and Finance";
+  font-size: clamp(38px, 4vw, 68px);
+  font-weight: 500;
+  line-height: 1.08;
+  text-align: center;
+}
+
+.dw-case-cloudchipr #product-benefits .dw-case-feature-grid {
+  border-top: 0;
+  gap: clamp(64px, 8vw, 130px) clamp(28px, 5vw, 90px);
+}
+
+.dw-case-cloudchipr #product-benefits .dw-case-feature-grid article {
+  padding: 0;
+  border: 0;
+  text-align: center;
+}
+
+.dw-case-cloudchipr #product-benefits .dw-case-feature-grid img {
+  display: block;
+  margin: 0 auto 30px;
+}
+
+.dw-case-cloudchipr #headline-achievements {
+  background-color: #0e0a3e !important;
+}
+
+.dw-case-cloudchipr #headline-achievements .dw-case-metrics {
+  display: block;
+}
+
+.dw-case-cloudchipr #headline-achievements .dw-case-metrics h2 {
+  max-width: 1200px;
+  margin: 0 auto clamp(70px, 8vw, 130px);
+  font-size: clamp(42px, 5vw, 86px);
+  line-height: 1.05;
+  text-align: center;
+}
+
+.dw-case-cloudchipr #headline-achievements .dw-case-metrics > div {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 5vw, 100px);
+  border-top: 0;
+}
+
+.dw-case-cloudchipr #headline-achievements .dw-case-metrics article,
+.dw-case-cloudchipr #headline-achievements .dw-case-metrics article:nth-child(even) {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+}
+
+.dw-case-cloudchipr #headline-achievements .dw-case-metrics article img {
+  margin-bottom: 24px;
+}
+
+.dw-case-cloudchipr #headline-achievements .dw-case-metrics strong {
+  font-size: clamp(42px, 4vw, 72px);
+}
+
+@media (max-width: 760px) {
+  .dw-case-cloudchipr #product-benefits::before { text-align: left; }
+  .dw-case-cloudchipr #product-benefits .dw-case-feature-grid,
+  .dw-case-cloudchipr #headline-achievements .dw-case-metrics > div { grid-template-columns: 1fr; }
+}
+
+.dw-cloudchipr-title-accent {
+  color: transparent;
+  background: linear-gradient(92deg, #3560ec 0%, #8135e2 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.dw-case-section-product-overview {
+  z-index: 2;
+}
+
+.dw-case-section-product-overview .dw-case-media {
+  margin-top: -72px;
+}
+
+.dw-case-section-product-overview .dw-case-media,
+.dw-case-section-product-strip .dw-case-media {
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.dw-case-section-product-overview .dw-case-media img,
+.dw-case-section-product-strip .dw-case-media img {
+  border-radius: inherit;
+}
+
+@media (max-width: 760px) {
   .dw-cloudchipr-design-decision-inner {
-    width: calc(100% - 24px);
+    width: 100%;
   }
 
   .dw-cloudchipr-design-decision-main {
+    width: calc(100% - 24px);
+    margin: -48px auto;
     padding: 44px 24px 60px;
+    border-radius: 18px;
   }
 
   .dw-cloudchipr-design-decision-heading {
@@ -2374,8 +3117,9 @@
     font-size: clamp(32px, 9.2vw, 44px);
   }
 
-  .dw-cloudchipr-design-decision-heading > svg {
+  .dw-cloudchipr-design-decision-heading > img {
     width: 52px;
+    height: 52px;
   }
 
   .dw-cloudchipr-design-decision-copy {
@@ -2389,7 +3133,7 @@
   }
 
   .dw-cloudchipr-roi-calculation h3 {
-    margin-bottom: 36px;
+    margin-bottom: 80px;
   }
 
   .dw-cloudchipr-roi-calculation dl {
@@ -2399,12 +3143,12 @@
 
   .dw-cloudchipr-roi-result {
     grid-template-columns: 1fr;
-    min-height: 650px;
-    border-radius: 0 0 18px 18px;
+    min-height: 720px;
+    border-radius: 0;
   }
 
   .dw-cloudchipr-roi-equation {
-    padding: 54px 24px 30px;
+    padding: 102px 24px 30px;
   }
 
   .dw-cloudchipr-roi-equation h3 {
@@ -2430,9 +3174,345 @@
   }
 
   .dw-cloudchipr-roi-comment > img {
-    right: 10px;
-    width: 140px;
-    height: 140px;
+    right: 0;
+    width: 156px;
+    height: 156px;
+  }
+
+  .dw-case-cloudchipr .dw-case-section-product-direction-one .dw-case-prose,
+  .dw-case-cloudchipr .dw-case-section-product-direction-two .dw-case-prose {
+    width: calc(100% - 32px);
+  }
+
+  .dw-case-section-product-overview .dw-case-media {
+    margin-top: -42px;
+  }
+
+  .dw-case-section-product-overview .dw-case-media,
+  .dw-case-section-product-strip .dw-case-media {
+    border-radius: 16px;
+  }
+}
+
+.dw-cloudchipr-design-system-visuals {
+  z-index: 1;
+  overflow: hidden;
+  padding: 0 !important;
+  background: #f5f6fb;
+}
+
+.dw-cloudchipr-design-system-stage {
+  position: relative;
+  width: 100%;
+  min-height: clamp(700px, 57vw, 980px);
+  overflow: hidden;
+  background: #f5f6fb;
+}
+
+.dw-cloudchipr-design-system-stage figure {
+  position: absolute;
+  margin: 0;
+}
+
+.dw-cloudchipr-design-system-stage img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dw-cloudchipr-design-system-logo {
+  z-index: 2;
+  top: 12%;
+  left: max(8%, calc((100vw - 1480px) / 2));
+  width: clamp(190px, 16vw, 300px);
+}
+
+.dw-cloudchipr-design-system-benefits {
+  position: absolute;
+  z-index: 3;
+  top: 47%;
+  left: max(8%, calc((100vw - 1480px) / 2));
+  display: grid;
+  margin: 0;
+  padding-left: 1.1em;
+  gap: clamp(18px, 1.5vw, 28px);
+  color: #0d0d11;
+  font-size: clamp(20px, 1.65vw, 30px);
+  line-height: 1.16;
+}
+
+.dw-cloudchipr-design-system-screen {
+  z-index: 1;
+  top: 8%;
+  right: -2.5%;
+  width: min(62vw, 1060px);
+}
+
+.dw-cloudchipr-design-system-price {
+  z-index: 4;
+  top: 35%;
+  left: 45%;
+  width: clamp(290px, 24vw, 470px);
+  filter: drop-shadow(0 24px 50px rgba(28, 34, 85, 0.16));
+}
+
+.dw-case-cloudchipr .dw-case-feature-grid img {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.dw-cloudchipr-overall-achievements {
+  position: relative;
+  z-index: 1;
+  padding: clamp(110px, 12vw, 180px) 20px 100px !important;
+  background: #0e0a3e url('/portfolio-assets/cloudchipr/achievements-background.png') center / cover no-repeat !important;
+  color: #0a0a0d;
+}
+
+.dw-cloudchipr-overall-achievements-inner {
+  width: min(82%, 1160px);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dw-page .dw-cloudchipr-overall-achievements h2 {
+  margin: 0;
+  font-family: "Syne", sans-serif;
+  font-size: clamp(56px, 6.2vw, 92px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: #fff;
+}
+
+.dw-cloudchipr-overall-achievements h2 span {
+  color: transparent;
+  background: linear-gradient(92deg, #304fe2 0%, #8135e2 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.dw-case-cloudchipr #overall-achievements + * {
+  position: relative;
+  z-index: 2;
+  margin-top: -100px;
+}
+
+.dw-cloudchipr-overall-achievements-inner > p {
+  margin: clamp(76px, 7vw, 104px) 0 0;
+  color: #6d6d72;
+  font-size: clamp(22px, 1.85vw, 30px);
+  line-height: 1.45;
+}
+
+.dw-cloudchipr-overall-achievements ul { color: rgb(255 255 255 / 78%); }
+.dw-cloudchipr-overall-achievements li strong { color: #fff; }
+
+.dw-cloudchipr-overall-achievements ul {
+  margin: clamp(56px, 5vw, 76px) 0 0;
+  padding-left: 1.35em;
+  color: #707075;
+  font-size: clamp(20px, 1.8vw, 30px);
+  line-height: 1.58;
+}
+
+.dw-cloudchipr-overall-achievements li::marker {
+  color: #77777b;
+  font-size: 0.7em;
+}
+
+.dw-cloudchipr-overall-achievements li strong {
+  color: #0a0a0d;
+  font-weight: 500;
+}
+
+.dw-cloudchipr-overall-achievements li u {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+.dw-cloudchipr-overall-achievements li span {
+  color: #77777b;
+}
+
+.dw-cloudchipr-feedback {
+  padding: clamp(110px, 10vw, 170px) 20px clamp(120px, 11vw, 190px) !important;
+  background: #0e0a3e;
+  color: #fff;
+}
+
+.dw-cloudchipr-feedback-inner {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+}
+
+.dw-page .dw-cloudchipr-feedback h2 {
+  margin: 0;
+  font-family: "Syne", sans-serif;
+  font-size: clamp(56px, 5.5vw, 88px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.dw-cloudchipr-feedback blockquote {
+  max-width: 1120px;
+  margin: clamp(76px, 7vw, 110px) 0 0;
+  color: #c9c6e9;
+  font-family: "Syne", sans-serif;
+  font-size: clamp(25px, 2.05vw, 38px);
+  font-weight: 400;
+  line-height: 1.62;
+}
+
+.dw-cloudchipr-feedback-person {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  margin-top: clamp(58px, 6vw, 92px);
+  gap: 28px;
+}
+
+.dw-cloudchipr-feedback-avatar {
+  display: block;
+  width: clamp(96px, 8vw, 140px);
+  height: clamp(96px, 8vw, 140px);
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.dw-cloudchipr-feedback-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dw-cloudchipr-feedback-person-copy strong,
+.dw-cloudchipr-feedback-person-copy small {
+  display: block;
+}
+
+.dw-cloudchipr-feedback-person-copy strong {
+  color: #3c4dab;
+  font-family: "Syne", sans-serif;
+  font-size: clamp(32px, 3.3vw, 58px);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.dw-cloudchipr-feedback-person-copy small {
+  margin-top: 18px;
+  color: #8985b8;
+  font-size: clamp(17px, 1.45vw, 26px);
+}
+
+.dw-cloudchipr-feedback-person > a {
+  display: grid;
+  width: clamp(64px, 5.6vw, 92px);
+  height: clamp(64px, 5.6vw, 92px);
+  border-radius: 8px;
+  background: #6250eb;
+  color: #0e0a3e;
+  place-items: center;
+}
+
+.dw-cloudchipr-feedback-person > a svg {
+  width: 72%;
+  height: 72%;
+}
+
+@media (max-width: 760px) {
+  .dw-case-section.dw-cloudchipr-design-decision,
+  .dw-case-section.dw-cloudchipr-design-system-visuals {
+    padding: 0 !important;
+  }
+
+  .dw-cloudchipr-design-system-stage {
+    display: grid;
+    min-height: 0;
+    padding: 92px 24px 100px;
+    gap: 46px;
+  }
+
+  .dw-cloudchipr-design-system-stage figure,
+  .dw-cloudchipr-design-system-benefits {
+    position: relative;
+    inset: auto;
+  }
+
+  .dw-cloudchipr-design-system-logo {
+    width: min(54vw, 240px);
+  }
+
+  .dw-cloudchipr-design-system-benefits {
+    gap: 16px;
+    padding-left: 1.05em;
+    font-size: 20px;
+  }
+
+  .dw-cloudchipr-design-system-screen {
+    right: -22%;
+    width: 122%;
+    justify-self: end;
+  }
+
+  .dw-cloudchipr-design-system-price {
+    z-index: 4;
+    width: min(78vw, 390px);
+    margin-top: -58%;
+    justify-self: center;
+  }
+
+  .dw-cloudchipr-overall-achievements {
+    padding: 92px 24px !important;
+  }
+
+  .dw-cloudchipr-overall-achievements-inner {
+    width: 100%;
+  }
+
+  .dw-cloudchipr-overall-achievements-inner > p {
+    margin-top: 48px;
+  }
+
+  .dw-cloudchipr-overall-achievements ul {
+    margin-top: 34px;
+    padding-left: 1.1em;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  .dw-cloudchipr-feedback {
+    padding: 92px 24px 110px !important;
+  }
+
+  .dw-cloudchipr-feedback blockquote {
+    margin-top: 54px;
+    font-size: 22px;
+    line-height: 1.5;
+  }
+
+  .dw-cloudchipr-feedback-person {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .dw-cloudchipr-feedback-person-copy strong {
+    font-size: 25px;
+  }
+
+  .dw-cloudchipr-feedback-person-copy small {
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .dw-cloudchipr-feedback-person > a {
+    grid-column: 2;
+    width: 52px;
+    height: 52px;
+    margin-top: 6px;
   }
 }
 
@@ -3358,6 +4438,11 @@
   .dw-case-next-list a span:last-child {
     transition: none;
   }
+  .dw-mex-cursor,
+  .dw-mex-industry-icon-row,
+  .dw-mex-icon-construction,
+  .dw-mex-icon-grid { animation: none; }
+  .dw-mex-icon-line-art [data-mex-icon-path] { stroke-dashoffset: 0; }
 }
 
 /* Figma case-study compositions ------------------------------------------------ */
@@ -3515,6 +4600,11 @@
   padding-top: clamp(28px, 4.2vw, 80px);
 }
 
+.dw-case-cloudchipr .dw-case-meta-co-designers dt {
+  display: flex;
+  align-items: center;
+}
+
 .dw-case-cloudchipr .dw-case-tool-icons {
   display: flex;
   align-items: center;
@@ -3540,14 +4630,22 @@
 .dw-case-cloudchipr .dw-case-collaborators span {
   display: inline-flex;
   align-items: center;
-  min-height: 42px;
-  padding: 7px 18px;
+  min-height: clamp(42px, 3.15vw, 58px);
+  padding: 4px clamp(16px, 1.25vw, 24px) 4px 5px;
   color: #fff;
   background: rgba(26, 39, 151, 0.56);
   border-radius: 999px;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: none;
   white-space: nowrap;
+}
+
+.dw-case-cloudchipr .dw-case-collaborators img {
+  width: clamp(34px, 2.6vw, 48px);
+  height: clamp(34px, 2.6vw, 48px);
+  margin-right: clamp(9px, 0.75vw, 14px);
+  flex: 0 0 auto;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .dw-case-cloudchipr .dw-case-intro-media {
@@ -3586,14 +4684,14 @@
 
 .dw-cloudchipr-construction {
   position: relative;
-  width: min(calc(100% - 40px), 1788px);
-  aspect-ratio: 1788 / 708;
-  min-height: 500px;
+  width: min(calc(100% - 20px), 2048px);
+  aspect-ratio: 2090 / 866;
+  min-height: 0;
   margin: 0 auto;
   overflow: hidden;
   color: #fff;
-  background: linear-gradient(41.269deg, rgb(32, 65, 235) 8.3056%, rgb(115, 52, 241) 73.616%);
-  border-radius: 30px;
+  background: linear-gradient(108deg, #2948ed 0%, #4b3aec 52%, #7430ef 100%);
+  border-radius: clamp(20px, 1.55vw, 32px);
 }
 
 .dw-construction-guides,
@@ -3605,57 +4703,81 @@
 
 .dw-construction-guide {
   position: absolute;
-  border: 2px dashed rgba(255, 255, 255, 0.5);
+  border: 2px dashed rgba(194, 193, 255, 0.62);
 }
 
 .dw-construction-guide-logo {
-  top: 36.7%;
-  left: 22.3%;
-  width: 55.6%;
-  height: 15.4%;
+  top: 36.5%;
+  left: 22.1%;
+  width: 55.9%;
+  height: 14.7%;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 calc(9.09% - 1px),
+    rgba(31, 25, 149, 0.5) calc(9.09% - 1px) calc(9.09% + 1px),
+    transparent calc(9.09% + 1px) 9.09%
+  );
 }
 
 .dw-construction-guide-strapline {
-  top: 59.3%;
-  left: 27.2%;
-  width: 45.7%;
-  height: 15.8%;
+  top: 57.4%;
+  left: 27.1%;
+  width: 44.7%;
+  height: 14.9%;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 calc(11.11% - 1px),
+    rgba(31, 25, 149, 0.42) calc(11.11% - 1px) calc(11.11% + 1px),
+    transparent calc(11.11% + 1px) 11.11%
+  );
 }
 
 .dw-construction-centerline {
   position: absolute;
-  top: 18.2%;
-  bottom: 25%;
-  left: 45.7%;
-  border-left: 2px dashed rgba(19, 28, 145, 0.72);
+  top: 18.5%;
+  bottom: 26.5%;
+  left: 45.8%;
+  border-left: 2px dashed rgba(28, 24, 151, 0.66);
 }
 
 .dw-construction-logo {
   position: absolute;
-  top: 40.7%;
-  left: 27.2%;
+  top: 39.1%;
+  left: 26.8%;
   display: grid;
-  grid-template-columns: minmax(150px, 0.28fr) minmax(0, 0.72fr);
+  grid-template-columns: minmax(142px, 0.245fr) minmax(0, 0.755fr);
   grid-template-areas:
     "glyph wordmark"
     "strapline strapline";
   align-items: center;
-  width: 45.6%;
+  width: 45.5%;
 }
 
 .dw-construction-glyph {
   position: relative;
   grid-area: glyph;
   display: block;
-  width: clamp(118px, 10.6vw, 202px);
-  height: clamp(70px, 5.8vw, 110px);
+  width: clamp(116px, 10.5vw, 214px);
+  height: clamp(64px, 5.55vw, 114px);
+}
+
+.dw-construction-glyph-blueprint {
+  position: absolute;
+  inset: -10% -5%;
+  width: 110%;
+  height: 120%;
+  overflow: visible;
+  stroke: rgba(18, 16, 105, 0.82);
+  stroke-width: 1.8;
+  stroke-dasharray: 8 8;
+  vector-effect: non-scaling-stroke;
 }
 
 .dw-construction-ring {
   position: absolute;
   top: 50%;
   display: block;
-  border: clamp(11px, 1.05vw, 20px) solid #fff;
+  border: clamp(10px, 0.95vw, 19px) solid #fff;
   border-radius: 50%;
   transform: translateY(-50%);
 }
@@ -3685,9 +4807,10 @@
   display: flex;
   align-items: baseline;
   color: #fff;
-  font-size: clamp(54px, 5.45vw, 104px);
+  font-family: "Archivo", Arial, sans-serif;
+  font-size: clamp(52px, 5.15vw, 102px);
   font-weight: 700;
-  line-height: 0.9;
+  line-height: 0.92;
   letter-spacing: 0;
 }
 
@@ -3697,9 +4820,9 @@
 
 .dw-construction-strapline {
   grid-area: strapline;
-  margin-top: clamp(18px, 2vw, 38px);
-  color: rgba(255, 255, 255, 0.68);
-  font-size: clamp(22px, 2.13vw, 40px);
+  margin-top: clamp(18px, 1.85vw, 36px);
+  color: rgba(255, 255, 255, 0.67);
+  font-size: clamp(21px, 2vw, 39px);
   font-weight: 400;
   line-height: 1.1;
   text-align: center;
@@ -3708,30 +4831,30 @@
 
 .dw-construction-label {
   position: absolute;
-  color: rgba(255, 255, 255, 0.58);
-  font-size: clamp(20px, 1.75vw, 34px);
+  color: rgba(205, 202, 255, 0.67);
+  font-size: clamp(20px, 1.65vw, 33px);
   font-weight: 600;
   line-height: 1;
 }
 
 .dw-construction-label-glyph {
-  top: 43.1%;
-  left: 15.2%;
+  top: 42.5%;
+  left: 15.3%;
 }
 
 .dw-construction-label-lookup {
-  top: 18.4%;
-  left: 46.7%;
+  top: 18.8%;
+  left: 46.8%;
 }
 
 .dw-construction-label-wordmark {
-  top: 43.1%;
-  left: 79.5%;
+  top: 42.5%;
+  left: 79.8%;
 }
 
 .dw-construction-label-strapline {
-  top: 81%;
-  left: 45.7%;
+  top: 77.4%;
+  left: 45.8%;
 }
 
 .dw-construction-callout-circle,
@@ -3762,38 +4885,38 @@
 }
 
 .dw-construction-callout-cloud .dw-construction-callout-circle {
-  top: 43.2%;
-  left: 25.9%;
+  top: 43.4%;
+  left: 26.2%;
 }
 
 .dw-construction-callout-cloud .dw-construction-callout-line {
-  top: 54.2%;
-  left: 16.3%;
-  width: 14.7%;
+  top: 55.4%;
+  left: 16.1%;
+  width: 15.2%;
   transform: rotate(-47deg);
 }
 
 .dw-construction-callout-cloud .dw-construction-callout-copy {
-  top: 68.1%;
-  left: 15.2%;
+  top: 67.2%;
+  left: 15.3%;
   transform: rotate(-47deg);
 }
 
 .dw-construction-callout-type .dw-construction-callout-circle {
-  top: 39.6%;
-  left: 68.9%;
+  top: 40.2%;
+  left: 68.7%;
 }
 
 .dw-construction-callout-type .dw-construction-callout-line {
-  top: 31.8%;
-  left: 72.2%;
-  width: 12.3%;
+  top: 30.4%;
+  left: 72.5%;
+  width: 11.9%;
   transform: rotate(-45deg);
 }
 
 .dw-construction-callout-type .dw-construction-callout-copy {
-  top: 27.2%;
-  left: 76.1%;
+  top: 25.8%;
+  left: 76.2%;
   transform: rotate(-45deg);
 }
 
@@ -4399,6 +5522,86 @@
   background-repeat: no-repeat;
   border: 2px solid #4245f6;
   border-radius: 4px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Securion annotation refinements */
+.dw-case-securion .dw-case-intro-surface { background: #fff !important; }
+.dw-case-securion .dw-case-intro { padding-bottom: 0 !important; }
+.dw-case-securion .dw-case-intro-heading { background: #fff; }
+.dw-case-securion .dw-case-intro-media { position: relative; min-height: clamp(420px, 58vw, 900px); overflow: hidden; }
+.dw-case-securion .dw-case-intro-media::after { content: ""; position: absolute; inset: 0; background: rgb(10 18 40 / 34%); pointer-events: none; }
+.dw-case-securion .dw-securion-laws-eyebrow { margin: 0 0 18px; color: #666; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+.dw-case-securion .dw-securion-scale-law img { width: 100%; height: auto; object-fit: contain; }
+.dw-case-securion .dw-securion-brand-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 44px);
+  align-items: end;
+  margin-top: clamp(56px, 7vw, 120px);
+}
+.dw-case-securion .dw-securion-colors-inner,
+.dw-case-securion .dw-securion-colors header,
+.dw-case-securion .dw-securion-colors h2 { text-align: left; }
+.dw-case-securion #secure-product .dw-case-prose { width: min(calc(100% - 80px), 1400px); margin: 0 auto; }
+.dw-case-securion #secure-product h2 { max-width: 1400px; margin: 0; text-align: left; }
+.dw-case-securion #secure-screens img { background: #fff; object-fit: cover; }
+.dw-case-securion .dw-securion-feedback-avatar { border: 0; }
+.dw-case-securion .dw-securion-feedback-person { position: relative; }
+.dw-case-securion .dw-securion-feedback-linkedin { display: grid; place-items: center; width: 48px; height: 48px; margin-left: auto; border-radius: 6px; background: #fff; color: #2f5edb; font: 700 30px/1 Arial, sans-serif; text-decoration: none; }
+.dw-case-securion .dw-securion-brand-pair img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
+@media (max-width: 760px) {
+  .dw-case-securion .dw-securion-brand-pair { grid-template-columns: 1fr; }
+}
+.dw-case-securion .dw-case-intro-heading h1 { color: #080808; }
+.dw-case-securion .dw-case-intro-heading h2 { color: #666; }
+.dw-case-securion .dw-securion-logo-landscape { width: 100%; max-width: none; }
+.dw-case-securion #simple-laws .dw-securion-logo-landscape { width: 100vw; margin-left: calc((100% - 100vw) / 2); }
+.dw-case-securion .dw-securion-logo-landscape img { width: 100%; height: auto; }
+.dw-case-securion .dw-securion-colors header { text-align: left; }
+.dw-case-securion .dw-securion-colors header h2 { text-align: left; }
+.dw-case-securion .dw-securion-feedback {
+  background: linear-gradient(135deg, #1644d0 0%, #568cff 100%) !important;
+}
+.dw-case-securion .dw-securion-feedback-inner {
+  padding: clamp(36px, 5vw, 84px);
+  border-radius: 42px;
+  background: rgb(255 255 255 / 8%);
+}
+.dw-case-securion #secure-product {
+  background: #fff !important;
+  color: #666 !important;
+  padding-top: clamp(90px, 10vw, 170px) !important;
+  padding-bottom: clamp(90px, 10vw, 170px) !important;
+}
+.dw-case-securion #secure-product h2 {
+  max-width: 760px;
+  margin: 0 auto;
+  color: #666;
+  font-size: clamp(30px, 3.4vw, 58px);
+  line-height: 1.12;
+  text-align: center;
+}
+.dw-case-securion #secure-product h2 strong { color: #080808; }
+.dw-case-securion #mobile-screens .dw-case-gallery {
+  display: block;
+  columns: 3 260px;
+  column-gap: clamp(14px, 2vw, 28px);
+}
+.dw-case-securion #mobile-screens .dw-case-gallery figure {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 clamp(14px, 2vw, 28px);
+  break-inside: avoid;
+}
+@media (max-width: 760px) {
+  .dw-case-securion #mobile-screens .dw-case-gallery { columns: 2 150px; }
 }
 
 .dw-securion-construction {
@@ -4959,6 +6162,15 @@
   width: min(calc(100% - 120px), 1600px) !important;
 }
 
+.dw-case-cloudchipr .dw-case-feature-grid,
+.dw-case-cloudchipr .dw-case-feature-grid article,
+.dw-case-cloudchipr .dw-case-metrics > div,
+.dw-case-cloudchipr .dw-case-metrics article,
+.dw-case-cloudchipr .dw-case-metrics article:nth-child(odd),
+.dw-case-cloudchipr .dw-case-metrics article:nth-child(even) {
+  border: 0;
+}
+
 @media (max-width: 1100px) {
   .dw-case-intro-surface {
     width: calc(100% - 48px);
@@ -5078,8 +6290,14 @@
 
   .dw-case-cloudchipr .dw-case-collaborators span {
     min-height: 34px;
-    padding: 5px 11px;
+    padding: 3px 11px 3px 4px;
     font-size: 13px;
+  }
+
+  .dw-case-cloudchipr .dw-case-collaborators img {
+    width: 28px;
+    height: 28px;
+    margin-right: 8px;
   }
 
   .dw-cloudchipr-construction {
@@ -5721,3 +6939,6 @@
     margin-top: 0;
   }
 }
+.dw-photo-lab-tool-icons{display:flex;gap:10px;flex-wrap:wrap}.dw-photo-lab-tool{display:inline-flex;align-items:center;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #d7e8e2;font-size:12px;font-weight:600;color:#1b4238}.dw-photo-lab-problem-flow{padding-top:0}.dw-photo-lab-flow{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;padding:30px 0}.dw-photo-lab-flow-step{width:180px;height:180px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:#e9cfd2;color:#171717;font-size:18px;line-height:1.2;animation:photoLabStepIn .6s ease both}.dw-photo-lab-flow-step.step-1{background:#edb7bd;animation-delay:.25s}.dw-photo-lab-flow-step.step-2{background:#d98e98;animation-delay:.5s}.dw-photo-lab-flow-step.step-3{background:#b85d66;color:#fff;animation-delay:.75s}.dw-photo-lab-flow-arrow{font-size:34px;color:#c33b45;animation:photoLabStepIn .5s ease both}.dw-photo-lab-flow-arrow:nth-of-type(2){animation-delay:.35s}.dw-photo-lab-flow-arrow:nth-of-type(3){animation-delay:.6s}@keyframes photoLabStepIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+.dw-case-section-problem-intro .dw-case-richtext,.dw-case-section-root-cause .dw-case-richtext,.dw-case-section-objective .dw-case-richtext,.dw-case-section-unexpected-change .dw-case-richtext{color:#666;line-height:1.6}.dw-case-section-problem-intro strong,.dw-case-section-root-cause strong,.dw-case-section-objective strong,.dw-case-section-unexpected-change strong{color:#111}.dw-case-section-anticipated-transformations{background:linear-gradient(135deg,#fff 0%,#f4fbf6 100%);border-radius:28px;margin:40px auto;padding-left:clamp(24px,6vw,90px);padding-right:clamp(24px,6vw,90px)}.dw-case-section-anticipated-transformations h2{color:#111}.dw-case-section-anticipated-transformations h2::first-line{color:#5cae55}.dw-case-section-anticipated-transformations li{color:#666;margin:18px 0}.dw-case-section-anticipated-transformations li strong{color:#111}.dw-case-section-feedback{background:#38b84b!important;background-image:radial-gradient(ellipse at 20% 10%,transparent 0 28%,rgba(255,255,255,.16) 29% 29.5%,transparent 30% 38%,rgba(255,255,255,.12) 39% 39.5%,transparent 40%)!important}.dw-case-section-feedback .dw-case-testimonial{background:rgba(37,170,68,.72);border-radius:34px;padding:70px 8%;max-width:1050px;margin:auto}.dw-case-section-feedback blockquote{color:#fff}.dw-case-section-product-editor{order:-1}
+.dw-securion-tool-icons img{width:220px;max-width:100%;height:auto;display:block}.dw-securion-feedback{background:#39b84b url('/portfolio-assets/securion/feedback-reference.png') center/cover no-repeat!important;position:relative;overflow:hidden}.dw-securion-feedback::before{content:"";position:absolute;inset:0;background:rgba(45,180,70,.62);mix-blend-mode:screen;pointer-events:none}.dw-securion-feedback-inner{position:relative;z-index:1;background:rgba(48,177,68,.72);border-radius:34px;padding:clamp(36px,6vw,90px)!important}.dw-securion-feedback-heading h2{color:#fff}.dw-securion-feedback blockquote{color:#fff;max-width:900px}

@@ -11,10 +11,10 @@ const LAYERS = {
   ENTIRE_SCENE: 3
 } as const;
 
-const BASE_DRIFT_SPEED = 0.1;
-const HERO_DRIFT_SPEED = 0.03;
-const FACTS_TIME_SPEED = 0.22;
-const HERO_TIME_SPEED = 0.12;
+const BASE_DRIFT_SPEED = 0.08;
+const HERO_DRIFT_SPEED = 0.01;
+const FACTS_TIME_SPEED = 0.16;
+const HERO_TIME_SPEED = 0.1;
 
 function hexToVec3(hex: string) {
   const value = Number.parseInt(hex.slice(1), 16);

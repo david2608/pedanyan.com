@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: Inter, system-ui, sans-serif;
+        font-size: 12px;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: var(--figma-color-bg);
+        color: var(--figma-color-text);
+      }
+
+      main {
+        display: grid;
+        min-height: 620px;
+        grid-template-rows: auto 1fr auto;
+      }
+
+      header {
+        padding: 20px;
+        border-bottom: 1px solid var(--figma-color-border);
+      }
+
+      h1 {
+        margin: 0 0 16px;
+        font-size: 18px;
+        letter-spacing: -0.02em;
+      }
+
+      #selection-title {
+        overflow: hidden;
+        margin: 0 0 4px;
+        font-weight: 600;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      #selection-meta {
+        overflow: hidden;
+        color: var(--figma-color-text-secondary);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      form {
+        display: grid;
+        align-content: start;
+        gap: 4px;
+        padding: 16px 20px;
+      }
+
+      label {
+        display: grid;
+        grid-template-columns: 18px 1fr;
+        gap: 10px;
+        align-items: start;
+        padding: 9px 0;
+        cursor: pointer;
+      }
+
+      label strong { display: block; margin-bottom: 2px; font-weight: 500; }
+      label span { color: var(--figma-color-text-secondary); line-height: 1.35; }
+      input { margin: 1px 0 0; accent-color: var(--figma-color-bg-brand); }
+
+      footer {
+        display: grid;
+        gap: 10px;
+        padding: 16px 20px 20px;
+        border-top: 1px solid var(--figma-color-border);
+      }
+
+      button {
+        width: 100%;
+        height: 40px;
+        border: 0;
+        border-radius: 6px;
+        background: var(--figma-color-bg-brand);
+        color: var(--figma-color-text-onbrand);
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      button:hover { background: var(--figma-color-bg-brand-hover); }
+      button:disabled { cursor: default; opacity: 0.45; }
+
+      #status { min-height: 16px; color: var(--figma-color-text-secondary); }
+      #stats { min-height: 16px; color: var(--figma-color-text-tertiary); font-size: 11px; }
+
+      #progress {
+        height: 2px;
+        overflow: hidden;
+        border-radius: 99px;
+        background: var(--figma-color-bg-secondary);
+        opacity: 0;
+      }
+
+      #progress.is-active { opacity: 1; }
+      #progress::after {
+        display: block;
+        width: 38%;
+        height: 100%;
+        background: var(--figma-color-bg-brand);
+        content: "";
+        animation: progress 1.1s ease-in-out infinite alternate;
+      }
+
+      @keyframes progress {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(260%); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #progress::after { animation: none; width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Case Study Exporter</h1>
+        <div id="selection-title">Select one case-study frame</div>
+        <div id="selection-meta">Nothing selected</div>
+      </header>
+
+      <form id="options">
+        <label>
+          <input type="checkbox" name="includeHidden" checked />
+          <span><strong>Include hidden layers</strong>Preserves the complete selected-frame structure.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="includeConfiguredExports" checked />
+          <span><strong>Export configured assets</strong>Uses export settings already attached to Figma layers.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="includePreview" checked />
+          <span><strong>Create reference PNG</strong>Renders the selected frame at up to 1440 px wide.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="includeVariables" checked />
+          <span><strong>Include variables and styles</strong>Adds local variables and referenced style metadata.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="includeVectors" />
+          <span><strong>Export vector layers as SVG</strong>Useful for logos and icons, but can create many files.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="includeCss" />
+          <span><strong>Include CSS snapshots</strong>Captures Figma CSS per layer. Slower on large frames.</span>
+        </label>
+      </form>
+
+      <footer>
+        <div id="progress"></div>
+        <div id="status">Select one frame, section, component, instance, or group.</div>
+        <div id="stats"></div>
+        <button id="export" type="button" disabled>Export JSON + assets</button>
+      </footer>
+    </main>
+    <script>/*__UI_BUNDLE__*/</script>
+  </body>
+</html>

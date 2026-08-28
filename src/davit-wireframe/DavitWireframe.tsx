@@ -34,8 +34,27 @@ import { websiteContent } from "./websiteContent";
 
 gsap.registerPlugin(Observer, ScrollTrigger);
 
-const BASE_DUST_SPEED = 0.1;
-const BASE_HERO_DUST_SPEED = 0.03;
+const BASE_DUST_SPEED = 0.08;
+const BASE_HERO_DUST_SPEED = 0.01;
+
+// Homepage hero → animated numbers timing controls (seconds).
+// Edit these values to tune the complete numbers experience by hand.
+const HOME_NUMBERS_MOTION = {
+  heroReveal: 1.08,
+  heroHideAt: 1.07,
+  heroTransitionEnd: 1.12,
+  numbersStart: 1.18,
+  scaleIn: 8,
+  focusHold: 0.4,
+  scaleOut: 8,
+  countStartDelay: 0.08,
+  countTo23: 1.2,
+  count23To27: 1.6,
+  experienceMove: 0.72,
+  scrollMaxAdditionalSpeed: 1.5,
+  scrollSensitivity: 180,
+  scrollReleaseReset: 0.14
+} as const;
 
 type PageKey = "home" | "designer" | "designTalent" | "school" | "publicWork" | "letsTalk";
 
@@ -2209,6 +2228,8 @@ function HomeUnifiedScrollExperience() {
       };
       let lastTickTime = gsap.ticker.time;
       let motionTween: gsap.core.Tween | null = null;
+      let finalHandoffCall: gsap.core.Tween | null = null;
+      let speedResetCall: gsap.core.Tween | null = null;
       let correctingBoundary = false;
       let releasedForward = false;
       let trigger: ScrollTrigger;
@@ -2256,24 +2277,28 @@ function HomeUnifiedScrollExperience() {
         .to(heroScreen, {
           yPercent: -8,
           scale: 0.94,
-          duration: 1.08,
+          duration: HOME_NUMBERS_MOTION.heroReveal,
           ease: "power2.inOut"
         }, 0)
         .to(statsPanel, {
           clipPath: "inset(0% 0% 0% 0%)",
           yPercent: 0,
-          duration: 1.08,
+          duration: HOME_NUMBERS_MOTION.heroReveal,
           ease: "power3.inOut"
         }, 0)
-        .to(hero, { autoAlpha: 0, duration: 0.01 }, 1.07);
+        .to(hero, { autoAlpha: 0, duration: 0.01 }, HOME_NUMBERS_MOTION.heroHideAt);
 
-      const heroTransitionEnd = 1.12;
-      const statsStart = 1.18;
-      const statStep = 0.88;
+      const heroTransitionEnd = HOME_NUMBERS_MOTION.heroTransitionEnd;
+      const statsStart = HOME_NUMBERS_MOTION.numbersStart;
+      const numberScaleInDuration = HOME_NUMBERS_MOTION.scaleIn;
+      const numberScaleOutDuration = HOME_NUMBERS_MOTION.scaleOut;
+      const numberFocusHold = HOME_NUMBERS_MOTION.focusHold;
+      let nextStageStart = statsStart;
+      let statsEnd = statsStart;
       statStages.forEach((stage, index) => {
         const isFinal = index === statStages.length - 1;
         const fromLeft = index % 2 === 0;
-        const start = statsStart + index * statStep;
+        const start = nextStageStart;
         const focusX = isFinal ? 0 : fromLeft ? "-14vw" : "14vw";
         const focusY = isFinal ? 0 : fromLeft ? "4vh" : "-3vh";
 
@@ -2295,12 +2320,12 @@ function HomeUnifiedScrollExperience() {
               scale: 1,
               autoAlpha: 1,
               filter: "blur(0px)",
-              duration: 0.44,
-              ease: isFinal ? "power3.inOut" : "power2.out"
+              duration: numberScaleInDuration,
+              ease: "power2.inOut"
             },
             start
           )
-          .to(stage, { duration: isFinal ? 0.48 : 0.34 }, start + 0.44)
+          .to(stage, { duration: numberFocusHold }, start + numberScaleInDuration)
           .to(
             stage,
             {
@@ -2310,30 +2335,47 @@ function HomeUnifiedScrollExperience() {
               scale: isFinal ? 1.85 : 1.28,
               autoAlpha: 0,
               filter: "blur(14px)",
-              duration: 0.44,
-              ease: "power2.in"
+              duration: numberScaleOutDuration,
+              ease: "power2.inOut"
             },
-            start + (isFinal ? 1.12 : 0.72)
+            start + numberScaleInDuration + numberFocusHold
           );
 
         if (isFinal) {
-          timeline.to(
-            investmentCounter,
-            {
-              value: 27,
-              duration: 0.7,
-              ease: "power3.inOut",
-              snap: { value: 1 },
-              onUpdate: updateSlot
-            },
-            start + 0.08
-          );
+          timeline
+            .to(
+              investmentCounter,
+              {
+                value: 23,
+                duration: HOME_NUMBERS_MOTION.countTo23,
+                ease: "power2.out",
+                snap: { value: 1 },
+                onUpdate: updateSlot
+              },
+              start + HOME_NUMBERS_MOTION.countStartDelay
+            )
+            .to(
+              investmentCounter,
+              {
+                value: 27,
+                duration: HOME_NUMBERS_MOTION.count23To27,
+                ease: "power1.inOut",
+                snap: { value: 1 },
+                onUpdate: updateSlot
+              },
+              start + HOME_NUMBERS_MOTION.countStartDelay + HOME_NUMBERS_MOTION.countTo23
+            );
         }
 
-        factFocusTimes.push(start + (isFinal ? 0.82 : 0.44));
+        factFocusTimes.push(start + numberScaleInDuration);
+        nextStageStart = start + numberScaleInDuration;
+        statsEnd = Math.max(
+          statsEnd,
+          start + numberScaleInDuration + numberFocusHold + numberScaleOutDuration
+        );
       });
 
-      const experienceStart = statsStart + statStages.length * statStep + 0.64;
+      const experienceStart = statsEnd + 0.64;
       timeline
         .to(statsPanel, { autoAlpha: 0, duration: 0.3 }, experienceStart - 0.18)
         .to(experiencePanel, { autoAlpha: 1, duration: 0.42 }, experienceStart)
@@ -2447,6 +2489,8 @@ function HomeUnifiedScrollExperience() {
       };
 
       const moveToFact = (index: number, direction: 1 | -1) => {
+        finalHandoffCall?.kill();
+        finalHandoffCall = null;
         if (index < 0) {
           enterHero();
           return;
@@ -2457,12 +2501,18 @@ function HomeUnifiedScrollExperience() {
         const isFinal = index === factFocusTimes.length - 1;
         playback.activeFact = index;
         playback.awaitingExitGesture = false;
-        moveTo(targetTime, isFinal ? 1.18 : 0.96, direction, () => {
+        const timelineDistance = Math.abs(targetTime - playback.time);
+        moveTo(targetTime, Math.max(0.2, timelineDistance), direction, () => {
           const now = gsap.ticker.time;
-          playback.minimumUntil = now + (isFinal ? 0.72 : 0.38);
-          playback.holdUntil = now + 1.4;
-          playback.autoAt = isFinal ? Number.POSITIVE_INFINITY : now + 1.4;
+          playback.minimumUntil = now;
+          playback.holdUntil = now;
+          playback.autoAt = isFinal ? Number.POSITIVE_INFINITY : now;
           playback.awaitingExitGesture = isFinal;
+          if (isFinal) {
+            moveToExperience(0, 1, true);
+          } else {
+            moveToFact(index + 1, 1);
+          }
         });
       };
 
@@ -2480,7 +2530,8 @@ function HomeUnifiedScrollExperience() {
         playback.awaitingExitGesture = false;
         activeIndexRef.current = index;
         setActiveIndex(index);
-        moveTo(targetTime, fromFacts ? 1.1 : 0.72, direction, () => {
+        const timelineDistance = Math.abs(targetTime - playback.time);
+        moveTo(targetTime, fromFacts ? Math.max(0.2, timelineDistance) : HOME_NUMBERS_MOTION.experienceMove, direction, () => {
           const now = gsap.ticker.time;
           playback.minimumUntil = now;
           playback.holdUntil = now + Math.max(
@@ -2495,19 +2546,34 @@ function HomeUnifiedScrollExperience() {
       };
 
       const accelerateCurrentMotion = (deltaY: number) => {
-        const multiplier = 1 + Math.min(0.75, Math.abs(deltaY) / 420);
-        playback.speedMultiplier = Math.max(playback.speedMultiplier, multiplier);
-        motionTween?.timeScale(playback.speedMultiplier);
+        if (!motionTween) return;
+        const requestedMultiplier = 1 + Math.min(
+          HOME_NUMBERS_MOTION.scrollMaxAdditionalSpeed,
+          Math.abs(deltaY) / HOME_NUMBERS_MOTION.scrollSensitivity
+        );
+        playback.speedMultiplier = Math.max(playback.speedMultiplier, requestedMultiplier);
+        motionTween.timeScale(playback.speedMultiplier);
+        speedResetCall?.kill();
+        speedResetCall = gsap.delayedCall(HOME_NUMBERS_MOTION.scrollReleaseReset, () => {
+          speedResetCall = null;
+          playback.speedMultiplier = 1;
+          motionTween?.timeScale(1);
+        });
       };
 
       const handleInput = (deltaY: number) => {
         if (Math.abs(deltaY) < 2) return;
+
+        finalHandoffCall?.kill();
+        finalHandoffCall = null;
 
         const now = gsap.ticker.time;
         const direction = deltaY > 0 ? 1 : -1;
         playback.lastInputAt = now;
 
         if (motionTween) {
+          // Extra input accelerates only the transition already in progress.
+          // It never launches the following chapter on top of the current one.
           if (direction === playback.motionDirection) accelerateCurrentMotion(deltaY);
           return;
         }
@@ -2521,7 +2587,10 @@ function HomeUnifiedScrollExperience() {
             releaseToPage(-1);
             return;
           }
-          moveTo(heroTransitionEnd, 0.9, 1, enterFacts);
+          moveTo(heroTransitionEnd, 0.9, 1, () => {
+            enterFacts();
+            moveToFact(0, 1);
+          });
           return;
         }
 
@@ -2563,9 +2632,11 @@ function HomeUnifiedScrollExperience() {
       };
 
       inputObserver = Observer.create({
-        target: window,
+        target: section,
         type: "wheel,touch",
         preventDefault: true,
+        allowClicks: true,
+        lockAxis: true,
         tolerance: 4,
         onDown: (self) => handleInput(Math.max(40, Math.abs(self.deltaY))),
         onUp: (self) => handleInput(-Math.max(40, Math.abs(self.deltaY)))
@@ -2636,9 +2707,7 @@ function HomeUnifiedScrollExperience() {
             });
           }
         },
-        onLeaveBack: () => {
-          if (playback.time <= 0.001) inputObserver.disable();
-        }
+        onLeaveBack: () => inputObserver.disable()
       });
       if (trigger.isActive) {
         if (trigger.scroll() <= trigger.start) trigger.scroll(trigger.start + 1);
@@ -2679,21 +2748,10 @@ function HomeUnifiedScrollExperience() {
         document.documentElement.classList.toggle("dw-cosmic-stats-entering", factsAreEntering);
         document.documentElement.classList.toggle("dw-cosmic-stats-active", factsHaveCoveredHeader);
 
-        playback.speedMultiplier +=
-          (1 - playback.speedMultiplier) * (1 - Math.pow(0.5, delta / 0.48));
         motionTween?.timeScale(playback.speedMultiplier);
 
-        if (motionTween || now < playback.holdUntil || now < playback.autoAt) return;
-        if (now - playback.lastInputAt < 1.2) return;
-
-        if (playback.chapter === "facts" && playback.activeFact < factFocusTimes.length - 1) {
-          moveToFact(playback.activeFact + 1, 1);
-        } else if (
-          playback.chapter === "experience" &&
-          playback.activeExperience < experienceFocusTimes.length - 1
-        ) {
-          moveToExperience(playback.activeExperience + 1, 1);
-        }
+        // Chapter changes are gesture-driven. Nothing advances in the
+        // background while the user is reading or interacting elsewhere.
       };
 
       gsap.ticker.add(tick);
@@ -2706,6 +2764,8 @@ function HomeUnifiedScrollExperience() {
       return () => {
         inputObserver.disable();
         motionTween?.kill();
+        finalHandoffCall?.kill();
+        speedResetCall?.kill();
         selectExperienceRef.current = () => undefined;
         gsap.ticker.remove(tick);
         experienceItems.forEach((item) => {

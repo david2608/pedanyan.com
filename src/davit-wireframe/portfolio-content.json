@@ -238,6 +238,20 @@
           "height": 208,
           "alt": "Viktor Harutyunyan"
         },
+        "design-system-skull": {
+          "packagePath": "assets/cloudchipr/design-system-skull.png",
+          "kind": "image",
+          "width": 312,
+          "height": 312,
+          "alt": "Hand-drawn skull held in a hand"
+        },
+        "roi-comment-portrait": {
+          "packagePath": "assets/cloudchipr/roi-comment-portrait.png",
+          "kind": "image",
+          "width": 656,
+          "height": 618,
+          "alt": "CloudChipr team member"
+        },
         "navigation-background": {
           "packagePath": "assets/cloudchipr/navigation-background.png",
           "sourceNode": "331:37272",
@@ -684,7 +698,7 @@
           "sourceNode": "331:28072",
           "layout": "wide",
           "background": {
-            "color": "#0e0a3e"
+            "color": "#ffffff"
           },
           "paddingBottom": "40px",
           "asset": "product-overview"
@@ -695,43 +709,10 @@
           "sourceNode": "331:28073",
           "layout": "wide",
           "background": {
-            "color": "#0e0a3e"
+            "color": "#ffffff"
           },
           "paddingBottom": "130px",
           "asset": "product-strip"
-        },
-        {
-          "id": "product-direction-two",
-          "type": "prose",
-          "sourceNode": "331:28080",
-          "layout": "contained",
-          "paddingTop": "130px",
-          "paddingBottom": "130px",
-          "title": "Remove Friction around costs between Engineering and Finance"
-        },
-        {
-          "id": "product-screen-pair",
-          "type": "gallery",
-          "sourceNode": "331:28093",
-          "layout": "wide",
-          "columns": 2,
-          "paddingBottom": "40px",
-          "items": [
-            {
-              "asset": "product-screen-left"
-            },
-            {
-              "asset": "product-screen-right"
-            }
-          ]
-        },
-        {
-          "id": "product-screen-wide",
-          "type": "media",
-          "sourceNode": "331:28095",
-          "layout": "wide",
-          "paddingBottom": "130px",
-          "asset": "product-screen-wide"
         },
         {
           "id": "product-benefits",
@@ -768,6 +749,39 @@
           ]
         },
         {
+          "id": "product-direction-two",
+          "type": "prose",
+          "sourceNode": "331:28080",
+          "layout": "contained",
+          "paddingTop": "130px",
+          "paddingBottom": "130px",
+          "title": "Remove Friction around costs between Engineering and Finance"
+        },
+        {
+          "id": "product-screen-pair",
+          "type": "gallery",
+          "sourceNode": "331:28093",
+          "layout": "wide",
+          "columns": 2,
+          "paddingBottom": "40px",
+          "items": [
+            {
+              "asset": "product-screen-left"
+            },
+            {
+              "asset": "product-screen-right"
+            }
+          ]
+        },
+        {
+          "id": "product-screen-wide",
+          "type": "media",
+          "sourceNode": "331:28095",
+          "layout": "wide",
+          "paddingBottom": "130px",
+          "asset": "product-screen-wide"
+        },
+        {
           "id": "headline-achievements",
           "type": "metrics",
           "sourceNode": "331:28081",
@@ -777,8 +791,8 @@
             "position": "center"
           },
           "textColor": "#ffffff",
-          "paddingTop": "300px",
-          "paddingBottom": "270px",
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
           "title": "On the moment I Left the company",
           "items": [
             {
@@ -1330,10 +1344,10 @@
           "paddingBottom": "150px",
           "columns": [
             {
-              "body": "<p>How might we effectively centralize and organize digital materials and assets, providing easy searchability and accessibility for brands, manufacturers, and suppliers within the Material Exchange platform?</p><p>How might we enhance collaboration and communication between teams by integrating feedback and approval processes seamlessly within the Material Exchange platform, ensuring efficient collaboration and minimizing miscommunication?</p><p>How might we assist brands in maintaining consistent and cohesive material usage across different teams and stakeholders, leveraging the Material Exchange platform’s capabilities?</p>"
+              "body": "<ul><li>How might we <strong>effectively centralize and organize digital materials and assets</strong>, providing easy <strong>searchability and accessibility for brands, manufacturers, and suppliers</strong> within the Material Exchange platform?</li><li>How might we <strong>enhance collaboration and communication between teams</strong> by integrating feedback and approval processes seamlessly within the Material Exchange platform, ensuring efficient collaboration and minimizing miscommunication?</li><li>How might we <strong>assist brands in maintaining consistent and cohesive material usage</strong> across different teams and stakeholders, leveraging the Material Exchange platform’s capabilities?</li></ul>"
             },
             {
-              "body": "<p>How might we automate manual tasks and streamline workflows within the Material Exchange platform to significantly improve efficiency, saving valuable time for all users involved?</p><p>How might we ensure robust access controls and permissions within the Material Exchange platform, prioritizing data security and confidentiality to protect sensitive information?</p><p>How might we provide valuable analytics and insights on material usage and performance within the Material Exchange platform, empowering data-driven decision-making for brands, manufacturers, and suppliers?</p><p>How might we guarantee seamless scalability and integration of the Material Exchange platform with other tools and systems used by brands, manufacturers, and suppliers, ensuring smooth operations and compatibility?</p>"
+              "body": "<ul><li>How might we <strong>automate manual tasks and streamline workflows</strong> within the Material Exchange platform to significantly improve efficiency, saving valuable time for all users involved?</li><li>How might we <strong>ensure robust access controls and permissions</strong> within the Material Exchange platform, prioritizing data security and confidentiality to protect sensitive information?</li><li>How might we <strong>provide valuable analytics and insights on material usage and performance</strong> within the Material Exchange platform, empowering data-driven decision-making for brands, manufacturers, and suppliers?</li><li>How might we <strong>guarantee seamless scalability and integration</strong> of the Material Exchange platform with other tools and systems used by brands, manufacturers, and suppliers, ensuring smooth operations and compatibility?</li></ul>"
             }
           ]
         },
@@ -1407,8 +1421,8 @@
           "paddingTop": "40px",
           "paddingBottom": "90px",
           "eyebrow": "Hypothesis N 1",
-          "title": "Material managers straggle spending too much time on adding materials to the folders.",
-          "body": "<p><strong>🕒 Exp. Duration - 45min</strong><br><strong>❌ Act. Result- 61min</strong></p><p>In a usability test, a material manager was asked to create a winter-fall collection of materials. This involved making folders for different categories and then finding and adding materials to these folders. Interestingly, a lot of time was spent on opening and closing folders repeatedly. The manager also had to add each material one by one to the folders, which took up a big portion of the time. Surprisingly, about 60% of the total time was used just for managing folders and adding materials individually. This left only 40% of the time for more important tasks like making decisions and evaluating materials.</p>"
+          "title": "Material managers struggle, spending too much time adding materials to folders.",
+          "body": "<p class=\"dw-mex-metrics\"><strong>🕒 <span>Exp. Duration</span> — 45 min</strong><br><strong>❌ <span>Act. Result</span> — 61 min</strong></p><p>In a usability test, a material manager was asked to <strong>create a winter-fall collection of materials.</strong> This involved making folders for different categories and then finding and adding materials to those folders.</p><p>Interestingly, <strong>a lot of time was spent opening and closing folders repeatedly.</strong> The manager also had to add each material individually, which took up a large portion of the session.</p><p>Surprisingly, <strong>about 60% of the total time was used just for managing folders and adding materials.</strong> This left only 40% for more important work such as decision-making and evaluating materials.</p>"
         },
         {
           "id": "dropzone-solution",
@@ -1418,7 +1432,7 @@
           "paddingTop": "60px",
           "paddingBottom": "80px",
           "eyebrow": "The Solution",
-          "body": "<p>As a solution, we introduced a innovative feature named <strong>“Dropezone”</strong>. Drawing inspiration from people's familiarity with operating system folders, Dropezone enables users to effortlessly drag and drop files, mirroring a natural experience.</p>"
+          "body": "<p>As a solution, we introduced an innovative feature named <strong>“Dropzone”</strong>. Drawing inspiration from people's familiarity with operating system folders, Dropzone enables users to effortlessly drag and drop files, mirroring a natural experience.</p>"
         },
         {
           "id": "dropzone",
@@ -1435,7 +1449,7 @@
           "layout": "contained",
           "paddingTop": "50px",
           "paddingBottom": "150px",
-          "body": "<p><strong>🕒 Exp. Duration - 45min</strong><br><strong>🎉 Act. Result- 23min</strong></p><p>To enhance efficiency, we added the capability to select multiple items and utilize multiple dropzones, streamlining the process of managing up to 4 folders within a single task. This approach not only simplifies the user experience but also significantly accelerates the material management process.</p>"
+          "body": "<p>To enhance efficiency, we added the capability to <strong>select multiple items and utilize multiple dropzones</strong>, streamlining the process of managing up to 4 folders within a single task. This approach not only simplifies the user experience but also significantly accelerates the material management process.</p><p class=\"dw-mex-metrics\"><strong>🕒 <span>Exp. Duration</span> — 45 min</strong><br><strong>🎉 <span>Act. Result</span> — 23 min</strong></p>"
         },
         {
           "id": "hypothesis-two",
@@ -1461,7 +1475,7 @@
           "paddingTop": "30px",
           "paddingBottom": "80px",
           "eyebrow": "The Solution",
-          "body": "<p>Easier grouping of search criteria would simplify repetitive operations by enabling users to execute the same search with a single click. So, to address this need, we introduced and the tested the <strong>“Save Search”</strong> feature.</p>"
+          "body": "<p>Easier grouping of search criteria would <strong>simplify repetitive operations</strong> by enabling users to execute the <strong>same search with a single click.</strong> To address this need, we <strong>introduced and tested the “Save Search” feature.</strong></p>"
         },
         {
           "id": "save-search",
@@ -1582,7 +1596,7 @@
           "alt": "Securion brand book"
         },
         "identity-mockup": {
-          "packagePath": "assets/securion/identity-mockup.png",
+          "packagePath": "assets/securion/brand-applications.png",
           "sourceNode": "331:28396",
           "kind": "image",
           "width": 1800,
@@ -1746,6 +1760,10 @@
             {
               "label": "Projects:",
               "value": "Mobile Crypto Wallet, Crypto Exchange"
+            },
+            {
+              "label": "Tools:",
+              "value": "Figma, Sketch, Photoshop, Illustrator"
             }
           ],
           "media": "hero"
@@ -2089,6 +2107,10 @@
             {
               "label": "Projects:",
               "value": "ME Photo Lab"
+            },
+            {
+              "label": "Tools:",
+              "value": "Figma, Sketch, Microsoft Teams, Jira"
             }
           ],
           "media": "hero"
@@ -2164,15 +2186,6 @@
           "layout": "wide",
           "paddingBottom": "150px",
           "asset": "user-stories"
-        },
-        {
-          "id": "mobile-first-heading",
-          "type": "prose",
-          "sourceNode": "331:32572",
-          "layout": "contained",
-          "paddingTop": "100px",
-          "paddingBottom": "75px",
-          "title": "Mobile First"
         },
         {
           "id": "mobile-first",

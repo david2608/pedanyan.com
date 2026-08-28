@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useRef, type CSSProperties, type ReactNode } from "react";
+import React, { useEffect, useMemo, useRef, type CSSProperties, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { KeyRound, Shield, Skull, Undo2 } from "lucide-react";
+import { KeyRound, Linkedin, Shield } from "lucide-react";
 import portfolioManifest from "./portfolio-content.json";
 import "@fontsource/syne/400.css";
 import "@fontsource/syne/500.css";
@@ -190,13 +190,26 @@ function SectionHeading({ project, section }: { project: PortfolioProject; secti
     const rest = section.title.slice(lead.length).trim();
     return <><span className="dw-case-heading-accent">{lead} </span><span>{rest}</span></>;
   }
+  if (project.project.slug === "cloudchipr" && section.id === "product-direction-one") {
+    return <>Automatically optimize cloud costs using <span className="dw-cloudchipr-title-accent">FinOps best practices</span></>;
+  }
+  if (project.project.slug === "cloudchipr" && section.id === "product-direction-two") {
+    return <>Remove Friction around costs between <span className="dw-cloudchipr-title-accent">Engineering and Finance</span></>;
+  }
   return <>{section.title}</>;
 }
+
+const cloudchiprCollaborators: Record<string, string> = {
+  "Bella Hayrapetyan": "/portfolio-assets/cloudchipr/collaborators/bella-hayrapetyan.png",
+  "Habet Ayvazyan": "/portfolio-assets/cloudchipr/collaborators/habet-ayvazyan.png",
+  "Zhanna Voskanyan": "/portfolio-assets/cloudchipr/collaborators/zhanna-voskanyan.png"
+};
 
 function IntroSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   const style = sectionStyle(project, section);
   const isCloudChipr = project.project.slug === "cloudchipr";
   const isSecurion = project.project.slug === "securion";
+  const isPhotoLab = project.project.slug === "material-exchange-photo-lab";
   if (section.background?.radius) style.borderRadius = section.background.radius;
 
   return (
@@ -211,7 +224,15 @@ function IntroSection({ project, section }: { project: PortfolioProject; section
           {section.metadata?.map((item) => (
             <div className={`dw-case-meta-${item.label.replace(/:$/, "").toLowerCase().replace(/[^a-z]+/g, "-")}`} key={item.label}>
               <dt>{item.label.replace(/:$/, "")}</dt>
-              {isCloudChipr && item.label.startsWith("Tools") ? (
+              {isSecurion && item.label.startsWith("Tools") ? (
+                <dd className="dw-case-tool-icons dw-securion-tool-icons" aria-label="Figma, Sketch, Photoshop, and Illustrator">
+                  <img src="/portfolio-assets/securion/tools.png" alt="Figma, Sketch, Photoshop, and Illustrator" />
+                </dd>
+              ) : isPhotoLab && item.label.startsWith("Tools") ? (
+                <dd className="dw-case-tool-icons dw-photo-lab-tool-icons" aria-label="Figma, Sketch, Microsoft Teams, and Jira">
+                  {['Figma','Sketch','Teams','Jira'].map((tool) => <span className="dw-photo-lab-tool" key={tool}>{tool}</span>)}
+                </dd>
+              ) : isCloudChipr && item.label.startsWith("Tools") ? (
                 <dd className="dw-case-tool-icons" aria-label="Figma, Notion, and Slack">
                   <img src="/portfolio-assets/cloudchipr/tools/figma.svg" alt="Figma" />
                   <img src="/portfolio-assets/cloudchipr/tools/notion.svg" alt="Notion" />
@@ -219,7 +240,15 @@ function IntroSection({ project, section }: { project: PortfolioProject; section
                 </dd>
               ) : isCloudChipr && item.label.startsWith("Co-Designers") ? (
                 <dd className="dw-case-collaborators">
-                  {item.value.split(",").map((name) => <span key={name.trim()}>{name.trim()}</span>)}
+                  {item.value.split(",").map((name) => {
+                    const collaborator = name.trim();
+                    return (
+                      <span key={collaborator}>
+                        <img src={cloudchiprCollaborators[collaborator]} alt="" />
+                        {collaborator}
+                      </span>
+                    );
+                  })}
                 </dd>
               ) : (
                 <dd dangerouslySetInnerHTML={{ __html: item.value }} />
@@ -356,7 +385,8 @@ function HotelWalking({ project, section }: { project: PortfolioProject; section
     >
       <div data-portfolio-reveal>
         <p>Customer experience / observed in context</p>
-        <h2>{section.title}</h2>
+        <p className="dw-securion-laws-eyebrow">Logo principles</p>
+        <h2>Simple Laws</h2>
         <Html html={section.body} className="dw-hotel-walking-copy" />
       </div>
     </section>
@@ -562,7 +592,11 @@ function SecurionLogoLaws({ project, section }: { project: PortfolioProject; sec
         <div className="dw-securion-scale-law">
           <p><span>5.</span> The logo is <strong>highly scalable</strong>, maintaining clarity and recognition
           from the smallest app icon to large-format use.</p>
-          <ProjectImage project={project} assetKey="logo-strip" />
+          <img src="/portfolio-assets/securion/logo-scale-reference.png" alt="Securion logo shown at 140, 100, 60 and 30 pixel sizes" />
+        </div>
+        <div className="dw-securion-brand-pair" aria-label="Securion brand application examples">
+          <img src="/portfolio-assets/securion/brand-lanyard.png" alt="Securion lanyard and access badge" />
+          <img src="/portfolio-assets/securion/brand-hoodie.png" alt="Securion hoodie application" />
         </div>
       </div>
     </section>
@@ -670,6 +704,7 @@ function SecurionFeedback({ project, section }: { project: PortfolioProject; sec
           <div className="dw-securion-feedback-person">
             <span className="dw-securion-feedback-avatar"><ProjectImage project={project} assetKey={section.avatar} /></span>
             <span><strong>{person.name}</strong><small>{person.role}</small></span>
+            {person.url ? <a className="dw-securion-feedback-linkedin" href={person.url} target="_blank" rel="noreferrer" aria-label={`${person.name} on LinkedIn`}>in</a> : null}
           </div>
         ) : null}
         <span className="dw-securion-feedback-mark" aria-hidden="true">”</span>
@@ -700,22 +735,22 @@ function MaterialExchangeIntro({ project, section }: { project: PortfolioProject
           {metadata?.map((item) => (
             <div key={item.label}><dt>{item.label.replace(/:$/, "")}</dt><dd dangerouslySetInnerHTML={{ __html: item.value }} /></div>
           ))}
-        </dl>
-        <div className="dw-mex-tools" data-portfolio-reveal>
-          <span>Tools</span>
-          <img src="/portfolio-assets/material-exchange/tools.png" alt="Figma, Confluence, and Overflow" />
-        </div>
-        <div className="dw-mex-collaborators" data-portfolio-reveal>
-          <span>Co-Designers</span>
-          <div>
-            {materialCollaborators.map((person) => (
-              <a href={person.href} target="_blank" rel="noreferrer" key={person.name}>
-                <i className={`dw-mex-avatar avatar-${person.avatar}`} aria-hidden="true" />
-                {person.name}
-              </a>
-            ))}
+          <div className="dw-mex-meta-tools">
+            <dt>Tools</dt>
+            <dd><img src="/portfolio-assets/material-exchange/tools.png" alt="Figma, Confluence, and Overflow" /></dd>
           </div>
-        </div>
+          <div className="dw-mex-meta-collaborators">
+            <dt>Co-Designers</dt>
+            <dd>
+              {materialCollaborators.map((person) => (
+                <a href={person.href} target="_blank" rel="noreferrer" key={person.name}>
+                  <i className={`dw-mex-avatar avatar-${person.avatar}`} aria-hidden="true" />
+                  {person.name}
+                </a>
+              ))}
+            </dd>
+          </div>
+        </dl>
         <div className="dw-mex-hero-product" data-portfolio-parallax>
           <ProjectImage project={project} assetKey={section.media} eager />
         </div>
@@ -832,14 +867,26 @@ function MaterialExchangeNavigation({ project, section }: { project: PortfolioPr
   );
 }
 
+function MaterialExchangeCursor({ className, name }: { className: string; name: string }) {
+  return (
+    <span className={`dw-mex-cursor ${className}`}>
+      <svg className="dw-mex-cursor-pointer" viewBox="0 0 18 22" aria-hidden="true">
+        <path className="dw-mex-cursor-pointer-fill" d="M14.04 9.67 1.03 1.52 3.86 17.24 7.25 11.42 14.04 9.67Z" />
+        <path className="dw-mex-cursor-pointer-outline" d="M1.42.89 14.43 9.04 15.9 9.96 14.22 10.39 7.74 12.06 4.5 17.62 3.48 19.36 3.13 17.37.3 1.65 0 0 1.42.89Z" />
+      </svg>
+      <span className="dw-mex-cursor-name">{name}</span>
+    </span>
+  );
+}
+
 function MaterialExchangeVisualLanguage({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   return (
     <section className="dw-mex-visual-language" id={section.id} data-mex-visual-language>
       <div className="dw-mex-visual-heading" data-portfolio-reveal>
-        <span className="dw-mex-cursor cursor-davit">Davit</span>
-        <span className="dw-mex-cursor cursor-ani">Ani</span>
-        <span className="dw-mex-cursor cursor-gohar">Gohar</span>
-        <span className="dw-mex-cursor cursor-vlad">Vlad</span>
+        <MaterialExchangeCursor className="cursor-davit" name="Davit" />
+        <MaterialExchangeCursor className="cursor-ani" name="Ani" />
+        <MaterialExchangeCursor className="cursor-gohar" name="Gohar" />
+        <MaterialExchangeCursor className="cursor-vlad" name="Vlad" />
         <h2>{section.title}</h2>
         <Html html={section.body} />
       </div>
@@ -850,7 +897,38 @@ function MaterialExchangeVisualLanguage({ project, section }: { project: Portfol
   );
 }
 
-function MaterialExchangeIconography({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+function MaterialExchangeIconography({ section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const frameRef = useRef<HTMLIFrameElement | null>(null);
+  const isVisibleRef = useRef(false);
+
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return;
+
+    const notifyFrame = (command: "play" | "stop") => {
+      frame.contentWindow?.postMessage(`iconography:${command}`, window.location.origin);
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      const isVisible = entry.isIntersecting && entry.intersectionRatio >= 0.2;
+      if (isVisible === isVisibleRef.current) return;
+      isVisibleRef.current = isVisible;
+      notifyFrame(isVisible ? "play" : "stop");
+    }, { threshold: [0, 0.2, 0.5] });
+
+    const handleLoad = () => {
+      if (isVisibleRef.current) notifyFrame("play");
+    };
+
+    frame.addEventListener("load", handleLoad);
+    observer.observe(frame);
+    return () => {
+      observer.disconnect();
+      frame.removeEventListener("load", handleLoad);
+      notifyFrame("stop");
+    };
+  }, []);
+
   return (
     <section className="dw-mex-iconography" id={section.id} data-mex-iconography>
       <div className="dw-mex-reading" data-portfolio-reveal>
@@ -859,20 +937,62 @@ function MaterialExchangeIconography({ project, section }: { project: PortfolioP
         <Html html={section.body} />
       </div>
       <div className="dw-mex-icon-stage" data-portfolio-reveal>
-        <ProjectImage project={project} assetKey="iconography" />
+        <iframe
+          ref={frameRef}
+          src="/portfolio-assets/material-exchange/iconography-animated.html"
+          title="Animated Material Exchange iconography system"
+          loading="lazy"
+        />
       </div>
-      <p className="dw-mex-icon-conclusion" data-portfolio-reveal>After 2.5 months of dedicated effort, the <strong>Mat-EX design system was baked</strong> and handed to the development team.</p>
     </section>
   );
 }
 
 function MaterialExchangeDesignSystem({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const frameRef = useRef<HTMLIFrameElement | null>(null);
+  const isVisibleRef = useRef(false);
+
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return;
+
+    const notifyFrame = (command: "play" | "stop") => {
+      frame.contentWindow?.postMessage(`matex:${command}`, window.location.origin);
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      const isVisible = entry.isIntersecting && entry.intersectionRatio >= 0.2;
+      if (isVisible === isVisibleRef.current) return;
+      isVisibleRef.current = isVisible;
+      notifyFrame(isVisible ? "play" : "stop");
+    }, { threshold: [0, 0.2, 0.5] });
+
+    const handleLoad = () => {
+      if (isVisibleRef.current) notifyFrame("play");
+    };
+
+    frame.addEventListener("load", handleLoad);
+    observer.observe(frame);
+    return () => {
+      observer.disconnect();
+      frame.removeEventListener("load", handleLoad);
+      notifyFrame("stop");
+    };
+  }, []);
+
   return (
     <section className="dw-mex-system" id={section.id} data-mex-system>
       <header data-portfolio-reveal>
         <Html html={section.body} />
       </header>
-      <figure className="dw-mex-system-map" data-portfolio-reveal><ProjectImage project={project} assetKey="design-system-map" /></figure>
+      <figure className="dw-mex-system-map dw-mex-system-map-animated" data-portfolio-reveal>
+        <iframe
+          ref={frameRef}
+          src="/portfolio-assets/material-exchange/matex-architecture-animated.html"
+          title="Animated MAT-EX design system architecture"
+          loading="lazy"
+        />
+      </figure>
       <figure className="dw-mex-system-showcase" data-portfolio-reveal><ProjectImage project={project} assetKey="design-system-showcase" /></figure>
     </section>
   );
@@ -882,10 +1002,49 @@ function MaterialExchangeIdeation({ project, section }: { project: PortfolioProj
   const matrix = project.sections.find((item) => item.id === "ideation-matrix");
   const statements = project.sections.find((item) => item.id === "hmw-statements");
   const columns = project.sections.find((item) => item.id === "hmw-columns");
+  const frameRef = useRef<HTMLIFrameElement | null>(null);
+  const isVisibleRef = useRef(false);
+
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return;
+
+    const notifyFrame = (command: "play" | "stop") => {
+      frame.contentWindow?.postMessage(`value-satisfaction:${command}`, window.location.origin);
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      const isVisible = entry.isIntersecting && entry.intersectionRatio >= 0.2;
+      if (isVisible === isVisibleRef.current) return;
+      isVisibleRef.current = isVisible;
+      notifyFrame(isVisible ? "play" : "stop");
+    }, { threshold: [0, 0.2, 0.5] });
+
+    const handleLoad = () => {
+      if (isVisibleRef.current) notifyFrame("play");
+    };
+
+    frame.addEventListener("load", handleLoad);
+    observer.observe(frame);
+    return () => {
+      observer.disconnect();
+      frame.removeEventListener("load", handleLoad);
+      notifyFrame("stop");
+    };
+  }, []);
+
   return (
     <section className="dw-mex-ideation" id={section.id}>
       <header className="dw-mex-reading" data-portfolio-reveal><h2>{section.title}</h2><Html html={section.body} /></header>
-      <figure data-portfolio-reveal><ProjectImage project={project} assetKey={matrix?.asset} /><figcaption>{matrix?.caption}</figcaption></figure>
+      <figure className="dw-mex-value-satisfaction" data-portfolio-reveal>
+        <iframe
+          ref={frameRef}
+          src="/portfolio-assets/material-exchange/value-satisfaction-animated.html"
+          title="Interactive user value and satisfaction matrix discussion"
+          loading="lazy"
+        />
+        <figcaption>{matrix?.caption}</figcaption>
+      </figure>
       <div className="dw-mex-hmw" id="hmw-statements" data-portfolio-reveal>
         <h2>{statements?.title}</h2>
         <div>{Array.isArray(columns?.columns) ? columns.columns.map((column, index) => <Html html={column.body} key={index} />) : null}</div>
@@ -926,13 +1085,47 @@ function MaterialExchangeTesting({ project, section }: { project: PortfolioProje
   return (
     <section className="dw-mex-testing" id={section.id}>
       <h2 data-portfolio-reveal>{section.title}</h2>
-      <div className="dw-mex-test-copy" data-portfolio-reveal><p className="eyebrow">{one?.eyebrow}</p><h3>{one?.title}</h3><Html html={one?.body} /></div>
-      <div className="dw-mex-test-copy solution" data-portfolio-reveal><h4>{oneSolution?.eyebrow}</h4><Html html={oneSolution?.body} /></div>
+      <div className="dw-mex-test-copy hypothesis" data-portfolio-reveal>
+        <header className="dw-mex-hypothesis-heading">
+          <p className="eyebrow">{one?.eyebrow}</p>
+          <h3>{one?.title}</h3>
+        </header>
+        <Html html={one?.body} className="dw-mex-hypothesis-body" />
+      </div>
+      <div className="dw-mex-test-copy solution" data-portfolio-reveal>
+        <h4>{oneSolution?.eyebrow}</h4>
+        <Html html={oneSolution?.body} />
+      </div>
       <figure data-portfolio-reveal><ProjectImage project={project} assetKey="dropzone" /></figure>
-      <div className="dw-mex-test-copy result" data-portfolio-reveal><Html html={oneResult?.body} /></div>
+      <div className="dw-mex-test-copy result" data-portfolio-reveal><Html html={oneResult?.body} className="dw-mex-hypothesis-body" /></div>
       <div className="dw-mex-test-two">
-        <div className="dw-mex-test-copy" data-portfolio-reveal><p className="eyebrow">{two?.eyebrow}</p><Html html={two?.body} /><h4>{twoSolution?.eyebrow}</h4><Html html={twoSolution?.body} /></div>
-        <figure data-portfolio-reveal><ProjectImage project={project} assetKey="save-search" /></figure>
+        <div className="dw-mex-test-copy hypothesis" data-portfolio-reveal>
+          <header className="dw-mex-hypothesis-heading">
+            <p className="eyebrow">{two?.eyebrow}</p>
+            <Html html={two?.body} className="dw-mex-hypothesis-title" />
+          </header>
+        </div>
+        <div className="dw-mex-test-copy solution" data-portfolio-reveal>
+          <h4>{twoSolution?.eyebrow}</h4>
+          <Html html={twoSolution?.body} />
+        </div>
+        <figure className="dw-mex-save-search-composition" data-portfolio-reveal data-mex-save-search>
+          <img
+            className="dw-mex-save-search-tablet"
+            src="/portfolio-assets/material-exchange/save-search-tablet.png"
+            alt="Material Exchange search results displayed on a tablet"
+          />
+          <img
+            className="dw-mex-save-search-panel"
+            src="/portfolio-assets/material-exchange/save-search-panel.png"
+            alt="Saved Search criteria panel"
+          />
+          <img
+            className="dw-mex-save-search-actions"
+            src="/portfolio-assets/material-exchange/save-search-actions.png"
+            alt="Save Smart Search and Delete actions"
+          />
+        </figure>
       </div>
     </section>
   );
@@ -973,39 +1166,10 @@ function ProseSection({ project, section }: { project: PortfolioProject; section
 function CloudChiprLogoConstruction() {
   return (
     <div className="dw-cloudchipr-construction" data-cloudchipr-construction>
-      <div className="dw-construction-guides" aria-hidden="true">
-        <span className="dw-construction-guide dw-construction-guide-logo" />
-        <span className="dw-construction-guide dw-construction-guide-strapline" />
-        <span className="dw-construction-centerline" />
-      </div>
-
-      <div className="dw-construction-logo" aria-label="CloudChipr. Workflow Automation for Cloud Operations">
-        <span className="dw-construction-glyph" aria-hidden="true">
-          <span className="dw-construction-ring dw-construction-ring-left" />
-          <span className="dw-construction-ring dw-construction-ring-center" />
-          <span className="dw-construction-ring dw-construction-ring-right" />
-        </span>
-        <span className="dw-construction-wordmark" aria-hidden="true">
-          {"cloudchipr".split("").map((letter, index) => <span key={`${letter}-${index}`}>{letter}</span>)}
-        </span>
-        <span className="dw-construction-strapline">Workflow Automation for Cloud Operations</span>
-      </div>
-
-      <span className="dw-construction-label dw-construction-label-glyph">Glyph.</span>
-      <span className="dw-construction-label dw-construction-label-lookup">Lookup.</span>
-      <span className="dw-construction-label dw-construction-label-wordmark">Wordmark.</span>
-      <span className="dw-construction-label dw-construction-label-strapline">Strapline.</span>
-
-      <span className="dw-construction-callout dw-construction-callout-cloud" aria-hidden="true">
-        <span className="dw-construction-callout-circle" />
-        <span className="dw-construction-callout-line" />
-        <span className="dw-construction-callout-copy">Cloud + Chart</span>
-      </span>
-      <span className="dw-construction-callout dw-construction-callout-type" aria-hidden="true">
-        <span className="dw-construction-callout-circle" />
-        <span className="dw-construction-callout-line" />
-        <span className="dw-construction-callout-copy">Product Sans</span>
-      </span>
+      <img
+        src="/portfolio-assets/cloudchipr/logo-construction-reference.svg"
+        alt="CloudChipr logo construction, glyph, wordmark, and strapline"
+      />
     </div>
   );
 }
@@ -1033,13 +1197,13 @@ function CloudChiprConceptSelection({
           <figure className="dw-cloudchipr-concept dw-cloudchipr-concept-favorite">
             <ProjectImage project={project} assetKey="concept-favorite" />
             <figcaption>My favorite.</figcaption>
-            <Undo2 className="dw-cloudchipr-concept-arrow" aria-hidden="true" strokeWidth={1.5} />
+            <img className="dw-cloudchipr-concept-arrow" src="/portfolio-assets/cloudchipr/concept-arrow.svg" alt="" aria-hidden="true" />
           </figure>
 
           <figure className="dw-cloudchipr-concept dw-cloudchipr-concept-selected">
             <ProjectImage project={project} assetKey="concept-selected" />
             <figcaption>Selected by client</figcaption>
-            <Undo2 className="dw-cloudchipr-concept-arrow" aria-hidden="true" strokeWidth={1.5} />
+            <img className="dw-cloudchipr-concept-arrow" src="/portfolio-assets/cloudchipr/concept-arrow.svg" alt="" aria-hidden="true" />
           </figure>
         </div>
 
@@ -1056,14 +1220,12 @@ function CloudChiprBrandItems({ project, section }: { project: PortfolioProject;
   return (
     <section className="dw-case-section dw-cloudchipr-brand-items" id={section.id} data-cloudchipr-brand-items>
       <div className="dw-cloudchipr-brand-items-stage">
+        <img className="dw-cloudchipr-brand-bottle" src="/portfolio-assets/cloudchipr/brand-bottle.png" alt="CloudChipr branded bottle" />
         <figure className="dw-cloudchipr-brand-layer dw-cloudchipr-brand-layer-badge">
           <ProjectImage project={project} assetKey="brand-badge" />
         </figure>
         <figure className="dw-cloudchipr-brand-layer dw-cloudchipr-brand-layer-details">
           <ProjectImage project={project} assetKey="brand-card-details" />
-        </figure>
-        <figure className="dw-cloudchipr-brand-layer dw-cloudchipr-brand-layer-logo">
-          <ProjectImage project={project} assetKey="brand-card-logo" />
         </figure>
       </div>
     </section>
@@ -1276,9 +1438,6 @@ function CloudChiprCompetitorAnalysis({ section }: { section: PortfolioSection }
   return (
     <section className="dw-case-section dw-cloudchipr-competitors" id={section.id} data-cloudchipr-competitors>
       <div className="dw-cloudchipr-competitor-art" aria-hidden="true">
-        <span className="dw-cloudchipr-competitor-void" />
-        <span className="dw-cloudchipr-competitor-orb dw-cloudchipr-competitor-orb-one" />
-        <span className="dw-cloudchipr-competitor-orb dw-cloudchipr-competitor-orb-two" />
         <span className="dw-cloudchipr-competitor-ribbon" />
       </div>
 
@@ -1326,7 +1485,7 @@ function CloudChiprCompetitorAnalysis({ section }: { section: PortfolioSection }
             </ul>
           </div>
           <div className="dw-cloudchipr-comparison-column dw-cloudchipr-comparison-cloudchipr">
-            <h3><span className="dw-cloudchipr-comparison-mark" aria-hidden="true" />cloudchipr</h3>
+            <h3><img src="/portfolio-assets/cloudchipr/cloudchipr-wordmark.svg" alt="CloudChipr" /></h3>
             <ul>
               {cloudChiprAdvantages.map((item) => <li key={item}><span aria-hidden="true">✓</span>{item}</li>)}
             </ul>
@@ -1353,7 +1512,7 @@ function CloudChiprDesignSystemDecision({ project, section }: { project: Portfol
         <div className="dw-cloudchipr-design-decision-main">
           <header className="dw-cloudchipr-design-decision-heading">
             <h2>To Design or Not to <span>Design system?</span></h2>
-            <Skull aria-hidden="true" strokeWidth={1.15} />
+            <ProjectImage project={project} assetKey="design-system-skull" />
           </header>
 
           <p className="dw-cloudchipr-design-decision-copy">
@@ -1382,7 +1541,7 @@ function CloudChiprDesignSystemDecision({ project, section }: { project: Portfol
 
           <div className="dw-cloudchipr-roi-comment">
             <p>Holy hosting!<br />That’s a lot of wasted money.</p>
-            <ProjectImage project={project} assetKey="viktor-avatar" />
+            <ProjectImage project={project} assetKey="roi-comment-portrait" />
           </div>
         </div>
       </div>
@@ -1390,7 +1549,94 @@ function CloudChiprDesignSystemDecision({ project, section }: { project: Portfol
   );
 }
 
+function CloudChiprDesignSystemVisuals({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const benefits = [
+    "Stylish",
+    "Not expensive",
+    "Intuitive customization",
+    "Dedicated to accessibility",
+    "Has all necessary components"
+  ];
+
+  return (
+    <section className="dw-case-section dw-cloudchipr-design-system-visuals" id={section.id} data-cloudchipr-design-system-visuals>
+      <div className="dw-cloudchipr-design-system-stage">
+        <figure className="dw-cloudchipr-design-system-logo">
+          <ProjectImage project={project} assetKey="design-system-logo" />
+        </figure>
+
+        <ul className="dw-cloudchipr-design-system-benefits">
+          {benefits.map((benefit) => <li key={benefit}>{benefit}</li>)}
+        </ul>
+
+        <figure className="dw-cloudchipr-design-system-screen">
+          <ProjectImage project={project} assetKey="design-system-screen" />
+        </figure>
+
+        <figure className="dw-cloudchipr-design-system-price">
+          <ProjectImage project={project} assetKey="design-system-mobile" />
+        </figure>
+      </div>
+    </section>
+  );
+}
+
+function CloudChiprOverallAchievements({ section }: { section: PortfolioSection }) {
+  const achievements = [
+    <>Overall <strong>$500K saved during testing for companies such as SuperAnnotate, ActiveLoop, Flux etc.</strong> <span>(95k ARR in less than 1 month of operations.)</span></>,
+    <>Successfully <strong>reduced cloud spending by 30%</strong> for a client during beta testing <span>(the goal was 8–15%).</span></>,
+    <>Started as a <strong>solo designer and finished as a design lead.</strong></>,
+    <><strong>Grew a team of 4 talented designers.</strong></>,
+    <>Understood and designed the entire product’s <strong>MVP in just 6 months.</strong></>,
+    <>Nailed all design operations inside the company.</>,
+    <>Company became profitable in just 8 months.</>,
+    <><strong><u>CloudChipr</u> has raised a total of <u>$1.3M</u> in funding over <u>4</u> rounds.</strong></>
+  ];
+
+  return (
+    <section className="dw-case-section dw-cloudchipr-overall-achievements" id={section.id}>
+      <div className="dw-cloudchipr-overall-achievements-inner" data-portfolio-reveal>
+        <h2>Overall <span>Achievements</span></h2>
+        <p>During 18 months working at CloudChipr:</p>
+        <ul>{achievements.map((achievement, index) => <li key={index}>{achievement}</li>)}</ul>
+      </div>
+    </section>
+  );
+}
+
+function CloudChiprFeedback({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const person = section.person;
+  return (
+    <section className="dw-case-section dw-cloudchipr-feedback" id={section.id}>
+      <div className="dw-cloudchipr-feedback-inner" data-portfolio-reveal>
+        <h2>{section.title || "Feedback"}</h2>
+        <blockquote>{section.quote}</blockquote>
+        {person ? (
+          <div className="dw-cloudchipr-feedback-person">
+            <span className="dw-cloudchipr-feedback-avatar"><ProjectImage project={project} assetKey={section.avatar} /></span>
+            <span className="dw-cloudchipr-feedback-person-copy">
+              <strong>{person.name}</strong>
+              <small>{person.role}</small>
+            </span>
+            {person.url ? (
+              <a href={person.url} target="_blank" rel="noreferrer" aria-label={`${person.name} on LinkedIn`}>
+                <Linkedin aria-hidden="true" strokeWidth={0} fill="currentColor" />
+              </a>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
 function MediaSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  if (project.project.slug === "material-exchange-photo-lab" && section.id === "problem-flow") {
+    const steps = ["low quality content", "low interest from suppliers", "low amount of sales", "drop users"];
+    return <section className={sectionClass(section, "dw-photo-lab-problem-flow")} style={sectionStyle(project, section)} id={section.id}>
+      <div className="dw-photo-lab-flow" aria-label="Problem progression">{steps.map((step, index) => <React.Fragment key={step}><div className={`dw-photo-lab-flow-step step-${index}`}><span>{step}</span></div>{index < steps.length - 1 ? <span className="dw-photo-lab-flow-arrow" aria-hidden="true">→</span> : null}</React.Fragment>)}</div>
+    </section>;
+  }
   if (project.project.slug === "cloudchipr" && section.id === "brand-construction") {
     return (
       <section className={sectionClass(section, "dw-case-brand-construction-section")} style={sectionStyle(project, section)} id={section.id}>
@@ -1651,6 +1897,15 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   if (project.project.slug === "cloudchipr" && section.id === "design-system-decision") {
     return <CloudChiprDesignSystemDecision project={project} section={section} />;
   }
+  if (project.project.slug === "cloudchipr" && section.id === "design-system-visuals") {
+    return <CloudChiprDesignSystemVisuals project={project} section={section} />;
+  }
+  if (project.project.slug === "cloudchipr" && section.id === "overall-achievements") {
+    return <CloudChiprOverallAchievements section={section} />;
+  }
+  if (project.project.slug === "cloudchipr" && section.id === "feedback") {
+    return <CloudChiprFeedback project={project} section={section} />;
+  }
   if (project.project.slug === "securion" && section.id === "brand-identity") {
     return <SecurionBrandIdentity project={project} section={section} />;
   }
@@ -1815,6 +2070,7 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
         const construction = container.querySelector<HTMLElement>("[data-cloudchipr-construction]");
         if (construction) {
           const guides = construction.querySelectorAll<HTMLElement>(".dw-construction-guide, .dw-construction-centerline");
+          const blueprint = construction.querySelectorAll<SVGGeometryElement>(".dw-construction-glyph-blueprint circle, .dw-construction-glyph-blueprint path");
           const rings = construction.querySelectorAll<HTMLElement>(".dw-construction-ring");
           const letters = construction.querySelectorAll<HTMLElement>(".dw-construction-wordmark > span");
           const strapline = construction.querySelector<HTMLElement>(".dw-construction-strapline");
@@ -1824,8 +2080,12 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
           const calloutCopy = construction.querySelectorAll<HTMLElement>(".dw-construction-callout-copy");
 
           gsap.set(construction, { autoAlpha: 0.35, scale: 0.985 });
-          gsap.set(guides, { autoAlpha: 0, scaleX: 0.18, transformOrigin: "left center" });
-          gsap.set(rings, { autoAlpha: 0, x: -36, scale: 0.2, rotation: -55, transformOrigin: "center" });
+          gsap.set(guides, { autoAlpha: 0, clipPath: "inset(0 100% 0 0)" });
+          blueprint.forEach((item) => {
+            const length = item.getTotalLength();
+            gsap.set(item, { strokeDasharray: length, strokeDashoffset: length, autoAlpha: 0 });
+          });
+          gsap.set(rings, { autoAlpha: 0, scale: 0.72, transformOrigin: "center" });
           gsap.set(letters, { autoAlpha: 0, y: 34, filter: "blur(8px)" });
           gsap.set(strapline, { autoAlpha: 0, y: 22, filter: "blur(6px)" });
           gsap.set(labels, { autoAlpha: 0, y: 14 });
@@ -1843,14 +2103,16 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
             }
           })
             .to(construction, { autoAlpha: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 0)
-            .to(guides, { autoAlpha: 1, scaleX: 1, stagger: 0.08, duration: 0.9, ease: "power2.out" }, 0.08)
-            .to(rings, { autoAlpha: 1, x: 0, scale: 1, rotation: 0, stagger: 0.12, duration: 0.9, ease: "back.out(1.35)" }, 0.32)
-            .to(letters, { autoAlpha: 1, y: 0, filter: "blur(0px)", stagger: 0.045, duration: 0.75, ease: "power3.out" }, 0.56)
-            .to(strapline, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, 0.94)
-            .to(labels, { autoAlpha: 1, y: 0, stagger: 0.08, duration: 0.55, ease: "power2.out" }, 1.08)
-            .to(circles, { autoAlpha: 1, scale: 1, stagger: 0.14, duration: 0.7, ease: "back.out(1.5)" }, 1.18)
-            .to(lines, { autoAlpha: 1, scaleX: 1, stagger: 0.14, duration: 0.65, ease: "power2.out" }, 1.28)
-            .to(calloutCopy, { autoAlpha: 1, y: 0, stagger: 0.12, duration: 0.5, ease: "power2.out" }, 1.44);
+            .to(guides, { autoAlpha: 1, clipPath: "inset(0 0% 0 0)", stagger: 0.08, duration: 0.85, ease: "power2.out" }, 0.08)
+            .to(blueprint, { autoAlpha: 0.62, strokeDashoffset: 0, stagger: 0.07, duration: 0.65, ease: "power1.inOut" }, 0.3)
+            .to(labels, { autoAlpha: 1, y: 0, stagger: 0.07, duration: 0.5, ease: "power2.out" }, 0.5)
+            .to(circles, { autoAlpha: 1, scale: 1, stagger: 0.12, duration: 0.62, ease: "back.out(1.35)" }, 0.64)
+            .to(lines, { autoAlpha: 1, scaleX: 1, stagger: 0.12, duration: 0.58, ease: "power2.out" }, 0.72)
+            .to(calloutCopy, { autoAlpha: 1, y: 0, stagger: 0.1, duration: 0.45, ease: "power2.out" }, 0.88)
+            .to(rings, { autoAlpha: 1, scale: 1, stagger: 0.1, duration: 0.72, ease: "back.out(1.2)" }, 1.02)
+            .to(letters, { autoAlpha: 1, y: 0, filter: "blur(0px)", stagger: 0.04, duration: 0.68, ease: "power3.out" }, 1.14)
+            .to(strapline, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.62, ease: "power3.out" }, 1.48)
+            .to(blueprint, { autoAlpha: 0.24, duration: 0.4, ease: "power1.out" }, 1.5);
         }
 
         const concepts = container.querySelector<HTMLElement>("[data-cloudchipr-concepts]");
@@ -1894,12 +2156,10 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
           const stage = brandItems.querySelector<HTMLElement>(".dw-cloudchipr-brand-items-stage");
           const badge = brandItems.querySelector<HTMLElement>(".dw-cloudchipr-brand-layer-badge");
           const details = brandItems.querySelector<HTMLElement>(".dw-cloudchipr-brand-layer-details");
-          const logo = brandItems.querySelector<HTMLElement>(".dw-cloudchipr-brand-layer-logo");
 
           gsap.set(stage, { autoAlpha: 0.35, scale: 0.985, filter: "blur(4px)" });
           gsap.set(badge, { autoAlpha: 0, xPercent: -34, yPercent: 18, rotation: -8, scale: 0.82 });
           gsap.set(details, { autoAlpha: 0, xPercent: 30, yPercent: -22, rotation: 8, scale: 0.84 });
-          gsap.set(logo, { autoAlpha: 0, xPercent: 34, yPercent: 24, rotation: -7, scale: 0.82 });
 
           gsap.timeline({
             scrollTrigger: {
@@ -1912,8 +2172,7 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
           })
             .to(stage, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.7, ease: "power2.out" }, 0)
             .to(badge, { autoAlpha: 1, xPercent: 0, yPercent: 0, rotation: 0, scale: 1, duration: 1, ease: "power3.out" }, 0.05)
-            .to(details, { autoAlpha: 1, xPercent: 0, yPercent: 0, rotation: 0, scale: 1, duration: 1, ease: "power3.out" }, 0.24)
-            .to(logo, { autoAlpha: 1, xPercent: 0, yPercent: 0, rotation: 0, scale: 1, duration: 1, ease: "power3.out" }, 0.42);
+            .to(details, { autoAlpha: 1, xPercent: 0, yPercent: 0, rotation: 0, scale: 1, duration: 1, ease: "power3.out" }, 0.24);
 
           gsap.to(badge?.querySelector("img"), {
             yPercent: -5,
@@ -1922,11 +2181,6 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
           });
           gsap.to(details?.querySelector("img"), {
             yPercent: 4,
-            ease: "none",
-            scrollTrigger: { trigger: brandItems, start: "top bottom", end: "bottom top", scrub: 0.8 }
-          });
-          gsap.to(logo?.querySelector("img"), {
-            yPercent: -3,
             ease: "none",
             scrollTrigger: { trigger: brandItems, start: "top bottom", end: "bottom top", scrub: 0.8 }
           });
@@ -2059,7 +2313,6 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
           const copy = competitors.querySelectorAll<HTMLElement>(".dw-cloudchipr-competitor-block > p, .dw-cloudchipr-competitor-insights > p");
           const logos = competitors.querySelectorAll<HTMLElement>(".dw-cloudchipr-wordmark");
           const comparison = competitors.querySelector<HTMLElement>(".dw-cloudchipr-competitor-comparison");
-          const orbs = competitors.querySelectorAll<HTMLElement>(".dw-cloudchipr-competitor-orb");
 
           gsap.fromTo(title, { autoAlpha: 0, y: 28, filter: "blur(8px)" }, {
             autoAlpha: 1,
@@ -2101,12 +2354,6 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
             scrollTrigger: { trigger: comparison, start: "top 90%", toggleActions: "play none none reverse" }
           });
 
-          gsap.to(orbs, {
-            yPercent: (index) => index === 0 ? -8 : 8,
-            rotation: (index) => index === 0 ? 5 : -5,
-            ease: "none",
-            scrollTrigger: { trigger: competitors, start: "top bottom", end: "bottom top", scrub: 0.85 }
-          });
         }
 
         const designDecision = container.querySelector<HTMLElement>("[data-cloudchipr-design-decision]");
@@ -2175,6 +2422,51 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
             duration: 0.85,
             ease: "back.out(1.25)",
             scrollTrigger: { trigger: result, start: "top 72%", toggleActions: "play none none reverse" }
+          });
+        }
+
+        const designSystemVisuals = container.querySelector<HTMLElement>("[data-cloudchipr-design-system-visuals]");
+        if (designSystemVisuals) {
+          const logo = designSystemVisuals.querySelector<HTMLElement>(".dw-cloudchipr-design-system-logo");
+          const benefits = designSystemVisuals.querySelectorAll<HTMLElement>(".dw-cloudchipr-design-system-benefits li");
+          const screen = designSystemVisuals.querySelector<HTMLElement>(".dw-cloudchipr-design-system-screen");
+          const price = designSystemVisuals.querySelector<HTMLElement>(".dw-cloudchipr-design-system-price");
+
+          gsap.fromTo(logo, { autoAlpha: 0, x: -38, y: 20, scale: 0.92 }, {
+            autoAlpha: 1,
+            x: 0,
+            y: 0,
+            scale: 1,
+            duration: 0.85,
+            ease: "power3.out",
+            scrollTrigger: { trigger: designSystemVisuals, start: "top 78%", toggleActions: "play none none reverse" }
+          });
+
+          gsap.fromTo(benefits, { autoAlpha: 0, x: -28 }, {
+            autoAlpha: 1,
+            x: 0,
+            stagger: 0.09,
+            duration: 0.58,
+            ease: "power2.out",
+            scrollTrigger: { trigger: designSystemVisuals, start: "top 68%", toggleActions: "play none none reverse" }
+          });
+
+          gsap.fromTo(screen, { autoAlpha: 0, x: 80, scale: 0.97 }, {
+            autoAlpha: 1,
+            x: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: { trigger: designSystemVisuals, start: "top 78%", toggleActions: "play none none reverse" }
+          });
+
+          gsap.fromTo(price, { autoAlpha: 0, y: 64, scale: 0.9 }, {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.9,
+            ease: "back.out(1.2)",
+            scrollTrigger: { trigger: designSystemVisuals, start: "top 62%", toggleActions: "play none none reverse" }
           });
         }
 
@@ -2347,11 +2639,21 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
         });
       });
 
-      const materialIcons = container.querySelectorAll<HTMLElement>("[data-mex-icon]");
-      if (materialIcons.length) {
-        gsap.fromTo(materialIcons, { autoAlpha: 0, scale: 0.35, rotate: -18 }, {
-          autoAlpha: 1, scale: 1, rotate: 0, stagger: 0.14, duration: 0.75, ease: "back.out(1.8)",
-          scrollTrigger: { trigger: "[data-mex-iconography]", start: "top 70%", toggleActions: "play none none reverse" }
+      const materialIconPaths = container.querySelectorAll<SVGGeometryElement>("[data-mex-icon-path]");
+      if (materialIconPaths.length) {
+        gsap.fromTo(materialIconPaths, {
+          strokeDasharray: 1,
+          strokeDashoffset: 1
+        }, {
+          strokeDashoffset: 0,
+          stagger: 0.09,
+          duration: 1.25,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: "[data-mex-iconography]",
+            start: "top 64%",
+            toggleActions: "play none none reverse"
+          }
         });
       }
 

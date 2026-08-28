@@ -1923,9 +1923,11 @@
           "id": "feedback",
           "type": "testimonial",
           "sourceNode": "331:28576",
+          "showLinkedin": true,
+          "annotationText": "Wanna ask Shaunt if he was sober writing this? =)",
           "layout": "contained",
           "background": {
-            "color": "#171341"
+            "gradient": "linear-gradient(25.2deg, rgb(0, 47, 191) 16.845%, rgb(85, 138, 255) 85.533%)"
           },
           "textColor": "#ffffff",
           "paddingTop": "165px",
@@ -1935,7 +1937,8 @@
           "avatar": "shaunt-avatar",
           "person": {
             "name": "Shaunt Sarkissian",
-            "role": "Chief Markets Officer at TBOL (The Bank of London)"
+            "role": "Chief Markets Officer at TBOL (The Bank of London)",
+            "url": "https://www.linkedin.com/in/michael-valasanyan-1a08056/?originalSubdomain=am"
           }
         },
         {

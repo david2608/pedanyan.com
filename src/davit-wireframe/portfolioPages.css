@@ -180,20 +180,64 @@
   }
 }
 
-/* Material Exchange keeps the source case study's own visual language. */
-.dw-case-material-exchange .dw-case-testimonial-heading {
-  max-width: 1050px;
-  margin: 0 auto 56px;
-  padding: 0 8%;
+@font-face {
+  font-family: "Shadows Into Light";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/shadows-into-light-400.woff2") format("woff2");
 }
 
+.dw-case-annotation-generic {
+  position: absolute;
+  right: -9%;
+  bottom: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  width: clamp(150px, 14vw, 230px);
+  pointer-events: none;
+  font-family: "Shadows Into Light", cursive;
+  font-size: clamp(17px, 1.3vw, 25px);
+  letter-spacing: 0.03em;
+  line-height: 1.15;
+}
+
+.dw-case-annotation-arrow {
+  width: 40%;
+  height: auto;
+  margin-left: 10%;
+}
+
+.dw-case-securion .dw-case-section-feedback .dw-case-testimonial {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dw-case-securion .dw-case-section-feedback blockquote {
+  color: #d0cdf0;
+}
+
+.dw-case-securion .dw-case-section-feedback .dw-case-testimonial-person-link strong {
+  color: #fdfdfd;
+}
+
+.dw-case-securion .dw-case-section-feedback .dw-case-testimonial-person-link small {
+  color: rgba(208, 205, 240, 0.6);
+  opacity: 1;
+}
+
+.dw-case-securion .dw-case-section-feedback .dw-case-testimonial-linkedin svg {
+  fill: #fdfdfd;
+}
+
+.dw-case-securion .dw-case-section-feedback .dw-case-annotation-generic {
+  color: #fff;
+}
+
+/* Material Exchange keeps the source case study's own visual language. */
 .dw-case-material-exchange .dw-case-testimonial {
-  position: relative;
   background: rgba(0, 0, 0, 0.04);
-  border-radius: 56px 56px 56px 0;
-  padding: 68px clamp(24px, 4.53vw, 87px) 70px;
-  max-width: 1134px;
-  margin: 0 auto;
 }
 
 .dw-case-material-exchange .dw-case-testimonial-annotation {
@@ -211,21 +255,10 @@
 }
 
 .dw-case-material-exchange .dw-case-testimonial blockquote {
-  max-width: none;
-  font-weight: 500;
-  font-size: clamp(22px, 1.67vw, 32px);
-  line-height: 1.8;
-  letter-spacing: 0.01em;
   color: #000;
 }
 
-.dw-case-material-exchange .dw-case-testimonial-heading {
-  font-weight: 600;
-}
-
 .dw-case-material-exchange .dw-case-avatar {
-  width: clamp(96px, 8vw, 140px);
-  height: clamp(96px, 8vw, 140px);
   border-radius: 0;
   overflow: visible;
   background: none;
@@ -233,28 +266,14 @@
 
 .dw-case-material-exchange .dw-case-testimonial-person-link strong {
   color: #5849e0;
-  font-weight: 700;
-  font-size: clamp(26px, 2.5vw, 48px);
 }
 
 .dw-case-material-exchange .dw-case-testimonial-person-link small {
-  font-size: clamp(16px, 1.25vw, 24px);
   opacity: 1;
   color: var(--mex-ink, #202020);
 }
 
-.dw-case-material-exchange .dw-case-testimonial-linkedin {
-  width: clamp(64px, 5.5vw, 95px);
-  height: clamp(64px, 5.5vw, 95px);
-  border-radius: 0;
-  background: transparent;
-}
 
-.dw-case-material-exchange .dw-case-testimonial-linkedin svg {
-  fill: #5849e0;
-  width: 100%;
-  height: 100%;
-}
 
 .dw-case-material-exchange {
   --mex-blue: #5968e9;
@@ -4144,20 +4163,29 @@
 
 .dw-case-testimonial {
   display: block;
+  position: relative;
+  border-radius: 56px 56px 56px 0;
+  padding: 68px clamp(24px, 4.53vw, 87px) 70px;
+  max-width: 1134px;
+  margin: 0 auto;
 }
 
 .dw-case-testimonial blockquote {
   margin: 0;
-  font-size: clamp(38px, 4.3vw, 82px);
-  font-weight: 400;
-  line-height: 1.05;
+  max-width: none;
+  font-size: clamp(22px, 1.67vw, 32px);
+  font-weight: 500;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
 }
 
-.dw-case-testimonial-heading {
+.dw-page .dw-case-testimonial-heading {
   font-size: clamp(48px, 4.167vw, 80px);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 0.98;
-  margin: 0 0 40px;
+  max-width: 1134px;
+  margin: 0 auto 56px;
+  padding: 0 clamp(24px, 4.53vw, 87px);
 }
 
 .dw-case-testimonial-person {
@@ -4179,8 +4207,8 @@
 
 .dw-case-avatar {
   display: block;
-  width: 64px;
-  height: 64px;
+  width: clamp(96px, 8vw, 140px);
+  height: clamp(96px, 8vw, 140px);
   overflow: hidden;
   border-radius: 50%;
   flex-shrink: 0;
@@ -4198,13 +4226,13 @@
 }
 
 .dw-case-testimonial-person-link strong {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: clamp(26px, 2.5vw, 48px);
+  font-weight: 700;
 }
 
 .dw-case-testimonial-person-link small {
   margin-top: 4px;
-  font-size: 13px;
+  font-size: clamp(16px, 1.25vw, 24px);
   line-height: 1.3;
   opacity: 0.7;
 }
@@ -4213,12 +4241,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: clamp(64px, 5.5vw, 95px);
+  height: clamp(64px, 5.5vw, 95px);
   flex-shrink: 0;
-  border-radius: 10px;
-  background: #111;
-  opacity: 0.85;
+  background: transparent;
+  opacity: 0.9;
   transition: opacity 0.2s ease;
 }
 
@@ -4227,9 +4254,9 @@ a.dw-case-testimonial-linkedin:hover {
 }
 
 .dw-case-testimonial-linkedin svg {
-  width: 24px;
-  height: 24px;
-  fill: #fff;
+  width: 100%;
+  height: 100%;
+  fill: #5849e0;
 }
 
 .dw-case-navigation {
@@ -6203,16 +6230,7 @@ a.dw-case-testimonial-linkedin:hover {
   padding-left: 0;
 }
 
-.dw-case-testimonial {
-  grid-template-columns: 0.5fr 1.5fr;
-  width: min(calc(100% - 120px), 1280px) !important;
-}
 
-.dw-case-testimonial blockquote {
-  max-width: 31ch;
-  font-size: clamp(22px, 1.67vw, 32px);
-  line-height: 1.45;
-}
 
 .dw-case-navigation {
   min-height: 760px;
@@ -7031,5 +7049,5 @@ a.dw-case-testimonial-linkedin:hover {
   }
 }
 .dw-photo-lab-tool-icons{display:flex;gap:10px;flex-wrap:wrap}.dw-photo-lab-tool{display:inline-flex;align-items:center;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #d7e8e2;font-size:12px;font-weight:600;color:#1b4238}.dw-photo-lab-problem-flow{padding-top:0}.dw-photo-lab-flow{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;padding:30px 0}.dw-photo-lab-flow-step{width:180px;height:180px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:#e9cfd2;color:#171717;font-size:18px;line-height:1.2;animation:photoLabStepIn .6s ease both}.dw-photo-lab-flow-step.step-1{background:#edb7bd;animation-delay:.25s}.dw-photo-lab-flow-step.step-2{background:#d98e98;animation-delay:.5s}.dw-photo-lab-flow-step.step-3{background:#b85d66;color:#fff;animation-delay:.75s}.dw-photo-lab-flow-arrow{font-size:34px;color:#c33b45;animation:photoLabStepIn .5s ease both}.dw-photo-lab-flow-arrow:nth-of-type(2){animation-delay:.35s}.dw-photo-lab-flow-arrow:nth-of-type(3){animation-delay:.6s}@keyframes photoLabStepIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
-.dw-case-section-problem-intro .dw-case-richtext,.dw-case-section-root-cause .dw-case-richtext,.dw-case-section-objective .dw-case-richtext,.dw-case-section-unexpected-change .dw-case-richtext{color:#666;line-height:1.6}.dw-case-section-problem-intro strong,.dw-case-section-root-cause strong,.dw-case-section-objective strong,.dw-case-section-unexpected-change strong{color:#111}.dw-case-section-anticipated-transformations{background:linear-gradient(135deg,#fff 0%,#f4fbf6 100%);border-radius:28px;margin:40px auto;padding-left:clamp(24px,6vw,90px);padding-right:clamp(24px,6vw,90px)}.dw-case-section-anticipated-transformations h2{color:#111}.dw-case-section-anticipated-transformations h2::first-line{color:#5cae55}.dw-case-section-anticipated-transformations li{color:#666;margin:18px 0}.dw-case-section-anticipated-transformations li strong{color:#111}.dw-case-securion .dw-case-section-feedback{background:#38b84b!important;background-image:radial-gradient(ellipse at 20% 10%,transparent 0 28%,rgba(255,255,255,.16) 29% 29.5%,transparent 30% 38%,rgba(255,255,255,.12) 39% 39.5%,transparent 40%)!important}.dw-case-securion .dw-case-section-feedback .dw-case-testimonial{background:rgba(37,170,68,.72);border-radius:34px;padding:70px 8%;max-width:1050px;margin:auto}.dw-case-securion .dw-case-section-feedback blockquote{color:#fff}.dw-case-section-product-editor{order:-1}
+.dw-case-section-problem-intro .dw-case-richtext,.dw-case-section-root-cause .dw-case-richtext,.dw-case-section-objective .dw-case-richtext,.dw-case-section-unexpected-change .dw-case-richtext{color:#666;line-height:1.6}.dw-case-section-problem-intro strong,.dw-case-section-root-cause strong,.dw-case-section-objective strong,.dw-case-section-unexpected-change strong{color:#111}.dw-case-section-anticipated-transformations{background:linear-gradient(135deg,#fff 0%,#f4fbf6 100%);border-radius:28px;margin:40px auto;padding-left:clamp(24px,6vw,90px);padding-right:clamp(24px,6vw,90px)}.dw-case-section-anticipated-transformations h2{color:#111}.dw-case-section-anticipated-transformations h2::first-line{color:#5cae55}.dw-case-section-anticipated-transformations li{color:#666;margin:18px 0}.dw-case-section-anticipated-transformations li strong{color:#111}.dw-case-section-product-editor{order:-1}
 .dw-securion-tool-icons img{width:220px;max-width:100%;height:auto;display:block}.dw-securion-feedback{background:#39b84b url('/portfolio-assets/securion/feedback-reference.png') center/cover no-repeat!important;position:relative;overflow:hidden}.dw-securion-feedback::before{content:"";position:absolute;inset:0;background:rgba(45,180,70,.62);mix-blend-mode:screen;pointer-events:none}.dw-securion-feedback-inner{position:relative;z-index:1;background:rgba(48,177,68,.72);border-radius:34px;padding:clamp(36px,6vw,90px)!important}.dw-securion-feedback-heading h2{color:#fff}.dw-securion-feedback blockquote{color:#fff;max-width:900px}

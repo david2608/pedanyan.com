@@ -65,6 +65,7 @@ type PortfolioSection = {
   } | string>;
   person?: { name: string; role: string; url?: string };
   showLinkedin?: boolean;
+  annotationText?: string;
   back?: { label: string; url: string };
 };
 
@@ -686,29 +687,6 @@ function SecurionColorTheory({ section }: { section: PortfolioSection }) {
             ))}
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function SecurionFeedback({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
-  const person = section.person;
-  return (
-    <section className="dw-case-section dw-securion-feedback" id={section.id} data-securion-feedback>
-      <div className="dw-securion-feedback-inner">
-        <div className="dw-securion-feedback-heading">
-          <span>Client perspective</span>
-          <h2>{section.title || "Feedback"}</h2>
-        </div>
-        <blockquote>“{section.quote}”</blockquote>
-        {person ? (
-          <div className="dw-securion-feedback-person">
-            <span className="dw-securion-feedback-avatar"><ProjectImage project={project} assetKey={section.avatar} /></span>
-            <span><strong>{person.name}</strong><small>{person.role}</small></span>
-            {person.url ? <a className="dw-securion-feedback-linkedin" href={person.url} target="_blank" rel="noreferrer" aria-label={`${person.name} on LinkedIn`}>in</a> : null}
-          </div>
-        ) : null}
-        <span className="dw-securion-feedback-mark" aria-hidden="true">”</span>
       </div>
     </section>
   );
@@ -1750,6 +1728,14 @@ function TestimonialSection({ project, section }: { project: PortfolioProject; s
             </svg>
           </span>
         ) : null}
+        {section.annotationText ? (
+          <span className="dw-case-testimonial-annotation dw-case-annotation-generic" aria-hidden="true">
+            <span className="dw-case-annotation-text">{section.annotationText}</span>
+            <svg className="dw-case-annotation-arrow" viewBox="0 0 156 150" fill="none">
+              <path d="M149.661 1.778C154.427 62.114 55.3778 148.279 0.999932 148.277" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </span>
+        ) : null}
         <blockquote>{section.quote}</blockquote>
         {person ? (
           <div className="dw-case-testimonial-person">
@@ -1948,9 +1934,6 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   }
   if (project.project.slug === "securion" && section.id === "grid-system") {
     return null;
-  }
-  if (project.project.slug === "securion" && section.id === "feedback") {
-    return <SecurionFeedback project={project} section={section} />;
   }
   if (section.type === "intro") return <IntroSection project={project} section={section} />;
   if (section.type === "prose") return <ProseSection project={project} section={section} />;
@@ -2590,10 +2573,10 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
           });
         }
 
-        const securionFeedback = container.querySelector<HTMLElement>("[data-securion-feedback]");
+        const securionFeedback = container.querySelector<HTMLElement>(".dw-case-section-feedback");
         if (securionFeedback) {
           const quote = securionFeedback.querySelector<HTMLElement>("blockquote");
-          const person = securionFeedback.querySelector<HTMLElement>(".dw-securion-feedback-person");
+          const person = securionFeedback.querySelector<HTMLElement>(".dw-case-testimonial-person");
           gsap.fromTo(quote, { autoAlpha: 0, y: 36, filter: "blur(8px)" }, {
             autoAlpha: 1,
             y: 0,

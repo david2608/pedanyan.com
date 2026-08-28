@@ -182,11 +182,26 @@
 
 /* Material Exchange keeps the source case study's own visual language. */
 .dw-case-material-exchange .dw-case-testimonial {
+  position: relative;
   background: #c3c6e8;
-  border-radius: 48px;
+  border-radius: 56px 56px 56px 0;
   padding: 70px 8%;
   max-width: 1050px;
   margin: 0 auto;
+}
+
+.dw-case-material-exchange .dw-case-testimonial-annotation {
+  position: absolute;
+  right: 2%;
+  bottom: 78px;
+  width: 150px;
+  pointer-events: none;
+}
+
+.dw-case-material-exchange .dw-case-testimonial-annotation svg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .dw-case-material-exchange .dw-case-testimonial blockquote {
@@ -219,6 +234,10 @@
   height: 64px;
   border-radius: 16px;
   background: #5849e0;
+}
+
+.dw-case-material-exchange .dw-case-testimonial-linkedin svg {
+  fill: #1c1c1c;
 }
 
 .dw-case-material-exchange {

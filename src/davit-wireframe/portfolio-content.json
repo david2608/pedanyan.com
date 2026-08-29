@@ -1645,23 +1645,23 @@
           "packagePath": "assets/securion/mobile-01.png",
           "sourceNode": "331:28585",
           "kind": "image",
-          "width": 664,
-          "height": 1214,
+          "width": 750,
+          "height": 1624,
           "alt": "Securion mobile screen"
         },
         "mobile-02": {
           "packagePath": "assets/securion/mobile-02.png",
           "sourceNode": "331:28586",
           "kind": "image",
-          "width": 664,
-          "height": 1214,
+          "width": 750,
+          "height": 1624,
           "alt": "Securion mobile screen"
         },
         "mobile-03": {
           "packagePath": "assets/securion/mobile-03.png",
           "sourceNode": "331:28587",
           "kind": "image",
-          "width": 664,
+          "width": 750,
           "height": 1212,
           "alt": "Securion mobile screen"
         },
@@ -1669,7 +1669,7 @@
           "packagePath": "assets/securion/mobile-04.png",
           "sourceNode": "331:28588",
           "kind": "image",
-          "width": 664,
+          "width": 750,
           "height": 1213,
           "alt": "Securion mobile screen"
         },
@@ -1677,7 +1677,7 @@
           "packagePath": "assets/securion/mobile-05.png",
           "sourceNode": "331:28589",
           "kind": "image",
-          "width": 664,
+          "width": 750,
           "height": 1212,
           "alt": "Securion mobile screen"
         },
@@ -1685,7 +1685,7 @@
           "packagePath": "assets/securion/mobile-06.png",
           "sourceNode": "331:28590",
           "kind": "image",
-          "width": 664,
+          "width": 750,
           "height": 1278,
           "alt": "Securion mobile screen"
         },
@@ -1693,7 +1693,7 @@
           "packagePath": "assets/securion/mobile-07.png",
           "sourceNode": "331:28591",
           "kind": "image",
-          "width": 664,
+          "width": 750,
           "height": 1215,
           "alt": "Securion mobile screen"
         },
@@ -1701,7 +1701,7 @@
           "packagePath": "assets/securion/mobile-08.png",
           "sourceNode": "331:28592",
           "kind": "image",
-          "width": 664,
+          "width": 750,
           "height": 1215,
           "alt": "Securion mobile screen"
         },
@@ -1709,7 +1709,7 @@
           "packagePath": "assets/securion/mobile-09.png",
           "sourceNode": "331:28593",
           "kind": "image",
-          "width": 664,
+          "width": 750,
           "height": 1215,
           "alt": "Securion mobile screen"
         },

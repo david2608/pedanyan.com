@@ -429,6 +429,44 @@
   transform: scale(-1, -1);
 }
 
+.dw-about-card--dark {
+  background: #161616;
+}
+
+.dw-about-card--dark h2 {
+  color: #fff;
+}
+
+.dw-about-card--dark .dw-about-card-eyebrow,
+.dw-about-card--dark .dw-about-card-body,
+.dw-about-card--dark .dw-about-card-details dt {
+  color: #9a9a9a;
+}
+
+.dw-about-card--dark .dw-about-card-body strong,
+.dw-about-card--dark .dw-about-card-details dd {
+  color: #fff;
+}
+
+/* Hotel Apartments feedback: olive theme per Figma */
+.dw-case-hotel-apartments .dw-case-section-feedback .dw-case-testimonial {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 34px;
+}
+
+.dw-case-hotel-apartments .dw-case-section-feedback .dw-case-testimonial-person-link strong {
+  color: #fff;
+}
+
+.dw-case-hotel-apartments .dw-case-section-feedback .dw-case-testimonial-person-link small {
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+}
+
+.dw-case-hotel-apartments .dw-case-section-feedback .dw-case-testimonial-linkedin svg {
+  fill: #fff;
+}
+
 /* Photo Lab intro: only tools row like Figma */
 .dw-case-material-exchange-photo-lab .dw-case-meta dt {
   display: none;

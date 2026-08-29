@@ -2497,13 +2497,45 @@
         },
         {
           "id": "project",
-          "type": "prose",
+          "type": "about-card",
+          "variant": "dark",
           "sourceNode": "474:11266",
           "layout": "contained",
           "paddingTop": "190px",
           "paddingBottom": "180px",
           "title": "the Project",
-          "body": "<p>Hotel Apartments is a flexible online booking service specializing in extended-stay hotel room bookings. Easily browse and book carefully selected serviced apartments and villas, providing you with spacious, budget-friendly, and all-inclusive lodging options.</p>"
+          "eyebrow": "Overview",
+          "body": "<p>Hotel Apartments is a flexible <strong>online booking service</strong> specializing in extended-stay <strong>hotel room bookings.</strong> Easily <strong>browse and book</strong> carefully selected serviced <strong>apartments and villas,</strong> providing you with spacious, budget-friendly, and all-inclusive lodging options.</p>",
+          "metadata": [
+            {
+              "label": "Client:",
+              "value": "Smart Stay technologies"
+            },
+            {
+              "label": "Categories:",
+              "value": "B2B, B2C, SaaS, VRS"
+            },
+            {
+              "label": "Duration:",
+              "value": "4 Months"
+            },
+            {
+              "label": "Services:",
+              "value": "Field Studies, User Research, Competitive analyses, UI Design, Usability testing"
+            },
+            {
+              "label": "Projects:",
+              "value": "Mobile first Website"
+            },
+            {
+              "label": "Co-designer",
+              "value": "Marianna Zakaryan"
+            },
+            {
+              "label": "Tools:",
+              "value": "Figma, Notion, Miro"
+            }
+          ]
         },
         {
           "id": "migration",
@@ -2681,9 +2713,10 @@
           "id": "feedback",
           "type": "testimonial",
           "sourceNode": "535:9770",
+          "showLinkedin": true,
           "layout": "contained",
           "background": {
-            "color": "#312720"
+            "color": "#767760"
           },
           "textColor": "#ffffff",
           "paddingTop": "165px",

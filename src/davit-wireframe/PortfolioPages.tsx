@@ -66,6 +66,7 @@ type PortfolioSection = {
   person?: { name: string; role: string; url?: string };
   showLinkedin?: boolean;
   annotationText?: string;
+  variant?: string;
   back?: { label: string; url: string };
 };
 
@@ -310,34 +311,6 @@ function HotelIntro({ project, section }: { project: PortfolioProject; section: 
   );
 }
 
-function HotelProject({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
-  const intro = project.sections.find((item) => item.type === "intro");
-  const metadata = intro?.metadata || [];
-  return (
-    <section
-      className="dw-case-section dw-hotel-project"
-      id={section.id}
-      style={{ "--hotel-project-image": `url(${assetUrl(project, "hero")})` } as CSSProperties}
-    >
-      <div className="dw-hotel-project-inner" data-portfolio-reveal>
-        <header>
-          <p>Hotel Apartments / Smart Stay technologies</p>
-          <h2>The Project</h2>
-        </header>
-        <Html html={section.body} className="dw-hotel-project-copy" />
-        <dl className="dw-hotel-project-meta">
-          {metadata.map((item) => (
-            <div key={item.label}>
-              <dt>{item.label.replace(/:$/, "")}</dt>
-              <dd>{item.value}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </section>
-  );
-}
-
 function HotelMigration({ section }: { section: PortfolioSection }) {
   return (
     <section className="dw-case-section dw-hotel-migration" id={section.id}>
@@ -472,23 +445,6 @@ function HotelWebDesign({ project, section }: { project: PortfolioProject; secti
             <p className="type-h2">Extended stays, made simple.</p>
             <p className="type-body">A flexible booking experience for serviced apartments and villas.</p>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function HotelFeedback({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
-  return (
-    <section className="dw-case-section dw-hotel-feedback" id={section.id} data-hotel-feedback>
-      <div className="dw-hotel-feedback-inner" data-portfolio-reveal>
-        <p>Client perspective</p>
-        <h2>{section.title || "Feedback"}</h2>
-        <blockquote>“{section.quote}”</blockquote>
-        <div className="dw-hotel-feedback-person">
-          <span><ProjectImage project={project} assetKey={section.avatar} /></span>
-          <div><strong>{section.person?.name}</strong><small>{section.person?.role}</small></div>
-          <b aria-hidden="true">in</b>
         </div>
       </div>
     </section>
@@ -1115,7 +1071,7 @@ function MaterialExchangeTesting({ project, section }: { project: PortfolioProje
 function AboutCardSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   return (
     <section className={sectionClass(section, "dw-case-about-card-section")} style={sectionStyle(project, section)} id={section.id}>
-      <div className="dw-about-card" data-portfolio-reveal>
+      <div className={`dw-about-card${section.variant === "dark" ? " dw-about-card--dark" : ""}`} data-portfolio-reveal>
         <h2>{section.title}</h2>
         <div className="dw-about-card-grid">
           <div className="dw-about-card-overview">
@@ -1865,9 +1821,6 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   if (project.project.slug === "hotel-apartments" && section.id === "intro") {
     return <HotelIntro project={project} section={section} />;
   }
-  if (project.project.slug === "hotel-apartments" && section.id === "project") {
-    return <HotelProject project={project} section={section} />;
-  }
   if (project.project.slug === "hotel-apartments" && section.id === "migration") {
     return <HotelMigration section={section} />;
   }
@@ -1891,9 +1844,6 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   }
   if (project.project.slug === "hotel-apartments" && ["web-overview", "web-screens"].includes(section.id)) {
     return null;
-  }
-  if (project.project.slug === "hotel-apartments" && section.id === "feedback") {
-    return <HotelFeedback project={project} section={section} />;
   }
   if (project.project.slug === "cloudchipr" && section.id === "field-study") {
     return <CloudChiprFieldStudy project={project} section={section} />;

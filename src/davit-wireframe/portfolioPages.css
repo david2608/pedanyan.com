@@ -448,6 +448,85 @@
   color: #fff;
 }
 
+/* Hotel brand: real construction notes + Figma chat bubbles */
+.dw-hotel-brand-construction-notes {
+  display: block;
+  width: min(60%, 560px);
+  height: auto;
+  margin: 0 auto;
+}
+
+.dw-hotel-chat-bubble {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 300px;
+  padding: 12px 14px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgb(20 22 18 / 22%);
+  color: #2a2a2a;
+}
+
+.dw-hotel-chat-bubble p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.dw-hotel-chat-meta {
+  margin-bottom: 3px !important;
+}
+
+.dw-hotel-chat-meta strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.dw-hotel-chat-meta small {
+  margin-left: 6px;
+  color: #9a9a9a;
+  font-size: 11px;
+}
+
+.dw-hotel-chat-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #37a169;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.dw-hotel-chat-bubble-brief {
+  position: absolute;
+  top: -10%;
+  right: 0;
+}
+
+.dw-hotel-preference {
+  position: relative;
+}
+
+.dw-hotel-chat-bubble-approval {
+  position: absolute;
+  left: 52%;
+  bottom: -76px;
+}
+
+@media (max-width: 900px) {
+  .dw-hotel-chat-bubble-brief,
+  .dw-hotel-chat-bubble-approval {
+    position: static;
+    margin: 18px auto 0;
+  }
+}
+
 /* Hotel Apartments feedback: olive theme per Figma */
 .dw-case-hotel-apartments .dw-case-section-feedback .dw-case-testimonial {
   background: rgba(0, 0, 0, 0.08);

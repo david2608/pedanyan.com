@@ -381,16 +381,18 @@ function HotelBrand({ project, section }: { project: PortfolioProject; section: 
     <section className="dw-case-section dw-hotel-brand" id={section.id} data-hotel-brand>
       <div className="dw-hotel-brand-stage" style={{ "--hotel-brand-texture": `url(${assetUrl(project, "walking-users-shoes")})` } as CSSProperties}>
         <header data-portfolio-reveal>
-          <p>Identity / hospitality</p>
           <h2>{section.title}</h2>
           <Html html={section.body} className="dw-hotel-brand-intro" />
         </header>
         <div className="dw-hotel-brand-construction" data-portfolio-reveal>
-          <HotelMark label={false} />
-          <span className="dw-hotel-brand-axis axis-one">Luxury villa windows</span>
-          <span className="dw-hotel-brand-axis axis-two">Letter H</span>
-          <span className="dw-hotel-brand-axis axis-three">Letter A</span>
-          <blockquote>“This one is really good. What do you think?”<small>Rafayel Papikyan / client feedback</small></blockquote>
+          <img className="dw-hotel-brand-construction-notes" src="/portfolio-assets/hotel-apartments/brand-logo.png" alt="Hotel Apartments logo construction: luxury villa windows, letter H, letter A" />
+          <div className="dw-hotel-chat-bubble dw-hotel-chat-bubble-brief" data-portfolio-reveal>
+            <span className="dw-hotel-chat-avatar" aria-hidden="true">RP</span>
+            <div>
+              <p className="dw-hotel-chat-meta"><strong>Rafayel</strong> <small>2h ago</small></p>
+              <p>I want something really simple. Try to mix Hotel with Letter H or A. Black or other dark color maybe...</p>
+            </div>
+          </div>
         </div>
         <div className="dw-hotel-preference" data-portfolio-reveal>
           <h3>Client&apos;s preference</h3>
@@ -399,14 +401,19 @@ function HotelBrand({ project, section }: { project: PortfolioProject; section: 
             <span className="is-selected"><HotelMark label={false} /></span>
             <span><HotelMark label={false} /></span>
           </div>
+          <div className="dw-hotel-chat-bubble dw-hotel-chat-bubble-approval">
+            <span className="dw-hotel-chat-avatar" aria-hidden="true">RP</span>
+            <div>
+              <p className="dw-hotel-chat-meta"><strong>Rafayel</strong> <small>1h ago</small></p>
+              <p>This one is really good. What do you think?</p>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="dw-hotel-brand-applications">
         <figure className="dw-hotel-brand-table" data-portfolio-reveal><ProjectImage project={project} assetKey="brand-detail-01" /></figure>
-        <p data-portfolio-reveal>Once the concept was chosen, I built a clean, minimal identity for the practical details guests touch: business cards, labels, door hangers, menus and room amenities.</p>
         <figure className="dw-hotel-brand-suite" data-portfolio-parallax><ProjectImage project={project} assetKey="brand-applications" /></figure>
-        <p data-portfolio-reveal>The olive, linen and warm sand palette gives the service a quieter, more residential character than a conventional booking platform.</p>
         <figure className="dw-hotel-brand-linen" data-portfolio-reveal><ProjectImage project={project} assetKey="brand-detail-02" /></figure>
         <figure className="dw-hotel-brand-collage" data-portfolio-reveal><ProjectImage project={project} assetKey="brand-collage" /></figure>
       </div>

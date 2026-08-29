@@ -1889,7 +1889,7 @@
         },
         {
           "id": "mobile-screens",
-          "overlapTop": "-320px",
+          "overlapTop": "-160px",
           "overlapBottom": "-250px",
           "type": "gallery",
           "sourceNode": "331:28585",
@@ -1937,7 +1937,7 @@
             "gradient": "linear-gradient(25.2deg, rgb(0, 47, 191) 16.845%, rgb(85, 138, 255) 85.533%)"
           },
           "textColor": "#ffffff",
-          "paddingTop": "165px",
+          "paddingTop": "380px",
           "paddingBottom": "130px",
           "title": "Feedback",
           "quote": "Alright, so Davit's been quite the design maestro. I mean, seriously, this guy's a one-man show. He's tackled it all - design, markup, and even worked his magic on WordPress building our marketing website. Davit, keep pushing those design boundaries, you're in a league of your own!",

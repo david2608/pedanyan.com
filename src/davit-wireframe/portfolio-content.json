@@ -2501,6 +2501,7 @@
           "variant": "dark",
           "sourceNode": "474:11266",
           "layout": "contained",
+          "overlapTop": "-280px",
           "paddingTop": "190px",
           "paddingBottom": "180px",
           "title": "the Project",
@@ -2574,6 +2575,14 @@
           "asset": "field-study"
         },
         {
+          "id": "walking-visual",
+          "type": "media",
+          "sourceNode": "540:9911",
+          "layout": "contained",
+          "overlapBottom": "-160px",
+          "asset": "walking-users-shoes"
+        },
+        {
           "id": "walking-copy",
           "type": "prose",
           "sourceNode": "488:14265",
@@ -2586,17 +2595,6 @@
           "paddingBottom": "80px",
           "title": "Walking a Mile in the User's Shoes",
           "body": "<p>As the website already existed, one of my main goals was to understand the current customer experience and identify the issues that led to drop-offs (87%), as well as why some users chose competitors over our service. In meetings and interviews with users who visited our office in person, I asked them to replicate their actions on our website, offering them gifts that I had brought with me from Yerevan (magnets, candies, etc.).</p>"
-        },
-        {
-          "id": "walking-visual",
-          "type": "media",
-          "sourceNode": "540:9911",
-          "layout": "wide",
-          "background": {
-            "color": "#29221f"
-          },
-          "paddingBottom": "140px",
-          "asset": "walking-users-shoes"
         },
         {
           "id": "journey-map",

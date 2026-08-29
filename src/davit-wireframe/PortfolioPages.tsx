@@ -67,6 +67,8 @@ type PortfolioSection = {
   showLinkedin?: boolean;
   annotationText?: string;
   variant?: string;
+  overlapTop?: string;
+  overlapBottom?: string;
   back?: { label: string; url: string };
 };
 
@@ -132,7 +134,11 @@ function sectionStyle(project: PortfolioProject, section: PortfolioSection): CSS
     backgroundPosition: section.background?.position,
     backgroundSize: backgroundAsset ? "cover" : undefined,
     paddingTop: section.paddingTop,
-    paddingBottom: section.paddingBottom
+    paddingBottom: section.paddingBottom,
+    marginTop: section.overlapTop,
+    marginBottom: section.overlapBottom,
+    position: section.overlapTop || section.overlapBottom ? "relative" : undefined,
+    zIndex: section.overlapTop || section.overlapBottom ? 2 : undefined
   };
 }
 
@@ -353,15 +359,9 @@ function HotelMigrationVisual({ project, section }: { project: PortfolioProject;
 
 function HotelWalking({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   return (
-    <section
-      className="dw-case-section dw-hotel-walking"
-      id={section.id}
-      style={{ "--hotel-walking-image": `url(${assetUrl(project, "walking-users-shoes")})` } as CSSProperties}
-    >
+    <section className="dw-case-section dw-hotel-walking" id={section.id}>
       <div data-portfolio-reveal>
-        <p>Customer experience / observed in context</p>
-        <p className="dw-securion-laws-eyebrow">Logo principles</p>
-        <h2>Simple Laws</h2>
+        <h2 className="dw-hotel-walking-title">{section.title}:</h2>
         <Html html={section.body} className="dw-hotel-walking-copy" />
       </div>
     </section>
@@ -379,7 +379,7 @@ const hotelColors = [
 function HotelBrand({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   return (
     <section className="dw-case-section dw-hotel-brand" id={section.id} data-hotel-brand>
-      <div className="dw-hotel-brand-stage" style={{ "--hotel-brand-texture": `url(${assetUrl(project, "walking-users-shoes")})` } as CSSProperties}>
+      <div className="dw-hotel-brand-stage" style={{ "--hotel-brand-texture": `url(${assetUrl(project, "brand-foundation")})` } as CSSProperties}>
         <header data-portfolio-reveal>
           <h2>{section.title}</h2>
           <Html html={section.body} className="dw-hotel-brand-intro" />
@@ -412,9 +412,12 @@ function HotelBrand({ project, section }: { project: PortfolioProject; section: 
       </div>
 
       <div className="dw-hotel-brand-applications">
-        <figure className="dw-hotel-brand-table" data-portfolio-reveal><ProjectImage project={project} assetKey="brand-detail-01" /></figure>
+        <figure className="dw-hotel-brand-table dw-overlap-up" data-portfolio-reveal><ProjectImage project={project} assetKey="brand-detail-01" /></figure>
         <figure className="dw-hotel-brand-suite" data-portfolio-parallax><ProjectImage project={project} assetKey="brand-applications" /></figure>
-        <figure className="dw-hotel-brand-linen" data-portfolio-reveal><ProjectImage project={project} assetKey="brand-detail-02" /></figure>
+        <div className="dw-hotel-brand-craft">
+          <p data-portfolio-reveal>Once the <strong>concept is chosen,</strong> it&apos;s time to craft a clean and minimalistic design for specific elements like <strong>business cards, labels, door hangers, and more.</strong></p>
+          <figure className="dw-hotel-brand-linen dw-overlap-up-strong" data-portfolio-reveal><ProjectImage project={project} assetKey="brand-detail-02" /></figure>
+        </div>
         <figure className="dw-hotel-brand-collage" data-portfolio-reveal><ProjectImage project={project} assetKey="brand-collage" /></figure>
       </div>
     </section>
@@ -425,11 +428,11 @@ function HotelWebDesign({ project, section }: { project: PortfolioProject; secti
   return (
     <section className="dw-case-section dw-hotel-web" id={section.id} data-hotel-web>
       <div className="dw-hotel-web-inner">
-        <header data-portfolio-reveal><p>Product expression</p><h2>{section.title}</h2></header>
+        <header data-portfolio-reveal><h2>{section.title}</h2></header>
         <figure className="dw-hotel-web-hero" data-portfolio-parallax>
           <ProjectImage project={project} assetKey="hero" />
         </figure>
-        <figure className="dw-hotel-web-browser" data-portfolio-reveal>
+        <figure className="dw-hotel-web-browser dw-overlap-up-strong" data-portfolio-reveal>
           <ProjectImage project={project} assetKey="web-overview" />
         </figure>
 
@@ -1842,7 +1845,7 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   }
   if (
     project.project.slug === "hotel-apartments" &&
-    ["walking-visual", "brand-foundation", "client-preference", "brand-details", "brand-applications", "brand-collage"].includes(section.id)
+    ["brand-foundation", "client-preference", "brand-details", "brand-applications", "brand-collage"].includes(section.id)
   ) {
     return null;
   }

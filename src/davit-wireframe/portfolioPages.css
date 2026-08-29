@@ -448,6 +448,61 @@
   color: #fff;
 }
 
+/* Overlap pattern: sections/figures poke into their neighbors (Figma layering style) */
+.dw-overlap-up {
+  margin-top: -100px;
+  position: relative;
+  z-index: 2;
+}
+
+.dw-overlap-up-strong {
+  margin-top: clamp(-380px, -18vw, -140px);
+  position: relative;
+  z-index: 2;
+}
+
+.dw-hotel-brand-craft {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(28px, 5vw, 90px);
+  align-items: start;
+}
+
+.dw-hotel-brand-craft > p {
+  margin: clamp(24px, 4vw, 70px) 0 0;
+  font-size: clamp(20px, 1.67vw, 32px);
+  font-weight: 500;
+  line-height: 1.6;
+  color: #646464;
+}
+
+.dw-hotel-brand-craft > p strong {
+  color: #111;
+  font-weight: 500;
+}
+
+.dw-hotel-brand-craft .dw-hotel-brand-linen {
+  margin: 0;
+  margin-top: clamp(-380px, -18vw, -140px);
+}
+
+.dw-hotel-brand-craft .dw-hotel-brand-linen img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .dw-hotel-brand-craft {
+    grid-template-columns: 1fr;
+  }
+
+  .dw-overlap-up,
+  .dw-overlap-up-strong {
+    margin-top: 0;
+  }
+}
+
 /* Hotel brand: real construction notes + Figma chat bubbles */
 .dw-hotel-brand-construction-notes {
   display: block;
@@ -2115,9 +2170,14 @@
 }
 
 .dw-hotel-walking {
-  min-height: clamp(680px, 74vw, 1150px);
-  padding: clamp(110px, 11vw, 190px) 0;
-  background: #fafafa var(--hotel-walking-image) center / cover no-repeat;
+  padding: clamp(160px, 16vw, 300px) 0 clamp(110px, 11vw, 190px);
+  background: #fafafa;
+}
+
+.dw-hotel-walking-title {
+  text-decoration: underline;
+  text-underline-offset: 10px;
+  text-decoration-thickness: 2px;
 }
 
 .dw-hotel-walking > div {
@@ -2347,10 +2407,8 @@
 }
 
 .dw-hotel-brand-table { grid-column: 1 / span 5; }
-.dw-hotel-brand-table + p { grid-column: 7 / span 5; align-self: center; }
 .dw-hotel-brand-suite { grid-column: 1 / -1; }
-.dw-hotel-brand-suite + p { grid-column: 1 / span 5; }
-.dw-hotel-brand-linen { grid-column: 8 / span 5; margin-top: -18vw !important; }
+.dw-hotel-brand-craft { grid-column: 1 / -1; }
 .dw-hotel-brand-collage { grid-column: 1 / -1; margin-top: clamp(60px, 8vw, 140px) !important; }
 
 .dw-hotel-brand-applications p {

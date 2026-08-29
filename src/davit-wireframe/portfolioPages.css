@@ -336,9 +336,9 @@
 
 .dw-securion-scale-law-text {
   margin: 0;
-  font-size: clamp(17px, 1.15vw, 22px);
-  line-height: 1.6;
-  color: #646464;
+  font-size: clamp(20px, 1.85vw, 34px);
+  line-height: 1.5;
+  color: #696969;
 }
 
 .dw-securion-scale-law-text span {
@@ -346,14 +346,15 @@
 }
 
 .dw-securion-scale-law-text strong {
-  color: #111;
+  color: #080808;
+  font-weight: 500;
 }
 
 .dw-securion-scale-marks {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
-  gap: clamp(20px, 4vw, 80px);
+  justify-content: flex-start;
+  gap: clamp(28px, 4.5vw, 86px);
 }
 
 .dw-securion-scale-marks figure {
@@ -383,6 +384,26 @@
   .dw-securion-scale-inner {
     grid-template-columns: 1fr;
   }
+}
+
+/* Securion secure-screens: light stage with the Figma blurred blue blob (node 331:28660) */
+.dw-case-securion .dw-case-section-secure-screens {
+  position: relative;
+}
+
+.dw-case-securion .dw-case-section-secure-screens::before {
+  content: "";
+  position: absolute;
+  top: 4%;
+  left: 6%;
+  width: clamp(60px, 6vw, 110px);
+  height: clamp(54px, 5.4vw, 100px);
+  background: #2743ec;
+  border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%;
+  filter: blur(14px);
+  opacity: 0.85;
+  transform: rotate(-18deg);
+  pointer-events: none;
 }
 
 /* Securion mobile gallery: Figma masonry stagger; offset columns overflow into the feedback section */

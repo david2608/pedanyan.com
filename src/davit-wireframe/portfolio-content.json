@@ -1756,7 +1756,7 @@
         },
         {
           "id": "about",
-          "overlapTop": "-43px",
+          "overlapTop": "-240px",
           "type": "about-card",
           "sourceNode": "331:28289",
           "layout": "contained",
@@ -1875,10 +1875,7 @@
           "type": "media",
           "sourceNode": "331:28574",
           "layout": "wide",
-          "background": {
-            "color": "#13102f"
-          },
-          "paddingBottom": "150px",
+          "paddingBottom": "0px",
           "asset": "secure-screens"
         },
         {
@@ -1886,12 +1883,13 @@
           "type": "media",
           "sourceNode": "331:28431",
           "layout": "wide",
-          "paddingTop": "120px",
-          "paddingBottom": "140px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
           "asset": "grid-system"
         },
         {
           "id": "mobile-screens",
+          "overlapTop": "-320px",
           "overlapBottom": "-250px",
           "type": "gallery",
           "sourceNode": "331:28585",

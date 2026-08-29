@@ -412,16 +412,16 @@
   z-index: 2;
 }
 
-.dw-case-securion .dw-case-section-mobile-screens .dw-case-gallery > figure:nth-child(3n + 2) {
+.dw-case-securion .dw-case-section-mobile-screens .dw-case-gallery > figure:nth-child(n + 4):nth-child(-n + 6) img {
   transform: translateY(clamp(80px, 11.2vw, 215px));
 }
 
-.dw-case-securion .dw-case-section-mobile-screens .dw-case-gallery > figure:nth-child(3n) {
+.dw-case-securion .dw-case-section-mobile-screens .dw-case-gallery > figure:nth-child(n + 7) img {
   transform: translateY(clamp(160px, 22.4vw, 430px));
 }
 
 @media (max-width: 760px) {
-  .dw-case-securion .dw-case-section-mobile-screens .dw-case-gallery > figure {
+  .dw-case-securion .dw-case-section-mobile-screens .dw-case-gallery > figure img {
     transform: none !important;
   }
 }

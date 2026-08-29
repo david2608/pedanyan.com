@@ -6159,8 +6159,10 @@ a.dw-case-testimonial-linkedin:hover {
 .dw-case-securion #secure-product h2 strong { color: #080808; }
 .dw-case-securion #mobile-screens .dw-case-gallery {
   display: block;
-  columns: 3 260px;
+  columns: 3 220px;
   column-gap: clamp(14px, 2vw, 28px);
+  max-width: 81%;
+  margin: 0 auto;
 }
 .dw-case-securion #mobile-screens .dw-case-gallery figure {
   display: inline-block;

@@ -385,6 +385,26 @@
   }
 }
 
+/* Securion mobile gallery: Figma masonry stagger; offset columns overflow into the feedback section */
+.dw-case-securion .dw-case-section-mobile-screens {
+  position: relative;
+  z-index: 2;
+}
+
+.dw-case-securion .dw-case-section-mobile-screens .dw-case-gallery > figure:nth-child(3n + 2) {
+  transform: translateY(clamp(80px, 11.2vw, 215px));
+}
+
+.dw-case-securion .dw-case-section-mobile-screens .dw-case-gallery > figure:nth-child(3n) {
+  transform: translateY(clamp(160px, 22.4vw, 430px));
+}
+
+@media (max-width: 760px) {
+  .dw-case-securion .dw-case-section-mobile-screens .dw-case-gallery > figure {
+    transform: none !important;
+  }
+}
+
 /* Securion intro: Figma shows only the tools icon row, no labels */
 .dw-case-securion .dw-case-meta dt {
   display: none;

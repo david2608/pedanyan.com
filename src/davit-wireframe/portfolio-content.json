@@ -1109,6 +1109,7 @@
         },
         {
           "id": "initial-wireframes",
+          "overlapBottom": "-450px",
           "type": "media",
           "sourceNode": "331:24486",
           "layout": "wide",
@@ -1285,6 +1286,7 @@
         },
         {
           "id": "design-system-map",
+          "overlapBottom": "-570px",
           "type": "media",
           "sourceNode": "331:27304",
           "layout": "wide",
@@ -1378,6 +1380,7 @@
         },
         {
           "id": "smart-search",
+          "overlapBottom": "-84px",
           "type": "split",
           "sourceNode": "331:27244",
           "layout": "wide",
@@ -1479,6 +1482,7 @@
         },
         {
           "id": "save-search",
+          "overlapBottom": "-140px",
           "type": "media",
           "sourceNode": "331:27566",
           "layout": "wide",
@@ -1752,6 +1756,7 @@
         },
         {
           "id": "about",
+          "overlapTop": "-43px",
           "type": "about-card",
           "sourceNode": "331:28289",
           "layout": "contained",
@@ -1887,6 +1892,7 @@
         },
         {
           "id": "mobile-screens",
+          "overlapBottom": "-250px",
           "type": "gallery",
           "sourceNode": "331:28585",
           "layout": "wide",
@@ -2105,6 +2111,7 @@
         },
         {
           "id": "project",
+          "overlapTop": "-55px",
           "type": "about-card",
           "sourceNode": "331:30165",
           "layout": "contained",

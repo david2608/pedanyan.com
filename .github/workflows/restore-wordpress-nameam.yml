@@ -1,0 +1,67 @@
+name: Restore WordPress to Name.am
+
+on:
+  workflow_dispatch:
+    inputs:
+      backup_run_id:
+        description: Production deployment run ID containing the WordPress backup
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: nameam-production
+  cancel-in-progress: false
+
+jobs:
+  restore:
+    name: Restore previous WordPress website
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+
+    steps:
+      - name: Download selected WordPress backup
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download "${{ inputs.backup_run_id }}" \
+            --repo "${{ github.repository }}" \
+            --name wordpress-production-backup \
+            --dir backup
+          test -s backup/wordpress-production-backup.tar.gz
+
+      - name: Prepare website files
+        run: |
+          mkdir -p restore-site
+          tar -xzf backup/wordpress-production-backup.tar.gz -C restore-site
+          test -n "$(find restore-site -mindepth 1 -maxdepth 1 -print -quit)"
+
+      - name: Install secure FTP client
+        run: sudo apt-get update && sudo apt-get install --yes lftp
+
+      - name: Restore WordPress files
+        env:
+          NAMEAM_FTP_HOST: ${{ secrets.NAMEAM_FTP_HOST }}
+          NAMEAM_FTP_USERNAME: ${{ secrets.NAMEAM_FTP_USERNAME }}
+          NAMEAM_FTP_PASSWORD: ${{ secrets.NAMEAM_FTP_PASSWORD }}
+          NAMEAM_FTP_PATH: ${{ secrets.NAMEAM_FTP_PATH }}
+        run: |
+          test -n "$NAMEAM_FTP_HOST"
+          test -n "$NAMEAM_FTP_USERNAME"
+          test -n "$NAMEAM_FTP_PASSWORD"
+          test -n "$NAMEAM_FTP_PATH"
+          lftp -c "
+            set cmd:fail-exit yes;
+            set net:max-retries 2;
+            set net:timeout 30;
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate yes;
+            open --user \"$NAMEAM_FTP_USERNAME\" --password \"$NAMEAM_FTP_PASSWORD\" \"$NAMEAM_FTP_HOST\";
+            mirror --reverse --delete --verbose --parallel=4 restore-site/ \"$NAMEAM_FTP_PATH\";
+            bye;
+          "

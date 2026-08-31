@@ -505,6 +505,7 @@
         },
         {
           "id": "field-study",
+          "overlapBottom": "-160px",
           "type": "prose",
           "sourceNode": "331:28175",
           "layout": "contained",
@@ -817,6 +818,10 @@
           "type": "prose",
           "sourceNode": "331:27975",
           "layout": "contained",
+          "background": {
+            "color": "#f4f4f2"
+          },
+          "textColor": "#111111",
           "paddingTop": "180px",
           "paddingBottom": "180px",
           "title": "Overall Achievements",
@@ -2242,8 +2247,8 @@
           "background": {
             "color": "#161b2a"
           },
-          "paddingTop": "70px",
-          "paddingBottom": "130px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
           "asset": "product-collage"
         },
         {
@@ -2761,6 +2766,327 @@
               "label": "ME Photo Lab",
               "url": "/material-exchange-photo-lab/"
             }
+          ]
+        }
+      ]
+    },
+    {
+      "project": {
+        "title": "Tempo",
+        "slug": "tempo",
+        "source": {
+          "fileKey": "tempo-case-study-882-37432",
+          "nodeId": "882:37432"
+        }
+      },
+      "assets": {
+        "card": {
+          "packagePath": "assets/tempo/tempo-card.png",
+          "alt": "Tempo delivery route mobile application screens",
+          "width": 1440,
+          "height": 1800
+        },
+        "restaurants": {
+          "packagePath": "assets/tempo/restaurants.png",
+          "alt": "Tempo restaurant discovery screen",
+          "width": 1836,
+          "height": 3953
+        },
+        "route-optimization": {
+          "packagePath": "assets/tempo/route-optimization.png",
+          "alt": "Tempo multi-stop route optimization screen",
+          "width": 1836,
+          "height": 3953
+        },
+        "forgot-password": {
+          "packagePath": "assets/tempo/forgot-password.png",
+          "alt": "Tempo password recovery screen",
+          "width": 1836,
+          "height": 3953
+        },
+        "screen-04": { "packagePath": "assets/tempo/screen-04.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
+        "screen-05": { "packagePath": "assets/tempo/screen-05.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
+        "screen-06": { "packagePath": "assets/tempo/screen-06.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
+        "screen-07": { "packagePath": "assets/tempo/screen-07.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
+        "screen-08": { "packagePath": "assets/tempo/screen-08.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
+        "screen-09": { "packagePath": "assets/tempo/screen-09.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
+        "screen-10": { "packagePath": "assets/tempo/screen-10.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
+        "screen-11": { "packagePath": "assets/tempo/screen-11.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
+        "screen-12": { "packagePath": "assets/tempo/screen-12.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
+        "landing-page": {
+          "packagePath": "assets/tempo/landing-page.png",
+          "alt": "Tempo marketing landing page presented on a laptop",
+          "width": 1854,
+          "height": 1901
+        }
+      },
+      "sections": [
+        {
+          "id": "intro",
+          "type": "intro",
+          "layout": "wide",
+          "background": {
+            "color": "#dff3ec",
+            "scope": "inner",
+            "radius": "30px"
+          },
+          "textColor": "#131313",
+          "title": "Tempo",
+          "subtitle": "One courier route for food, pharmacy items, documents, and custom requests.",
+          "metadata": [
+            {
+              "label": "Client:",
+              "value": "Chant Khialian"
+            },
+            {
+              "label": "Categories:",
+              "value": "Delivery, Mobile App, Product Design"
+            },
+            {
+              "label": "Duration:",
+              "value": "In process"
+            },
+            {
+              "label": "Projects:",
+              "value": "Application"
+            },
+            {
+              "label": "Tools:",
+              "value": "Figma"
+            },
+            {
+              "label": "Team:",
+              "value": "David Pedanyan, Anna Avalyan"
+            }
+          ],
+          "media": "restaurants"
+        },
+        {
+          "id": "project",
+          "type": "about-card",
+          "layout": "contained",
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
+          "title": "the Project",
+          "eyebrow": "Overview",
+          "body": "<p><strong>Tempo</strong> brings food, pharmacy items, documents, and custom errands into one delivery app. Its signature feature lets a customer combine <strong>several pickup points in one courier route</strong>, review the order of stops, and track the full delivery from one place.</p><p>I worked with the product team on the experience strategy, information architecture, core flows, interface design, and a reusable UI kit.</p>",
+          "metadata": [
+            { "label": "Client:", "value": "Chant Khialian" },
+            { "label": "Categories:", "value": "Delivery, Mobile App" },
+            { "label": "Duration:", "value": "In process" },
+            { "label": "Services:", "value": "Product strategy, UX, UI design" },
+            { "label": "Projects:", "value": "Application" },
+            { "label": "Tools:", "value": "Figma" }
+          ]
+        },
+        {
+          "id": "problem",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "110px",
+          "paddingBottom": "90px",
+          "eyebrow": "Problem Statement",
+          "title": "Several errands often happen at the same time",
+          "body": "<p>A customer may order dinner while an important document waits across town. Standard delivery apps treat each request as a separate order, with another checkout, courier, fee, and tracking screen.</p><p>Tempo needed one flow that could combine different request types without making the route feel complex. Customers had to understand where the courier would go, how another stop affected the trip, and when the full order would arrive.</p>"
+        },
+        {
+          "id": "solution",
+          "type": "prose",
+          "layout": "contained",
+          "background": { "color": "#1b8874" },
+          "textColor": "#ffffff",
+          "paddingTop": "140px",
+          "paddingBottom": "140px",
+          "eyebrow": "Solution",
+          "title": "One order, several stops, one courier",
+          "body": "<p>Customers add food, documents, pharmacy items, or a custom address to the same delivery. Tempo groups those stops, proposes an efficient order, and keeps the route visible before checkout.</p><p>The product explains the benefit in context. A time-saving message appears on the map, while the route sheet lists each stop and lets the customer adjust the plan before the courier starts.</p>"
+        },
+        {
+          "id": "process",
+          "type": "feature-grid",
+          "layout": "wide",
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
+          "title": "Process",
+          "items": [
+            { "value": "01", "label": "Study delivery apps and route planners" },
+            { "value": "02", "label": "Map categories, orders, and multi-stop journeys" },
+            { "value": "03", "label": "Test the route model in wireframes" },
+            { "value": "04", "label": "Build the product UI and component library" }
+          ]
+        },
+        {
+          "id": "goals",
+          "type": "feature-grid",
+          "layout": "wide",
+          "background": { "color": "#f3f5f4" },
+          "paddingTop": "140px",
+          "paddingBottom": "140px",
+          "title": "Project Goals",
+          "items": [
+            { "value": "01", "label": "Let customers manage different delivery needs in one app" },
+            { "value": "02", "label": "Show each stop, route change, and arrival expectation" },
+            { "value": "03", "label": "Make another pickup feel like part of the current order" },
+            { "value": "04", "label": "Give the team reusable patterns for new categories" }
+          ]
+        },
+        {
+          "id": "competitive-analysis",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "140px",
+          "paddingBottom": "80px",
+          "eyebrow": "Discovery",
+          "title": "Delivery apps taught us conventions. Route planners taught us sequence.",
+          "body": "<p>We reviewed local delivery products to understand familiar patterns for browsing, checkout, and tracking. We also studied route-planning tools because Tempo’s core interaction depends on ordering several locations.</p><p>The comparison exposed a gap. Delivery apps handled products well but treated each order as a closed journey. Route planners handled stops well but lacked the shopping context customers expect. Tempo needed both mental models in one interface.</p>"
+        },
+        {
+          "id": "signature-moment",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "110px",
+          "paddingBottom": "90px",
+          "eyebrow": "Signature Interaction",
+          "title": "The plus button turns one delivery into a route",
+          "body": "<p>A customer can add another pickup without leaving the active order. The new address joins the route sheet, and Tempo updates the map and estimated time.</p><p>Contextual guidance introduces the feature at the moment it becomes useful. Customers learn the route model through the task rather than a separate tutorial.</p>"
+        },
+        {
+          "id": "route-feature",
+          "type": "split",
+          "layout": "wide",
+          "background": { "color": "#dff3ec" },
+          "paddingTop": "120px",
+          "paddingBottom": "120px",
+          "columns": [
+            { "asset": "route-optimization" },
+            { "title": "The route explains each decision", "body": "<p>The map shows the pickup order and highlights the proposed path. A compact message estimates the time saved through optimization.</p><p>The bottom sheet keeps delivery details close to the map. Customers can inspect stops, change their order, and start the delivery without losing spatial context.</p>" }
+          ]
+        },
+        {
+          "id": "wireframes",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "140px",
+          "paddingBottom": "80px",
+          "eyebrow": "Wireframes",
+          "title": "Wireframes made the new route model testable",
+          "body": "<p>We mapped the path from category discovery to order building, route review, checkout, and tracking. Low-fidelity screens helped us decide where customers could add a stop and how the route sheet should respond.</p><p>The wireframes also connected supporting journeys such as sign-in, profiles, order history, and delivery preferences.</p>"
+        },
+        {
+          "id": "product-structure",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "100px",
+          "paddingBottom": "80px",
+          "eyebrow": "Information Architecture",
+          "title": "Categories organize a broad service without hiding the route",
+          "body": "<p>Tempo covers food, pharmacy items, alcohol, shops, documents, and custom deliveries. Categories and filters help customers enter through the need they recognize.</p><p>The route remains the shared layer across those categories. A customer can move between shopping and delivery planning while the current stops stay intact.</p>"
+        },
+        {
+          "id": "core-flow",
+          "type": "gallery",
+          "layout": "wide",
+          "background": { "color": "#f3f5f4" },
+          "paddingTop": "100px",
+          "paddingBottom": "150px",
+          "columns": 4,
+          "items": [
+            { "asset": "restaurants", "caption": "Discover services" },
+            { "asset": "screen-04", "caption": "Build an order" },
+            { "asset": "route-optimization", "caption": "Optimize the route" },
+            { "asset": "screen-05", "caption": "Track delivery" }
+          ]
+        },
+        {
+          "id": "delivery-made-for-you",
+          "type": "prose",
+          "layout": "contained",
+          "background": { "color": "#1b8874" },
+          "textColor": "#ffffff",
+          "paddingTop": "150px",
+          "paddingBottom": "100px",
+          "eyebrow": "Product Experience",
+          "title": "A consistent experience across different requests",
+          "body": "<p>Restaurant cards, pharmacy listings, document delivery, and custom pickups use the same product language. Customers keep familiar controls as the content changes.</p><p>Small choices support the wider service. Delivery preferences can reduce waste, saved information speeds up repeat orders, and account history keeps past routes accessible.</p>"
+        },
+        {
+          "id": "product-screens",
+          "type": "gallery",
+          "layout": "wide",
+          "background": { "color": "#1b8874" },
+          "textColor": "#ffffff",
+          "paddingBottom": "170px",
+          "columns": 4,
+          "items": [
+            { "asset": "screen-06" },
+            { "asset": "screen-07" },
+            { "asset": "screen-08" },
+            { "asset": "screen-09" },
+            { "asset": "screen-10" },
+            { "asset": "screen-11" },
+            { "asset": "screen-12" },
+            { "asset": "forgot-password" }
+          ]
+        },
+        {
+          "id": "trust-and-access",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "140px",
+          "paddingBottom": "110px",
+          "eyebrow": "Trust and Access",
+          "title": "Sensitive deliveries need more than a tracking dot",
+          "body": "<p>Document delivery introduced a stronger trust requirement. Customers need confirmation that the courier received the correct item and delivered it to the intended recipient.</p><p>Tempo pairs delivery status with clear addresses, recipient details, and confirmation messages. Sign-in and recovery flows offer familiar paths through email or phone, so customers can return to an active order without confusion.</p>"
+        },
+        {
+          "id": "landing-page",
+          "type": "split",
+          "layout": "wide",
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
+          "columns": [
+            { "title": "Launching the service before the app", "body": "<p>The business needed a public entry point while the mobile product remained in progress. We designed a landing page that explains Tempo’s promise, gives customers a phone number for delivery requests, and invites couriers and partners to join.</p><p>The page let the team begin learning from real demand before the full application was ready.</p>" },
+            { "asset": "landing-page" }
+          ]
+        },
+        {
+          "id": "design-system",
+          "type": "feature-grid",
+          "layout": "wide",
+          "background": { "color": "#f3f5f4" },
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
+          "title": "A system the product team can extend",
+          "items": [
+            { "value": "Aa", "label": "Readable type for maps, commerce, and account flows" },
+            { "value": "#1B8874", "label": "A green accent that connects brand and product" },
+            { "value": "24px", "label": "Spacing rules that hold across dense mobile screens" },
+            { "value": "UI", "label": "Reusable inputs, buttons, cards, feedback, and states" }
+          ]
+        },
+        {
+          "id": "reflection",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
+          "eyebrow": "Reflection",
+          "title": "The route is the product, not a final tracking screen",
+          "body": "<p>Tempo’s broad service catalog could have produced a collection of unrelated ordering flows. Treating the route as a persistent product layer gave those flows a shared structure.</p><p>The next design phase should test how customers interpret route changes, fees, and arrival estimates when they add more stops. Those decisions affect trust more than visual polish.</p>"
+        },
+        {
+          "id": "portfolio-navigation",
+          "type": "navigation",
+          "layout": "wide",
+          "background": { "color": "#dff3ec" },
+          "paddingTop": "90px",
+          "paddingBottom": "120px",
+          "title": "Take a look at my other projects",
+          "back": { "label": "BACK", "url": "/" },
+          "items": [
+            { "label": "CloudChipr", "url": "/cloudchipr/" },
+            { "label": "Material Exchange", "url": "/material-exchange/" },
+            { "label": "Securion", "url": "/securion/" }
           ]
         }
       ]

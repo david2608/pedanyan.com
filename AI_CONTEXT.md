@@ -354,3 +354,10 @@ Storybook build may warn that it cannot write `/Users/davit/.storybook/settings.
 - Every case study is rendered from the shared structured section system: intro, prose, media, gallery, split, feature grid, chips, metrics, testimonial, and project navigation.
 - Preserve semantic/selectable copy, source section order, project-specific colors, 1048px text width, 1800px media width, circular testimonial portraits, and responsive stacking.
 - Storybook includes one story for the index and one for each project under `MVP Pages`.
+
+## Case Study Generation
+
+New case studies are generated from raw content using the standard block system
+documented in `DESIGN-LANGUAGE.md` (repo root). Give the AI the copy + images and
+it maps them to `portfolio-content.json` sections — no per-study Figma unless
+Davit explicitly asks for a custom section.

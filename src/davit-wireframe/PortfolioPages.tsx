@@ -85,7 +85,8 @@ const projectAccents: Record<string, { accent: string; surface: string }> = {
   "material-exchange": { accent: "#325d45", surface: "#eaf4ed" },
   securion: { accent: "#6658ff", surface: "#eae8ff" },
   "material-exchange-photo-lab": { accent: "#157a63", surface: "#e6f8f1" },
-  "hotel-apartments": { accent: "#795d46", surface: "#f1e9e2" }
+  "hotel-apartments": { accent: "#795d46", surface: "#f1e9e2" },
+  tempo: { accent: "#1b8874", surface: "#daf2e8" }
 };
 
 function isStorybook() {
@@ -144,7 +145,70 @@ function sectionStyle(project: PortfolioProject, section: PortfolioSection): CSS
 
 function Html({ html, className = "" }: { html?: string; className?: string }) {
   if (!html) return null;
-  return <div className={className} dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div className={className} dangerouslySetInnerHTML={{ __html: addCaseStudyHighlights(html) }} />;
+}
+
+const caseStudyHighlightPhrases = [
+  "$500K saved",
+  "reduced cloud spending by 30%",
+  "$1.3M in funding",
+  "resources that are never used",
+  "cost optimization",
+  "direct and indirect competitors",
+  "design lead",
+  "team of 4 talented designers",
+  "entire product’s MVP",
+  "profitable in just 8 months",
+  "digital platform",
+  "brands, manufacturers, and suppliers",
+  "160 individuals from 24 different countries",
+  "at least twice a month",
+  "350 pixel perfect linear icons",
+  "Mat-EX cross-devices design system",
+  "1 to 5 talented designers",
+  "limited image editing skills and budget constraints",
+  "easy and intuitive design tool",
+  "two months of dedication",
+  "critical priorities",
+  "Russian-Ukrainian War",
+  "moving to Dubai",
+  "field study",
+  "business trip",
+  "drop-offs (87%)",
+  "book a hotel apartment instantly",
+  "distinct identity",
+  "one flow",
+  "several pickup points in one courier route",
+  "efficient order",
+  "route visible before checkout",
+  "route-planning tools",
+  "plus button",
+  "active order",
+  "Low-fidelity screens",
+  "Categories and filters",
+  "same product language",
+  "clear address and recipient details",
+  "persistent product layer"
+];
+
+const caseStudyHighlightPattern = new RegExp(
+  `(${caseStudyHighlightPhrases
+    .sort((a, b) => b.length - a.length)
+    .map((phrase) => phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|")})`,
+  "g"
+);
+
+function addCaseStudyHighlights(html: string) {
+  let insideStrong = false;
+  return html.split(/(<[^>]+>)/g).map((token) => {
+    if (token.startsWith("<")) {
+      if (/^<strong(?:\s|>)/i.test(token)) insideStrong = true;
+      if (/^<\/strong>/i.test(token)) insideStrong = false;
+      return token;
+    }
+    return insideStrong ? token : token.replace(caseStudyHighlightPattern, "<strong>$1</strong>");
+  }).join("");
 }
 
 function ProjectImage({
@@ -229,7 +293,7 @@ function IntroSection({ project, section }: { project: PortfolioProject; section
           <h1><ProjectTitle title={section.title} /></h1>
           <h2>{section.subtitle}</h2>
         </div>
-        <dl className="dw-case-meta">
+        <dl className="dw-case-meta" aria-hidden={isSecurion || undefined}>
           {section.metadata?.map((item) => (
             <div className={`dw-case-meta-${item.label.replace(/:$/, "").toLowerCase().replace(/[^a-z]+/g, "-")}`} key={item.label}>
               <dt>{item.label.replace(/:$/, "")}</dt>
@@ -267,7 +331,6 @@ function IntroSection({ project, section }: { project: PortfolioProject; section
         </dl>
         {isSecurion ? (
           <div className="dw-securion-tools" aria-label="Tools used: Sketch, Confluence, Slack, and Asana">
-            <span>Used tools</span>
             <img src="/portfolio-assets/securion/tools.png" alt="Sketch, Confluence, Slack, and Asana" />
           </div>
         ) : null}
@@ -376,6 +439,56 @@ const hotelColors = [
   { name: "Gold", hex: "#E6BC73", rgb: "230 188 115" }
 ];
 
+function HotelBrandConstructionSvg() {
+  return (
+    <svg className="dw-hotel-brand-construction-notes" viewBox="0 0 742 873" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hotel Apartments logo construction geometry">
+      <defs>
+        <filter id="hotel-construction-shadow" x="69" y="183" width="561" height="613" filterUnits="userSpaceOnUse">
+          <feDropShadow dx="0" dy="34" stdDeviation="27" floodColor="#3C3C3C" floodOpacity=".25" />
+        </filter>
+      </defs>
+      <g stroke="#DBDBDB" strokeOpacity=".5" strokeWidth="4">
+        <circle cx="320.5" cy="239.5" r="46.5" />
+        <path d="M284 208 97 21" />
+        <circle cx="239.5" cy="647.5" r="46.5" />
+        <path d="M208 684 21 871" />
+        <circle cx="406.5" cy="430.5" r="46.5" />
+        <path d="M443 399 728 114" />
+      </g>
+      <g fill="#DBDBDB" fontFamily="Arial, sans-serif" fontSize="22">
+        <text x="76" y="38" transform="rotate(45 76 38)">Luxury villa windows</text>
+        <text x="42" y="835" transform="rotate(-45 42 835)">Letter H</text>
+        <text x="614" y="215" transform="rotate(-45 614 215)">Letter A</text>
+      </g>
+      <g filter="url(#hotel-construction-shadow)" fill="#fff">
+        <path d="M394.73 508.584H304.27V657.921H394.73V508.584Z" />
+        <path d="M407.56 668.738H287.746V683.762H407.56V668.738Z" />
+        <path d="M432.522 693.777H262.784V708.801H432.522V693.777Z" />
+        <path d="M213.46 277.318V708H123V350.985" />
+        <path d="M576 350.984V708H485.54V277.317" />
+        <path d="M394.73 233.649V417.84H304.27V233.649L349.5 203L394.73 233.649Z" />
+      </g>
+    </svg>
+  );
+}
+
+function HotelPreferenceSvg() {
+  const mark = (x: number, y: number, scale: number, color: string, framed = false) => (
+    <g transform={`translate(${x} ${y}) scale(${scale})`} fill={color}>
+      {framed ? <path d="M3.27 0H134V134H0V0h3.27Zm124.27 6.5H6.54v121h121V6.5Z" /> : null}
+      <path d="M57.92 76.05h18.12v34.19H57.92V76.05ZM57.92 23.79h18.12v34.15H57.92V23.79ZM21.71 23.73h18.12v86.5H21.71v-86.5ZM94.17 23.73h18.13v86.5H94.17v-86.5Z" />
+    </g>
+  );
+  return (
+    <svg className="dw-hotel-preference-svg" viewBox="0 0 1054 245" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Client preference: three Hotel Apartments logo options with the center option selected">
+      <text x="0" y="34" fill="white" fontFamily="Syne, Arial, sans-serif" fontSize="34" fontWeight="600">Client&apos;s preference</text>
+      {mark(0, 126, 0.8, "#DBDBDB")}
+      {mark(460, 110, 1, "white", true)}
+      {mark(963, 126, 0.8, "#DBDBDB")}
+    </svg>
+  );
+}
+
 function HotelBrand({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   return (
     <section className="dw-case-section dw-hotel-brand" id={section.id} data-hotel-brand>
@@ -385,7 +498,7 @@ function HotelBrand({ project, section }: { project: PortfolioProject; section: 
           <Html html={section.body} className="dw-hotel-brand-intro" />
         </header>
         <div className="dw-hotel-brand-construction" data-portfolio-reveal>
-          <img className="dw-hotel-brand-construction-notes" src="/portfolio-assets/hotel-apartments/brand-logo.png" alt="Hotel Apartments logo construction: luxury villa windows, letter H, letter A" />
+          <HotelBrandConstructionSvg />
           <div className="dw-hotel-chat-bubble dw-hotel-chat-bubble-brief" data-portfolio-reveal>
             <span className="dw-hotel-chat-avatar" aria-hidden="true">RP</span>
             <div>
@@ -395,24 +508,15 @@ function HotelBrand({ project, section }: { project: PortfolioProject; section: 
           </div>
         </div>
         <div className="dw-hotel-preference" data-portfolio-reveal>
-          <h3>Client&apos;s preference</h3>
-          <div>
-            <span><HotelMark label={false} /></span>
-            <span className="is-selected"><HotelMark label={false} /></span>
-            <span><HotelMark label={false} /></span>
-          </div>
-          <div className="dw-hotel-chat-bubble dw-hotel-chat-bubble-approval">
-            <span className="dw-hotel-chat-avatar" aria-hidden="true">RP</span>
-            <div>
-              <p className="dw-hotel-chat-meta"><strong>Rafayel</strong> <small>1h ago</small></p>
-              <p>This one is really good. What do you think?</p>
-            </div>
-          </div>
+          <HotelPreferenceSvg />
         </div>
       </div>
 
       <div className="dw-hotel-brand-applications">
         <figure className="dw-hotel-brand-table dw-overlap-up" data-portfolio-reveal><ProjectImage project={project} assetKey="brand-detail-01" /></figure>
+        <div className="dw-hotel-brand-rationale" data-portfolio-reveal>
+          <p>We carried the <strong>calm, residential character</strong> across each touchpoint. The window-inspired mark, muted palette, and restrained typography connect booking materials with the <strong>in-room experience.</strong></p>
+        </div>
         <figure className="dw-hotel-brand-suite" data-portfolio-parallax><ProjectImage project={project} assetKey="brand-applications" /></figure>
         <div className="dw-hotel-brand-craft">
           <p data-portfolio-reveal>Once the <strong>concept is chosen,</strong> it&apos;s time to craft a clean and minimalistic design for specific elements like <strong>business cards, labels, door hangers, and more.</strong></p>
@@ -461,16 +565,6 @@ function HotelWebDesign({ project, section }: { project: PortfolioProject; secti
   );
 }
 
-function SecurionConstructionMark() {
-  return (
-    <div className="dw-securion-construction-mark" role="img" aria-label="Securion logo construction">
-      <span className="dw-securion-mark-dashed" aria-hidden="true" />
-      <span className="dw-securion-mark-ring" aria-hidden="true" />
-      <img src="/portfolio-assets/securion/logo-mark.svg" alt="" />
-    </div>
-  );
-}
-
 function SecurionBrandIdentity({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   return (
     <section className="dw-case-section dw-securion-brand" id={section.id} data-securion-brand>
@@ -485,25 +579,54 @@ function SecurionBrandIdentity({ project, section }: { project: PortfolioProject
       </div>
 
       <div className="dw-securion-construction" data-portfolio-reveal>
-        <ProjectImage project={project} assetKey="logo-construction" />
-        <SecurionConstructionMark />
-        <div className="dw-securion-construction-notes">
-          <article>
-            <Shield aria-hidden="true" strokeWidth={1.7} />
+        <div className="dw-sc-phone dw-sc-phone-top" aria-hidden="true">
+          <img src="/portfolio-assets/securion/construction/phone-dock.png" alt="" />
+        </div>
+        <div className="dw-sc-phone dw-sc-phone-bottom" aria-hidden="true">
+          <img src="/portfolio-assets/securion/construction/phone-dock.png" alt="" />
+          <span className="dw-sc-phone-appicon"><img src="/portfolio-assets/securion/construction/app-glyph.svg" alt="" /></span>
+          <span className="dw-sc-phone-shade" />
+        </div>
+
+        <div className="dw-sc-panel" role="img" aria-label="Securion logo construction: shield, letter S and keyhole blueprint over a blue panel">
+          <ProjectImage project={project} assetKey="logo-construction" />
+          <img className="dw-sc-el dw-sc-v104" src="/portfolio-assets/securion/construction/guide-diagonal.svg" alt="" />
+          <img className="dw-sc-el dw-sc-v103" src="/portfolio-assets/securion/construction/guide-diagonal.svg" alt="" />
+          <img className="dw-sc-el dw-sc-arc-left" src="/portfolio-assets/securion/construction/orbit-arc-left.svg" alt="" />
+          <img className="dw-sc-el dw-sc-arc-right" src="/portfolio-assets/securion/construction/orbit-arc-right.svg" alt="" />
+          <img className="dw-sc-el dw-sc-ring-2350" src="/portfolio-assets/securion/construction/ring-2350.svg" alt="" />
+          <img className="dw-sc-el dw-sc-ring-2348" src="/portfolio-assets/securion/construction/ring-2348.svg" alt="" />
+          <img className="dw-sc-el dw-sc-ring-2347" src="/portfolio-assets/securion/construction/ring-2347.svg" alt="" />
+          <span className="dw-sc-el dw-sc-square" aria-hidden="true" />
+          <img className="dw-sc-el dw-sc-ddot dw-sc-ddot-a" src="/portfolio-assets/securion/construction/dashed-dot.svg" alt="" />
+          <img className="dw-sc-el dw-sc-ddot dw-sc-ddot-b" src="/portfolio-assets/securion/construction/dashed-dot.svg" alt="" />
+          <img className="dw-sc-el dw-sc-ddot dw-sc-ddot-c" src="/portfolio-assets/securion/construction/dashed-dot.svg" alt="" />
+          <img className="dw-sc-el dw-sc-glyph" src="/portfolio-assets/securion/construction/glyph.svg" alt="" />
+          <img className="dw-sc-el dw-sc-gear" src="/portfolio-assets/securion/construction/center-gear.svg" alt="" />
+          <img className="dw-sc-el dw-sc-keypoly" src="/portfolio-assets/securion/construction/keyhole-poly.svg" alt="" />
+          <img className="dw-sc-el dw-sc-conn dw-sc-conn-left" src="/portfolio-assets/securion/construction/connector-left.svg" alt="" />
+          <img className="dw-sc-el dw-sc-conn dw-sc-conn-right" src="/portfolio-assets/securion/construction/connector-right.svg" alt="" />
+          <svg className="dw-sc-dot dw-sc-dot-2351" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="7.5" fill="#0939C6" /><circle cx="7.5" cy="7.5" r="6.5" fill="none" stroke="#fff" strokeOpacity="0.7" strokeWidth="2" /></svg>
+          <svg className="dw-sc-dot dw-sc-dot-2352" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="7.5" fill="#0939C6" /><circle cx="7.5" cy="7.5" r="6.5" fill="none" stroke="#fff" strokeOpacity="0.7" strokeWidth="2" /></svg>
+          <svg className="dw-sc-dot dw-sc-dot-2353" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="7.5" fill="#336CE5" /><circle cx="7.5" cy="7.5" r="6.5" fill="none" stroke="#fff" strokeOpacity="0.7" strokeWidth="2" /></svg>
+          <svg className="dw-sc-dot dw-sc-dot-2354" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="7.5" fill="#2D5FE1" fillOpacity="0.7" /><circle cx="7.5" cy="7.5" r="6.5" fill="none" stroke="#fff" strokeOpacity="0.3" strokeWidth="2" /></svg>
+          <svg className="dw-sc-dot dw-sc-dot-2355" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="7.5" fill="#2D5FE1" fillOpacity="0.7" /><circle cx="7.5" cy="7.5" r="6.5" fill="none" stroke="#fff" strokeOpacity="0.3" strokeWidth="2" /></svg>
+          <svg className="dw-sc-dot dw-sc-dot-2356" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="7.5" fill="#2D5FE1" fillOpacity="0.7" /><circle cx="7.5" cy="7.5" r="6.5" fill="none" stroke="#fff" strokeOpacity="0.3" strokeWidth="2" /></svg>
+        </div>
+
+        <div className="dw-securion-construction-notes dw-sc-notes">
+          <article className="dw-sc-note-shield">
+            <span className="dw-sc-note-iconrow"><img src="/portfolio-assets/securion/construction/icon-shield.svg" alt="" /></span>
             <strong>shield</strong>
             <p>For Security, Protection, Safety, Defense, Trust, Strength, Resilience, Guardianship, Safeguarding, Fortification</p>
           </article>
-          <article>
-            <span className="dw-securion-letter" aria-hidden="true">S</span>
+          <article className="dw-sc-note-letter">
+            <span className="dw-sc-note-iconrow"><span className="dw-securion-letter" aria-hidden="true">S</span></span>
             <strong>letter “S”</strong>
             <p>The First Letter of the brand name.<br /><span className="dw-securion-note-bright">Securion = Turn the Security on</span></p>
           </article>
-          <article>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
-              <circle cx="12" cy="12" r="10" />
-              <circle cx="12" cy="10" r="2.4" fill="currentColor" stroke="none" />
-              <path d="M10.9 11.8 10 16h4l-0.9-4.2" fill="currentColor" stroke="none" />
-            </svg>
+          <article className="dw-sc-note-keyhole">
+            <span className="dw-sc-note-iconrow"><img src="/portfolio-assets/securion/construction/icon-keyhole.svg" alt="" /></span>
             <strong>keyhole</strong>
             <p>For Access, Secrecy, Mystery, Security, Opportunity, Lock, Entrance, Privacy, Hidden, Revealing</p>
           </article>
@@ -1115,7 +1238,16 @@ function ProseSection({ project, section }: { project: PortfolioProject; section
         {section.eyebrow ? <p className="dw-case-eyebrow">{section.eyebrow}</p> : null}
         {section.title ? (
           <h2 className={section.headingGradient ? "has-gradient" : ""} style={headingStyle}>
-            <SectionHeading project={project} section={section} />
+            {project.project.slug === "securion" && section.id === "secure-product" ? (
+              <span className="dw-securion-secure-lines" aria-label={section.title}>
+                <span>High Secure, and</span>
+                <span>functional Multi-Factor and</span>
+                <span>Multi-Signature solution for all of</span>
+                <span>your Digital Assets.</span>
+              </span>
+            ) : project.project.slug === "material-exchange-photo-lab" && section.id === "anticipated-transformations" ? (
+              <><span className="dw-photo-lab-title-accent">Anticipated Transformations:</span>{" "}The Impact of Our Image Editing Tool on Material Exchange</>
+            ) : <SectionHeading project={project} section={section} />}
           </h2>
         ) : null}
         <Html html={section.body} className="dw-case-richtext" />
@@ -1614,6 +1746,43 @@ function MediaSection({ project, section }: { project: PortfolioProject; section
       <div className="dw-photo-lab-flow" aria-label="Problem progression">{steps.map((step, index) => <React.Fragment key={step.label}><div className={`dw-photo-lab-flow-step step-${index}`}><span>{step.label}</span><span className={`dw-photo-lab-flow-emoji emoji-${step.emojiPos}`} aria-hidden="true">{step.emoji}</span></div>{index < steps.length - 1 ? <span className="dw-photo-lab-flow-arrow" aria-hidden="true">→</span> : null}</React.Fragment>)}</div>
     </section>;
   }
+  if (project.project.slug === "material-exchange-photo-lab" && section.id === "user-stories") {
+    const stories = [
+      {
+        role: "material manager",
+        avatar: "MM",
+        body: <><span>As a material manager, I want to be able to </span><strong>efficiently edit and enhance material thumbnails</strong><span> and gallery images, so that our materials are visually appealing to potential buyers and encourage engagement with our catalog. Also, I want to be able to </span><strong>batch process images</strong><span> for multiple materials, so that I can save time and maintain a consistent look across our extensive catalog of materials.</span></>
+      },
+      {
+        role: "scanning manager",
+        avatar: "SM",
+        body: <><span>As a scanning manager in a manufacturing company, I want to be able to </span><strong>enhance the quality of scanned material images</strong><span>, so that our digital archive remains </span><strong>accurate and easy to access</strong><span> for historical reference.</span></>
+      },
+      {
+        role: "material photographer",
+        avatar: "MP",
+        body: <><span>As a material photographer, I want to be able to </span><strong>capture, edit, and upload images</strong><span> of materials directly through the app, simplifying the process of updating our catalog and providing our customers with </span><strong>accurate visuals</strong><span>.</span></>
+      }
+    ];
+    return (
+      <section className={sectionClass(section, "dw-photo-lab-user-stories")} style={sectionStyle(project, section)} id={section.id}>
+        <h2 data-portfolio-reveal>{section.title}</h2>
+        <div className="dw-photo-lab-stories-layout">
+          <figure className="dw-photo-lab-stories-photo" data-portfolio-reveal>
+            <ProjectImage project={project} assetKey={section.asset} />
+          </figure>
+          <div className="dw-photo-lab-story-list">
+            {stories.map((story, index) => (
+              <article className={`dw-photo-lab-story story-${index + 1}`} key={story.role}>
+                <span className="dw-photo-lab-story-avatar" aria-hidden="true">{story.avatar}</span>
+                <p>{story.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
   if (project.project.slug === "cloudchipr" && section.id === "brand-construction") {
     return (
       <section className={sectionClass(section, "dw-case-brand-construction-section")} style={sectionStyle(project, section)} id={section.id}>
@@ -1671,10 +1840,13 @@ function SplitSection({ project, section }: { project: PortfolioProject; section
 function FeatureGridSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   return (
     <section className={sectionClass(section)} style={sectionStyle(project, section)} id={section.id}>
+      {section.title ? <h2 className="dw-case-feature-title" data-portfolio-reveal>{section.title}</h2> : null}
       <div className="dw-case-feature-grid" data-portfolio-reveal>
         {section.items?.map((item, index) => typeof item === "string" ? null : (
           <article key={`${item.icon}-${index}`}>
             <ProjectImage project={project} assetKey={item.icon} />
+            {item.value ? <strong>{item.value}</strong> : null}
+            {item.label ? <span>{item.label}</span> : null}
             <Html html={item.text} />
           </article>
         ))}
@@ -1760,18 +1932,35 @@ function TestimonialSection({ project, section }: { project: PortfolioProject; s
 }
 
 function NavigationSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
-  const items = section.items?.filter((item): item is Exclude<typeof item, string> => typeof item !== "string") || [];
+  const otherProjects = projects.filter((item) => item.project.slug !== project.project.slug);
   return (
-    <section className="dw-case-navigation" style={sectionStyle(project, section)} id={section.id}>
+    <section className="dw-case-navigation dw-case-more-projects" id={section.id}>
       <div data-portfolio-reveal>
         <a className="dw-case-back" href={portfolioHref()} target={isStorybook() ? "_parent" : undefined}>Back to work</a>
-        <h2>{section.title || "More selected work"}</h2>
+        <div className="dw-case-more-heading">
+          <p>Selected work</p>
+          <h2>Explore other case studies</h2>
+        </div>
         <div className="dw-case-next-list">
-          {items.map((item, index) => {
-            const slug = projectSlugFromLegacyUrl(item.url);
+          {otherProjects.map((otherProject, index) => {
+            const intro = otherProject.sections[0];
+            const accent = projectAccents[otherProject.project.slug];
             return (
-              <a href={projectHref(slug)} target={isStorybook() ? "_parent" : undefined} key={`${item.label}-${index}`}>
-                <span>{item.label}</span><span>↗</span>
+              <a
+                className="dw-case-more-card"
+                href={projectHref(otherProject.project.slug)}
+                target={isStorybook() ? "_parent" : undefined}
+                key={otherProject.project.slug}
+                style={{ "--project-accent": accent?.accent, "--project-surface": accent?.surface } as CSSProperties}
+              >
+                <span className="dw-case-more-card-media">
+                  <ProjectImage project={otherProject} assetKey={intro.media} />
+                </span>
+                <span className="dw-case-more-card-copy">
+                  <small>{String(index + 1).padStart(2, "0")}</small>
+                  <strong>{otherProject.project.title}</strong>
+                  <span aria-hidden="true">↗</span>
+                </span>
               </a>
             );
           })}
@@ -1845,7 +2034,7 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   }
   if (
     project.project.slug === "hotel-apartments" &&
-    ["brand-foundation", "client-preference", "brand-details", "brand-applications", "brand-collage"].includes(section.id)
+    ["walking-visual", "brand-foundation", "client-preference", "brand-details", "brand-applications", "brand-collage"].includes(section.id)
   ) {
     return null;
   }
@@ -2598,6 +2787,25 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
             scrollTrigger: { trigger: securionFeedback, start: "top 66%", toggleActions: "play none none reverse" }
           });
         }
+
+        const secureProductTitle = container.querySelector<HTMLElement>("#secure-product h2");
+        const secureProductLines = secureProductTitle?.querySelectorAll<HTMLElement>(".dw-securion-secure-lines > span");
+        if (secureProductTitle && secureProductLines?.length) {
+          gsap.fromTo(secureProductLines, {
+            backgroundPosition: "100% 0%"
+          }, {
+            backgroundPosition: "0% 0%",
+            ease: "none",
+            stagger: 1,
+            scrollTrigger: {
+              trigger: secureProductTitle,
+              start: "top 82%",
+              end: "bottom 28%",
+              scrub: 0.65,
+              invalidateOnRefresh: true
+            }
+          });
+        }
       } else {
         gsap.utils.toArray<HTMLElement>("[data-portfolio-reveal]").forEach((element) => {
           gsap.fromTo(element, { autoAlpha: 0, y: 56 }, {
@@ -2624,11 +2832,77 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
             y: 0,
             scale: 1,
             rotate: 0,
-            stagger: 0.16,
+            stagger: 0.18,
             duration: 1,
-            ease: "power3.out"
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: materialIntro,
+              start: "top 82%",
+              toggleActions: "play none none reverse"
+            }
           });
         }
+      }
+
+      const photoLabFlow = container.querySelector<HTMLElement>(".dw-photo-lab-flow");
+      if (photoLabFlow) {
+        const flowItems = photoLabFlow.querySelectorAll<HTMLElement>(
+          ".dw-photo-lab-flow-step, .dw-photo-lab-flow-arrow"
+        );
+        gsap.fromTo(flowItems, {
+          autoAlpha: 0,
+          scale: 0.72,
+          y: 22
+        }, {
+          autoAlpha: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.72,
+          stagger: 0.16,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: photoLabFlow,
+            start: "top 82%",
+            toggleActions: "play none none reverse"
+          }
+        });
+      }
+
+      const photoLabStories = container.querySelector<HTMLElement>(".dw-photo-lab-user-stories");
+      if (photoLabStories) {
+        const storyCards = photoLabStories.querySelectorAll<HTMLElement>(".dw-photo-lab-story");
+        gsap.fromTo(storyCards, {
+          autoAlpha: 0,
+          x: 38,
+          y: 20,
+          scale: 0.97
+        }, {
+          autoAlpha: 1,
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 0.78,
+          stagger: 0.18,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: photoLabStories,
+            start: "top 78%",
+            toggleActions: "play none none reverse"
+          }
+        });
+      }
+
+      const visualLanguage = container.querySelector<HTMLElement>("[data-mex-visual-language]");
+      if (visualLanguage) {
+        ScrollTrigger.create({
+          trigger: visualLanguage,
+          start: "top 88%",
+          end: "bottom 12%",
+          onEnter: () => visualLanguage.classList.add("is-in-viewport"),
+          onEnterBack: () => visualLanguage.classList.add("is-in-viewport"),
+          onLeave: () => visualLanguage.classList.remove("is-in-viewport"),
+          onLeaveBack: () => visualLanguage.classList.remove("is-in-viewport")
+        });
       }
 
       gsap.utils.toArray<HTMLElement>("[data-mex-note]").forEach((note, index) => {
@@ -2705,7 +2979,7 @@ export function PortfolioIndexContent() {
         <h1>Products I helped shape.</h1>
         <div>
           <p>I work with founders and product teams when the direction is still unclear or the product needs a stronger design system.</p>
-          <span>Five detailed case studies</span>
+          <span>Six detailed case studies</span>
         </div>
       </header>
       <div className="dw-portfolio-project-grid">

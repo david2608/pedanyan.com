@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 import gsap from "gsap";
+import { CustomEase } from "gsap/CustomEase";
 import { Observer } from "gsap/Observer";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MessageCircle } from "lucide-react";
@@ -32,7 +33,16 @@ import { PortfolioMusicToggle } from "./PortfolioMusicToggle";
 import { siteData } from "./siteData";
 import { websiteContent } from "./websiteContent";
 
-gsap.registerPlugin(Observer, ScrollTrigger);
+gsap.registerPlugin(CustomEase, Observer, ScrollTrigger);
+
+CustomEase.create(
+  "numberFastSlowFast",
+  "M0,0 C0.05,0.2 0.18,0.3 0.4,0.3125 C0.5,0.318 0.62,0.37 0.72,0.43 C0.86,0.55 0.96,0.82 1,1"
+);
+CustomEase.create(
+  "numberTravelPath",
+  "M0,0 C0.08,0.16 0.2,0.25 0.4,0.269 C0.52,0.28 0.67,0.34 0.78,0.48 C0.9,0.65 0.97,0.88 1,1"
+);
 
 const BASE_DUST_SPEED = 0.08;
 const BASE_HERO_DUST_SPEED = 0.01;
@@ -44,16 +54,21 @@ const HOME_NUMBERS_MOTION = {
   heroHideAt: 1.07,
   heroTransitionEnd: 1.12,
   numbersStart: 1.18,
-  scaleIn: 8,
-  focusHold: 0.4,
-  scaleOut: 8,
+  scaleIn: 2,
+  focusHold: 1,
+  scaleOut: 2,
+  focusZoom: 1.18,
+  focusDepth: 150,
+  focusDrift: 18,
   countStartDelay: 0.08,
-  countTo23: 1.2,
-  count23To27: 1.6,
-  experienceMove: 0.72,
+  countTo22: 2.6,
+  count22To27: 1.8,
+  experienceMove: 1.04,
   scrollMaxAdditionalSpeed: 1.5,
   scrollSensitivity: 180,
-  scrollReleaseReset: 0.14
+  scrollReleaseReset: 0.14,
+  mouseParallax: 28,
+  mouseParallaxDuration: 0.65
 } as const;
 
 type PageKey = "home" | "designer" | "designTalent" | "school" | "publicWork" | "letsTalk";
@@ -608,23 +623,8 @@ function DepthTextReveal({ children }: { children: string }) {
 }
 
 function SlotMachineNumber() {
-  const digits = "01234567890123456789".split("");
-
   return (
-    <div className="dw-designer-slot-number" aria-label="$27M">
-      <span className="dw-slot-symbol">$</span>
-      <span className="dw-slot-digit" data-slot="tens" aria-hidden="true">
-        {digits.map((digit, index) => (
-          <span key={`tens-${digit}-${index}`}>{digit}</span>
-        ))}
-      </span>
-      <span className="dw-slot-digit" data-slot="ones" aria-hidden="true">
-        {digits.map((digit, index) => (
-          <span key={`ones-${digit}-${index}`}>{digit}</span>
-        ))}
-      </span>
-      <span className="dw-slot-symbol">M</span>
-    </div>
+    <div className="dw-designer-slot-number" aria-label="$0M">$0M</div>
   );
 }
 
@@ -801,7 +801,7 @@ function WireframeChrome() {
   );
 }
 
-export function DavitNav({ activePage }: { activePage?: PageKey }) {
+export function SiteHeader({ activePage }: { activePage?: PageKey }) {
   const [theme, setTheme] = useState<"day" | "night">("day");
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -863,7 +863,6 @@ export function DavitNav({ activePage }: { activePage?: PageKey }) {
         {websiteContent.navigation.school.label}
       </NavAnchor>
       <div className="dw-right">
-        {activePage === "designer" || activePage === "designTalent" ? <PortfolioMusicToggle /> : null}
         <button
           className="dw-theme-toggle"
           type="button"
@@ -893,10 +892,18 @@ function FixedSocialLinks() {
   );
 }
 
+function SiteFooter() {
+  return (
+    <footer className="dw-site-footer">
+      <HomeTalkRoutingSection />
+    </footer>
+  );
+}
+
 function PageShell({
   children,
   className = "",
-  showFooter = false,
+  showFooter = true,
   activePage
 }: {
   children: ReactNode;
@@ -907,15 +914,13 @@ function PageShell({
   return (
     <main className={`dw-page ${className}`}>
       <WireframeChrome />
-      <DavitNav activePage={activePage} />
+      <SiteHeader activePage={activePage} />
       <FixedSocialLinks />
+      <div className="dw-fixed-music-control">
+        <PortfolioMusicToggle />
+      </div>
       {children}
-      {showFooter ? (
-        <footer className="dw-footer">
-          <div>Davit Pedanyan</div>
-          <div>Products / designers / creative culture</div>
-        </footer>
-      ) : null}
+      {showFooter ? <SiteFooter /> : null}
     </main>
   );
 }
@@ -1287,11 +1292,7 @@ function DesignerScrollStory() {
           investmentRef.current.querySelector<HTMLElement>(".dw-designer-slot-number") ??
           investmentRef.current;
         const value = Math.max(0, Math.min(27, Math.round(investmentCounter.value)));
-        const tens = Math.floor(value / 10);
-        const ones = value % 10;
-        const loop = value >= 27 ? 1 : Math.min(1, Math.floor(investmentCounter.value / 14));
-        slotElement.style.setProperty("--slot-tens", String(loop * 10 + tens));
-        slotElement.style.setProperty("--slot-ones", String(loop * 10 + ones));
+        slotElement.textContent = `$${value}M`;
         slotElement.setAttribute("aria-label", `$${value}M`);
       };
 
@@ -2191,6 +2192,7 @@ function HomeUnifiedScrollExperience() {
       const heroScreen = scene.querySelector<HTMLElement>(".dw-home-hero-screen");
       const statsPanel = scene.querySelector<HTMLElement>(".dw-home-unified-stats");
       const statStages = gsap.utils.toArray<HTMLElement>(".dw-home-unified-stat");
+      const statContents = gsap.utils.toArray<HTMLElement>(".dw-home-unified-stat .dw-depth-content");
       const experiencePanel = scene.querySelector<HTMLElement>(".dw-home-unified-experience");
       const experienceList = scene.querySelector<HTMLElement>(".dw-experience-list");
       const experienceItems = gsap.utils.toArray<HTMLElement>(".dw-experience-list li");
@@ -2241,11 +2243,7 @@ function HomeUnifiedScrollExperience() {
           investmentRef.current.querySelector<HTMLElement>(".dw-designer-slot-number") ??
           investmentRef.current;
         const value = Math.max(0, Math.min(27, Math.round(investmentCounter.value)));
-        const tens = Math.floor(value / 10);
-        const ones = value % 10;
-        const loop = value >= 27 ? 1 : Math.min(1, Math.floor(investmentCounter.value / 14));
-        slotElement.style.setProperty("--slot-tens", String(loop * 10 + tens));
-        slotElement.style.setProperty("--slot-ones", String(loop * 10 + ones));
+        slotElement.textContent = `$${value}M`;
         slotElement.setAttribute("aria-label", `$${value}M`);
       };
 
@@ -2295,60 +2293,70 @@ function HomeUnifiedScrollExperience() {
       const numberFocusHold = HOME_NUMBERS_MOTION.focusHold;
       let nextStageStart = statsStart;
       let statsEnd = statsStart;
+      let investmentStart = Number.POSITIVE_INFINITY;
       statStages.forEach((stage, index) => {
         const isFinal = index === statStages.length - 1;
-        const fromLeft = index % 2 === 0;
+        const finalExtraHold = isFinal ? 4 : 0;
         const start = nextStageStart;
-        const focusX = isFinal ? 0 : fromLeft ? "-14vw" : "14vw";
+        const lifecycleDuration =
+          numberScaleInDuration + numberFocusHold + finalExtraHold + numberScaleOutDuration;
+        const fromLeft = index % 2 === 0;
+        const entryX = isFinal ? 0 : fromLeft ? "-42vw" : "42vw";
         const focusY = isFinal ? 0 : fromLeft ? "4vh" : "-3vh";
+        const exitX = isFinal ? 0 : fromLeft ? "62vw" : "-62vw";
 
         timeline
-          .fromTo(
-            stage,
-            {
-              x: isFinal ? 0 : fromLeft ? "-42vw" : "42vw",
-              y: focusY,
-              z: -1200,
-              scale: 0.12,
-              autoAlpha: 0,
-              filter: "blur(10px)"
-            },
-            {
-              x: focusX,
-              y: focusY,
-              z: 0,
-              scale: 1,
-              autoAlpha: 1,
-              filter: "blur(0px)",
-              duration: numberScaleInDuration,
-              ease: "power2.inOut"
-            },
-            start
-          )
-          .to(stage, { duration: numberFocusHold }, start + numberScaleInDuration)
+          .set(stage, { x: entryX, y: focusY, z: 0, scale: 0, autoAlpha: 0, filter: "blur(9px)" }, start)
           .to(
             stage,
             {
-              x: focusX,
-              y: isFinal ? "-4vh" : fromLeft ? "-7vh" : "7vh",
-              z: 920,
-              scale: isFinal ? 1.85 : 1.28,
-              autoAlpha: 0,
-              filter: "blur(14px)",
-              duration: numberScaleOutDuration,
-              ease: "power2.inOut"
+              x: exitX,
+              duration: lifecycleDuration,
+              ease: "numberTravelPath"
             },
-            start + numberScaleInDuration + numberFocusHold
+            start
+          )
+          .fromTo(
+            stage,
+            { scale: 0 },
+            {
+              scale: 3.2,
+              duration: lifecycleDuration,
+              ease: "numberFastSlowFast"
+            },
+            start
+          )
+          .fromTo(
+            stage,
+            { autoAlpha: 0, filter: "blur(9px)" },
+            {
+              autoAlpha: 1,
+              filter: "blur(0px)",
+              duration: lifecycleDuration * 0.25,
+              ease: "none"
+            },
+            start
+          )
+          .to(
+            stage,
+            {
+              autoAlpha: 0,
+              filter: "blur(12px)",
+              duration: lifecycleDuration * 0.18,
+              ease: "none"
+            },
+            start + lifecycleDuration * 0.65
           );
 
         if (isFinal) {
+          investmentStart = start;
           timeline
             .to(
               investmentCounter,
               {
-                value: 23,
-                duration: HOME_NUMBERS_MOTION.countTo23,
-                ease: "power2.out",
+                value: 22,
+                duration: HOME_NUMBERS_MOTION.countTo22,
+                ease: "none",
                 snap: { value: 1 },
                 onUpdate: updateSlot
               },
@@ -2358,20 +2366,26 @@ function HomeUnifiedScrollExperience() {
               investmentCounter,
               {
                 value: 27,
-                duration: HOME_NUMBERS_MOTION.count23To27,
+                duration: HOME_NUMBERS_MOTION.count22To27,
                 ease: "power1.inOut",
                 snap: { value: 1 },
-                onUpdate: updateSlot
+                onUpdate: updateSlot,
+                onComplete: () => {
+                  investmentCounter.value = 27;
+                  updateSlot();
+                }
               },
-              start + HOME_NUMBERS_MOTION.countStartDelay + HOME_NUMBERS_MOTION.countTo23
+              start + HOME_NUMBERS_MOTION.countStartDelay + HOME_NUMBERS_MOTION.countTo22
             );
         }
 
         factFocusTimes.push(start + numberScaleInDuration);
-        nextStageStart = start + numberScaleInDuration;
+        // Reveal the next number in the distance exactly when the current
+        // number begins fading, creating a continuous depth handoff.
+        nextStageStart = start + lifecycleDuration * 0.65;
         statsEnd = Math.max(
           statsEnd,
-          start + numberScaleInDuration + numberFocusHold + numberScaleOutDuration
+          start + lifecycleDuration
         );
       });
 
@@ -2429,6 +2443,19 @@ function HomeUnifiedScrollExperience() {
 
       const renderPlayback = () => {
         timeline.time(playback.time, false);
+        if (Number.isFinite(investmentStart) && playback.time >= investmentStart) {
+          const elapsed = Math.max(
+            0,
+            playback.time - investmentStart - HOME_NUMBERS_MOTION.countStartDelay
+          );
+          investmentCounter.value = elapsed <= HOME_NUMBERS_MOTION.countTo22
+            ? 22 * (elapsed / HOME_NUMBERS_MOTION.countTo22)
+            : 22 + 5 * Math.min(
+                1,
+                (elapsed - HOME_NUMBERS_MOTION.countTo22) / HOME_NUMBERS_MOTION.count22To27
+              );
+          updateSlot();
+        }
         updateActiveExperience();
       };
 
@@ -2502,6 +2529,9 @@ function HomeUnifiedScrollExperience() {
         playback.activeFact = index;
         playback.awaitingExitGesture = false;
         const timelineDistance = Math.abs(targetTime - playback.time);
+        // Advance facts at a constant timeline rate. Easing each trip to a
+        // focus marker made the controller decelerate to zero and restart for
+        // every number, even though the number's own scale curve was smooth.
         moveTo(targetTime, Math.max(0.2, timelineDistance), direction, () => {
           const now = gsap.ticker.time;
           playback.minimumUntil = now;
@@ -2513,7 +2543,7 @@ function HomeUnifiedScrollExperience() {
           } else {
             moveToFact(index + 1, 1);
           }
-        });
+        }, "none");
       };
 
       const moveToExperience = (
@@ -2533,6 +2563,9 @@ function HomeUnifiedScrollExperience() {
         const timelineDistance = Math.abs(targetTime - playback.time);
         moveTo(targetTime, fromFacts ? Math.max(0.2, timelineDistance) : HOME_NUMBERS_MOTION.experienceMove, direction, () => {
           const now = gsap.ticker.time;
+          // Ignore the inertial tail of the wheel gesture that initiated this
+          // transition; it must not advance a second experience item.
+          playback.cooldownUntil = Math.max(playback.cooldownUntil, now + 1.1);
           playback.minimumUntil = now;
           playback.holdUntil = now + Math.max(
             requestedHold,
@@ -2542,13 +2575,16 @@ function HomeUnifiedScrollExperience() {
             ? Number.POSITIVE_INFINITY
             : now + 3.5;
           playback.awaitingExitGesture = index === experienceFocusTimes.length - 1;
-        });
+        }, "power2.inOut");
       };
 
       const accelerateCurrentMotion = (deltaY: number) => {
         if (!motionTween) return;
+        const maximumAdditionalSpeed = playback.chapter === "experience"
+          ? 0.3
+          : HOME_NUMBERS_MOTION.scrollMaxAdditionalSpeed;
         const requestedMultiplier = 1 + Math.min(
-          HOME_NUMBERS_MOTION.scrollMaxAdditionalSpeed,
+          maximumAdditionalSpeed,
           Math.abs(deltaY) / HOME_NUMBERS_MOTION.scrollSensitivity
         );
         playback.speedMultiplier = Math.max(playback.speedMultiplier, requestedMultiplier);
@@ -2580,7 +2616,9 @@ function HomeUnifiedScrollExperience() {
         if (now < playback.cooldownUntil) return;
 
         playback.cooldownUntil = now + 0.35;
-        playback.speedMultiplier = 1 + Math.min(0.75, Math.abs(deltaY) / 420);
+        playback.speedMultiplier = playback.chapter === "experience"
+          ? 1 + Math.min(0.18, Math.abs(deltaY) / 900)
+          : 1 + Math.min(0.75, Math.abs(deltaY) / 420);
 
         if (playback.chapter === "hero") {
           if (direction < 0) {
@@ -2642,6 +2680,32 @@ function HomeUnifiedScrollExperience() {
         onUp: (self) => handleInput(-Math.max(40, Math.abs(self.deltaY)))
       });
       inputObserver.disable();
+
+      const parallaxX = statContents.map((content) => gsap.quickTo(content, "x", {
+        duration: HOME_NUMBERS_MOTION.mouseParallaxDuration,
+        ease: "power3.out"
+      }));
+      const parallaxY = statContents.map((content) => gsap.quickTo(content, "y", {
+        duration: HOME_NUMBERS_MOTION.mouseParallaxDuration,
+        ease: "power3.out"
+      }));
+      const resetNumberParallax = () => {
+        parallaxX.forEach((move) => move(0));
+        parallaxY.forEach((move) => move(0));
+      };
+      const handleNumberParallax = (event: PointerEvent) => {
+        if (playback.chapter !== "facts") {
+          resetNumberParallax();
+          return;
+        }
+        const rect = section.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width - 0.5) * HOME_NUMBERS_MOTION.mouseParallax;
+        const y = ((event.clientY - rect.top) / rect.height - 0.5) * HOME_NUMBERS_MOTION.mouseParallax;
+        parallaxX.forEach((move) => move(x));
+        parallaxY.forEach((move) => move(y));
+      };
+      section.addEventListener("pointermove", handleNumberParallax, { passive: true });
+      section.addEventListener("pointerleave", resetNumberParallax);
 
       const pauseExperienceAuto = () => {
         if (playback.chapter !== "experience") return;
@@ -2766,6 +2830,8 @@ function HomeUnifiedScrollExperience() {
         motionTween?.kill();
         finalHandoffCall?.kill();
         speedResetCall?.kill();
+        section.removeEventListener("pointermove", handleNumberParallax);
+        section.removeEventListener("pointerleave", resetNumberParallax);
         selectExperienceRef.current = () => undefined;
         gsap.ticker.remove(tick);
         experienceItems.forEach((item) => {
@@ -3276,7 +3342,7 @@ export function ContactSection() {
 
 export function LetsTalkPage() {
   return (
-    <PageShell className="dw-talk-shell" showFooter={false} activePage="letsTalk">
+    <PageShell className="dw-talk-shell" activePage="letsTalk">
       <section className="dw-talk-page">
         <div className="dw-talk-bg-placeholder" aria-hidden="true" />
         <h1>
@@ -3304,7 +3370,6 @@ export function HomePage() {
       <HomeIntroSection />
       <HomeUnifiedScrollExperience />
       <HomePathCardsSection />
-      <HomeTalkRoutingSection />
     </PageShell>
   );
 }
@@ -3378,7 +3443,6 @@ export function StoryPage() {
       <EcosystemSection />
       <ProofSection />
       <ThoughtsSection />
-      <ContactSection />
     </PageShell>
   );
 }
@@ -3398,7 +3462,6 @@ export function PublicWorkPage() {
   return (
     <PageShell activePage="publicWork">
       <PublicMediaGridPageSection />
-      <ContactSection />
     </PageShell>
   );
 }

@@ -72,7 +72,7 @@ jobs:
             set ftp:ssl-protect-data true;
             set ssl:verify-certificate yes;
             open --user \"$NAMEAM_FTP_USERNAME\" --password \"$NAMEAM_FTP_PASSWORD\" \"$NAMEAM_FTP_HOST\";
-            mirror --verbose --parallel=4 \"$NAMEAM_FTP_PATH\" previous-production-site/;
+            mirror --exclude-glob='wp backup*' --verbose --parallel=4 \"$NAMEAM_FTP_PATH\" previous-production-site/;
             bye;
           "
           tar -czf wordpress-production-backup.tar.gz -C previous-production-site .
@@ -85,6 +85,26 @@ jobs:
           path: wordpress-production-backup.tar.gz
           retention-days: 90
           if-no-files-found: error
+
+      - name: Keep a WordPress copy on the hosting account
+        if: ${{ inputs.environment == 'production' }}
+        env:
+          NAMEAM_FTP_HOST: ${{ secrets.NAMEAM_FTP_HOST }}
+          NAMEAM_FTP_USERNAME: ${{ secrets.NAMEAM_FTP_USERNAME }}
+          NAMEAM_FTP_PASSWORD: ${{ secrets.NAMEAM_FTP_PASSWORD }}
+          NAMEAM_FTP_PATH: ${{ secrets.NAMEAM_FTP_PATH }}
+        run: |
+          lftp -c "
+            set cmd:fail-exit yes;
+            set net:max-retries 2;
+            set net:timeout 30;
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate yes;
+            open --user \"$NAMEAM_FTP_USERNAME\" --password \"$NAMEAM_FTP_PASSWORD\" \"$NAMEAM_FTP_HOST\";
+            mirror --reverse --delete --verbose --parallel=4 previous-production-site/ \"$NAMEAM_FTP_PATH/wp backup\";
+            bye;
+          "
 
       - name: Deploy build to Name.am
         env:
@@ -105,6 +125,6 @@ jobs:
             set ftp:ssl-protect-data true;
             set ssl:verify-certificate yes;
             open --user \"$NAMEAM_FTP_USERNAME\" --password \"$NAMEAM_FTP_PASSWORD\" \"$NAMEAM_FTP_HOST\";
-            mirror --reverse --delete --verbose --parallel=4 dist/ \"$NAMEAM_FTP_PATH\";
+            mirror --reverse --delete --exclude-glob='wp backup*' --verbose --parallel=4 dist/ \"$NAMEAM_FTP_PATH\";
             bye;
           "

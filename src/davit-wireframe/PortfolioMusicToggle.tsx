@@ -75,7 +75,6 @@ function createAmbientEngine(): AmbientEngine {
 export function PortfolioMusicToggle() {
   const engineRef = useRef<AmbientEngine | null>(null);
   const mountedRef = useRef(true);
-  const userPausedRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [heights, setHeights] = useState(() => Array(BAR_COUNT).fill(0.12));
 
@@ -113,11 +112,9 @@ export function PortfolioMusicToggle() {
 
   const toggle = useCallback(() => {
     if (isPlaying) {
-      userPausedRef.current = true;
       stop();
       return;
     }
-    userPausedRef.current = false;
     void start();
   }, [isPlaying, start, stop]);
 
@@ -138,32 +135,11 @@ export function PortfolioMusicToggle() {
   useEffect(() => {
     mountedRef.current = true;
 
-    const removeUnlockListeners = () => {
-      window.removeEventListener("click", unlockAutoplay, true);
-      window.removeEventListener("keydown", unlockAutoplay, true);
-    };
-
-    const unlockAutoplay = (event: Event) => {
-      const target = event.target;
-      if (target instanceof Element && target.closest(".dw-music-button")) return;
-      if (userPausedRef.current) return;
-      void start().then((started) => {
-        if (started) removeUnlockListeners();
-      });
-    };
-
-    window.addEventListener("click", unlockAutoplay, true);
-    window.addEventListener("keydown", unlockAutoplay, true);
-    void start().then((started) => {
-      if (started) removeUnlockListeners();
-    });
-
     return () => {
       mountedRef.current = false;
-      removeUnlockListeners();
       stop(false);
     };
-  }, [start, stop]);
+  }, [stop]);
 
   return (
     <aside className={`dw-music-control${isPlaying ? " is-playing" : ""}`} aria-live="polite">

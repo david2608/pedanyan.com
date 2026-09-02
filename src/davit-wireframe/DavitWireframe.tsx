@@ -17,12 +17,6 @@ import {
 } from "shaders/react";
 import davitMainImage from "../assets/davit-main.jpg";
 import figmaHeroPerson from "../assets/figma-hero/davit-cutout.png";
-import figmaHeroDetailHead from "../assets/figma-hero/detail-head.png";
-import figmaHeroDetailCube from "../assets/figma-hero/detail-cube.png";
-import figmaHeroDetailPisces from "../assets/figma-hero/detail-pisces.png";
-import figmaHeroDetailCorner from "../assets/figma-hero/detail-corner.png";
-import figmaHeroOrnamentSheet from "../assets/figma-hero/ornament-sheet.png";
-import figmaHeroLogoMark from "../assets/figma-hero/logo-mark.png";
 import figmaHeroProductsObject from "../assets/figma-hero/hover-products.png";
 import figmaHeroDesignersObject from "../assets/figma-hero/hover-designers.png";
 import figmaHeroCultureObject from "../assets/figma-hero/hover-culture.png";
@@ -63,10 +57,10 @@ const HOME_NUMBERS_MOTION = {
   countStartDelay: 0.08,
   countTo22: 2.6,
   count22To27: 1.8,
-  experienceMove: 1.04,
-  scrollMaxAdditionalSpeed: 1.5,
-  scrollSensitivity: 180,
-  scrollReleaseReset: 0.14,
+  experienceMove: 0.72,
+  scrollMaxAdditionalSpeed: 2.6,
+  scrollSensitivity: 110,
+  scrollReleaseReset: 0.35,
   mouseParallax: 28,
   mouseParallaxDuration: 0.65
 } as const;
@@ -835,10 +829,9 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
   return (
     <header className={`dw-header ${isScrolled ? "is-scrolled" : ""}`}>
       <NavAnchor className="dw-logo" href="/am">
-        <span className="dw-logo-mark" aria-hidden="true">
-          <img src={figmaHeroLogoMark} alt="" />
+        <span className="dw-logo-word">
+          <img src="/brand/pdnyn-handdrawn.png" alt="PDNYN" />
         </span>
-        <span className="dw-logo-word">{websiteContent.navigation.logo}</span>
       </NavAnchor>
       <nav className="dw-nav" aria-label="Main navigation">
         {websiteContent.navigation.primary.map((item) => (
@@ -1111,45 +1104,6 @@ export function HeroSection() {
       onMouseLeave={resetHeroMove}
     >
       <div className="dw-home-hero-screen">
-        <div className="dw-figma-hero-ornaments" aria-hidden="true">
-          <div
-            className="dw-figma-ornament dw-figma-ornament-header"
-            data-float-depth="0.35"
-          >
-            <img src={figmaHeroOrnamentSheet} alt="" />
-          </div>
-          <img
-            className="dw-figma-ornament dw-figma-ornament-head"
-            src={figmaHeroDetailHead}
-            alt=""
-            data-float-depth="0.55"
-          />
-          <img
-            className="dw-figma-ornament dw-figma-ornament-pisces"
-            src={figmaHeroDetailPisces}
-            alt=""
-            data-float-depth="0.75"
-          />
-          <img
-            className="dw-figma-ornament dw-figma-ornament-cube"
-            src={figmaHeroDetailCube}
-            alt=""
-            data-float-depth="0.95"
-          />
-          <img
-            className="dw-figma-ornament dw-figma-ornament-corner"
-            src={figmaHeroDetailCorner}
-            alt=""
-            data-float-depth="0.42"
-          />
-          <div
-            className="dw-figma-ornament dw-figma-ornament-orbit"
-            data-float-depth="0.62"
-          >
-            <img src={figmaHeroOrnamentSheet} alt="" />
-          </div>
-        </div>
-
         <figure className="dw-home-hero-portrait-card" data-speed="-0.18" data-float-depth="0.2">
           <img src={figmaHeroPerson} alt="Davit Pedanyan seated on a studio stool" />
         </figure>
@@ -1229,7 +1183,7 @@ export function HeroSection() {
 function DesignerScrollStory() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const stickyRef = useRef<HTMLDivElement | null>(null);
-  const investmentRef = useRef<HTMLElement | null>(null);
+  const investmentRef = useRef<HTMLDivElement | null>(null);
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   const compactMotion = useMediaQuery("(max-width: 760px)");
   const useStaticMode = reducedMotion || compactMotion;
@@ -1246,7 +1200,7 @@ function DesignerScrollStory() {
         defaults: { ease: "none" },
         paused: true
       });
-      const playback = { progress: 0, scrollTarget: 0, reverseUntil: 0, velocity: 0 };
+      const playback = { progress: 0, scrollTarget: 0, direction: 1, velocity: 0 };
       let lastTickTime = gsap.ticker.time;
 
       const stageFrom = {
@@ -1277,7 +1231,7 @@ function DesignerScrollStory() {
         filter: "blur(14px)",
         duration: 0.3
       };
-      const revealCaption = (stage: HTMLElement, at = "<+=0.05") => {
+      const revealCaption = (stage: HTMLElement, at: string | number = "<+=0.05") => {
         tl.to(stage.querySelectorAll(".dw-depth-char"), {
           autoAlpha: 1,
           y: 0,
@@ -1417,31 +1371,24 @@ function DesignerScrollStory() {
       ScrollTrigger.create({
         trigger: section,
         start: "top top",
-        end: `+=${Math.max(920, stages.length * 220)}%`,
+        end: `+=${Math.max(520, stages.length * 130)}%`,
         pin: sticky,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
-          const previousTarget = playback.scrollTarget;
           playback.scrollTarget = self.progress;
+          playback.direction = self.direction;
           playback.velocity = Math.abs(self.getVelocity());
-          if (playback.scrollTarget < previousTarget - 0.001) {
-            playback.reverseUntil = gsap.ticker.time + 0.42;
-          }
         },
-        onLeave: (self) => {
-          if (playback.progress < handoffProgress) {
-            const lockPoint = self.start + (self.end - self.start) * Math.max(0.82, handoffProgress);
-            self.scroll(lockPoint);
-            playback.scrollTarget = Math.max(playback.scrollTarget, handoffProgress);
-            playback.velocity = Math.max(playback.velocity, 7200);
-            return;
-          }
-
-          playback.scrollTarget = Math.max(playback.scrollTarget, handoffProgress);
+        onLeave: () => {
+          playback.scrollTarget = 1;
+          playback.direction = 1;
+          playback.velocity = Math.max(playback.velocity, 9000);
         },
         onLeaveBack: () => {
           playback.scrollTarget = 0;
+          playback.direction = -1;
+          playback.velocity = Math.max(playback.velocity, 9000);
         }
       });
 
@@ -1450,13 +1397,15 @@ function DesignerScrollStory() {
         const delta = Math.min(0.08, now - lastTickTime);
         lastTickTime = now;
         const scrollGap = playback.scrollTarget - playback.progress;
-        const idleSpeed = 0.014;
-        const velocityCatchup = Math.min(0.92, Math.max(0.08, playback.velocity / 5200));
+        const idleSpeed = 0.022;
+        const velocityCatchup = Math.min(1, Math.max(0.16, playback.velocity / 2600));
         const maxStep = Math.max(delta * idleSpeed, Math.abs(scrollGap) * velocityCatchup);
 
-        if (scrollGap > 0.002 || (scrollGap < -0.002 && now < playback.reverseUntil)) {
-          playback.progress += Math.sign(scrollGap) * Math.min(Math.abs(scrollGap), maxStep);
-        } else if (playback.progress < 1) {
+        if (scrollGap > 0.002) {
+          playback.progress += Math.min(scrollGap, maxStep);
+        } else if (scrollGap < -0.002 && playback.direction < 0) {
+          playback.progress -= Math.min(-scrollGap, maxStep);
+        } else if (playback.direction >= 0 && playback.progress < 1) {
           playback.progress += delta * idleSpeed;
         }
 
@@ -2013,7 +1962,8 @@ function ExperienceList({
   onSelect?: (index: number) => void;
 }) {
   return (
-    <ol className="dw-experience-list">
+    <>
+      <ol className="dw-experience-list">
       {experiences.map((experience, index) => (
         <li className={index === activeIndex ? "is-active" : ""} key={experience.company}>
           <button
@@ -2034,7 +1984,8 @@ function ExperienceList({
           </button>
         </li>
       ))}
-    </ol>
+      </ol>
+    </>
   );
 }
 
@@ -2075,7 +2026,7 @@ function ExperienceScrollSection() {
 
         gsap.to(list, {
           y: targetY,
-          duration: immediate ? 0 : 0.62,
+          duration: immediate ? 0 : 0.75,
           ease: "power3.out",
           overwrite: true
         });
@@ -2083,11 +2034,14 @@ function ExperienceScrollSection() {
 
       centerActiveItem(0, true);
 
+      const drawLine = gsap.quickTo(line, "strokeDashoffset", { duration: 0.5, ease: "power2.out" });
+      const floatPath = gsap.quickTo(".dw-experience-path", "yPercent", { duration: 0.7, ease: "power2.out" });
+
       ScrollTrigger.create({
         trigger: section,
         start: "top top",
         end: `+=${experiences.length * 72}%`,
-        scrub: 0.85,
+        scrub: 1.2,
         pin: scene,
         anticipatePin: 1,
         invalidateOnRefresh: true,
@@ -2099,18 +2053,8 @@ function ExperienceScrollSection() {
             Math.max(0, Math.round(preciseIndex))
           );
 
-          gsap.to(line, {
-            strokeDashoffset: lineLength * (1 - self.progress),
-            duration: 0.28,
-            ease: "power2.out",
-            overwrite: true
-          });
-          gsap.to(".dw-experience-path", {
-            yPercent: -8 * self.progress,
-            duration: 0.42,
-            ease: "power2.out",
-            overwrite: true
-          });
+          drawLine(lineLength * (1 - self.progress));
+          floatPath(-8 * self.progress);
 
           if (nextIndex === activeIndexRef.current) return;
           activeIndexRef.current = nextIndex;
@@ -2123,7 +2067,7 @@ function ExperienceScrollSection() {
               autoAlpha: index === nextIndex ? 1 : Math.max(0.16, 0.34 - distance * 0.06),
               y: index === nextIndex ? 0 : 26,
               scale: index === nextIndex ? 1 : 0.965,
-              duration: 0.34,
+              duration: 0.5,
               ease: "power3.out",
               overwrite: true
             });
@@ -2174,7 +2118,7 @@ function HomeUnifiedScrollExperience() {
   const sceneRef = useRef<HTMLDivElement | null>(null);
   const heroDustRef = useRef<HTMLDivElement | null>(null);
   const statsDustRef = useRef<HTMLDivElement | null>(null);
-  const investmentRef = useRef<HTMLElement | null>(null);
+  const investmentRef = useRef<HTMLDivElement | null>(null);
   const selectExperienceRef = useRef<(index: number) => void>(() => undefined);
   const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -2194,6 +2138,7 @@ function HomeUnifiedScrollExperience() {
       const statStages = gsap.utils.toArray<HTMLElement>(".dw-home-unified-stat");
       const statContents = gsap.utils.toArray<HTMLElement>(".dw-home-unified-stat .dw-depth-content");
       const experiencePanel = scene.querySelector<HTMLElement>(".dw-home-unified-experience");
+      const whitePanel = scene.querySelector<HTMLElement>(".dw-home-unified-white");
       const experienceList = scene.querySelector<HTMLElement>(".dw-experience-list");
       const experienceItems = gsap.utils.toArray<HTMLElement>(".dw-experience-list li");
       const line = scene.querySelector<SVGPathElement>(".dw-experience-path-line");
@@ -2203,6 +2148,7 @@ function HomeUnifiedScrollExperience() {
         !heroScreen ||
         !statsPanel ||
         !experiencePanel ||
+        !whitePanel ||
         !experienceList ||
         !line ||
         statStages.length === 0 ||
@@ -2234,6 +2180,7 @@ function HomeUnifiedScrollExperience() {
       let speedResetCall: gsap.core.Tween | null = null;
       let correctingBoundary = false;
       let releasedForward = false;
+      let exitingUp = false;
       let trigger: ScrollTrigger;
       let inputObserver: Observer;
 
@@ -2266,8 +2213,8 @@ function HomeUnifiedScrollExperience() {
         transformOrigin: "50% 50%"
       });
       gsap.set(experiencePanel, { autoAlpha: 0 });
-      gsap.set(experienceItems, { autoAlpha: 0.18, scale: 0.97 });
-      gsap.set(experienceItems[0], { autoAlpha: 1, scale: 1 });
+      gsap.set(whitePanel, { autoAlpha: 0 });
+      gsap.set(experienceItems, { autoAlpha: 0, y: 54, scale: 0.97 });
       gsap.set(line, { strokeDasharray: lineLength, strokeDashoffset: lineLength });
       updateSlot();
 
@@ -2292,7 +2239,8 @@ function HomeUnifiedScrollExperience() {
       const numberScaleOutDuration = HOME_NUMBERS_MOTION.scaleOut;
       const numberFocusHold = HOME_NUMBERS_MOTION.focusHold;
       let nextStageStart = statsStart;
-      let statsEnd = statsStart;
+      let statsEnd: number = statsStart;
+      let finalZoomEnd = 0;
       let investmentStart = Number.POSITIVE_INFINITY;
       statStages.forEach((stage, index) => {
         const isFinal = index === statStages.length - 1;
@@ -2320,8 +2268,8 @@ function HomeUnifiedScrollExperience() {
             stage,
             { scale: 0 },
             {
-              scale: 3.2,
-              duration: lifecycleDuration,
+              scale: isFinal ? 2.4 : 3.2,
+              duration: isFinal ? 5 : lifecycleDuration,
               ease: "numberFastSlowFast"
             },
             start
@@ -2337,7 +2285,9 @@ function HomeUnifiedScrollExperience() {
             },
             start
           )
-          .to(
+;
+        if (!isFinal) {
+          timeline.to(
             stage,
             {
               autoAlpha: 0,
@@ -2347,6 +2297,7 @@ function HomeUnifiedScrollExperience() {
             },
             start + lifecycleDuration * 0.65
           );
+        }
 
         if (isFinal) {
           investmentStart = start;
@@ -2377,6 +2328,16 @@ function HomeUnifiedScrollExperience() {
               },
               start + HOME_NUMBERS_MOTION.countStartDelay + HOME_NUMBERS_MOTION.countTo22
             );
+
+          // $27M finale: the white figure zooms straight into the camera and
+          // the frame bleeds to white, which becomes the timeline's canvas.
+          const zoomAt = start + 5.15;
+          finalZoomEnd = zoomAt + 1.1;
+          timeline
+            .to(stage, { scale: 15, duration: 1.05, ease: "power3.in" }, zoomAt)
+            .to(whitePanel, { autoAlpha: 1, duration: 0.45, ease: "power2.in" }, zoomAt + 0.5)
+            .to(statsPanel, { autoAlpha: 0, duration: 0.35 }, zoomAt + 0.62)
+            .to(stage, { autoAlpha: 0, duration: 0.22, ease: "none" }, zoomAt + 0.88);
         }
 
         factFocusTimes.push(start + numberScaleInDuration);
@@ -2385,15 +2346,29 @@ function HomeUnifiedScrollExperience() {
         nextStageStart = start + lifecycleDuration * 0.65;
         statsEnd = Math.max(
           statsEnd,
-          start + lifecycleDuration
+          isFinal ? finalZoomEnd : start + lifecycleDuration
         );
       });
 
-      const experienceStart = statsEnd + 0.64;
+      const experienceStart = statsEnd + 0.4;
       timeline
-        .to(statsPanel, { autoAlpha: 0, duration: 0.3 }, experienceStart - 0.18)
-        .to(experiencePanel, { autoAlpha: 1, duration: 0.42 }, experienceStart)
+        .to(experiencePanel, { autoAlpha: 1, duration: 0.3 }, experienceStart)
+        .to(whitePanel, { autoAlpha: 0, duration: 0.5 }, experienceStart + 0.55)
         .to(line, { strokeDashoffset: 0, duration: experiences.length * 0.66 }, experienceStart);
+
+      // Timeline content cascades in from below, item by item.
+      experienceItems.forEach((item, itemIndex) => {
+        timeline.to(
+          item,
+          {
+            autoAlpha: itemIndex === 0 ? 1 : Math.max(0.12, 0.28 - itemIndex * 0.045),
+            y: itemIndex === 0 ? 0 : 12,
+            duration: 0.5,
+            ease: "power3.out"
+          },
+          experienceStart + 0.12 + itemIndex * 0.07
+        );
+      });
 
       experienceItems.forEach((activeItem, activeIndex) => {
         const start = experienceStart + activeIndex * 0.66;
@@ -2407,19 +2382,22 @@ function HomeUnifiedScrollExperience() {
           start
         );
 
-        experienceItems.forEach((item, itemIndex) => {
-          const distance = Math.abs(itemIndex - activeIndex);
-          timeline.to(
-            item,
-            {
-              autoAlpha: itemIndex === activeIndex ? 1 : Math.max(0.12, 0.28 - distance * 0.045),
-              scale: itemIndex === activeIndex ? 1 : 0.97,
-              duration: 0.34,
-              ease: "power2.out"
-            },
-            start
-          );
-        });
+        if (activeIndex > 0) {
+          experienceItems.forEach((item, itemIndex) => {
+            const distance = Math.abs(itemIndex - activeIndex);
+            timeline.to(
+              item,
+              {
+                autoAlpha: itemIndex === activeIndex ? 1 : Math.max(0.12, 0.28 - distance * 0.045),
+                y: itemIndex === activeIndex ? 0 : 12,
+                scale: itemIndex === activeIndex ? 1 : 0.97,
+                duration: 0.34,
+                ease: "power2.out"
+              },
+              start
+            );
+          });
+        }
       });
 
       timeline.to({}, { duration: 0.54 });
@@ -2467,7 +2445,26 @@ function HomeUnifiedScrollExperience() {
         playback.time = direction > 0 ? timelineDuration : 0;
         renderPlayback();
         releasedForward = direction > 0;
-        trigger.scroll(direction > 0 ? trigger.end + 2 : trigger.start - 2);
+        if (direction > 0) {
+          trigger.scroll(trigger.end + 2);
+          return;
+        }
+        // Exit upward: unpin, then glide the page to the very top so the
+        // intro section is actually in view. While the glide runs, the
+        // gesture's inertial tail must not re-capture the pinned scene.
+        exitingUp = true;
+        trigger.scroll(trigger.start - 2);
+        const scrollProxy = { y: Math.max(0, trigger.start - 2) };
+        gsap.to(scrollProxy, {
+          y: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          overwrite: true,
+          onUpdate: () => window.scrollTo(0, scrollProxy.y),
+          onComplete: () => {
+            exitingUp = false;
+          }
+        });
       };
 
       const moveTo = (
@@ -2536,6 +2533,13 @@ function HomeUnifiedScrollExperience() {
           const now = gsap.ticker.time;
           playback.minimumUntil = now;
           playback.holdUntil = now;
+          if (direction < 0) {
+            // Arrived here by scrolling back: hold on this number. The story
+            // resumes only on the next downward gesture - never on its own.
+            playback.autoAt = Number.POSITIVE_INFINITY;
+            playback.awaitingExitGesture = false;
+            return;
+          }
           playback.autoAt = isFinal ? Number.POSITIVE_INFINITY : now;
           playback.awaitingExitGesture = isFinal;
           if (isFinal) {
@@ -2565,7 +2569,7 @@ function HomeUnifiedScrollExperience() {
           const now = gsap.ticker.time;
           // Ignore the inertial tail of the wheel gesture that initiated this
           // transition; it must not advance a second experience item.
-          playback.cooldownUntil = Math.max(playback.cooldownUntil, now + 1.1);
+          playback.cooldownUntil = Math.max(playback.cooldownUntil, now + 0.55);
           playback.minimumUntil = now;
           playback.holdUntil = now + Math.max(
             requestedHold,
@@ -2581,13 +2585,19 @@ function HomeUnifiedScrollExperience() {
       const accelerateCurrentMotion = (deltaY: number) => {
         if (!motionTween) return;
         const maximumAdditionalSpeed = playback.chapter === "experience"
-          ? 0.3
+          ? 0.6
           : HOME_NUMBERS_MOTION.scrollMaxAdditionalSpeed;
         const requestedMultiplier = 1 + Math.min(
           maximumAdditionalSpeed,
           Math.abs(deltaY) / HOME_NUMBERS_MOTION.scrollSensitivity
         );
-        playback.speedMultiplier = Math.max(playback.speedMultiplier, requestedMultiplier);
+        playback.speedMultiplier = Math.min(
+          1 + maximumAdditionalSpeed,
+          Math.max(
+            playback.speedMultiplier + Math.abs(deltaY) / (HOME_NUMBERS_MOTION.scrollSensitivity * 6),
+            requestedMultiplier
+          )
+        );
         motionTween.timeScale(playback.speedMultiplier);
         speedResetCall?.kill();
         speedResetCall = gsap.delayedCall(HOME_NUMBERS_MOTION.scrollReleaseReset, () => {
@@ -2608,17 +2618,45 @@ function HomeUnifiedScrollExperience() {
         playback.lastInputAt = now;
 
         if (motionTween) {
-          // Extra input accelerates only the transition already in progress.
-          // It never launches the following chapter on top of the current one.
-          if (direction === playback.motionDirection) accelerateCurrentMotion(deltaY);
+          // Same-direction input accelerates the transition already in progress.
+          if (direction === playback.motionDirection) {
+            accelerateCurrentMotion(deltaY);
+            return;
+          }
+          // Opposite-direction input cancels it and steps back right away, so
+          // scrolling up always returns toward the previous number / item / section.
+          motionTween.kill();
+          motionTween = null;
+          playback.speedMultiplier = 1;
+          playback.cooldownUntil = now + 0.3;
+          if (playback.chapter === "hero") {
+            if (direction < 0) releaseToPage(-1);
+            return;
+          }
+          if (playback.chapter === "facts") {
+            moveToFact(playback.activeFact + direction, direction);
+            return;
+          }
+          if (direction < 0) {
+            if (playback.activeExperience === 0) {
+              playback.chapter = "facts";
+              moveToFact(factFocusTimes.length - 1, -1);
+            } else {
+              moveToExperience(playback.activeExperience - 1, -1);
+            }
+          } else if (playback.activeExperience >= experienceFocusTimes.length - 1) {
+            releaseToPage(1);
+          } else {
+            moveToExperience(playback.activeExperience + 1, 1);
+          }
           return;
         }
         if (now < playback.cooldownUntil) return;
 
-        playback.cooldownUntil = now + 0.35;
+        playback.cooldownUntil = now + 0.25;
         playback.speedMultiplier = playback.chapter === "experience"
-          ? 1 + Math.min(0.18, Math.abs(deltaY) / 900)
-          : 1 + Math.min(0.75, Math.abs(deltaY) / 420);
+          ? 1 + Math.min(0.4, Math.abs(deltaY) / 500)
+          : 1 + Math.min(1.1, Math.abs(deltaY) / 300);
 
         if (playback.chapter === "hero") {
           if (direction < 0) {
@@ -2732,6 +2770,7 @@ function HomeUnifiedScrollExperience() {
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onEnter: (self) => {
+          if (exitingUp) return;
           releasedForward = false;
           if (self.scroll() <= self.start) self.scroll(self.start + 1);
           inputObserver.enable();
@@ -2866,6 +2905,10 @@ function HomeUnifiedScrollExperience() {
   return (
     <section className="dw-home-unified-scroll" ref={sectionRef} aria-label="Davit Pedanyan overview">
       <div className="dw-home-unified-scene" ref={sceneRef}>
+        <div className="dw-scroll-hint" aria-hidden="true">
+          <span className="dw-scroll-hint-line" />
+          <span className="dw-scroll-hint-text">scroll</span>
+        </div>
         <div
           className="dw-home-unified-phase dw-home-unified-hero"
           ref={heroDustRef}
@@ -2903,6 +2946,8 @@ function HomeUnifiedScrollExperience() {
           })}
         </div>
 
+        <div className="dw-home-unified-phase dw-home-unified-white" aria-hidden="true" />
+
         <div className="dw-home-unified-phase dw-home-unified-experience" aria-label="Work experience">
           <AnimatedAccentPath />
           <ExperienceList
@@ -2918,7 +2963,9 @@ function HomeUnifiedScrollExperience() {
 function DesignerFinalSection() {
   return (
     <section className="dw-designer-finale" aria-label="Work with Davit">
-      <div className="dw-designer-finale-mark" aria-hidden="true">PDNYN</div>
+      <div className="dw-designer-finale-mark" aria-hidden="true">
+        <img src="/brand/pdnyn-handdrawn.png" alt="" />
+      </div>
       <div className="dw-designer-finale-copy">
         <span className="dw-scatter-eyebrow">
           <span aria-hidden="true" />

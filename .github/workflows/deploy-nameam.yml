@@ -70,7 +70,7 @@ jobs:
             set ftp:ssl-protect-data true;
             set ssl:verify-certificate yes;
             open --user \"$NAMEAM_FTP_USERNAME\" --password \"$NAMEAM_FTP_PASSWORD\" \"$NAMEAM_FTP_HOST\";
-            mirror --reverse --delete \
+            mirror --reverse --only-newer \
               --exclude-glob='.well-known*' \
               --exclude-glob='.ftpquota*' \
               --exclude-glob='error_log*' \

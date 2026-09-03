@@ -40,6 +40,7 @@ CustomEase.create(
 
 const BASE_DUST_SPEED = 0.08;
 const BASE_HERO_DUST_SPEED = 0.01;
+const DAVIT_LINKEDIN_URL = "https://am.linkedin.com/in/davit-pedanyan";
 
 // Homepage hero → animated numbers timing controls (seconds).
 // Edit these values to tune the complete numbers experience by hand.
@@ -864,10 +865,10 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
         >
           <span>{theme === "day" ? "night mode" : "day mode"}</span>
         </button>
-        <NavAnchor className="dw-pill" href={websiteContent.navigation.talk.href} isActive={activePage === "letsTalk"}>
+        <a className="dw-pill" href={DAVIT_LINKEDIN_URL} target="_blank" rel="noreferrer">
           <MessageCircle className="dw-talk-icon" aria-hidden="true" strokeWidth={1.8} />
           <span>{websiteContent.navigation.talk.label}</span>
-        </NavAnchor>
+        </a>
       </div>
     </header>
   );
@@ -3495,20 +3496,24 @@ export function StoryPage() {
 }
 
 export function SchoolPage() {
-  return (
-    <PageShell activePage="school">
-      <SchoolSection />
-      <SchoolStandardsSection />
-      <SchoolPracticeSection />
-      <SchoolFinalSection />
-    </PageShell>
-  );
+  return <ComingSoonPage title="School" activePage="school" />;
 }
 
 export function PublicWorkPage() {
+  return <ComingSoonPage title="Public" activePage="publicWork" />;
+}
+
+function ComingSoonPage({ title, activePage }: { title: "Public" | "School"; activePage: PageKey }) {
   return (
-    <PageShell activePage="publicWork">
-      <PublicMediaGridPageSection />
+    <PageShell activePage={activePage}>
+      <section className="dw-coming-soon">
+        <Eyebrow>{title}</Eyebrow>
+        <h1>coming<br />soon.</h1>
+        <p>I'm shaping this part of the site. In the meantime, find me on LinkedIn.</p>
+        <a className="dw-coming-soon-link" href={DAVIT_LINKEDIN_URL} target="_blank" rel="noreferrer">
+          Connect on LinkedIn
+        </a>
+      </section>
     </PageShell>
   );
 }
@@ -3534,6 +3539,9 @@ export function AppRouter() {
   if (path === "/am/story") return <PublicWorkPage />;
   if (path === "/am/school") return <SchoolPage />;
   if (path === "/am/public-work") return <PublicWorkPage />;
-  if (path === "/am/lets-talk") return <LetsTalkPage />;
+  if (path === "/am/lets-talk") {
+    window.location.replace(DAVIT_LINKEDIN_URL);
+    return null;
+  }
   return <HomePage />;
 }

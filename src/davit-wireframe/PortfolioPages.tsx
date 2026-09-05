@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useRef, type CSSProperties, type ReactNode } from "react";
+import React, { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Linkedin, Shield } from "lucide-react";
+import { Linkedin, Shield, MessageCircle, ScanLine, WalletCards } from "lucide-react";
 import portfolioManifest from "./portfolio-content.json";
 import "@fontsource/syne/400.css";
 import "@fontsource/syne/500.css";
@@ -86,8 +86,43 @@ const projectAccents: Record<string, { accent: string; surface: string }> = {
   securion: { accent: "#6658ff", surface: "#eae8ff" },
   "material-exchange-photo-lab": { accent: "#157a63", surface: "#e6f8f1" },
   "hotel-apartments": { accent: "#795d46", surface: "#f1e9e2" },
-  tempo: { accent: "#1b8874", surface: "#daf2e8" }
+  tempo: { accent: "#1b8874", surface: "#daf2e8" },
+  icredo: { accent: "#1e60e5", surface: "#edf4ff" }
 };
+
+const portfolioCardImages: Record<string, string> = {
+  cloudchipr: "/portfolio-assets/cards/cloudchipr-card.png",
+  "material-exchange": "/portfolio-assets/cards/material-exchange-card.png",
+  securion: "/portfolio-assets/cards/securion-card.png",
+  "material-exchange-photo-lab": "/portfolio-assets/cards/material-exchange-photo-lab-card.png",
+  "hotel-apartments": "/portfolio-assets/cards/hotel-apartments-card.png",
+  tempo: "/portfolio-assets/cards/tempo-card.png",
+  icredo: "/portfolio-assets/icredo/hero-thumbnail.png"
+};
+
+const portfolioCardHeadlines: Record<string, string> = {
+  cloudchipr: "$500K saved in cloud costs.",
+  "material-exchange": "Cut material management from 61 to 23 minutes.",
+  securion: "Multi-factor security for digital assets.",
+  "material-exchange-photo-lab": "Designed for 30% more material engagement.",
+  "hotel-apartments": "Made extended stays bookable online.",
+  tempo: "One delivery. Several stops.",
+  icredo: "A loan conversation, not a long form."
+};
+
+const portfolioFilterMetadata: Record<string, { year: string; category: string }> = {
+  cloudchipr: { year: "2023", category: "FinOps" },
+  "material-exchange": { year: "2021", category: "SaaS" },
+  securion: { year: "2018", category: "Crypto" },
+  "material-exchange-photo-lab": { year: "2023", category: "Product tools" },
+  "hotel-apartments": { year: "2022", category: "Travel" },
+  tempo: { year: "2026", category: "Delivery" },
+  icredo: { year: "2026", category: "Fintech" }
+};
+
+function PortfolioCardVisual({ project }: { project: PortfolioProject }) {
+  return <img src={portfolioCardImages[project.project.slug]} alt={`${project.project.title} project thumbnail`} />;
+}
 
 function isStorybook() {
   if (typeof window === "undefined") return false;
@@ -347,6 +382,98 @@ function IntroSection({ project, section }: { project: PortfolioProject; section
           ) : null}
         </div>
         {isCloudChipr ? <span className="dw-case-project-rail" aria-hidden="true">Projects</span> : null}
+      </div>
+    </section>
+  );
+}
+
+function IcredoPhone({ project, asset, className = "" }: { project: PortfolioProject; asset: string; className?: string }) {
+  return (
+    <div className={`dw-icredo-phone ${className}`}>
+      <span className="dw-icredo-phone-speaker" aria-hidden="true" />
+      <ProjectImage project={project} assetKey={asset} />
+    </div>
+  );
+}
+
+function IcredoIntro({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className="dw-case-intro dw-case-wide dw-icredo-intro" id={section.id} data-portfolio-reveal>
+      <div className="dw-case-intro-surface" style={sectionStyle(project, section)}>
+        <div className="dw-case-intro-heading">
+          <p>Selected case study / fintech</p>
+          <h1><ProjectTitle title={section.title} /></h1>
+          <h2>{section.subtitle}</h2>
+        </div>
+        <dl className="dw-case-meta">
+          {section.metadata?.map((item) => <div key={item.label}><dt>{item.label.replace(/:$/, "")}</dt><dd>{item.value}</dd></div>)}
+        </dl>
+        <div className="dw-icredo-hero-composition" aria-label="iCredo assistant with a real in-app chat screen">
+          <img
+            className="dw-icredo-hero-banner"
+            src="/portfolio-assets/icredo/hero-higgsfield.png"
+            alt="The iCredo robot assistant presenting the conversational loan application"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function IcredoChatPrototype({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const copy = Array.isArray(section.columns) ? section.columns[0] : undefined;
+  return (
+    <section className={sectionClass(section, "dw-icredo-chat-section")} style={sectionStyle(project, section)} id={section.id}>
+      <div className="dw-icredo-chat-layout" data-portfolio-reveal>
+        <article className="dw-icredo-chat-copy">
+          <span className="dw-icredo-section-icon"><MessageCircle /></span>
+          <h2>{copy?.title}</h2>
+          <Html html={copy?.body} className="dw-case-richtext" />
+        </article>
+        <div className="dw-icredo-chat-stage" aria-label="Animated iCredo conversation prototype">
+          <div className="dw-icredo-code-chat">
+            <div className="dw-icredo-code-chat-top"><span className="dw-icredo-code-avatar">C</span><strong>iCredo</strong><small>online</small></div>
+            <p className="dw-icredo-bubble dw-icredo-bubble-a">Բարև, ինչքա՞ն գումար է պետք քեզ։</p>
+            <p className="dw-icredo-bubble dw-icredo-bubble-user">1,000,000 դրամ</p>
+            <p className="dw-icredo-bubble dw-icredo-bubble-b">Եկ միասին գտնենք հարմար տարբերակը։</p>
+            <div className="dw-icredo-chat-chips"><span>12 ամիս</span><span>24 ամիս</span><span>36 ամիս</span></div>
+            <p className="dw-icredo-bubble dw-icredo-bubble-c">Ինչո՞ւ է պետք վարկը։</p>
+          </div>
+          <IcredoPhone project={project} asset="chat-flow" className="dw-icredo-chat-reference" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function IcredoTrustSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const copy = Array.isArray(section.columns) ? section.columns[1] : undefined;
+  return (
+    <section className={sectionClass(section, "dw-icredo-trust-section")} style={sectionStyle(project, section)} id={section.id}>
+      <div className="dw-icredo-trust-layout" data-portfolio-reveal>
+        <div className="dw-icredo-device-orbit"><span className="dw-icredo-orbit-ring" /><IcredoPhone project={project} asset="kyc" /></div>
+        <article>
+          <span className="dw-icredo-section-icon"><ScanLine /></span>
+          <h2>{copy?.title}</h2>
+          <Html html={copy?.body} className="dw-case-richtext" />
+          <div className="dw-icredo-trust-notes"><span><b>01</b> Explain the request</span><span><b>02</b> Show progress</span><span><b>03</b> Confirm what happens next</span></div>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+function IcredoLoansSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const copy = Array.isArray(section.columns) ? section.columns[0] : undefined;
+  return (
+    <section className={sectionClass(section, "dw-icredo-loans-section")} style={sectionStyle(project, section)} id={section.id}>
+      <div className="dw-icredo-loans-layout" data-portfolio-reveal>
+        <article>
+          <span className="dw-icredo-section-icon"><WalletCards /></span>
+          <h2>{copy?.title}</h2>
+          <Html html={copy?.body} className="dw-case-richtext" />
+        </article>
+        <div className="dw-icredo-loan-phone-stage"><span className="dw-icredo-loan-rail" aria-hidden="true">active loan / balance / schedule</span><IcredoPhone project={project} asset="my-loans" /></div>
       </div>
     </section>
   );
@@ -1910,7 +2037,7 @@ function TestimonialSection({ project, section }: { project: PortfolioProject; s
         {person ? (
           <div className="dw-case-testimonial-person">
             <span className="dw-case-testimonial-person-link">
-              <span className="dw-case-avatar"><ProjectImage project={project} assetKey={section.avatar} /></span>
+              <span className="dw-case-avatar">{section.avatar ? <ProjectImage project={project} assetKey={section.avatar} /> : <span className="dw-case-avatar-initials">{person.name.split(" ").map((part) => part[0]).join("").slice(0, 2)}</span>}</span>
               <span><strong>{person.name}</strong><small>{person.role}</small></span>
             </span>
             {section.showLinkedin ? (
@@ -1943,8 +2070,8 @@ function NavigationSection({ project, section }: { project: PortfolioProject; se
         </div>
         <div className="dw-case-next-list">
           {otherProjects.map((otherProject, index) => {
-            const intro = otherProject.sections[0];
             const accent = projectAccents[otherProject.project.slug];
+            const isPhotoLab = otherProject.project.slug === "material-exchange-photo-lab";
             return (
               <a
                 className="dw-case-more-card"
@@ -1953,8 +2080,8 @@ function NavigationSection({ project, section }: { project: PortfolioProject; se
                 key={otherProject.project.slug}
                 style={{ "--project-accent": accent?.accent, "--project-surface": accent?.surface } as CSSProperties}
               >
-                <span className="dw-case-more-card-media">
-                  <ProjectImage project={otherProject} assetKey={intro.media} />
+                <span className={`dw-case-more-card-media${isPhotoLab ? " dw-case-more-card-media--photo-lab" : ""}`}>
+                  <PortfolioCardVisual project={otherProject} />
                 </span>
                 <span className="dw-case-more-card-copy">
                   <small>{String(index + 1).padStart(2, "0")}</small>
@@ -2125,6 +2252,19 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   }
   if (project.project.slug === "securion" && section.id === "color-system") {
     return null;
+  }
+
+  if (project.project.slug === "icredo" && section.id === "intro") {
+    return <IcredoIntro project={project} section={section} />;
+  }
+  if (project.project.slug === "icredo" && section.id === "chat-solution") {
+    return <IcredoChatPrototype project={project} section={section} />;
+  }
+  if (project.project.slug === "icredo" && section.id === "trust") {
+    return <IcredoTrustSection project={project} section={section} />;
+  }
+  if (project.project.slug === "icredo" && section.id === "my-loans") {
+    return <IcredoLoansSection project={project} section={section} />;
   }
 
   if (section.type === "about-card") return <AboutCardSection project={project} section={section} />;
@@ -2970,7 +3110,14 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
 
 export function PortfolioIndexContent() {
   const containerRef = useRef<HTMLElement | null>(null);
+  const [selectedYear, setSelectedYear] = useState("All years");
   usePortfolioMotion(containerRef);
+
+  const years = ["All years", ...Array.from(new Set(projects.map((project) => portfolioFilterMetadata[project.project.slug]?.year).filter(Boolean))).sort((a, b) => b.localeCompare(a))];
+  const visibleProjects = projects.filter((project) => {
+    const metadata = portfolioFilterMetadata[project.project.slug];
+    return selectedYear === "All years" || metadata?.year === selectedYear;
+  });
 
   return (
     <section className="dw-portfolio-index" ref={containerRef}>
@@ -2979,11 +3126,22 @@ export function PortfolioIndexContent() {
         <h1>Products I helped shape.</h1>
         <div>
           <p>I work with founders and product teams when the direction is still unclear or the product needs a stronger design system.</p>
-          <span>Six detailed case studies</span>
+          <span>Seven detailed case studies</span>
         </div>
       </header>
+      <aside className="dw-portfolio-filter" aria-label="Filter case studies">
+        <span>Selected year</span>
+        <label>
+          <span>Year</span>
+          <select value={selectedYear} onChange={(event) => setSelectedYear(event.target.value)}>
+            {years.map((year) => <option key={year}>{year}</option>)}
+          </select>
+        </label>
+        <small>{visibleProjects.length} of {projects.length} cases</small>
+      </aside>
       <div className="dw-portfolio-project-grid">
-        {projects.map((project, index) => {
+        {visibleProjects.map((project) => {
+          const index = projects.indexOf(project);
           const intro = project.sections[0];
           const accent = projectAccents[project.project.slug];
           const categories = intro.metadata?.find((item) => item.label.startsWith("Categories"))?.value;
@@ -2998,11 +3156,15 @@ export function PortfolioIndexContent() {
               key={project.project.slug}
             >
               <div className="dw-portfolio-card-media">
-                <ProjectImage project={project} assetKey={intro.media} />
+                <PortfolioCardVisual project={project} />
               </div>
               <div className="dw-portfolio-card-copy">
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <div><h2>{project.project.title}</h2><p>{intro.subtitle}</p></div>
+                <div>
+                  <span className="dw-portfolio-card-project-name">{project.project.title}</span>
+                  <h2>{portfolioCardHeadlines[project.project.slug] || project.project.title}</h2>
+                  <p>{intro.subtitle}</p>
+                </div>
                 <div className="dw-portfolio-card-meta"><span>{categories}</span><span>{duration}</span></div>
               </div>
             </a>

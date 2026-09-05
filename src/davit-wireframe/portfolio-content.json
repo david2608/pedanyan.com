@@ -6,7 +6,8 @@
     "material-exchange": "/material-exchange/",
     "securion": "/securion/",
     "material-exchange-photo-lab": "/material-exchange-photo-lab/",
-    "hotel-apartments": "/hotel-apartments/"
+    "hotel-apartments": "/hotel-apartments/",
+    "icredo": "/icredo/"
   },
   "projects": [
     {
@@ -3088,6 +3089,190 @@
             { "label": "Material Exchange", "url": "/material-exchange/" },
             { "label": "Securion", "url": "/securion/" }
           ]
+        }
+      ]
+    },
+    {
+      "project": {
+        "title": "iCredo",
+        "slug": "icredo",
+        "source": {
+          "fileKey": "ArNVd7WCm9Dmfxeu7E25gA",
+          "nodeId": "418:4825"
+        }
+      },
+      "assets": {
+        "hero": {
+          "packagePath": "assets/icredo/hero-thumbnail.png",
+          "alt": "iCredo lending assistant guiding a loan conversation",
+          "width": 4608,
+          "height": 3456
+        },
+        "hero-robot-v2": {
+          "packagePath": "assets/icredo/hero-robot-v2.png",
+          "alt": "iCredo assistant in a clean studio setting",
+          "width": 1536,
+          "height": 1024
+        },
+        "chat-flow": {
+          "packagePath": "assets/icredo/chat-flow.png",
+          "alt": "iCredo mobile loan conversation",
+          "width": 393,
+          "height": 852
+        },
+        "kyc": {
+          "packagePath": "assets/icredo/kyc.png",
+          "alt": "iCredo identity verification flow",
+          "width": 393,
+          "height": 852
+        },
+        "my-loans": {
+          "packagePath": "assets/icredo/my-loans.png",
+          "alt": "iCredo active loans overview",
+          "width": 393,
+          "height": 1082
+        }
+      },
+      "sections": [
+        {
+          "id": "intro",
+          "type": "intro",
+          "layout": "wide",
+          "background": { "color": "#edf4ff", "scope": "inner", "radius": "30px" },
+          "textColor": "#041f34",
+          "title": "iCredo",
+          "subtitle": "A conversational lending app designed to make a difficult financial decision feel understandable.",
+          "metadata": [
+            { "label": "Category:", "value": "Fintech, mobile product" },
+            { "label": "Focus:", "value": "Product strategy, UX, UI system" },
+            { "label": "Platform:", "value": "iOS and Android" },
+            { "label": "Tools:", "value": "Figma" }
+          ],
+          "media": "hero"
+        },
+        {
+          "id": "project",
+          "type": "about-card",
+          "layout": "contained",
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
+          "title": "The project",
+          "eyebrow": "Overview",
+          "body": "<p><strong>iCredo</strong> is a mobile AI chat experience for people exploring and managing a loan. It brings loan discovery, calculation, identity verification, repayment, and account status into one guided product.</p><p>The core design challenge was not simply to make an application easier to complete. It was to help a person understand a sensitive financial decision while the product collected the information required to make it.</p>",
+          "metadata": [
+            { "label": "Services:", "value": "Product strategy, UX, UI, design system" },
+            { "label": "Key flow:", "value": "Ask → understand → verify → receive → manage" },
+            { "label": "Language:", "value": "Armenian-first interface" }
+          ]
+        },
+        {
+          "id": "market-context",
+          "type": "feature-grid",
+          "layout": "wide",
+          "background": { "color": "#041f34" },
+          "textColor": "#ffffff",
+          "paddingTop": "140px",
+          "paddingBottom": "140px",
+          "title": "The financial context made clarity essential",
+          "items": [
+            { "value": "85%", "label": "of surveyed people had never tried to take out a loan online" },
+            { "value": "948K", "label": "resident individual borrowers with active loan balances in Armenia" },
+            { "value": "1 in 3", "label": "residents roughly carried an active loan balance" },
+            { "value": "58%", "label": "annual rate ceiling within the product context" }
+          ]
+        },
+        {
+          "id": "problem",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "140px",
+          "paddingBottom": "100px",
+          "eyebrow": "Problem statement",
+          "title": "A necessary amount of information can still feel like too much",
+          "body": "<p>Many people were unfamiliar with online lending, while the product still had to collect detailed personal and financial information. In a high-interest, last-resort lending context, every request for information needed to feel deliberate, explainable, and respectful.</p><p>The existing web calculator treated borrowing as a calculation task. The mobile experience had to turn it into a guided decision journey.</p>"
+        },
+        {
+          "id": "chat-solution",
+          "type": "split",
+          "layout": "wide",
+          "background": { "color": "#edf4ff" },
+          "paddingTop": "120px",
+          "paddingBottom": "120px",
+          "columns": [
+            { "title": "A conversation when context matters. Controls when precision matters.", "body": "<p>The assistant asks for one decision at a time, explains why it is needed, and uses simple chat language. When a user needs accuracy—such as an amount or repayment preference—the conversation hands off to visible chips and structured inputs.</p><p>This avoids a long, impersonal form while keeping financial choices precise.</p>" },
+            { "asset": "chat-flow" }
+          ]
+        },
+        {
+          "id": "trust",
+          "type": "split",
+          "layout": "wide",
+          "paddingTop": "140px",
+          "paddingBottom": "140px",
+          "columns": [
+            { "asset": "kyc" },
+            { "title": "Trust is designed into the verification flow", "body": "<p>KYC gives users direct capture guidance, a clear task boundary, and a visible security-progress indicator. The experience makes it clear what is being requested, what has been completed, and what happens next.</p><p>The goal was not to make verification feel invisible. It was to make it feel understandable.</p>" }
+          ]
+        },
+        {
+          "id": "testing",
+          "type": "prose",
+          "layout": "contained",
+          "background": { "color": "#f4f7f9" },
+          "paddingTop": "140px",
+          "paddingBottom": "140px",
+          "eyebrow": "Prototype validation",
+          "title": "What the first usability sessions were designed to challenge",
+          "body": "<p><strong>Can a chat interaction make required questions feel clearer than a form?</strong> We tested whether people understood why the assistant was asking each question, especially when the request moved from a casual amount conversation into personal details.</p><p><strong>Can people enter a number with confidence?</strong> The design pairs open input with quick amount choices and repayment modes, so users do not have to invent the interaction model themselves.</p><p><strong>Can a person understand an active loan at a glance?</strong> The post-approval workspace brings loan status, remaining balance, progress, next payment, and repayment actions into one consistent view.</p><p><em>These are the validation hypotheses and design responses for the case-study draft. Replace this copy with documented session findings before presenting it as completed research.</em></p>"
+        },
+        {
+          "id": "my-loans",
+          "type": "split",
+          "layout": "wide",
+          "background": { "color": "#041f34" },
+          "textColor": "#ffffff",
+          "paddingTop": "130px",
+          "paddingBottom": "130px",
+          "columns": [
+            { "title": "The loan remains legible after approval", "body": "<p>My Loans turns a financial commitment into a manageable workspace. Cards show status, remaining balance, progress, next payment, repayment controls, and a route into detailed schedules.</p><p>The same component system carries the experience from first question through long-term management.</p>" },
+            { "asset": "my-loans" }
+          ]
+        },
+        {
+          "id": "system",
+          "type": "feature-grid",
+          "layout": "wide",
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
+          "title": "A system for a product that keeps growing",
+          "items": [
+            { "value": "Chat", "label": "Conversation patterns for guidance and decision making" },
+            { "value": "KYC", "label": "Secure capture and clear step progress" },
+            { "value": "Loans", "label": "Reusable account, repayment, status, and schedule patterns" },
+            { "value": "UI", "label": "Shared tokens, components, and mobile interaction rules" }
+          ]
+        },
+        {
+          "id": "feedback",
+          "type": "testimonial",
+          "layout": "wide",
+          "background": { "color": "#edf4ff" },
+          "paddingTop": "120px",
+          "paddingBottom": "120px",
+          "title": "Business context",
+          "quote": "Credo Finance’s stated goal is to give consumers a personal approach and flexible, convenient services. The product direction translated that goal into a mobile flow people could understand before they committed.",
+          "person": { "name": "Bella Gabrielyan", "role": "Executive Director & Board Member, Credo Finance" },
+          "annotationText": "Leadership context — not a direct testimonial"
+        },
+        {
+          "id": "reflection",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "140px",
+          "paddingBottom": "150px",
+          "eyebrow": "Reflection",
+          "title": "The right interface does not make the decision disappear",
+          "body": "<p>Borrowing is personal, consequential, and sometimes stressful. The design did not try to hide that. It gave people a calmer way to ask questions, provide sensitive information, and keep track of what they had agreed to.</p><p>The strongest next step is to replace the validation hypotheses with documented usability-session notes and a before-and-after of the previous iCredo calculator.</p>"
         }
       ]
     }

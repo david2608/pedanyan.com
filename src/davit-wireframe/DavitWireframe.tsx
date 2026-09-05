@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { Observer } from "gsap/Observer";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Play, X } from "lucide-react";
 import {
   Shader,
   Dither,
@@ -16,7 +16,10 @@ import {
   WaveDistortion
 } from "shaders/react";
 import davitMainImage from "../assets/davit-main.jpg";
-import figmaHeroPerson from "../assets/figma-hero/davit-cutout.png";
+import heroPoseNeutral from "../assets/figma-hero/davit-pose-neutral.png";
+import heroPoseIdk from "../assets/figma-hero/davit-pose-idk.png";
+import heroPoseGood from "../assets/figma-hero/davit-pose-good.png";
+import heroPoseScroll from "../assets/figma-hero/davit-pose-scroll.png";
 import figmaHeroProductsObject from "../assets/figma-hero/hover-products.png";
 import figmaHeroDesignersObject from "../assets/figma-hero/hover-designers.png";
 import figmaHeroCultureObject from "../assets/figma-hero/hover-culture.png";
@@ -413,6 +416,205 @@ const fallbackPublicBlogCategories = [
   }
 ];
 
+const publicArchiveEntries = [
+  {
+    slug: "design-in-2030",
+    year: "2025",
+    type: "UX Storm 1.3 / DigiTec",
+    title: "Design in 2030 — a workshop for 100+ thinkers and practitioners.",
+    description: "At DigiTec 2025, UX Storm brought designers, thinkers, and practitioners together to test what design becomes when strategy, ethics, systems, and AI are part of the work.",
+    image: "/public-work/design-in-2030-digitec-2025.jpg",
+    imageAlt: "Design in 2030 workshop poster for DigiTec 2025",
+    url: "https://www.linkedin.com/posts/davit-pedanyan_aca-ux-designeducation-activity-7325191317901242368-jlGI"
+  },
+  {
+    slug: "ux-storm-1-2",
+    year: "2024",
+    type: "UX Storm / moderator",
+    title: "UX Storm 1.2 — shaping the future in UX design.",
+    description: "A donation-based Yerevan meetup with talks on UX research and UX writing, followed by speed discussions. Davit moderated the session on the future of UX design.",
+    image: "/public-work/ux-storm-1-2.jpg",
+    imageAlt: "Davit Pedanyan speaking to an audience at UX Storm 1.2",
+    url: "https://www.linkedin.com/posts/davit-pedanyan_uxstorm-activity-7229777603987976192-mQoa"
+  },
+  {
+    slug: "ux-storm-1-0",
+    year: "2023",
+    type: "UX Storm / founder format",
+    title: "UX Storm 1.0 — 100+ people, six conversations, one shared room.",
+    description: "The first UX Storm convened more than 100 design and adjacent-field professionals, testing six speed-discussion topics alongside the main program.",
+    image: "/public-work/ux-storm-1-0.jpg",
+    imageAlt: "Davit Pedanyan hosting UX Storm 1.0",
+    gallery: [
+      "/public-work/ux-storm-1-0/JONY0102.jpg",
+      "/public-work/ux-storm-1-0/JONY0167.jpg",
+      "/public-work/ux-storm-1-0/JONY0122.jpg",
+      "/public-work/ux-storm-1-0/JONY0107.jpg",
+      "/public-work/ux-storm-1-0/JONY0227.jpg",
+      "/public-work/ux-storm-1-0/JONY0360.jpg",
+      "/public-work/ux-storm-1-0/JONY0350.jpg",
+      "/public-work/ux-storm-1-0/JONY0386.jpg",
+      "/public-work/ux-storm-1-0/JONY0210.jpg",
+      "/public-work/ux-storm-1-0/JONY0161.jpg",
+      "/public-work/ux-storm-1-0/JONY0281.jpg",
+      "/public-work/ux-storm-1-0/JONY0384.jpg",
+      "/public-work/ux-storm-1-0/JONY0336.jpg",
+      "/public-work/ux-storm-1-0/JONY0271.jpg",
+      "/public-work/ux-storm-1-0/JONY0112.jpg"
+    ],
+    url: "https://www.linkedin.com/posts/davit-pedanyan_uxstorm-activity-7038788879109234689-s0mH"
+  },
+  {
+    slug: "ux-design-battle-jury",
+    year: "2025",
+    type: "Panel / jury",
+    title: "UXBattle — joining the jury for ideas under pressure.",
+    description: "Invited to the jury for UXBattle, a live design challenge supported by Converse Bank and produced by Skill, where portfolios and product thinking were tested in public.",
+    image: "/public-work/ux-design-battle-jury-1.jpg",
+    secondaryImage: "/public-work/ux-design-battle-jury-2.jpg",
+    imageAlt: "Davit Pedanyan speaking as a UX Design Battle jury member",
+    url: "https://www.linkedin.com/posts/davit-pedanyan_uxbattle-activity-7338090109671514112-AVRV"
+  },
+  {
+    slug: "ux-storm-1-1",
+    year: "2024",
+    type: "UX Storm 1.1 / speaker",
+    title: "UX Storm 1.1 — making room for an honest design conversation.",
+    description: "The second UX Storm continued the format with a direct, intimate session for Armenia’s growing product-design community.",
+    image: "/public-work/ux-storm-1-1.jpg",
+    imageAlt: "Davit Pedanyan speaking at UX Storm 1.1",
+    url: "https://www.linkedin.com/posts/davit-pedanyan_%D5%AF%D5%AB%D5%BD%D5%BE%D5%AB%D6%80-%D6%84%D5%B8-%D5%BD%D5%AF%D5%BD%D5%B6%D5%A1%D5%AF-%D5%B8%D6%82-%D5%BD%D5%AF%D5%BD%D5%A1%D5%AE-%D5%AF%D6%80%D5%A5%D5%A1%D5%BF%D5%AB%D5%BE-%D5%A8%D5%B6%D5%AF%D5%A5%D6%80%D5%B6%D5%A5%D6%80%D5%AB-activity-7266072420506120192-jkxz"
+  },
+  {
+    slug: "ux-storm-at-digitec",
+    year: "2025",
+    type: "UX Storm 1.3 / DigiTec",
+    title: "UX Storm at DigiTec — taking the conversation to Armenia’s biggest tech stage.",
+    description: "A live public session that brought product-design dialogue into the centre of DigiTec 2025.",
+    image: "/public-work/ux-storm-1-3-digitec.jpg",
+    imageAlt: "Davit Pedanyan speaking at UX Storm during DigiTec 2025",
+    url: "https://www.linkedin.com/in/davit-pedanyan/"
+  },
+  {
+    slug: "tech-week-vanadzor",
+    year: "2025",
+    type: "Tech Week / Vanadzor",
+    title: "Speaking at Tech Week Vanadzor — design as a regional conversation.",
+    description: "Taking product-design thinking beyond Yerevan and into one of Armenia’s largest technology gatherings.",
+    image: "/public-work/tech-week-2025.jpg",
+    imageAlt: "Davit Pedanyan speaking at Tech Week Vanadzor 2025",
+    url: "https://techweek.am/"
+  },
+  {
+    slug: "2x-masnageter",
+    year: "2025",
+    publishedAt: "2025-11-10",
+    type: "Podcast / product design",
+    title: "2X ՄԱՍՆԱԳԵՏՆԵՐ #1 — taste, design, and AI in product work.",
+    description: "A conversation about being a designer, developing aesthetic judgement, and using AI without losing the human responsibility behind product decisions.",
+    image: "/public-work/2x-masnageter-thumbnail.jpg",
+    imageAlt: "2X ՄԱՍՆԱԳԵՏՆԵՐ podcast with Davit Pedanyan",
+    videoId: "HBzUonXgdow",
+    url: "https://www.youtube.com/watch?v=HBzUonXgdow"
+  },
+  {
+    slug: "how2b-ui-ux-designer",
+    year: "2024",
+    publishedAt: "2024-12-24",
+    type: "Podcast / career",
+    title: "How to be a UI/UX designer — a How2B speed interview.",
+    description: "A practical conversation for people entering UI/UX: how to start, build useful habits, and focus on the thinking behind a durable design career.",
+    image: "https://i.ytimg.com/vi/5GkLC2HoWb4/maxresdefault.jpg",
+    imageAlt: "How2B speed interview with Davit Pedanyan about becoming a UI UX designer",
+    videoId: "5GkLC2HoWb4",
+    url: "https://www.youtube.com/watch?v=5GkLC2HoWb4"
+  }
+];
+
+const publicArticleCopy: Record<string, { eyebrow: string; standfirst: string; sections: Array<{ title: string; paragraphs: string[] }> }> = {
+  "design-in-2030": {
+    eyebrow: "DigiTec 2025 / UX Storm 1.3",
+    standfirst: "At Armenia’s largest technology gathering, 100+ designers, thinkers, and practitioners came together to ask a deliberately uncomfortable question: what should design become by 2030?",
+    sections: [
+      { title: "A workshop, not a lecture", paragraphs: ["Design in 2030 was built as a working room rather than a one-way programme. The intention was simple: put people with different levels of experience and different relationships to technology in the same space, then give them a question large enough to matter.", "The event brought together designers, product people, and curious practitioners at DigiTec 2025. Instead of treating the future as a trend report, the format asked participants to work through what changes when tools can produce screens, systems, and prototypes faster than ever before."] },
+      { title: "Beyond the pixel", paragraphs: ["One theme kept returning: the value of a designer is moving beyond the production of isolated interfaces. Automation will take more of the repetitive execution. What remains distinctly human is framing the problem, noticing consequences, making trade-offs, and building a direction that people can understand.", "That does not make craft less important. It changes where craft begins. The work shifts toward strategy, ethical judgement, systems thinking, and the ability to connect technology with real human behaviour."] },
+      { title: "Why make it public", paragraphs: ["UX Storm has always been a way to make product-design conversations visible in Armenia. Bringing this edition to DigiTec expanded that conversation beyond a familiar design circle and made room for people who will shape the next generation of products alongside us.", "The strongest outcome was not a single prediction about 2030. It was a shared recognition that the future of design will be built by people who keep learning, challenge their own assumptions, and stay responsible for the impact of what they create."] }
+    ]
+  },
+  "ux-design-battle-jury": {
+    eyebrow: "UX Design Battle / jury",
+    standfirst: "A live design battle is not only about who wins. It is a rare chance to watch portfolios, product instincts, and collaboration tested in the open.",
+    sections: [
+      { title: "The value of public pressure", paragraphs: ["I joined the jury for UX Design Battle, organised by Skill and supported by Converse Bank. The setting was fast, visible, and demanding: participants had to make choices, explain them, and keep moving while an audience watched.", "That pressure is useful when it is handled with care. It shows that a portfolio is not a finished statement. It is evidence of how someone thinks when the brief is imperfect and the answer is not obvious."] },
+      { title: "What a jury should look for", paragraphs: ["The most interesting work was not necessarily the most polished screen. It was the thinking behind it: a clear understanding of the user, a sensible hierarchy of problems, and the confidence to explain what was intentionally left out.", "Good critique should not reward performance alone. It should help participants leave with sharper questions for their next project—about context, trade-offs, and what makes a product decision defensible."] },
+      { title: "A stronger local practice", paragraphs: ["Events like UX Design Battle matter because they give emerging designers a public place to practise. Participants leave with a case for their portfolio, but also with experience receiving feedback from people who work in the field.", "For the community, it is a reminder that design culture becomes stronger when we make the process visible: how ideas evolve, where they break, and how respectful critique turns a draft into a better decision."] }
+    ]
+  },
+  "ux-storm-1-2": {
+    eyebrow: "UX Storm 1.2 / Yerevan, 2024",
+    standfirst: "UX Storm 1.2 brought the community back together around a familiar question with no simple answer: what is the future of UX design?",
+    sections: [
+      { title: "A room for the real questions", paragraphs: ["The second edition continued the format with talks, speed discussions, and a donation-based entry that connected participation with support for vetted charities. It made the event more than a calendar item—it was a reason to pause, meet, and think together.", "I moderated the speakers and led a conversation on the future of UX design. The topic is easy to make abstract, so the discussion stayed close to daily practice: what is changing in our work, which skills are becoming more valuable, and what should younger designers learn first?"] },
+      { title: "Future-facing, but practical", paragraphs: ["The future of UX is not a distant destination. It shows up in the quality of questions we ask today: whether we understand research, whether we can write clearly, whether we see the wider system around an interface.", "The evening made space for different answers. Designers, researchers, writers, and product people do not approach the work in exactly the same way. That difference is what made the conversation useful."] },
+      { title: "Keeping the format alive", paragraphs: ["UX Storm is deliberately open. It is a place for people who are starting out, people who have been working for years, and people from adjacent disciplines who care about better products.", "The aim is not to manufacture consensus. It is to build a habit of discussing the work honestly, in person, and with enough generosity that people return to their teams with something practical to try."] }
+    ]
+  },
+  "ux-storm-1-0": {
+    eyebrow: "UX Storm 1.0 / Yerevan, 2023",
+    standfirst: "The first UX Storm gathered more than 100 people across design and related fields, then tested a simple idea: better conversations happen when everyone has a way into the room.",
+    sections: [
+      { title: "Starting with community", paragraphs: ["The first edition was a signal that Armenia’s UI, UX, and product community was ready for a larger public conversation. More than 100 professionals came together around the main programme, but the event was designed to make participation active rather than passive.", "Alongside the talks, six speed-discussion topics gave people a chance to move between small groups, meet someone new, and test ideas in a lighter format. Colleagues coordinated those discussions, turning the room into a network rather than an audience."] },
+      { title: "Why speed discussions worked", paragraphs: ["A conventional event can make it easy to listen and easy to leave. Speed discussions change the rhythm. They ask people to formulate a thought, hear an unfamiliar perspective, and move on before the conversation becomes too comfortable.", "The format worked because it welcomed the unfinished idea. Not every contribution had to be an expert opinion; participants could ask, disagree, or simply compare how they approached the same problem in their own work."] },
+      { title: "The first proof", paragraphs: ["The success of UX Storm 1.0 was not only the attendance. It was the energy people carried out of the room and the clear desire to have the format again.", "That first event established the foundation for the editions that followed: a product-design gathering rooted in practical work, candid exchange, and a belief that a stronger community makes stronger products."] }
+    ]
+  },
+  "ux-storm-1-1": {
+    eyebrow: "UX Storm 1.1 / community event",
+    standfirst: "The second gathering kept the UX Storm idea intentionally close to the people in the room: a direct conversation about the work, the industry, and where designers find their next level.",
+    sections: [
+      { title: "Keeping momentum human", paragraphs: ["After the first event, the important thing was not to repeat the same night at a larger scale. UX Storm 1.1 focused on keeping the atmosphere open enough for people to speak honestly about their work and their doubts.", "The community was growing, but the purpose stayed the same: create an environment where experience is shared without gatekeeping and where a junior designer can be part of the same conversation as a lead or founder."] },
+      { title: "Learning in public", paragraphs: ["Design communities are built through more than finished case studies. They are built when people can talk about what did not work, ask for context, and understand that even experienced practitioners are still learning.", "That kind of visibility makes the profession feel more reachable. It turns the design community from a list of impressive people online into peers who can challenge and support one another."] },
+      { title: "An evolving format", paragraphs: ["Each UX Storm has adapted to the people, speakers, and questions present at that time. That is a strength, not a lack of consistency. The recognisable part is the intention: conversation over performance, curiosity over certainty.", "UX Storm 1.1 helped confirm that the format was not a one-time event. It was becoming a recurring place for Armenia’s product-design community to meet itself."] }
+    ]
+  },
+  "ux-storm-at-digitec": {
+    eyebrow: "UX Storm 1.3 / DigiTec 2025",
+    standfirst: "Bringing UX Storm to DigiTec made one thing clear: the future of design belongs in the centre of the technology conversation, not at its edge.",
+    sections: [
+      { title: "Taking design to the main stage", paragraphs: ["DigiTec brings together builders, companies, students, and people following the direction of Armenian technology. Hosting UX Storm there placed product design alongside the conversations that often shape it: engineering, AI, entrepreneurship, and business.", "The event was an opportunity to talk directly about the shift from designing screens to helping shape systems, products, and decisions. Design is not a service added at the end; it is part of how a product earns trust from the beginning."] },
+      { title: "A broader audience", paragraphs: ["A larger stage changes the audience. People arrive with different vocabulary and different expectations. That makes clarity more important: explain the craft without making it smaller, and explain the business value without losing the human side of the work.", "The conversation connected design to questions of responsibility, technology, and long-term product quality—the things teams need to address together rather than handing to one discipline."] },
+      { title: "The next public conversation", paragraphs: ["UX Storm at DigiTec showed that there is an appetite for more design-led public programming at major technology events. It also showed how much value comes from putting designers in dialogue with people outside the usual circle.", "The task now is to keep that exchange practical. Big stages matter, but their best use is to send people back to their next project with a better question and the confidence to ask it."] }
+    ]
+  },
+  "tech-week-vanadzor": {
+    eyebrow: "Tech Week Vanadzor / 2025",
+    standfirst: "Tech Week Vanadzor made technology feel regional, collective, and close to the next generation of Armenian builders.",
+    sections: [
+      { title: "Beyond the capital", paragraphs: ["Tech Week Vanadzor brought a multi-day technology programme to Armenia’s third-largest city. Across July 4–6, the event combined talks, workshops, an education expo, and community activity around the idea that opportunity should not be concentrated in one place.", "Speaking there was meaningful because product design gains depth when it is connected to different local contexts. The people building future teams and future products are not all in the same city, nor should the conversation be."] },
+      { title: "Design belongs in the ecosystem", paragraphs: ["Technology events often focus on what can be built. Design adds another question: what should be built, for whom, and with what consequences? That perspective matters equally to a new founder, an engineering team, a student, or a public institution.", "The session was an opportunity to frame design as a way of thinking—not just a visual outcome. It is about observing people, defining the real problem, and making choices that stay coherent as a product grows."] },
+      { title: "Growing outward", paragraphs: ["Regional gatherings create different kinds of momentum. They connect people who may not usually meet, make local ambition visible, and give students a closer view of possible careers in technology.", "For me, Tech Week Vanadzor reinforced a simple belief: a stronger Armenian tech ecosystem needs a stronger design culture everywhere—not only in established companies or the capital, but wherever people are beginning to build."] }
+    ]
+  },
+  "2x-masnageter": {
+    eyebrow: "2X ՄԱՍՆԱԳԵՏՆԵՐ / podcast",
+    standfirst: "A conversation about what makes design work last: developing aesthetic judgement, staying curious, and using AI as a tool without handing over the responsibility to it.",
+    sections: [
+      { title: "Taste is a practice", paragraphs: ["Aesthetic taste is sometimes described as something you either have or do not have. In practice, it is trained through attention. You look closely, compare what works with what does not, and learn to explain the difference without relying only on personal preference.", "For a product designer, taste is not decoration. It affects hierarchy, clarity, tone, and the level of care a person feels when they use a product. It is the ability to make choices that are not only attractive but appropriate to the context."] },
+      { title: "AI changes the surface first", paragraphs: ["AI can make more outputs available faster: references, drafts, interface directions, and language. That is useful, but it does not remove the need for judgement. A generated option still has to be evaluated against a real audience, a real product, and the consequences of putting it into the world.", "The designer’s role becomes less about being the only person able to produce a screen and more about setting a direction, asking better questions, and knowing when a polished result is still the wrong answer."] },
+      { title: "The human work remains", paragraphs: ["Good product work starts with empathy and ends with responsibility. It asks who benefits, who might be excluded, and whether the team is solving the real problem rather than the most visible one.", "This podcast is a conversation for anyone building their point of view in design: tools will change, but curiosity, observation, and a sense of responsibility remain the foundation of the work."] }
+    ]
+  },
+  "how2b-ui-ux-designer": {
+    eyebrow: "How2B / speed interview",
+    standfirst: "A concise, practical conversation for people who want to enter UI/UX design without confusing a collection of screens with the beginning of a real design practice.",
+    sections: [
+      { title: "Start with the problem", paragraphs: ["The fastest way into UI/UX is not to memorise a tool. It is to learn how to see a problem. Who is trying to do something? What is making that difficult? What would make the outcome clearer, faster, safer, or more useful?", "Tools matter because they let you communicate an idea. But tools change quickly. The habit of finding the real problem, explaining your reasoning, and testing an assumption is what gives a designer a career that can move with the industry."] },
+      { title: "Build evidence, not decoration", paragraphs: ["A portfolio should show the path behind a result. Instead of presenting only polished screens, show the context, the constraints, the decisions, and what you learned. A recruiter or product team wants to understand how you think when the brief is incomplete.", "Early projects do not need to be huge. They need to be honest. Pick a problem you can observe, give it a clear boundary, and document your choices with enough detail that another person can follow your logic."] },
+      { title: "Keep learning in public", paragraphs: ["Design is easier to learn when you are part of a community. Meet other practitioners, ask for critique, attend events, and share work before it feels perfect. These moments build confidence and expose you to approaches you would not find alone.", "The goal is not to become a UI/UX designer overnight. It is to build a practice of attention, making, feedback, and iteration that will keep improving long after the first job title arrives."] }
+    ]
+  }
+};
+
 const fallbackDrunkTalksGallery = [
   {
     title: "Foreign designer night",
@@ -528,22 +730,73 @@ function useResolvedNavLink(href: string) {
   return { href: resolvedHref, target };
 }
 
+type HeroPose = "idk" | "good" | "scroll";
+
+// Living-portrait clips: transparent VP9 WebM (alpha), served locally.
+const HERO_CLIPS: Partial<Record<"neutral" | HeroPose, string>> = {
+  neutral: "/hero-video/idle.webm",
+  idk: "/hero-video/shrug.webm",
+  good: "/hero-video/thumbs.webm",
+  scroll: "/hero-video/scroll.webm"
+};
+
+// Stop-motion flipbook: transparent WebP frame sequences extracted from the
+// 2K keyed videos, played with hard cuts at ~12fps.
+const heroFrameSequence = (name: string, count: number) =>
+  Array.from({ length: count }, (_, i) => `/hero-frames/${name}/f${String(i + 1).padStart(2, "0")}.webp`);
+const HERO_FRAMES: Partial<Record<"neutral" | HeroPose, string[]>> = {
+  neutral: heroFrameSequence("idle", 18),
+  idk: heroFrameSequence("shrug", 20).slice(2),
+  good: heroFrameSequence("thumbs", 20).slice(2),
+  scroll: heroFrameSequence("scroll", 20).slice(2)
+};
+// Gestures run snappy; the breathing loop slower, near natural pace.
+const HERO_FRAME_MS = 60;
+const HERO_SCROLL_FRAME_MS = 85; // the point-down scroll gesture keeps its original, calmer pace
+const HERO_IDLE_FRAME_MS = 125; // natural pace: source video is 24fps, frames sampled every 3rd
+const HERO_IDLE_PAUSE_MS = 4200; // rest on the calm frame between breaths
+
+// Alpha WebM plays everywhere modern except Safari, which decodes VP9 but
+// renders the alpha channel as an opaque backing - there the stills stay.
+function supportsAlphaVideo() {
+  if (typeof document === "undefined" || typeof navigator === "undefined") return false;
+  const agent = navigator.userAgent;
+  const isSafari = /safari/i.test(agent) && !/chrome|chromium|crios|android|edg/i.test(agent);
+  if (isSafari) return false;
+  return document.createElement("video").canPlayType('video/webm; codecs="vp9"') !== "";
+}
+
+// The hero portrait listens for this event and swaps Davit's pose.
+function emitHeroPose(pose: HeroPose | null) {
+  window.dispatchEvent(new CustomEvent<HeroPose | null>("dw-hero-pose", { detail: pose }));
+}
+
 function NavAnchor({
   children,
   className,
   href,
-  isActive = false
+  isActive = false,
+  poseOnHover
 }: {
   children: ReactNode;
   className?: string;
   href: string;
   isActive?: boolean;
+  poseOnHover?: HeroPose;
 }) {
   const link = useResolvedNavLink(href);
   const classes = [className, isActive ? "is-active" : ""].filter(Boolean).join(" ");
+  const poseHandlers = poseOnHover
+    ? {
+        onMouseEnter: () => emitHeroPose(poseOnHover),
+        onMouseLeave: () => emitHeroPose(null),
+        onFocus: () => emitHeroPose(poseOnHover),
+        onBlur: () => emitHeroPose(null)
+      }
+    : {};
 
   return (
-    <a className={classes || undefined} href={link.href} target={link.target} aria-current={isActive ? "page" : undefined}>
+    <a className={classes || undefined} href={link.href} target={link.target} aria-current={isActive ? "page" : undefined} {...poseHandlers}>
       {children}
     </a>
   );
@@ -829,7 +1082,7 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
 
   return (
     <header className={`dw-header ${isScrolled ? "is-scrolled" : ""}`}>
-      <NavAnchor className="dw-logo" href="/am">
+      <NavAnchor className="dw-logo" href="/am" poseOnHover="scroll">
         <span className="dw-logo-word">
           <img src="/brand/pdnyn-handdrawn.png" alt="PDNYN" />
         </span>
@@ -843,6 +1096,7 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
               (activePage === "designTalent" && item.href === "/am/designer") ||
               (activePage === "publicWork" && item.href === "/am/public-work")
             }
+            poseOnHover={item.href === "/am/public-work" ? "idk" : undefined}
             key={item.href}
           >
             {item.label}
@@ -853,6 +1107,7 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
         className="dw-school-link"
         href={websiteContent.navigation.school.href}
         isActive={activePage === "school"}
+        poseOnHover="idk"
       >
         {websiteContent.navigation.school.label}
       </NavAnchor>
@@ -865,7 +1120,16 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
         >
           <span>{theme === "day" ? "night mode" : "day mode"}</span>
         </button>
-        <a className="dw-pill" href={DAVIT_LINKEDIN_URL} target="_blank" rel="noreferrer">
+        <a
+          className="dw-pill"
+          href={DAVIT_LINKEDIN_URL}
+          target="_blank"
+          rel="noreferrer"
+          onMouseEnter={() => emitHeroPose("good")}
+          onMouseLeave={() => emitHeroPose(null)}
+          onFocus={() => emitHeroPose("good")}
+          onBlur={() => emitHeroPose(null)}
+        >
           <MessageCircle className="dw-talk-icon" aria-hidden="true" strokeWidth={1.8} />
           <span>{websiteContent.navigation.talk.label}</span>
         </a>
@@ -1097,6 +1361,103 @@ export function HeroSection() {
     onBlur: () => setHeroFocus(null)
   });
 
+  const [hoverPose, setHoverPose] = useState<HeroPose | null>(null);
+  const [pulseScroll, setPulseScroll] = useState(false);
+
+  useEffect(() => {
+    const onPose = (event: Event) => {
+      setHoverPose((event as CustomEvent<HeroPose | null>).detail ?? null);
+    };
+    window.addEventListener("dw-hero-pose", onPose);
+    return () => window.removeEventListener("dw-hero-pose", onPose);
+  }, []);
+
+  useEffect(() => {
+    // Every 15s the scroll gesture plays once, full length, then rewinds.
+    let timeout = 0;
+    const interval = window.setInterval(() => {
+      setPulseScroll(true);
+      timeout = window.setTimeout(() => setPulseScroll(false), 1800);
+    }, 15000);
+    return () => {
+      window.clearInterval(interval);
+      window.clearTimeout(timeout);
+    };
+  }, []);
+
+  const heroPose: HeroPose | "neutral" = hoverPose ?? (pulseScroll ? "scroll" : "neutral");
+  const heroClipRefs = useRef<Record<string, HTMLVideoElement | null>>({});
+  // Plan B: the AI-video layer degraded the engraving too much - flipbook
+  // frame sequences replace it. Video code kept but disabled.
+  const [clipsEnabled] = useState(false);
+  void supportsAlphaVideo;
+  const activeClip = clipsEnabled && HERO_CLIPS[heroPose] ? heroPose : null;
+
+  const [frameView, setFrameViewState] = useState<{ pose: "neutral" | HeroPose; index: number } | null>(null);
+  const frameViewRef = useRef<typeof frameView>(null);
+  const setFrameView = (view: typeof frameView) => {
+    frameViewRef.current = view;
+    setFrameViewState(view);
+  };
+
+  useEffect(() => {
+    const timers: number[] = [];
+    const play = (pose: "neutral" | HeroPose) => {
+      const frames = HERO_FRAMES[pose];
+      if (!frames) {
+        setFrameView(null);
+        return;
+      }
+      const isLoop = pose === "neutral";
+      let step = 0;
+      setFrameView({ pose, index: 0 });
+      const tick = () => {
+        step += 1;
+        if (step >= frames.length) {
+          if (!isLoop) return; // hold the final frame while the pose stays active
+          step = 0;
+        }
+        setFrameView({ pose, index: step });
+        const delay = !isLoop
+          ? pose === "scroll" ? HERO_SCROLL_FRAME_MS : HERO_FRAME_MS
+          : step === 0
+            ? HERO_IDLE_PAUSE_MS // breath done: rest on the calm frame
+            : HERO_IDLE_FRAME_MS;
+        timers.push(window.setTimeout(tick, delay));
+      };
+      timers.push(window.setTimeout(tick, isLoop ? HERO_IDLE_PAUSE_MS : pose === "scroll" ? HERO_SCROLL_FRAME_MS : HERO_FRAME_MS));
+    };
+
+    // Leaving a gesture hard-cuts straight back to the active pose --
+    // same instant-cut language as the rest of the hero.
+    play(heroPose);
+    return () => timers.forEach((timer) => window.clearTimeout(timer));
+  }, [heroPose]);
+
+  useEffect(() => {
+    // Warm the gesture clips shortly after load so first hover has no delay.
+    if (!clipsEnabled) return;
+    const warmup = window.setTimeout(() => {
+      Object.entries(heroClipRefs.current).forEach(([pose, video]) => {
+        if (video && pose !== "neutral") video.load();
+      });
+    }, 2500);
+    return () => window.clearTimeout(warmup);
+  }, [clipsEnabled]);
+
+  useEffect(() => {
+    Object.entries(heroClipRefs.current).forEach(([pose, video]) => {
+      if (!video) return;
+      if (pose === activeClip) {
+        video.playbackRate = 1.5;
+        video.currentTime = 0;
+        void video.play().catch(() => undefined);
+      } else {
+        video.pause();
+      }
+    });
+  }, [activeClip]);
+
   return (
     <section
       className={`dw-section dw-home-hero dw-figma-hero${isTyping ? " is-copy-typing" : ""}${heroFocus ? ` has-focus is-${heroFocus}` : ""}`}
@@ -1105,8 +1466,38 @@ export function HeroSection() {
       onMouseLeave={resetHeroMove}
     >
       <div className="dw-home-hero-screen">
-        <figure className="dw-home-hero-portrait-card" data-speed="-0.18" data-float-depth="0.2">
-          <img src={figmaHeroPerson} alt="Davit Pedanyan seated on a studio stool" />
+        <figure className={`dw-home-hero-portrait-card is-pose-${heroPose}${clipsEnabled ? " has-clips" : ""}${frameView ? " has-frames" : ""}`} data-speed="-0.18" data-float-depth="0.2">
+          <img className="dw-hero-pose dw-hero-pose-neutral" src={heroPoseNeutral} alt="Davit Pedanyan seated on a studio stool" />
+          <img className="dw-hero-pose dw-hero-pose-idk" src={heroPoseIdk} alt="" aria-hidden="true" />
+          <img className="dw-hero-pose dw-hero-pose-good" src={heroPoseGood} alt="" aria-hidden="true" />
+          <img className="dw-hero-pose dw-hero-pose-scroll" src={heroPoseScroll} alt="" aria-hidden="true" />
+          <img className="dw-hero-stool" src="/hero-frames/stool.webp" alt="" aria-hidden="true" />
+          {Object.entries(HERO_FRAMES).map(([pose, frames]) =>
+            frames.map((frameSrc, frameIndex) => (
+              <img
+                className={`dw-hero-frame${frameView && frameView.pose === pose && frameView.index === frameIndex ? " is-active" : ""}`}
+                src={frameSrc}
+                alt=""
+                aria-hidden="true"
+                key={`${pose}-${frameIndex}`}
+              />
+            ))
+          )}
+          {clipsEnabled && Object.entries(HERO_CLIPS).map(([pose, src]) => (
+            <video
+              className={`dw-hero-clip${activeClip === pose ? " is-active" : ""}`}
+              src={src}
+              muted
+              playsInline
+              preload={pose === "neutral" ? "auto" : "none"}
+              loop={pose === "neutral"}
+              aria-hidden="true"
+              ref={(element) => {
+                heroClipRefs.current[pose] = element;
+              }}
+              key={pose}
+            />
+          ))}
         </figure>
 
         <div className="dw-home-hero-statement" data-speed="0.12" data-float-depth="-0.08">
@@ -2182,6 +2573,7 @@ function HomeUnifiedScrollExperience() {
       let correctingBoundary = false;
       let releasedForward = false;
       let exitingUp = false;
+      let heroScrollNudgeDone = false;
       let trigger: ScrollTrigger;
       let inputObserver: Observer;
 
@@ -2662,6 +3054,14 @@ function HomeUnifiedScrollExperience() {
         if (playback.chapter === "hero") {
           if (direction < 0) {
             releaseToPage(-1);
+            return;
+          }
+          if (!heroScrollNudgeDone) {
+            // First down-scroll: Davit points down once. The next scroll moves on.
+            heroScrollNudgeDone = true;
+            emitHeroPose("scroll");
+            gsap.delayedCall(1.7, () => emitHeroPose(null));
+            playback.cooldownUntil = now + 0.9;
             return;
           }
           moveTo(heroTransitionEnd, 0.9, 1, () => {
@@ -3238,7 +3638,7 @@ export function PublicWorkSection() {
   );
 }
 
-export function PublicMediaGridPageSection() {
+function LegacyPublicMediaGridPageSection() {
   return (
     <section className="dw-media-page" id="public-work">
       <section className="dw-public-media-section" aria-label="Public and media">
@@ -3330,6 +3730,140 @@ export function PublicMediaGridPageSection() {
       </section>
       </section>
     </section>
+  );
+}
+
+export function PublicMediaGridPageSection() {
+  const [activePodcast, setActivePodcast] = useState<(typeof publicArchiveEntries)[number] | null>(null);
+  const archiveEntries = [...publicArchiveEntries].sort((a, b) => {
+    const dateFor = (entry: (typeof publicArchiveEntries)[number]) => entry.publishedAt ?? `${entry.year}-01-01`;
+    return dateFor(b).localeCompare(dateFor(a));
+  });
+
+  return (
+    <section className="dw-media-page" id="public-work">
+      <section className="dw-public-media-section dw-public-journal" aria-label="Public work archive">
+        <header className="dw-public-journal-hero">
+          <span>Public work / 2018–now</span>
+          <h1>Talks, events,<br />and conversations<br />in public.</h1>
+          <p>I organise formats, moderate discussions, teach, write, and join the conversations that help Armenia’s design community get sharper and more connected.</p>
+        </header>
+
+        <section className="dw-public-journal-feature" aria-label="Featured public work">
+          <span>Featured series</span>
+          <div><p>UX Storm</p><h2>Three events. One growing product-design community.</h2></div>
+          <p>UX Storm is an open format for talks, speed discussions, and candid exchange between designers, researchers, writers, founders, and people who care about better products.</p>
+        </section>
+
+        <section className="dw-public-journal-grid" aria-label="Public work archive">
+          {archiveEntries.map((entry, index) => {
+            const videoId = "videoId" in entry ? entry.videoId : undefined;
+            const cardContent = <>
+              <div className={`dw-public-journal-entry-media${entry.secondaryImage ? " has-secondary" : ""}`}>
+                <img src={entry.image} alt={entry.imageAlt} />
+                {entry.secondaryImage ? <img src={entry.secondaryImage} alt="" aria-hidden="true" /> : null}
+                {videoId ? <span className="dw-public-podcast-play" aria-hidden="true"><Play fill="currentColor" size={19} /></span> : null}
+              </div>
+              <div><span>{entry.year}</span><span>{entry.type}</span></div>
+              <h2>{entry.title}</h2>
+              <p>{entry.description}</p>
+              <span className="dw-public-journal-link">{videoId ? "Play episode ↗" : "Read article ↗"}</span>
+            </>;
+
+            return videoId ? (
+              <button className={`dw-public-journal-entry is-podcast entry-${index + 1}`} key={entry.title} type="button" onClick={() => setActivePodcast(entry)}>
+                {cardContent}
+              </button>
+            ) : (
+              <a className={`dw-public-journal-entry entry-${index + 1}`} key={entry.title} href={`/am/public-work/${entry.slug}`}>
+                {cardContent}
+              </a>
+            );
+          })}
+        </section>
+      </section>
+
+      {activePodcast && "videoId" in activePodcast ? (
+        <div className="dw-public-podcast-modal" role="dialog" aria-modal="true" aria-label={`Play ${activePodcast.title}`} onClick={() => setActivePodcast(null)}>
+          <div className="dw-public-podcast-modal-frame" onClick={(event) => event.stopPropagation()}>
+            <button className="dw-public-podcast-close" type="button" onClick={() => setActivePodcast(null)} aria-label="Close video"><X size={21} /></button>
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${activePodcast.videoId}?autoplay=1`}
+              title={activePodcast.title}
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      ) : null}
+    </section>
+  );
+}
+
+function PublicArticlePage({ slug }: { slug: string }) {
+  const entry = publicArchiveEntries.find((item) => item.slug === slug);
+  const article = publicArticleCopy[slug];
+  const videoId = entry && "videoId" in entry ? entry.videoId : undefined;
+  const gallery = (entry && "gallery" in entry ? entry.gallery : []) ?? [];
+
+  if (!entry || !article) return <PublicWorkPage />;
+
+  return (
+    <PageShell activePage="publicWork">
+      <article className="dw-public-article">
+        <a className="dw-public-article-back" href="/am/public-work">← Public archive</a>
+        <header className="dw-public-article-hero">
+          <div>
+            <span>{article.eyebrow}</span>
+            <h1>{entry.title}</h1>
+            <p>{article.standfirst}</p>
+          </div>
+          {videoId ? (
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+              title={entry.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          ) : <img src={entry.image} alt={entry.imageAlt} />}
+        </header>
+
+        <div className="dw-public-article-body">
+          <aside>
+            <span>{entry.year}</span>
+            <span>{entry.type}</span>
+          </aside>
+          <div>
+            {article.sections.map((section) => (
+              <section key={section.title}>
+                <h2>{section.title}</h2>
+                {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              </section>
+            ))}
+          </div>
+        </div>
+
+        {gallery.length ? (
+          <section className="dw-public-article-gallery" aria-label="UX Storm 1.0 event gallery">
+            <span>Event gallery / UX Storm 1.0</span>
+            <div>
+              {gallery.map((image, index) => <img key={image} src={image} alt={`UX Storm 1.0 event moment ${index + 1}`} loading="lazy" />)}
+            </div>
+          </section>
+        ) : (
+          <section className="dw-public-article-gallery-placeholder" aria-label="Event gallery placeholder">
+            <span>Event gallery</span>
+            <p>More images from this event will be added here.</p>
+            {entry.secondaryImage ? <img src={entry.secondaryImage} alt="Additional event moment" /> : null}
+          </section>
+        )}
+
+        <footer className="dw-public-article-footer">
+          <a href={entry.url} target="_blank" rel="noreferrer">View related source ↗</a>
+          <a href="/am/public-work">More public work ↗</a>
+        </footer>
+      </article>
+    </PageShell>
   );
 }
 
@@ -3500,7 +4034,11 @@ export function SchoolPage() {
 }
 
 export function PublicWorkPage() {
-  return <ComingSoonPage title="Public" activePage="publicWork" />;
+  return (
+    <PageShell activePage="publicWork">
+      <PublicMediaGridPageSection />
+    </PageShell>
+  );
 }
 
 function ComingSoonPage({ title, activePage }: { title: "Public" | "School"; activePage: PageKey }) {
@@ -3538,6 +4076,9 @@ export function AppRouter() {
   if (path === "/am/design-talent") return <DesignTalentPage />;
   if (path === "/am/story") return <PublicWorkPage />;
   if (path === "/am/school") return <SchoolPage />;
+  const publicArticleMatch = path.match(/^\/am\/public-work\/([^/]+)$/);
+  if (publicArticleMatch && publicArchiveEntries.some((entry) => entry.slug === publicArticleMatch[1] && "videoId" in entry)) return <PublicWorkPage />;
+  if (publicArticleMatch) return <PublicArticlePage slug={publicArticleMatch[1]} />;
   if (path === "/am/public-work") return <PublicWorkPage />;
   if (path === "/am/lets-talk") {
     window.location.replace(DAVIT_LINKEDIN_URL);

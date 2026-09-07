@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Partner logos — three concepts</title>
+<style>
+  :root{
+    --ink:#0a0a0a; --muted:#5f5a50; --line:#dedbd4; --paper:#ffffff; --wash:#f5f3ee;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--wash);color:var(--ink);
+       font:16px/1.5 Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px 120px}
+  header.top{padding:56px 0 30px;border-bottom:1px solid var(--line)}
+  h1{margin:0 0 14px;font-size:clamp(2rem,5vw,3.4rem);line-height:.98;letter-spacing:-.04em;font-weight:700}
+  .lede{max-width:64ch;color:var(--muted);font-size:1.02rem;margin:0}
+  .concept{margin-top:64px;border:1px solid var(--line);border-radius:20px;background:var(--paper);overflow:hidden}
+  .concept-head{padding:24px 26px 20px;border-bottom:1px solid var(--line);display:flex;gap:18px;
+                align-items:flex-start;flex-wrap:wrap;justify-content:space-between}
+  .concept-head h2{margin:0 0 7px;font-size:1.42rem;letter-spacing:-.025em;font-weight:600}
+  .concept-head p{margin:0;color:var(--muted);font-size:.93rem;max-width:60ch}
+  .tag{font:500 .66rem/1 ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;
+       color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 12px;white-space:nowrap}
+  .stage{padding:38px 26px 42px}
+  .verdict{padding:16px 26px 22px;border-top:1px solid var(--line);background:var(--wash);
+           font-size:.88rem;color:var(--muted)}
+  .verdict b{color:var(--ink);font-weight:600}
+
+  /* shared logo chip */
+  .logo{display:flex;align-items:center;justify-content:center;height:100%}
+  .logo img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+  .fallback{font-weight:600;letter-spacing:-.01em;font-size:.9rem;text-align:center;line-height:1.15}
+
+  /* ---------- A: timeline ---------- */
+  .tl{display:grid;gap:0}
+  .tl-row{display:grid;grid-template-columns:78px 1fr auto;gap:22px;align-items:center;
+          padding:17px 0;border-top:1px solid var(--line)}
+  .tl-row:last-child{border-bottom:1px solid var(--line)}
+  .tl-year{font:500 .8rem/1 ui-monospace,Menlo,monospace;color:var(--muted)}
+  .tl-role strong{display:block;font-size:1.06rem;font-weight:600;letter-spacing:-.015em}
+  .tl-role span{font-size:.85rem;color:var(--muted)}
+  .tl-logos{display:flex;gap:9px;align-items:center;flex-wrap:wrap;justify-content:flex-end;max-width:46%}
+  .tl-logos .logo{width:58px;height:30px;filter:grayscale(1);opacity:.62;transition:.28s}
+  .tl-row:hover .tl-logos .logo{filter:none;opacity:1}
+
+  /* ---------- B: proof wall ---------- */
+  .wall-label{font:500 .68rem/1 ui-monospace,Menlo,monospace;letter-spacing:.15em;text-transform:uppercase;
+              color:var(--muted);margin-bottom:20px}
+  .wall{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+        border-top:1px solid var(--line);border-left:1px solid var(--line)}
+  .wall .cell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+              height:104px;display:grid;place-items:center;padding:18px}
+  .wall .logo{width:100%;height:100%;filter:grayscale(1) contrast(.15) brightness(.55);opacity:.75;transition:.3s ease}
+  .wall .cell:hover .logo{filter:none;opacity:1;transform:scale(1.05)}
+
+  /* ---------- C: drift band ---------- */
+  .band{background:#0b0b0b;border-radius:16px;padding:34px 0;overflow:hidden;position:relative}
+  .band::before,.band::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:2;pointer-events:none}
+  .band::before{left:0;background:linear-gradient(90deg,#0b0b0b,transparent)}
+  .band::after{right:0;background:linear-gradient(270deg,#0b0b0b,transparent)}
+  .band-label{color:#8b8880;font:500 .68rem/1 ui-monospace,Menlo,monospace;letter-spacing:.15em;
+              text-transform:uppercase;padding:0 26px 20px}
+  .rowwrap{overflow:hidden}
+  .row{display:flex;gap:52px;width:max-content;will-change:transform}
+  .row + .rowwrap{margin-top:26px}
+  .row .logo{width:104px;height:38px;flex:none;filter:grayscale(1) invert(1) brightness(1.6);opacity:.5}
+  .row .fallback{color:#f2efe6}
+  .hint{margin-top:16px;font-size:.83rem;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>Partner logos — three concepts</h1>
+  <p class="lede">All three use your real twelve brands and real logo sources, so what you see is what ships.
+  Today the marquee is the very last thing on the homepage, after the entire scroll sequence — which is most of
+  why it doesn't land. Every concept below moves it earlier. Tell me a letter and I'll build it into the site.</p>
+</header>
+
+<!-- ============ A ============ -->
+<section class="concept">
+  <div class="concept-head">
+    <div>
+      <h2>A · Woven into the timeline</h2>
+      <p>No separate logo section at all. Each partner sits on the row of the period it belongs to, so the logos
+      read as evidence attached to a claim rather than a decorative strip.</p>
+    </div>
+    <span class="tag">needs your input</span>
+  </div>
+  <div class="stage">
+    <div class="tl" id="tl"></div>
+  </div>
+  <div class="verdict"><b>Trade-off:</b> strongest credibility, because a logo next to a year is a claim you are
+  standing behind. But I need you to tell me which partner belongs to which period — the groupings below are
+  placeholders. Also the least "impressive" visually: it is quiet by design.</div>
+</section>
+
+<!-- ============ B ============ -->
+<section class="concept">
+  <div class="concept-head">
+    <div>
+      <h2>B · Proof wall, directly under the hero</h2>
+      <p>A still grid in the first screen after the hero. Muted by default, full colour on hover. Reads as a
+      credential list — the pattern a hiring manager already knows how to scan.</p>
+    </div>
+    <span class="tag">ready to ship</span>
+  </div>
+  <div class="stage">
+    <div class="wall-label">Worked with</div>
+    <div class="wall" id="wall"></div>
+  </div>
+  <div class="verdict"><b>Trade-off:</b> fastest to read and the easiest to place high on the page. Static, so it
+  competes with nothing — but it also asks for no attention. Best if the goal is credibility rather than delight.</div>
+</section>
+
+<!-- ============ C ============ -->
+<section class="concept">
+  <div class="concept-head">
+    <div>
+      <h2>C · Scroll-driven drift</h2>
+      <p>Two rows moving in opposite directions on a dark band, tied to <em>scroll velocity</em> rather than a
+      constant loop — it advances when you move and stops when you stop, so it never feels like an ad banner.</p>
+    </div>
+    <span class="tag">scroll the page</span>
+  </div>
+  <div class="stage">
+    <div class="band">
+      <div class="band-label">Worked with</div>
+      <div class="rowwrap"><div class="row" id="rowA"></div></div>
+      <div class="rowwrap"><div class="row" id="rowB"></div></div>
+    </div>
+    <p class="hint">↕ Scroll this page up and down — the rows track your scrolling and drift to a stop when you pause.</p>
+  </div>
+  <div class="verdict"><b>Trade-off:</b> the most alive of the three, and it earns its motion because the motion is
+  yours, not a loop. Costs a dark full-bleed band, which has to sit somewhere the page can afford to go dark.</div>
+</section>
+
+</div>
+
+<script>
+const BRANDS = [
+  {name:"NPUA", domain:"polytechnic.am"},
+  {name:"Mellat Bank", domain:"mellatbank.am"},
+  {name:"Public Council of Armenia", domain:"publiccouncil.am"},
+  {name:"SoftLand", domain:"softland.am"},
+  {name:"Wirestock", domain:"wirestock.io"},
+  {name:"Yerevan Mall", domain:"yerevanmall.am"},
+  {name:"Kinodaran", domain:"kinodaran.am", wordmark:"/logos/partners/kinodaran.svg"},
+  {name:"TCF", domain:"tcf.am", wordmark:"/logos/partners/tcf.png"},
+  {name:"W8RK", domain:"w8rk.com"},
+  {name:"8Imiges", domain:""},
+  {name:"Insafe", domain:"insafe.am"},
+  {name:"Sarkissian.pro", domain:"sarkissian.pro"}
+];
+
+function logoNode(b){
+  const box = document.createElement("span");
+  box.className = "logo";
+  const src = b.wordmark || (b.domain ? "https://logo.clearbit.com/" + b.domain : "");
+  if (!src) { box.innerHTML = '<span class="fallback">' + b.name + '</span>'; return box; }
+  const img = new Image();
+  img.alt = b.name; img.loading = "lazy"; img.src = src;
+  img.onerror = () => {
+    if (b.domain && !img.dataset.retried) {
+      img.dataset.retried = "1";
+      img.src = "https://www.google.com/s2/favicons?domain=" + b.domain + "&sz=128";
+      return;
+    }
+    box.innerHTML = '<span class="fallback">' + b.name + '</span>';
+  };
+  box.appendChild(img);
+  return box;
+}
+
+/* ---- A ---- */
+const ERAS = [
+  {year:"2024 →", role:"Freedx", note:"Head of Design", take:[0,1]},
+  {year:"2023", role:"Lynon · CloudChipr", note:"Design lead", take:[4,8]},
+  {year:"2021–22", role:"T-Bank · Delux", note:"Design Lead", take:[5,10,11]},
+  {year:"2019–20", role:"Webb Fontaine", note:"Enterprise platforms", take:[2,3]},
+  {year:"Ongoing", role:"Community & teaching", note:"UX Storm, ACA, juries", take:[6,7,9]}
+];
+const tl = document.getElementById("tl");
+ERAS.forEach(e => {
+  const row = document.createElement("div"); row.className = "tl-row";
+  row.innerHTML = '<span class="tl-year">'+e.year+'</span>' +
+                  '<span class="tl-role"><strong>'+e.role+'</strong><span>'+e.note+'</span></span>';
+  const logos = document.createElement("span"); logos.className = "tl-logos";
+  e.take.forEach(i => logos.appendChild(logoNode(BRANDS[i])));
+  row.appendChild(logos); tl.appendChild(row);
+});
+
+/* ---- B ---- */
+const wall = document.getElementById("wall");
+BRANDS.forEach(b => {
+  const cell = document.createElement("div"); cell.className = "cell";
+  cell.appendChild(logoNode(b)); wall.appendChild(cell);
+});
+
+/* ---- C ---- */
+const rowA = document.getElementById("rowA"), rowB = document.getElementById("rowB");
+[...BRANDS, ...BRANDS, ...BRANDS].forEach(b => rowA.appendChild(logoNode(b)));
+[...BRANDS].reverse().concat([...BRANDS].reverse(), [...BRANDS].reverse()).forEach(b => rowB.appendChild(logoNode(b)));
+
+let offA = 0, offB = 0, lastY = scrollY, vel = 0, drift = 0;
+const spanA = () => rowA.scrollWidth / 3, spanB = () => rowB.scrollWidth / 3;
+(function loop(){
+  const y = scrollY;
+  const raw = y - lastY; lastY = y;
+  vel += (raw - vel) * 0.2;
+  drift += (0.35 - drift) * 0.04;          // a slow floor so it never looks broken
+  const step = vel * 0.9 + drift;
+  offA = (offA + step) % spanA();
+  offB = (offB - step) % spanB();
+  if (offA < 0) offA += spanA();
+  if (offB > 0) offB -= spanB();
+  rowA.style.transform = "translateX(" + (-offA) + "px)";
+  rowB.style.transform = "translateX(" + offB + "px)";
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

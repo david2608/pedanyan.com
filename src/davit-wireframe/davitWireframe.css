@@ -10,6 +10,10 @@ select {
   font-family: Archivo, Arial, Helvetica, sans-serif;
 }
 
+body {
+  margin: 0;
+}
+
 .dw-page {
   --dw-bg: #ffffff;
   --dw-panel: #ffffff;
@@ -79,17 +83,33 @@ select {
 }
 
 .dw-cursor-label {
-  display: none;
-}
-
-.dw-progress {
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 9997;
-  width: 0;
-  height: 3px;
-  background: var(--dw-acid);
+  z-index: 61;
+  color: #ffffff;
+  mix-blend-mode: difference;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate(18px, 22px);
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.dw-cursor-label.is-visible {
+  opacity: 1;
+}
+
+.dw-cursor-label.is-flipped {
+  transform: translate(calc(-100% - 18px), 22px);
+}
+
+.dw-progress {
+  display: none;
 }
 
 .dw-header {
@@ -1267,8 +1287,7 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
 }
 
 .dw-home-unified-experience .dw-experience-path {
-  right: -4vw;
-  opacity: 0.1;
+  opacity: 0.26;
 }
 
 .dw-home-unified-static {
@@ -2256,14 +2275,13 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
 .dw-experience-path {
   position: absolute;
   z-index: 0;
-  right: -8vw;
-  top: -3vh;
-  width: 30vw;
-  height: 112vh;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   overflow: visible;
   filter: none;
-  opacity: 0.16;
+  opacity: 0.3;
 }
 
 .dw-experience-path-line {
@@ -2274,7 +2292,8 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
 
 .dw-experience-path-line {
   stroke: var(--dw-hot);
-  stroke-width: 9;
+  stroke-width: 15;
+  vector-effect: non-scaling-stroke;
 }
 
 .dw-experience-list {
@@ -3232,6 +3251,33 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   padding: 0 20px clamp(110px, 12vw, 190px);
 }
 
+.dw-public-year-timeline {
+  position: fixed;
+  z-index: 20;
+  top: 50%;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transform: translateY(-50%);
+}
+
+.dw-public-year-timeline a {
+  color: inherit;
+  font-size: 13px;
+  line-height: 1;
+  text-decoration: none;
+  transition: font-size 160ms ease, opacity 160ms ease;
+}
+
+.dw-public-year-timeline a:not(.is-active) {
+  opacity: .42;
+}
+
+.dw-public-year-timeline a.is-active {
+  font-size: 18px;
+}
+
 .dw-public-journal-hero {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(260px, 5fr);
@@ -3258,11 +3304,11 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
 }
 
 .dw-public-journal-hero h1 {
-  max-width: 10ch;
   margin: 0;
-  font-size: clamp(60px, 7.4vw, 138px);
+  font-size: clamp(54px, 6.6vw, 124px);
   font-weight: 400;
-  line-height: 0.91;
+  line-height: 0.95;
+  white-space: nowrap;
 }
 
 .dw-public-journal-hero p {
@@ -3337,7 +3383,6 @@ button.dw-public-journal-entry {
 }
 
 .dw-public-journal-entry-media {
-  aspect-ratio: 16 / 10;
   display: grid;
   position: relative;
   min-width: 0;
@@ -3347,15 +3392,21 @@ button.dw-public-journal-entry {
 }
 
 .dw-public-journal-entry-media.has-secondary {
+  aspect-ratio: 16 / 10;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2px;
 }
 
 .dw-public-journal-entry-media img {
+  display: block;
   width: 100%;
+  height: auto;
+  transition: transform 500ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.dw-public-journal-entry-media.has-secondary img {
   height: 100%;
   object-fit: cover;
-  transition: transform 500ms cubic-bezier(.22, 1, .36, 1);
 }
 
 .dw-public-journal-entry:hover .dw-public-journal-entry-media img {
@@ -3434,7 +3485,7 @@ button.dw-public-journal-entry {
 }
 
 .dw-public-journal-entry h2 {
-  max-width: 12ch;
+  max-width: none;
   margin: 0 0 20px;
   font-size: clamp(28px, 2.45vw, 46px);
   font-weight: 400;
@@ -3456,6 +3507,12 @@ button.dw-public-journal-entry {
   text-underline-offset: 4px;
 }
 
+.dw-public-journal-link.is-external {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .dw-public-journal-entry.entry-1 { grid-column: 1 / span 7; }
 .dw-public-journal-entry.entry-2 { grid-column: 10 / span 3; margin-top: clamp(130px, 15vw, 270px); }
 .dw-public-journal-entry.entry-3 { grid-column: 2 / span 3; margin-top: clamp(150px, 16vw, 290px); }
@@ -3465,6 +3522,12 @@ button.dw-public-journal-entry {
 .dw-public-journal-entry.entry-7 { grid-column: 4 / span 5; }
 .dw-public-journal-entry.entry-8 { grid-column: 1 / span 4; margin-top: clamp(110px, 13vw, 240px); }
 .dw-public-journal-entry.entry-9 { grid-column: 7 / span 5; margin-top: clamp(40px, 6vw, 110px); }
+.dw-public-journal-entry.entry-10 { grid-column: 2 / span 6; margin-top: clamp(90px, 11vw, 190px); }
+.dw-public-journal-entry.entry-11 { grid-column: 9 / span 4; margin-top: clamp(45px, 7vw, 120px); }
+.dw-public-journal-entry.entry-12 { grid-column: 3 / span 6; margin-top: clamp(70px, 9vw, 160px); }
+.dw-public-journal-entry.entry-13 { grid-column: 10 / span 3; margin-top: clamp(120px, 14vw, 250px); }
+.dw-public-journal-entry.entry-14 { grid-column: 1 / span 5; }
+.dw-public-journal-entry:not([class*=" entry-"]) { grid-column: auto / span 5; }
 
 .dw-public-journal-entry.entry-1 .dw-public-journal-entry-media img {
   object-position: center 38%;
@@ -3473,7 +3536,7 @@ button.dw-public-journal-entry {
 .dw-public-article {
   max-width: 1540px;
   margin: 0 auto;
-  padding: clamp(128px, 12vw, 190px) 20px clamp(110px, 13vw, 210px);
+  padding: clamp(104px, 8vw, 140px) 20px clamp(90px, 10vw, 160px);
 }
 
 .dw-public-article-back,
@@ -3491,11 +3554,11 @@ button.dw-public-journal-entry {
 }
 
 .dw-public-article-hero {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(340px, 5fr);
-  gap: clamp(28px, 5vw, 90px);
-  align-items: end;
-  padding: clamp(80px, 10vw, 150px) 0 clamp(62px, 7vw, 120px);
+  grid-template-columns: 1fr;
+  gap: clamp(30px, 4vw, 56px);
+  padding: clamp(46px, 5vw, 84px) 0 clamp(44px, 5vw, 82px);
   border-bottom: 1px solid var(--dw-line);
 }
 
@@ -3509,33 +3572,43 @@ button.dw-public-journal-entry {
 }
 
 .dw-public-article-hero h1 {
-  max-width: 11ch;
-  margin: 22px 0 30px;
-  font-size: clamp(56px, 7.3vw, 126px);
+  /* article titles are full sentences; 11ch at 126px stacked them five deep */
+  max-width: 20ch;
+  margin: 18px 0 26px;
+  font-size: clamp(40px, 4.6vw, 82px);
   font-weight: 400;
   letter-spacing: -.065em;
   line-height: .9;
 }
 
 .dw-public-article-hero p {
-  max-width: 28ch;
+  max-width: 46ch;
   margin: 0;
   font-size: clamp(20px, 1.55vw, 27px);
   line-height: 1.17;
 }
 
-.dw-public-article-hero > img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
+.dw-public-article-hero-media {
+  position: relative;
+  min-width: 0;
+}
+
+.dw-public-article-hero-media > img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 56svh;
+  height: auto;
+  margin-inline: auto;
   background: #e7e7e4;
 }
 
-.dw-public-article-hero > iframe {
+.dw-public-article-hero-media > iframe,
+.dw-public-article-hero-media > video {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   border: 0;
-  background: #111;
+  background: #111111;
 }
 
 .dw-public-article-body {
@@ -3579,6 +3652,77 @@ button.dw-public-journal-entry {
   margin-top: 20px;
 }
 
+.dw-public-article-inline-image {
+  width: min(860px, calc(100vw - 56px));
+  margin: clamp(42px, 6vw, 88px) 0 0;
+  box-shadow: 0 18px 44px rgba(17, 17, 17, 0.16);
+}
+
+.dw-public-article-inline-image.image-2 {
+  width: min(690px, calc(100vw - 56px));
+  margin-left: clamp(0px, 5vw, 78px);
+}
+
+.dw-public-article-inline-image.image-3 {
+  width: min(760px, calc(100vw - 56px));
+  margin-left: clamp(0px, 2vw, 34px);
+}
+
+.dw-public-article-inline-image.image-3 img {
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.dw-public-article-inline-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.dw-public-article-inline-image.image-1 img {
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.dw-public-article-inline-image.image-2 img {
+  aspect-ratio: 4 / 3;
+}
+
+.dw-uxstorm-badge {
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  z-index: 3;
+  display: block;
+  width: clamp(96px, 10vw, 150px);
+  aspect-ratio: 1;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+  pointer-events: none;
+}
+
+.dw-uxstorm-badge img {
+  position: absolute;
+  inset: 7%;
+  width: 86%;
+  height: 86%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dw-uxstorm-badge-ring {
+    animation: dwUxstormSpin 22s linear infinite;
+  }
+}
+
+@keyframes dwUxstormSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .dw-public-article-gallery {
   margin-top: clamp(96px, 13vw, 220px);
 }
@@ -3592,34 +3736,22 @@ button.dw-public-journal-entry {
   text-transform: uppercase;
 }
 
-.dw-public-article-gallery > div {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: clamp(22px, 3vw, 50px) 16px;
+/* The gallery renders a MediaCarousel, not a photo grid. The old
+   ".dw-public-article-gallery > div" grid and its cover-cropped media rules
+   were landing on .dw-carousel itself — squeezing the track to one grid
+   column and cropping every slide. Removed; MediaCarousel styles itself. */
+
+
+
+.dw-public-gallery-note {
+  margin-left: 14px;
+  padding: 3px 10px;
+  border: 1px solid var(--dw-line);
+  border-radius: 999px;
+  font-style: normal;
+  letter-spacing: .04em;
 }
 
-.dw-public-article-gallery img {
-  width: 100%;
-  height: 100%;
-  min-height: 220px;
-  object-fit: cover;
-}
-
-.dw-public-article-gallery img:nth-child(1) { grid-column: 1 / span 8; aspect-ratio: 3 / 2; }
-.dw-public-article-gallery img:nth-child(2) { grid-column: 10 / span 3; aspect-ratio: 3 / 4; margin-top: clamp(55px, 8vw, 140px); }
-.dw-public-article-gallery img:nth-child(3) { grid-column: 3 / span 5; aspect-ratio: 4 / 3; }
-.dw-public-article-gallery img:nth-child(4) { grid-column: 8 / span 5; aspect-ratio: 4 / 3; margin-top: clamp(42px, 6vw, 100px); }
-.dw-public-article-gallery img:nth-child(5) { grid-column: 1 / span 7; aspect-ratio: 3 / 2; }
-.dw-public-article-gallery img:nth-child(6) { grid-column: 9 / span 4; aspect-ratio: 3 / 4; }
-.dw-public-article-gallery img:nth-child(7) { grid-column: 2 / span 4; aspect-ratio: 3 / 4; }
-.dw-public-article-gallery img:nth-child(8) { grid-column: 7 / span 6; aspect-ratio: 3 / 2; margin-top: clamp(34px, 5vw, 82px); }
-.dw-public-article-gallery img:nth-child(9) { grid-column: 1 / span 5; aspect-ratio: 4 / 3; }
-.dw-public-article-gallery img:nth-child(10) { grid-column: 7 / span 6; aspect-ratio: 3 / 2; }
-.dw-public-article-gallery img:nth-child(11) { grid-column: 3 / span 4; aspect-ratio: 3 / 4; }
-.dw-public-article-gallery img:nth-child(12) { grid-column: 8 / span 5; aspect-ratio: 3 / 4; margin-top: clamp(45px, 7vw, 120px); }
-.dw-public-article-gallery img:nth-child(13) { grid-column: 1 / span 7; aspect-ratio: 3 / 2; }
-.dw-public-article-gallery img:nth-child(14) { grid-column: 9 / span 4; aspect-ratio: 3 / 4; }
-.dw-public-article-gallery img:nth-child(15) { grid-column: 2 / span 8; aspect-ratio: 3 / 2; }
 
 .dw-public-article-gallery-placeholder {
   display: grid;
@@ -3650,14 +3782,58 @@ button.dw-public-journal-entry {
 }
 
 .dw-public-article-footer {
+  display: grid;
+  grid-template-columns: minmax(140px, 2fr) minmax(0, 10fr);
+  gap: clamp(26px, 5vw, 84px);
+  align-items: start;
+  padding-top: clamp(60px, 8vw, 120px);
+  border-top: 1px solid var(--dw-line);
+}
+
+.dw-public-article-pagination {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 5vw, 90px);
+}
+
+.dw-public-article-pagination > a {
   display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  padding-top: 20px;
-  border-top: 0;
+  flex-direction: column;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.dw-public-article-pagination .is-next {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.dw-public-article-pagination span {
+  color: var(--dw-muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.dw-public-article-pagination strong {
+  max-width: 18ch;
+  font-size: clamp(21px, 2vw, 34px);
+  font-weight: 400;
+  letter-spacing: -.045em;
+  line-height: .98;
+}
+
+.dw-public-article-pagination > a:hover strong {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
 }
 
 @media (max-width: 900px) {
+  .dw-public-year-timeline {
+    display: none;
+  }
+
   .dw-public-journal-hero {
     grid-template-columns: 1fr;
     row-gap: 42px;
@@ -3683,7 +3859,12 @@ button.dw-public-journal-entry {
   .dw-public-journal-entry.entry-6,
   .dw-public-journal-entry.entry-7,
   .dw-public-journal-entry.entry-8,
-  .dw-public-journal-entry.entry-9 {
+  .dw-public-journal-entry.entry-9,
+  .dw-public-journal-entry.entry-10,
+  .dw-public-journal-entry.entry-11,
+  .dw-public-journal-entry.entry-12,
+  .dw-public-journal-entry.entry-13,
+  .dw-public-journal-entry.entry-14 {
     grid-column: auto;
     margin-top: 0;
   }
@@ -3692,18 +3873,6 @@ button.dw-public-journal-entry {
   .dw-public-article-body,
   .dw-public-article-gallery-placeholder {
     grid-template-columns: 1fr;
-  }
-
-  .dw-public-article-gallery > div {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-  }
-
-  .dw-public-article-gallery img:nth-child(n) {
-    grid-column: auto;
-    min-height: 0;
-    margin-top: 0;
-    aspect-ratio: 4 / 3;
   }
 
   .dw-public-article-hero > img,
@@ -3723,6 +3892,17 @@ button.dw-public-journal-entry {
     margin-bottom: 52px;
   }
 
+  .dw-public-article-inline-image,
+  .dw-public-article-inline-image.image-2 {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .dw-public-article-footer {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
   .dw-public-article-gallery-placeholder > img {
     max-width: 620px;
     min-height: 0;
@@ -3740,7 +3920,8 @@ button.dw-public-journal-entry {
   }
 
   .dw-public-journal-hero h1 {
-    font-size: clamp(54px, 15vw, 82px);
+    font-size: clamp(44px, 13vw, 82px);
+    white-space: normal;
   }
 
   .dw-public-journal-grid {
@@ -6212,4 +6393,392 @@ button.dw-public-journal-entry {
   .dw-page .dw-figma-hero .dw-home-hero-statement h1 {
     font-size: clamp(31px, 9.15vw, 42px);
   }
+}
+
+.dw-partner-marquee {
+  overflow: hidden;
+  padding: clamp(22px, 3vw, 40px) 0;
+  border-top: 1px solid color-mix(in srgb, var(--dw-line) 14%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--dw-line) 14%, transparent);
+  background: var(--dw-bg);
+}
+
+.dw-partner-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: dwPartnerMarquee 38s linear infinite;
+}
+
+.dw-partner-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: clamp(38px, 5vw, 76px);
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  opacity: 0.62;
+  filter: grayscale(1);
+}
+
+.dw-partner-marquee-item .dw-experience-logo {
+  width: 34px;
+  height: 34px;
+}
+
+.dw-partner-marquee-wordmark {
+  display: block;
+  height: 30px;
+  width: auto;
+}
+
+@keyframes dwPartnerMarquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-partner-marquee-track {
+    width: auto;
+    flex-wrap: wrap;
+    gap: 18px;
+    animation: none;
+  }
+}
+
+.dw-footer-paths {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(14px, 2vw, 26px);
+  padding: clamp(22px, 3vw, 40px) clamp(16px, 4vw, 64px);
+  border-top: 1px solid color-mix(in srgb, var(--dw-line) 14%, transparent);
+  background: var(--dw-bg);
+}
+
+.dw-footer-path-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border: 1px solid color-mix(in srgb, var(--dw-line) 24%, transparent);
+  border-radius: 999px;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.dw-footer-path-link:hover {
+  border-color: var(--dw-line);
+  background: var(--dw-panel2);
+}
+
+
+/* no cropping anywhere in articles: natural aspect ratios */
+.dw-public-article-inline-image img,
+.dw-public-article-inline-image.image-2 img {
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.dw-public-article-gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.dw-public-article-gallery video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  background: transparent;
+  border: 0;
+}
+
+/* Event identity carousel: uniform height, natural widths */
+.dw-public-article-branding {
+  padding: clamp(58px, 7vw, 110px) 0 0;
+}
+
+.dw-public-article-branding > span {
+  display: block;
+  color: var(--dw-muted);
+  font-size: 12px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.dw-public-article-branding > p {
+  max-width: 62ch;
+  margin: 14px 0 0;
+  color: #646464;
+  font-size: clamp(15px, 1.1vw, 19px);
+  line-height: 1.55;
+}
+
+
+/* fixed chrome adapts to any background */
+.dw-fixed-socials,
+.dw-fixed-music-control,
+.dw-portfolio-year-timeline,
+.dw-public-year-timeline {
+  color: #ffffff;
+  mix-blend-mode: difference;
+}
+
+.dw-fixed-socials a {
+  color: #ffffff;
+}
+
+.dw-fixed-music-control {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.dw-fixed-music-control .dw-music-control,
+.dw-fixed-music-control .dw-music-button {
+  color: #ffffff;
+}
+
+/* header navigation adapts to any background (same difference blend) */
+.dw-page .dw-header {
+  color: #ffffff;
+  mix-blend-mode: difference;
+}
+
+.dw-header .dw-logo,
+.dw-header .dw-nav,
+.dw-header .dw-school-link,
+.dw-header .dw-right {
+  color: #ffffff;
+}
+
+.dw-header .dw-nav a,
+.dw-header .dw-pill,
+.dw-header .dw-theme-toggle {
+  color: #ffffff;
+}
+
+.dw-header .dw-logo-word img {
+  filter: invert(1);
+}
+
+:root[data-dw-theme="night"] .dw-header .dw-logo-word img {
+  filter: invert(1);
+}
+
+/* === Media carousel (reference style: counter, arrows, staggered strip, captions) === */
+.dw-carousel {
+  margin-top: clamp(22px, 3vw, 40px);
+}
+
+.dw-carousel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: clamp(18px, 2.4vw, 34px);
+}
+
+.dw-carousel-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.dw-carousel-counter b {
+  font-weight: 600;
+}
+
+.dw-carousel-counter i {
+  display: block;
+  width: clamp(60px, 8vw, 120px);
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.dw-carousel-counter > span {
+  opacity: 0.55;
+}
+
+.dw-carousel-arrows {
+  display: inline-flex;
+  gap: 18px;
+}
+
+.dw-carousel-arrows button {
+  padding: 4px 6px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.dw-carousel-arrows button:hover {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+.dw-carousel-arrows button:first-child:hover {
+  transform: translateX(-2px);
+}
+
+.dw-carousel-track {
+  display: flex;
+  gap: clamp(20px, 2.6vw, 44px);
+  align-items: flex-start;
+  padding: 6px 4px clamp(26px, 3vw, 44px);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  scrollbar-width: none;
+}
+
+.dw-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.dw-carousel-track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.dw-carousel-item {
+  flex: none;
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.dw-carousel-item img,
+.dw-carousel-item video {
+  display: block;
+  height: clamp(220px, 26vw, 380px);
+  width: auto;
+  max-width: none;
+  /* Width comes from the media's own ratio, which is unknown until it loads.
+     Without a floor, a lazy slide measures zero wide and the strip collapses
+     until it arrives. Small enough that any loaded image overrides it. */
+  min-width: clamp(120px, 12vw, 180px);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.dw-carousel-item:nth-child(4n+1) img,
+.dw-carousel-item:nth-child(4n+1) video {
+  height: clamp(250px, 30vw, 430px);
+}
+
+.dw-carousel-item:nth-child(4n+3) img,
+.dw-carousel-item:nth-child(4n+3) video {
+  height: clamp(200px, 23vw, 330px);
+}
+
+.dw-carousel-item figcaption {
+  margin-top: 12px;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  opacity: 0.62;
+}
+
+/* case-study carousel section shell */
+.dw-case-carousel-section .dw-case-carousel-heading {
+  width: min(calc(100% - 40px), var(--case-big));
+  margin: 0 auto clamp(10px, 1.6vw, 24px);
+}
+
+.dw-case-carousel-section .dw-carousel {
+  width: min(calc(100% - 40px), var(--case-wide));
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* chaotic editorial alignment for article sections */
+.dw-public-article-body > div > section:nth-of-type(3n+2) {
+  margin-left: clamp(0px, 9vw, 170px);
+}
+
+.dw-public-article-body > div > section:nth-of-type(3n) {
+  margin-left: clamp(0px, 4vw, 70px);
+  margin-right: clamp(0px, 5vw, 90px);
+}
+
+@media (max-width: 900px) {
+  .dw-public-article-body > div > section:nth-of-type(3n+2),
+  .dw-public-article-body > div > section:nth-of-type(3n) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* --- motion.min.js pilot (ux-storm-1-2 article + material-exchange copy) --- */
+/* Snappier duration for this site's quieter feel; script defaults are .8s. */
+.dw-motion-pilot {
+  --anim-dur: 0.6s;
+}
+
+/* --- footer invitation (replaces the four static Telegram tag links) --- */
+.dw-footer-invite {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(14px, 3vw, 36px);
+  padding: clamp(22px, 4vw, 40px) 0;
+}
+
+.dw-footer-invite p {
+  margin: 0;
+  font-size: clamp(1.05rem, 2.2vw, 1.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  max-width: 22ch;
+}
+
+.dw-footer-invite-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+  padding: 13px 24px;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.dw-footer-invite-button:hover,
+.dw-footer-invite-button:focus-visible {
+  background: currentColor;
+  transform: translateY(-2px);
+}
+
+.dw-footer-invite-button:hover span,
+.dw-footer-invite-button:focus-visible span {
+  color: var(--dw-bg, #fff);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-footer-invite-button:hover { transform: none; }
+}
+
+/* Inline banners carry no context on their own — name who is on them. */
+.dw-public-article-inline-image figcaption {
+  margin-top: 12px;
+  color: var(--dw-muted);
+  font-size: 12.5px;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  max-width: 52ch;
 }

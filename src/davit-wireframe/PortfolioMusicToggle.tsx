@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./portfolioMusicToggle.css";
 
-const BAR_COUNT = 5;
 const CHORDS = [
   [110, 164.81, 220, 329.63],
   [98, 146.83, 196, 293.66],
@@ -15,10 +14,6 @@ type AmbientEngine = {
   oscillators: OscillatorNode[];
   chordTimer: number;
 };
-
-function randomHeights() {
-  return Array.from({ length: BAR_COUNT }, () => Math.random() * 0.8 + 0.2);
-}
 
 function createAmbientEngine(): AmbientEngine {
   const context = new AudioContext();
@@ -76,7 +71,6 @@ export function PortfolioMusicToggle() {
   const engineRef = useRef<AmbientEngine | null>(null);
   const mountedRef = useRef(true);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [heights, setHeights] = useState(() => Array(BAR_COUNT).fill(0.12));
 
   const stop = useCallback((updateState = true) => {
     const engine = engineRef.current;
@@ -119,20 +113,6 @@ export function PortfolioMusicToggle() {
   }, [isPlaying, start, stop]);
 
   useEffect(() => {
-    if (!isPlaying) {
-      setHeights(Array(BAR_COUNT).fill(0.12));
-      return;
-    }
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) {
-      setHeights([0.3, 0.65, 0.9, 0.55, 0.25]);
-      return;
-    }
-    const waveformTimer = window.setInterval(() => setHeights(randomHeights()), 120);
-    return () => window.clearInterval(waveformTimer);
-  }, [isPlaying]);
-
-  useEffect(() => {
     mountedRef.current = true;
 
     return () => {
@@ -150,11 +130,17 @@ export function PortfolioMusicToggle() {
         aria-pressed={isPlaying}
         onClick={toggle}
       >
-        <span className="dw-music-wave" aria-hidden="true">
-          {heights.map((height, index) => (
-            <i key={index} style={{ "--bar-scale": height } as React.CSSProperties} />
-          ))}
-        </span>
+        <svg className="dw-music-icon" viewBox="0 0 32 32" aria-hidden="true">
+          <defs>
+            <clipPath id="dw-music-clip">
+              <circle cx="16" cy="16" r="10" />
+            </clipPath>
+          </defs>
+          <g className="dw-music-glyph" clipPath="url(#dw-music-clip)">
+            <path className="dw-music-sine" d="M -8 16 q 3 -5 6 0 t 6 0 t 6 0 t 6 0 t 6 0 t 6 0 t 6 0 t 6 0" />
+          </g>
+          <line className="dw-music-flat" x1="9" y1="16" x2="23" y2="16" />
+        </svg>
       </button>
     </aside>
   );

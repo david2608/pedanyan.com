@@ -38,25 +38,48 @@
   box-shadow: 0 0 0 2px currentColor;
 }
 
-.dw-music-wave {
-  display: flex;
-  width: 22px;
-  height: 18px;
-  flex: 0 0 22px;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
+.dw-music-icon {
+  display: block;
+  width: 34px;
+  height: 34px;
 }
 
-.dw-music-wave i {
-  display: block;
-  width: 1.5px;
-  height: 14px;
-  border-radius: 99px;
-  background: currentColor;
-  transform: scaleY(max(0.2, var(--bar-scale)));
-  transition: transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
-  transform-origin: center;
+.dw-music-sine,
+.dw-music-flat {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.dw-music-glyph {
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.dw-music-flat {
+  opacity: 1;
+  transition: opacity 260ms ease;
+}
+
+.dw-music-control.is-playing .dw-music-glyph {
+  opacity: 1;
+}
+
+.dw-music-control.is-playing .dw-music-flat {
+  opacity: 0;
+}
+
+@keyframes dwMusicSineDrift {
+  to {
+    transform: translateX(-12px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dw-music-control.is-playing .dw-music-sine {
+    animation: dwMusicSineDrift 1.4s linear infinite;
+  }
 }
 
 @media (max-width: 680px) {
@@ -78,7 +101,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .dw-music-button,
-  .dw-music-wave i {
+  .dw-music-glyph,
+  .dw-music-flat {
     transition-duration: 0.01ms;
   }
 }

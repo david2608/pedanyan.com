@@ -1,0 +1,133 @@
+/* End-of-page continuation: reading to the bottom and continuing to scroll
+   fills the ring; a completed pull opens the next page. */
+
+/* Inside a case study this sits on the fixed light canvas; inside an article it
+   sits on the themed page. currentColor is set by whichever parent applies. */
+/* Not a card and not a "related" module — the end of the page, and the one
+   affordance that says what continuing will do. Deliberately quiet. */
+.dw-pull-next {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  width: min(calc(100% - 40px), 640px);
+  margin: clamp(60px, 9vw, 130px) auto clamp(50px, 7vw, 100px);
+  padding: 0;
+  border: 0;
+  color: inherit;
+  transition: transform 0.3s ease;
+}
+
+/* the fill sweeps across the card as the pull progresses */
+.dw-pull-next.is-complete {
+  transform: translateY(-4px);
+}
+
+.dw-pull-next-media {
+  position: relative;
+  display: block;
+  width: clamp(84px, 9vw, 128px);
+  aspect-ratio: 16 / 11;
+  border-radius: 13px;
+  overflow: hidden;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.dw-pull-next-media img,
+.dw-pull-next-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dw-pull-next-copy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  order: 2;
+}
+
+.dw-pull-next-copy small {
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.dw-pull-next-copy strong {
+  font-size: clamp(19px, 2.4vw, 34px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- the ring ---------- */
+.dw-pull-next-meter {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(46px, 4vw, 58px);
+  aspect-ratio: 1;
+  flex: none;
+  order: 1;
+}
+
+.dw-pull-next-meter svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+
+.dw-pull-next-meter circle {
+  fill: none;
+  stroke-width: 2;
+  cx: 22px;
+}
+
+.dw-pull-track {
+  stroke: color-mix(in srgb, currentColor 22%, transparent);
+}
+
+.dw-pull-fill {
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-dasharray: 119.4;
+  stroke-dashoffset: calc(119.4 - (119.4 * var(--pull, 0)));
+  transition: stroke-dashoffset 0.12s linear;
+}
+
+.dw-pull-arrow {
+  position: absolute;
+  font-size: 17px;
+  line-height: 1;
+  transform: translateY(calc(var(--pull, 0) * 3px));
+}
+
+.dw-pull-next-hint {
+  order: 3;
+  position: relative;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  opacity: 0.62;
+}
+
+/* ---------- leaving ---------- */
+.dw-page-leaving .dw-page > *:not(.dw-chat-layer) {
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 1, 1);
+  opacity: 0;
+  transform: translateY(-26px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-pull-next::before,
+  .dw-pull-fill,
+  .dw-pull-arrow { transition: none; }
+  .dw-pull-next-hint { display: none; }
+  .dw-page-leaving .dw-page > * { transition: none; opacity: 1; transform: none; }
+}

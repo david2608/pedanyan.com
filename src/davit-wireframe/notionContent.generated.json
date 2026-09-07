@@ -3,7 +3,7 @@
     "logo": "PDNYN",
     "primary": [
       {
-        "label": "Portfolio",
+        "label": "Work",
         "href": "/am/designer"
       },
       {
@@ -43,35 +43,42 @@
         "creative culture."
       ],
       "snippets": [
-        "Design generalist",
+        "Design leader",
         "Educator",
         "Community\nbuilder in Armenia",
-        "Product design",
-        "Public work"
+        "20+ years in product",
+        "Open to work & projects"
       ]
     },
     "pathCards": [
       {
+        "title": "Hiring for your team?",
+        "text": "Twenty years across products, startups, and design systems. See the case studies and how I lead the work.",
+        "cta": "See my work",
+        "href": "/am/designer"
+      },
+      {
         "title": "Need design help?",
-        "text": "I help founders and product teams define the design problem, find the right designer, and decide what to do next.",
-        "cta": "See how I can help",
+        "text": "I help founders and product teams define the design problem, choose a direction, and ship it with confidence.",
+        "cta": "See how I work",
         "href": "/am/designer"
       },
       {
         "title": "Want to learn design?",
-        "text": "I teach beginners to research, critique, design interfaces, and explain their decisions.",
+        "text": "I teach beginners to research, critique, design interfaces, and defend their decisions.",
         "cta": "Explore the school",
         "href": "/am/school"
       },
       {
-        "title": "Want to know my story?",
-        "text": "See the talks, workshops, critique sessions, and community events I run in Armenia.",
+        "title": "Want to collaborate or know my story?",
+        "text": "Talks, workshops, critique nights, and the community work behind UX Storm.",
         "cta": "See my public work",
         "href": "/am/public-work"
       }
     ],
     "talkRoutes": [
-      "Need design help?",
+      "Hiring a designer or a design lead?",
+      "Need design help on your product?",
       "Want to learn design?",
       "Want to invite me or collaborate?",
       "Want to know my story?"
@@ -79,10 +86,11 @@
     "talkCta": "Let's talk"
   },
   "sharedContactRoutes": [
-    "Need design help?",
+    "Hiring a designer or a design lead?",
+    "Need design help on your product?",
     "Want to learn design?",
-    "Want to invite me?",
-    "Want to collaborate?"
+    "Want to invite me or collaborate?",
+    "Want to know my story?"
   ],
   "letsTalk": {
     "headline": [
@@ -93,7 +101,7 @@
     "routes": [
       {
         "label": "For companies",
-        "text": "Tell me what you are building and where design is stuck. I can define the role, find a designer, or set product direction.",
+        "text": "Tell me what you are building and where design is stuck. I can join as a design lead, define the role you should hire, or set product direction.",
         "cta": "Talk about the product",
         "href": "/am/lets-talk",
         "className": "dw-talk-route-companies"
@@ -151,32 +159,24 @@
         "do for",
         "you"
       ],
-      "text": "I can review your product, define the design role you need, or help your team choose a direction."
+      "text": "Product reviews, team leadership, defining the design role you should hire, or setting direction — tell me where design is stuck."
     },
     "experiences": [
       {
-        "company": "Lynon",
+        "company": "Freedx",
         "role": "Head of Design",
+        "years": "",
+        "type": "Design leadership / fintech",
+        "logoDomain": "freedx.com",
+        "description": "I lead design where product, brand, and strategy meet."
+      },
+      {
+        "company": "Lynon",
+        "role": "Design Lead",
         "years": "Current",
         "type": "Design leadership",
         "logoDomain": "lynon.com",
-        "description": "I lead product design across the product and its communication."
-      },
-      {
-        "company": "Armenian Code Academy",
-        "role": "Design Practice Lead",
-        "years": "4+ years",
-        "type": "Design education",
-        "logoDomain": "aca.am",
-        "description": "I built and led UX courses, workshops, UX Storm, and mentorship programs."
-      },
-      {
-        "company": "artmart",
-        "role": "Founder",
-        "years": "Current",
-        "type": "Creative education",
-        "logoDomain": "artmart.am",
-        "description": "I founded artmart, a contemporary art school in Armenia."
+        "description": "I lead design as a partner to the business, not a service to it."
       },
       {
         "company": "T-Bank / Tinkoff",
@@ -184,23 +184,15 @@
         "years": "Verify dates",
         "type": "Product design",
         "logoDomain": "tbank.ru",
-        "description": "I designed products with a large fintech team."
+        "description": "I designed at the scale of millions of users."
       },
       {
-        "company": "Material Exchange",
-        "role": "Product / Design Lead",
-        "years": "Feb 2020 - Feb 2022",
-        "type": "Product design leadership",
-        "logoDomain": "material-exchange.com",
-        "description": "I designed the product and its design system for an international materials platform."
-      },
-      {
-        "company": "Webb Fontaine",
+        "company": "Delux",
         "role": "Design Lead",
-        "years": "Verify dates",
-        "type": "Enterprise product design",
-        "logoDomain": "webbfontaine.com",
-        "description": "I led design systems and interface work for complex enterprise products."
+        "years": "",
+        "type": "Product design",
+        "logoDomain": "",
+        "description": "I led designers, not just designs."
       },
       {
         "company": "CloudChipr",
@@ -208,23 +200,23 @@
         "years": "Verify dates",
         "type": "Startup product design",
         "logoDomain": "cloudchipr.com",
-        "description": "I designed the product from its first MVP through early growth."
+        "description": "I set product direction and built the design system from zero."
       },
       {
-        "company": "Liga Insurance",
-        "role": "Product Designer",
+        "company": "Webb Fontaine",
+        "role": "Design Lead",
         "years": "Verify dates",
-        "type": "Insurance product design",
-        "logoDomain": "liga.am",
-        "description": "I designed mobile and web insurance products."
+        "type": "Enterprise product design",
+        "logoDomain": "webbfontaine.com",
+        "description": "I owned design for enterprise-scale platforms."
       },
       {
-        "company": "Uphold",
-        "role": "Senior UI/UX Designer",
-        "years": "Verify dates",
-        "type": "Fintech / crypto product",
-        "logoDomain": "uphold.com",
-        "description": "I designed mobile wallet and crypto-fintech products."
+        "company": "Material Exchange",
+        "role": "Product / Design Lead",
+        "years": "Feb 2020 - Feb 2022",
+        "type": "Product design leadership",
+        "logoDomain": "material-exchange.com",
+        "description": "I led design from research to a shipped system."
       },
       {
         "company": "The Bank of London",
@@ -232,7 +224,23 @@
         "years": "Verify dates",
         "type": "Fintech product design",
         "logoDomain": "thebankoflondon.com",
-        "description": "I designed interfaces for digital banking products."
+        "description": "I learned how regulated fintech ships."
+      },
+      {
+        "company": "Uphold",
+        "role": "Senior UI/UX Designer",
+        "years": "Verify dates",
+        "type": "Fintech / crypto product",
+        "logoDomain": "uphold.com",
+        "description": "I designed flows people trust with their money."
+      },
+      {
+        "company": "Liga Insurance",
+        "role": "Product Designer",
+        "years": "Verify dates",
+        "type": "Insurance product design",
+        "logoDomain": "liga.am",
+        "description": "I designed interfaces."
       }
     ]
   },
@@ -325,7 +333,7 @@
         "formats,",
         "and media."
       ],
-      "text": "I host talks, workshops, UX Storm, Drunk Talks, and critique nights for designers in Armenia. I also speak, teach, and join public conversations about design."
+      "text": "I run UX Storm, Drunk Talks, critique nights, and workshops — and I speak, teach, and join public conversations about design. This page is the record."
     },
     "categories": [
       {

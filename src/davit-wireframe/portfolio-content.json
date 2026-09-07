@@ -384,31 +384,31 @@
           "subtitle": "Brand Identity and A Cloud Cost Management and Analytics Platform Design",
           "metadata": [
             {
-              "label": "Client:",
+              "label": "Client",
               "value": "CloudChipr"
             },
             {
-              "label": "Categories:",
+              "label": "Categories",
               "value": "FinOps, SaaS, B2B, CCMS"
             },
             {
-              "label": "Duration:",
+              "label": "Duration",
               "value": "18 Months"
             },
             {
-              "label": "Services:",
+              "label": "Services",
               "value": "Brand Identity, Problem Discovery, User research, MVP, Usability testing"
             },
             {
-              "label": "Projects:",
+              "label": "Projects",
               "value": "Platform MVP, Scheduling tool, AWS, GCP, Azure Cost Optimisation"
             },
             {
-              "label": "Tools:",
+              "label": "Tools",
               "value": "Figma, Miro, Maze"
             },
             {
-              "label": "Co-Designers:",
+              "label": "Team",
               "value": "Bella Hayrapetyan, Habet Ayvazyan, Zhanna Voskanyan"
             }
           ],
@@ -1073,31 +1073,31 @@
           "subtitle": "Digital Asset Management Platform and Marketplace",
           "metadata": [
             {
-              "label": "Client:",
+              "label": "Client",
               "value": "<a href=\"https://material-exchange.com/\" target=\"_blank\" rel=\"noopener\">Material Exchange</a>"
             },
             {
-              "label": "Categories:",
+              "label": "Categories",
               "value": "SaaS, B2B/B2C, DAMS"
             },
             {
-              "label": "Duration:",
+              "label": "Duration",
               "value": "2 Years"
             },
             {
-              "label": "Services:",
+              "label": "Services",
               "value": "Problem Discovery, Team management, Design System Development"
             },
             {
-              "label": "Projects:",
+              "label": "Projects",
               "value": "Marketplace, Showroom, Design System, White Label, Back Office, Mobile App."
             },
             {
-              "label": "Tools:",
+              "label": "Tools",
               "value": "Figma, Confluence, Overflow"
             },
             {
-              "label": "Co-Designers:",
+              "label": "Team",
               "value": "Ani Atanesyan, Vladimir Popov, Gohar Aleksanyan"
             }
           ],
@@ -1752,12 +1752,6 @@
           "paddingBottom": "0px",
           "title": "Securion 2018",
           "subtitle": "Mobile Crypto Wallet and Exchange.",
-          "metadata": [
-            {
-              "label": "Tools:",
-              "value": "Figma, Sketch, Photoshop, Illustrator"
-            }
-          ],
           "media": "hero"
         },
         {
@@ -1768,29 +1762,32 @@
           "layout": "contained",
           "paddingTop": "190px",
           "paddingBottom": "180px",
-          "title": "About the Project",
-          "eyebrow": "Overview",
+          "title": "About the project",
           "body": "<p>Securion is a revolutionary blockchain project aimed at providing the <strong>most secure cryptocurrency wallet and exchange</strong> platform in the fintech industry. The goal is to set a new standard for <strong>security and user experience</strong> in the world of digital currencies.</p>",
           "metadata": [
             {
-              "label": "Client:",
+              "label": "Client",
               "value": "The Bank of London"
             },
             {
-              "label": "Categories:",
+              "label": "Categories",
               "value": "FinTech, Blockchain, SaaS, B2C"
             },
             {
-              "label": "Duration:",
+              "label": "Duration",
               "value": "8 Months"
             },
             {
-              "label": "Services:",
+              "label": "Services",
               "value": "Brand Identity, UI Design, Usability testing"
             },
             {
-              "label": "Projects:",
+              "label": "Projects",
               "value": "Mobile Crypto Wallet, Crypto Exchange"
+            },
+            {
+              "label": "Tools",
+              "value": "Figma, Sketch, Photoshop, Illustrator"
             }
           ]
         },
@@ -2105,12 +2102,6 @@
           "paddingBottom": "0px",
           "title": "ME Photo Lab",
           "subtitle": "Cross-platform photo editing extension.",
-          "metadata": [
-            {
-              "label": "Tools:",
-              "value": "Figma, Sketch, Microsoft Teams, Jira"
-            }
-          ],
           "media": "hero"
         },
         {
@@ -2121,32 +2112,31 @@
           "layout": "contained",
           "paddingTop": "190px",
           "paddingBottom": "170px",
-          "title": "the Project",
-          "eyebrow": "Overview",
+          "title": "About the project",
           "body": "<p>ME Photo Lab is a <strong>flexible, cross-platform photo editor</strong> designed mostly for material <strong>suppliers and resellers</strong>. Effortlessly <strong>edit and standardize scanned and captured material images</strong>. It allows users to elevate their materials and make image management in <strong>Material Exchange</strong> platform easy.</p>",
           "metadata": [
             {
-              "label": "Client:",
+              "label": "Client",
               "value": "Material Exchange"
             },
             {
-              "label": "Categories:",
+              "label": "Categories",
               "value": "B2B, SaaS"
             },
             {
-              "label": "Duration:",
+              "label": "Duration",
               "value": "2 Months"
             },
             {
-              "label": "Services:",
+              "label": "Services",
               "value": "Competitive analyses, UI Design, Usability testing"
             },
             {
-              "label": "Projects:",
+              "label": "Projects",
               "value": "ME Photo Lab"
             },
             {
-              "label": "Tools:",
+              "label": "Tools",
               "value": "Figma, Sketch, Microsoft Teams, Jira"
             }
           ]
@@ -2267,7 +2257,7 @@
           "type": "testimonial",
           "sourceNode": "331:32936",
           "showLinkedin": true,
-          "annotationText": "Does Sergey really think I\u2019m good? Reach him out directly.",
+          "annotationText": "Does Sergey really think I’m good? Reach him out directly.",
           "layout": "contained",
           "background": {
             "color": "#44ae49"
@@ -2474,36 +2464,6 @@
           "paddingBottom": "0px",
           "title": "Hotel Apartments",
           "subtitle": "online booking service specializing in extended-stay hotel room booking",
-          "metadata": [
-            {
-              "label": "Client:",
-              "value": "Smart Stay technologies"
-            },
-            {
-              "label": "Categories:",
-              "value": "B2B, B2C, SaaS, VRS"
-            },
-            {
-              "label": "Duration:",
-              "value": "4 Months"
-            },
-            {
-              "label": "Services:",
-              "value": "Field Studies, User Research, Competitive analyses, UI Design, Usability testing"
-            },
-            {
-              "label": "Projects:",
-              "value": "Mobile first Website"
-            },
-            {
-              "label": "Tools:",
-              "value": "Figma, Notion, Miro"
-            },
-            {
-              "label": "Co-design:",
-              "value": "Smart Stay product team"
-            }
-          ],
           "media": "hero"
         },
         {
@@ -2515,37 +2475,36 @@
           "overlapTop": "-280px",
           "paddingTop": "190px",
           "paddingBottom": "180px",
-          "title": "the Project",
-          "eyebrow": "Overview",
-          "body": "<p>Hotel Apartments is a flexible <strong>online booking service</strong> specializing in extended-stay <strong>hotel room bookings.</strong> Easily <strong>browse and book</strong> carefully selected serviced <strong>apartments and villas,</strong> providing you with spacious, budget-friendly, and all-inclusive lodging options.</p>",
+          "title": "About the project",
+          "body": "<p>Hotel Apartments is a flexible <strong>online booking service</strong> specializing in extended-stay <strong>hotel room bookings.</strong> Easily <strong>browse and book</strong> carefully selected serviced <strong>apartments and villas,</strong> providing you with spacious, budget-friendly, and all-inclusive lodging options.</p><p><strong>The business became profitable in its first year and surpassed $5M in revenue.</strong> That outcome came at a difficult moment: the end of the coronavirus period left hotels empty, war accelerated relocations, and newly arrived residents needed flexible places to live. The product connected that unusual market demand with a clearer booking experience.</p>",
           "metadata": [
             {
-              "label": "Client:",
+              "label": "Client",
               "value": "Smart Stay technologies"
             },
             {
-              "label": "Categories:",
+              "label": "Categories",
               "value": "B2B, B2C, SaaS, VRS"
             },
             {
-              "label": "Duration:",
+              "label": "Duration",
               "value": "4 Months"
             },
             {
-              "label": "Services:",
+              "label": "Services",
               "value": "Field Studies, User Research, Competitive analyses, UI Design, Usability testing"
             },
             {
-              "label": "Projects:",
+              "label": "Projects",
               "value": "Mobile first Website"
             },
             {
-              "label": "Co-designer",
-              "value": "Marianna Zakaryan"
+              "label": "Tools",
+              "value": "Figma, Notion, Miro"
             },
             {
-              "label": "Tools:",
-              "value": "Figma, Notion, Miro"
+              "label": "Team",
+              "value": "Marianna Zakaryan"
             }
           ]
         },
@@ -2805,15 +2764,60 @@
           "width": 1836,
           "height": 3953
         },
-        "screen-04": { "packagePath": "assets/tempo/screen-04.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
-        "screen-05": { "packagePath": "assets/tempo/screen-05.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
-        "screen-06": { "packagePath": "assets/tempo/screen-06.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
-        "screen-07": { "packagePath": "assets/tempo/screen-07.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
-        "screen-08": { "packagePath": "assets/tempo/screen-08.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
-        "screen-09": { "packagePath": "assets/tempo/screen-09.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
-        "screen-10": { "packagePath": "assets/tempo/screen-10.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
-        "screen-11": { "packagePath": "assets/tempo/screen-11.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
-        "screen-12": { "packagePath": "assets/tempo/screen-12.png", "alt": "Tempo mobile application screen", "width": 1836, "height": 3953 },
+        "screen-04": {
+          "packagePath": "assets/tempo/screen-04.png",
+          "alt": "Tempo mobile application screen",
+          "width": 1836,
+          "height": 3953
+        },
+        "screen-05": {
+          "packagePath": "assets/tempo/screen-05.png",
+          "alt": "Tempo mobile application screen",
+          "width": 1836,
+          "height": 3953
+        },
+        "screen-06": {
+          "packagePath": "assets/tempo/screen-06.png",
+          "alt": "Tempo mobile application screen",
+          "width": 1836,
+          "height": 3953
+        },
+        "screen-07": {
+          "packagePath": "assets/tempo/screen-07.png",
+          "alt": "Tempo mobile application screen",
+          "width": 1836,
+          "height": 3953
+        },
+        "screen-08": {
+          "packagePath": "assets/tempo/screen-08.png",
+          "alt": "Tempo mobile application screen",
+          "width": 1836,
+          "height": 3953
+        },
+        "screen-09": {
+          "packagePath": "assets/tempo/screen-09.png",
+          "alt": "Tempo mobile application screen",
+          "width": 1836,
+          "height": 3953
+        },
+        "screen-10": {
+          "packagePath": "assets/tempo/screen-10.png",
+          "alt": "Tempo mobile application screen",
+          "width": 1836,
+          "height": 3953
+        },
+        "screen-11": {
+          "packagePath": "assets/tempo/screen-11.png",
+          "alt": "Tempo mobile application screen",
+          "width": 1836,
+          "height": 3953
+        },
+        "screen-12": {
+          "packagePath": "assets/tempo/screen-12.png",
+          "alt": "Tempo mobile application screen",
+          "width": 1836,
+          "height": 3953
+        },
         "landing-page": {
           "packagePath": "assets/tempo/landing-page.png",
           "alt": "Tempo marketing landing page presented on a laptop",
@@ -2833,33 +2837,7 @@
           },
           "textColor": "#131313",
           "title": "Tempo",
-          "subtitle": "One courier route for food, pharmacy items, documents, and custom requests.",
-          "metadata": [
-            {
-              "label": "Client:",
-              "value": "Chant Khialian"
-            },
-            {
-              "label": "Categories:",
-              "value": "Delivery, Mobile App, Product Design"
-            },
-            {
-              "label": "Duration:",
-              "value": "In process"
-            },
-            {
-              "label": "Projects:",
-              "value": "Application"
-            },
-            {
-              "label": "Tools:",
-              "value": "Figma"
-            },
-            {
-              "label": "Team:",
-              "value": "David Pedanyan, Anna Avalyan"
-            }
-          ],
+          "subtitle": "Safe special delivery for important documents and time-sensitive items.",
           "media": "restaurants"
         },
         {
@@ -2868,16 +2846,37 @@
           "layout": "contained",
           "paddingTop": "150px",
           "paddingBottom": "150px",
-          "title": "the Project",
-          "eyebrow": "Overview",
-          "body": "<p><strong>Tempo</strong> brings food, pharmacy items, documents, and custom errands into one delivery app. Its signature feature lets a customer combine <strong>several pickup points in one courier route</strong>, review the order of stops, and track the full delivery from one place.</p><p>I worked with the product team on the experience strategy, information architecture, core flows, interface design, and a reusable UI kit.</p>",
+          "title": "About the project",
+          "body": "<p><strong>Tempo</strong> is a safe special-delivery service built around documents and other time-sensitive items. It helps a customer request a trusted courier, confirm the sender and recipient, and follow the delivery from pickup to handoff.</p><p>The route model can also support food, pharmacy items, and custom errands, but the central product promise is document safety: the right item, handled by the right courier, delivered to the intended person.</p><p>I worked with the product team on the experience strategy, information architecture, core flows, interface design, and a reusable UI kit.</p>",
           "metadata": [
-            { "label": "Client:", "value": "Chant Khialian" },
-            { "label": "Categories:", "value": "Delivery, Mobile App" },
-            { "label": "Duration:", "value": "In process" },
-            { "label": "Services:", "value": "Product strategy, UX, UI design" },
-            { "label": "Projects:", "value": "Application" },
-            { "label": "Tools:", "value": "Figma" }
+            {
+              "label": "Client",
+              "value": "Chant Khialian"
+            },
+            {
+              "label": "Categories",
+              "value": "Delivery, Mobile App"
+            },
+            {
+              "label": "Duration",
+              "value": "In process"
+            },
+            {
+              "label": "Services",
+              "value": "Product strategy, UX, UI design"
+            },
+            {
+              "label": "Projects",
+              "value": "Application"
+            },
+            {
+              "label": "Tools",
+              "value": "Figma"
+            },
+            {
+              "label": "Team",
+              "value": "David Pedanyan, Anna Avalyan"
+            }
           ]
         },
         {
@@ -2894,7 +2893,9 @@
           "id": "solution",
           "type": "prose",
           "layout": "contained",
-          "background": { "color": "#1b8874" },
+          "background": {
+            "color": "#17836f"
+          },
           "textColor": "#ffffff",
           "paddingTop": "140px",
           "paddingBottom": "140px",
@@ -2910,25 +2911,51 @@
           "paddingBottom": "150px",
           "title": "Process",
           "items": [
-            { "value": "01", "label": "Study delivery apps and route planners" },
-            { "value": "02", "label": "Map categories, orders, and multi-stop journeys" },
-            { "value": "03", "label": "Test the route model in wireframes" },
-            { "value": "04", "label": "Build the product UI and component library" }
+            {
+              "value": "01",
+              "label": "Study delivery apps and route planners"
+            },
+            {
+              "value": "02",
+              "label": "Map categories, orders, and multi-stop journeys"
+            },
+            {
+              "value": "03",
+              "label": "Test the route model in wireframes"
+            },
+            {
+              "value": "04",
+              "label": "Build the product UI and component library"
+            }
           ]
         },
         {
           "id": "goals",
           "type": "feature-grid",
           "layout": "wide",
-          "background": { "color": "#f3f5f4" },
+          "background": {
+            "color": "#f3f5f4"
+          },
           "paddingTop": "140px",
           "paddingBottom": "140px",
           "title": "Project Goals",
           "items": [
-            { "value": "01", "label": "Let customers manage different delivery needs in one app" },
-            { "value": "02", "label": "Show each stop, route change, and arrival expectation" },
-            { "value": "03", "label": "Make another pickup feel like part of the current order" },
-            { "value": "04", "label": "Give the team reusable patterns for new categories" }
+            {
+              "value": "01",
+              "label": "Let customers manage different delivery needs in one app"
+            },
+            {
+              "value": "02",
+              "label": "Show each stop, route change, and arrival expectation"
+            },
+            {
+              "value": "03",
+              "label": "Make another pickup feel like part of the current order"
+            },
+            {
+              "value": "04",
+              "label": "Give the team reusable patterns for new categories"
+            }
           ]
         },
         {
@@ -2955,12 +2982,19 @@
           "id": "route-feature",
           "type": "split",
           "layout": "wide",
-          "background": { "color": "#dff3ec" },
+          "background": {
+            "color": "#dff3ec"
+          },
           "paddingTop": "120px",
           "paddingBottom": "120px",
           "columns": [
-            { "asset": "route-optimization" },
-            { "title": "The route explains each decision", "body": "<p>The map shows the pickup order and highlights the proposed path. A compact message estimates the time saved through optimization.</p><p>The bottom sheet keeps delivery details close to the map. Customers can inspect stops, change their order, and start the delivery without losing spatial context.</p>" }
+            {
+              "asset": "route-optimization"
+            },
+            {
+              "title": "The route explains each decision",
+              "body": "<p>The map shows the pickup order and highlights the proposed path. A compact message estimates the time saved through optimization.</p><p>The bottom sheet keeps delivery details close to the map. Customers can inspect stops, change their order, and start the delivery without losing spatial context.</p>"
+            }
           ]
         },
         {
@@ -2987,22 +3021,38 @@
           "id": "core-flow",
           "type": "gallery",
           "layout": "wide",
-          "background": { "color": "#f3f5f4" },
+          "background": {
+            "color": "#f3f5f4"
+          },
           "paddingTop": "100px",
           "paddingBottom": "150px",
           "columns": 4,
           "items": [
-            { "asset": "restaurants", "caption": "Discover services" },
-            { "asset": "screen-04", "caption": "Build an order" },
-            { "asset": "route-optimization", "caption": "Optimize the route" },
-            { "asset": "screen-05", "caption": "Track delivery" }
+            {
+              "asset": "restaurants",
+              "caption": "Discover services"
+            },
+            {
+              "asset": "screen-04",
+              "caption": "Build an order"
+            },
+            {
+              "asset": "route-optimization",
+              "caption": "Optimize the route"
+            },
+            {
+              "asset": "screen-05",
+              "caption": "Track delivery"
+            }
           ]
         },
         {
           "id": "delivery-made-for-you",
           "type": "prose",
           "layout": "contained",
-          "background": { "color": "#1b8874" },
+          "background": {
+            "color": "#17836f"
+          },
           "textColor": "#ffffff",
           "paddingTop": "150px",
           "paddingBottom": "100px",
@@ -3014,19 +3064,37 @@
           "id": "product-screens",
           "type": "gallery",
           "layout": "wide",
-          "background": { "color": "#1b8874" },
+          "background": {
+            "color": "#17836f"
+          },
           "textColor": "#ffffff",
           "paddingBottom": "170px",
           "columns": 4,
           "items": [
-            { "asset": "screen-06" },
-            { "asset": "screen-07" },
-            { "asset": "screen-08" },
-            { "asset": "screen-09" },
-            { "asset": "screen-10" },
-            { "asset": "screen-11" },
-            { "asset": "screen-12" },
-            { "asset": "forgot-password" }
+            {
+              "asset": "screen-06"
+            },
+            {
+              "asset": "screen-07"
+            },
+            {
+              "asset": "screen-08"
+            },
+            {
+              "asset": "screen-09"
+            },
+            {
+              "asset": "screen-10"
+            },
+            {
+              "asset": "screen-11"
+            },
+            {
+              "asset": "screen-12"
+            },
+            {
+              "asset": "forgot-password"
+            }
           ]
         },
         {
@@ -3046,23 +3114,42 @@
           "paddingTop": "150px",
           "paddingBottom": "150px",
           "columns": [
-            { "title": "Launching the service before the app", "body": "<p>The business needed a public entry point while the mobile product remained in progress. We designed a landing page that explains Tempo’s promise, gives customers a phone number for delivery requests, and invites couriers and partners to join.</p><p>The page let the team begin learning from real demand before the full application was ready.</p>" },
-            { "asset": "landing-page" }
+            {
+              "title": "Launching the service before the app",
+              "body": "<p>The business needed a public entry point while the mobile product remained in progress. We designed a landing page that explains Tempo’s promise, gives customers a phone number for delivery requests, and invites couriers and partners to join.</p><p>The page let the team begin learning from real demand before the full application was ready.</p>"
+            },
+            {
+              "asset": "landing-page"
+            }
           ]
         },
         {
           "id": "design-system",
           "type": "feature-grid",
           "layout": "wide",
-          "background": { "color": "#f3f5f4" },
+          "background": {
+            "color": "#f3f5f4"
+          },
           "paddingTop": "150px",
           "paddingBottom": "150px",
           "title": "A system the product team can extend",
           "items": [
-            { "value": "Aa", "label": "Readable type for maps, commerce, and account flows" },
-            { "value": "#1B8874", "label": "A green accent that connects brand and product" },
-            { "value": "24px", "label": "Spacing rules that hold across dense mobile screens" },
-            { "value": "UI", "label": "Reusable inputs, buttons, cards, feedback, and states" }
+            {
+              "value": "Aa",
+              "label": "Readable type for maps, commerce, and account flows"
+            },
+            {
+              "value": "#1B8874",
+              "label": "A green accent that connects brand and product"
+            },
+            {
+              "value": "24px",
+              "label": "Spacing rules that hold across dense mobile screens"
+            },
+            {
+              "value": "UI",
+              "label": "Reusable inputs, buttons, cards, feedback, and states"
+            }
           ]
         },
         {
@@ -3079,15 +3166,29 @@
           "id": "portfolio-navigation",
           "type": "navigation",
           "layout": "wide",
-          "background": { "color": "#dff3ec" },
+          "background": {
+            "color": "#dff3ec"
+          },
           "paddingTop": "90px",
           "paddingBottom": "120px",
           "title": "Take a look at my other projects",
-          "back": { "label": "BACK", "url": "/" },
+          "back": {
+            "label": "BACK",
+            "url": "/"
+          },
           "items": [
-            { "label": "CloudChipr", "url": "/cloudchipr/" },
-            { "label": "Material Exchange", "url": "/material-exchange/" },
-            { "label": "Securion", "url": "/securion/" }
+            {
+              "label": "CloudChipr",
+              "url": "/cloudchipr/"
+            },
+            {
+              "label": "Material Exchange",
+              "url": "/material-exchange/"
+            },
+            {
+              "label": "Securion",
+              "url": "/securion/"
+            }
           ]
         }
       ]
@@ -3131,6 +3232,48 @@
           "alt": "iCredo active loans overview",
           "width": 393,
           "height": 1082
+        },
+        "mascot-making-of": {
+          "packagePath": "assets/icredo/mascot/making-of.webp",
+          "alt": "Making of the iCredo mascot - half pencil sketch, half finished render",
+          "width": 1800,
+          "height": 1208
+        },
+        "mascot-pose-celebrate": {
+          "packagePath": "assets/icredo/mascot/pose-celebrate.webp",
+          "alt": "Mascot celebrating an approved loan with confetti",
+          "width": 722,
+          "height": 722
+        },
+        "mascot-pose-sad": {
+          "packagePath": "assets/icredo/mascot/pose-sad.webp",
+          "alt": "Mascot showing empathy when something goes wrong",
+          "width": 722,
+          "height": 722
+        },
+        "mascot-pose-confused": {
+          "packagePath": "assets/icredo/mascot/pose-confused.webp",
+          "alt": "Mascot thinking through an unclear answer",
+          "width": 600,
+          "height": 600
+        },
+        "mascot-pose-builder": {
+          "packagePath": "assets/icredo/mascot/pose-builder.webp",
+          "alt": "Mascot in a hard hat during maintenance states",
+          "width": 722,
+          "height": 722
+        },
+        "hero-higgsfield": {
+          "packagePath": "assets/icredo/hero-higgsfield.png",
+          "alt": "The iCredo robot assistant presenting the conversational loan application",
+          "width": 2560,
+          "height": 1440
+        },
+        "hero-square": {
+          "packagePath": "assets/icredo/hero-square.webp",
+          "alt": "The iCredo mascot celebrating next to the real loan chat on a phone",
+          "width": 1600,
+          "height": 1600
         }
       },
       "sections": [
@@ -3138,16 +3281,15 @@
           "id": "intro",
           "type": "intro",
           "layout": "wide",
-          "background": { "color": "#edf4ff", "scope": "inner", "radius": "30px" },
+          "background": {
+            "color": "#fbfcff",
+            "gradient": "linear-gradient(128deg, #cfe6ff 0%, #e3f0ff 45%, #f6f9ff 100%)",
+            "scope": "inner",
+            "radius": "30px"
+          },
           "textColor": "#041f34",
           "title": "iCredo",
           "subtitle": "A conversational lending app designed to make a difficult financial decision feel understandable.",
-          "metadata": [
-            { "label": "Category:", "value": "Fintech, mobile product" },
-            { "label": "Focus:", "value": "Product strategy, UX, UI system" },
-            { "label": "Platform:", "value": "iOS and Android" },
-            { "label": "Tools:", "value": "Figma" }
-          ],
           "media": "hero"
         },
         {
@@ -3156,29 +3298,63 @@
           "layout": "contained",
           "paddingTop": "150px",
           "paddingBottom": "150px",
-          "title": "The project",
-          "eyebrow": "Overview",
+          "title": "About the project",
           "body": "<p><strong>iCredo</strong> is a mobile AI chat experience for people exploring and managing a loan. It brings loan discovery, calculation, identity verification, repayment, and account status into one guided product.</p><p>The core design challenge was not simply to make an application easier to complete. It was to help a person understand a sensitive financial decision while the product collected the information required to make it.</p>",
           "metadata": [
-            { "label": "Services:", "value": "Product strategy, UX, UI, design system" },
-            { "label": "Key flow:", "value": "Ask → understand → verify → receive → manage" },
-            { "label": "Language:", "value": "Armenian-first interface" }
+            {
+              "label": "Categories",
+              "value": "Fintech, mobile product"
+            },
+            {
+              "label": "Services",
+              "value": "Product strategy, UX, UI, design system"
+            },
+            {
+              "label": "Tools",
+              "value": "Figma"
+            },
+            {
+              "label": "Platform",
+              "value": "iOS and Android"
+            },
+            {
+              "label": "Key flow",
+              "value": "Ask → understand → verify → receive → manage"
+            },
+            {
+              "label": "Language",
+              "value": "Armenian-first interface"
+            }
           ]
         },
         {
           "id": "market-context",
           "type": "feature-grid",
           "layout": "wide",
-          "background": { "color": "#041f34" },
+          "background": {
+            "color": "#041f34"
+          },
           "textColor": "#ffffff",
           "paddingTop": "140px",
           "paddingBottom": "140px",
           "title": "The financial context made clarity essential",
           "items": [
-            { "value": "85%", "label": "of surveyed people had never tried to take out a loan online" },
-            { "value": "948K", "label": "resident individual borrowers with active loan balances in Armenia" },
-            { "value": "1 in 3", "label": "residents roughly carried an active loan balance" },
-            { "value": "58%", "label": "annual rate ceiling within the product context" }
+            {
+              "value": "85%",
+              "label": "of surveyed people had never tried to take out a loan online"
+            },
+            {
+              "value": "948K",
+              "label": "resident individual borrowers with active loan balances in Armenia"
+            },
+            {
+              "value": "1 in 3",
+              "label": "residents roughly carried an active loan balance"
+            },
+            {
+              "value": "58%",
+              "label": "annual rate ceiling within the product context"
+            }
           ]
         },
         {
@@ -3195,12 +3371,19 @@
           "id": "chat-solution",
           "type": "split",
           "layout": "wide",
-          "background": { "color": "#edf4ff" },
+          "background": {
+            "color": "#edf4ff"
+          },
           "paddingTop": "120px",
           "paddingBottom": "120px",
           "columns": [
-            { "title": "A conversation when context matters. Controls when precision matters.", "body": "<p>The assistant asks for one decision at a time, explains why it is needed, and uses simple chat language. When a user needs accuracy—such as an amount or repayment preference—the conversation hands off to visible chips and structured inputs.</p><p>This avoids a long, impersonal form while keeping financial choices precise.</p>" },
-            { "asset": "chat-flow" }
+            {
+              "title": "A conversation when context matters. Controls when precision matters.",
+              "body": "<p>The assistant asks for one decision at a time, explains why it is needed, and uses simple chat language. When a user needs accuracy—such as an amount or repayment preference—the conversation hands off to visible chips and structured inputs.</p><p>This avoids a long, impersonal form while keeping financial choices precise.</p>"
+            },
+            {
+              "asset": "chat-flow"
+            }
           ]
         },
         {
@@ -3210,15 +3393,22 @@
           "paddingTop": "140px",
           "paddingBottom": "140px",
           "columns": [
-            { "asset": "kyc" },
-            { "title": "Trust is designed into the verification flow", "body": "<p>KYC gives users direct capture guidance, a clear task boundary, and a visible security-progress indicator. The experience makes it clear what is being requested, what has been completed, and what happens next.</p><p>The goal was not to make verification feel invisible. It was to make it feel understandable.</p>" }
+            {
+              "asset": "kyc"
+            },
+            {
+              "title": "Trust is designed into the verification flow",
+              "body": "<p>KYC gives users direct capture guidance, a clear task boundary, and a visible security-progress indicator. The experience makes it clear what is being requested, what has been completed, and what happens next.</p><p>The goal was not to make verification feel invisible. It was to make it feel understandable.</p>"
+            }
           ]
         },
         {
           "id": "testing",
           "type": "prose",
           "layout": "contained",
-          "background": { "color": "#f4f7f9" },
+          "background": {
+            "color": "#f4f7f9"
+          },
           "paddingTop": "140px",
           "paddingBottom": "140px",
           "eyebrow": "Prototype validation",
@@ -3229,13 +3419,20 @@
           "id": "my-loans",
           "type": "split",
           "layout": "wide",
-          "background": { "color": "#041f34" },
+          "background": {
+            "color": "#041f34"
+          },
           "textColor": "#ffffff",
           "paddingTop": "130px",
           "paddingBottom": "130px",
           "columns": [
-            { "title": "The loan remains legible after approval", "body": "<p>My Loans turns a financial commitment into a manageable workspace. Cards show status, remaining balance, progress, next payment, repayment controls, and a route into detailed schedules.</p><p>The same component system carries the experience from first question through long-term management.</p>" },
-            { "asset": "my-loans" }
+            {
+              "title": "The loan remains legible after approval",
+              "body": "<p>My Loans turns a financial commitment into a manageable workspace. Cards show status, remaining balance, progress, next payment, repayment controls, and a route into detailed schedules.</p><p>The same component system carries the experience from first question through long-term management.</p>"
+            },
+            {
+              "asset": "my-loans"
+            }
           ]
         },
         {
@@ -3246,22 +3443,81 @@
           "paddingBottom": "150px",
           "title": "A system for a product that keeps growing",
           "items": [
-            { "value": "Chat", "label": "Conversation patterns for guidance and decision making" },
-            { "value": "KYC", "label": "Secure capture and clear step progress" },
-            { "value": "Loans", "label": "Reusable account, repayment, status, and schedule patterns" },
-            { "value": "UI", "label": "Shared tokens, components, and mobile interaction rules" }
+            {
+              "value": "Chat",
+              "label": "Conversation patterns for guidance and decision making"
+            },
+            {
+              "value": "KYC",
+              "label": "Secure capture and clear step progress"
+            },
+            {
+              "value": "Loans",
+              "label": "Reusable account, repayment, status, and schedule patterns"
+            },
+            {
+              "value": "UI",
+              "label": "Shared tokens, components, and mobile interaction rules"
+            }
+          ]
+        },
+        {
+          "id": "mascot",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "120px",
+          "title": "Why a mascot? A face for the scariest conversation in finance",
+          "body": "<p><strong>Asking for money is the moment people feel most judged.</strong> A human loan officer—even a photographed one—carries that judgment into the interface. The mascot removes it: nobody feels evaluated by a small red robot. It turns an interrogation into a guided conversation and gives the assistant a consistent, recognizable presence across the whole product.</p><p>The mascot also does functional work. It carries the app’s emotional states—celebrating an approval, apologizing for an error, thinking through an unclear answer, wearing a hard hat during maintenance—so the product can communicate outcomes with feeling instead of system jargon. In a category where trust is the whole battle, a character users smile at is not decoration; it is the trust mechanism.</p>"
+        },
+        {
+          "id": "mascot-making-of",
+          "type": "media",
+          "layout": "contained",
+          "paddingTop": "80px",
+          "asset": "mascot-making-of",
+          "caption": "Making of: from construction sketch to finished character."
+        },
+        {
+          "id": "mascot-poses",
+          "type": "gallery",
+          "layout": "contained",
+          "paddingTop": "60px",
+          "paddingBottom": "120px",
+          "columns": 4,
+          "items": [
+            {
+              "asset": "mascot-pose-celebrate",
+              "caption": "Loan approved"
+            },
+            {
+              "asset": "mascot-pose-sad",
+              "caption": "Something went wrong"
+            },
+            {
+              "asset": "mascot-pose-confused",
+              "caption": "Needs a clearer answer"
+            },
+            {
+              "asset": "mascot-pose-builder",
+              "caption": "Under maintenance"
+            }
           ]
         },
         {
           "id": "feedback",
           "type": "testimonial",
           "layout": "wide",
-          "background": { "color": "#edf4ff" },
+          "background": {
+            "color": "#edf4ff"
+          },
           "paddingTop": "120px",
           "paddingBottom": "120px",
           "title": "Business context",
           "quote": "Credo Finance’s stated goal is to give consumers a personal approach and flexible, convenient services. The product direction translated that goal into a mobile flow people could understand before they committed.",
-          "person": { "name": "Bella Gabrielyan", "role": "Executive Director & Board Member, Credo Finance" },
+          "person": {
+            "name": "Bella Gabrielyan",
+            "role": "Executive Director & Board Member, Credo Finance"
+          },
           "annotationText": "Leadership context — not a direct testimonial"
         },
         {
@@ -3273,6 +3529,251 @@
           "eyebrow": "Reflection",
           "title": "The right interface does not make the decision disappear",
           "body": "<p>Borrowing is personal, consequential, and sometimes stressful. The design did not try to hide that. It gave people a calmer way to ask questions, provide sensitive information, and keep track of what they had agreed to.</p><p>The strongest next step is to replace the validation hypotheses with documented usability-session notes and a before-and-after of the previous iCredo calculator.</p>"
+        },
+        {
+          "id": "portfolio-navigation",
+          "type": "navigation",
+          "layout": "wide",
+          "paddingTop": "90px",
+          "paddingBottom": "120px",
+          "title": "Take a look at my other projects"
+        }
+      ]
+    },
+    {
+      "project": {
+        "title": "Nesba",
+        "slug": "nesba",
+        "source": {
+          "fileKey": "rWtNqXFYu5wwMKR4b5BIW8",
+          "nodeId": "393:5704"
+        }
+      },
+      "assets": {
+        "hero": {
+          "packagePath": "assets/nesba/capital-flow.png",
+          "alt": "Abstract capital flow visual for Nesba",
+          "width": 2400,
+          "height": 1350
+        },
+        "home-zero": {
+          "packagePath": "assets/nesba/home-zero-state.png",
+          "alt": "Nesba home screen showing the new investor state",
+          "width": 2346,
+          "height": 2400
+        },
+        "explore": {
+          "packagePath": "assets/nesba/explore.png",
+          "alt": "Nesba investment discovery and fund exploration screens",
+          "width": 308,
+          "height": 2400
+        },
+        "open-banking": {
+          "packagePath": "assets/nesba/open-banking.png",
+          "alt": "Nesba open banking account connection flow",
+          "width": 2400,
+          "height": 2046
+        },
+        "settings": {
+          "packagePath": "assets/nesba/settings-verified.png",
+          "alt": "Nesba verified identity and settings screens",
+          "width": 1931,
+          "height": 2400
+        },
+        "palette": {
+          "packagePath": "assets/nesba/palette-exploration.png",
+          "alt": "Nesba palette exploration and UI directions",
+          "width": 1916,
+          "height": 2400
+        }
+      },
+      "sections": [
+        {
+          "id": "intro",
+          "type": "intro",
+          "layout": "wide",
+          "background": {
+            "color": "#101512",
+            "gradient": "radial-gradient(circle at 78% 22%, #25382c 0%, #111614 38%, #090b0a 100%)",
+            "radius": "30px"
+          },
+          "textColor": "#f5f4ed",
+          "title": "Nesba",
+          "subtitle": "A unified Saudi wealth experience that turns everyday financial activity into a clearer path to investing.",
+          "media": "hero"
+        },
+        {
+          "id": "project",
+          "type": "about-card",
+          "layout": "contained",
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
+          "eyebrow": "The opportunity",
+          "title": "From scattered money signals to a confident next step",
+          "body": "<p><span class=\"dw-nesba-highlight\">One view for cash flow and investing.</span> Nesba connects income, spending, surplus, risk, and managed investing across linked accounts.</p><p>People first see <span class=\"dw-nesba-highlight\">what came in, what went out, and where it happened.</span> Then they can decide what to invest.</p><p>The product stays approachable while keeping consent, risk, and identity explicit.</p>",
+          "metadata": [
+            {
+              "label": "Categories",
+              "value": "Wealth management, open banking"
+            },
+            {
+              "label": "Services",
+              "value": "Product strategy, UX, UI, design system"
+            },
+            {
+              "label": "Problem",
+              "value": "Fragmented cash-flow and wealth tools"
+            },
+            {
+              "label": "Design response",
+              "value": "One financial picture, then guided investment choices"
+            },
+            {
+              "label": "Constraints",
+              "value": "Nafath identity, consent, RTL and Arabic readiness"
+            },
+            {
+              "label": "Market",
+              "value": "Saudi Arabia"
+            },
+            {
+              "label": "Platform",
+              "value": "Mobile"
+            },
+            {
+              "label": "Focus",
+              "value": "Investment guidance, identity, localisation"
+            }
+          ]
+        },
+        {
+          "id": "research-context",
+          "type": "feature-grid",
+          "layout": "wide",
+          "background": {
+            "color": "#edf2ed"
+          },
+          "paddingTop": "140px",
+          "paddingBottom": "140px",
+          "title": "The market signal: access is growing. Confidence still has to be designed.",
+          "items": [
+            {
+              "value": "2 in 3",
+              "label": "adults worldwide made or received a digital payment in 2021 — a global signal that digital finance can be a doorway to broader financial services.",
+              "text": "<a href=\"https://www.worldbank.org/en/news/feature/2022/07/21/covid-19-boosted-the-adoption-of-digital-financial-services\" target=\"_blank\" rel=\"noreferrer\">World Bank research ↗</a>"
+            },
+            {
+              "value": "94.4%",
+              "label": "of investment portfolios in Saudi Arabia were opened through e-KYC in 2022, according to the Financial Sector Development Program.",
+              "text": "<a href=\"https://www.vision2030.gov.sa/media/jxxnxpya/program-charter-2020-2025-fsdp-en.pdf\" target=\"_blank\" rel=\"noreferrer\">FSDP source ↗</a>"
+            },
+            {
+              "value": "AIS + PIS",
+              "label": "Saudi open-banking standards cover account information and payment initiation, making consent-led account connection a core product concern.",
+              "text": "<a href=\"https://www.openbanking.sama.gov.sa/index-en.html\" target=\"_blank\" rel=\"noreferrer\">SAMA Open Banking ↗</a>"
+            },
+            {
+              "value": "RTL-ready",
+              "label": "Localisation is structural: language, hierarchy, direction, and identity flows must work together—not as a late translation layer."
+            }
+          ]
+        },
+        {
+          "id": "home-state",
+          "type": "split",
+          "layout": "wide",
+          "paddingTop": "130px",
+          "paddingBottom": "130px",
+          "columns": [
+            {
+              "title": "The home screen acknowledges the investor’s starting point",
+              "body": "<p>A zero state explains what is missing, why an investor profile matters, and what changes after it is complete.</p><p><span class=\"dw-nesba-highlight\">Income and spending share account colours.</span> A signed total sits inside each donut chart; the current month is the default, with past and custom ranges available.</p><p>Once ready, home shifts to portfolio value and the next useful action.</p>"
+            },
+            {
+              "asset": "home-zero"
+            }
+          ]
+        },
+        {
+          "id": "explore",
+          "type": "split",
+          "layout": "wide",
+          "background": {
+            "color": "#111614"
+          },
+          "textColor": "#f5f4ed",
+          "paddingTop": "130px",
+          "paddingBottom": "130px",
+          "columns": [
+            {
+              "asset": "explore"
+            },
+            {
+              "title": "Discovery without the noise of a trading terminal",
+              "body": "<p>Investing is separate from daily transactions. Search, categories, and curated portfolios support exploration while recommendations stay central.</p><p><span class=\"dw-nesba-highlight\">Risk is presented as a choice, not market theatre.</span></p>"
+            }
+          ]
+        },
+        {
+          "id": "open-banking",
+          "type": "media",
+          "layout": "wide",
+          "paddingTop": "130px",
+          "asset": "open-banking",
+          "caption": "Open Banking turns linked accounts into one cash-flow picture. Account colours carry from connection to chart, while consent stays visible—not hidden plumbing.",
+          "captionUrl": "https://www.openbanking.sama.gov.sa/index-en.html"
+        },
+        {
+          "id": "identity",
+          "type": "split",
+          "layout": "wide",
+          "background": {
+            "color": "#f4f1e8"
+          },
+          "paddingTop": "140px",
+          "paddingBottom": "140px",
+          "columns": [
+            {
+              "title": "Identity is a product state, not a background check",
+              "body": "<p>Nafath-verified names stay protected. Changing a phone number clearly triggers re-verification.</p><p><span class=\"dw-nesba-highlight\">Recommendations are a visible preference.</span> Investors can edit or opt out; everyone else sees a clear invitation to enable them.</p><p>That makes regulation legible and supports Arabic/English and RTL from the start.</p>"
+            },
+            {
+              "asset": "settings"
+            }
+          ]
+        },
+        {
+          "id": "palette-feedback",
+          "type": "media",
+          "layout": "contained",
+          "background": {
+            "color": "#202321"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "120px",
+          "paddingBottom": "120px",
+          "asset": "palette",
+          "title": "Palette, hierarchy, feedback",
+          "body": "<p>We tested how much structure Nesba needed to feel trustworthy without becoming heavy.</p><p>The final direction uses colour for meaning, then lets spacing and type do the rest.</p>",
+          "caption": "Colour carries the state. Space carries the hierarchy."
+        },
+        {
+          "id": "reflection",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "150px",
+          "paddingBottom": "160px",
+          "eyebrow": "Reflection",
+          "title": "Financial confidence is built across the whole journey",
+          "body": "<p>The work was not about making investing look simpler than it is. It was about giving a person enough context to act: a clear financial picture, an explicit identity state, a visible risk language, and recommendations that arrive at the right moment.</p><p><em>Market figures are included to frame the design context, not as measured product outcomes. This case study does not claim performance or conversion results that have not been documented.</em></p>"
+        },
+        {
+          "id": "portfolio-navigation",
+          "type": "navigation",
+          "layout": "wide",
+          "paddingTop": "90px",
+          "paddingBottom": "120px",
+          "title": "Take a look at my other projects"
         }
       ]
     }

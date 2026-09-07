@@ -1,30 +1,27 @@
-# Design QA — Securion intro
+# Design QA — iCredo animated conversation
 
-- Source visual truth: user-attached original Figma reference for the Securion intro strip (1546 × 250 px reference crop).
-- Implementation screenshot: `/Users/davit/Documents/Pedanyan Brand/securion-intro-implementation-final.png`.
-- Viewport: 1546 × 1250 CSS px, device density 1.
-- State: desktop, page top, light theme.
-- Full-view evidence: the implementation screenshot shows the complete intro and beginning of the hero at the reference viewport.
-- Focused-region evidence: the intro strip was inspected at native size because typography, the single-line subtitle, and the tool row are all readable in the full-width screenshot.
+- Source visual truth: the five user-supplied 393 × 852 SVG screens for chat, summary, verification details, loading, and success.
+- Implementation: `/am/projects/icredo#chat-solution` in the local in-app browser.
+- State checked: desktop and responsive rules, light theme, animated flow running inside the fixed-height device viewport.
 
 ## Findings
 
-No actionable P0, P1, or P2 differences remain for the annotated area.
+No actionable P0, P1, or P2 differences remain in the animated section.
 
-- Fonts and typography: title/year hierarchy matches; subtitle is one line and uses the muted gray treatment.
-- Spacing and layout rhythm: title begins at x=129 px versus approximately x=126 px in the source; tool row begins at x=1184 px versus approximately x=1190 px in the source.
-- Colors and visual tokens: white background, dark title, gray year/subtitle match the source.
-- Image quality and asset fidelity: the supplied four-tool raster asset is used directly at 294 × 58 px; no replacement icons or approximations are present.
-- Copy and content: only “Securion 2018” and “Mobile Crypto Wallet and Exchange.” remain on the left; the duplicate tool metadata and “USED TOOLS” label are removed.
-
-## Comparison history
-
-1. Initial finding: duplicate tool rows, an extra “USED TOOLS” label, subtitle wrapping, and content too close to the left edge.
-2. Fixes: hid the generic metadata renderer for Securion, removed the label, reduced and right-aligned the source tool asset, aligned the title block to the Figma margin, and kept the subtitle on one line at desktop widths.
-3. Post-fix evidence: `/Users/davit/Documents/Pedanyan Brand/securion-intro-implementation-final.png`; measured title margin and tool-row position are within a few pixels of the source reference.
+- Asset fidelity: every supplied SVG is embedded as a live SVG document; its interface artwork, vectors, and Armenian copy are not rasterized or redrawn.
+- Layout: the phone retains a fixed viewport height throughout the sequence, so surrounding case-study content does not jump.
+- Hardware: the animated prototype, KYC, and Loans screens now share one six-pixel device outline, a 44-pixel shell radius, and the same compact Dynamic Island.
+- Conversation: vector groups reveal in sequence inside the first SVG rather than exposing cropped copies of a screenshot.
+- Sequence: chat hands off to summary, verification details, loading, and success without an empty frame between states.
+- Verification: native groups in the supplied third screen appear sequentially; no HTML checkbox overlay remains.
+- Loading and success: native loader groups pulse in sequence; the supplied success artwork enters with a restrained lift and bounce.
+- Navigation: carousel dots and the vertical carousel caption were removed; all five moments occupy one screen in fixed chronology.
+- System icons: Chat, KYC, Loans, and UI each have a consistent line icon in the case-study system section.
+- Responsive behavior: the device scales down at the existing mobile breakpoint without changing the section’s content order.
+- Accessibility: the animated experience has a descriptive label, embedded states have descriptive titles, and reduced-motion users receive a paused readable chat state.
 
 ## Follow-up polish
 
-No additional polish is required for this annotation.
+The automatic loop remains 21 seconds so each screen stays readable. All five SVGs pass XML validation, the production build passes, and the source diff has no whitespace errors.
 
 final result: passed

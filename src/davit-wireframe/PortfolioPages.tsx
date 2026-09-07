@@ -1,13 +1,17 @@
 import React, { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Linkedin, Shield, MessageCircle, ScanLine, WalletCards } from "lucide-react";
+import { Linkedin, Shield, MessageCircle, ScanLine, WalletCards, PanelsTopLeft, House, UserRound } from "lucide-react";
 import portfolioManifest from "./portfolio-content.json";
 import "@fontsource/syne/400.css";
 import "@fontsource/syne/500.css";
 import "@fontsource/syne/600.css";
 import "@fontsource/syne/700.css";
 import "./portfolioPages.css";
+import { MediaCarousel } from "./MediaCarousel";
+import { PullToContinue } from "./PullToContinue";
+import { useTextMotion } from "./textMotion";
+import { openContactChat } from "./ContactChat";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,7 +82,20 @@ export type PortfolioProject = {
   sections: PortfolioSection[];
 };
 
-const projects = portfolioManifest.projects as PortfolioProject[];
+const portfolioFilterMetadata: Record<string, { year: string; category: string }> = {
+  cloudchipr: { year: "2023", category: "FinOps" },
+  "material-exchange": { year: "2021", category: "SaaS" },
+  securion: { year: "2018", category: "Crypto" },
+  "material-exchange-photo-lab": { year: "2023", category: "Product tools" },
+  "hotel-apartments": { year: "2022", category: "Travel" },
+  tempo: { year: "2026", category: "Delivery" },
+  icredo: { year: "2026", category: "Fintech" },
+  nesba: { year: "2025", category: "Wealthtech" }
+};
+
+const projects = (portfolioManifest.projects as unknown as PortfolioProject[])
+  .slice()
+  .sort((a, b) => Number(portfolioFilterMetadata[b.project.slug]?.year ?? 0) - Number(portfolioFilterMetadata[a.project.slug]?.year ?? 0));
 
 const projectAccents: Record<string, { accent: string; surface: string }> = {
   cloudchipr: { accent: "#5635ef", surface: "#ebe7ff" },
@@ -87,7 +104,8 @@ const projectAccents: Record<string, { accent: string; surface: string }> = {
   "material-exchange-photo-lab": { accent: "#157a63", surface: "#e6f8f1" },
   "hotel-apartments": { accent: "#795d46", surface: "#f1e9e2" },
   tempo: { accent: "#1b8874", surface: "#daf2e8" },
-  icredo: { accent: "#1e60e5", surface: "#edf4ff" }
+  icredo: { accent: "#1e60e5", surface: "#edf4ff" },
+  nesba: { accent: "#2e6042", surface: "#edf2ed" }
 };
 
 const portfolioCardImages: Record<string, string> = {
@@ -97,7 +115,8 @@ const portfolioCardImages: Record<string, string> = {
   "material-exchange-photo-lab": "/portfolio-assets/cards/material-exchange-photo-lab-card.png",
   "hotel-apartments": "/portfolio-assets/cards/hotel-apartments-card.png",
   tempo: "/portfolio-assets/cards/tempo-card.png",
-  icredo: "/portfolio-assets/icredo/hero-thumbnail.png"
+  icredo: "/portfolio-assets/icredo/portfolio-thumbnail.png",
+  nesba: "/portfolio-assets/nesba/home-zero-state.png"
 };
 
 const portfolioCardHeadlines: Record<string, string> = {
@@ -106,22 +125,36 @@ const portfolioCardHeadlines: Record<string, string> = {
   securion: "Multi-factor security for digital assets.",
   "material-exchange-photo-lab": "Designed for 30% more material engagement.",
   "hotel-apartments": "Made extended stays bookable online.",
-  tempo: "One delivery. Several stops.",
-  icredo: "A loan conversation, not a long form."
+  tempo: "Safe document delivery, from sender to recipient.",
+  icredo: "A loan conversation, not a long form.",
+  nesba: "One clear path from cash flow to investing."
 };
 
-const portfolioFilterMetadata: Record<string, { year: string; category: string }> = {
-  cloudchipr: { year: "2023", category: "FinOps" },
-  "material-exchange": { year: "2021", category: "SaaS" },
-  securion: { year: "2018", category: "Crypto" },
-  "material-exchange-photo-lab": { year: "2023", category: "Product tools" },
-  "hotel-apartments": { year: "2022", category: "Travel" },
-  tempo: { year: "2026", category: "Delivery" },
-  icredo: { year: "2026", category: "Fintech" }
+
+const portfolioCardVideos: Record<string, { src: string; poster: string }> = {
+  nesba: { src: "/portfolio-assets/nesba/nesba-card.mp4", poster: "/portfolio-assets/nesba/nesba-card-poster.webp" }
 };
 
 function PortfolioCardVisual({ project }: { project: PortfolioProject }) {
-  return <img src={portfolioCardImages[project.project.slug]} alt={`${project.project.title} project thumbnail`} />;
+  const video = portfolioCardVideos[project.project.slug];
+  if (video) {
+    return (
+      <video
+        src={video.src}
+        poster={video.poster}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label={`${project.project.title} project thumbnail animation`}
+      />
+    );
+  }
+  const intro = project.sections[0];
+  const fallbackKey = intro?.media || intro?.asset;
+  const src = portfolioCardImages[project.project.slug] || assetUrl(project, fallbackKey) || placeholderImage(project.project.title);
+  return <img src={src} alt={`${project.project.title} project thumbnail`} />;
 }
 
 function isStorybook() {
@@ -161,12 +194,12 @@ function placeholderImage(label: string) {
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
-function sectionStyle(project: PortfolioProject, section: PortfolioSection): CSSProperties {
+function sectionStyle(project: PortfolioProject | undefined, section: PortfolioSection): CSSProperties {
   const backgroundAsset = section.background?.asset;
   return {
     color: section.textColor,
     backgroundColor: section.background?.color,
-    backgroundImage: section.background?.gradient || (backgroundAsset ? `url(${assetUrl(project, backgroundAsset)})` : undefined),
+    backgroundImage: section.background?.gradient || (backgroundAsset && project ? `url(${assetUrl(project, backgroundAsset)})` : undefined),
     backgroundPosition: section.background?.position,
     backgroundSize: backgroundAsset ? "cover" : undefined,
     paddingTop: section.paddingTop,
@@ -223,7 +256,14 @@ const caseStudyHighlightPhrases = [
   "Categories and filters",
   "same product language",
   "clear address and recipient details",
-  "persistent product layer"
+  "persistent product layer",
+  "one decision at a time",
+  "long, impersonal form",
+  "direct capture guidance",
+  "financial commitment",
+  "manageable workspace",
+  "trust mechanism",
+  "guided conversation"
 ];
 
 const caseStudyHighlightPattern = new RegExp(
@@ -281,12 +321,31 @@ function ProjectTitle({ title }: { title?: string }) {
   return <>{yearMatch[1]} <span className="dw-case-title-year">{yearMatch[2]}</span></>;
 }
 
+// Relative luminance of a hex colour, per WCAG. Used to decide whether a
+// section paints itself dark enough that the grey-on-white text scale would
+// fall below AA and the whole section needs to flip to white type.
+function hexLuminance(hex?: string) {
+  if (!hex || hex[0] !== "#") return null;
+  let value = hex.slice(1);
+  if (value.length === 3) value = value.split("").map((c) => c + c).join("");
+  if (value.length !== 6) return null;
+  const channels = [0, 2, 4].map((i) => parseInt(value.slice(i, i + 2), 16) / 255);
+  const linear = channels.map((c) => (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)));
+  return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
+}
+
+function sectionIsDark(section: PortfolioSection) {
+  const luminance = hexLuminance(section.background?.color);
+  return luminance !== null && luminance < 0.3;
+}
+
 function sectionClass(section: PortfolioSection, extra = "") {
   return [
     "dw-case-section",
     `dw-case-${section.layout || (section.type === "prose" ? "contained" : "wide")}`,
     `dw-case-type-${section.type}`,
     `dw-case-section-${section.id}`,
+    sectionIsDark(section) ? "dw-case-on-dark" : "",
     extra
   ].filter(Boolean).join(" ");
 }
@@ -304,7 +363,19 @@ function SectionHeading({ project, section }: { project: PortfolioProject; secti
   if (project.project.slug === "cloudchipr" && section.id === "product-direction-two") {
     return <>Remove Friction around costs between <span className="dw-cloudchipr-title-accent">Engineering and Finance</span></>;
   }
+  if (project.project.slug === "icredo") return <IcredoHighlightedTitle title={section.title} />;
+  if (project.project.slug === "nesba") return <NesbaHighlightedTitle title={section.title} />;
   return <>{section.title}</>;
+}
+
+function IcredoHighlightedTitle({ title = "" }: { title?: string }) {
+  const pattern = /(financial context|clarity|conversation|precision|trust|verification|loan|approval|system|growing|scariest conversation|finance)/gi;
+  return <>{title.split(pattern).map((part, index) => /^(financial context|clarity|conversation|precision|trust|verification|loan|approval|system|growing|scariest conversation|finance)$/i.test(part) ? <span className="dw-icredo-title-highlight" key={`${part}-${index}`}>{part}</span> : part)}</>;
+}
+
+function NesbaHighlightedTitle({ title = "" }: { title?: string }) {
+  const pattern = /(money signals|confident next step|starting point|trading terminal|identity|product state|financial confidence)/gi;
+  return <>{title.split(pattern).map((part, index) => /^(money signals|confident next step|starting point|trading terminal|identity|product state|financial confidence)$/i.test(part) ? <span className="dw-nesba-title-highlight" key={`${part}-${index}`}>{part}</span> : part)}</>;
 }
 
 const cloudchiprCollaborators: Record<string, string> = {
@@ -387,11 +458,12 @@ function IntroSection({ project, section }: { project: PortfolioProject; section
   );
 }
 
-function IcredoPhone({ project, asset, className = "" }: { project: PortfolioProject; asset: string; className?: string }) {
+function IcredoPhone({ project, asset, className = "", tabBar = false }: { project: PortfolioProject; asset: string; className?: string; tabBar?: boolean }) {
   return (
     <div className={`dw-icredo-phone ${className}`}>
       <span className="dw-icredo-phone-speaker" aria-hidden="true" />
       <ProjectImage project={project} assetKey={asset} />
+      {tabBar ? <nav className="dw-icredo-phone-tabs" aria-label="Loan app navigation"><House /><MessageCircle /><WalletCards className="is-active" /><UserRound /></nav> : null}
     </div>
   );
 }
@@ -408,13 +480,11 @@ function IcredoIntro({ project, section }: { project: PortfolioProject; section:
         <dl className="dw-case-meta">
           {section.metadata?.map((item) => <div key={item.label}><dt>{item.label.replace(/:$/, "")}</dt><dd>{item.value}</dd></div>)}
         </dl>
-        <div className="dw-icredo-hero-composition" aria-label="iCredo assistant with a real in-app chat screen">
-          <img
-            className="dw-icredo-hero-banner"
-            src="/portfolio-assets/icredo/hero-higgsfield.png"
-            alt="The iCredo robot assistant presenting the conversational loan application"
-          />
-        </div>
+        <img
+          className="dw-icredo-hero-square"
+          src="/portfolio-assets/icredo/hero-square.webp"
+          alt="The iCredo mascot celebrating next to the real loan chat on a phone"
+        />
       </div>
     </section>
   );
@@ -427,19 +497,34 @@ function IcredoChatPrototype({ project, section }: { project: PortfolioProject; 
       <div className="dw-icredo-chat-layout" data-portfolio-reveal>
         <article className="dw-icredo-chat-copy">
           <span className="dw-icredo-section-icon"><MessageCircle /></span>
-          <h2>{copy?.title}</h2>
+          <h2><IcredoHighlightedTitle title={copy?.title} /></h2>
           <Html html={copy?.body} className="dw-case-richtext" />
         </article>
         <div className="dw-icredo-chat-stage" aria-label="Animated iCredo conversation prototype">
-          <div className="dw-icredo-code-chat">
-            <div className="dw-icredo-code-chat-top"><span className="dw-icredo-code-avatar">C</span><strong>iCredo</strong><small>online</small></div>
-            <p className="dw-icredo-bubble dw-icredo-bubble-a">Բարև, ինչքա՞ն գումար է պետք քեզ։</p>
-            <p className="dw-icredo-bubble dw-icredo-bubble-user">1,000,000 դրամ</p>
-            <p className="dw-icredo-bubble dw-icredo-bubble-b">Եկ միասին գտնենք հարմար տարբերակը։</p>
-            <div className="dw-icredo-chat-chips"><span>12 ամիս</span><span>24 ամիս</span><span>36 ամիս</span></div>
-            <p className="dw-icredo-bubble dw-icredo-bubble-c">Ինչո՞ւ է պետք վարկը։</p>
+          <div className="dw-icredo-flow-phone">
+            <span className="dw-icredo-dynamic-island" aria-hidden="true" />
+            <div className="dw-icredo-flow-viewport">
+              <div className="dw-icredo-flow-scene dw-icredo-flow-chat" aria-hidden="true">
+                <object type="image/svg+xml" data="/portfolio-assets/icredo/conversation-flow/01-chat.svg" aria-label="Loan assistant conversation" />
+              </div>
+
+              <div className="dw-icredo-flow-scene dw-icredo-flow-summary" aria-hidden="true">
+                <object type="image/svg+xml" data="/portfolio-assets/icredo/conversation-flow/02-summary.svg" aria-label="Loan summary" />
+              </div>
+
+              <div className="dw-icredo-flow-scene dw-icredo-flow-details" aria-hidden="true">
+                <object type="image/svg+xml" data="/portfolio-assets/icredo/conversation-flow/03-details.svg" aria-label="Loan detail selection" />
+              </div>
+
+              <div className="dw-icredo-flow-scene dw-icredo-flow-loading" aria-hidden="true">
+                <object type="image/svg+xml" data="/portfolio-assets/icredo/conversation-flow/04-loading.svg" aria-label="Application loading" />
+              </div>
+
+              <div className="dw-icredo-flow-scene dw-icredo-flow-success" aria-hidden="true">
+                <object type="image/svg+xml" data="/portfolio-assets/icredo/conversation-flow/05-success.svg" aria-label="Application success" />
+              </div>
+            </div>
           </div>
-          <IcredoPhone project={project} asset="chat-flow" className="dw-icredo-chat-reference" />
         </div>
       </div>
     </section>
@@ -454,7 +539,7 @@ function IcredoTrustSection({ project, section }: { project: PortfolioProject; s
         <div className="dw-icredo-device-orbit"><span className="dw-icredo-orbit-ring" /><IcredoPhone project={project} asset="kyc" /></div>
         <article>
           <span className="dw-icredo-section-icon"><ScanLine /></span>
-          <h2>{copy?.title}</h2>
+          <h2><IcredoHighlightedTitle title={copy?.title} /></h2>
           <Html html={copy?.body} className="dw-case-richtext" />
           <div className="dw-icredo-trust-notes"><span><b>01</b> Explain the request</span><span><b>02</b> Show progress</span><span><b>03</b> Confirm what happens next</span></div>
         </article>
@@ -470,10 +555,28 @@ function IcredoLoansSection({ project, section }: { project: PortfolioProject; s
       <div className="dw-icredo-loans-layout" data-portfolio-reveal>
         <article>
           <span className="dw-icredo-section-icon"><WalletCards /></span>
-          <h2>{copy?.title}</h2>
+          <h2><IcredoHighlightedTitle title={copy?.title} /></h2>
           <Html html={copy?.body} className="dw-case-richtext" />
         </article>
-        <div className="dw-icredo-loan-phone-stage"><span className="dw-icredo-loan-rail" aria-hidden="true">active loan / balance / schedule</span><IcredoPhone project={project} asset="my-loans" /></div>
+        <div className="dw-icredo-loan-phone-stage"><IcredoPhone project={project} asset="my-loans" tabBar /></div>
+      </div>
+    </section>
+  );
+}
+
+function IcredoSystemSection({ section }: { section: PortfolioSection }) {
+  const icons = [MessageCircle, ScanLine, WalletCards, PanelsTopLeft];
+  return (
+    <section className={sectionClass(section, "dw-icredo-system-section")} style={sectionStyle(undefined, section)} id={section.id}>
+      <div className="dw-icredo-system-inner" data-portfolio-reveal>
+        <h2><IcredoHighlightedTitle title={section.title} /></h2>
+        <div className="dw-icredo-system-grid">
+          {section.items?.map((item, index) => {
+            if (typeof item === "string") return null;
+            const Icon = icons[index] ?? PanelsTopLeft;
+            return <article key={item.value ?? index}><span className="dw-icredo-system-icon"><Icon /></span><strong>{item.value}</strong><p>{item.label}</p></article>;
+          })}
+        </div>
       </div>
     </section>
   );
@@ -696,7 +799,7 @@ function SecurionBrandIdentity({ project, section }: { project: PortfolioProject
   return (
     <section className="dw-case-section dw-securion-brand" id={section.id} data-securion-brand>
       <div className="dw-securion-brand-copy">
-        <h2>{section.title}</h2>
+        <h2><SectionHeading project={project} section={section} /></h2>
         <p>
           Securion&apos;s brand essence revolves around <mark>trust</mark>, <mark>security</mark>, and
           <mark> innovation</mark>. It represents the unwavering <mark>commitment</mark> to safeguarding
@@ -934,7 +1037,7 @@ function MaterialExchangeIntro({ project, section }: { project: PortfolioProject
           ))}
           <div className="dw-mex-meta-tools">
             <dt>Tools</dt>
-            <dd><img src="/portfolio-assets/material-exchange/tools.png" alt="Figma, Confluence, and Overflow" /></dd>
+            <dd><img src="/portfolio-assets/material-exchange/tools.png" alt="Figma, Confluence, and Overflow" width={410} height={110} /></dd>
           </div>
           <div className="dw-mex-meta-collaborators">
             <dt>Co-Designers</dt>
@@ -1043,6 +1146,8 @@ function MaterialExchangeResearch({ project, section }: { project: PortfolioProj
           <img
             className="dw-mex-platform-role-legend"
             src="/portfolio-assets/material-exchange/platform-user-roles.png"
+            width={2100}
+            height={216}
             alt="Platform roles: hosts, suppliers, customers, pavilion sponsors, certifying authorities, verification and service providers, Material Exchange staff, and anonymous users"
           />
           <ProjectImage project={project} assetKey="platform-users" />
@@ -1311,16 +1416,22 @@ function MaterialExchangeTesting({ project, section }: { project: PortfolioProje
             className="dw-mex-save-search-tablet"
             src="/portfolio-assets/material-exchange/save-search-tablet.png"
             alt="Material Exchange search results displayed on a tablet"
+            width={3221}
+            height={2491}
           />
           <img
             className="dw-mex-save-search-panel"
             src="/portfolio-assets/material-exchange/save-search-panel.png"
             alt="Saved Search criteria panel"
+            width={882}
+            height={1004}
           />
           <img
             className="dw-mex-save-search-actions"
             src="/portfolio-assets/material-exchange/save-search-actions.png"
             alt="Save Smart Search and Delete actions"
+            width={861}
+            height={390}
           />
         </figure>
       </div>
@@ -1922,6 +2033,38 @@ function MediaSection({ project, section }: { project: PortfolioProject; section
     <section className={sectionClass(section)} style={sectionStyle(project, section)} id={section.id}>
       <figure className="dw-case-media" data-portfolio-reveal data-portfolio-parallax>
         <ProjectImage project={project} assetKey={section.asset} />
+        {section.caption ? <figcaption>{section.caption}{section.captionUrl ? <> <a href={section.captionUrl} target="_blank" rel="noreferrer">Source ↗</a></> : null}</figcaption> : null}
+      </figure>
+    </section>
+  );
+}
+
+function NesbaPaletteFeedback({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  return (
+    <section className={sectionClass(section, "dw-nesba-palette-feedback")} style={sectionStyle(project, section)} id={section.id}>
+      <div className="dw-nesba-palette-feedback-copy" data-portfolio-reveal>
+        <p className="dw-case-eyebrow">Design direction</p>
+        <h2>{section.title || "Palette, hierarchy, feedback"}</h2>
+        <Html html={section.body} className="dw-case-richtext" />
+      </div>
+      <figure className="dw-nesba-palette-board" data-portfolio-reveal>
+        <div className="dw-nesba-palette-stage">
+          <ProjectImage project={project} assetKey={section.asset} />
+          <aside className="dw-nesba-review-note is-approved" aria-label="Stakeholder feedback on the green palette direction">
+            <div className="dw-nesba-review-note-bar"><span>MND-01</span><span>TOP DIRECTION</span></div>
+            <div className="dw-nesba-review-note-body">
+              <img className="dw-nesba-review-avatar" src="/portfolio-assets/nesba/mattia-brigliadori.jpg" alt="Mattia Brigliadori" />
+              <p><strong>Mattia Brigliadori</strong><small>1 yr. ago</small><br />This top option feels stronger and calmer. Let’s move forward.</p>
+            </div>
+          </aside>
+          <aside className="dw-nesba-review-note is-revision" aria-label="Stakeholder feedback on the yellow palette direction">
+            <div className="dw-nesba-review-note-bar"><span>MND-01</span><span>YELLOW DIRECTION</span></div>
+            <div className="dw-nesba-review-note-body">
+              <img className="dw-nesba-review-avatar" src="/portfolio-assets/nesba/mattia-brigliadori.jpg" alt="Mattia Brigliadori" />
+              <p><strong>Mattia Brigliadori</strong><small>1 yr. ago</small><br />Try this without the stroke, with a subtler surface.</p>
+            </div>
+          </aside>
+        </div>
         {section.caption ? <figcaption>{section.caption}</figcaption> : null}
       </figure>
     </section>
@@ -1955,7 +2098,7 @@ function SplitSection({ project, section }: { project: PortfolioProject; section
         {columns.map((column, index) => (
           <article key={`${section.id}-${index}`}>
             {column.asset ? <ProjectImage project={project} assetKey={column.asset} /> : null}
-            {column.title ? <h2>{column.title}</h2> : null}
+            {column.title ? <h2><SectionHeading project={project} section={{ ...section, title: column.title }} /></h2> : null}
             <Html html={column.body} className="dw-case-richtext" />
           </article>
         ))}
@@ -1967,7 +2110,7 @@ function SplitSection({ project, section }: { project: PortfolioProject; section
 function FeatureGridSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   return (
     <section className={sectionClass(section)} style={sectionStyle(project, section)} id={section.id}>
-      {section.title ? <h2 className="dw-case-feature-title" data-portfolio-reveal>{section.title}</h2> : null}
+      {section.title ? <h2 className="dw-case-feature-title" data-portfolio-reveal><SectionHeading project={project} section={section} /></h2> : null}
       <div className="dw-case-feature-grid" data-portfolio-reveal>
         {section.items?.map((item, index) => typeof item === "string" ? null : (
           <article key={`${item.icon}-${index}`}>
@@ -2058,46 +2201,46 @@ function TestimonialSection({ project, section }: { project: PortfolioProject; s
   );
 }
 
-function NavigationSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
-  const otherProjects = projects.filter((item) => item.project.slug !== project.project.slug);
+function CarouselSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const items = (section.items ?? [])
+    .map((item) => {
+      if (typeof item === "string") return { src: assetUrl(project, item), caption: undefined as string | undefined };
+      return { src: assetUrl(project, item.asset), caption: item.caption };
+    })
+    .filter((item) => Boolean(item.src));
   return (
-    <section className="dw-case-navigation dw-case-more-projects" id={section.id}>
+    <section className={sectionClass(section, "dw-case-carousel-section")} style={sectionStyle(project, section)} id={section.id}>
+      {section.title || section.eyebrow ? (
+        <header className="dw-case-carousel-heading" data-portfolio-reveal>
+          {section.eyebrow ? <p className="dw-case-eyebrow">{section.eyebrow}</p> : null}
+          {section.title ? <h2>{section.title}</h2> : null}
+        </header>
+      ) : null}
       <div data-portfolio-reveal>
-        <a className="dw-case-back" href={portfolioHref()} target={isStorybook() ? "_parent" : undefined}>Back to work</a>
-        <div className="dw-case-more-heading">
-          <p>Selected work</p>
-          <h2>Explore other case studies</h2>
-        </div>
-        <div className="dw-case-next-list">
-          {otherProjects.map((otherProject, index) => {
-            const accent = projectAccents[otherProject.project.slug];
-            const isPhotoLab = otherProject.project.slug === "material-exchange-photo-lab";
-            return (
-              <a
-                className="dw-case-more-card"
-                href={projectHref(otherProject.project.slug)}
-                target={isStorybook() ? "_parent" : undefined}
-                key={otherProject.project.slug}
-                style={{ "--project-accent": accent?.accent, "--project-surface": accent?.surface } as CSSProperties}
-              >
-                <span className={`dw-case-more-card-media${isPhotoLab ? " dw-case-more-card-media--photo-lab" : ""}`}>
-                  <PortfolioCardVisual project={otherProject} />
-                </span>
-                <span className="dw-case-more-card-copy">
-                  <small>{String(index + 1).padStart(2, "0")}</small>
-                  <strong>{otherProject.project.title}</strong>
-                  <span aria-hidden="true">↗</span>
-                </span>
-              </a>
-            );
-          })}
-        </div>
+        <MediaCarousel ariaLabel={section.title || "Project gallery"} items={items} />
       </div>
     </section>
   );
 }
 
+function NavigationSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const index = projects.findIndex((item) => item.project.slug === project.project.slug);
+  const nextProject = projects[(index + 1) % projects.length];
+  return (
+    <section className="dw-case-navigation dw-case-prevnext" id={section.id}>
+      <PullToContinue
+        href={projectHref(nextProject.project.slug)}
+        kicker="Next case study"
+        title={nextProject.project.title}
+      />
+    </section>
+  );
+}
+
 function ProjectSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  if (project.project.slug === "nesba" && section.id === "palette-feedback") {
+    return <NesbaPaletteFeedback project={project} section={section} />;
+  }
   if (project.project.slug === "material-exchange" && section.id === "intro") {
     return <MaterialExchangeIntro project={project} section={section} />;
   }
@@ -2266,12 +2409,16 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   if (project.project.slug === "icredo" && section.id === "my-loans") {
     return <IcredoLoansSection project={project} section={section} />;
   }
+  if (project.project.slug === "icredo" && section.id === "system") {
+    return <IcredoSystemSection section={section} />;
+  }
 
   if (section.type === "about-card") return <AboutCardSection project={project} section={section} />;
   if (section.type === "intro") return <IntroSection project={project} section={section} />;
   if (section.type === "prose") return <ProseSection project={project} section={section} />;
   if (section.type === "media") return <MediaSection project={project} section={section} />;
   if (section.type === "gallery") return <GallerySection project={project} section={section} />;
+  if (section.type === "carousel") return <CarouselSection project={project} section={section} />;
   if (section.type === "split") return <SplitSection project={project} section={section} />;
   if (section.type === "feature-grid") return <FeatureGridSection project={project} section={section} />;
   if (section.type === "chips") return <ChipsSection project={project} section={section} />;
@@ -2281,10 +2428,40 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   return null;
 }
 
+// Sections paint themselves from JSON, from bespoke CSS, or from a component's
+// own styles. Rather than trust any one of those, read the resolved background
+// off the DOM and flag anything dark enough that the grey-on-white text scale
+// would fall below WCAG AA. The CSS counterpart flips those sections to white.
+function useDarkSectionFlags(containerRef: React.RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const flag = () => {
+      container.querySelectorAll<HTMLElement>("section, .dw-case-section").forEach((section) => {
+        const computed = getComputedStyle(section);
+        const parts = computed.backgroundColor.match(/[\d.]+/g);
+        if (!parts) return;
+        const alpha = parts.length > 3 ? parseFloat(parts[3]) : 1;
+        if (alpha < 0.85) return; // see-through: it is not the surface
+        const linear = parts.slice(0, 3).map((value) => {
+          const channel = Number(value) / 255;
+          return channel <= 0.03928 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);
+        });
+        const luminance = 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
+        section.classList.toggle("dw-case-on-dark", luminance < 0.3);
+      });
+    };
+    flag();
+    const timer = window.setTimeout(flag, 400); // after fonts/images settle the layout
+    return () => window.clearTimeout(timer);
+  }, [containerRef]);
+}
+
 function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
   useEffect(() => {
     const container = containerRef.current;
     if (!container || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (container.hasAttribute("data-motion-pilot")) return; // motion.min.js pilot copy: GSAP off
     const context = gsap.context(() => {
       if (container.classList.contains("dw-case-study")) {
         const textSelector = [
@@ -2293,7 +2470,8 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
           ".dw-case-meta dd",
           ".dw-case-prose > .dw-case-eyebrow",
           ".dw-case-prose > h2",
-          ".dw-case-prose > .dw-case-richtext",
+          ".dw-case-prose .dw-case-richtext > p",
+          ".dw-case-richtext li",
           ".dw-case-project-details > div",
           ".dw-case-split h2",
           ".dw-case-split .dw-case-richtext",
@@ -2306,103 +2484,39 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
           ".dw-cloudchipr-problem-lead",
           ".dw-cloudchipr-problem-list > li",
           ".dw-cloudchipr-problem-conclusion",
-          ".dw-case-back",
-          ".dw-case-navigation h2",
-          ".dw-case-next-list a"
+          ".dw-case-back"
         ].join(",");
         const mediaSelector = [
           ".dw-case-intro-media",
           ".dw-case-media",
           ".dw-case-gallery figure",
-          ".dw-case-split article > img"
+          ".dw-case-split article > img",
+          ".dw-icredo-chat-stage",
+          ".dw-icredo-device-orbit",
+          ".dw-icredo-loan-phone-stage",
+          ".dw-icredo-system-grid",
+          ".dw-case-section-mascot-making-of figure"
         ].join(",");
 
-        gsap.utils.toArray<HTMLElement>(".dw-case-intro, .dw-case-section, .dw-case-navigation").forEach((section) => {
-          const textTargets = Array.from(section.querySelectorAll<HTMLElement>(textSelector));
-          const mediaTargets = Array.from(section.querySelectorAll<HTMLElement>(mediaSelector));
+        // Body text and media reveals are handled by the motion.min.js
+        // attribute layer (textMotion.ts), which gives headings the
+        // line-masked reveal. Only the bespoke timelines below stay in GSAP.
 
-          if (textTargets.length) {
-            gsap.fromTo(textTargets, {
-              autoAlpha: 0,
-              y: 32,
-              filter: "blur(10px)"
-            }, {
-              autoAlpha: 1,
-              y: 0,
-              filter: "blur(0px)",
-              duration: 0.9,
-              delay: 0.08,
-              stagger: 0.045,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: section,
-                start: "top 88%",
-                toggleActions: "play none none reverse"
-              }
-            });
-
-            gsap.fromTo(textTargets, {
-              autoAlpha: 1,
-              y: 0,
-              filter: "blur(0px)"
-            }, {
-              autoAlpha: 0.08,
-              y: -18,
-              filter: "blur(9px)",
-              stagger: 0.018,
-              ease: "none",
-              immediateRender: false,
-              scrollTrigger: {
-                trigger: section,
-                start: "bottom 24%",
-                end: "bottom top",
-                scrub: 0.65,
-                invalidateOnRefresh: true
-              }
-            });
-          }
-
-          if (mediaTargets.length) {
-            gsap.fromTo(mediaTargets, {
-              autoAlpha: 0.25,
-              y: 24,
-              scale: 1.012,
-              filter: "blur(3px)"
-            }, {
-              autoAlpha: 1,
-              y: 0,
-              scale: 1,
-              filter: "blur(0px)",
-              duration: 1.05,
-              delay: 0.16,
-              stagger: 0.04,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: section,
-                start: "top 90%",
-                toggleActions: "play none none reverse"
-              }
-            });
-
-            gsap.fromTo(mediaTargets, {
-              autoAlpha: 1,
-              y: 0,
-              filter: "blur(0px)"
-            }, {
-              autoAlpha: 0.34,
-              y: -10,
-              filter: "blur(2px)",
-              ease: "none",
-              immediateRender: false,
-              scrollTrigger: {
-                trigger: section,
-                start: "bottom 18%",
-                end: "bottom top",
-                scrub: 0.7,
-                invalidateOnRefresh: true
-              }
-            });
-          }
+        gsap.utils.toArray<HTMLElement>(".dw-case-prevnext-card").forEach((card) => {
+          gsap.fromTo(card, {
+            autoAlpha: 0,
+            x: card.classList.contains("is-next") ? 76 : -76
+          }, {
+            autoAlpha: 1,
+            x: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 94%",
+              toggleActions: "play none none reverse"
+            }
+          });
         });
 
         const construction = container.querySelector<HTMLElement>("[data-cloudchipr-construction]");
@@ -2512,16 +2626,22 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
             .to(badge, { autoAlpha: 1, xPercent: 0, yPercent: 0, rotation: 0, scale: 1, duration: 1, ease: "power3.out" }, 0.05)
             .to(details, { autoAlpha: 1, xPercent: 0, yPercent: 0, rotation: 0, scale: 1, duration: 1, ease: "power3.out" }, 0.24);
 
-          gsap.to(badge?.querySelector("img"), {
-            yPercent: -5,
-            ease: "none",
-            scrollTrigger: { trigger: brandItems, start: "top bottom", end: "bottom top", scrub: 0.8 }
-          });
-          gsap.to(details?.querySelector("img"), {
-            yPercent: 4,
-            ease: "none",
-            scrollTrigger: { trigger: brandItems, start: "top bottom", end: "bottom top", scrub: 0.8 }
-          });
+          const badgeImg = badge?.querySelector("img");
+          if (badgeImg) {
+            gsap.to(badgeImg, {
+              yPercent: -5,
+              ease: "none",
+              scrollTrigger: { trigger: brandItems, start: "top bottom", end: "bottom top", scrub: 0.8 }
+            });
+          }
+          const detailsImg = details?.querySelector("img");
+          if (detailsImg) {
+            gsap.to(detailsImg, {
+              yPercent: 4,
+              ease: "none",
+              scrollTrigger: { trigger: brandItems, start: "top bottom", end: "bottom top", scrub: 0.8 }
+            });
+          }
         }
 
         const howItStarted = container.querySelector<HTMLElement>("[data-cloudchipr-started]");
@@ -3108,10 +3228,35 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
   }, [containerRef]);
 }
 
+const workEngagementModes = [
+  {
+    id: "role",
+    intent: "hiring",
+    label: "A role on your team",
+    body: "Design leadership where product, brand and strategy meet. Tell me the role and the team and I’ll tell you straight whether it’s a fit.",
+    cursor: "talk about a role"
+  },
+  {
+    id: "project",
+    intent: "project",
+    label: "A product that’s stuck",
+    body: "Unclear direction, a system that won’t scale, or something that needs shipping. Most of the eight cases above started here.",
+    cursor: "talk about a project"
+  },
+  {
+    id: "room",
+    intent: "collab",
+    label: "A room to speak in",
+    body: "Talks, juries, workshops and teaching. I take them on when the room is right — and I run UX Storm, so I know what makes one.",
+    cursor: "talk about an event"
+  }
+];
+
 export function PortfolioIndexContent() {
   const containerRef = useRef<HTMLElement | null>(null);
   const [selectedYear, setSelectedYear] = useState("All years");
   usePortfolioMotion(containerRef);
+  useTextMotion(containerRef);
 
   const years = ["All years", ...Array.from(new Set(projects.map((project) => portfolioFilterMetadata[project.project.slug]?.year).filter(Boolean))).sort((a, b) => b.localeCompare(a))];
   const visibleProjects = projects.filter((project) => {
@@ -3123,29 +3268,30 @@ export function PortfolioIndexContent() {
     <section className="dw-portfolio-index" ref={containerRef}>
       <header className="dw-portfolio-index-hero" data-portfolio-reveal>
         <p>Selected work / 2018–2026</p>
-        <h1>Products I helped shape.</h1>
+        <h1>Eight products. The decisions behind them.</h1>
         <div>
-          <p>I work with founders and product teams when the direction is still unclear or the product needs a stronger design system.</p>
-          <span>Seven detailed case studies</span>
+          <p>Fintech, delivery, crypto, SaaS — most of them taken from an unclear brief to a system that shipped. Each case study shows the research that changed direction, the structure that made scale possible, and the trade-offs I would still defend in a review.</p>
+          <span>8 case studies · 2018–2026</span>
         </div>
       </header>
-      <aside className="dw-portfolio-filter" aria-label="Filter case studies">
-        <span>Selected year</span>
-        <label>
-          <span>Year</span>
-          <select value={selectedYear} onChange={(event) => setSelectedYear(event.target.value)}>
-            {years.map((year) => <option key={year}>{year}</option>)}
-          </select>
-        </label>
-        <small>{visibleProjects.length} of {projects.length} cases</small>
-      </aside>
+      <nav className="dw-portfolio-year-timeline" aria-label="Filter case studies by year">
+        {years.map((year) => (
+          <button
+            key={year}
+            type="button"
+            className={selectedYear === year ? "is-active" : undefined}
+            onClick={() => setSelectedYear(year)}
+          >
+            {year === "All years" ? "All" : year}
+          </button>
+        ))}
+      </nav>
       <div className="dw-portfolio-project-grid">
         {visibleProjects.map((project) => {
           const index = projects.indexOf(project);
           const intro = project.sections[0];
           const accent = projectAccents[project.project.slug];
-          const categories = intro.metadata?.find((item) => item.label.startsWith("Categories"))?.value;
-          const duration = intro.metadata?.find((item) => item.label.startsWith("Duration"))?.value;
+          const cardMeta = portfolioFilterMetadata[project.project.slug];
           return (
             <a
               className={`dw-portfolio-project-card card-${index + 1}`}
@@ -3165,15 +3311,32 @@ export function PortfolioIndexContent() {
                   <h2>{portfolioCardHeadlines[project.project.slug] || project.project.title}</h2>
                   <p>{intro.subtitle}</p>
                 </div>
-                <div className="dw-portfolio-card-meta"><span>{categories}</span><span>{duration}</span></div>
+                <div className="dw-portfolio-card-meta"><span>{cardMeta?.category}</span><span>{cardMeta?.year}</span></div>
               </div>
             </a>
           );
         })}
       </div>
-      <footer className="dw-portfolio-index-footer" data-portfolio-reveal>
-        <p>Need product direction, a design system, or a designer who can lead the work?</p>
-        <a href={isStorybook() ? "/?path=/story/mvp-pages--lets-talk" : "/am/lets-talk"} target={isStorybook() ? "_parent" : undefined}>Let’s talk</a>
+      <footer className="dw-work-next" data-portfolio-reveal>
+        <div className="dw-work-next-head">
+          <span>What happens next</span>
+          <h2>You’ve seen the work. Here’s how I take it on.</h2>
+        </div>
+        <div className="dw-work-next-modes">
+          {workEngagementModes.map((mode) => (
+            <button
+              className="dw-work-next-mode"
+              type="button"
+              key={mode.id}
+              onClick={() => openContactChat(mode.intent)}
+              data-cursor-label={mode.cursor}
+            >
+              <span className="dw-work-next-mode-label">{mode.label}</span>
+              <span className="dw-work-next-mode-body">{mode.body}</span>
+              <span className="dw-work-next-mode-go" aria-hidden="true">Start here &rarr;</span>
+            </button>
+          ))}
+        </div>
       </footer>
     </section>
   );
@@ -3181,15 +3344,18 @@ export function PortfolioIndexContent() {
 
 export function CaseStudyContent({ slug }: { slug: string }) {
   const containerRef = useRef<HTMLElement | null>(null);
-  const project = useMemo(() => projects.find((item) => item.project.slug === slug), [slug]);
+  const dataSlug = slug === "material-exchange-motion-pilot" ? "material-exchange" : slug;
+  const project = useMemo(() => projects.find((item) => item.project.slug === dataSlug), [dataSlug]);
   usePortfolioMotion(containerRef);
+  useDarkSectionFlags(containerRef);
+  useTextMotion(containerRef);
 
   if (!project) {
     return <section className="dw-case-not-found"><h1>Project not found.</h1><a href={portfolioHref()}>Back to selected work</a></section>;
   }
 
   return (
-    <article className={`dw-case-study dw-case-${slug}`} ref={containerRef}>
+    <article className={`dw-case-study dw-case-${dataSlug} dw-motion-pilot`} ref={containerRef}>
       {project.sections.map((section) => <ProjectSection project={project} section={section} key={section.id} />)}
     </article>
   );

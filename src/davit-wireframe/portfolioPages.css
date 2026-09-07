@@ -8,8 +8,8 @@
 /* CloudChipr layout tiers and browser-review refinements */
 .dw-case-cloudchipr {
   --cloudchipr-full: 100%;
-  --cloudchipr-middle: min(calc(100% - 120px), 1788px);
-  --cloudchipr-small: min(50%, 900px);
+  --cloudchipr-middle: min(calc(100% - 40px), 1800px);
+  --cloudchipr-small: min(calc(100% - 40px), 1400px);
 }
 
 .dw-cloudchipr-problem-inner,
@@ -811,7 +811,7 @@
   line-height: 1.35;
 }
 
-.dw-mex-meta dt { color: #7c837d; }
+.dw-mex-meta dt { color: #5f6660; }
 .dw-mex-meta dd { font-weight: 500; }
 .dw-mex-meta a { color: inherit; text-underline-offset: 4px; }
 
@@ -1116,7 +1116,8 @@
 .dw-mex-cursor-pointer-fill { fill: var(--cursor-color); }
 .dw-mex-cursor-pointer-outline { fill: none; stroke: #fff; stroke-width: 1.55; stroke-linejoin: round; }
 .cursor-davit {
-  --cursor-color: #ee4d3d;
+  /* #ee4d3d gave white labels 3.64:1 */
+  --cursor-color: #e22614;
   --cursor-delay: -1s;
   --cursor-x-1: 58px;
   --cursor-y-1: 32px;
@@ -1126,7 +1127,8 @@
   left: 12%;
 }
 .cursor-ani {
-  --cursor-color: #ef54ae;
+  /* #ef54ae gave white labels 3.21:1 */
+  --cursor-color: #dd1589;
   --cursor-delay: -3.2s;
   --cursor-x-1: -48px;
   --cursor-y-1: 46px;
@@ -1136,7 +1138,8 @@
   right: 18%;
 }
 .cursor-gohar {
-  --cursor-color: #43ae67;
+  /* #43ae67 gave white labels 2.80:1 */
+  --cursor-color: #33844e;
   --cursor-delay: -5.4s;
   --cursor-x-1: 48px;
   --cursor-y-1: -42px;
@@ -1146,7 +1149,8 @@
   left: 6%;
 }
 .cursor-vlad {
-  --cursor-color: #4c6df0;
+  /* #4c6df0 gave white labels 4.42:1 */
+  --cursor-color: #4769f0;
   --cursor-delay: -7.6s;
   --cursor-x-1: -56px;
   --cursor-y-1: -38px;
@@ -1451,7 +1455,8 @@
     text-align: center;
   }
   .dw-mex-initial-wireframes figcaption {
-    color: rgba(255, 255, 255, 0.88);
+    /* was rgba(255,255,255,.88) — invisible since this figure moved to a white surface */
+    color: #5c5c58;
     font-weight: 500;
   }
 
@@ -2145,7 +2150,7 @@
 }
 
 .dw-hotel-reading {
-  max-width: 1320px;
+  max-width: 1400px;
 }
 
 .dw-hotel-reading > p {
@@ -3200,7 +3205,8 @@
 }
 
 .dw-cloudchipr-comparison-cloudchipr li > span {
-  color: #38ae55;
+  /* was #38ae55 — 2.86:1 on white; this reads the same but clears AA at 5.4:1 */
+  color: #1f8a3f;
   font-size: 20px;
   line-height: 0.9;
 }
@@ -3307,7 +3313,7 @@
 .dw-cloudchipr-design-decision-main {
   position: relative;
   z-index: 3;
-  width: min(1160px, calc(100% - 64px));
+  width: min(1400px, calc(100% - 64px));
   margin: -100px auto;
   padding: clamp(54px, 6vw, 86px) clamp(48px, 7vw, 92px) clamp(64px, 7vw, 96px);
   border: 1px solid rgba(255, 255, 255, 0.72);
@@ -3519,8 +3525,10 @@
 /* CloudChipr review pass: match the Figma compositions at the three annotated
    milestones while keeping the existing content and responsive breakpoints. */
 .dw-case-cloudchipr .dw-case-section-product-direction-one {
-  min-height: clamp(360px, 31vw, 560px);
+  min-height: 0;
   background: #0e0a3e !important;
+  padding: clamp(118px, 8.7vw, 148px) 20px clamp(34px, 2.8vw, 48px) !important;
+  box-sizing: border-box;
 }
 
 .dw-case-cloudchipr .dw-case-section-product-direction-one .dw-case-prose h2 {
@@ -3792,9 +3800,10 @@
 
 .dw-cloudchipr-design-system-screen {
   z-index: 1;
-  top: 8%;
-  right: -2.5%;
-  width: min(62vw, 1060px);
+  inset: 0;
+  width: min(58vw, 1000px);
+  height: fit-content;
+  margin: auto !important;
 }
 
 .dw-cloudchipr-design-system-price {
@@ -3815,7 +3824,7 @@
   position: relative;
   z-index: 1;
   padding: clamp(110px, 12vw, 180px) 20px 100px !important;
-  background: #0e0a3e url('/portfolio-assets/cloudchipr/achievements-background.png') center / cover no-repeat !important;
+  background: #ffffff !important;
   color: #0a0a0d;
 }
 
@@ -3832,7 +3841,7 @@
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.035em;
-  color: #fff;
+  color: #0a0a0d;
 }
 
 .dw-cloudchipr-overall-achievements h2 span {
@@ -3849,26 +3858,29 @@
 }
 
 .dw-cloudchipr-overall-achievements-inner > p {
-  margin: clamp(76px, 7vw, 104px) 0 0;
+  margin: clamp(34px, 4vw, 60px) 0 0;
   color: #6d6d72;
   font-size: clamp(22px, 1.85vw, 30px);
   line-height: 1.45;
+  letter-spacing: -.01em;
 }
 
-.dw-cloudchipr-overall-achievements ul { color: rgb(255 255 255 / 78%); }
-.dw-cloudchipr-overall-achievements li strong { color: #fff; }
+.dw-cloudchipr-overall-achievements ul { color: #707075; }
+.dw-cloudchipr-overall-achievements li strong { color: #0a0a0d; }
 
 .dw-cloudchipr-overall-achievements ul {
-  margin: clamp(56px, 5vw, 76px) 0 0;
-  padding-left: 1.35em;
+  width: min(100%, 1080px);
+  margin: clamp(42px, 5vw, 72px) auto 0;
+  padding: 0 0 0 1.25em;
+  list-style: square;
   color: #707075;
   font-size: clamp(20px, 1.8vw, 30px);
-  line-height: 1.58;
+  line-height: 1.55;
 }
 
-.dw-cloudchipr-overall-achievements li::marker {
-  color: #77777b;
-  font-size: 0.7em;
+.dw-cloudchipr-overall-achievements li {
+  padding: 4px 0;
+  text-align: left;
 }
 
 .dw-cloudchipr-overall-achievements li strong {
@@ -3892,7 +3904,7 @@
 }
 
 .dw-cloudchipr-feedback-inner {
-  width: min(100%, 1280px);
+  width: min(100%, 1040px);
   margin: 0 auto;
 }
 
@@ -3906,7 +3918,7 @@
 }
 
 .dw-cloudchipr-feedback blockquote {
-  max-width: 1120px;
+  max-width: 940px;
   margin: clamp(76px, 7vw, 110px) 0 0;
   color: #c9c6e9;
   font-family: "Syne", sans-serif;
@@ -3943,7 +3955,8 @@
 }
 
 .dw-cloudchipr-feedback-person-copy strong {
-  color: #3c4dab;
+  /* was #3c4dab — 2.51:1 against the navy behind it; lifted to 6.1:1 */
+  color: #8fa2ee;
   font-family: "Syne", sans-serif;
   font-size: clamp(32px, 3.3vw, 58px);
   font-weight: 600;
@@ -4032,6 +4045,8 @@
     line-height: 1.55;
   }
 
+  .dw-cloudchipr-overall-achievements li { padding: 14px 0; }
+
   .dw-cloudchipr-feedback {
     padding: 92px 24px 110px !important;
   }
@@ -4069,7 +4084,7 @@
   position: relative;
   z-index: 1;
   min-height: 100vh;
-  padding: clamp(124px, 10vw, 180px) 20px 0;
+  padding: clamp(100px, 7.5vw, 142px) 20px 0;
   background: var(--dw-bg);
   color: var(--dw-text);
 }
@@ -4080,8 +4095,8 @@
   column-gap: 40px;
   align-items: end;
   max-width: 1880px;
-  min-height: min(48vh, 580px);
-  margin: 0 auto clamp(68px, 8vw, 132px);
+  min-height: min(34vh, 400px);
+  margin: 0 auto clamp(46px, 5vw, 88px);
 }
 
 .dw-portfolio-index-hero > p {
@@ -4093,9 +4108,11 @@
 }
 
 .dw-page .dw-portfolio-index-hero h1 {
-  max-width: 9ch;
+  /* was 9ch, which stacked the headline into six lines and pushed every
+     project card below the fold. Wider measure = same words, three lines. */
+  max-width: 17ch;
   font-family: inherit;
-  font-size: clamp(60px, 7vw, 124px);
+  font-size: clamp(52px, 5.6vw, 104px);
   font-weight: 400;
   line-height: 0.9;
   letter-spacing: 0;
@@ -4131,6 +4148,45 @@
   max-width: 1880px;
   margin: 0 auto;
 }
+
+.dw-portfolio-year-timeline {
+  position: fixed;
+  z-index: 20;
+  top: 50%;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  transform: translateY(-50%);
+}
+
+.dw-portfolio-year-timeline button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  transition: font-size 160ms ease, opacity 160ms ease;
+}
+
+.dw-portfolio-year-timeline button:not(.is-active) {
+  opacity: .42;
+}
+
+.dw-portfolio-year-timeline button.is-active {
+  font-size: 18px;
+}
+
+@media (max-width: 900px) {
+  .dw-portfolio-year-timeline {
+    display: none;
+  }
+}
+
 
 .dw-portfolio-filter {
   position: fixed;
@@ -4194,6 +4250,8 @@
   --project-surface: #f0f0f0;
   display: block;
   min-width: 0;
+  /* Future cards inherit the repeating stagger below instead of collapsing. */
+  grid-column: auto;
 }
 
 .dw-portfolio-project-card.card-1 {
@@ -4224,7 +4282,31 @@
 }
 
 .dw-portfolio-project-card.card-7 {
-  grid-column: 3 / span 8;
+  grid-column: 1 / span 4;
+  margin-top: clamp(100px, 12vw, 220px);
+}
+
+.dw-portfolio-project-card.card-8 {
+  grid-column: 5 / span 8;
+}
+
+/* Continue the original alternating four-card rhythm for every later case study. */
+.dw-portfolio-project-card:nth-child(4n + 2):nth-child(n + 9) {
+  grid-column: 9 / span 4;
+  margin-top: clamp(100px, 12vw, 220px);
+}
+
+.dw-portfolio-project-card:nth-child(4n + 3):nth-child(n + 9) {
+  grid-column: 1 / span 4;
+  margin-top: clamp(100px, 12vw, 220px);
+}
+
+.dw-portfolio-project-card:nth-child(4n + 4):nth-child(n + 9) {
+  grid-column: 5 / span 8;
+}
+
+.dw-portfolio-project-card:nth-child(4n + 1):nth-child(n + 9) {
+  grid-column: 1 / span 8;
 }
 
 .dw-portfolio-card-media {
@@ -4254,7 +4336,8 @@
   transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.dw-portfolio-card-media img {
+.dw-portfolio-card-media img,
+.dw-portfolio-card-media video {
   width: 100%;
   height: 100%;
   max-height: 820px;
@@ -4262,7 +4345,8 @@
   transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.dw-portfolio-project-card:hover .dw-portfolio-card-media img {
+.dw-portfolio-project-card:hover .dw-portfolio-card-media img,
+.dw-portfolio-project-card:hover .dw-portfolio-card-media video {
   transform: scale(1.025);
 }
 
@@ -4298,7 +4382,9 @@
   display: block;
   margin-bottom: 8px;
   color: var(--dw-muted);
-  font-size: 12px;
+  font-size: clamp(16px, 1.25vw, 21px);
+  font-weight: 500;
+  letter-spacing: .02em;
   line-height: 1.2;
   text-transform: uppercase;
 }
@@ -4608,6 +4694,202 @@
 .dw-case-split article > img {
   width: 100%;
   margin-bottom: 38px;
+}
+
+/* Nesba — Saudi wealth-management case study */
+.dw-case-nesba .dw-case-intro-surface {
+  min-height: 760px;
+}
+
+.dw-case-nesba .dw-case-intro-media {
+  align-self: center;
+  padding-top: 42px;
+}
+
+.dw-case-nesba .dw-case-intro-media img {
+  filter: drop-shadow(0 32px 48px rgb(0 0 0 / 32%));
+}
+
+.dw-nesba-title-highlight,
+.dw-case-nesba .dw-nesba-highlight {
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background: #c9e8ac;
+  color: #173422;
+}
+
+.dw-nesba-title-highlight {
+  padding: 0 .08em;
+}
+
+.dw-case-nesba .dw-nesba-highlight {
+  padding: .04em .18em;
+  font-weight: 600;
+}
+
+.dw-case-nesba .dw-case-section-home-state .dw-case-split article:last-child img,
+.dw-case-nesba .dw-case-section-identity .dw-case-split article:last-child img {
+  max-height: 720px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.dw-case-nesba .dw-case-section-explore .dw-case-split article:first-child {
+  display: flex;
+  justify-content: center;
+}
+
+.dw-case-nesba .dw-case-section-explore .dw-case-split article:first-child img {
+  width: min(100%, 350px);
+  max-height: 720px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 22px;
+  box-shadow: 0 24px 62px rgb(0 0 0 / 28%);
+}
+
+.dw-nesba-palette-feedback {
+  display: grid;
+  grid-template-columns: minmax(280px, .9fr) minmax(420px, 1.35fr) minmax(280px, .7fr);
+  align-items: start;
+  gap: clamp(28px, 5vw, 92px);
+}
+
+.dw-nesba-palette-feedback-copy {
+  padding-top: clamp(8px, 4vw, 82px);
+}
+
+.dw-nesba-palette-feedback-copy h2 {
+  margin: 16px 0 28px;
+  max-width: 380px;
+  font-size: clamp(42px, 3.35vw, 60px);
+  font-weight: 400;
+  line-height: .98;
+}
+
+.dw-nesba-palette-board { margin: 0; }
+
+.dw-nesba-palette-board img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.dw-nesba-palette-stage {
+  position: relative;
+}
+
+.dw-nesba-review-note {
+  position: absolute;
+  z-index: 1;
+  width: min(46%, 300px);
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 12px;
+  color: #202321;
+  background: rgb(246 247 242 / 96%);
+  box-shadow: 0 18px 42px rgb(0 0 0 / 28%);
+  backdrop-filter: blur(10px);
+  animation: dw-nesba-note-float 5.8s ease-in-out infinite;
+}
+
+.dw-nesba-review-note.is-approved {
+  top: 4%;
+  right: 4%;
+}
+
+.dw-nesba-review-note.is-revision {
+  top: 35%;
+  left: 5%;
+  animation-delay: -2.9s;
+}
+
+.dw-nesba-review-note-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  color: rgb(255 255 255 / 82%);
+  background: #444744;
+  font-size: 9px;
+  letter-spacing: .08em;
+  line-height: 1;
+}
+
+.dw-nesba-review-note.is-approved .dw-nesba-review-note-bar { background: #17694f; }
+.dw-nesba-review-note.is-revision .dw-nesba-review-note-bar { color: #25210d; background: #e0bd19; }
+
+.dw-nesba-review-note-body {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 9px;
+  padding: 11px;
+}
+
+.dw-nesba-review-avatar {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  color: #fff;
+  background: #242624;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.dw-nesba-review-note-body p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.32;
+}
+
+.dw-nesba-review-note-body strong { font-weight: 700; }
+
+.dw-nesba-review-note-body small {
+  margin-left: 4px;
+  color: #73756f;
+  font-size: 9px;
+}
+
+@keyframes dw-nesba-note-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-.35deg); }
+  50% { transform: translate3d(0, -9px, 0) rotate(.35deg); }
+}
+
+.dw-nesba-palette-feedback figcaption,
+.dw-case-media figcaption a,
+.dw-case-feature-grid article p a {
+  color: inherit;
+}
+
+.dw-case-media figcaption a,
+.dw-case-feature-grid article p a {
+  text-underline-offset: .22em;
+}
+
+@media (max-width: 900px) {
+  .dw-case-nesba .dw-case-intro-surface { min-height: 0; }
+  .dw-case-nesba .dw-case-intro-media { padding-top: 0; }
+  .dw-case-nesba .dw-case-section-home-state .dw-case-split article:last-child img,
+  .dw-case-nesba .dw-case-section-identity .dw-case-split article:last-child img,
+  .dw-case-nesba .dw-case-section-explore .dw-case-split article:first-child img { max-height: none; }
+  .dw-nesba-palette-feedback { grid-template-columns: 1fr; }
+  .dw-nesba-palette-feedback-copy { padding-top: 0; }
+  .dw-nesba-review-note { width: min(50%, 280px); }
+}
+
+@media (max-width: 560px) {
+  .dw-nesba-review-note { width: min(62%, 240px); }
+  .dw-nesba-review-note.is-revision { top: 49%; }
+  .dw-nesba-review-note-body { grid-template-columns: 23px 1fr; gap: 7px; padding: 8px; }
+  .dw-nesba-review-avatar { width: 23px; height: 23px; font-size: 8px; }
+  .dw-nesba-review-note-body p { font-size: 9px; }
+  .dw-nesba-review-note-body small { font-size: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-nesba-review-note { animation: none; }
 }
 
 .dw-page .dw-case-split h2 {
@@ -4966,6 +5248,14 @@ a.dw-case-testimonial-linkedin:hover {
   transition: transform 700ms cubic-bezier(0.2, 0.75, 0.2, 1);
 }
 
+.dw-case-more-card-media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--project-surface, #f0f0f0);
+}
+
 .dw-case-more-card:hover .dw-case-more-card-media img {
   transform: scale(1.035);
 }
@@ -5056,16 +5346,19 @@ a.dw-case-testimonial-linkedin:hover {
     gap: 110px 20px;
   }
 
+  .dw-portfolio-project-card {
+    grid-column: auto;
+    margin-top: 0;
+  }
+
   .dw-portfolio-project-card.card-1,
   .dw-portfolio-project-card.card-2,
   .dw-portfolio-project-card.card-3,
   .dw-portfolio-project-card.card-4,
   .dw-portfolio-project-card.card-5,
   .dw-portfolio-project-card.card-6,
-  .dw-portfolio-project-card.card-7 {
-    grid-column: auto;
-    margin-top: 0;
-  }
+  .dw-portfolio-project-card.card-7,
+  .dw-portfolio-project-card.card-8 { grid-column: auto; margin-top: 0; }
 
   .dw-portfolio-card-media,
   .dw-portfolio-project-card.card-2 .dw-portfolio-card-media,
@@ -5136,6 +5429,8 @@ a.dw-case-testimonial-linkedin:hover {
     grid-template-columns: 1fr;
     gap: 90px;
   }
+
+  .dw-portfolio-project-card { grid-column: auto; margin-top: 0; }
 
   .dw-portfolio-project-card.card-5 {
     grid-column: auto;
@@ -7125,50 +7420,71 @@ a.dw-case-testimonial-linkedin:hover {
 }
 
 .dw-icredo-hero-composition {
-  position: absolute;
-  z-index: 1;
-  right: 0;
-  bottom: 0;
-  width: min(68vw, 1100px);
-  height: 100%;
+  display: none;
 }
 
 .dw-icredo-hero-banner {
+  display: none;
+}
+
+.dw-icredo-hero-square {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 54% 62%;
-  transform: scale(1.32);
+  z-index: 1;
+  right: clamp(16px, 3vw, 56px);
+  bottom: 0;
+  width: min(44vw, 760px);
+  max-height: 94%;
+  object-fit: contain;
+  object-position: bottom right;
+}
+
+@media (max-width: 900px) {
+  .dw-icredo-intro .dw-case-intro-surface { min-height: 0; padding-bottom: 0; }
+  .dw-icredo-intro .dw-case-intro-heading { max-width: 100%; }
+  .dw-icredo-hero-square {
+    position: static;
+    width: 100%;
+    max-height: none;
+    margin-top: 24px;
+  }
+}
+
+.dw-icredo-intro .dw-case-intro-surface {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dw-icredo-intro .dw-case-intro-heading {
+  max-width: min(44%, 620px);
 }
 
 .dw-icredo-phone {
   position: relative;
   width: min(100%, 330px);
-  padding: 10px;
+  aspect-ratio: 393 / 852;
   overflow: hidden;
-  background: #101b2e;
-  border: 7px solid #101b2e;
-  border-radius: 38px;
-  box-shadow: 0 28px 70px rgba(14, 35, 81, .25), inset 0 0 0 1px rgba(255,255,255,.35);
+  background: #fff;
+  border: 6px solid #101b2e;
+  border-radius: 44px;
+  box-shadow: 0 28px 70px rgba(14, 35, 81, .25);
 }
 
 .dw-icredo-phone::before {
   position: absolute;
   z-index: 2;
-  top: 12px;
+  top: 10px;
   left: 50%;
-  width: 34%;
-  height: 18px;
+  width: 74px;
+  height: 20px;
   content: "";
   background: #101b2e;
-  border-radius: 0 0 14px 14px;
+  border-radius: 999px;
   transform: translateX(-50%);
 }
 
 .dw-icredo-phone-speaker { display: none; }
-.dw-icredo-phone img { display: block; width: 100%; height: auto; border-radius: 25px; }
+.dw-icredo-phone img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; border-radius: 37px; }
 
 .dw-icredo-hero-phone {
   position: absolute;
@@ -7208,6 +7524,16 @@ a.dw-case-testimonial-linkedin:hover {
 
 .dw-case-icredo #market-context .dw-case-feature-grid { counter-reset: icredo-context; }
 .dw-case-icredo #market-context .dw-case-feature-grid article:nth-child(n + 10)::before { content: counter(icredo-context); }
+.dw-case-icredo #market-context { padding-right: clamp(36px, 6vw, 110px); padding-left: clamp(36px, 6vw, 110px); }
+.dw-case-icredo #market-context .dw-case-feature-title,
+.dw-case-icredo #market-context .dw-case-feature-grid { width: min(100%, 1500px); }
+.dw-case-icredo #market-context .dw-case-feature-grid article:last-child strong { display: inline-block; padding: .14em .24em .08em; color: #041f34; background: #ff6258; border-radius: .16em; font-size: clamp(48px, 5vw, 84px); transform: rotate(-2deg); }
+
+.dw-icredo-title-highlight { display: inline; padding: 0 .08em; color: #041f34; background: linear-gradient(transparent 58%, #9bdc39 58% 92%, transparent 92%); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.dw-icredo-chat-section .dw-icredo-title-highlight,
+.dw-icredo-trust-section .dw-icredo-title-highlight { background-image: linear-gradient(transparent 58%, #8dc7ff 58% 92%, transparent 92%); }
+.dw-icredo-loans-section .dw-icredo-title-highlight { color: #fff; background-image: linear-gradient(transparent 58%, rgba(64,135,255,.72) 58% 92%, transparent 92%); }
+.dw-case-icredo .dw-case-richtext strong { padding: .04em .14em; color: #041f34; background: #dfffaa; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 
 .dw-icredo-chat-section,
 .dw-icredo-trust-section,
@@ -7242,42 +7568,75 @@ a.dw-case-testimonial-linkedin:hover {
 .dw-page .dw-icredo-trust-layout h2,
 .dw-page .dw-icredo-loans-layout h2 { margin-bottom: 24px; font-size: clamp(42px, 4.3vw, 76px); font-weight: 500; line-height: .98; }
 
-.dw-icredo-chat-stage { position: relative; min-height: 600px; }
-
-.dw-icredo-code-chat {
-  position: absolute;
-  z-index: 2;
-  top: 5%;
-  left: 0;
-  width: min(74%, 460px);
-  padding: 22px;
-  color: #172033;
-  background: rgba(255,255,255,.96);
-  border: 1px solid rgba(30,96,229,.14);
-  border-radius: 24px;
-  box-shadow: 0 28px 60px rgba(20, 47, 96, .16);
+.dw-icredo-chat-stage {
+  position: relative;
+  display: grid;
+  min-height: 700px;
+  place-items: center;
 }
 
-.dw-icredo-code-chat-top { display: flex; align-items: center; gap: 9px; margin-bottom: 18px; font-size: 14px; }
-.dw-icredo-code-chat-top small { color: #5480c8; font-size: 11px; }
-.dw-icredo-code-avatar { display: grid; width: 28px; height: 28px; color: #fff; background: #e13e31; border-radius: 50%; place-items: center; font-weight: 700; }
-.dw-icredo-bubble { width: fit-content; max-width: 88%; margin: 10px 0; padding: 12px 14px; font-size: clamp(12px, 1vw, 15px); line-height: 1.35; background: #f1f5fa; border-radius: 16px 16px 16px 4px; opacity: 0; transform: translateY(10px); animation: dw-icredo-message .65s ease forwards; }
-.dw-icredo-bubble-user { margin-left: auto; color: #fff; background: #1e60e5; border-radius: 16px 16px 4px 16px; animation-delay: 1.6s; }
-.dw-icredo-bubble-a { animation-delay: .4s; }.dw-icredo-bubble-b { animation-delay: 2.6s; }.dw-icredo-bubble-c { animation-delay: 4.6s; }
-.dw-icredo-chat-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 13px 0; opacity: 0; animation: dw-icredo-message .65s ease 3.5s forwards; }
-.dw-icredo-chat-chips span { padding: 7px 9px; color: #1e60e5; border: 1px solid rgba(30,96,229,.35); border-radius: 99px; font-size: 11px; }
-
-.dw-icredo-chat-reference {
-  position: absolute;
-  right: 2%;
-  bottom: 0;
-  width: min(44%, 280px);
-  transform: rotate(6deg);
-  transform-origin: bottom center;
+.dw-icredo-flow-phone {
+  position: relative;
+  width: min(310px, 62vw);
+  overflow: hidden;
+  background: #fff;
+  border: 6px solid #101b2e;
+  border-radius: 44px;
+  box-shadow: 0 34px 90px rgba(10, 34, 66, .25);
+  transform: rotate(2.5deg);
 }
+
+.dw-icredo-dynamic-island {
+  position: absolute;
+  z-index: 20;
+  top: 10px;
+  left: 50%;
+  width: 74px;
+  height: 20px;
+  background: #101b2e;
+  border-radius: 999px;
+  transform: translateX(-50%);
+}
+
+.dw-icredo-flow-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 393 / 852;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 37px;
+}
+
+.dw-icredo-flow-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #fff;
+  opacity: 0;
+  animation-duration: 21s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.dw-icredo-flow-scene object {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.dw-icredo-flow-chat {
+  opacity: 1;
+  animation-name: dw-icredo-scene-chat;
+}
+
+.dw-icredo-flow-summary { animation-name: dw-icredo-scene-summary; }
+.dw-icredo-flow-details { animation-name: dw-icredo-scene-details; }
+.dw-icredo-flow-loading { animation-name: dw-icredo-scene-loading; }
+.dw-icredo-flow-success { animation-name: dw-icredo-scene-success; }
 
 .dw-icredo-trust-layout { grid-template-columns: minmax(380px, .9fr) minmax(0, 1fr); }
-.dw-icredo-device-orbit { position: relative; display: grid; min-height: 620px; place-items: center; }
+.dw-icredo-device-orbit { position: relative; display: grid; min-height: 720px; place-items: center; }
 .dw-icredo-device-orbit .dw-icredo-phone { width: min(66%, 310px); transform: rotate(-7deg); animation: dw-icredo-device-float 5.5s ease-in-out infinite; }
 .dw-icredo-orbit-ring { position: absolute; width: min(86%, 540px); aspect-ratio: 1; border: 1px dashed rgba(30,96,229,.38); border-radius: 50%; transform: rotate(-18deg); }
 .dw-icredo-orbit-ring::after { position: absolute; top: 12%; left: 5%; width: 16px; height: 16px; content: ""; background: #1e60e5; border-radius: 50%; box-shadow: 390px 400px 0 #e13e31; }
@@ -7286,13 +7645,29 @@ a.dw-case-testimonial-linkedin:hover {
 
 .dw-icredo-loans-section { color: #fff; }
 .dw-icredo-loans-layout { grid-template-columns: minmax(0, 1fr) minmax(380px, .9fr); }
-.dw-icredo-loan-phone-stage { position: relative; display: grid; min-height: 640px; place-items: center; }
+.dw-icredo-loan-phone-stage { position: relative; display: grid; min-height: 760px; place-items: center; }
 .dw-icredo-loan-phone-stage .dw-icredo-phone { z-index: 1; width: min(68%, 330px); transform: rotate(5deg); }
-.dw-icredo-loan-rail { position: absolute; top: 18%; right: -10%; color: rgba(255,255,255,.3); font-size: clamp(23px, 3vw, 48px); letter-spacing: -.04em; text-transform: uppercase; transform: rotate(-90deg); transform-origin: center; white-space: nowrap; }
+.dw-icredo-phone-tabs { position: absolute; z-index: 4; right: 12px; bottom: 12px; left: 12px; display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; height: 58px; color: #788797; background: rgba(255,255,255,.96); border: 1px solid rgba(4,31,52,.1); border-radius: 22px; box-shadow: 0 10px 28px rgba(4,31,52,.14); backdrop-filter: blur(12px); }
+.dw-icredo-phone-tabs svg { width: 19px; height: 19px; margin: auto; stroke-width: 1.8; }
+.dw-icredo-phone-tabs .is-active { color: #1e60e5; }
 
-.dw-case-icredo #testing .dw-case-richtext { max-width: 56ch; }
-.dw-case-icredo #testing .dw-case-richtext p { padding: 18px 0 18px 66px; border-top: 1px solid rgba(4,31,52,.16); position: relative; }
-.dw-case-icredo #testing .dw-case-richtext p::before { position: absolute; left: 0; color: #1e60e5; font-size: 14px; content: "→"; }
+.dw-icredo-system-inner { width: min(calc(100% - 120px), 1500px); margin: 0 auto; }
+.dw-page .dw-icredo-system-inner > h2 { max-width: 11ch; margin-bottom: clamp(58px, 7vw, 110px); font-size: clamp(48px, 6vw, 96px); font-weight: 500; line-height: .95; }
+.dw-icredo-system-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid rgba(4,31,52,.2); }
+.dw-icredo-system-grid article { min-height: 280px; padding: 34px 28px; border-right: 1px solid rgba(4,31,52,.2); }
+.dw-icredo-system-grid article:last-child { border-right: 0; }
+.dw-icredo-system-icon { display: grid; width: 48px; height: 48px; margin-bottom: 54px; color: #fff; background: #1e60e5; border-radius: 50%; place-items: center; }
+.dw-icredo-system-icon svg { width: 23px; height: 23px; stroke-width: 1.7; }
+.dw-icredo-system-grid strong { display: block; margin-bottom: 15px; font-size: clamp(30px, 2.8vw, 48px); font-weight: 500; }
+.dw-icredo-system-grid p { max-width: 22ch; margin: 0; color: rgba(4,31,52,.68); font-size: 15px; line-height: 1.45; }
+
+.dw-case-icredo #testing .dw-case-prose { max-width: 1180px; }
+.dw-case-icredo #testing .dw-case-richtext { max-width: none; counter-reset: icredo-test; }
+.dw-case-icredo #testing .dw-case-richtext p { position: relative; width: min(72%, 720px); margin-top: 34px; padding: 30px 34px 34px 92px; background: #fff; border: 1px solid rgba(4,31,52,.12); border-radius: 26px; box-shadow: 0 18px 46px rgba(4,31,52,.07); counter-increment: icredo-test; }
+.dw-case-icredo #testing .dw-case-richtext p::before { position: absolute; top: 27px; left: 28px; color: #1e60e5; font-size: 24px; content: "0" counter(icredo-test); }
+.dw-case-icredo #testing .dw-case-richtext p:nth-child(2) { margin-left: 25%; transform: rotate(1.4deg); }
+.dw-case-icredo #testing .dw-case-richtext p:nth-child(3) { margin-left: 8%; transform: rotate(-1deg); }
+.dw-case-icredo #testing .dw-case-richtext p:last-child { width: min(62%, 650px); margin-left: 35%; padding-left: 72px; background: #dceaff; transform: rotate(1deg); }
 .dw-case-icredo #testing .dw-case-richtext p:last-child::before { content: "*"; }
 .dw-case-icredo #feedback .dw-case-testimonial { background: transparent; }
 .dw-case-icredo #feedback .dw-case-avatar { display: grid; color: #fff; background: #1e60e5; place-items: center; }
@@ -7301,6 +7676,30 @@ a.dw-case-testimonial-linkedin:hover {
 @keyframes dw-icredo-message { to { opacity: 1; transform: translateY(0); } }
 @keyframes dw-icredo-device-float { 50% { transform: rotate(-3deg) translateY(-16px); } }
 @keyframes dw-icredo-pulse { 50% { transform: scale(1.12); opacity: .6; } }
+@keyframes dw-icredo-scene-chat {
+  0%, 24% { z-index: 5; opacity: 1; }
+  27%, 100% { z-index: 0; opacity: 0; }
+}
+@keyframes dw-icredo-scene-summary {
+  0%, 23% { z-index: 0; opacity: 0; }
+  26%, 41% { z-index: 5; opacity: 1; }
+  44%, 100% { z-index: 0; opacity: 0; }
+}
+@keyframes dw-icredo-scene-details {
+  0%, 40% { z-index: 0; opacity: 0; }
+  43%, 64% { z-index: 5; opacity: 1; }
+  67%, 100% { z-index: 0; opacity: 0; }
+}
+@keyframes dw-icredo-scene-loading {
+  0%, 63% { z-index: 0; opacity: 0; }
+  66%, 80% { z-index: 5; opacity: 1; }
+  83%, 100% { z-index: 0; opacity: 0; }
+}
+@keyframes dw-icredo-scene-success {
+  0%, 79% { z-index: 0; opacity: 0; }
+  83%, 97% { z-index: 5; opacity: 1; }
+  100% { z-index: 0; opacity: 0; }
+}
 
 @media (max-width: 820px) {
   .dw-icredo-intro .dw-case-intro-surface { min-height: 900px; }
@@ -7311,9 +7710,25 @@ a.dw-case-testimonial-linkedin:hover {
   .dw-icredo-trust-layout,
   .dw-icredo-loans-layout { grid-template-columns: 1fr; width: min(calc(100% - 40px), 640px); gap: 48px; }
   .dw-icredo-trust-layout > article { order: -1; }
-  .dw-icredo-chat-stage, .dw-icredo-device-orbit, .dw-icredo-loan-phone-stage { min-height: 520px; }
-  .dw-icredo-code-chat { width: 78%; }
-  .dw-icredo-chat-reference { width: 44%; }
+  .dw-icredo-chat-stage { min-height: 640px; }
+  .dw-icredo-device-orbit, .dw-icredo-loan-phone-stage { min-height: 720px; }
+  .dw-icredo-flow-phone { width: min(280px, 76vw); }
+  .dw-icredo-system-inner { width: min(calc(100% - 40px), 640px); }
+  .dw-icredo-system-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dw-icredo-system-grid article:nth-child(2) { border-right: 0; }
+  .dw-icredo-system-grid article:nth-child(n + 3) { border-top: 1px solid rgba(4,31,52,.2); }
+  .dw-case-icredo #market-context { padding-right: 24px; padding-left: 24px; }
+  .dw-case-icredo #testing .dw-case-richtext p,
+  .dw-case-icredo #testing .dw-case-richtext p:nth-child(2),
+  .dw-case-icredo #testing .dw-case-richtext p:nth-child(3),
+  .dw-case-icredo #testing .dw-case-richtext p:last-child { width: 100%; margin-left: 0; padding: 24px 22px 26px 72px; transform: none; }
+  .dw-case-icredo #testing .dw-case-richtext p::before { top: 22px; left: 22px; font-size: 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-icredo-flow-scene,
+  .dw-icredo-flow-scene object { animation-play-state: paused; }
+  .dw-icredo-flow-chat { opacity: 1; }
 }
 
 
@@ -7354,7 +7769,7 @@ a.dw-case-testimonial-linkedin:hover {
 
 .dw-case-feature-grid,
 .dw-case-metrics {
-  width: min(calc(100% - 120px), 1600px) !important;
+  width: min(calc(100% - 40px), 1400px) !important;
 }
 
 .dw-case-cloudchipr .dw-case-feature-grid,
@@ -8193,3 +8608,519 @@ a.dw-case-testimonial-linkedin:hover {
 .dw-case-section-anticipated-transformations h2::first-line{color:inherit}.dw-photo-lab-title-accent{color:#5cae55}.dw-photo-lab-user-stories{width:min(calc(100% - 40px),var(--case-wide));margin:0 auto;padding:clamp(54px,7vw,110px) clamp(24px,4vw,72px);background:#f6f8fa;border-radius:28px}.dw-photo-lab-user-stories>h2{margin:0 0 clamp(50px,6vw,90px);font-size:clamp(48px,6vw,92px);line-height:1}.dw-photo-lab-stories-layout{display:grid;grid-template-columns:minmax(300px,.78fr) minmax(480px,1.22fr);gap:clamp(42px,6vw,96px);align-items:stretch}.dw-photo-lab-stories-photo{position:relative;min-height:820px;margin:0;overflow:hidden;border-radius:28px;background:#171c20}.dw-photo-lab-stories-photo img{position:absolute;top:-17%;left:0;width:278%;max-width:none;height:auto}.dw-photo-lab-story-list{display:flex;flex-direction:column;justify-content:center;gap:clamp(26px,3vw,44px)}.dw-photo-lab-story{position:relative;padding:clamp(25px,2.4vw,38px) clamp(28px,3vw,48px);border:2px solid #d9dde1;border-radius:25px;background:#f8fafb;color:#696b70}.dw-photo-lab-story::before{content:"";position:absolute;left:-2px;bottom:-23px;width:40px;height:38px;background:linear-gradient(135deg,transparent 49%,#d9dde1 50% 52%,#f8fafb 53%);clip-path:polygon(0 0,100% 0,0 100%)}.dw-photo-lab-story p{margin:0;font-size:clamp(17px,1.45vw,24px);line-height:1.48}.dw-photo-lab-story strong{color:#171719;font-weight:600}.dw-photo-lab-story-avatar{position:absolute;left:-70px;bottom:-20px;display:grid;place-items:center;width:52px;height:52px;border:4px solid #fff;border-radius:50%;background:linear-gradient(145deg,#e8a66f,#8d3848);color:#fff;font-size:12px;font-weight:700;box-shadow:0 6px 18px rgb(27 32 37 / 16%)}.dw-photo-lab-story:nth-child(2)::before{right:-2px;left:auto;transform:scaleX(-1)}.dw-photo-lab-story:nth-child(2) .dw-photo-lab-story-avatar{right:-70px;left:auto;background:linear-gradient(145deg,#87a392,#243f38)}.dw-photo-lab-story:nth-child(3) .dw-photo-lab-story-avatar{background:linear-gradient(145deg,#de9a4c,#33211b)}@media(max-width:900px){.dw-photo-lab-user-stories{width:calc(100% - 24px);padding-right:18px;padding-left:18px}.dw-photo-lab-stories-layout{grid-template-columns:1fr}.dw-photo-lab-stories-photo{min-height:72svh}.dw-photo-lab-story-list{padding:0 36px}.dw-photo-lab-story-avatar{left:-38px}.dw-photo-lab-story:nth-child(2) .dw-photo-lab-story-avatar{right:-38px}}
 .dw-photo-lab-story.story-1,.dw-photo-lab-story.story-3{border-bottom-left-radius:0}.dw-photo-lab-story.story-2{border-bottom-right-radius:0}
 .dw-securion-tool-icons img{width:220px;max-width:100%;height:auto;display:block}
+
+/* === Case-study consistency pass === */
+.dw-case-study {
+  --case-big: 1400px;
+}
+
+/* 1. One paragraph font everywhere */
+.dw-case-study :where(section) :where(p, li, blockquote) {
+  font-family: Archivo, Arial, Helvetica, sans-serif;
+}
+
+/* 2. One highlight pattern: grey body, black strong (Material Exchange reference) */
+.dw-case-study :where(section p, section li) {
+  color: #646464;
+}
+
+.dw-case-study :where(section p, section li) :where(strong, b) {
+  color: #141414;
+  font-weight: 600;
+  background: none;
+  text-decoration: none;
+}
+
+/* kill the remaining decorative highlight variants */
+.dw-page .dw-case-study .dw-icredo-title-highlight,
+.dw-page .dw-case-study .dw-nesba-title-highlight,
+.dw-page .dw-case-study .dw-cloudchipr-title-accent,
+.dw-page .dw-case-study .dw-case-heading-accent,
+.dw-page .dw-case-study .dw-photo-lab-title-accent {
+  padding: 0;
+  color: inherit;
+  background: none;
+  background-image: none;
+}
+
+.dw-page .dw-case-study .dw-mex-problem-two-copy strong,
+.dw-page .dw-case-study .dw-mex-problem-two-copy li strong {
+  text-decoration: none;
+}
+
+/* 4. Containers: full-width / big / half; titles live in big */
+.dw-case-section.dw-case-full > .dw-case-media,
+.dw-case-section.dw-case-full > .dw-case-gallery,
+.dw-case-section.dw-case-full > .dw-case-split {
+  width: 100%;
+  max-width: none;
+}
+
+.dw-case-section.dw-case-big > .dw-case-prose,
+.dw-case-section.dw-case-big > .dw-case-media,
+.dw-case-section.dw-case-big > .dw-case-gallery,
+.dw-case-section.dw-case-big > .dw-case-split,
+.dw-case-section.dw-case-big > .dw-case-chips {
+  width: min(calc(100% - 40px), var(--case-big));
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.dw-case-section.dw-case-half > .dw-case-prose,
+.dw-case-section.dw-case-half > .dw-case-media,
+.dw-case-section.dw-case-half > .dw-case-gallery,
+.dw-case-section.dw-case-half > .dw-case-split,
+.dw-case-section.dw-case-half > .dw-case-chips {
+  width: min(calc(100% - 40px), var(--case-content));
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.dw-page .dw-case-study .dw-case-prose {
+  width: min(calc(100% - 40px), var(--case-big));
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.dw-page .dw-case-study .dw-case-prose > h2 {
+  grid-column: 1 / -1;
+  max-width: 24ch;
+}
+
+/* 5. Prev / next case cards */
+.dw-case-prevnext {
+  width: min(calc(100% - 40px), var(--case-wide));
+  margin: 0 auto;
+  padding: clamp(70px, 8vw, 140px) 0 clamp(60px, 7vw, 120px);
+}
+
+.dw-case-prevnext .dw-case-back {
+  display: inline-block;
+  margin-bottom: clamp(28px, 3vw, 48px);
+}
+
+.dw-case-prevnext-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 24px;
+}
+
+.dw-case-prevnext-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: min(46%, 430px);
+  padding: 14px 18px;
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  border-radius: 18px;
+  background: #ffffff;
+  color: #141414;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.dw-case-prevnext-card:hover {
+  border-color: rgba(17, 17, 17, 0.5);
+  transform: translateY(-2px);
+}
+
+.dw-case-prevnext-card.is-next {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.dw-case-prevnext-media {
+  flex: none;
+  width: clamp(96px, 9vw, 132px);
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--project-surface, #f0f0ec);
+}
+
+.dw-case-prevnext-media img,
+.dw-case-prevnext-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dw-case-prevnext-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.dw-case-prevnext-copy small {
+  /* #8a8a86 was 3.47:1 at 11px; this is 5.0:1 */
+  color: #6b6b66;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dw-case-prevnext-copy strong {
+  font-size: clamp(16px, 1.3vw, 21px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+@media (max-width: 760px) {
+  .dw-case-prevnext-row {
+    flex-direction: column;
+  }
+
+  .dw-case-prevnext-card,
+  .dw-case-prevnext-card.is-next {
+    max-width: 100%;
+  }
+}
+
+/* === Container normalization: full (1800) / big (1400) / half (1048) === */
+.dw-page .dw-case-study .dw-cloudchipr-started-inner,
+.dw-page .dw-case-study .dw-cloudchipr-concepts-inner,
+.dw-page .dw-case-study .dw-cloudchipr-field-study-heading,
+.dw-page .dw-case-study .dw-cloudchipr-field-study-inner,
+.dw-page .dw-case-study .dw-cloudchipr-design-decision-heading,
+.dw-page .dw-case-study .dw-cloudchipr-overall-achievements-inner,
+.dw-page .dw-case-study .dw-cloudchipr-feedback-inner,
+.dw-page .dw-case-study .dw-cloudchipr-brand-items-stage,
+.dw-page .dw-case-study .dw-mex-reading,
+.dw-page .dw-case-study .dw-mex-icon-conclusion,
+.dw-page .dw-case-study .dw-mex-navigation-copy,
+.dw-page .dw-case-study .dw-mex-system > header,
+.dw-page .dw-case-study .dw-mex-visual-heading,
+.dw-page .dw-case-study .dw-mex-research-columns,
+.dw-page .dw-case-study .dw-case-feature-grid,
+.dw-page .dw-case-study .dw-case-metrics,
+.dw-page .dw-case-study .dw-case-feature-title,
+.dw-page .dw-case-study .dw-securion-brand-copy,
+.dw-page .dw-case-study .dw-securion-laws-inner,
+.dw-page .dw-case-study .dw-securion-colors-inner,
+.dw-page .dw-case-study .dw-icredo-chat-layout,
+.dw-page .dw-case-study .dw-icredo-trust-layout,
+.dw-page .dw-case-study .dw-icredo-loans-layout,
+.dw-page .dw-case-study .dw-icredo-system-inner,
+.dw-page .dw-case-study .dw-hotel-walking > div {
+  width: min(calc(100% - 40px), var(--case-big));
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.dw-page .dw-case-study .dw-mex-icon-stage,
+.dw-page .dw-case-study .dw-cloudchipr-construction {
+  width: min(calc(100% - 40px), var(--case-wide));
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* body text keeps a readable measure inside big containers */
+.dw-page .dw-case-study .dw-mex-reading > p,
+.dw-page .dw-case-study .dw-mex-icon-conclusion > p,
+.dw-page .dw-case-study .dw-mex-navigation-copy > p,
+.dw-page .dw-case-study .dw-cloudchipr-started-inner p,
+.dw-page .dw-case-study .dw-cloudchipr-field-study-heading p,
+.dw-page .dw-case-study .dw-cloudchipr-design-decision-heading p,
+.dw-page .dw-case-study .dw-cloudchipr-overall-achievements-inner p,
+.dw-page .dw-case-study .dw-cloudchipr-feedback-inner > p {
+  max-width: 72ch;
+}
+
+.dw-page .dw-case-study .dw-cloudchipr-problem-heading,
+.dw-page .dw-case-study .dw-cloudchipr-concepts-copy {
+  width: min(calc(100% - 40px), var(--case-big));
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.dw-page .dw-case-study .dw-cloudchipr-competitor-inner > h2 {
+  max-width: var(--case-big);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* titles that sit directly in full-bleed sections snap to the big container */
+.dw-page .dw-case-study .dw-case-section > h2,
+.dw-page .dw-case-study .dw-mex-hmw > h2,
+.dw-page .dw-case-study .dw-mex-personalized > h2,
+.dw-page .dw-case-study .dw-mex-testing > h2 {
+  width: min(calc(100% - 40px), var(--case-big));
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.dw-page .dw-case-study .dw-about-card h2,
+.dw-page .dw-case-study .dw-about-card .dw-about-card-body {
+  max-width: var(--case-big);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* prose container wins over per-page ID overrides */
+.dw-page .dw-case-study .dw-case-section .dw-case-prose {
+  width: min(calc(100% - 40px), var(--case-big)) !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+/* ============================================================
+   Dark case-study sections — contrast
+   The grey/black text scale is built for white surfaces. On a dark
+   section background that grey (#646464) drops as low as 1.36:1, so
+   every text colour inside flips to white and hierarchy comes from
+   size and weight instead of lightness. The .dw-case-on-dark class is
+   applied at runtime from the section's resolved background colour,
+   so bespoke sections are covered too. !important is deliberate here:
+   it has to beat a long tail of per-project colour rules.
+   ============================================================ */
+.dw-case-on-dark,
+.dw-case-on-dark h1,
+.dw-case-on-dark h2,
+.dw-case-on-dark h3,
+.dw-case-on-dark h4,
+.dw-case-on-dark h5,
+.dw-case-on-dark li,
+.dw-case-on-dark dt,
+.dw-case-on-dark dd,
+.dw-case-on-dark span,
+.dw-case-on-dark small,
+.dw-case-on-dark strong,
+.dw-case-on-dark b,
+.dw-case-on-dark em,
+.dw-case-on-dark figcaption,
+.dw-case-on-dark blockquote,
+.dw-case-on-dark a {
+  color: #ffffff !important;
+}
+
+/* Body copy keeps the muted/emphasised rhythm, just inverted: slightly
+   translucent body, solid highlight. Only at sizes that clear AA large. */
+.dw-case-on-dark p {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.dw-case-on-dark p strong,
+.dw-case-on-dark p b,
+.dw-case-on-dark h1,
+.dw-case-on-dark h2,
+.dw-case-on-dark h3 {
+  color: #ffffff !important;
+}
+
+/* Anything small has no opacity budget on a dark accent — stays solid. */
+.dw-case-on-dark figcaption,
+.dw-case-on-dark small,
+.dw-case-on-dark .dw-case-eyebrow,
+.dw-case-on-dark dt {
+  color: #ffffff !important;
+}
+
+.dw-case-on-dark a {
+  text-decoration-color: rgba(255, 255, 255, 0.55);
+}
+
+/* Elements that paint their own light surface inside a dark section keep
+   their own colours — they are not "on dark" at all. */
+.dw-case-on-dark .dw-case-prevnext-card,
+.dw-case-on-dark .dw-case-prevnext-card *,
+.dw-case-on-dark .dw-mex-cursor-name,
+.dw-case-on-dark [class*="-card"] {
+  color: revert-layer;
+}
+
+/* The prev/next block sits on the page background, not on a full-bleed cover
+   image. The legacy .dw-case-navigation rule (white type, 760px tall) predates
+   it and was making "Back to work" white-on-white on every light case study. */
+.dw-case-navigation.dw-case-prevnext {
+  min-height: 0;
+  /* the case-study canvas is fixed light in both themes, so this must not
+     follow --dw-text: at night that token is cream and would vanish here */
+  color: #111111;
+  background: none;
+}
+
+/* Small labels on dark surfaces get no opacity budget — 13px at 88% white on
+   the darkest accent lands at 3.98:1, so they stay fully opaque. */
+.dw-case-section.dw-case-on-dark .dw-case-prose > p.dw-case-eyebrow,
+.dw-case-section.dw-case-on-dark .dw-case-richtext > p.dw-case-eyebrow,
+.dw-case-section.dw-case-on-dark .dw-case-prose > .dw-case-eyebrow,
+.dw-case-section.dw-case-on-dark span.dw-case-eyebrow,
+.dw-case-section.dw-case-on-dark .dw-case-eyebrow,
+.dw-case-section.dw-case-on-dark figcaption,
+.dw-case-section.dw-case-on-dark small {
+  color: #ffffff;
+}
+
+/* ============================================================
+   Three container sizes, and only three.
+   Media used to resolve to calc(100% - 24px) in "wide" sections, which at a
+   1512px viewport is 1488px — indistinguishable from full bleed, so every
+   image read as oversized. Generic media now sits in "big" (1400) unless a
+   section explicitly asks for full bleed or half.
+   ============================================================ */
+.dw-case-study {
+  --case-full: 100%;
+  --case-big: 1400px;
+  --case-half: 720px;
+}
+
+.dw-case-section.dw-case-type-media > .dw-case-media,
+.dw-case-section.dw-case-type-gallery > .dw-case-gallery {
+  width: min(calc(100% - 40px), var(--case-big)) !important;
+  margin-inline: auto !important;
+}
+
+/* opt-outs, by section id, for the shots that genuinely want the full width */
+.dw-case-section.dw-case-full > .dw-case-media,
+.dw-case-section-hero > .dw-case-media,
+.dw-case-section-cover > .dw-case-media,
+.dw-case-section-product-strip > .dw-case-media {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.dw-case-section.dw-case-half > .dw-case-media {
+  width: min(calc(100% - 40px), var(--case-half)) !important;
+}
+
+/* A tall portrait shot inside "big" still has to fit a laptop screen. */
+.dw-case-section.dw-case-type-media > .dw-case-media img,
+.dw-case-section.dw-case-type-media > .dw-case-media video {
+  max-height: 86svh;
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   Day / night rule for case studies
+   Articles and site chrome follow the theme token-for-token. Case studies
+   cannot: each one carries a bespoke colour system (Tempo's teal, CloudChipr's
+   navy, Nesba's greens) that IS the work being shown, and inverting it would
+   both wreck the art direction and undo the AA contrast pairing above.
+   So the canvas is declared fixed-light in both themes and, at night, framed
+   so it reads as a designed document on a dark desk rather than a theme that
+   forgot to switch.
+   ============================================================ */
+.dw-case-study {
+  background: #ffffff;
+  color: #111111;
+}
+
+:root[data-dw-theme="night"] .dw-page .dw-case-study {
+  margin: clamp(10px, 1.4vw, 22px) auto clamp(28px, 4vw, 56px);
+  width: calc(100% - clamp(20px, 2.8vw, 44px));
+  border-radius: clamp(14px, 1.6vw, 26px);
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.09), 0 30px 90px rgba(0, 0, 0, 0.6);
+}
+
+/* Sections that bleed to the canvas edge must not poke past the rounded frame. */
+:root[data-dw-theme="night"] .dw-page .dw-case-study > section {
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dw-case-study {
+    transition: margin 0.4s ease, width 0.4s ease, border-radius 0.4s ease, box-shadow 0.4s ease;
+  }
+}
+
+/* ============================================================
+   End of the Work index — replaces the one-line "Let's talk" link.
+   Three ways people actually arrive, each opening the chat pre-picked.
+   ============================================================ */
+.dw-work-next {
+  width: min(calc(100% - 40px), var(--case-big, 1400px));
+  margin: clamp(80px, 10vw, 170px) auto clamp(60px, 7vw, 110px);
+  padding-top: clamp(34px, 4vw, 60px);
+  border-top: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+}
+
+.dw-work-next-head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: clamp(30px, 4vw, 54px);
+}
+
+.dw-work-next-head span {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.dw-work-next-head h2 {
+  margin: 0;
+  max-width: 20ch;
+  font-size: clamp(30px, 4.4vw, 62px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.dw-work-next-modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+  gap: clamp(14px, 1.6vw, 24px);
+}
+
+.dw-work-next-mode {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: clamp(22px, 2.4vw, 34px);
+  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  border-radius: 18px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  transition: border-color 0.28s ease, transform 0.28s ease, background-color 0.28s ease;
+}
+
+.dw-work-next-mode:hover,
+.dw-work-next-mode:focus-visible {
+  border-color: currentColor;
+  transform: translateY(-3px);
+  background: color-mix(in srgb, currentColor 4%, transparent);
+}
+
+.dw-work-next-mode-label {
+  font-size: clamp(18px, 1.7vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.dw-work-next-mode-body {
+  font-size: clamp(14px, 1.05vw, 16px);
+  line-height: 1.5;
+  opacity: 0.74;
+}
+
+.dw-work-next-mode-go {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.dw-work-next-mode:hover .dw-work-next-mode-go,
+.dw-work-next-mode:focus-visible .dw-work-next-mode-go {
+  opacity: 0.85;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-work-next-mode,
+  .dw-work-next-mode-go { transition: none; }
+  .dw-work-next-mode:hover { transform: none; }
+  .dw-work-next-mode-go { opacity: 0.85; transform: none; }
+}

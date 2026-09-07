@@ -1,0 +1,77 @@
+/* Octagons flying out of depth behind the numbers. Transform and opacity only,
+   so the whole field stays on the compositor. */
+
+.dw-octagon-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 900px;
+  perspective-origin: 50% 50%;
+  --warp: 1;
+  /* This phase paints itself near-black in both themes, so the shapes carry
+     their own light colour rather than inheriting the page text colour. */
+  color: #f2efe6;
+}
+
+.dw-octagon {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: var(--size);
+  height: var(--size);
+  margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+  transform-style: preserve-3d;
+  animation: dwOctagonWarp var(--duration) linear infinite;
+  animation-delay: var(--delay);
+  /* scroll velocity shortens the cycle: the field rushes when the page does */
+  animation-duration: calc(var(--duration) / var(--warp));
+  will-change: transform, opacity;
+}
+
+.dw-octagon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.dw-octagon polygon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.1;
+  vector-effect: non-scaling-stroke;
+}
+
+@keyframes dwOctagonWarp {
+  0% {
+    transform: translateZ(-1500px) rotate(calc(var(--spin) * -1)) scale(0.85);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.26;
+  }
+  70% {
+    opacity: 0.15;
+  }
+  100% {
+    transform: translateZ(620px) rotate(var(--spin)) scale(1.15);
+    opacity: 0;
+  }
+}
+
+/* The numbers themselves must always sit in front. */
+.dw-home-unified-stats > *:not(.dw-octagon-field) {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 760px) {
+  /* fewer, smaller shapes on phones — and none through the middle */
+  .dw-octagon:nth-child(n + 9) { display: none; }
+  .dw-octagon { opacity: 0.7; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-octagon { animation: none; opacity: 0.05; transform: none; }
+}

@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { Observer } from "gsap/Observer";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MessageCircle, Play, X } from "lucide-react";
+import { ExternalLink, MessageCircle, Play, X } from "lucide-react";
 import {
   Shader,
   Dither,
@@ -27,6 +27,11 @@ import { CosmicDustBackground } from "./CosmicDustBackground";
 import { RapierGlassCubes } from "./HomeRapierGlassBackground";
 import { CaseStudyContent, PortfolioIndexContent } from "./PortfolioPages";
 import { PortfolioMusicToggle } from "./PortfolioMusicToggle";
+import { MediaCarousel } from "./MediaCarousel";
+import { ContactChat, openContactChat } from "./ContactChat";
+import { PullToContinue } from "./PullToContinue";
+import { OctagonField } from "./OctagonField";
+import { useTextMotion } from "./textMotion";
 import { siteData } from "./siteData";
 import { websiteContent } from "./websiteContent";
 
@@ -418,14 +423,81 @@ const fallbackPublicBlogCategories = [
 
 const publicArchiveEntries = [
   {
+    slug: "ux-storm-1-4",
+    year: "2025",
+    publishedAt: "2025-12-12",
+    type: "UX Storm 1.4 / product design",
+    title: "UX Storm 1.4 — the new era of product designers.",
+    description: "Three talks and three speed-discussion tables explored how product designers move from interface execution toward strategy, judgement, and intentional collaboration with AI.",
+    image: "/public-work/ux-storm-1-4/banner-main.jpg",
+    imageAlt: "UX Storm 1.4 poster - The New Era of Product Designers, six speakers, Dec 12 2025",
+    inlineImages: [
+      "/public-work/ux-storm-1-4/banner-roubina.jpg",
+      "/public-work/ux-storm-1-4/banner-stepan.jpg",
+      "/public-work/ux-storm-1-4/banner-mentors.jpg"
+    ],
+    inlineCaptions: [
+      "Roubina Tutunjian — From UX/UI to Product Designer: Building Strategic Muscles in the Age of AI",
+      "Stepan Sargsyan — AI as a Design Partner: When to Use It, When Not To",
+      "The three speed-discussion tables, as announced"
+    ],
+    galleryNote: "Captured by our audience",
+    gallery: [
+      "/public-work/ux-storm-1-4/audience-02.jpg",
+      "/public-work/ux-storm-1-4/audience-video-03.mp4",
+      "/public-work/ux-storm-1-4/audience-01.jpg",
+      "/public-work/ux-storm-1-4/planning-call.png",
+      "/public-work/ux-storm-1-4/audience-03.jpg",
+      "/public-work/ux-storm-1-4/audience-video-01.mp4",
+      "/public-work/ux-storm-1-4/audience-04.jpg",
+      "/public-work/ux-storm-1-4/audience-video-02.mp4",
+      "/public-work/ux-storm-1-4/audience-selfie.jpg",
+      "/public-work/ux-storm-1-4/banner-matthew.jpg",
+      "/public-work/ux-storm-1-4/banner-saak.jpg",
+      "/public-work/ux-storm-1-4/banner-arpine.jpg",
+      "/public-work/ux-storm-1-4/banner-davit-table.jpg",
+      "/public-work/ux-storm-1-4/banner-nareg.jpg"
+    ],
+    galleryCaptions: [
+      "The room settling in",
+      "From the crowd, on a phone",
+      "Mid-talk, full house",
+      "The planning call behind the edition",
+      "Between the sessions",
+      "Speed-discussion energy",
+      "Listening close",
+      "Another moment from the audience",
+      "The audience selfie",
+      "Poster, Matthew Yousefian",
+      "Poster, Saak Bertrand on the deck",
+      "Table 2 — Arpine Lputyan on PM–design collaboration",
+      "Table 3 — my own, on the art in the design",
+      "Table 4 — Nareg Abedi Masihi on AI text mistakes"
+    ],
+    url: "https://luma.com/iicrwjxl"
+  },
+  {
     slug: "design-in-2030",
     year: "2025",
+    publishedAt: "2025-10-11",
     type: "UX Storm 1.3 / DigiTec",
     title: "Design in 2030 — a workshop for 100+ thinkers and practitioners.",
     description: "At DigiTec 2025, UX Storm brought designers, thinkers, and practitioners together to test what design becomes when strategy, ethics, systems, and AI are part of the work.",
-    image: "/public-work/design-in-2030-digitec-2025.jpg",
-    imageAlt: "Design in 2030 workshop poster for DigiTec 2025",
-    url: "https://www.linkedin.com/posts/davit-pedanyan_aca-ux-designeducation-activity-7325191317901242368-jlGI"
+    image: "/public-work/ux-storm-1-3/hero.jpg",
+    imageAlt: "Davit Pedanyan introducing the Design in 2030 workshop at DigiTec 2025",
+    inlineImages: [
+      "/public-work/ux-storm-1-3/workshop-output.jpg",
+      "/public-work/ux-storm-1-3/model.jpg"
+    ],
+    gallery: [
+      "/public-work/ux-storm-1-3/table-discussion.jpg",
+      "/public-work/ux-storm-1-3/workforce-topic.jpg",
+      "/public-work/ux-storm-1-3/facilitation.jpg",
+      "/public-work/ux-storm-1-3/participant-voice.jpg",
+      "/public-work/ux-storm-1-3/team-output.jpg",
+      "/public-work/ux-storm-1-3/closing.jpg"
+    ],
+    url: "https://digitec.am/en-US/past-events/2025"
   },
   {
     slug: "ux-storm-1-2",
@@ -433,34 +505,55 @@ const publicArchiveEntries = [
     type: "UX Storm / moderator",
     title: "UX Storm 1.2 — shaping the future in UX design.",
     description: "A donation-based Yerevan meetup with talks on UX research and UX writing, followed by speed discussions. Davit moderated the session on the future of UX design.",
-    image: "/public-work/ux-storm-1-2.jpg",
-    imageAlt: "Davit Pedanyan speaking to an audience at UX Storm 1.2",
+    image: "/public-work/ux-storm-1-2/banner-cover.jpg",
+    imageAlt: "UX Storm 1.2 cover - retro space collage with the five speakers",
+    inlineImages: [
+      "/public-work/ux-storm-1-2/banner-alexandra.jpg",
+      "/public-work/ux-storm-1-2/banner-davit.jpg",
+      "/public-work/ux-storm-1-2/banner-nareg.jpg"
+    ],
+    gallery: [
+      "/public-work/ux-storm-1-2/research-talk.jpg",
+      "/public-work/ux-storm-1-2/audience.jpg",
+      "/public-work/ux-storm-1-2/speed-discussion.jpg",
+      "/public-work/ux-storm-1-2/banner-hrachik.jpg",
+      "/public-work/ux-storm-1-2/banner-shiraz.jpg"
+    ],
+    galleryCaptions: [
+      "Nareg mid-talk, on gamification",
+      "The room, listening",
+      "Speed discussions in motion",
+      "Talk banner, Hrachik Ajamian",
+      "Talk banner, Shiraz Tumasyan"
+    ],
     url: "https://www.linkedin.com/posts/davit-pedanyan_uxstorm-activity-7229777603987976192-mQoa"
   },
   {
     slug: "ux-storm-1-0",
     year: "2023",
     type: "UX Storm / founder format",
-    title: "UX Storm 1.0 — 100+ people, six conversations, one shared room.",
-    description: "The first UX Storm convened more than 100 design and adjacent-field professionals, testing six speed-discussion topics alongside the main program.",
-    image: "/public-work/ux-storm-1-0.jpg",
-    imageAlt: "Davit Pedanyan hosting UX Storm 1.0",
-    gallery: [
-      "/public-work/ux-storm-1-0/JONY0102.jpg",
-      "/public-work/ux-storm-1-0/JONY0167.jpg",
+    title: "UX Storm 1.0 — 200 applications, 120 seats, one shared room.",
+    description: "The first UX Storm drew over 200 applications for 120 places. Two keynotes and six speed-discussion topics, in partnership with Ameriabank.",
+    image: "/public-work/ux-storm-1-0/banner-main.jpg",
+    imageAlt: "UX Storm 1.0 product design meetup — Ishkhan Adamyan and Davit Pedanyan, Kamar Business Center, March 2",
+    inlineImages: [
       "/public-work/ux-storm-1-0/JONY0122.jpg",
-      "/public-work/ux-storm-1-0/JONY0107.jpg",
+      "/public-work/ux-storm-1-0/JONY0350.jpg"
+    ],
+    gallery: [
       "/public-work/ux-storm-1-0/JONY0227.jpg",
-      "/public-work/ux-storm-1-0/JONY0360.jpg",
-      "/public-work/ux-storm-1-0/JONY0350.jpg",
-      "/public-work/ux-storm-1-0/JONY0386.jpg",
       "/public-work/ux-storm-1-0/JONY0210.jpg",
-      "/public-work/ux-storm-1-0/JONY0161.jpg",
       "/public-work/ux-storm-1-0/JONY0281.jpg",
-      "/public-work/ux-storm-1-0/JONY0384.jpg",
-      "/public-work/ux-storm-1-0/JONY0336.jpg",
+      "/public-work/ux-storm-1-0/JONY0102.jpg",
+      "/public-work/ux-storm-1-0/JONY0107.jpg",
+      "/public-work/ux-storm-1-0/JONY0360.jpg",
+      "/public-work/ux-storm-1-0/JONY0112.jpg",
+      "/public-work/ux-storm-1-0/JONY0161.jpg",
+      "/public-work/ux-storm-1-0/JONY0167.jpg",
       "/public-work/ux-storm-1-0/JONY0271.jpg",
-      "/public-work/ux-storm-1-0/JONY0112.jpg"
+      "/public-work/ux-storm-1-0/JONY0336.jpg",
+      "/public-work/ux-storm-1-0/JONY0384.jpg",
+      "/public-work/ux-storm-1-0/JONY0386.jpg"
     ],
     url: "https://www.linkedin.com/posts/davit-pedanyan_uxstorm-activity-7038788879109234689-s0mH"
   },
@@ -473,6 +566,13 @@ const publicArchiveEntries = [
     image: "/public-work/ux-design-battle-jury-1.jpg",
     secondaryImage: "/public-work/ux-design-battle-jury-2.jpg",
     imageAlt: "Davit Pedanyan speaking as a UX Design Battle jury member",
+    inlineImages: ["", "/public-work/ux-design-battle-jury-2.jpg"],
+    gallery: [
+      "/public-work/ux-battle/speaker.jpg",
+      "/public-work/ux-battle/audience.jpg",
+      "/public-work/ux-battle/working-room.jpg",
+      "/public-work/ux-battle/winner.jpg"
+    ],
     url: "https://www.linkedin.com/posts/davit-pedanyan_uxbattle-activity-7338090109671514112-AVRV"
   },
   {
@@ -481,19 +581,19 @@ const publicArchiveEntries = [
     type: "UX Storm 1.1 / speaker",
     title: "UX Storm 1.1 — making room for an honest design conversation.",
     description: "The second UX Storm continued the format with a direct, intimate session for Armenia’s growing product-design community.",
-    image: "/public-work/ux-storm-1-1.jpg",
+    image: "/public-work/ux-storm-1-1/speaker.jpg",
     imageAlt: "Davit Pedanyan speaking at UX Storm 1.1",
-    url: "https://www.linkedin.com/posts/davit-pedanyan_%D5%AF%D5%AB%D5%BD%D5%BE%D5%AB%D6%80-%D6%84%D5%B8-%D5%BD%D5%AF%D5%BD%D5%B6%D5%A1%D5%AF-%D5%B8%D6%82-%D5%BD%D5%AF%D5%BD%D5%A1%D5%AE-%D5%AF%D6%80%D5%A5%D5%A1%D5%BF%D5%AB%D5%BE-%D5%A8%D5%B6%D5%AF%D5%A5%D6%80%D5%B6%D5%A5%D6%80%D5%AB-activity-7266072420506120192-jkxz"
-  },
-  {
-    slug: "ux-storm-at-digitec",
-    year: "2025",
-    type: "UX Storm 1.3 / DigiTec",
-    title: "UX Storm at DigiTec — taking the conversation to Armenia’s biggest tech stage.",
-    description: "A live public session that brought product-design dialogue into the centre of DigiTec 2025.",
-    image: "/public-work/ux-storm-1-3-digitec.jpg",
-    imageAlt: "Davit Pedanyan speaking at UX Storm during DigiTec 2025",
-    url: "https://www.linkedin.com/in/davit-pedanyan/"
+    inlineImages: [
+      "/public-work/ux-storm-1-1/speaker.jpg",
+      "/public-work/ux-storm-1-1/table.jpg"
+    ],
+    gallery: [
+      "/public-work/ux-storm-1-1/room.jpg",
+      "/public-work/ux-storm-1-1/discussion.jpg",
+      "/public-work/ux-storm-1-1/audience.jpg",
+      "/public-work/ux-storm-1-1/panel.jpg"
+    ],
+    url: "https://darpass.com/event/uxstorm-1-1-product-design-meetup/"
   },
   {
     slug: "tech-week-vanadzor",
@@ -503,6 +603,11 @@ const publicArchiveEntries = [
     description: "Taking product-design thinking beyond Yerevan and into one of Armenia’s largest technology gatherings.",
     image: "/public-work/tech-week-2025.jpg",
     imageAlt: "Davit Pedanyan speaking at Tech Week Vanadzor 2025",
+    inlineImages: ["", "/public-work/tech-week/hall.jpg"],
+    gallery: [
+      "/public-work/tech-week/talk-closeup.jpg",
+      "/public-work/tech-week/audience.jpg"
+    ],
     url: "https://techweek.am/"
   },
   {
@@ -528,91 +633,124 @@ const publicArchiveEntries = [
     imageAlt: "How2B speed interview with Davit Pedanyan about becoming a UI UX designer",
     videoId: "5GkLC2HoWb4",
     url: "https://www.youtube.com/watch?v=5GkLC2HoWb4"
+  },
+  {
+    slug: "why-art-matters-medium",
+    year: "2026",
+    publishedAt: "2026-02-03",
+    type: "Essay / Medium",
+    title: "Why Art Matters — a letter to the exhausted soul.",
+    description: "A personal essay on art as attention, recovery, and a way to stay human in the pressure of everyday life.",
+    image: "/public-work/medium-why-art-matters.jpg",
+    imageAlt: "Art class image from Davit Pedanyan's Medium essay Why Art Matters",
+    externalUrl: "https://medium.com/@pedanyandavid/why-art-matters-a-letter-to-the-exhausted-soul-0091d03f5d3d"
+  },
+  {
+    slug: "undesign-armenia-medium",
+    year: "2026",
+    publishedAt: "2026-08-02",
+    type: "Essay / Medium",
+    title: "\u0531\u0576\u0564\u056b\u0566\u0561\u0575\u0576 Armenia \u2014 when public systems forget people.",
+    description: "An essay on systems designed without the people who live with their consequences \u2014 and what that costs us in time, health, and the ability to participate.",
+    image: "/public-work/medium-undesign.jpg",
+    imageAlt: "Mother Armenia statue covering her eyes \u2014 \u0531\u0576Design \u0540\u0561\u0575\u0561\u057d\u057f\u0561\u0576, a call for design-led transformation",
+    externalUrl: "https://medium.com/@pedanyandavid/%D5%A1%D5%B6%D5%A4%D5%AB%D5%A6%D5%A1%D5%B5%D5%B6-armenia-when-public-systems-forget-people-fddad0589691"
+  },
+  {
+    slug: "patterns-rhythm-medium",
+    year: "2024",
+    publishedAt: "2024-12-07",
+    type: "Essay / Medium",
+    title: "Patterns, Rhythm, and Flow — lessons from music in UX design.",
+    description: "How a background in music shaped the way I think about rhythm, contrast, and the flow of a product experience.",
+    image: "/public-work/medium-patterns-rhythm.jpg",
+    imageAlt: "Artwork from Davit Pedanyan's Medium essay about music and UX design",
+    externalUrl: "https://medium.com/@pedanyandavid/patterns-rhythm-and-flow-lessons-from-music-in-ux-design-4085bd68137f"
   }
 ];
 
 const publicArticleCopy: Record<string, { eyebrow: string; standfirst: string; sections: Array<{ title: string; paragraphs: string[] }> }> = {
-  "design-in-2030": {
-    eyebrow: "DigiTec 2025 / UX Storm 1.3",
-    standfirst: "At Armenia’s largest technology gathering, 100+ designers, thinkers, and practitioners came together to ask a deliberately uncomfortable question: what should design become by 2030?",
-    sections: [
-      { title: "A workshop, not a lecture", paragraphs: ["Design in 2030 was built as a working room rather than a one-way programme. The intention was simple: put people with different levels of experience and different relationships to technology in the same space, then give them a question large enough to matter.", "The event brought together designers, product people, and curious practitioners at DigiTec 2025. Instead of treating the future as a trend report, the format asked participants to work through what changes when tools can produce screens, systems, and prototypes faster than ever before."] },
-      { title: "Beyond the pixel", paragraphs: ["One theme kept returning: the value of a designer is moving beyond the production of isolated interfaces. Automation will take more of the repetitive execution. What remains distinctly human is framing the problem, noticing consequences, making trade-offs, and building a direction that people can understand.", "That does not make craft less important. It changes where craft begins. The work shifts toward strategy, ethical judgement, systems thinking, and the ability to connect technology with real human behaviour."] },
-      { title: "Why make it public", paragraphs: ["UX Storm has always been a way to make product-design conversations visible in Armenia. Bringing this edition to DigiTec expanded that conversation beyond a familiar design circle and made room for people who will shape the next generation of products alongside us.", "The strongest outcome was not a single prediction about 2030. It was a shared recognition that the future of design will be built by people who keep learning, challenge their own assumptions, and stay responsible for the impact of what they create."] }
-    ]
-  },
-  "ux-design-battle-jury": {
-    eyebrow: "UX Design Battle / jury",
-    standfirst: "A live design battle is not only about who wins. It is a rare chance to watch portfolios, product instincts, and collaboration tested in the open.",
-    sections: [
-      { title: "The value of public pressure", paragraphs: ["I joined the jury for UX Design Battle, organised by Skill and supported by Converse Bank. The setting was fast, visible, and demanding: participants had to make choices, explain them, and keep moving while an audience watched.", "That pressure is useful when it is handled with care. It shows that a portfolio is not a finished statement. It is evidence of how someone thinks when the brief is imperfect and the answer is not obvious."] },
-      { title: "What a jury should look for", paragraphs: ["The most interesting work was not necessarily the most polished screen. It was the thinking behind it: a clear understanding of the user, a sensible hierarchy of problems, and the confidence to explain what was intentionally left out.", "Good critique should not reward performance alone. It should help participants leave with sharper questions for their next project—about context, trade-offs, and what makes a product decision defensible."] },
-      { title: "A stronger local practice", paragraphs: ["Events like UX Design Battle matter because they give emerging designers a public place to practise. Participants leave with a case for their portfolio, but also with experience receiving feedback from people who work in the field.", "For the community, it is a reminder that design culture becomes stronger when we make the process visible: how ideas evolve, where they break, and how respectful critique turns a draft into a better decision."] }
-    ]
-  },
-  "ux-storm-1-2": {
-    eyebrow: "UX Storm 1.2 / Yerevan, 2024",
-    standfirst: "UX Storm 1.2 brought the community back together around a familiar question with no simple answer: what is the future of UX design?",
-    sections: [
-      { title: "A room for the real questions", paragraphs: ["The second edition continued the format with talks, speed discussions, and a donation-based entry that connected participation with support for vetted charities. It made the event more than a calendar item—it was a reason to pause, meet, and think together.", "I moderated the speakers and led a conversation on the future of UX design. The topic is easy to make abstract, so the discussion stayed close to daily practice: what is changing in our work, which skills are becoming more valuable, and what should younger designers learn first?"] },
-      { title: "Future-facing, but practical", paragraphs: ["The future of UX is not a distant destination. It shows up in the quality of questions we ask today: whether we understand research, whether we can write clearly, whether we see the wider system around an interface.", "The evening made space for different answers. Designers, researchers, writers, and product people do not approach the work in exactly the same way. That difference is what made the conversation useful."] },
-      { title: "Keeping the format alive", paragraphs: ["UX Storm is deliberately open. It is a place for people who are starting out, people who have been working for years, and people from adjacent disciplines who care about better products.", "The aim is not to manufacture consensus. It is to build a habit of discussing the work honestly, in person, and with enough generosity that people return to their teams with something practical to try."] }
-    ]
-  },
   "ux-storm-1-0": {
-    eyebrow: "UX Storm 1.0 / Yerevan, 2023",
-    standfirst: "The first UX Storm gathered more than 100 people across design and related fields, then tested a simple idea: better conversations happen when everyone has a way into the room.",
+    eyebrow: "UX Storm 1.0 / Kamar Business Center, 2 March",
+    standfirst: "The first UX Storm took over 200 applications for 120 seats. Two keynotes, six speed-discussion topics, and a question the industry here had been asking privately: what does a company actually expect from a designer?",
     sections: [
-      { title: "Starting with community", paragraphs: ["The first edition was a signal that Armenia’s UI, UX, and product community was ready for a larger public conversation. More than 100 professionals came together around the main programme, but the event was designed to make participation active rather than passive.", "Alongside the talks, six speed-discussion topics gave people a chance to move between small groups, meet someone new, and test ideas in a lighter format. Colleagues coordinated those discussions, turning the room into a network rather than an audience."] },
-      { title: "Why speed discussions worked", paragraphs: ["A conventional event can make it easy to listen and easy to leave. Speed discussions change the rhythm. They ask people to formulate a thought, hear an unfamiliar perspective, and move on before the conversation becomes too comfortable.", "The format worked because it welcomed the unfinished idea. Not every contribution had to be an expert opinion; participants could ask, disagree, or simply compare how they approached the same problem in their own work."] },
-      { title: "The first proof", paragraphs: ["The success of UX Storm 1.0 was not only the attendance. It was the energy people carried out of the room and the clear desire to have the format again.", "That first event established the foundation for the editions that followed: a product-design gathering rooted in practical work, candid exchange, and a belief that a stronger community makes stronger products."] }
+      { title: "The chart that quieted the room", paragraphs: ["Ishkhan Adamyan — NNG certified, one of the few people in the country holding that credential — put a stacked bar chart on the screen and the room went still. It compared what a small company expects from an Intern or Junior, from a Middle, and from the level above, broken into specific proficiencies rather than job titles: design software, wireframes and prototypes built around customer needs, user research and testing, interaction design and information architecture, experience with design systems, the ability to communicate a design idea, teamwork, management. And near the bottom, sitting there without apology, basic marketing and SMM knowledge.", "That last line is the honest one. In a small Armenian company a designer is rarely only a designer, and here it was on a screen in front of a full room instead of being discovered in month three of a job. Nobody argued with it.", "This was the reason to build the event. There were plenty of designers in Armenia and very few places where they could compare notes on what the work actually demands."] },
+      { title: "The talk I gave, from the other side", paragraphs: ["I was the second speaker, at the time Practice Lead at Armenian Code Academy, and I took the question up a level. Not what a company expects from a designer, but what a company has to build before it can use good design at all.", "Three mechanisms, and I would still argue for the same three: a UX metrics dashboard that ties design work to engagement, conversion and customer outcomes, because design that cannot be measured gets cut first; training and coaching, on the argument that a UX culture spreads through workshops and individual coaching rather than announcements; and a community of practice, the recurring forum where practitioners share methods instead of each reinventing them.", "Put next to Ishkhan's chart, the two talks framed one problem from opposite ends. His was about a designer's readiness. Mine was about an organisation's capacity to make use of it. A designer can be entirely ready for a company that has no mechanism to hear them — a common and expensive situation that never comes up in a job interview."] },
+      { title: "Why the format mattered more than the talks", paragraphs: ["Over 200 people applied. 120 were shortlisted. That ratio is the finding: the appetite was already there, and what was missing was the room.", "So the second half was not more talking at people. Six speed-discussion topics ran alongside the main programme, which meant a good share of the 120 spent the evening answering the question rather than watching two speakers answer it. Ameriabank partnered on the event and Armenian Code Academy brought it together.", "Between sessions someone played a keyboard at the edge of the stage. Students sat in the same rows as people running design teams. It was a professional evening, not a formal one — and it set the shape every UX Storm since has kept."] }
     ]
   },
   "ux-storm-1-1": {
-    eyebrow: "UX Storm 1.1 / community event",
-    standfirst: "The second gathering kept the UX Storm idea intentionally close to the people in the room: a direct conversation about the work, the industry, and where designers find their next level.",
+    eyebrow: "UX Storm 1.1 / Adobe Armenia, 2024",
+    standfirst: "The first edition filled a hall. The second one capped the list, sent invitations, and put everyone close enough to interrupt each other.",
     sections: [
-      { title: "Keeping momentum human", paragraphs: ["After the first event, the important thing was not to repeat the same night at a larger scale. UX Storm 1.1 focused on keeping the atmosphere open enough for people to speak honestly about their work and their doubts.", "The community was growing, but the purpose stayed the same: create an environment where experience is shared without gatekeeping and where a junior designer can be part of the same conversation as a lead or founder."] },
-      { title: "Learning in public", paragraphs: ["Design communities are built through more than finished case studies. They are built when people can talk about what did not work, ask for context, and understand that even experienced practitioners are still learning.", "That kind of visibility makes the profession feel more reachable. It turns the design community from a list of impressive people online into peers who can challenge and support one another."] },
-      { title: "An evolving format", paragraphs: ["Each UX Storm has adapted to the people, speakers, and questions present at that time. That is a strength, not a lack of consistency. The recognisable part is the intention: conversation over performance, curiosity over certainty.", "UX Storm 1.1 helped confirm that the format was not a one-time event. It was becoming a recurring place for Armenia’s product-design community to meet itself."] }
+      { title: "Smaller on purpose", paragraphs: ["UX Storm 1.1 ran on 21 March at Adobe Armenia, Halabyan 22/5, from half past six until ten at night. Armenian Code Academy organised it. Adobe hosted and sponsored. Attendance was limited and invitation-based, with confirmations sent out three days ahead.", "That was a decision, not a shortage of chairs. A hundred people in a hall produces energy. Forty on tiered benches produces argument. Attendees sat on cushioned wooden steps in front of a painted mountain range with the Yerevan skyline going dark through the glass behind the speaker, and nobody was more than a few metres from whoever held the microphone.", "The list was drawn around a specific mix: product designers, UX/UI designers, product managers, product owners. Not a designers-only room. A product-people room, which changes what the arguments are about, because half the room has to answer for a roadmap rather than a screen."] },
+      { title: "A new paradigm and an old skill", paragraphs: ["I presented UX Patterns in Generative AI: which interaction conventions are forming around systems that answer in language rather than in screens, and which of them are worth adopting rather than copying because a large product shipped them first.", "Lusine Dashtoyan, Senior Product Designer at Adobe, spoke about using analogies for better storytelling. On paper the two talks sit far apart. In the room they turned out to be one problem seen twice. Generative interfaces are unfamiliar to almost everyone who opens them, and the only reliable way to make an unfamiliar system legible is to reach for a structure the person already carries in their head. One talk described the new thing. The other described the oldest tool we have for explaining a new thing to somebody else.", "The programme was kept to two talks on purpose. The rest of the evening belonged to the room."] },
+      { title: "Three zones, twenty minutes each", paragraphs: ["After the talks the event split into three themed discussion zones, each with a moderator from the industry, each running twenty minutes before the group moved on. Armine Tevosyan took UX sign-off, the unglamorous question of who actually approves a design and on what evidence. Hayk P., a product manager at ServiceTitan, ran the zone on how product designers and product managers work together, which is where most of the friction in a small product team actually lives. I ran the third: which parts of design work AI is likely to take, and which parts it is not.", "Twenty minutes is short deliberately. There is no warm-up phase and no drift. People state a position early because there is no time to arrive at one politely, and the moderator’s job is to keep the disagreement specific.", "One zone ran in a side meeting room with acoustic panels, framed photographs of the Ararat plain and a basalt canyon, and a single long light-wood table. Around eighteen people were around it, seated and standing, with more on the bench along the wall. The display on the wall in that photograph reads 8:14 PM. That is the measure of whether the format worked. Not the talks. The fact that at quarter past eight, with food waiting, eighteen people were still at the table."] }
     ]
   },
-  "ux-storm-at-digitec": {
-    eyebrow: "UX Storm 1.3 / DigiTec 2025",
-    standfirst: "Bringing UX Storm to DigiTec made one thing clear: the future of design belongs in the centre of the technology conversation, not at its edge.",
+  "ux-storm-1-2": {
+    eyebrow: "UX Storm 1.2 / AI9, August 2024",
+    standfirst: "Five tracks, five speakers, one Friday in August. Two of the five sessions were not addressed to designers at all, and that was the argument of the edition.",
     sections: [
-      { title: "Taking design to the main stage", paragraphs: ["DigiTec brings together builders, companies, students, and people following the direction of Armenian technology. Hosting UX Storm there placed product design alongside the conversations that often shape it: engineering, AI, entrepreneurship, and business.", "The event was an opportunity to talk directly about the shift from designing screens to helping shape systems, products, and decisions. Design is not a service added at the end; it is part of how a product earns trust from the beginning."] },
-      { title: "A broader audience", paragraphs: ["A larger stage changes the audience. People arrive with different vocabulary and different expectations. That makes clarity more important: explain the craft without making it smaller, and explain the business value without losing the human side of the work.", "The conversation connected design to questions of responsibility, technology, and long-term product quality—the things teams need to address together rather than handing to one discipline."] },
-      { title: "The next public conversation", paragraphs: ["UX Storm at DigiTec showed that there is an appetite for more design-led public programming at major technology events. It also showed how much value comes from putting designers in dialogue with people outside the usual circle.", "The task now is to keep that exchange practical. Big stages matter, but their best use is to send people back to their next project with a better question and the confidence to ask it."] }
+      { title: "Five tags as a table of contents", paragraphs: ["UX Storm 1.2 ran on 16 August 2024 at AI9. The poster was a retro space collage, painted planets and a rocket trailing flame, and across the middle of it sat five tags that were the actual programme: UX.RESEARCH, UX.4.STARTUPS, UX.WRITING, UX.FUTURE, UX.4.DEVS.", "Each tag had a person behind it. Alexandra Keidiia on The Power of Research. Hrachik Ajamian on What Startups Expect from a UX Designer. Nareg Abedi Masihi on The Craft of UX Writing. Shiraz Tumasyan on UX Meets Development. I took UX.FUTURE with Shaping the Future in UX Design, and moderated the speakers across the day.", "Four organisations put their names on it: Armenian Creative Network, Armenian Code Academy, AI9 and imast. The room was AI9’s: exposed concrete ceiling, white spiral ducting, a slow ceiling fan, deep terracotta drapes, and rows of black folding chairs facing a projector screen."] },
+      { title: "The two tracks aimed at other people", paragraphs: ["Look at the five tracks again and the shape of the edition shows. Research, writing and the future are conversations designers have among themselves. Startups and development are not.", "What Startups Expect from a UX Designer is a talk about the distance between what a designer believes they were hired for and what a five-person company needs from them on Monday morning. UX Meets Development is the same distance measured from the other side, at the point where a design file becomes somebody else’s implementation problem and most of the quality in a product is quietly won or lost. Putting those two on the same bill as research and writing was the position of the edition. A designer who is excellent at the craft and illegible to the founder and the engineer is not yet useful to either.", "Nareg Abedi Masihi had the writing track, and at one point the screen behind him read LET’S TALK ABOUT GAMIFIACTION, typo included, next to a pixel-art sprite. Nobody in the room mentioned it, which felt like the correct response."] },
+      { title: "Paying to be there", paragraphs: ["Entry was donation-based, with the money going to vetted charities. That detail does more work than it looks like it does. Free events collect registrations. A donation collects a decision. People who put money down turn up, and people who turn up on purpose ask better questions.", "It also settled what the series is for. Not lead generation for anyone’s course or agency. A room the community pays into, on the understanding that the money leaves and goes somewhere useful.", "My own session, on where UX design goes next, is a topic that turns to vapour the moment you let it float. Kept close to practice it becomes three answerable questions instead: what is changing in the work this year, which skills are gaining value, and what a designer starting today should learn first."] }
+    ]
+  },
+  "ux-storm-1-4": {
+    eyebrow: "UX Storm 1.4 / artmart, December 2025",
+    standfirst: "Three talks, three tables and live music on the twelfth floor, built around the question the discipline keeps circling: if the tools can produce the screens, what exactly is a product designer for?",
+    sections: [
+      { title: "Three talks that do not agree", paragraphs: ["Matthew Yousefian, senior product designer and mentor, opened with Product Design is Not What You Think, an argument that the job most people believe they applied for is not the job. Roubina Tutunjian, a senior design leader, followed with From UX/UI to Product Designer: Building Strategic Muscles in the Age of AI: how a designer moves past executing interfaces into the decisions that set a product’s direction, and why AI raises the cost of never making that move. Stepan Sargsyan, group product design lead and mentor, took the other side of the same coin with AI as a Design Partner: When to Use It, When Not To.", "Stepan’s framing was the one the room needed. Not whether AI is good for design, a question with no usable answer, but where the boundary sits. Prompting is a design skill. So is restraint, so is shared context, and so is noticing when a fast, polished, confident output has quietly detached from anything real. AI will accelerate execution. It will not sign its name to the consequences.", "The edition ran on 12 December 2025 at seven in the evening, at artmart on Hakobyan 3, twelfth floor. Entry was free but registration was moderated and closed with a waitlist. The room was built for mid-level and senior designers and product people, which is why the three talks could disagree in public without anyone having to explain the basics first."] },
+      { title: "Three tables the talks could not settle", paragraphs: ["After the talks the room broke into three numbered speed-discussion tables, each led by a practitioner. Nareg Abedi Masihi took Simple AI Text Mistakes: What Designers Are Messing Up. That is the narrow, unglamorous version of the AI question. Not whether the technology is transformative, but the specific ways generated copy is going into shipped products badly right now.", "Arpine Lputyan took PM–Design Collaboration in Modern Product Teams, the relationship that decides more about a product’s quality than any tool choice, and the one most teams run on habit rather than design.", "I took the third table, The Art in the Design, deliberately out of step with the rest of the evening. In a programme otherwise arguing about strategy, AI and collaboration, one table spent its time on the part of the work that has no business justification and is obvious the moment it is missing. The tables exist because a talk can only propose a position. It takes a small group with different constraints and different scar tissue to find out whether the position survives contact."] },
+      { title: "What it takes to put the room together", paragraphs: ["There is a photograph in the gallery that is not from the night. It is a seven-person video call: Rima Igityan, Diana Almastyan, Nareg Abedi Masihi, Stepan Sargsyan, Matthew Yousefian, Roubina Tutunjian and me, with Matthew’s hand raised, waiting his turn.", "Two of those names are on no banner. Rima Igityan and Diana Almastyan built the edition and stayed off the poster. That call is a more honest picture of what an event is than any stage photograph: weeks of scheduling, arguments about topics and ideas that got cut, so that a room of people can walk in and find it already working. artmart hosted and was general sponsor alongside Armenian Code Academy, which ran the programming. Saak Bertrand played music through the night, which is the detail that keeps a senior-practitioner evening from turning into a conference panel.", "Every photograph in this gallery was taken by someone in the audience on their phone. Nobody was hired to document it. That is either a production oversight or the most accurate thing about the evening."] }
+    ]
+  },
+  "design-in-2030": {
+    eyebrow: "UX Storm 1.3 / DigiTec 2025",
+    standfirst: "Inside a festival built for forty thousand people, UX Storm set out round tables and asked working designers to write down, by hand, what their profession looks like in 2030.",
+    sections: [
+      { title: "Round tables inside a tech festival", paragraphs: ["DigiTec 2025 was UATE’s twentieth edition: three days from 10 to 12 October, 15,000 square metres at the Meridian Expo & Event Centre, more than 300 participating companies, and over 40,000 visitors expected under the line “where the sun never sets.” The published spine of the festival was AI on day one, investment on day two, scaling on day three. UX Storm 1.3 took a slot inside it — 11 October, 16:00, the DigiHub hall — under its own lockup: UX Storm by Armenian Code Academy.", "The room did the opposite of what an expo floor usually does. Black drapes, round white tables with transparent ghost chairs, eight to ten people at each, flip-chart easels, markers, and blocks of coloured sticky notes. Rows let people watch. Tables make them produce something and put a name on it. I worked the floor with a handheld mic instead of standing behind a podium, because a workshop where the facilitator stays on stage is a lecture with better furniture.", "The poster had promised 100-plus designers, thinkers and practitioners, and that mixture was the point — product people, engineers, students and marketers who all end up living with design decisions someone else made. One projected topic card read simply: Workflows and Collaboration. Everything else in the room, the tables produced themselves, on paper."] },
+      { title: "What the tables actually wrote", paragraphs: ["The most useful artefact of the afternoon was a sheet with three hand-drawn columns: Dropout, Actual, New Tools. What falls away by 2030, what survives, what replaces it. A participant held it up and presented it to the room.", "Under Dropout the table had written the Adobe suite, Protopie, and wireframing tools. Under Actual: Figma with AI integrated, Notion.ai, AutoCAD. Under New Tools: “intelligence integrated tools” and — the interesting one — “individual designed tools.” Read that last phrase again. A table of working designers, given the length of one exercise, bet that the industry-standard suites go first, that today’s tools survive only in the versions that absorb AI, and that the end state is practitioners assembling their own instruments rather than renting somebody else’s. That is a sharper claim than anything on a trends slide, and nobody led them to it.", "Another table went sideways from tools to identity. Their poster was headed FEM — Fearless Experience Makers, with a hand-drawn face mark and folded paper triangles labelled Light, Night, Sun, Moon, Direction, Compass, Star. A third produced a “hello” wordmark with a stick figure waving out of the final letter. Pink paper people, cut and folded, stood upright on the tables. Scissors and sticky notes, and what came back was positioning, symbol and tone — precisely the layer that does not automate."] },
+      { title: "Why a working room, and why here", paragraphs: ["The materials were a constraint with a purpose. Give a designer a laptop and the conversation drifts to execution within five minutes, because execution is where the tools flatter us. Give the same person a marker and a folded sticky note and the only things left to be good at are the idea and how well it survives being explained to eight strangers.", "The prompts worked the same way. Asking what design will be in 2030 invites a trend report. Asking which of your tools is gone, which survives and what replaces it forces a position you can be wrong about. Nobody left with a consensus forecast — the tables did not agree with each other and did not need to. They left with their own handwriting on a sheet of paper, which is the only kind of prediction people act on.", "The reason to run this at DigiTec rather than at a design meetup is that the design conversation is not very useful when only designers hear it. A festival that gives three days to building, funding and scaling benefits from one room asking what should be built and who carries the cost when the answer is wrong. A talk would have made that point as an assertion. A workshop made it structurally: design’s contribution is not a presentation at the end, it is a way of working that other disciplines can sit inside for an afternoon."] }
+    ]
+  },
+  "ux-design-battle-jury": {
+    eyebrow: "UI/UX Design Battle / jury member",
+    standfirst: "Converse Bank put a live product screen and 500,000 AMD behind a design competition, Skill built an event around it, and I judged it. From that seat you stop reading portfolios and start reading reasoning.",
+    sections: [
+      { title: "A real brief, a clock, and a room watching", paragraphs: ["The brief was not invented for the occasion. Contestants were asked to improve the repetitive-payment templates page in the Converse Bank mobile app — a screen that already exists, that people use to pay the same bills every month, and that the bank has to live with afterwards. Converse Bank was the general partner and put up the prize: 500,000 AMD, handed over on an oversized cheque with the tax note in the small print. Skill produced the event; ARDY, UATE, WODS and Visa sat on the partner strip. My badge said JURY MEMBER.", "The work happened in a bright glass-walled room — long white benches, a laptop and a mouse per person, a notepad, a branded bag. Individual work, heads down. Then the same people moved into an auditorium with wood acoustic panels and grey armchairs, put on matching white t-shirts with two cartoon boxers on the chest, and watched each other present.", "The event framing was deliberately light around the edges; the backdrop advertised speakers, snacks, a DJ and gifts. That is not a contradiction. Work of this kind goes better when the day around it is not solemn. The brief carried the weight on its own."] },
+      { title: "What I was judging", paragraphs: ["Not the best-looking screen. A competition rewards speed, and speed makes surfaces easy and thinking hard, so polish is the cheapest signal in the room. Repetitive payments make that trap especially visible: it is a page you can restyle in an afternoon and leave every real problem exactly where you found it.", "The first thing I looked for was whether someone had understood the task before solving it. A payment template is a shortcut a person builds for their own future self. So the questions that decide the design are how a template gets created without a separate setup ritual, how you tell two near-identical ones apart at a glance, what happens when the amount changes, and what it costs the user to get it wrong. Anyone who reached the visual layer without touching those had redecorated.", "The second was defensibility. In a timed battle you cannot iterate your way out of a bad premise, so the useful question after a presentation is always what got left out and why. A designer who can name their own trade-offs made choices; a designer who presents every decision as equally deliberate usually made none. The third was what happens under pushback. Some people defend the artefact and some defend the reasoning, and that difference tells you more about who will be useful on a product team in a year than any case study does."] },
+      { title: "What the format is good for, and what it is not", paragraphs: ["A single sitting is not enough for research, and nobody should present the results as finished product decisions. What a battle produces is a well-argued sketch. That is worth saying plainly, including to the people who win.", "What it does give is rare in this market: a real brief from a real bank, a fixed deadline, and a public defence in front of practitioners under no obligation to be encouraging. Most designers at that stage of a career have never once had to explain their work to a stranger who might disagree with it. That experience is worth more than the prize money.", "It also makes the process visible to everyone in the seats. When emerging designers watch each other’s ideas taken apart and put back together with respect, the standard for what counts as a good argument rises for the whole room. That is a cheap way to raise the level of a local practice, and more companies with real products should be funding it."] }
     ]
   },
   "tech-week-vanadzor": {
-    eyebrow: "Tech Week Vanadzor / 2025",
-    standfirst: "Tech Week Vanadzor made technology feel regional, collective, and close to the next generation of Armenian builders.",
+    eyebrow: "Tech Week Vanadzor / July 2025",
+    standfirst: "Three days of Armenian tech ran in Vanadzor rather than Yerevan, on purpose. I used my slot on the Charles Aznavour Palace stage to argue that Armenia has an անդիզայն problem, and that it is structural rather than cosmetic.",
     sections: [
-      { title: "Beyond the capital", paragraphs: ["Tech Week Vanadzor brought a multi-day technology programme to Armenia’s third-largest city. Across July 4–6, the event combined talks, workshops, an education expo, and community activity around the idea that opportunity should not be concentrated in one place.", "Speaking there was meaningful because product design gains depth when it is connected to different local contexts. The people building future teams and future products are not all in the same city, nor should the conversation be."] },
-      { title: "Design belongs in the ecosystem", paragraphs: ["Technology events often focus on what can be built. Design adds another question: what should be built, for whom, and with what consequences? That perspective matters equally to a new founder, an engineering team, a student, or a public institution.", "The session was an opportunity to frame design as a way of thinking—not just a visual outcome. It is about observing people, defining the real problem, and making choices that stay coherent as a product grows."] },
-      { title: "Growing outward", paragraphs: ["Regional gatherings create different kinds of momentum. They connect people who may not usually meet, make local ambition visible, and give students a closer view of possible careers in technology.", "For me, Tech Week Vanadzor reinforced a simple belief: a stronger Armenian tech ecosystem needs a stronger design culture everywhere—not only in established companies or the capital, but wherever people are beginning to build."] }
+      { title: "The word on the first slide", paragraphs: ["The opening slide read: The global reasons behind “Անդիզայն” country. Անդիզայն — undesigned. Not ugly, not unfinished. Undesigned: built without anyone asking who it was for.", "The second slide put the definition on screen in one sentence. When products, systems, physical spaces and policies are built without human-centred thought, they become անդիզայն. That phrasing was deliberate, because it moves the conversation off screens. A bus stop with no shade is անդիզայն. A form that asks for the same information three times is անդիզայն. A regulation written so that only its author can follow it is անդիզայն. The same failure in different clothes, and none of it fixed by hiring a better illustrator.", "The third slide was the counter-position: beyond aesthetics, design is about function, user experience and systems thinking — interconnectedness and the big picture rather than the surface. In a hall of engineers, founders and students, that is the useful message. Most of them will never open Figma. All of them will decide, at some point, whether the thing they are building accounts for the person on the other end of it."] },
+      { title: "A theatre in Vanadzor, not a hall in Yerevan", paragraphs: ["Tech Week is built on a refusal. TCF, Zealous and UATE keep it out of the capital and move it to a regional centre, because an ecosystem that exists in one city is not an ecosystem. In 2025 that city was Vanadzor: 4 to 6 July, roughly 2,800 participants, more than 60 speakers, over 50 partner companies and 300-plus workshop registrations. Alongside the talks ran DevHacks at the Vanadzor Technology Center — 68 teams selected from 95 applications, 48 hours, a $15,000 prize fund — the Wings competition with the Business Angel Network of Armenia, and an education expo with Teach For Armenia and Armath. Goris takes the event in 2026.", "The main stage was the Charles Aznavour Palace of Culture: a Soviet-era theatre with a crystal chandelier and plaster cornices, raked seating lit blue for the occasion, TWV 2025 spelled out in light-up letters along the stage lip. The banner behind me read Վանաձորը՝ տեխնոլոգիական մայրաքաղաք — Vanadzor, the technology capital. It is a large claim for a city of that size, and the distance between the claim and the present is more or less what I came to talk about.", "The audience was young and it was not a design crowd — students, people a few years into a first job, teams from local companies. That decided how the talk was built. A Yerevan design room arrives with the vocabulary and mostly agrees with you already. A regional room does not, which means every claim has to survive plain language in front of people with no professional reason to be generous about it. If the idea holds there, it holds."] },
+      { title: "What happened to the word afterwards", paragraphs: ["Naming a problem in front of several hundred people changes its status. It stops being a private complaint and becomes something people can point at, in their own city, about things they walk past every day.", "Անդիզայն kept working after the stage lights went down. The talk came first; the essay came later — the same idea written up for a wider readership, as an argument about how Armenian public systems forget the people inside them. Ideas that survive a live room are the ones worth writing down.", "That is also the case for speaking outside the capital, and it is not charity. Opportunity that exists in only one place is not opportunity, it is a queue. The people who will build the next generation of Armenian products are not all going to move to Yerevan first, and the design conversation should not wait for them to."] }
     ]
   },
   "2x-masnageter": {
     eyebrow: "2X ՄԱՍՆԱԳԵՏՆԵՐ / podcast",
-    standfirst: "A conversation about what makes design work last: developing aesthetic judgement, staying curious, and using AI as a tool without handing over the responsibility to it.",
+    standfirst: "The show sits designers down and asks the question its audience actually has: is becoming a product designer worth it? I gave the answer I would give a friend, not the one a school would print.",
     sections: [
-      { title: "Taste is a practice", paragraphs: ["Aesthetic taste is sometimes described as something you either have or do not have. In practice, it is trained through attention. You look closely, compare what works with what does not, and learn to explain the difference without relying only on personal preference.", "For a product designer, taste is not decoration. It affects hierarchy, clarity, tone, and the level of care a person feels when they use a product. It is the ability to make choices that are not only attractive but appropriate to the context."] },
-      { title: "AI changes the surface first", paragraphs: ["AI can make more outputs available faster: references, drafts, interface directions, and language. That is useful, but it does not remove the need for judgement. A generated option still has to be evaluated against a real audience, a real product, and the consequences of putting it into the world.", "The designer’s role becomes less about being the only person able to produce a screen and more about setting a direction, asking better questions, and knowing when a polished result is still the wrong answer."] },
-      { title: "The human work remains", paragraphs: ["Good product work starts with empathy and ends with responsibility. It asks who benefits, who might be excluded, and whether the team is solving the real problem rather than the most visible one.", "This podcast is a conversation for anyone building their point of view in design: tools will change, but curiosity, observation, and a sense of responsibility remain the foundation of the work."] }
+      { title: "The question", paragraphs: ["The series invites people with a public record in their field and puts the plain question to them. Mine was the plainest version of it: is it worth becoming a product designer. Not how to do the job well — whether to do it at all.", "That question deserves better than the two answers usually on offer. One is the course advertisement: high demand, remote work, good salary, six months. The other is the fatalism that arrived with the current generation of tools: it is finished, the models will do it. Both are selling something, and neither describes the job.", "A long-form conversation is the right place to say so. On a stage you have twenty minutes and you compress. Across a table you can be asked a follow-up you did not prepare for, and that is usually where the honest material is."] },
+      { title: "The honest answer", paragraphs: ["Yes, if what draws you is the part of the work nobody photographs. The visible half of product design — the screens — is a small fraction of it. The rest is working out what should exist, arguing for it with people who hold other priorities, cutting the version you liked, and explaining the same decision a third time to someone who was not in the room.", "The market has also moved the entry bar. Producing a competent screen is no longer scarce, so it is no longer a career on its own. What is scarce is judgement: knowing which of fifteen fixable things actually matters, being able to say why, and carrying the consequences once it ships. A generated option arrives knowing nothing about who it is for or what happens when the person using it is tired and in a hurry. Somebody still has to look at four plausible directions and rule three of them out.", "So the answer is conditional rather than encouraging. Worth it if you are curious about people and can tolerate having your work taken apart in public on a regular basis. Not worth it if the appeal is that it looks like the comfortable way into tech, because that door has been closing for a while."] },
+      { title: "What I would tell someone deciding", paragraphs: ["Test the interest before you pay for it. Watch somebody use something — a form, an app, a ticket machine — and notice what you want to do about it. If your first instinct is to find out why they got stuck, the raw material is there. If it is to redraw the buttons, that is a different job, and a perfectly good one.", "Then measure your progress in problems rather than in tools. Tool fluency has a short shelf life and it is the easiest thing on the list to acquire. The habit of finding the real problem and defending a choice is what carries a career across the next three shifts in the industry.", "And be patient about the timeline in a way the advertising is not. People do get hired inside a year. The ones who last are the ones who spent that year building things that got criticised, not the ones who spent it finishing lessons."] }
     ]
   },
   "how2b-ui-ux-designer": {
-    eyebrow: "How2B / speed interview",
-    standfirst: "A concise, practical conversation for people who want to enter UI/UX design without confusing a collection of screens with the beginning of a real design practice.",
+    eyebrow: "How2B × Armenian Code Academy / December 2024",
+    standfirst: "Thirteen questions, from what UI/UX actually is to how you tell whether you are suited to it, recorded for people deciding whether to spend a year and a course fee finding out.",
     sections: [
-      { title: "Start with the problem", paragraphs: ["The fastest way into UI/UX is not to memorise a tool. It is to learn how to see a problem. Who is trying to do something? What is making that difficult? What would make the outcome clearer, faster, safer, or more useful?", "Tools matter because they let you communicate an idea. But tools change quickly. The habit of finding the real problem, explaining your reasoning, and testing an assumption is what gives a designer a career that can move with the industry."] },
-      { title: "Build evidence, not decoration", paragraphs: ["A portfolio should show the path behind a result. Instead of presenting only polished screens, show the context, the constraints, the decisions, and what you learned. A recruiter or product team wants to understand how you think when the brief is incomplete.", "Early projects do not need to be huge. They need to be honest. Pick a problem you can observe, give it a clear boundary, and document your choices with enough detail that another person can follow your logic."] },
-      { title: "Keep learning in public", paragraphs: ["Design is easier to learn when you are part of a community. Meet other practitioners, ask for critique, attend events, and share work before it feels perfect. These moments build confidence and expose you to approaches you would not find alone.", "The goal is not to become a UI/UX designer overnight. It is to build a practice of attention, making, feedback, and iteration that will keep improving long after the first job title arrives."] }
+      { title: "The audience was not designers", paragraphs: ["How2B is an Armenian business and technology outlet — news, finance podcasts, salary and tax calculators, career explainers. Its readers are making decisions about work and money, not looking for craft tips. Armenian Code Academy, where I lead the design practice, made this episode with them in December 2024 for one specific person: someone who has heard that UI/UX is a good career, does not know what the job involves, and is trying to decide whether to commit to it.", "How2B published the full question list, and it is a fair one. What UI/UX is. What problems a designer solves. Examples of bad design and good design. Why projects matter. The stereotypes. The purpose of design. Which skills are required. How long it takes to learn. How to choose a course. Three recommendations for people starting out. And, last, how to work out whether you are actually suited to this.", "A school asking its own instructor how to choose a course is an obvious conflict of interest, so the answer has to be one that does not serve the school. Judge a course by whether it makes you build things that get criticised by people who are not grading you. A curriculum list and a roster of tools tell you very little."] },
+      { title: "The answers that hold up outside the video", paragraphs: ["Problem before tool. The route into this work is not learning software; it is learning to see a problem — who is trying to do something, what is making it hard, and what would make the outcome clearer, faster, safer or less humiliating. Tools matter because they let you communicate an answer. Tools also turn over every few years, and the habit of finding the real problem does not.", "Which is why “projects matter” is the least interesting-sounding item on that list and the most important one. You do not learn design by completing lessons. You learn it by picking a problem small enough to observe directly, making something, and finding out where it fails.", "And a portfolio is evidence, not a gallery. A row of polished screens tells a reviewer you can operate Figma. What a product team wants to see is how you think when the brief is incomplete: the context, the constraints, the decisions, and the thing you deliberately left out and why. Three honest projects with the reasoning attached beat ten decorative ones."] },
+      { title: "How to tell whether it is for you", paragraphs: ["The last question in the set is the one people rarely ask out loud, and it deserves a straight answer rather than encouragement.", "This work suits people who are curious about other people. Not people who like beautiful interfaces — people genuinely interested in why someone got confused, gave up, or did the thing the wrong way round. The second requirement is tolerance for critique. Design is the discipline where your work gets taken apart in front of others on a regular basis, and where “I like it” is never a sufficient defence. People who need their work admired burn out; people who want it tested get better quickly.", "The third is patience for the unglamorous half: the research, the edge cases, the fourth revision, the meeting where you explain the same decision again. That is most of the job. Anyone deciding whether to start should know it before they pay for a course, not after."] }
     ]
-  }
+  },
 };
 
 const fallbackDrunkTalksGallery = [
@@ -654,19 +792,7 @@ const publicFormats = websiteContent.public?.formats?.length
 const rawExperiences = websiteContent.designer?.experiences?.length
   ? websiteContent.designer.experiences
   : fallbackExperiences;
-const experiences = rawExperiences.map((experience, index) => {
-  if (index !== 0) return experience;
-  return {
-    ...experience,
-    company: "Freedx",
-    role: experience.company === "Lynon" ? "Design Lead" : experience.role,
-    years: "Current",
-    type: "Design leadership / fintech",
-    logoDomain: "freedx.com",
-    description:
-      "I lead product design for a crypto and fintech product."
-  };
-});
+const experiences = rawExperiences;
 const publicBlogCategories = websiteContent.public?.categories?.length
   ? websiteContent.public.categories
   : fallbackPublicBlogCategories;
@@ -679,21 +805,21 @@ const storyExperienceSteps = [
     marker: "01",
     title: "I started with products.",
     copy:
-      "The story begins inside product work: interfaces, brands, systems, teams, and the messy decisions that turn ideas into something people can use.",
+      "Twenty years inside product work: interfaces, brands, design systems, teams, and the messy decisions that turn ideas into something people use.",
     meta: "product design / direction"
   },
   {
     marker: "02",
     title: "Then I started building designers.",
     copy:
-      "Teaching became part of the work because design in Armenia needed stronger habits, sharper thinking, and a more serious path for beginners.",
+      "I built a school because design in Armenia needed stronger habits, sharper critique, and a serious path for beginners to become professionals.",
     meta: "education / Pedanyan School"
   },
   {
     marker: "03",
     title: "Then the work became public.",
     copy:
-      "Talks, critique nights, UX Storm, Drunk Talks, workshops, and media became ways to bring designers and creative people into the same room.",
+      "UX Storm, Drunk Talks, critique nights, workshops, and media — rooms where designers argue, learn, and raise the bar together.",
     meta: "community / public formats"
   }
 ];
@@ -993,6 +1119,10 @@ function WireframeChrome() {
       cursor.style.top = `${event.clientY}px`;
       label.style.left = `${event.clientX}px`;
       label.style.top = `${event.clientY}px`;
+      label.classList.toggle(
+        "is-flipped",
+        event.clientX + label.offsetWidth + 44 > window.innerWidth
+      );
     };
 
     const onScroll = () => {
@@ -1008,35 +1138,49 @@ function WireframeChrome() {
       });
     };
 
-    const hoverables = document.querySelectorAll("a, button, .dw-card, .dw-work-row, .dw-media-item");
-    const enter = () => {
-      if (!cursor || !label) return;
-      cursor.style.width = "54px";
-      cursor.style.height = "54px";
-      label.textContent = "open";
+    const cursorLabelFor = (target: Element): string => {
+      const tagged = target.closest<HTMLElement>("[data-cursor-label]");
+      if (tagged?.dataset.cursorLabel) return tagged.dataset.cursorLabel;
+      const music = target.closest(".dw-music-button");
+      if (music) return music.getAttribute("aria-pressed") === "true" ? "turn sound off" : "turn sound on";
+      const theme = target.closest(".dw-theme-toggle");
+      if (theme) return (theme.textContent || "").includes("night") ? "switch to night mode" : "switch to day mode";
+      if (target.closest(".dw-portfolio-project-card, .dw-case-prevnext-card, .dw-case-more-card")) return "open case study";
+      if (target.closest(".dw-public-podcast-play, .dw-public-journal-entry.is-podcast")) return "watch the episode";
+      if (target.closest(".dw-public-journal-entry")) return "read the article";
+      if (target.closest("video")) return "play video";
+      const anchor = target.closest("a");
+      if (anchor) {
+        const href = anchor.getAttribute("href") || "";
+        if (href.startsWith("https://t.me")) return "message me on telegram";
+        if (href.startsWith("mailto:")) return "write me an email";
+        if (anchor.getAttribute("target") === "_blank") return "opens in a new tab";
+        const text = (anchor.textContent || "").replace(/\s+/g, " ").trim();
+        if (text && text.length <= 16) return `go to ${text}`;
+        return "open";
+      }
+      return "";
     };
-    const leave = () => {
+
+    const onMouseOver = (event: MouseEvent) => {
       if (!cursor || !label) return;
-      cursor.style.width = "22px";
-      cursor.style.height = "22px";
-      label.textContent = "explore";
+      const target = event.target instanceof Element ? event.target : null;
+      const text = target ? cursorLabelFor(target) : "";
+      label.textContent = text;
+      label.classList.toggle("is-visible", Boolean(text));
+      cursor.style.width = text ? "54px" : "22px";
+      cursor.style.height = text ? "54px" : "22px";
     };
 
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("scroll", onScroll, { passive: true });
-    hoverables.forEach((element) => {
-      element.addEventListener("mouseenter", enter);
-      element.addEventListener("mouseleave", leave);
-    });
+    document.addEventListener("mouseover", onMouseOver, true);
     onScroll();
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("scroll", onScroll);
-      hoverables.forEach((element) => {
-        element.removeEventListener("mouseenter", enter);
-        element.removeEventListener("mouseleave", leave);
-      });
+      document.removeEventListener("mouseover", onMouseOver, true);
     };
   }, []);
 
@@ -1120,11 +1264,11 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
         >
           <span>{theme === "day" ? "night mode" : "day mode"}</span>
         </button>
-        <a
+        <button
           className="dw-pill"
-          href={DAVIT_LINKEDIN_URL}
-          target="_blank"
-          rel="noreferrer"
+          type="button"
+          onClick={() => openContactChat()}
+          data-cursor-label="start a conversation"
           onMouseEnter={() => emitHeroPose("good")}
           onMouseLeave={() => emitHeroPose(null)}
           onFocus={() => emitHeroPose("good")}
@@ -1132,7 +1276,7 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
         >
           <MessageCircle className="dw-talk-icon" aria-hidden="true" strokeWidth={1.8} />
           <span>{websiteContent.navigation.talk.label}</span>
-        </a>
+        </button>
       </div>
     </header>
   );
@@ -1150,9 +1294,24 @@ function FixedSocialLinks() {
   );
 }
 
+const DAVIT_TELEGRAM_URL = "https://t.me/pedanyan";
+
+
 function SiteFooter() {
   return (
     <footer className="dw-site-footer">
+      <div className="dw-footer-invite">
+        <p>Hiring, building something, or want to bring me into a room?</p>
+        <button
+          className="dw-footer-invite-button"
+          type="button"
+          onClick={() => openContactChat()}
+          data-cursor-label="start a conversation"
+        >
+          <span>Start a conversation</span>
+          <span aria-hidden="true">&rarr;</span>
+        </button>
+      </div>
       <HomeTalkRoutingSection />
     </footer>
   );
@@ -1179,6 +1338,7 @@ function PageShell({
       </div>
       {children}
       {showFooter ? <SiteFooter /> : null}
+      <ContactChat />
     </main>
   );
 }
@@ -2255,8 +2415,8 @@ export function HomeStoryTeaserSection() {
         story
       </div>
       <p>
-        I design products, teach beginners, and bring designers together through talks,
-        workshops, and critique sessions in Armenia.
+        I design products, build designers, and host the rooms where Armenia&apos;s
+        design community argues, learns, and grows.
       </p>
       <NavAnchor className="dw-home-text-link" href="/am/public-work">
         Read my story
@@ -2301,11 +2461,15 @@ function AnimatedAccentPath() {
     <svg className="dw-experience-path" viewBox="0 0 720 1100" preserveAspectRatio="none" aria-hidden="true">
       <path
         className="dw-experience-path-line"
-        d="M520 60 C470 250 488 418 438 572 C388 724 408 884 340 1040"
+        d="M -40 10 C 160 90 130 250 96 370 C 66 476 150 560 250 520 C 350 480 330 356 230 360 C 128 364 130 520 190 610 C 244 690 170 760 110 810 C 60 852 70 930 150 960 C 300 1016 540 1010 760 1130"
       />
     </svg>
   );
 }
+
+const localCompanyLogos: Record<string, string> = {
+  "Liga Insurance": "/logos/liga-icon.svg"
+};
 
 function getCompanyLogoUrl(domain: string, sourceIndex: number) {
   const safeDomain = domain.trim();
@@ -2321,7 +2485,7 @@ function getCompanyLogoUrl(domain: string, sourceIndex: number) {
 
 function ExperienceLogo({ company, domain }: { company: string; domain: string }) {
   const [sourceIndex, setSourceIndex] = useState(0);
-  const logoUrl = getCompanyLogoUrl(domain, sourceIndex);
+  const logoUrl = localCompanyLogos[company] ?? getCompanyLogoUrl(domain, sourceIndex);
   const initials = company
     .split(/\s|\/|-/)
     .filter(Boolean)
@@ -3326,6 +3490,7 @@ function HomeUnifiedScrollExperience() {
           aria-label="Design facts"
         >
           <CosmicDustBackground speedSourceRef={statsDustRef} variant="facts" />
+          <OctagonField />
           {designerStats.map((stat, index) => {
             const isFinal = index === designerStats.length - 1;
             const sideClass = index % 2 === 0 ? "dw-designer-stat-left" : "dw-designer-stat-right";
@@ -3735,29 +3900,65 @@ function LegacyPublicMediaGridPageSection() {
 
 export function PublicMediaGridPageSection() {
   const [activePodcast, setActivePodcast] = useState<(typeof publicArchiveEntries)[number] | null>(null);
+  const [activeArchiveYear, setActiveArchiveYear] = useState<string>("2026");
   const archiveEntries = [...publicArchiveEntries].sort((a, b) => {
     const dateFor = (entry: (typeof publicArchiveEntries)[number]) => entry.publishedAt ?? `${entry.year}-01-01`;
     return dateFor(b).localeCompare(dateFor(a));
   });
+  const archiveYears = [...new Set(archiveEntries.map((entry) => entry.year))];
+
+  useEffect(() => {
+    let frame = 0;
+    const updateActiveYear = () => {
+      frame = 0;
+      const center = window.innerHeight / 2;
+      const entries = [...document.querySelectorAll<HTMLElement>("[data-public-archive-year]")];
+      const nearest = entries.reduce<HTMLElement | undefined>((closest, candidate) => {
+        if (!closest) return candidate;
+        const candidateDistance = Math.abs(candidate.getBoundingClientRect().top - center);
+        const closestDistance = Math.abs(closest.getBoundingClientRect().top - center);
+        return candidateDistance < closestDistance ? candidate : closest;
+      }, undefined);
+      const year = nearest?.dataset.publicArchiveYear;
+      if (year) setActiveArchiveYear(year);
+    };
+    const requestUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateActiveYear);
+    };
+    requestUpdate();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   return (
     <section className="dw-media-page" id="public-work">
       <section className="dw-public-media-section dw-public-journal" aria-label="Public work archive">
+        <nav className="dw-public-year-timeline" aria-label="Public archive years">
+          {archiveYears.map((year) => (
+            <a key={year} href={`#public-year-${year}`} className={activeArchiveYear === year ? "is-active" : undefined}>{year}</a>
+          ))}
+        </nav>
         <header className="dw-public-journal-hero">
           <span>Public work / 2018–now</span>
           <h1>Talks, events,<br />and conversations<br />in public.</h1>
           <p>I organise formats, moderate discussions, teach, write, and join the conversations that help Armenia’s design community get sharper and more connected.</p>
         </header>
 
-        <section className="dw-public-journal-feature" aria-label="Featured public work">
-          <span>Featured series</span>
-          <div><p>UX Storm</p><h2>Three events. One growing product-design community.</h2></div>
-          <p>UX Storm is an open format for talks, speed discussions, and candid exchange between designers, researchers, writers, founders, and people who care about better products.</p>
-        </section>
-
         <section className="dw-public-journal-grid" aria-label="Public work archive">
           {archiveEntries.map((entry, index) => {
             const videoId = "videoId" in entry ? entry.videoId : undefined;
+            const externalUrl = "externalUrl" in entry ? entry.externalUrl : undefined;
+            const isFirstInYear = archiveEntries.findIndex((item) => item.year === entry.year) === index;
+            const yearAnchorProps = {
+              id: isFirstInYear ? `public-year-${entry.year}` : undefined,
+              "data-public-archive-year": entry.year,
+            };
+            const linkLabel = videoId ? "Watch and read ↗" : externalUrl ? "Read on Medium" : "Read article ↗";
             const cardContent = <>
               <div className={`dw-public-journal-entry-media${entry.secondaryImage ? " has-secondary" : ""}`}>
                 <img src={entry.image} alt={entry.imageAlt} />
@@ -3767,15 +3968,22 @@ export function PublicMediaGridPageSection() {
               <div><span>{entry.year}</span><span>{entry.type}</span></div>
               <h2>{entry.title}</h2>
               <p>{entry.description}</p>
-              <span className="dw-public-journal-link">{videoId ? "Play episode ↗" : "Read article ↗"}</span>
+              <span className={`dw-public-journal-link${externalUrl ? " is-external" : ""}`}>
+                {linkLabel}
+                {externalUrl ? <ExternalLink size={13} strokeWidth={1.7} aria-hidden="true" /> : null}
+              </span>
             </>;
 
             return videoId ? (
-              <button className={`dw-public-journal-entry is-podcast entry-${index + 1}`} key={entry.title} type="button" onClick={() => setActivePodcast(entry)}>
+              <button {...yearAnchorProps} className={`dw-public-journal-entry is-podcast entry-${index + 1}`} key={entry.title} type="button" onClick={() => setActivePodcast(entry)}>
                 {cardContent}
               </button>
+            ) : externalUrl ? (
+              <a {...yearAnchorProps} className={`dw-public-journal-entry entry-${index + 1}`} key={entry.title} href={externalUrl} target="_blank" rel="noreferrer">
+                {cardContent}
+              </a>
             ) : (
-              <a className={`dw-public-journal-entry entry-${index + 1}`} key={entry.title} href={`/am/public-work/${entry.slug}`}>
+              <a {...yearAnchorProps} className={`dw-public-journal-entry entry-${index + 1}`} key={entry.title} href={`/am/public-work/${entry.slug}`}>
                 {cardContent}
               </a>
             );
@@ -3805,12 +4013,37 @@ function PublicArticlePage({ slug }: { slug: string }) {
   const article = publicArticleCopy[slug];
   const videoId = entry && "videoId" in entry ? entry.videoId : undefined;
   const gallery = (entry && "gallery" in entry ? entry.gallery : []) ?? [];
+  const galleryCaptions = (entry && "galleryCaptions" in entry ? entry.galleryCaptions : []) ?? [];
+  const inlineImages = (entry && "inlineImages" in entry ? entry.inlineImages : []) ?? [];
+  const inlineCaptions = (entry && "inlineCaptions" in entry ? entry.inlineCaptions : []) ?? [];
+  const articleEntries = publicArchiveEntries
+    .filter((item) => Boolean(publicArticleCopy[item.slug]) && !("externalUrl" in item))
+    .sort((a, b) => {
+      const dateFor = (item: (typeof publicArchiveEntries)[number]) => item.publishedAt ?? `${item.year}-01-01`;
+      return dateFor(a).localeCompare(dateFor(b));
+    });
+  const articleIndex = entry ? articleEntries.findIndex((item) => item.slug === entry.slug) : -1;
+  const nextArticle = articleIndex >= 0 && articleIndex < articleEntries.length - 1 ? articleEntries[articleIndex + 1] : undefined;
+
+  const pilotImageSizes: Record<string, [number, number]> = {
+    "/public-work/ux-storm-1-2/banner-cover.jpg": [2200, 1238],
+    "/public-work/ux-storm-1-2/banner-alexandra.jpg": [2200, 1238],
+    "/public-work/ux-storm-1-2/banner-davit.jpg": [2200, 1238],
+    "/public-work/ux-storm-1-2/banner-nareg.jpg": [2200, 1238],
+    "/public-work/ux-storm-1-2/banner-hrachik.jpg": [2200, 1238],
+    "/public-work/ux-storm-1-2/banner-shiraz.jpg": [2200, 1238],
+    "/public-work/ux-storm-1-2/research-talk.jpg": [1650, 2200],
+    "/public-work/ux-storm-1-2/audience.jpg": [2200, 1237],
+    "/public-work/ux-storm-1-2/speed-discussion.jpg": [1650, 2200]
+  };
+  const articleRef = useRef<HTMLElement | null>(null);
+  useTextMotion(articleRef);
 
   if (!entry || !article) return <PublicWorkPage />;
 
   return (
-    <PageShell activePage="publicWork">
-      <article className="dw-public-article">
+    <PageShell activePage="publicWork" showFooter={false}>
+      <article className="dw-public-article dw-motion-pilot" ref={articleRef}>
         <a className="dw-public-article-back" href="/am/public-work">← Public archive</a>
         <header className="dw-public-article-hero">
           <div>
@@ -3818,14 +4051,22 @@ function PublicArticlePage({ slug }: { slug: string }) {
             <h1>{entry.title}</h1>
             <p>{article.standfirst}</p>
           </div>
-          {videoId ? (
-            <iframe
-              src={`https://www.youtube-nocookie.com/embed/${videoId}`}
-              title={entry.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          ) : <img src={entry.image} alt={entry.imageAlt} />}
+          <div className="dw-public-article-hero-media">
+            {videoId ? (
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+                title={entry.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            ) : <img src={entry.image} alt={entry.imageAlt} width={pilotImageSizes[entry.image]?.[0]} height={pilotImageSizes[entry.image]?.[1]} />}
+            {entry.type.includes("UX Storm") ? (
+              <span className="dw-uxstorm-badge" aria-hidden="true">
+                <img className="dw-uxstorm-badge-ring" src="/public-work/ux-storm-badge-ring.svg" alt="" />
+                <img className="dw-uxstorm-badge-mark" src="/public-work/ux-storm-badge-mark.svg" alt="" />
+              </span>
+            ) : null}
+          </div>
         </header>
 
         <div className="dw-public-article-body">
@@ -3834,33 +4075,60 @@ function PublicArticlePage({ slug }: { slug: string }) {
             <span>{entry.type}</span>
           </aside>
           <div>
-            {article.sections.map((section) => (
+            {article.sections.map((section, sectionIndex) => (
               <section key={section.title}>
                 <h2>{section.title}</h2>
-                {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+                {inlineImages[sectionIndex] ? (
+                  <figure className={`dw-public-article-inline-image image-${sectionIndex + 1}`}>
+                    <img
+                      src={inlineImages[sectionIndex]}
+                      alt={`${entry.type}: ${section.title}`}
+                      loading="lazy"
+                      width={pilotImageSizes[inlineImages[sectionIndex]]?.[0]}
+                      height={pilotImageSizes[inlineImages[sectionIndex]]?.[1]}
+                    />
+                    {inlineCaptions[sectionIndex] ? <figcaption>{inlineCaptions[sectionIndex]}</figcaption> : null}
+                  </figure>
+                ) : null}
               </section>
             ))}
           </div>
         </div>
 
         {gallery.length ? (
-          <section className="dw-public-article-gallery" aria-label="UX Storm 1.0 event gallery">
-            <span>Event gallery / UX Storm 1.0</span>
-            <div>
-              {gallery.map((image, index) => <img key={image} src={image} alt={`UX Storm 1.0 event moment ${index + 1}`} loading="lazy" />)}
-            </div>
+          <section className="dw-public-article-gallery" aria-label={`${entry.type} event gallery`}>
+            <span>
+              Selected moments / {entry.type}
+              {"galleryNote" in entry && entry.galleryNote ? <em className="dw-public-gallery-note">{entry.galleryNote}</em> : null}
+            </span>
+            <MediaCarousel
+              ariaLabel={`${entry.type} event gallery`}
+              items={gallery.map((src, i) => ({
+                src,
+                caption: galleryCaptions[i],
+                alt: `${entry.type} event moment ${i + 1}`,
+                width: pilotImageSizes[src]?.[0],
+                height: pilotImageSizes[src]?.[1]
+              }))}
+            />
           </section>
-        ) : (
+        ) : entry.secondaryImage ? (
           <section className="dw-public-article-gallery-placeholder" aria-label="Event gallery placeholder">
-            <span>Event gallery</span>
-            <p>More images from this event will be added here.</p>
-            {entry.secondaryImage ? <img src={entry.secondaryImage} alt="Additional event moment" /> : null}
+            <span>Selected moment</span>
+            <img src={entry.secondaryImage} alt="Additional event moment" />
           </section>
-        )}
+        ) : null}
 
         <footer className="dw-public-article-footer">
           <a href={entry.url} target="_blank" rel="noreferrer">View related source ↗</a>
-          <a href="/am/public-work">More public work ↗</a>
+          <PullToContinue
+            href={nextArticle ? `/am/public-work/${nextArticle.slug}` : "/am/public-work"}
+            kicker={nextArticle ? "Next article" : "Back to the archive"}
+            title={nextArticle ? nextArticle.title : "More public work"}
+          />
         </footer>
       </article>
     </PageShell>
@@ -3946,12 +4214,53 @@ export function LetsTalkPage() {
   );
 }
 
+const partnerBrands: Array<{ name: string; domain: string; wordmark?: string }> = [
+  { name: "NPUA", domain: "polytechnic.am" },
+  { name: "Mellat Bank", domain: "mellatbank.am" },
+  { name: "Public Council of Armenia", domain: "publiccouncil.am" },
+  { name: "SoftLand", domain: "softland.am" },
+  { name: "Wirestock", domain: "wirestock.io" },
+  { name: "Yerevan Mall", domain: "yerevanmall.am" },
+  { name: "Kinodaran", domain: "kinodaran.am", wordmark: "/logos/partners/kinodaran.svg" },
+  { name: "TCF", domain: "tcf.am", wordmark: "/logos/partners/tcf.png" },
+  { name: "W8RK", domain: "w8rk.com" },
+  { name: "8Imiges", domain: "" },
+  { name: "Insafe", domain: "insafe.am" },
+  { name: "Sarkissian.pro", domain: "sarkissian.pro" }
+];
+
+export function HomePartnerLogosSection() {
+  const doubled = [...partnerBrands, ...partnerBrands];
+  return (
+    <section className="dw-partner-marquee" aria-label="Partner companies and organizations">
+      <div className="dw-partner-marquee-track">
+        {doubled.map((item, index) => (
+          <span
+            className="dw-partner-marquee-item"
+            key={`${item.name}-${index}`}
+            aria-hidden={index >= partnerBrands.length}
+          >
+            {item.wordmark ? (
+              <img className="dw-partner-marquee-wordmark" src={item.wordmark} alt={item.name} loading="lazy" />
+            ) : (
+              <>
+                <ExperienceLogo company={item.name} domain={item.domain} />
+                <span>{item.name}</span>
+              </>
+            )}
+          </span>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function HomePage() {
   return (
     <PageShell className="dw-home-shell" activePage="home">
       <HomeIntroSection />
       <HomeUnifiedScrollExperience />
-      <HomePathCardsSection />
+      <HomePartnerLogosSection />
     </PageShell>
   );
 }
@@ -3970,7 +4279,7 @@ export function PortfolioPage() {
 
 export function ProjectPage({ slug }: { slug: string }) {
   return (
-    <PageShell activePage="designer">
+    <PageShell activePage="designer" showFooter={false}>
       <CaseStudyContent slug={slug} />
     </PageShell>
   );
@@ -4077,7 +4386,6 @@ export function AppRouter() {
   if (path === "/am/story") return <PublicWorkPage />;
   if (path === "/am/school") return <SchoolPage />;
   const publicArticleMatch = path.match(/^\/am\/public-work\/([^/]+)$/);
-  if (publicArticleMatch && publicArchiveEntries.some((entry) => entry.slug === publicArticleMatch[1] && "videoId" in entry)) return <PublicWorkPage />;
   if (publicArticleMatch) return <PublicArticlePage slug={publicArticleMatch[1]} />;
   if (path === "/am/public-work") return <PublicWorkPage />;
   if (path === "/am/lets-talk") {

@@ -6,7 +6,7 @@ import type { RefObject } from "react";
 const SKIP_WITHIN = [
   "[data-anim]",
   "[data-no-anim]",
-  ".dw-case-intro",
+  ".dw-case-intro",".dw-case-opening",
   ".dw-mex-intro",
   ".dw-public-article-hero",
   ".dw-portfolio-index-hero",

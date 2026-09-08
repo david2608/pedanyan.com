@@ -31,6 +31,12 @@ import { MediaCarousel } from "./MediaCarousel";
 import { ContactChat, openContactChat } from "./ContactChat";
 import { PullToContinue } from "./PullToContinue";
 import { OctagonField } from "./OctagonField";
+import {
+  ExperienceDetailModal,
+  experienceBody,
+  experienceSummary,
+  type ExperienceModalPayload
+} from "./ExperienceDetail";
 import { useTextMotion } from "./textMotion";
 import { siteData } from "./siteData";
 import { websiteContent } from "./websiteContent";
@@ -669,13 +675,33 @@ const publicArchiveEntries = [
   }
 ];
 
+// Hover label per public piece — each names what that specific article holds.
+const articleCursorLabels: Record<string, string> = {
+  "ux-storm-1-4": "Where designers argued about AI",
+  "design-in-2030": "The room that forecast 2030",
+  "ux-storm-1-2": "Five tracks, one August Friday",
+  "ux-storm-1-1": "An invitation-only design night",
+  "ux-storm-1-0": "How UX Storm began",
+  "ux-design-battle-jury": "Judging design under pressure",
+  "tech-week-vanadzor": "Naming Armenia's design problem",
+  "2x-masnageter": "Is product design worth it?",
+  "how2b-ui-ux-designer": "Where to start in UX",
+  "undesign-armenia-medium": "The Անդիզայն essay",
+  "why-art-matters-medium": "Why art still matters",
+  "patterns-rhythm-medium": "What music taught me about UX"
+};
+
+function articleCursorLabel(slug: string, isPodcast = false) {
+  return articleCursorLabels[slug] ?? (isPodcast ? "watch the episode" : "read the article");
+}
+
 const publicArticleCopy: Record<string, { eyebrow: string; standfirst: string; sections: Array<{ title: string; paragraphs: string[] }> }> = {
   "ux-storm-1-0": {
     eyebrow: "UX Storm 1.0 / Kamar Business Center, 2 March",
-    standfirst: "The first UX Storm took over 200 applications for 120 seats. Two keynotes, six speed-discussion topics, and a question the industry here had been asking privately: what does a company actually expect from a designer?",
+    standfirst: "The first UX Storm took over 200 applications for 120 seats. Two talks framed one problem from opposite ends: what a company expects from a designer, and what a company has to build before it can use one well.",
     sections: [
       { title: "The chart that quieted the room", paragraphs: ["Ishkhan Adamyan — NNG certified, one of the few people in the country holding that credential — put a stacked bar chart on the screen and the room went still. It compared what a small company expects from an Intern or Junior, from a Middle, and from the level above, broken into specific proficiencies rather than job titles: design software, wireframes and prototypes built around customer needs, user research and testing, interaction design and information architecture, experience with design systems, the ability to communicate a design idea, teamwork, management. And near the bottom, sitting there without apology, basic marketing and SMM knowledge.", "That last line is the honest one. In a small Armenian company a designer is rarely only a designer, and here it was on a screen in front of a full room instead of being discovered in month three of a job. Nobody argued with it.", "This was the reason to build the event. There were plenty of designers in Armenia and very few places where they could compare notes on what the work actually demands."] },
-      { title: "The talk I gave, from the other side", paragraphs: ["I was the second speaker, at the time Practice Lead at Armenian Code Academy, and I took the question up a level. Not what a company expects from a designer, but what a company has to build before it can use good design at all.", "Three mechanisms, and I would still argue for the same three: a UX metrics dashboard that ties design work to engagement, conversion and customer outcomes, because design that cannot be measured gets cut first; training and coaching, on the argument that a UX culture spreads through workshops and individual coaching rather than announcements; and a community of practice, the recurring forum where practitioners share methods instead of each reinventing them.", "Put next to Ishkhan's chart, the two talks framed one problem from opposite ends. His was about a designer's readiness. Mine was about an organisation's capacity to make use of it. A designer can be entirely ready for a company that has no mechanism to hear them — a common and expensive situation that never comes up in a job interview."] },
+      { title: "The talk I gave: mentorship and knowledge sharing", paragraphs: ["I spoke second, then Design Practice Lead at Armenian Code Academy, and opened with the least flattering fact I had. For the previous four years I had worked in companies with low or approximate UX maturity. I put it on a slide and labelled it a not-very-interesting fact about me. It was also the only reason I had anything useful to say on the subject.", "The talk ran on Chapman and Plewes' framework, which sorts organisations into five stages of UX maturity — beginning, awareness, adopting, realizing, exceptional. I put the global distribution on one slide and the Armenian one on the next, because the distance between them was the whole argument.", "Underneath it sat five mechanisms, and I would still argue for all five. A maturity assessment, so an organisation finds out where it actually stands rather than where it thinks it stands. A capability framework naming the specific skills required to move up a stage. A metrics dashboard tying design work to engagement, conversion and customer outcomes, because design that cannot be measured is the first thing cut. Training and coaching, on the argument that a UX culture spreads through workshops and individual attention rather than announcements. And a community of practice — the recurring forum where practitioners share methods instead of each quietly reinventing them.", "The second half was mentorship, which I treat as a design problem rather than a favour. A mentorship programme has participants, a timeline, goals, assignments and an assessment; decide those five and it works, skip them and it becomes two people having coffee. I also drew a line most of us blur: teaching is structured and one-to-many, tutoring is personal and one-to-few, and knowledge sharing is the broader thing that holds both plus every informal exchange in between.", "Then the numbers that made the case. Armenia had somewhere between 1,200 and 1,500 UX designers, of whom roughly 200 were mid-level or above. In the two years before that evening, 320 people had learned UX at ACA alone — a fifth of the country's designers, out of one school. That is the argument for knowledge sharing in a single ratio: the pipeline is being filled faster than the senior end of it is being grown.", "I ended on what sharing had given me rather than what it owed anyone: better problem-solving, sharper communication, a wider network, work I was happier doing, and the elimination of my fear of public speaking — which I marked, honestly, as in progress."] },
       { title: "Why the format mattered more than the talks", paragraphs: ["Over 200 people applied. 120 were shortlisted. That ratio is the finding: the appetite was already there, and what was missing was the room.", "So the second half was not more talking at people. Six speed-discussion topics ran alongside the main programme, which meant a good share of the 120 spent the evening answering the question rather than watching two speakers answer it. Ameriabank partnered on the event and Armenian Code Academy brought it together.", "Between sessions someone played a keyboard at the edge of the stage. Students sat in the same rows as people running design teams. It was a professional evening, not a formal one — and it set the shape every UX Storm since has kept."] }
     ]
   },
@@ -902,13 +928,15 @@ function NavAnchor({
   className,
   href,
   isActive = false,
-  poseOnHover
+  poseOnHover,
+  cursorLabel
 }: {
   children: ReactNode;
   className?: string;
   href: string;
   isActive?: boolean;
   poseOnHover?: HeroPose;
+  cursorLabel?: string;
 }) {
   const link = useResolvedNavLink(href);
   const classes = [className, isActive ? "is-active" : ""].filter(Boolean).join(" ");
@@ -922,7 +950,7 @@ function NavAnchor({
     : {};
 
   return (
-    <a className={classes || undefined} href={link.href} target={link.target} aria-current={isActive ? "page" : undefined} {...poseHandlers}>
+    <a className={classes || undefined} href={link.href} target={link.target} aria-current={isActive ? "page" : undefined} data-cursor-label={cursorLabel} {...poseHandlers}>
       {children}
     </a>
   );
@@ -1193,6 +1221,14 @@ function WireframeChrome() {
   );
 }
 
+// Hover labels for the main nav, keyed by destination rather than by label text
+// so a Notion re-sync of the nav wording cannot silently detach them.
+const navCursorLabels: Record<string, string> = {
+  "/am/designer": "Explore portfolio",
+  "/am/public-work": "About my role in community",
+  "/am/school": "Will be ready soon"
+};
+
 export function SiteHeader({ activePage }: { activePage?: PageKey }) {
   const [theme, setTheme] = useState<"day" | "night">("day");
   const [isScrolled, setIsScrolled] = useState(false);
@@ -1226,7 +1262,7 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
 
   return (
     <header className={`dw-header ${isScrolled ? "is-scrolled" : ""}`}>
-      <NavAnchor className="dw-logo" href="/am" poseOnHover="scroll">
+      <NavAnchor className="dw-logo" href="/am" poseOnHover="scroll" cursorLabel="To the Home">
         <span className="dw-logo-word">
           <img src="/brand/pdnyn-handdrawn.png" alt="PDNYN" />
         </span>
@@ -1241,6 +1277,7 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
               (activePage === "publicWork" && item.href === "/am/public-work")
             }
             poseOnHover={item.href === "/am/public-work" ? "idk" : undefined}
+            cursorLabel={navCursorLabels[item.href]}
             key={item.href}
           >
             {item.label}
@@ -1252,6 +1289,7 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
         href={websiteContent.navigation.school.href}
         isActive={activePage === "school"}
         poseOnHover="idk"
+        cursorLabel={navCursorLabels[websiteContent.navigation.school.href]}
       >
         {websiteContent.navigation.school.label}
       </NavAnchor>
@@ -1300,18 +1338,6 @@ const DAVIT_TELEGRAM_URL = "https://t.me/pedanyan";
 function SiteFooter() {
   return (
     <footer className="dw-site-footer">
-      <div className="dw-footer-invite">
-        <p>Hiring, building something, or want to bring me into a room?</p>
-        <button
-          className="dw-footer-invite-button"
-          type="button"
-          onClick={() => openContactChat()}
-          data-cursor-label="start a conversation"
-        >
-          <span>Start a conversation</span>
-          <span aria-hidden="true">&rarr;</span>
-        </button>
-      </div>
       <HomeTalkRoutingSection />
     </footer>
   );
@@ -2456,16 +2482,6 @@ export function HomeTalkRoutingSection() {
   );
 }
 
-function AnimatedAccentPath() {
-  return (
-    <svg className="dw-experience-path" viewBox="0 0 720 1100" preserveAspectRatio="none" aria-hidden="true">
-      <path
-        className="dw-experience-path-line"
-        d="M -40 10 C 160 90 130 250 96 370 C 66 476 150 560 250 520 C 350 480 330 356 230 360 C 128 364 130 520 190 610 C 244 690 170 760 110 810 C 60 852 70 930 150 960 C 300 1016 540 1010 760 1130"
-      />
-    </svg>
-  );
-}
 
 const localCompanyLogos: Record<string, string> = {
   "Liga Insurance": "/logos/liga-icon.svg"
@@ -2517,30 +2533,59 @@ function ExperienceList({
   activeIndex: number;
   onSelect?: (index: number) => void;
 }) {
+  const [detail, setDetail] = useState<ExperienceModalPayload | null>(null);
+
   return (
     <>
+      <header className="dw-experience-heading">
+        <span>Work experience</span>
+        <strong>From interfaces to design leadership.</strong>
+      </header>
       <ol className="dw-experience-list">
-      {experiences.map((experience, index) => (
-        <li className={index === activeIndex ? "is-active" : ""} key={experience.company}>
-          <button
-            className="dw-experience-item-button"
-            type="button"
-            onClick={() => onSelect?.(index)}
-            aria-current={index === activeIndex ? "step" : undefined}
-          >
-            <span className="dw-experience-company">{experience.company}</span>
-            <span className="dw-experience-active-detail" aria-hidden={index !== activeIndex}>
+      {experiences.map((experience, index) => {
+        const isActive = index === activeIndex;
+        return (
+          <li className={isActive ? "is-active" : ""} key={experience.company}>
+            <button
+              className="dw-experience-item-button"
+              type="button"
+              onClick={() => onSelect?.(index)}
+              aria-current={isActive ? "step" : undefined}
+              data-cursor-label={isActive ? "" : "See this role"}
+            >
+              <span className="dw-experience-company">{experience.company}</span>
+            </button>
+            <div className="dw-experience-active-detail" aria-hidden={!isActive}>
               <ExperienceLogo company={experience.company} domain={experience.logoDomain} />
               <span className="dw-experience-meta">
                 <span>{experience.role}</span>
                 <span>{experience.type}</span>
               </span>
-              <span className="dw-experience-description">{experience.description}</span>
-            </span>
-          </button>
-        </li>
-      ))}
+              <span className="dw-experience-description">
+                {experienceSummary(experience.company, experience.description)}
+              </span>
+              <button
+                className="dw-experience-more"
+                type="button"
+                tabIndex={isActive ? 0 : -1}
+                data-cursor-label="Read the full story"
+                onClick={() =>
+                  setDetail({
+                    company: experience.company,
+                    role: experience.role,
+                    type: experience.type,
+                    body: experienceBody(experience.company, experience.description)
+                  })
+                }
+              >
+                Read more
+              </button>
+            </div>
+          </li>
+        );
+      })}
       </ol>
+      <ExperienceDetailModal entry={detail} onClose={() => setDetail(null)} />
     </>
   );
 }
@@ -2553,6 +2598,7 @@ function ExperienceScrollSection() {
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   const compactMotion = useMediaQuery("(max-width: 760px)");
   const useStaticMode = reducedMotion || compactMotion;
+  const [staticDetail, setStaticDetail] = useState<ExperienceModalPayload | null>(null);
 
   useEffect(() => {
     if (useStaticMode || !sectionRef.current || !sceneRef.current) return;
@@ -2560,17 +2606,11 @@ function ExperienceScrollSection() {
     const section = sectionRef.current;
     const scene = sceneRef.current;
     const ctx = gsap.context(() => {
-      const line = scene.querySelector<SVGPathElement>(".dw-experience-path-line");
       const list = scene.querySelector<HTMLElement>(".dw-experience-list");
       const items = gsap.utils.toArray<HTMLElement>(".dw-experience-list li");
 
-      if (!line || !list || items.length === 0) return;
+      if (!list || items.length === 0) return;
 
-      const lineLength = line.getTotalLength();
-      gsap.set(line, {
-        strokeDasharray: lineLength,
-        strokeDashoffset: lineLength
-      });
       gsap.set(items, { autoAlpha: 0.22, y: 28, scale: 0.96 });
       gsap.set(items[0], { autoAlpha: 1, y: 0, scale: 1 });
 
@@ -2590,8 +2630,6 @@ function ExperienceScrollSection() {
 
       centerActiveItem(0, true);
 
-      const drawLine = gsap.quickTo(line, "strokeDashoffset", { duration: 0.5, ease: "power2.out" });
-      const floatPath = gsap.quickTo(".dw-experience-path", "yPercent", { duration: 0.7, ease: "power2.out" });
 
       ScrollTrigger.create({
         trigger: section,
@@ -2608,9 +2646,6 @@ function ExperienceScrollSection() {
             experiences.length - 1,
             Math.max(0, Math.round(preciseIndex))
           );
-
-          drawLine(lineLength * (1 - self.progress));
-          floatPath(-8 * self.progress);
 
           if (nextIndex === activeIndexRef.current) return;
           activeIndexRef.current = nextIndex;
@@ -2635,6 +2670,13 @@ function ExperienceScrollSection() {
     return () => ctx.revert();
   }, [useStaticMode]);
 
+  // The compact variant is a normal scrolling section, so its title uses the
+  // site-wide motion.min.js reveal. Nudge the script once it has mounted.
+  useEffect(() => {
+    if (!useStaticMode) return;
+    (window as unknown as { motion?: { scan?: () => void } }).motion?.scan?.();
+  }, [useStaticMode]);
+
   if (useStaticMode) {
     return (
       <section className="dw-experience-static" aria-label="Work experience">
@@ -2642,6 +2684,7 @@ function ExperienceScrollSection() {
           <span aria-hidden="true" />
           work experience
         </div>
+        <h2 className="dw-experience-static-title" data-anim="mask">From interfaces to design leadership.</h2>
         <div className="dw-experience-static-list">
           {experiences.map((experience, index) => (
             <article key={experience.company}>
@@ -2651,10 +2694,26 @@ function ExperienceScrollSection() {
               </div>
               <h3>{experience.company}</h3>
               <p>{experience.role}</p>
-              <p>{experience.description}</p>
+              <p>{experienceSummary(experience.company, experience.description)}</p>
+              <button
+                className="dw-experience-more dw-experience-static-more"
+                type="button"
+                data-cursor-label="Read the full story"
+                onClick={() =>
+                  setStaticDetail({
+                    company: experience.company,
+                    role: experience.role,
+                    type: experience.type,
+                    body: experienceBody(experience.company, experience.description)
+                  })
+                }
+              >
+                Read more
+              </button>
             </article>
           ))}
         </div>
+        <ExperienceDetailModal entry={staticDetail} onClose={() => setStaticDetail(null)} />
       </section>
     );
   }
@@ -2662,7 +2721,6 @@ function ExperienceScrollSection() {
   return (
     <section className="dw-experience-scroll" aria-label="Work experience" ref={sectionRef}>
       <div className="dw-experience-scene" ref={sceneRef}>
-        <AnimatedAccentPath />
         <ExperienceList activeIndex={activeIndex} />
       </div>
     </section>
@@ -2695,9 +2753,12 @@ function HomeUnifiedScrollExperience() {
       const statContents = gsap.utils.toArray<HTMLElement>(".dw-home-unified-stat .dw-depth-content");
       const experiencePanel = scene.querySelector<HTMLElement>(".dw-home-unified-experience");
       const whitePanel = scene.querySelector<HTMLElement>(".dw-home-unified-white");
+      const clientsPanel = scene.querySelector<HTMLElement>(".dw-home-unified-clients");
+      const clientsLabel = scene.querySelector<HTMLElement>(".dw-clients-label");
+      const clientItems = gsap.utils.toArray<HTMLElement>(".dw-clients-item");
       const experienceList = scene.querySelector<HTMLElement>(".dw-experience-list");
       const experienceItems = gsap.utils.toArray<HTMLElement>(".dw-experience-list li");
-      const line = scene.querySelector<SVGPathElement>(".dw-experience-path-line");
+      const experienceHeading = scene.querySelector<HTMLElement>(".dw-experience-heading");
 
       if (
         !hero ||
@@ -2706,14 +2767,12 @@ function HomeUnifiedScrollExperience() {
         !experiencePanel ||
         !whitePanel ||
         !experienceList ||
-        !line ||
         statStages.length === 0 ||
         experienceItems.length === 0
       ) return;
 
       const timeline = gsap.timeline({ paused: true, defaults: { ease: "none" } });
       const investmentCounter = { value: 0 };
-      const lineLength = line.getTotalLength();
       const factFocusTimes: number[] = [];
       const experienceFocusTimes: number[] = [];
       const playback = {
@@ -2772,7 +2831,7 @@ function HomeUnifiedScrollExperience() {
       gsap.set(experiencePanel, { autoAlpha: 0 });
       gsap.set(whitePanel, { autoAlpha: 0 });
       gsap.set(experienceItems, { autoAlpha: 0, y: 54, scale: 0.97 });
-      gsap.set(line, { strokeDasharray: lineLength, strokeDashoffset: lineLength });
+      if (experienceHeading) gsap.set(experienceHeading, { autoAlpha: 0, y: 26 });
       updateSlot();
 
       timeline
@@ -2907,11 +2966,61 @@ function HomeUnifiedScrollExperience() {
         );
       });
 
-      const experienceStart = statsEnd + 0.4;
+      // Clients live in the white wash between the numbers finale and the
+      // timeline. They arrive out of the same depth the last number left
+      // through, hold, then lift away as the timeline takes over. No loop:
+      // the beat only advances while Davit's visitor is scrolling.
+      const hasClients = Boolean(clientsPanel) && clientItems.length > 0;
+      const clientsStart = statsEnd + 0.15;
+
+      if (clientsPanel && hasClients) {
+        gsap.set(clientsPanel, { autoAlpha: 0 });
+        gsap.set(clientItems, { autoAlpha: 0, y: 44, scale: 0.78 });
+        if (clientsLabel) gsap.set(clientsLabel, { autoAlpha: 0, y: 16 });
+
+        timeline.to(clientsPanel, { autoAlpha: 1, duration: 0.22 }, clientsStart);
+
+        if (clientsLabel) {
+          timeline.to(
+            clientsLabel,
+            { autoAlpha: 1, y: 0, duration: 0.4, ease: "power3.out" },
+            clientsStart + 0.04
+          );
+        }
+
+        clientItems.forEach((item, itemIndex) => {
+          timeline.to(
+            item,
+            { autoAlpha: 1, y: 0, scale: 1, duration: 0.52, ease: "power3.out" },
+            clientsStart + 0.1 + itemIndex * 0.04
+          );
+        });
+
+        timeline.to(
+          clientItems,
+          { autoAlpha: 0, y: -30, scale: 1.08, duration: 0.4, ease: "power2.in", stagger: 0.018 },
+          clientsStart + 1.08
+        );
+
+        if (clientsLabel) {
+          timeline.to(clientsLabel, { autoAlpha: 0, y: -12, duration: 0.3 }, clientsStart + 1.12);
+        }
+
+        timeline.to(clientsPanel, { autoAlpha: 0, duration: 0.28 }, clientsStart + 1.34);
+      }
+
+      const experienceStart = statsEnd + (hasClients ? 1.75 : 0.4);
       timeline
         .to(experiencePanel, { autoAlpha: 1, duration: 0.3 }, experienceStart)
-        .to(whitePanel, { autoAlpha: 0, duration: 0.5 }, experienceStart + 0.55)
-        .to(line, { strokeDashoffset: 0, duration: experiences.length * 0.66 }, experienceStart);
+        .to(whitePanel, { autoAlpha: 0, duration: 0.5 }, experienceStart + 0.55);
+
+      if (experienceHeading) {
+        timeline.to(
+          experienceHeading,
+          { autoAlpha: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          experienceStart + 0.15
+        );
+      }
 
       // Timeline content cascades in from below, item by item.
       experienceItems.forEach((item, itemIndex) => {
@@ -3461,6 +3570,7 @@ function HomeUnifiedScrollExperience() {
     return (
       <div className="dw-home-unified-static">
         <HeroSection />
+        <HomePartnerLogosSection />
         <DesignerScrollStory />
         <ExperienceScrollSection />
       </div>
@@ -3514,8 +3624,25 @@ function HomeUnifiedScrollExperience() {
 
         <div className="dw-home-unified-phase dw-home-unified-white" aria-hidden="true" />
 
+        <div className="dw-home-unified-phase dw-home-unified-clients" aria-label="Selected clients">
+          <div className="dw-clients-inner">
+            <p className="dw-clients-label">Selected clients</p>
+            <ul className="dw-clients-grid">
+              {partnerBrands.map((brand) => (
+                <li className="dw-clients-item" key={brand.name}>
+                  {brand.wordmark ? (
+                    <img className="dw-clients-wordmark" src={brand.wordmark} alt={brand.name} loading="lazy" />
+                  ) : brand.noMark ? null : (
+                    <ExperienceLogo company={brand.name} domain={brand.domain} />
+                  )}
+                  <span className="dw-clients-name">{brand.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
         <div className="dw-home-unified-phase dw-home-unified-experience" aria-label="Work experience">
-          <AnimatedAccentPath />
           <ExperienceList
             activeIndex={activeIndex}
             onSelect={(index) => selectExperienceRef.current(index)}
@@ -3974,16 +4101,18 @@ export function PublicMediaGridPageSection() {
               </span>
             </>;
 
+            const cursorLabel = articleCursorLabel(entry.slug, Boolean(videoId));
+
             return videoId ? (
-              <button {...yearAnchorProps} className={`dw-public-journal-entry is-podcast entry-${index + 1}`} key={entry.title} type="button" onClick={() => setActivePodcast(entry)}>
+              <button {...yearAnchorProps} className={`dw-public-journal-entry is-podcast entry-${index + 1}`} key={entry.title} type="button" data-cursor-label={cursorLabel} onClick={() => setActivePodcast(entry)}>
                 {cardContent}
               </button>
             ) : externalUrl ? (
-              <a {...yearAnchorProps} className={`dw-public-journal-entry entry-${index + 1}`} key={entry.title} href={externalUrl} target="_blank" rel="noreferrer">
+              <a {...yearAnchorProps} className={`dw-public-journal-entry entry-${index + 1}`} key={entry.title} href={externalUrl} target="_blank" rel="noreferrer" data-cursor-label={cursorLabel}>
                 {cardContent}
               </a>
             ) : (
-              <a {...yearAnchorProps} className={`dw-public-journal-entry entry-${index + 1}`} key={entry.title} href={`/am/public-work/${entry.slug}`}>
+              <a {...yearAnchorProps} className={`dw-public-journal-entry entry-${index + 1}`} key={entry.title} href={`/am/public-work/${entry.slug}`} data-cursor-label={cursorLabel}>
                 {cardContent}
               </a>
             );
@@ -4128,6 +4257,7 @@ function PublicArticlePage({ slug }: { slug: string }) {
             href={nextArticle ? `/am/public-work/${nextArticle.slug}` : "/am/public-work"}
             kicker={nextArticle ? "Next article" : "Back to the archive"}
             title={nextArticle ? nextArticle.title : "More public work"}
+            cursorLabel={nextArticle ? articleCursorLabel(nextArticle.slug) : "Back to the archive"}
           />
         </footer>
       </article>
@@ -4214,17 +4344,22 @@ export function LetsTalkPage() {
   );
 }
 
-const partnerBrands: Array<{ name: string; domain: string; wordmark?: string }> = [
+/**
+ * `noMark` means the domain has no usable icon — Google serves its generic
+ * globe rather than a 404, so these would otherwise all render as the same
+ * blurry planet. Those entries fall through to type instead.
+ */
+const partnerBrands: Array<{ name: string; domain: string; wordmark?: string; noMark?: boolean }> = [
   { name: "NPUA", domain: "polytechnic.am" },
   { name: "Mellat Bank", domain: "mellatbank.am" },
-  { name: "Public Council of Armenia", domain: "publiccouncil.am" },
-  { name: "SoftLand", domain: "softland.am" },
+  { name: "Public Council of Armenia", domain: "publiccouncil.am", noMark: true },
+  { name: "SoftLand", domain: "softland.am", noMark: true },
   { name: "Wirestock", domain: "wirestock.io" },
   { name: "Yerevan Mall", domain: "yerevanmall.am" },
   { name: "Kinodaran", domain: "kinodaran.am", wordmark: "/logos/partners/kinodaran.svg" },
   { name: "TCF", domain: "tcf.am", wordmark: "/logos/partners/tcf.png" },
   { name: "W8RK", domain: "w8rk.com" },
-  { name: "8Imiges", domain: "" },
+  { name: "8Imiges", domain: "", noMark: true },
   { name: "Insafe", domain: "insafe.am" },
   { name: "Sarkissian.pro", domain: "sarkissian.pro" }
 ];
@@ -4244,7 +4379,7 @@ export function HomePartnerLogosSection() {
               <img className="dw-partner-marquee-wordmark" src={item.wordmark} alt={item.name} loading="lazy" />
             ) : (
               <>
-                <ExperienceLogo company={item.name} domain={item.domain} />
+                {item.noMark ? null : <ExperienceLogo company={item.name} domain={item.domain} />}
                 <span>{item.name}</span>
               </>
             )}
@@ -4260,7 +4395,6 @@ export function HomePage() {
     <PageShell className="dw-home-shell" activePage="home">
       <HomeIntroSection />
       <HomeUnifiedScrollExperience />
-      <HomePartnerLogosSection />
     </PageShell>
   );
 }

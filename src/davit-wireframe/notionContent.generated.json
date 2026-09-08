@@ -168,7 +168,7 @@
         "years": "",
         "type": "Design leadership / fintech",
         "logoDomain": "freedx.com",
-        "description": "I lead design where product, brand, and strategy meet."
+        "description": "Crypto exchanges ask people to trust software with money that can move against them in a minute. The design problem is that the reassurance a first-time user needs and the speed a daily trader needs live on the same screens, pulling in opposite directions. I lead design across product, brand and strategy so those two answers stay consistent instead of being settled screen by screen."
       },
       {
         "company": "Lynon",
@@ -176,7 +176,7 @@
         "years": "Current",
         "type": "Design leadership",
         "logoDomain": "lynon.com",
-        "description": "I lead design as a partner to the business, not a service to it."
+        "description": "The job was to get design out of the request queue. A team that only receives tickets can only improve decisions that were already made somewhere else, so most of the work was not design work — it was being in the room early enough that the brief was still a question."
       },
       {
         "company": "T-Bank / Tinkoff",
@@ -184,7 +184,7 @@
         "years": "Verify dates",
         "type": "Product design",
         "logoDomain": "tbank.ru",
-        "description": "I designed at the scale of millions of users."
+        "description": "At that scale a rounding error becomes a support queue. Millions of people used what shipped, which changes how you argue for things: you stop defending taste and start bringing evidence, because a preference applied to millions of people is a business decision, not a style one."
       },
       {
         "company": "Delux",
@@ -192,7 +192,7 @@
         "years": "",
         "type": "Product design",
         "logoDomain": "",
-        "description": "I led designers, not just designs."
+        "description": "The first time I was accountable for other people's work rather than my own. The uncomfortable part is that your instinct is to fix it yourself, and the job is the opposite — making critique specific enough that someone else can act on it, and then letting their solution be different from yours."
       },
       {
         "company": "CloudChipr",
@@ -200,7 +200,7 @@
         "years": "Verify dates",
         "type": "Startup product design",
         "logoDomain": "cloudchipr.com",
-        "description": "I set product direction and built the design system from zero."
+        "description": "I joined as the only designer and left with a team of four. There was no design system, so I built one from zero while the product was still deciding what it was. The hard part was never the components; it was keeping them stable while the cloud-cost features underneath them kept changing shape."
       },
       {
         "company": "Webb Fontaine",
@@ -208,7 +208,7 @@
         "years": "Verify dates",
         "type": "Enterprise product design",
         "logoDomain": "webbfontaine.com",
-        "description": "I owned design for enterprise-scale platforms."
+        "description": "Enterprise platforms whose users have no choice but to use them. That removes the feedback loop you normally rely on — nobody churns, they just quietly suffer — so the friction has to be gone looking for, in the field, rather than waited for in a metric."
       },
       {
         "company": "Material Exchange",
@@ -216,7 +216,7 @@
         "years": "Feb 2020 - Feb 2022",
         "type": "Product design leadership",
         "logoDomain": "material-exchange.com",
-        "description": "I led design from research to a shipped system."
+        "description": "Fashion sourcing still ran on physical swatches flown between continents. We digitised it. The research was the real work: a tour of a Goodwill Outlet warehouse, repeated interviews with material managers, and personas that kept getting rewritten as new user types surfaced. The system we shipped cut material management from 61 minutes to 23."
       },
       {
         "company": "The Bank of London",
@@ -224,7 +224,7 @@
         "years": "Verify dates",
         "type": "Fintech product design",
         "logoDomain": "thebankoflondon.com",
-        "description": "I learned how regulated fintech ships."
+        "description": "Regulated fintech is where you learn that “we can’t ship that” is often a legal sentence rather than a design opinion. Most of the craft went into finding the version that satisfied compliance and still made sense to a person reading it for the first time."
       },
       {
         "company": "Uphold",
@@ -232,7 +232,7 @@
         "years": "Verify dates",
         "type": "Fintech / crypto product",
         "logoDomain": "uphold.com",
-        "description": "I designed flows people trust with their money."
+        "description": "Multi-asset trading, where one mistaken tap moves real money. The question was never how to make it beautiful. It was how to make someone certain about what is about to happen one screen before it happens — and how to say that without turning every action into a warning."
       },
       {
         "company": "Liga Insurance",
@@ -240,7 +240,7 @@
         "years": "Verify dates",
         "type": "Insurance product design",
         "logoDomain": "liga.am",
-        "description": "I designed interfaces."
+        "description": "My first product role. I designed interfaces and assumed that was the job. What that period was actually worth was finding out how much of the work happens before anyone opens a design tool — and how rarely the brief you are handed is the problem you need to solve."
       }
     ]
   },

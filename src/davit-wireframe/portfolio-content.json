@@ -408,7 +408,7 @@
               "value": "Figma, Miro, Maze"
             },
             {
-              "label": "Team",
+              "label": "Co-Designers",
               "value": "Bella Hayrapetyan, Habet Ayvazyan, Zhanna Voskanyan"
             }
           ],
@@ -1097,7 +1097,7 @@
               "value": "Figma, Confluence, Overflow"
             },
             {
-              "label": "Team",
+              "label": "Co-Designers",
               "value": "Ani Atanesyan, Vladimir Popov, Gohar Aleksanyan"
             }
           ],
@@ -2503,7 +2503,7 @@
               "value": "Figma, Notion, Miro"
             },
             {
-              "label": "Team",
+              "label": "Co-Designers",
               "value": "Marianna Zakaryan"
             }
           ]
@@ -2874,8 +2874,8 @@
               "value": "Figma"
             },
             {
-              "label": "Team",
-              "value": "David Pedanyan, Anna Avalyan"
+              "label": "Co-Designers",
+              "value": "Anna Avalyan"
             }
           ]
         },

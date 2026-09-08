@@ -18,12 +18,14 @@ export function PullToContinue({
   kicker,
   title,
   media,
+  cursorLabel,
   onNavigate
 }: {
   href: string;
   kicker: string;
   title: string;
   media?: ReactNode;
+  cursorLabel?: string;
   onNavigate?: () => void;
 }) {
   const [progress, setProgress] = useState(0);
@@ -112,7 +114,7 @@ export function PullToContinue({
       className={`dw-pull-next${progress > 0.02 ? " is-pulling" : ""}${progress >= 1 ? " is-complete" : ""}`}
       href={href}
       style={{ "--pull": progress } as React.CSSProperties}
-      data-cursor-label={`go to ${title.toLowerCase()}`}
+      data-cursor-label={cursorLabel ?? `go to ${title.toLowerCase()}`}
       aria-label={`${kicker}: ${title}`}
     >
       {media ? <span className="dw-pull-next-media" aria-hidden="true">{media}</span> : null}

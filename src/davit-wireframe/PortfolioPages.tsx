@@ -11,7 +11,6 @@ import "./portfolioPages.css";
 import { MediaCarousel } from "./MediaCarousel";
 import { PullToContinue } from "./PullToContinue";
 import { useTextMotion } from "./textMotion";
-import { openContactChat } from "./ContactChat";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -383,6 +382,163 @@ const cloudchiprCollaborators: Record<string, string> = {
   "Habet Ayvazyan": "/portfolio-assets/cloudchipr/collaborators/habet-ayvazyan.png",
   "Zhanna Voskanyan": "/portfolio-assets/cloudchipr/collaborators/zhanna-voskanyan.png"
 };
+
+/* ============================================================
+   One opening for every case study.
+   Title, subtitle, the full metadata block and the product shot on a
+   single tinted panel, followed by the short "about" prose with no
+   heading of its own. This replaces the old split where six projects
+   put their metadata in a separate "About the project" section that
+   ran underneath the hero.
+   ============================================================ */
+function caseMetaClass(label: string) {
+  return `dw-case-meta-${label.replace(/:$/, "").toLowerCase().replace(/[^a-z]+/g, "-")}`;
+}
+
+function CaseOpeningValue({
+  project,
+  item
+}: {
+  project: PortfolioProject;
+  item: { label: string; value: string };
+}) {
+  const slug = project.project.slug;
+  const isTools = item.label.startsWith("Tools");
+  const isPeople = item.label.startsWith("Co-Designers");
+
+  if (isTools && slug === "material-exchange") {
+    return (
+      <dd className="dw-case-opening-tools">
+        <img src="/portfolio-assets/material-exchange/tools.png" alt="Figma, Confluence, and Overflow" width={410} height={110} />
+      </dd>
+    );
+  }
+  if (isTools && slug === "securion") {
+    return (
+      <dd className="dw-case-opening-tools" aria-label="Sketch, Confluence, Slack, and Asana">
+        <img src="/portfolio-assets/securion/tools.png" alt="Sketch, Confluence, Slack, and Asana" />
+      </dd>
+    );
+  }
+  if (isTools && slug === "cloudchipr") {
+    return (
+      <dd className="dw-case-opening-tools" aria-label="Figma, Notion, and Slack">
+        <img src="/portfolio-assets/cloudchipr/tools/figma.svg" alt="Figma" />
+        <img src="/portfolio-assets/cloudchipr/tools/notion.svg" alt="Notion" />
+        <img src="/portfolio-assets/cloudchipr/tools/slack.svg" alt="Slack" />
+      </dd>
+    );
+  }
+  if (isTools && slug === "material-exchange-photo-lab") {
+    return (
+      <dd className="dw-case-opening-chips" aria-label="Figma, Sketch, Microsoft Teams, and Jira">
+        {["Figma", "Sketch", "Teams", "Jira"].map((tool) => <span key={tool}>{tool}</span>)}
+      </dd>
+    );
+  }
+  if (isPeople && slug === "material-exchange") {
+    return (
+      <dd className="dw-case-opening-people">
+        {materialCollaborators.map((person) => (
+          <a href={person.href} target="_blank" rel="noreferrer" key={person.name}>
+            <i className={`dw-mex-avatar avatar-${person.avatar}`} aria-hidden="true" />
+            {person.name}
+          </a>
+        ))}
+      </dd>
+    );
+  }
+  if (isPeople && slug === "cloudchipr") {
+    return (
+      <dd className="dw-case-opening-people">
+        {item.value.split(",").map((name) => {
+          const person = name.trim();
+          return (
+            <span key={person}>
+              {cloudchiprCollaborators[person] ? <img src={cloudchiprCollaborators[person]} alt="" /> : null}
+              {person}
+            </span>
+          );
+        })}
+      </dd>
+    );
+  }
+  if (isPeople) {
+    return (
+      <dd className="dw-case-opening-people">
+        {item.value.replace(/<[^>]+>/g, "").split(",").map((name) => (
+          <span key={name.trim()}>{name.trim()}</span>
+        ))}
+      </dd>
+    );
+  }
+  return <dd dangerouslySetInnerHTML={{ __html: item.value }} />;
+}
+
+function CaseOpening({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const slug = project.project.slug;
+  // Metadata lives on the intro for two projects and on the follow-up
+  // "About the project" section for the other six. Take whichever has it.
+  const detail = project.sections.find((item) => item.id === "about" || item.id === "project");
+  const metadata = (section.metadata?.length ? section.metadata : detail?.metadata) ?? [];
+  const style = sectionStyle(project, section);
+  if (section.background?.radius) style.borderRadius = section.background.radius;
+
+  return (
+    <section className="dw-case-opening" id={section.id} data-portfolio-reveal>
+      <div className="dw-case-opening-panel" style={style}>
+        <div className="dw-case-opening-copy">
+          <p className="dw-case-opening-eyebrow">{section.eyebrow ?? "Selected case study"}</p>
+          <h1><ProjectTitle title={section.title} /></h1>
+          {section.subtitle ? <h2>{section.subtitle}</h2> : null}
+          {metadata.length ? (
+            <dl className="dw-case-opening-meta">
+              {metadata.map((item) => (
+                <div className={caseMetaClass(item.label)} key={item.label}>
+                  <dt>{item.label.replace(/:$/, "")}</dt>
+                  <CaseOpeningValue project={project} item={item} />
+                </div>
+              ))}
+            </dl>
+          ) : null}
+        </div>
+        <div className="dw-case-opening-media" data-portfolio-parallax>
+          <ProjectImage project={project} assetKey={section.media} eager />
+          {slug === "securion" ? (
+            <img
+              className="dw-securion-hero-logo"
+              src="/portfolio-assets/securion/logo-mark.svg"
+              alt="Securion shield logo"
+              width="460"
+              height="460"
+            />
+          ) : null}
+        </div>
+      </div>
+
+      {detail?.body ? (
+        <div className="dw-case-opening-about" data-portfolio-reveal>
+          {/* Generic "About the project" labels are dropped; a real sentence
+              heading (Nesba has one) is kept. */}
+          {detail.title && !/^about\b/i.test(detail.title) ? (
+            <>
+              {detail.eyebrow ? <p className="dw-case-eyebrow">{detail.eyebrow}</p> : null}
+              <h2>{detail.title}</h2>
+            </>
+          ) : null}
+          <Html html={detail.body} />
+        </div>
+      ) : null}
+
+      {slug === "material-exchange" ? (
+        <figure className="dw-mex-initial-wireframes" id="initial-wireframes" data-portfolio-reveal>
+          <ProjectImage project={project} assetKey="initial-wireframes" />
+          <figcaption>Initial wireframes of single material page.</figcaption>
+        </figure>
+      ) : null}
+    </section>
+  );
+}
 
 function IntroSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   const style = sectionStyle(project, section);
@@ -2232,6 +2388,7 @@ function NavigationSection({ project, section }: { project: PortfolioProject; se
         href={projectHref(nextProject.project.slug)}
         kicker="Next case study"
         title={nextProject.project.title}
+        cursorLabel={caseCursorLabel(nextProject.project.slug)}
       />
     </section>
   );
@@ -2240,9 +2397,6 @@ function NavigationSection({ project, section }: { project: PortfolioProject; se
 function ProjectSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   if (project.project.slug === "nesba" && section.id === "palette-feedback") {
     return <NesbaPaletteFeedback project={project} section={section} />;
-  }
-  if (project.project.slug === "material-exchange" && section.id === "intro") {
-    return <MaterialExchangeIntro project={project} section={section} />;
   }
   if (project.project.slug === "material-exchange" && section.id === "discovery-problem-one") {
     return <MaterialExchangeDiscovery project={project} section={section} />;
@@ -2286,9 +2440,6 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
     ].includes(section.id)
   ) {
     return null;
-  }
-  if (project.project.slug === "hotel-apartments" && section.id === "intro") {
-    return <HotelIntro project={project} section={section} />;
   }
   if (project.project.slug === "hotel-apartments" && section.id === "migration") {
     return <HotelMigration section={section} />;
@@ -2397,9 +2548,6 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
     return null;
   }
 
-  if (project.project.slug === "icredo" && section.id === "intro") {
-    return <IcredoIntro project={project} section={section} />;
-  }
   if (project.project.slug === "icredo" && section.id === "chat-solution") {
     return <IcredoChatPrototype project={project} section={section} />;
   }
@@ -2413,8 +2561,11 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
     return <IcredoSystemSection section={section} />;
   }
 
+  // Every case study opens the same way now, and the metadata block that
+  // used to run underneath as "About the project" is folded into it.
+  if (section.type === "intro") return <CaseOpening project={project} section={section} />;
+  if (section.id === "about" || section.id === "project") return null;
   if (section.type === "about-card") return <AboutCardSection project={project} section={section} />;
-  if (section.type === "intro") return <IntroSection project={project} section={section} />;
   if (section.type === "prose") return <ProseSection project={project} section={section} />;
   if (section.type === "media") return <MediaSection project={project} section={section} />;
   if (section.type === "gallery") return <GallerySection project={project} section={section} />;
@@ -2428,6 +2579,42 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   return null;
 }
 
+/**
+ * Phone mockups are exported at 2x-3x, so nothing in the markup says how big
+ * the screen is meant to be — a 1836px-wide iPhone shot was rendering ~700px
+ * across, close to twice life size. Measure the aspect ratio once the file has
+ * loaded and tag the portrait ones so CSS can hold them near device width.
+ */
+function usePhoneShotFlags(containerRef: React.RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const measure = (image: HTMLImageElement) => {
+      if (!image.naturalWidth) return;
+      const isPhone = image.naturalHeight / image.naturalWidth >= 1.7;
+      image.classList.toggle("is-phone-shot", isPhone);
+    };
+
+    const images = Array.from(
+      container.querySelectorAll<HTMLImageElement>(".dw-case-section img")
+    );
+    const cleanups: Array<() => void> = [];
+
+    images.forEach((image) => {
+      if (image.complete) {
+        measure(image);
+        return;
+      }
+      const onLoad = () => measure(image);
+      image.addEventListener("load", onLoad, { once: true });
+      cleanups.push(() => image.removeEventListener("load", onLoad));
+    });
+
+    return () => cleanups.forEach((off) => off());
+  }, [containerRef]);
+}
+
 // Sections paint themselves from JSON, from bespoke CSS, or from a component's
 // own styles. Rather than trust any one of those, read the resolved background
 // off the DOM and flag anything dark enough that the grey-on-white text scale
@@ -2437,7 +2624,7 @@ function useDarkSectionFlags(containerRef: React.RefObject<HTMLElement | null>) 
     const container = containerRef.current;
     if (!container) return;
     const flag = () => {
-      container.querySelectorAll<HTMLElement>("section, .dw-case-section").forEach((section) => {
+      container.querySelectorAll<HTMLElement>("section, .dw-case-section, .dw-case-opening-panel").forEach((section) => {
         const computed = getComputedStyle(section);
         const parts = computed.backgroundColor.match(/[\d.]+/g);
         if (!parts) return;
@@ -3228,29 +3415,23 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
   }, [containerRef]);
 }
 
-const workEngagementModes = [
-  {
-    id: "role",
-    intent: "hiring",
-    label: "A role on your team",
-    body: "Design leadership where product, brand and strategy meet. Tell me the role and the team and I’ll tell you straight whether it’s a fit.",
-    cursor: "talk about a role"
-  },
-  {
-    id: "project",
-    intent: "project",
-    label: "A product that’s stuck",
-    body: "Unclear direction, a system that won’t scale, or something that needs shipping. Most of the eight cases above started here.",
-    cursor: "talk about a project"
-  },
-  {
-    id: "room",
-    intent: "collab",
-    label: "A room to speak in",
-    body: "Talks, juries, workshops and teaching. I take them on when the room is right — and I run UX Storm, so I know what makes one.",
-    cursor: "talk about an event"
-  }
-];
+// Hover label per case study — each says what the case is actually about.
+// "Dive in Case" is only the fallback for a slug that has no phrase yet.
+const caseCursorLabels: Record<string, string> = {
+  "tempo": "One order, several stops",
+  "icredo": "A loan, by conversation",
+  "nesba": "Wealth, made legible",
+  "cloudchipr": "Cloud spend under control",
+  "material-exchange": "Materials, digitised",
+  "material-exchange-photo-lab": "Product shots at scale",
+  "hotel-apartments": "Stays worth booking",
+  "securion": "Crypto worth trusting"
+};
+
+export function caseCursorLabel(slug: string) {
+  return caseCursorLabels[slug] ?? "Dive in Case";
+}
+
 
 export function PortfolioIndexContent() {
   const containerRef = useRef<HTMLElement | null>(null);
@@ -3271,7 +3452,6 @@ export function PortfolioIndexContent() {
         <h1>Eight products. The decisions behind them.</h1>
         <div>
           <p>Fintech, delivery, crypto, SaaS — most of them taken from an unclear brief to a system that shipped. Each case study shows the research that changed direction, the structure that made scale possible, and the trade-offs I would still defend in a review.</p>
-          <span>8 case studies · 2018–2026</span>
         </div>
       </header>
       <nav className="dw-portfolio-year-timeline" aria-label="Filter case studies by year">
@@ -3299,13 +3479,13 @@ export function PortfolioIndexContent() {
               target={isStorybook() ? "_parent" : undefined}
               style={{ "--project-accent": accent?.accent, "--project-surface": accent?.surface } as CSSProperties}
               data-portfolio-reveal
+              data-cursor-label={caseCursorLabel(project.project.slug)}
               key={project.project.slug}
             >
               <div className="dw-portfolio-card-media">
                 <PortfolioCardVisual project={project} />
               </div>
               <div className="dw-portfolio-card-copy">
-                <span>{String(index + 1).padStart(2, "0")}</span>
                 <div>
                   <span className="dw-portfolio-card-project-name">{project.project.title}</span>
                   <h2>{portfolioCardHeadlines[project.project.slug] || project.project.title}</h2>
@@ -3317,27 +3497,6 @@ export function PortfolioIndexContent() {
           );
         })}
       </div>
-      <footer className="dw-work-next" data-portfolio-reveal>
-        <div className="dw-work-next-head">
-          <span>What happens next</span>
-          <h2>You’ve seen the work. Here’s how I take it on.</h2>
-        </div>
-        <div className="dw-work-next-modes">
-          {workEngagementModes.map((mode) => (
-            <button
-              className="dw-work-next-mode"
-              type="button"
-              key={mode.id}
-              onClick={() => openContactChat(mode.intent)}
-              data-cursor-label={mode.cursor}
-            >
-              <span className="dw-work-next-mode-label">{mode.label}</span>
-              <span className="dw-work-next-mode-body">{mode.body}</span>
-              <span className="dw-work-next-mode-go" aria-hidden="true">Start here &rarr;</span>
-            </button>
-          ))}
-        </div>
-      </footer>
     </section>
   );
 }
@@ -3348,6 +3507,7 @@ export function CaseStudyContent({ slug }: { slug: string }) {
   const project = useMemo(() => projects.find((item) => item.project.slug === dataSlug), [dataSlug]);
   usePortfolioMotion(containerRef);
   useDarkSectionFlags(containerRef);
+  usePhoneShotFlags(containerRef);
   useTextMotion(containerRef);
 
   if (!project) {

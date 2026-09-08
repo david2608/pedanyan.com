@@ -1277,6 +1277,116 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   pointer-events: none;
 }
 
+/* ------------------------------------------------------------------
+   Selected clients — the beat that fills the white wash between the
+   numbers finale and the work timeline. Marks arrive out of depth,
+   hold, then lift away. Motion lives in the GSAP timeline, so it only
+   advances while the visitor is scrolling; nothing loops on its own.
+   ------------------------------------------------------------------ */
+.dw-home-unified-clients {
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  padding: clamp(60px, 8vh, 120px) clamp(20px, 5vw, 90px);
+  background: transparent;
+  pointer-events: none;
+}
+
+.dw-clients-inner {
+  width: min(1180px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(26px, 4vh, 56px);
+}
+
+.dw-clients-label {
+  margin: 0;
+  color: var(--dw-muted);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.dw-clients-grid {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(18px, 2.6vw, 46px) clamp(16px, 2.2vw, 40px);
+  list-style: none;
+}
+
+.dw-clients-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--dw-text);
+  text-align: center;
+  will-change: transform, opacity;
+}
+
+/* Every mark gets the same box no matter what it is — a wordmark SVG, a
+   real logo, or a 32px favicon. Without this the two brands that have
+   proper files tower over the ten that don't. */
+.dw-clients-item .dw-experience-logo,
+.dw-clients-wordmark {
+  width: clamp(84px, 7vw, 116px);
+  height: clamp(34px, 2.7vw, 44px);
+  border-radius: 0;
+  background: transparent;
+  filter: grayscale(1);
+}
+
+/* Brands with no usable mark become type instead — the name grows to fill
+   the slot so the grid keeps its rhythm. A mixed wall of logos and set
+   names reads honestly; a wall of stretched favicons does not. */
+.dw-clients-item .dw-experience-logo.is-fallback {
+  background: transparent;
+  color: var(--dw-text);
+  font-size: clamp(15px, 1.15vw, 19px);
+}
+
+.dw-clients-item:not(:has(.dw-experience-logo, .dw-clients-wordmark)) {
+  justify-content: center;
+}
+
+.dw-clients-item:not(:has(.dw-experience-logo, .dw-clients-wordmark)) .dw-clients-name {
+  font-size: clamp(17px, 1.45vw, 23px);
+  opacity: 1;
+}
+
+.dw-clients-item .dw-experience-logo img,
+.dw-clients-wordmark {
+  object-fit: contain;
+}
+
+.dw-clients-item .dw-experience-logo img {
+  background: transparent;
+}
+
+/* The names carry the signal — most of these brands are Armenian and read
+   as unfamiliar shapes to anyone outside the market. */
+.dw-clients-name {
+  font-size: clamp(14px, 1.05vw, 18px);
+  letter-spacing: -0.005em;
+  line-height: 1.15;
+  opacity: 0.85;
+}
+
+:root[data-dw-theme="night"] .dw-clients-item .dw-experience-logo img,
+:root[data-dw-theme="night"] .dw-clients-wordmark {
+  filter: grayscale(1) invert(1);
+}
+
+@media (max-width: 1080px) {
+  .dw-clients-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .dw-home-unified-experience {
   z-index: 5;
 }
@@ -1286,11 +1396,7 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   padding-bottom: 45vh;
 }
 
-.dw-home-unified-experience .dw-experience-path {
-  opacity: 0.26;
-}
-
-.dw-home-unified-static {
+.dw-home-unified-experience .dw-home-unified-static {
   position: relative;
   background: var(--dw-bg);
 }
@@ -2272,30 +2378,6 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   background: var(--dw-bg);
 }
 
-.dw-experience-path {
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: visible;
-  filter: none;
-  opacity: 0.3;
-}
-
-.dw-experience-path-line {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.dw-experience-path-line {
-  stroke: var(--dw-hot);
-  stroke-width: 15;
-  vector-effect: non-scaling-stroke;
-}
-
 .dw-experience-list {
   position: absolute;
   z-index: 2;
@@ -2313,19 +2395,25 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
 .dw-experience-list li {
   position: relative;
   min-height: clamp(78px, 8.1vw, 154px);
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(0, 0.68fr) minmax(320px, 0.32fr);
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 52px);
   color: var(--dw-text);
   opacity: 0.26;
   will-change: transform, opacity;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+}
+
+.dw-experience-list li:last-child {
+  border-bottom: 0;
 }
 
 .dw-experience-item-button {
   width: 100%;
   min-height: inherit;
-  display: grid;
-  grid-template-columns: minmax(0, 0.68fr) minmax(320px, 0.32fr);
+  display: flex;
   align-items: center;
-  gap: clamp(18px, 2.4vw, 52px);
   padding: 0;
   border: 0;
   background: transparent;
@@ -2379,6 +2467,7 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
 .dw-experience-list li.is-active .dw-experience-active-detail {
   opacity: 1;
   transform: none;
+  pointer-events: auto;
   transition-delay: 80ms;
 }
 
@@ -2396,6 +2485,7 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
 .dw-experience-list li.is-active .dw-experience-active-detail > *:nth-child(1) { transition-delay: 120ms; }
 .dw-experience-list li.is-active .dw-experience-active-detail > *:nth-child(2) { transition-delay: 190ms; }
 .dw-experience-list li.is-active .dw-experience-active-detail > *:nth-child(3) { transition-delay: 260ms; }
+.dw-experience-list li.is-active .dw-experience-active-detail > *:nth-child(4) { transition-delay: 320ms; }
 
 .dw-experience-logo {
   position: relative;
@@ -6726,53 +6816,6 @@ button.dw-public-journal-entry {
   --anim-dur: 0.6s;
 }
 
-/* --- footer invitation (replaces the four static Telegram tag links) --- */
-.dw-footer-invite {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: clamp(14px, 3vw, 36px);
-  padding: clamp(22px, 4vw, 40px) 0;
-}
-
-.dw-footer-invite p {
-  margin: 0;
-  font-size: clamp(1.05rem, 2.2vw, 1.5rem);
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-  max-width: 22ch;
-}
-
-.dw-footer-invite-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  font-size: clamp(0.9rem, 1.6vw, 1.05rem);
-  padding: 13px 24px;
-  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
-}
-
-.dw-footer-invite-button:hover,
-.dw-footer-invite-button:focus-visible {
-  background: currentColor;
-  transform: translateY(-2px);
-}
-
-.dw-footer-invite-button:hover span,
-.dw-footer-invite-button:focus-visible span {
-  color: var(--dw-bg, #fff);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dw-footer-invite-button:hover { transform: none; }
-}
-
 /* Inline banners carry no context on their own — name who is on them. */
 .dw-public-article-inline-image figcaption {
   margin-top: 12px;
@@ -6781,4 +6824,63 @@ button.dw-public-journal-entry {
   line-height: 1.4;
   letter-spacing: 0.01em;
   max-width: 52ch;
+}
+
+/* Title for the work-experience timeline. The list itself is absolutely
+   positioned and GSAP-transformed through the viewport, so this sits in its
+   own anchored slot top-right — clear of the company names on the left and of
+   the active-role panel that sits mid-height on the right. */
+.dw-experience-heading {
+  position: absolute;
+  z-index: 3;
+  top: clamp(126px, 15vh, 190px);
+  right: 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  text-align: right;
+  pointer-events: none;
+  max-width: min(42vw, 620px);
+  will-change: opacity, transform;
+}
+
+.dw-experience-heading span {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dw-muted);
+}
+
+/* A real section title, at the scale the rest of the site uses for one. */
+.dw-experience-heading strong {
+  font-size: clamp(26px, 3.1vw, 52px);
+  font-weight: 500;
+  line-height: 1.03;
+  letter-spacing: -0.035em;
+  color: var(--dw-text);
+}
+
+@media (max-width: 900px) {
+  .dw-experience-heading {
+    top: clamp(104px, 12vh, 140px);
+    right: auto;
+    left: 5vw;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 80vw;
+  }
+  .dw-experience-heading strong { font-size: 16px; }
+}
+
+/* Same headline on the compact/mobile experience section, which renders from a
+   different component than the pinned timeline. */
+.dw-experience-static-title {
+  margin: 14px 0 clamp(28px, 5vw, 52px);
+  max-width: 18ch;
+  font-size: clamp(26px, 5vw, 44px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--dw-text);
 }

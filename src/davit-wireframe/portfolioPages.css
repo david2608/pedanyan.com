@@ -4356,14 +4356,13 @@
 
 .dw-portfolio-card-copy {
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr) minmax(150px, 0.4fr);
+  grid-template-columns: minmax(0, 1fr) minmax(150px, 0.4fr);
   gap: 16px;
   align-items: start;
   padding-top: 18px;
   border-top: 1px solid var(--dw-line);
 }
 
-.dw-portfolio-card-copy > span,
 .dw-portfolio-card-meta {
   font-size: 12px;
   line-height: 1.35;
@@ -5368,11 +5367,11 @@ a.dw-case-testimonial-linkedin:hover {
   }
 
   .dw-portfolio-card-copy {
-    grid-template-columns: 34px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .dw-portfolio-card-meta {
-    grid-column: 2;
+    grid-column: 1;
   }
 
   .dw-case-intro-surface {
@@ -8963,11 +8962,18 @@ a.dw-case-testimonial-linkedin:hover {
   --case-full: 100%;
   --case-big: 1400px;
   --case-half: 720px;
+  /* Mockups are exported around 1800px. Text still stops at --case-big for a
+     readable measure, but a screenshot capped at 1400 on a wide display was
+     showing UI at roughly three-quarters of the size it was designed at. Media
+     gets its own, larger ceiling so it can reach its native width. */
+  --case-media: 1800px;
 }
 
 .dw-case-section.dw-case-type-media > .dw-case-media,
-.dw-case-section.dw-case-type-gallery > .dw-case-gallery {
-  width: min(calc(100% - 40px), var(--case-big)) !important;
+.dw-case-section.dw-case-type-gallery > .dw-case-gallery,
+.dw-case-section.dw-case-big > .dw-case-media,
+.dw-case-section.dw-case-big > .dw-case-gallery {
+  width: min(calc(100% - 40px), var(--case-media)) !important;
   margin-inline: auto !important;
 }
 
@@ -8984,12 +8990,17 @@ a.dw-case-testimonial-linkedin:hover {
   width: min(calc(100% - 40px), var(--case-half)) !important;
 }
 
-/* A tall portrait shot inside "big" still has to fit a laptop screen. */
+/* Render at the asset's own width when it fits, shrink only when it must —
+   never stretch a small export up to fill the container. A tall portrait shot
+   still has to fit on screen, but the ceiling is generous enough that a
+   landscape mockup is governed by its width, not by the viewport height. */
 .dw-case-section.dw-case-type-media > .dw-case-media img,
-.dw-case-section.dw-case-type-media > .dw-case-media video {
-  max-height: 86svh;
+.dw-case-section.dw-case-type-media > .dw-case-media video,
+.dw-case-section.dw-case-big > .dw-case-media img,
+.dw-case-section.dw-case-big > .dw-case-media video {
   width: auto;
   max-width: 100%;
+  max-height: 98svh;
   margin-inline: auto;
 }
 
@@ -9027,100 +9038,269 @@ a.dw-case-testimonial-linkedin:hover {
   }
 }
 
+
 /* ============================================================
-   End of the Work index — replaces the one-line "Let's talk" link.
-   Three ways people actually arrive, each opening the chat pre-picked.
+   Shared case-study opening
+   One panel per project: title, subtitle, the whole metadata block
+   and the product shot, on the project's own accent. The short
+   "about" paragraph follows underneath with no heading — the old
+   separate "About the project" section is gone.
+   Geometry is lifted from the Material Exchange opening, which is
+   the one Davit picked; colours come from currentColor so the three
+   dark accents (Securion, Nesba, CloudChipr) work unchanged.
    ============================================================ */
-.dw-work-next {
-  width: min(calc(100% - 40px), var(--case-big, 1400px));
-  margin: clamp(80px, 10vw, 170px) auto clamp(60px, 7vw, 110px);
-  padding-top: clamp(34px, 4vw, 60px);
-  border-top: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+.dw-case-opening {
+  padding: clamp(20px, 2vw, 38px);
 }
 
-.dw-work-next-head {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: clamp(30px, 4vw, 54px);
+.dw-case-opening-panel {
+  position: relative;
+  min-height: min(1040px, calc(100svh - 38px));
+  padding: clamp(58px, 6vw, 112px);
+  overflow: hidden;
+  border-radius: 30px;
+  color: #111111;
+  isolation: isolate;
 }
 
-.dw-work-next-head span {
-  font-size: 11px;
-  letter-spacing: 0.14em;
+.dw-case-opening-copy {
+  position: relative;
+  z-index: 3;
+  width: min(50%, 760px);
+}
+
+.dw-case-opening-eyebrow {
+  margin: 0 0 22px;
+  color: color-mix(in srgb, currentColor 55%, transparent);
+  font-size: clamp(13px, 0.95vw, 18px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  opacity: 0.6;
 }
 
-.dw-work-next-head h2 {
+.dw-page .dw-case-opening-copy h1 {
   margin: 0;
-  max-width: 20ch;
-  font-size: clamp(30px, 4.4vw, 62px);
-  font-weight: 600;
-  line-height: 1.02;
-  letter-spacing: -0.035em;
-}
-
-.dw-work-next-modes {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
-  gap: clamp(14px, 1.6vw, 24px);
-}
-
-.dw-work-next-mode {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  padding: clamp(22px, 2.4vw, 34px);
-  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
-  border-radius: 18px;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  transition: border-color 0.28s ease, transform 0.28s ease, background-color 0.28s ease;
-}
-
-.dw-work-next-mode:hover,
-.dw-work-next-mode:focus-visible {
-  border-color: currentColor;
-  transform: translateY(-3px);
-  background: color-mix(in srgb, currentColor 4%, transparent);
-}
-
-.dw-work-next-mode-label {
-  font-size: clamp(18px, 1.7vw, 24px);
-  font-weight: 600;
+  font-size: clamp(50px, 4.6vw, 92px);
+  font-weight: 500;
+  line-height: 0.94;
   letter-spacing: -0.02em;
-  line-height: 1.15;
 }
 
-.dw-work-next-mode-body {
-  font-size: clamp(14px, 1.05vw, 16px);
-  line-height: 1.5;
-  opacity: 0.74;
+.dw-page .dw-case-opening-copy h2 {
+  max-width: 34ch;
+  margin: 22px 0 0;
+  color: color-mix(in srgb, currentColor 62%, transparent);
+  font-size: clamp(19px, 1.85vw, 33px);
+  font-weight: 400;
+  line-height: 1.22;
 }
 
-.dw-work-next-mode-go {
-  margin-top: auto;
-  padding-top: 8px;
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity 0.28s ease, transform 0.28s ease;
+.dw-case-opening-meta {
+  position: relative;
+  z-index: 3;
+  margin: clamp(52px, 5.5vw, 110px) 0 0;
 }
 
-.dw-work-next-mode:hover .dw-work-next-mode-go,
-.dw-work-next-mode:focus-visible .dw-work-next-mode-go {
-  opacity: 0.85;
-  transform: none;
+.dw-case-opening-meta > div {
+  display: grid;
+  grid-template-columns: minmax(115px, 0.36fr) 1fr;
+  gap: 22px;
+  padding: 9px 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .dw-work-next-mode,
-  .dw-work-next-mode-go { transition: none; }
-  .dw-work-next-mode:hover { transform: none; }
-  .dw-work-next-mode-go { opacity: 0.85; transform: none; }
+.dw-case-opening-meta dt,
+.dw-case-opening-meta dd {
+  margin: 0;
+  font-size: clamp(15px, 1.08vw, 21px);
+  line-height: 1.35;
+}
+
+.dw-case-opening-meta dt {
+  color: color-mix(in srgb, currentColor 62%, transparent);
+}
+
+.dw-case-opening-meta dd {
+  font-weight: 500;
+}
+
+.dw-case-opening-meta a {
+  color: inherit;
+  text-underline-offset: 4px;
+}
+
+.dw-case-opening-tools {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dw-case-opening-tools img {
+  display: block;
+  width: auto;
+  max-width: 190px;
+  max-height: 34px;
+  opacity: 0.82;
+}
+
+.dw-case-opening-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dw-case-opening-chips span {
+  padding: 5px 12px;
+  border: 1px solid color-mix(in srgb, currentColor 24%, transparent);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.dw-case-opening-people {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dw-case-opening-people a,
+.dw-case-opening-people span {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 13px 3px 4px;
+  color: inherit;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.dw-case-opening-people a:hover {
+  background: color-mix(in srgb, currentColor 15%, transparent);
+}
+
+.dw-case-opening-people img,
+.dw-case-opening-people .dw-mex-avatar {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: grayscale(1);
+}
+
+.dw-case-opening-people span:empty,
+.dw-case-opening-people a:empty {
+  display: none;
+}
+
+.dw-case-opening-media {
+  position: absolute;
+  z-index: 2;
+  right: -4%;
+  bottom: 12%;
+  width: min(56%, 920px);
+}
+
+.dw-case-opening-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 70svh;
+  object-fit: contain;
+  object-position: right bottom;
+}
+
+/* The paragraph that used to be its own "About the project" section. */
+/* Aligned to the panel's own text column so it reads as a continuation
+   of the opening rather than a new, centred section. */
+.dw-case-opening-about {
+  max-width: 1020px;
+  margin: clamp(56px, 7vw, 120px) 0 clamp(20px, 4vw, 70px);
+  padding: 0 clamp(58px, 6vw, 112px);
+}
+
+.dw-case-opening-about p {
+  margin: 0 0 1.1em;
+  font-size: clamp(18px, 1.5vw, 27px);
+  line-height: 1.42;
+}
+
+.dw-case-opening-about p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 1100px) {
+  .dw-case-opening-about {
+    padding: 0 clamp(24px, 5vw, 56px);
+  }
+
+  .dw-case-opening-panel {
+    min-height: auto;
+    padding: clamp(36px, 6vw, 64px) clamp(24px, 5vw, 56px);
+    border-radius: 18px;
+  }
+
+  .dw-case-opening-copy {
+    width: 100%;
+  }
+
+  .dw-case-opening-media {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: calc(100% + 12vw);
+    margin: clamp(30px, 5vw, 56px) -6vw 0;
+  }
+
+  .dw-case-opening-media img {
+    max-height: none;
+    object-position: center;
+  }
+
+  .dw-page .dw-case-opening-copy h1 {
+    font-size: clamp(38px, 9vw, 62px);
+  }
+
+  .dw-page .dw-case-opening-copy h2 {
+    max-width: none;
+    font-size: clamp(20px, 4.4vw, 30px);
+  }
+
+  .dw-case-opening-meta > div {
+    grid-template-columns: minmax(96px, 0.4fr) 1fr;
+    gap: 14px;
+  }
+}
+
+.dw-page .dw-case-opening-about h2 {
+  margin: 0 0 clamp(18px, 2vw, 32px);
+  font-size: clamp(30px, 3.2vw, 58px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+}
+
+.dw-case-opening-about .dw-case-eyebrow {
+  margin: 0 0 14px;
+}
+
+/* ============================================================
+   Phone mockups at something like device size
+   Tagged at runtime (usePhoneShotFlags) from the file's own aspect
+   ratio, because a 2x/3x export carries no hint of its intended size.
+   A real handset is ~390pt wide; these were rendering close to 700.
+   ============================================================ */
+.dw-case-study .dw-case-section img.is-phone-shot {
+  width: auto;
+  max-width: min(100%, 430px);
+  height: auto;
+  margin-inline: auto;
+}
+
+.dw-case-study .dw-case-section.dw-case-type-split img.is-phone-shot {
+  display: block;
 }

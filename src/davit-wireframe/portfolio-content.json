@@ -414,7 +414,7 @@
               "value": "CloudChipr"
             },
             {
-              "label": "Role",
+              "label": "Role:",
               "value": "Product Designer and Design Lead"
             },
             {
@@ -422,11 +422,11 @@
               "value": "18 Months"
             },
             {
-              "label": "Scope",
+              "label": "Scope:",
               "value": "Brand identity, research, MVP, automation workflows"
             },
             {
-              "label": "Tools",
+              "label": "Tools:",
               "value": "Figma, Miro, Maze"
             },
             {
@@ -807,8 +807,8 @@
             "position": "center"
           },
           "textColor": "#ffffff",
-          "paddingTop": "150px",
-          "paddingBottom": "150px",
+          "paddingTop": "300px",
+          "paddingBottom": "270px",
           "title": "Company-reported impact at the time I left",
           "items": [
             {
@@ -840,7 +840,7 @@
           "paddingTop": "180px",
           "paddingBottom": "180px",
           "title": "What I delivered",
-          "body": "<p>My work over 18 months, from early product definition through design leadership.</p>"
+          "body": "<p class=\"dw-cloudchipr-outcome-lead\">From early validation to an MVP and a product design practice that could grow with the company.</p><div class=\"dw-cloudchipr-outcome-columns\"><section><p class=\"dw-cloudchipr-outcome-index\">01</p><h3>Early validation</h3><ul><li>A beta client <strong>reduced cloud spending by 30%</strong>, against an 8–15% target.</li><li><strong>$500K in savings</strong> was recorded during testing with SuperAnnotate, ActiveLoop, and Flux.</li></ul></section><section><p class=\"dw-cloudchipr-outcome-index\">02</p><h3>Product and leadership</h3><ul><li>Defined and designed the product <strong>MVP in six months.</strong></li><li>Progressed from <strong>solo designer to design lead</strong> over an 18-month engagement.</li><li>Built and led a <strong>four-designer team</strong>, establishing the product design practice.</li></ul></section></div>"
         },
         {
           "id": "feedback",

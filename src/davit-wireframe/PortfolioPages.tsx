@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Linkedin, Shield, MessageCircle, ScanLine, WalletCards, PanelsTopLeft, House, UserRound } from "lucide-react";
 import portfolioManifest from "./portfolio-content.json";
+import tempoV2 from "./tempo-v2.json";
 import "@fontsource/syne/400.css";
 import "@fontsource/syne/500.css";
 import "@fontsource/syne/600.css";
@@ -95,6 +96,19 @@ const portfolioFilterMetadata: Record<string, { year: string; category: string }
 const projects = (portfolioManifest.projects as unknown as PortfolioProject[])
   .slice()
   .sort((a, b) => Number(portfolioFilterMetadata[b.project.slug]?.year ?? 0) - Number(portfolioFilterMetadata[a.project.slug]?.year ?? 0));
+
+/**
+ * Working drafts. Reachable by URL so they can be compared against the live
+ * page, but deliberately kept out of `projects` so they never appear in the
+ * Work grid, the year filters, or the next-project chain.
+ */
+const draftProjects = [tempoV2 as unknown as PortfolioProject];
+
+/** Every project the router can resolve, live or draft. */
+const routableProjects = [...projects, ...draftProjects];
+
+/** Drafts borrow the styling and per-project CSS of the page they clone. */
+const draftStyleSource: Record<string, string> = { "tempo-v2": "tempo" };
 
 const projectAccents: Record<string, { accent: string; surface: string }> = {
   cloudchipr: { accent: "#5635ef", surface: "#ebe7ff" },
@@ -551,7 +565,7 @@ function IntroSection({ project, section }: { project: PortfolioProject; section
     <section className="dw-case-intro dw-case-wide" id={section.id} data-portfolio-reveal>
       <div className="dw-case-intro-surface" style={style}>
         <div className="dw-case-intro-heading">
-          <p>Selected case study</p>
+          <p>{isCloudChipr ? "FinOps case study / 2023" : "Selected case study"}</p>
           <h1><ProjectTitle title={section.title} /></h1>
           <h2>{section.subtitle}</h2>
         </div>
@@ -2079,23 +2093,36 @@ function CloudChiprDesignSystemVisuals({ project, section }: { project: Portfoli
 }
 
 function CloudChiprOverallAchievements({ section }: { section: PortfolioSection }) {
-  const achievements = [
-    <>Overall <strong>$500K saved during testing for companies such as SuperAnnotate, ActiveLoop, Flux etc.</strong> <span>(95k ARR in less than 1 month of operations.)</span></>,
-    <>Successfully <strong>reduced cloud spending by 30%</strong> for a client during beta testing <span>(the goal was 8–15%).</span></>,
-    <>Started as a <strong>solo designer and finished as a design lead.</strong></>,
-    <><strong>Grew a team of 4 talented designers.</strong></>,
-    <>Understood and designed the entire product’s <strong>MVP in just 6 months.</strong></>,
-    <>Nailed all design operations inside the company.</>,
-    <>Company became profitable in just 8 months.</>,
-    <><strong><u>CloudChipr</u> has raised a total of <u>$1.3M</u> in funding over <u>4</u> rounds.</strong></>
+  const validation = [
+    <>A beta client <strong>reduced cloud spending by 30%</strong>, against an 8–15% target.</>,
+    <><strong>$500K in savings</strong> was recorded during testing with companies including SuperAnnotate, ActiveLoop, and Flux.</>
+  ];
+  const contribution = [
+    <>Defined and designed the product <strong>MVP in six months.</strong></>,
+    <>Progressed from <strong>solo designer to design lead</strong> over an 18-month engagement.</>,
+    <>Built and led a <strong>four-designer team</strong>, establishing the product design practice.</>
   ];
 
   return (
     <section className="dw-case-section dw-cloudchipr-overall-achievements" id={section.id}>
       <div className="dw-cloudchipr-overall-achievements-inner" data-portfolio-reveal>
-        <h2>Overall <span>Achievements</span></h2>
-        <p>During 18 months working at CloudChipr:</p>
-        <ul>{achievements.map((achievement, index) => <li key={index}>{achievement}</li>)}</ul>
+        <div className="dw-cloudchipr-delivery-heading">
+          <p>Case study outcome</p>
+          <h2>What I <span>delivered</span></h2>
+          <p>From early validation to an MVP and product design practice that could grow with the company.</p>
+        </div>
+        <div className="dw-cloudchipr-achievement-groups">
+          <section>
+            <div className="dw-cloudchipr-achievement-index">01</div>
+            <h3>Early validation</h3>
+            <ul>{validation.map((achievement, index) => <li key={index}>{achievement}</li>)}</ul>
+          </section>
+          <section>
+            <div className="dw-cloudchipr-achievement-index">02</div>
+            <h3>Product and leadership</h3>
+            <ul>{contribution.map((achievement, index) => <li key={index}>{achievement}</li>)}</ul>
+          </section>
+        </div>
       </div>
     </section>
   );
@@ -2509,6 +2536,9 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   }
   if (project.project.slug === "cloudchipr" && section.id === "design-system-visuals") {
     return <CloudChiprDesignSystemVisuals project={project} section={section} />;
+  }
+  if (project.project.slug === "cloudchipr" && section.id === "product-direction-two") {
+    return null;
   }
   if (project.project.slug === "cloudchipr" && section.id === "overall-achievements") {
     return <CloudChiprOverallAchievements section={section} />;
@@ -3504,7 +3534,12 @@ export function PortfolioIndexContent() {
 export function CaseStudyContent({ slug }: { slug: string }) {
   const containerRef = useRef<HTMLElement | null>(null);
   const dataSlug = slug === "material-exchange-motion-pilot" ? "material-exchange" : slug;
-  const project = useMemo(() => projects.find((item) => item.project.slug === dataSlug), [dataSlug]);
+  // A draft keeps its own content but wears the original's per-project CSS.
+  const styleSlug = draftStyleSource[dataSlug] ?? dataSlug;
+  const project = useMemo(
+    () => routableProjects.find((item) => item.project.slug === dataSlug),
+    [dataSlug]
+  );
   usePortfolioMotion(containerRef);
   useDarkSectionFlags(containerRef);
   usePhoneShotFlags(containerRef);
@@ -3515,7 +3550,7 @@ export function CaseStudyContent({ slug }: { slug: string }) {
   }
 
   return (
-    <article className={`dw-case-study dw-case-${dataSlug} dw-motion-pilot`} ref={containerRef}>
+    <article className={`dw-case-study dw-case-${styleSlug} dw-motion-pilot`} ref={containerRef}>
       {project.sections.map((section) => <ProjectSection project={project} section={section} key={section.id} />)}
     </article>
   );

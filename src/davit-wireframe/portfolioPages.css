@@ -3557,18 +3557,6 @@
   background: #f7f8fc !important;
 }
 
-.dw-case-cloudchipr #product-benefits::before {
-  display: block;
-  max-width: 1200px;
-  margin: 0 auto clamp(70px, 7vw, 120px);
-  color: #0b0b12;
-  content: "Remove Friction around costs between Engineering and Finance";
-  font-size: clamp(38px, 4vw, 68px);
-  font-weight: 500;
-  line-height: 1.08;
-  text-align: center;
-}
-
 .dw-case-cloudchipr #product-benefits .dw-case-feature-grid {
   border-top: 0;
   gap: clamp(64px, 8vw, 130px) clamp(28px, 5vw, 90px);
@@ -3623,7 +3611,6 @@
 }
 
 @media (max-width: 760px) {
-  .dw-case-cloudchipr #product-benefits::before { text-align: left; }
   .dw-case-cloudchipr #product-benefits .dw-case-feature-grid,
   .dw-case-cloudchipr #headline-achievements .dw-case-metrics > div { grid-template-columns: 1fr; }
 }
@@ -3876,6 +3863,32 @@
   color: #707075;
   font-size: clamp(20px, 1.8vw, 30px);
   line-height: 1.55;
+}
+
+.dw-cloudchipr-achievement-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(44px, 7vw, 112px);
+  width: min(100%, 1080px);
+  margin: clamp(54px, 6vw, 88px) auto 0;
+}
+
+.dw-cloudchipr-achievement-groups h3 {
+  margin: 0;
+  color: #6d6d72;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.dw-cloudchipr-achievement-groups ul {
+  width: auto;
+  margin: 22px 0 0;
+}
+
+@media (max-width: 760px) {
+  .dw-cloudchipr-achievement-groups { grid-template-columns: 1fr; }
 }
 
 .dw-cloudchipr-overall-achievements li {
@@ -9303,4 +9316,321 @@ a.dw-case-testimonial-linkedin:hover {
 
 .dw-case-study .dw-case-section.dw-case-type-split img.is-phone-shot {
   display: block;
+}
+
+/* ============================================================
+   Case-study outcome band
+   The one section that must not read as another paragraph. Full
+   width on the project accent, oversized heading, body copy at
+   reading size rather than caption size.
+   ============================================================ */
+.dw-case-section#outcome .dw-case-prose {
+  width: min(calc(100% - 40px), var(--case-big)) !important;
+}
+
+.dw-page .dw-case-study .dw-case-section#outcome h2 {
+  max-width: 22ch;
+  font-size: clamp(34px, 4vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
+.dw-case-section#outcome .dw-case-richtext p {
+  max-width: 62ch;
+  font-size: clamp(17px, 1.35vw, 24px);
+  line-height: 1.45;
+}
+
+.dw-case-section#outcome .dw-case-eyebrow {
+  opacity: 0.72;
+}
+
+/* CloudChipr: an impact-led case-study opening and closing chapter.
+   Reference lock: the supplied CloudChipr Figma frames use an indigo canvas,
+   oversized type, a single blue-violet accent, and product evidence as media. */
+.dw-case-cloudchipr .dw-case-intro-surface {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-areas:
+    "heading media"
+    "meta media";
+  gap: 46px 48px;
+  width: min(calc(100% - 96px), 1680px);
+  min-height: 760px;
+  padding: clamp(52px, 5vw, 96px) clamp(38px, 5vw, 92px) clamp(42px, 4vw, 72px);
+  overflow: hidden;
+  border-radius: 8px;
+  background: #0e0a3e !important;
+}
+
+.dw-case-cloudchipr .dw-case-intro-heading {
+  width: auto;
+  align-self: end;
+}
+
+.dw-case-cloudchipr .dw-case-intro-heading > p {
+  display: block;
+  margin: 0 0 18px;
+  color: #b9b0ff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+
+.dw-page .dw-case-cloudchipr .dw-case-intro-heading h1 {
+  font-size: clamp(64px, 6.4vw, 112px);
+  font-weight: 600;
+  line-height: .9;
+  letter-spacing: -.055em;
+  text-wrap: balance;
+}
+
+.dw-page .dw-case-cloudchipr .dw-case-intro-heading h2 {
+  max-width: 18ch;
+  margin-top: 28px;
+  color: #d0cdf0;
+  font-size: clamp(24px, 2.05vw, 38px);
+  font-weight: 400;
+  line-height: 1.22;
+  text-wrap: balance;
+}
+
+.dw-case-cloudchipr .dw-case-meta {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 28px;
+  align-self: start;
+  padding: 0;
+}
+
+.dw-case-cloudchipr .dw-case-meta div {
+  display: block;
+  min-width: 0;
+  padding-top: 14px;
+  border-top: 1px solid rgb(208 205 240 / 24%);
+}
+
+.dw-case-cloudchipr .dw-case-meta dt,
+.dw-case-cloudchipr .dw-case-meta dd {
+  padding: 0;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.dw-case-cloudchipr .dw-case-meta dt {
+  margin: 0 0 5px;
+  color: #a49fc9;
+}
+
+.dw-case-cloudchipr .dw-case-meta dd {
+  color: #fff;
+}
+
+.dw-case-cloudchipr .dw-case-meta-tools,
+.dw-case-cloudchipr .dw-case-meta-co-designers {
+  display: none !important;
+}
+
+.dw-case-cloudchipr .dw-case-intro-media {
+  position: relative;
+  z-index: 2;
+  grid-area: media;
+  top: auto;
+  right: auto;
+  align-self: center;
+  width: 118%;
+  margin: 0 -9% 0 -9%;
+  transform: translateY(4%);
+}
+
+.dw-case-cloudchipr .dw-case-project-rail {
+  display: none;
+}
+
+.dw-cloudchipr-overall-achievements {
+  padding: clamp(90px, 9vw, 168px) 24px clamp(100px, 10vw, 180px) !important;
+  background: #f4f5fb !important;
+}
+
+.dw-cloudchipr-overall-achievements-inner {
+  width: min(100%, 1360px);
+  text-align: left;
+}
+
+.dw-cloudchipr-delivery-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr);
+  column-gap: clamp(48px, 10vw, 180px);
+  align-items: end;
+  padding-bottom: clamp(50px, 6vw, 92px);
+  border-bottom: 1px solid #cbd0e3;
+}
+
+.dw-cloudchipr-delivery-heading > p:first-child {
+  grid-column: 1 / -1;
+  margin: 0 0 18px;
+  color: #5b6078;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.dw-page .dw-cloudchipr-overall-achievements .dw-cloudchipr-delivery-heading h2 {
+  grid-column: 1;
+  margin: 0;
+  font-size: clamp(62px, 6.6vw, 112px);
+  line-height: .9;
+  letter-spacing: -.06em;
+  text-wrap: balance;
+}
+
+.dw-cloudchipr-delivery-heading > p:last-child {
+  grid-column: 2;
+  margin: 0;
+  color: #53566a;
+  font-size: clamp(19px, 1.6vw, 27px);
+  line-height: 1.38;
+  text-wrap: pretty;
+}
+
+.dw-cloudchipr-achievement-groups {
+  gap: 0;
+  width: 100%;
+  margin: 0;
+}
+
+.dw-cloudchipr-achievement-groups > section {
+  position: relative;
+  min-height: 330px;
+  padding: clamp(34px, 4vw, 62px) clamp(26px, 4vw, 64px) 32px;
+  border-bottom: 1px solid #cbd0e3;
+}
+
+.dw-cloudchipr-achievement-groups > section + section {
+  border-left: 1px solid #cbd0e3;
+}
+
+.dw-cloudchipr-achievement-index {
+  margin-bottom: clamp(40px, 6vw, 92px);
+  color: #4d45d7;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dw-cloudchipr-achievement-groups h3 {
+  color: #11121a;
+  font-size: clamp(22px, 1.8vw, 30px);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.dw-cloudchipr-achievement-groups ul {
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  color: #62657a;
+  font-size: clamp(17px, 1.3vw, 22px);
+  line-height: 1.45;
+}
+
+.dw-cloudchipr-achievement-groups li {
+  position: relative;
+  padding: 0 0 16px 20px;
+}
+
+.dw-cloudchipr-achievement-groups li::before {
+  position: absolute;
+  top: .58em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4d45d7;
+  content: "";
+}
+
+@media (max-width: 900px) {
+  .dw-case-cloudchipr .dw-case-intro-surface {
+    grid-template-columns: 1fr;
+    grid-template-areas: "heading" "media" "meta";
+    width: min(calc(100% - 32px), 720px);
+    min-height: 0;
+    padding: 42px 24px 0;
+  }
+
+  .dw-page .dw-case-cloudchipr .dw-case-intro-heading h1 { font-size: clamp(58px, 15vw, 88px); }
+
+  .dw-case-cloudchipr .dw-case-intro-media {
+    width: 112%;
+    margin: 0 -6%;
+    transform: translateY(6%);
+  }
+
+  .dw-case-cloudchipr .dw-case-meta {
+    grid-template-columns: 1fr 1fr;
+    padding: 24px 0 36px;
+  }
+
+  .dw-cloudchipr-delivery-heading { grid-template-columns: 1fr; gap: 28px; }
+  .dw-page .dw-cloudchipr-overall-achievements .dw-cloudchipr-delivery-heading h2,
+  .dw-cloudchipr-delivery-heading > p:last-child { grid-column: 1; }
+}
+
+@media (max-width: 620px) {
+  .dw-case-cloudchipr .dw-case-intro-surface { border-radius: 6px; }
+  .dw-case-cloudchipr .dw-case-meta { grid-template-columns: 1fr; }
+  .dw-cloudchipr-achievement-groups { grid-template-columns: 1fr; }
+  .dw-cloudchipr-achievement-groups > section { min-height: 0; }
+  .dw-cloudchipr-achievement-groups > section + section { border-left: 0; }
+}
+
+/* Feedback follows the original Figma composition: one broad statement,
+   then a clear attribution row, instead of a small testimonial card. */
+.dw-page .dw-cloudchipr-feedback {
+  padding: clamp(112px, 11vw, 190px) 24px clamp(116px, 10vw, 174px) !important;
+  background: #0e0a3e !important;
+}
+
+.dw-page .dw-case-study .dw-cloudchipr-feedback-inner {
+  width: min(calc(100% - 48px), 1120px);
+}
+
+.dw-page .dw-cloudchipr-feedback h2 {
+  margin: 0;
+  color: #ffffff !important;
+  font-family: "Syne", sans-serif;
+  font-size: clamp(64px, 6.4vw, 104px) !important;
+  font-weight: 500;
+  line-height: .92;
+  letter-spacing: -.05em;
+}
+
+.dw-page .dw-cloudchipr-feedback blockquote {
+  display: block;
+  position: relative;
+  z-index: 1;
+  max-width: 31ch;
+  margin: clamp(54px, 6vw, 96px) 0 0;
+  padding: 0;
+  color: #d0cdf0 !important;
+  font-family: Archivo, Arial, Helvetica, sans-serif;
+  font-size: clamp(25px, 2.25vw, 40px);
+  font-weight: 400;
+  line-height: 1.48;
+  letter-spacing: 0;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.dw-page .dw-cloudchipr-feedback-person {
+  width: min(100%, 760px);
+  margin-top: clamp(58px, 7vw, 112px);
+  padding-top: 28px;
+  border-top: 1px solid rgb(208 205 240 / 24%);
+}
+
+@media (max-width: 620px) {
+  .dw-page .dw-case-study .dw-cloudchipr-feedback-inner { width: 100%; }
+  .dw-page .dw-cloudchipr-feedback h2 { font-size: 58px !important; }
+  .dw-page .dw-cloudchipr-feedback blockquote { font-size: 23px; line-height: 1.5; }
 }

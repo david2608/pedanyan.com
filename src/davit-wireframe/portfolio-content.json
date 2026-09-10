@@ -373,35 +373,31 @@
           "sourceNode": "331:27645",
           "layout": "wide",
           "background": {
-            "gradient": "linear-gradient(41.269deg, rgb(32,65,235) 8.3056%, rgb(115,52,241) 73.616%)",
+            "color": "#0e0a3e",
             "scope": "inner",
-            "radius": "30px"
+            "radius": "8px"
           },
           "textColor": "#ffffff",
           "paddingTop": "57px",
           "paddingBottom": "0px",
           "title": "CloudChipr",
-          "subtitle": "Brand Identity and A Cloud Cost Management and Analytics Platform Design",
+          "subtitle": "Making cloud cost operations actionable for engineering and finance teams.",
           "metadata": [
             {
               "label": "Client",
               "value": "CloudChipr"
             },
             {
-              "label": "Categories",
-              "value": "FinOps, SaaS, B2B, CCMS"
+              "label": "Role",
+              "value": "Product Designer and Design Lead"
             },
             {
               "label": "Duration",
               "value": "18 Months"
             },
             {
-              "label": "Services",
-              "value": "Brand Identity, Problem Discovery, User research, MVP, Usability testing"
-            },
-            {
-              "label": "Projects",
-              "value": "Platform MVP, Scheduling tool, AWS, GCP, Azure Cost Optimisation"
+              "label": "Scope",
+              "value": "Brand identity, research, MVP, automation workflows"
             },
             {
               "label": "Tools",
@@ -422,8 +418,8 @@
           "headingGradient": "linear-gradient(93.372deg, rgb(32,65,235) 29.211%, rgb(115,52,241) 91.828%)",
           "paddingTop": "203px",
           "paddingBottom": "190px",
-          "title": "About the project",
-          "body": "<p>Cloudchipr is a cloud costs <strong>observability, management and automation platform.</strong></p><p>It helps engineering and finance teams save time and money by <strong>automating cloud operations.</strong> With Cloudchipr, teams can <strong>schedule different automated workflows</strong> that send Slack alerts, build <strong>Tableau charts</strong>, create Jira tickets, and <strong>deactivate unused resources</strong> across all major cloud platforms. It’s like Zapier for cloud ops.</p>"
+          "title": "The brief",
+          "body": "<p>CloudChipr is a cloud-cost observability, management, and automation platform for engineering and finance teams.</p><p>My role was to turn complex cloud operations into an understandable MVP: teams could schedule workflows, send Slack alerts, create Jira tickets, and deactivate unused resources across AWS, GCP, and Azure.</p>"
         },
         {
           "id": "brand-construction",
@@ -692,7 +688,7 @@
           "textColor": "#ffffff",
           "paddingTop": "150px",
           "paddingBottom": "80px",
-          "title": "Automatically optimize cloud costs using FinOps best practices"
+          "title": "From cloud-cost insight to action"
         },
         {
           "id": "product-overview",
@@ -723,6 +719,7 @@
           "layout": "wide",
           "paddingTop": "100px",
           "paddingBottom": "180px",
+          "title": "Designed to remove friction between engineering and finance",
           "items": [
             {
               "icon": "feature-save",
@@ -749,15 +746,6 @@
               "text": "<strong>Tagging policies</strong> enforcement"
             }
           ]
-        },
-        {
-          "id": "product-direction-two",
-          "type": "prose",
-          "sourceNode": "331:28080",
-          "layout": "contained",
-          "paddingTop": "130px",
-          "paddingBottom": "130px",
-          "title": "Remove Friction around costs between Engineering and Finance"
         },
         {
           "id": "product-screen-pair",
@@ -795,22 +783,22 @@
           "textColor": "#ffffff",
           "paddingTop": "150px",
           "paddingBottom": "150px",
-          "title": "On the moment I Left the company",
+          "title": "Company-reported impact at the time I left",
           "items": [
             {
               "icon": "metric-saved",
               "value": "$50M+",
-              "label": "Saved in total so far"
+              "label": "Total cloud savings reported"
             },
             {
               "icon": "metric-customers",
               "value": "$1.2M/per year",
-              "label": "Customers save on average"
+              "label": "Average annual customer savings reported"
             },
             {
               "icon": "metric-engineers",
               "value": "200h+",
-              "label": "Engineers sаve on average"
+              "label": "Average engineering time saved"
             }
           ]
         },
@@ -825,8 +813,8 @@
           "textColor": "#111111",
           "paddingTop": "180px",
           "paddingBottom": "180px",
-          "title": "Overall Achievements",
-          "body": "<p>During 18 month working in CloudChipr:</p><p>Overall $500K saved during testing for companies such are SuperAnnotate, ActiveLoop, Flux etc.<br>(95k ARR in less than 1month of operations.)<br>Successfully reduced cloud spending by 30% for a client during beta testing (The goal was 8-15% ).<br>Started as a solo designer and finished as a design lead.<br>Grew a team of 4 talented designers.<br>Understood and designed the entire product’s MVP in just 6month.<br>Nailed all design operations inside the company.<br>Company became profitable in just 8 months<br>Cloudchipr has raised a total of $1.3M in funding over 4 rounds.</p>"
+          "title": "What I delivered",
+          "body": "<p>My work over 18 months, from early product definition through design leadership.</p>"
         },
         {
           "id": "feedback",

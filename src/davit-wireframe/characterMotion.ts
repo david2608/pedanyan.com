@@ -99,6 +99,19 @@ function warm(paths: string[]) {
   });
 }
 
+/** Decode a short run at a time so the opening loader stays smooth. */
+function warmInBatches(paths: string[], batchSize = 8, delayMs = 120) {
+  let cursor = 0;
+  let timer = 0;
+  const next = () => {
+    warm(paths.slice(cursor, cursor + batchSize));
+    cursor += batchSize;
+    if (cursor < paths.length) timer = window.setTimeout(next, delayMs);
+  };
+  next();
+  return () => window.clearTimeout(timer);
+}
+
 export function useCharacterMotion({
   sectionRef,
   enabled = true,
@@ -346,23 +359,29 @@ export function useCharacterMotion({
     return framePath(spec.dir, index);
   }, [state, frameIndex, reducedMotion]);
 
-  /**
-   * Preload in the order the states are needed: the entrance and the idle
-   * loop at once, the reactions and gravity a beat after the entrance so
-   * they do not compete with it for bandwidth.
-   */
+  /** Prepare entrance and idle while the intro screen is still visible. */
   useEffect(() => {
-    if (available.entrance) warm(clipFrames("entrance"));
-    if (available.idle) warm(clipFrames("idle"));
+    const paths = [
+      ...(available.entrance ? clipFrames("entrance") : []),
+      ...(available.idle ? clipFrames("idle") : [])
+    ];
+    if (!paths.length) return;
+    return warmInBatches(paths);
   }, [available.entrance, available.idle]);
   useEffect(() => {
     if (!entered) return;
+    const paths = (["scroll", "considering", "approval", "gravity"] as ClipName[]).flatMap((name) =>
+      available[name] ? clipFrames(name) : []
+    );
+    if (!paths.length) return;
+    let cancelWarmup: () => void = () => undefined;
     const later = window.setTimeout(() => {
-      (["scroll", "considering", "approval", "gravity"] as ClipName[]).forEach((name) => {
-        if (available[name]) warm(clipFrames(name));
-      });
+      cancelWarmup = warmInBatches(paths, 6, 220);
     }, 800);
-    return () => window.clearTimeout(later);
+    return () => {
+      window.clearTimeout(later);
+      cancelWarmup();
+    };
   }, [entered, available]);
 
   return {

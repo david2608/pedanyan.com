@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { Observer } from "gsap/Observer";
@@ -21,7 +21,6 @@ import figmaHeroDesignersObject from "../assets/figma-hero/hover-designers.png";
 import figmaHeroCultureObject from "../assets/figma-hero/hover-culture.png";
 import { CosmicDustBackground } from "./CosmicDustBackground";
 import { RapierGlassCubes } from "./HomeRapierGlassBackground";
-import { CaseStudyContent, PortfolioIndexContent } from "./PortfolioPages";
 import { PortfolioMusicToggle } from "./PortfolioMusicToggle";
 import { MediaCarousel } from "./MediaCarousel";
 import { ContactChat, openContactChat } from "./ContactChat";
@@ -34,10 +33,19 @@ import {
   type ExperienceModalPayload
 } from "./ExperienceDetail";
 import { POKE_EVENT, useCharacterMotion } from "./characterMotion";
-import { HeroCharacterVideo } from "./characterVideo";
+import { GONE_EVENT, HeroCharacterVideo, isHeroGone } from "./characterVideo";
 import { useTextMotion } from "./textMotion";
 import { siteData } from "./siteData";
 import { websiteContent } from "./websiteContent";
+
+// Case studies are intentionally separate from the home bundle: their media
+// and content only matter after someone chooses to view the work.
+const LazyPortfolioIndexContent = lazy(() =>
+  import("./PortfolioPages").then((module) => ({ default: module.PortfolioIndexContent }))
+);
+const LazyCaseStudyContent = lazy(() =>
+  import("./PortfolioPages").then((module) => ({ default: module.CaseStudyContent }))
+);
 
 gsap.registerPlugin(CustomEase, Observer, ScrollTrigger);
 
@@ -1641,11 +1649,18 @@ export function HeroSection() {
   // characterMotion.ts (entrance on first view, breathing idle, hover
   // reactions, scroll invitation, gravity scrub from the home timeline).
   const heroSectionRef = useRef<HTMLElement | null>(null);
-  // `?hero=video` on the home URL swaps the keyed frames for the plain MP4s
-  // with the studio background baked in - a side-by-side test, not a mode.
+  // The character is the MP4 clips with the studio background baked in and
+  // feathered edges; `?hero=frames` on the home URL brings back the keyed
+  // frame sequences for comparison.
   const [heroMode] = useState<"frames" | "video">(() =>
-    typeof window !== "undefined" && new URLSearchParams(window.location.search).get("hero") === "video" ? "video" : "frames"
+    typeof window !== "undefined" && new URLSearchParams(window.location.search).get("hero") === "frames" ? "frames" : "video"
   );
+  const [heroGone, setHeroGone] = useState(() => isHeroGone());
+  useEffect(() => {
+    const onGone = () => setHeroGone(true);
+    window.addEventListener(GONE_EVENT, onGone);
+    return () => window.removeEventListener(GONE_EVENT, onGone);
+  }, []);
   const character = useCharacterMotion({ sectionRef: heroSectionRef, start: isTyping, enabled: heroMode === "frames" });
   const { onHoverIntent: characterHover } = character;
 
@@ -1683,14 +1698,14 @@ export function HeroSection() {
     >
       <div className="dw-home-hero-screen">
         <figure
-          className={`dw-home-hero-portrait-card is-mode-${heroMode} is-state-${character.state}${character.entered ? " has-entered" : ""}`}
+          className={`dw-home-hero-portrait-card is-mode-${heroMode} is-state-${character.state}${character.entered ? " has-entered" : ""}${heroGone ? " is-gone" : ""}`}
           data-speed="-0.18"
           data-float-depth="0.2"
-          data-cursor-label="poke"
+          data-cursor-label={heroGone ? undefined : "poke"}
           style={character.parallaxStyle}
-          role="button"
-          tabIndex={0}
-          aria-label="Poke Davit"
+          role={heroGone ? undefined : "button"}
+          tabIndex={heroGone ? -1 : 0}
+          aria-label={heroGone ? "An empty studio stool. Davit has left." : "Poke Davit"}
           onClick={() => window.dispatchEvent(new CustomEvent(POKE_EVENT))}
           onKeyDown={(event) => {
             if (event.key === "Enter" || event.key === " ") {
@@ -4220,7 +4235,7 @@ export function PublicMediaGridPageSection() {
           ))}
         </nav>
         <header className="dw-public-journal-hero">
-          <span>Public work / 2018–now</span>
+          <span>Public work / selected stories</span>
           <h1>Talks, events,<br />and conversations<br />in public.</h1>
           <p>I organise formats, moderate discussions, teach, write, and join the conversations that help Armenia’s design community get sharper and more connected.</p>
         </header>
@@ -4555,7 +4570,9 @@ export function HomePage() {
 export function DesignerPage() {
   return (
     <PageShell activePage="designer">
-      <PortfolioIndexContent />
+      <Suspense fallback={<div className="dw-route-loading" aria-live="polite">Loading work</div>}>
+        <LazyPortfolioIndexContent />
+      </Suspense>
     </PageShell>
   );
 }
@@ -4567,7 +4584,9 @@ export function PortfolioPage() {
 export function ProjectPage({ slug }: { slug: string }) {
   return (
     <PageShell activePage="designer" showFooter={false}>
-      <CaseStudyContent slug={slug} />
+      <Suspense fallback={<div className="dw-route-loading" aria-live="polite">Loading case study</div>}>
+        <LazyCaseStudyContent slug={slug} />
+      </Suspense>
     </PageShell>
   );
 }

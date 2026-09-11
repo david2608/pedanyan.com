@@ -261,6 +261,12 @@
   opacity: 0.9;
 }
 
+.dw-chat-send:disabled {
+  cursor: not-allowed;
+  opacity: 0.38;
+  transform: none;
+}
+
 /* ---------- phones: bottom sheet ---------- */
 @media (max-width: 560px) {
   .dw-chat-layer { padding: 0; align-items: flex-end; justify-content: stretch; }

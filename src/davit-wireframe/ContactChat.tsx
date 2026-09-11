@@ -11,6 +11,7 @@ export type ChatIntent = {
   reply: string;
   placeholder: string;
   opener: string;
+  requiresDetail?: boolean;
 };
 
 // Four ways people arrive. Each one changes what Davit asks back and what
@@ -47,6 +48,15 @@ export const chatIntents: ChatIntent[] = [
     reply: "What's the event or the idea, and roughly when? I take on talks, juries and workshops when the room is right.",
     placeholder: "The event or idea, and timing…",
     opener: "Hi Davit — I'd like to invite you to speak or collaborate."
+  },
+  {
+    id: "message",
+    chip: "Your message",
+    said: "I have something else in mind.",
+    reply: "Tell me what's on your mind. I'll read it personally.",
+    placeholder: "Write your message…",
+    opener: "Hi Davit —",
+    requiresDetail: true
   }
 ];
 
@@ -104,6 +114,7 @@ export function ContactChat() {
 
   const send = useCallback(() => {
     if (!intent) return;
+    if (intent.requiresDetail && !detail.trim()) return;
     const body = detail.trim() ? `${intent.opener}\n\n${detail.trim()}` : intent.opener;
     window.open(`${DAVIT_TELEGRAM_URL}?text=${encodeURIComponent(body)}`, "_blank", "noopener");
     close();
@@ -174,6 +185,7 @@ export function ContactChat() {
                 className="dw-chat-send"
                 type="button"
                 onClick={send}
+                disabled={intent.requiresDetail && !detail.trim()}
                 data-cursor-label="continue on telegram"
               >
                 Continue on Telegram &rarr;

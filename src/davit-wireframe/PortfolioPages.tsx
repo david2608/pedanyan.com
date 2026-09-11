@@ -3478,7 +3478,7 @@ export function PortfolioIndexContent() {
   return (
     <section className="dw-portfolio-index" ref={containerRef}>
       <header className="dw-portfolio-index-hero" data-portfolio-reveal>
-        <p>Selected work / 2018–2026</p>
+        <p>Selected work / case studies</p>
         <h1>Eight products. The decisions behind them.</h1>
         <div>
           <p>Fintech, delivery, crypto, SaaS — most of them taken from an unclear brief to a system that shipped. Each case study shows the research that changed direction, the structure that made scale possible, and the trade-offs I would still defend in a review.</p>

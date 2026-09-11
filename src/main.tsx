@@ -8,6 +8,9 @@ import "@fontsource/archivo/900.css";
 import { AppRouter } from "./davit-wireframe/DavitWireframe";
 import "./davit-wireframe/davitWireframe.css";
 
+// A release marker makes each publish unambiguous to browser caches.
+document.documentElement.dataset.release = "2026-09-12.2";
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AppRouter />

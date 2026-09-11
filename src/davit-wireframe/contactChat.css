@@ -74,7 +74,7 @@
   height: 42px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 50% 18%;
+  object-position: 50% 50%;
   background: var(--dw-cream, #eee4cf);
   flex: none;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { Observer } from "gsap/Observer";
@@ -16,10 +16,6 @@ import {
   WaveDistortion
 } from "shaders/react";
 import davitMainImage from "../assets/davit-main.jpg";
-import heroPoseNeutral from "../assets/figma-hero/davit-pose-neutral.png";
-import heroPoseIdk from "../assets/figma-hero/davit-pose-idk.png";
-import heroPoseGood from "../assets/figma-hero/davit-pose-good.png";
-import heroPoseScroll from "../assets/figma-hero/davit-pose-scroll.png";
 import figmaHeroProductsObject from "../assets/figma-hero/hover-products.png";
 import figmaHeroDesignersObject from "../assets/figma-hero/hover-designers.png";
 import figmaHeroCultureObject from "../assets/figma-hero/hover-culture.png";
@@ -37,6 +33,8 @@ import {
   experienceSummary,
   type ExperienceModalPayload
 } from "./ExperienceDetail";
+import { POKE_EVENT, useCharacterMotion } from "./characterMotion";
+import { HeroCharacterVideo } from "./characterVideo";
 import { useTextMotion } from "./textMotion";
 import { siteData } from "./siteData";
 import { websiteContent } from "./websiteContent";
@@ -819,6 +817,23 @@ const rawExperiences = websiteContent.designer?.experiences?.length
   ? websiteContent.designer.experiences
   : fallbackExperiences;
 const experiences = rawExperiences;
+
+const experienceThemes: Record<string, string> = {
+  Freedx: "freedx",
+  Lynon: "lynon",
+  "T-Bank / Tinkoff": "tbank",
+  Delux: "delux",
+  CloudChipr: "cloudchipr",
+  "Webb Fontaine": "webb-fontaine",
+  "Material Exchange": "material-exchange",
+  "The Bank of London": "bank-of-london",
+  Uphold: "uphold",
+  "Liga Insurance": "liga"
+};
+
+function experienceTheme(company: string) {
+  return experienceThemes[company] ?? "default";
+}
 const publicBlogCategories = websiteContent.public?.categories?.length
   ? websiteContent.public.categories
   : fallbackPublicBlogCategories;
@@ -885,39 +900,6 @@ function useResolvedNavLink(href: string) {
 type HeroPose = "idk" | "good" | "scroll";
 
 // Living-portrait clips: transparent VP9 WebM (alpha), served locally.
-const HERO_CLIPS: Partial<Record<"neutral" | HeroPose, string>> = {
-  neutral: "/hero-video/idle.webm",
-  idk: "/hero-video/shrug.webm",
-  good: "/hero-video/thumbs.webm",
-  scroll: "/hero-video/scroll.webm"
-};
-
-// Stop-motion flipbook: transparent WebP frame sequences extracted from the
-// 2K keyed videos, played with hard cuts at ~12fps.
-const heroFrameSequence = (name: string, count: number) =>
-  Array.from({ length: count }, (_, i) => `/hero-frames/${name}/f${String(i + 1).padStart(2, "0")}.webp`);
-const HERO_FRAMES: Partial<Record<"neutral" | HeroPose, string[]>> = {
-  neutral: heroFrameSequence("idle", 18),
-  idk: heroFrameSequence("shrug", 20).slice(2),
-  good: heroFrameSequence("thumbs", 20).slice(2),
-  scroll: heroFrameSequence("scroll", 20).slice(2)
-};
-// Gestures run snappy; the breathing loop slower, near natural pace.
-const HERO_FRAME_MS = 60;
-const HERO_SCROLL_FRAME_MS = 85; // the point-down scroll gesture keeps its original, calmer pace
-const HERO_IDLE_FRAME_MS = 125; // natural pace: source video is 24fps, frames sampled every 3rd
-const HERO_IDLE_PAUSE_MS = 4200; // rest on the calm frame between breaths
-
-// Alpha WebM plays everywhere modern except Safari, which decodes VP9 but
-// renders the alpha channel as an opaque backing - there the stills stay.
-function supportsAlphaVideo() {
-  if (typeof document === "undefined" || typeof navigator === "undefined") return false;
-  const agent = navigator.userAgent;
-  const isSafari = /safari/i.test(agent) && !/chrome|chromium|crios|android|edg/i.test(agent);
-  if (isSafari) return false;
-  return document.createElement("video").canPlayType('video/webm; codecs="vp9"') !== "";
-}
-
 // The hero portrait listens for this event and swaps Davit's pose.
 function emitHeroPose(pose: HeroPose | null) {
   window.dispatchEvent(new CustomEvent<HeroPose | null>("dw-hero-pose", { detail: pose }));
@@ -1230,12 +1212,13 @@ const navCursorLabels: Record<string, string> = {
 };
 
 export function SiteHeader({ activePage }: { activePage?: PageKey }) {
-  const [theme, setTheme] = useState<"day" | "night">("day");
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    document.documentElement.dataset.dwTheme = theme;
-  }, [theme]);
+    // Clear a legacy theme value left behind by a hot reload after the switcher
+    // was removed. The site now has one intentional, light presentation.
+    delete document.documentElement.dataset.dwTheme;
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -1263,9 +1246,7 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
   return (
     <header className={`dw-header ${isScrolled ? "is-scrolled" : ""}`}>
       <NavAnchor className="dw-logo" href="/am" poseOnHover="scroll" cursorLabel="To the Home">
-        <span className="dw-logo-word">
-          <img src="/brand/pdnyn-handdrawn.png" alt="PDNYN" />
-        </span>
+        <span className="dw-logo-word">PDNYN</span>
       </NavAnchor>
       <nav className="dw-nav" aria-label="Main navigation">
         {websiteContent.navigation.primary.map((item) => (
@@ -1294,14 +1275,6 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
         {websiteContent.navigation.school.label}
       </NavAnchor>
       <div className="dw-right">
-        <button
-          className="dw-theme-toggle"
-          type="button"
-          aria-label="Toggle day and night theme"
-          onClick={() => setTheme((current) => (current === "day" ? "night" : "day"))}
-        >
-          <span>{theme === "day" ? "night mode" : "day mode"}</span>
-        </button>
         <button
           className="dw-pill"
           type="button"
@@ -1426,14 +1399,71 @@ function HomeShaderBackground() {
   );
 }
 
-function HomeIntroSection() {
-  const greetings = ["Hello", "Bonjour", "Ciao", "Olá", "Hallå", "Guten Tag", "Բարև"];
+/**
+ * The greeting intro is a first-impression piece. It is charming once and
+ * tiring on the fourth visit, so a returning visitor gets the same sequence
+ * played roughly three times faster rather than a different (or absent) one.
+ *
+ * The visit is remembered in localStorage. After INTRO_MEMORY_DAYS the full
+ * version returns, on the assumption that someone coming back months later
+ * has forgotten it — delete that check if you would rather it never replay.
+ */
+const INTRO_SEEN_KEY = "dw-intro-seen-at";
+const INTRO_MEMORY_DAYS = 30;
 
-  useEffect(() => {
+function hasSeenIntroRecently() {
+  try {
+    const seenAt = Number(window.localStorage.getItem(INTRO_SEEN_KEY));
+    if (!seenAt) return false;
+    return Date.now() - seenAt < INTRO_MEMORY_DAYS * 24 * 60 * 60 * 1000;
+  } catch {
+    // Private mode, or site data blocked: treat every visit as the first.
+    return false;
+  }
+}
+
+function rememberIntroSeen() {
+  try {
+    window.localStorage.setItem(INTRO_SEEN_KEY, String(Date.now()));
+  } catch {
+    /* nothing to do — the intro just plays in full next time */
+  }
+}
+
+/**
+ * Decided once per page load, not once per mount. Reading and writing inside
+ * the effect made a first visit report itself as a return visit: React runs
+ * effects twice in development, so the first run stored the timestamp and the
+ * second run read it straight back. A remount must not change the answer
+ * mid-visit either.
+ */
+let introIsBriefForThisLoad: boolean | null = null;
+
+function resolveIntroPacing() {
+  if (introIsBriefForThisLoad === null) {
+    introIsBriefForThisLoad = hasSeenIntroRecently();
+    rememberIntroSeen();
+  }
+  return introIsBriefForThisLoad;
+}
+
+/** Armenian stays last in both lists: the final greeting gets its own animation. */
+const INTRO_GREETINGS = ["Hello", "Bonjour", "Ciao", "Olá", "Hallå", "Guten Tag", "Привет", "Բարև"];
+const INTRO_GREETINGS_BRIEF = ["Hello", "Բարև"];
+
+function HomeIntroSection() {
+  // Resolved once per page load, so the list and the pacing always agree.
+  const [brief] = useState(resolveIntroPacing);
+  const greetings = brief ? INTRO_GREETINGS_BRIEF : INTRO_GREETINGS;
+
+  // Layout effect, not effect: the pacing class has to land before the
+  // greetings paint, or the first one animates at full length and then snaps.
+  useLayoutEffect(() => {
     document.documentElement.classList.remove("dw-home-loader-done");
     document.documentElement.classList.remove("dw-home-loader-revealing");
     const previousOverflow = document.documentElement.style.overflow;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (brief) document.documentElement.classList.add("dw-home-intro-brief");
     document.documentElement.style.overflow = "hidden";
     let refreshTimer = 0;
     const startReveal = () => {
@@ -1448,8 +1478,11 @@ function HomeIntroSection() {
         ScrollTrigger.refresh();
       }, reducedMotion ? 80 : 180);
     };
-    const revealStartTimer = window.setTimeout(startReveal, reducedMotion ? 520 : 4280);
-    const revealTimer = window.setTimeout(revealPage, reducedMotion ? 900 : 5400);
+    // Keep these in step with the CSS pacing below.
+    const revealStartAt = reducedMotion ? 520 : brief ? 1160 : 4800;
+    const revealAt = reducedMotion ? 900 : brief ? 1500 : 5920;
+    const revealStartTimer = window.setTimeout(startReveal, revealStartAt);
+    const revealTimer = window.setTimeout(revealPage, revealAt);
 
     return () => {
       window.clearTimeout(revealStartTimer);
@@ -1458,8 +1491,9 @@ function HomeIntroSection() {
       document.documentElement.style.overflow = previousOverflow;
       document.documentElement.classList.remove("dw-home-loader-revealing");
       document.documentElement.classList.remove("dw-home-loader-done");
+      document.documentElement.classList.remove("dw-home-intro-brief");
     };
-  }, []);
+  }, [brief]);
 
   return (
     <section className="dw-home-intro" aria-label="Loading the Pedanyan website">
@@ -1500,6 +1534,62 @@ function AnimatedHeroCopy({
           {character === " " ? "\u00a0" : character}
         </span>
       ))}
+    </span>
+  );
+}
+
+/**
+ * Case-study reel that sits in the indent left of "products".
+ *
+ * Hard cuts, no crossfade — the point is the flicker of eight products, not a
+ * slideshow. Sources are 480x360 WebP crops (about 46KB for all eight) rather
+ * than the 1.3-2MB cards they came from, because this is the LCP screen.
+ * They are preloaded so a cut never lands on an undecoded frame.
+ */
+const HERO_REEL_FRAMES = [
+  "/portfolio-assets/hero-reel/cloudchipr.webp",
+  "/portfolio-assets/hero-reel/material-exchange.webp",
+  "/portfolio-assets/hero-reel/tempo.webp",
+  "/portfolio-assets/hero-reel/icredo.webp",
+  "/portfolio-assets/hero-reel/securion.webp",
+  "/portfolio-assets/hero-reel/nesba.webp",
+  "/portfolio-assets/hero-reel/hotel-apartments.webp",
+  "/portfolio-assets/hero-reel/material-exchange-photo-lab.webp"
+];
+
+const HERO_REEL_INTERVAL = 190;
+
+function HeroCaseReel({ active, startDelay }: { active: boolean; startDelay: number }) {
+  const [frame, setFrame] = useState(0);
+  const [shown, setShown] = useState(false);
+  const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+
+  // Decode every frame up front; a cut should never wait on the network.
+  useEffect(() => {
+    HERO_REEL_FRAMES.forEach((src) => {
+      const image = new Image();
+      image.src = src;
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!active) return;
+    const appear = window.setTimeout(() => setShown(true), startDelay);
+    return () => window.clearTimeout(appear);
+  }, [active, startDelay]);
+
+  useEffect(() => {
+    if (!shown || reducedMotion) return;
+    const tick = window.setInterval(
+      () => setFrame((current) => (current + 1) % HERO_REEL_FRAMES.length),
+      HERO_REEL_INTERVAL
+    );
+    return () => window.clearInterval(tick);
+  }, [shown, reducedMotion]);
+
+  return (
+    <span className={`dw-hero-reel${shown ? " is-shown" : ""}`} aria-hidden="true">
+      <img src={HERO_REEL_FRAMES[frame]} alt="" width={480} height={360} decoding="async" />
     </span>
   );
 }
@@ -1547,155 +1637,93 @@ export function HeroSection() {
     onBlur: () => setHeroFocus(null)
   });
 
-  const [hoverPose, setHoverPose] = useState<HeroPose | null>(null);
-  const [pulseScroll, setPulseScroll] = useState(false);
+  // Main character: one keyed frame sequence per state, driven by
+  // characterMotion.ts (entrance on first view, breathing idle, hover
+  // reactions, scroll invitation, gravity scrub from the home timeline).
+  const heroSectionRef = useRef<HTMLElement | null>(null);
+  // `?hero=video` on the home URL swaps the keyed frames for the plain MP4s
+  // with the studio background baked in - a side-by-side test, not a mode.
+  const [heroMode] = useState<"frames" | "video">(() =>
+    typeof window !== "undefined" && new URLSearchParams(window.location.search).get("hero") === "video" ? "video" : "frames"
+  );
+  const character = useCharacterMotion({ sectionRef: heroSectionRef, start: isTyping, enabled: heroMode === "frames" });
+  const { onHoverIntent: characterHover } = character;
 
   useEffect(() => {
+    if (heroMode !== "frames") return;
+    // Nav hovers keep speaking the old dialect (idk / good / scroll).
     const onPose = (event: Event) => {
-      setHoverPose((event as CustomEvent<HeroPose | null>).detail ?? null);
+      const pose = (event as CustomEvent<HeroPose | null>).detail ?? null;
+      characterHover(pose === "idk" ? "considering" : pose === "good" ? "approval" : pose === "scroll" ? "scroll" : null);
     };
     window.addEventListener("dw-hero-pose", onPose);
     return () => window.removeEventListener("dw-hero-pose", onPose);
-  }, []);
+  }, [characterHover, heroMode]);
 
   useEffect(() => {
-    // Every 15s the scroll gesture plays once, full length, then rewinds.
-    let timeout = 0;
-    const interval = window.setInterval(() => {
-      setPulseScroll(true);
-      timeout = window.setTimeout(() => setPulseScroll(false), 1800);
-    }, 15000);
-    return () => {
-      window.clearInterval(interval);
-      window.clearTimeout(timeout);
-    };
-  }, []);
-
-  const heroPose: HeroPose | "neutral" = hoverPose ?? (pulseScroll ? "scroll" : "neutral");
-  const heroClipRefs = useRef<Record<string, HTMLVideoElement | null>>({});
-  // Plan B: the AI-video layer degraded the engraving too much - flipbook
-  // frame sequences replace it. Video code kept but disabled.
-  const [clipsEnabled] = useState(false);
-  void supportsAlphaVideo;
-  const activeClip = clipsEnabled && HERO_CLIPS[heroPose] ? heroPose : null;
-
-  const [frameView, setFrameViewState] = useState<{ pose: "neutral" | HeroPose; index: number } | null>(null);
-  const frameViewRef = useRef<typeof frameView>(null);
-  const setFrameView = (view: typeof frameView) => {
-    frameViewRef.current = view;
-    setFrameViewState(view);
-  };
-
-  useEffect(() => {
-    const timers: number[] = [];
-    const play = (pose: "neutral" | HeroPose) => {
-      const frames = HERO_FRAMES[pose];
-      if (!frames) {
-        setFrameView(null);
-        return;
-      }
-      const isLoop = pose === "neutral";
-      let step = 0;
-      setFrameView({ pose, index: 0 });
-      const tick = () => {
-        step += 1;
-        if (step >= frames.length) {
-          if (!isLoop) return; // hold the final frame while the pose stays active
-          step = 0;
-        }
-        setFrameView({ pose, index: step });
-        const delay = !isLoop
-          ? pose === "scroll" ? HERO_SCROLL_FRAME_MS : HERO_FRAME_MS
-          : step === 0
-            ? HERO_IDLE_PAUSE_MS // breath done: rest on the calm frame
-            : HERO_IDLE_FRAME_MS;
-        timers.push(window.setTimeout(tick, delay));
-      };
-      timers.push(window.setTimeout(tick, isLoop ? HERO_IDLE_PAUSE_MS : pose === "scroll" ? HERO_SCROLL_FRAME_MS : HERO_FRAME_MS));
-    };
-
-    // Leaving a gesture hard-cuts straight back to the active pose --
-    // same instant-cut language as the rest of the hero.
-    play(heroPose);
-    return () => timers.forEach((timer) => window.clearTimeout(timer));
-  }, [heroPose]);
-
-  useEffect(() => {
-    // Warm the gesture clips shortly after load so first hover has no delay.
-    if (!clipsEnabled) return;
-    const warmup = window.setTimeout(() => {
-      Object.entries(heroClipRefs.current).forEach(([pose, video]) => {
-        if (video && pose !== "neutral") video.load();
-      });
-    }, 2500);
-    return () => window.clearTimeout(warmup);
-  }, [clipsEnabled]);
-
-  useEffect(() => {
-    Object.entries(heroClipRefs.current).forEach(([pose, video]) => {
-      if (!video) return;
-      if (pose === activeClip) {
-        video.playbackRate = 1.5;
-        video.currentTime = 0;
-        void video.play().catch(() => undefined);
-      } else {
-        video.pause();
-      }
-    });
-  }, [activeClip]);
+    if (heroMode !== "frames") return;
+    // The hero words have their own reactions: designers makes him consider,
+    // creative culture gets the nod.
+    characterHover(heroFocus === "designers" ? "considering" : heroFocus === "culture" ? "approval" : null);
+  }, [heroFocus, characterHover, heroMode]);
 
   return (
     <section
       className={`dw-section dw-home-hero dw-figma-hero${isTyping ? " is-copy-typing" : ""}${heroFocus ? ` has-focus is-${heroFocus}` : ""}`}
       id="top"
-      onMouseMove={handleHeroMove}
-      onMouseLeave={resetHeroMove}
+      ref={heroSectionRef}
+      onMouseMove={(event) => {
+        handleHeroMove(event);
+        character.onPointerMove(event);
+      }}
+      onMouseLeave={(event) => {
+        resetHeroMove(event);
+        character.onPointerLeave();
+      }}
     >
       <div className="dw-home-hero-screen">
-        <figure className={`dw-home-hero-portrait-card is-pose-${heroPose}${clipsEnabled ? " has-clips" : ""}${frameView ? " has-frames" : ""}`} data-speed="-0.18" data-float-depth="0.2">
-          <img className="dw-hero-pose dw-hero-pose-neutral" src={heroPoseNeutral} alt="Davit Pedanyan seated on a studio stool" />
-          <img className="dw-hero-pose dw-hero-pose-idk" src={heroPoseIdk} alt="" aria-hidden="true" />
-          <img className="dw-hero-pose dw-hero-pose-good" src={heroPoseGood} alt="" aria-hidden="true" />
-          <img className="dw-hero-pose dw-hero-pose-scroll" src={heroPoseScroll} alt="" aria-hidden="true" />
-          <img className="dw-hero-stool" src="/hero-frames/stool.webp" alt="" aria-hidden="true" />
-          {Object.entries(HERO_FRAMES).map(([pose, frames]) =>
-            frames.map((frameSrc, frameIndex) => (
-              <img
-                className={`dw-hero-frame${frameView && frameView.pose === pose && frameView.index === frameIndex ? " is-active" : ""}`}
-                src={frameSrc}
-                alt=""
-                aria-hidden="true"
-                key={`${pose}-${frameIndex}`}
-              />
-            ))
-          )}
-          {clipsEnabled && Object.entries(HERO_CLIPS).map(([pose, src]) => (
-            <video
-              className={`dw-hero-clip${activeClip === pose ? " is-active" : ""}`}
-              src={src}
-              muted
-              playsInline
-              preload={pose === "neutral" ? "auto" : "none"}
-              loop={pose === "neutral"}
-              aria-hidden="true"
-              ref={(element) => {
-                heroClipRefs.current[pose] = element;
-              }}
-              key={pose}
+        <figure
+          className={`dw-home-hero-portrait-card is-mode-${heroMode} is-state-${character.state}${character.entered ? " has-entered" : ""}`}
+          data-speed="-0.18"
+          data-float-depth="0.2"
+          data-cursor-label="poke"
+          style={character.parallaxStyle}
+          role="button"
+          tabIndex={0}
+          aria-label="Poke Davit"
+          onClick={() => window.dispatchEvent(new CustomEvent(POKE_EVENT))}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              window.dispatchEvent(new CustomEvent(POKE_EVENT));
+            }
+          }}
+        >
+          {heroMode === "video" ? (
+            <HeroCharacterVideo start={isTyping} focus={heroFocus} />
+          ) : (
+            <img
+              className="dw-hero-character"
+              src={character.src}
+              alt={character.state === "entrance" && !character.entered ? "" : "Davit Pedanyan seated on a studio stool"}
+              decoding="sync"
+              draggable={false}
             />
-          ))}
+          )}
         </figure>
 
         <div className="dw-home-hero-statement" data-speed="0.12" data-float-depth="-0.08">
-          <h1 aria-label="I build products, designers, and creative culture.">
+          <h1 aria-label="I build products, designers, and culture.">
             <span className="dw-figma-hero-line dw-figma-copy dw-figma-copy-build">
               <AnimatedHeroCopy text="I build" start={0} step={42} />
             </span>
             <span className="dw-figma-hero-line dw-figma-hero-line-products">
+              <HeroCaseReel active={isTyping} startDelay={3500} />
               <a
                 className="dw-figma-hero-word dw-figma-copy dw-figma-copy-products"
                 href={productsLink.href}
                 target={productsLink.target}
+                data-cursor-label="View case studies"
                 {...focusHeroWord("products")}
               >
                 <AnimatedHeroCopy text="products" start={370} step={70} />
@@ -1709,25 +1737,24 @@ export function HeroSection() {
                 className="dw-figma-hero-word dw-figma-copy dw-figma-copy-designers"
                 href={designersLink.href}
                 target={designersLink.target}
+                data-cursor-label="Visit Pedanyan School"
                 {...focusHeroWord("designers")}
               >
-                <AnimatedHeroCopy text="designers" start={1140} step={70} />
+                <AnimatedHeroCopy text="designers," start={1140} step={70} />
               </a>
-              <span className="dw-figma-copy dw-figma-copy-designers">
-                <AnimatedHeroCopy text="," start={1820} step={42} />
-              </span>
-              <span className="dw-figma-copy dw-figma-copy-and">
-                <AnimatedHeroCopy text=" and" start={1900} step={42} />
-              </span>
             </span>
             <span className="dw-figma-hero-line">
+              <span className="dw-figma-copy dw-figma-copy-and">
+                <AnimatedHeroCopy text="and " start={1900} step={42} />
+              </span>
               <a
                 className="dw-figma-hero-word dw-figma-copy dw-figma-copy-culture"
                 href={cultureLink.href}
                 target={cultureLink.target}
+                data-cursor-label="View public work"
                 {...focusHeroWord("culture")}
               >
-                <AnimatedHeroCopy text="creative culture" start={2230} step={65} />
+                <AnimatedHeroCopy text="culture" start={2230} step={65} />
               </a>
               <span className="dw-figma-copy dw-figma-copy-culture">
                 <AnimatedHeroCopy text="." start={3270} step={42} />
@@ -2484,7 +2511,8 @@ export function HomeTalkRoutingSection() {
 
 
 const localCompanyLogos: Record<string, string> = {
-  "Liga Insurance": "/logos/liga-icon.svg"
+  "Liga Insurance": "/logos/liga-icon.svg",
+  Delux: "/logos/delux-holiday-homes.png"
 };
 
 function getCompanyLogoUrl(domain: string, sourceIndex: number) {
@@ -2538,8 +2566,7 @@ function ExperienceList({
   return (
     <>
       <header className="dw-experience-heading">
-        <span>Work experience</span>
-        <strong>From interfaces to design leadership.</strong>
+        <h2>Work experience</h2>
       </header>
       <ol className="dw-experience-list">
       {experiences.map((experience, index) => {
@@ -2599,6 +2626,7 @@ function ExperienceScrollSection() {
   const compactMotion = useMediaQuery("(max-width: 760px)");
   const useStaticMode = reducedMotion || compactMotion;
   const [staticDetail, setStaticDetail] = useState<ExperienceModalPayload | null>(null);
+  const [staticActiveIndex, setStaticActiveIndex] = useState(0);
 
   useEffect(() => {
     if (useStaticMode || !sectionRef.current || !sceneRef.current) return;
@@ -2677,14 +2705,39 @@ function ExperienceScrollSection() {
     (window as unknown as { motion?: { scan?: () => void } }).motion?.scan?.();
   }, [useStaticMode]);
 
+  useEffect(() => {
+    if (!useStaticMode) return;
+
+    const articles = Array.from(
+      sectionRef.current?.querySelectorAll<HTMLElement>(".dw-experience-static-list article") ?? []
+    );
+    if (!articles.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        const index = articles.indexOf(visible.target as HTMLElement);
+        if (index >= 0) setStaticActiveIndex(index);
+      },
+      { rootMargin: "-34% 0px -42% 0px", threshold: [0.1, 0.4, 0.7] }
+    );
+
+    articles.forEach((article) => observer.observe(article));
+    return () => observer.disconnect();
+  }, [useStaticMode]);
+
   if (useStaticMode) {
     return (
-      <section className="dw-experience-static" aria-label="Work experience">
-        <div className="dw-scatter-eyebrow">
-          <span aria-hidden="true" />
-          work experience
-        </div>
-        <h2 className="dw-experience-static-title" data-anim="mask">From interfaces to design leadership.</h2>
+      <section
+        ref={sectionRef}
+        className="dw-experience-static"
+        aria-label="Work experience"
+        data-experience-theme={experienceTheme(experiences[staticActiveIndex]?.company ?? "")}
+      >
+        <h2 className="dw-experience-static-title" data-anim="mask">Work experience</h2>
         <div className="dw-experience-static-list">
           {experiences.map((experience, index) => (
             <article key={experience.company}>
@@ -2719,7 +2772,12 @@ function ExperienceScrollSection() {
   }
 
   return (
-    <section className="dw-experience-scroll" aria-label="Work experience" ref={sectionRef}>
+    <section
+      className="dw-experience-scroll"
+      aria-label="Work experience"
+      ref={sectionRef}
+      data-experience-theme={experienceTheme(experiences[activeIndex]?.company ?? "")}
+    >
       <div className="dw-experience-scene" ref={sceneRef}>
         <ExperienceList activeIndex={activeIndex} />
       </div>
@@ -2777,8 +2835,9 @@ function HomeUnifiedScrollExperience() {
       const experienceFocusTimes: number[] = [];
       const playback = {
         time: 0,
-        chapter: "hero" as "hero" | "facts" | "experience",
+        chapter: "hero" as "hero" | "facts" | "clients" | "experience",
         activeFact: -1,
+        clientStep: 0,
         activeExperience: 0,
         motionDirection: 1 as 1 | -1,
         speedMultiplier: 1,
@@ -2972,10 +3031,18 @@ function HomeUnifiedScrollExperience() {
       // the beat only advances while Davit's visitor is scrolling.
       const hasClients = Boolean(clientsPanel) && clientItems.length > 0;
       const clientsStart = statsEnd + 0.15;
+      const clientsIntroTime = clientsStart + 0.55;
+      const clientsFocusTime = hasClients ? clientsStart + 1.8 : 0;
+      const clientsExitAt = clientsStart + 2.55;
+      const experienceStart = statsEnd + (hasClients ? 3.25 : 0.4);
 
       if (clientsPanel && hasClients) {
+        const clientGridColumns = 4;
+        const clientGridRows = Math.ceil(clientItems.length / clientGridColumns);
+        const viewportX = window.innerWidth * 0.72;
+        const viewportY = window.innerHeight * 0.76;
+
         gsap.set(clientsPanel, { autoAlpha: 0 });
-        gsap.set(clientItems, { autoAlpha: 0, y: 44, scale: 0.78 });
         if (clientsLabel) gsap.set(clientsLabel, { autoAlpha: 0, y: 16 });
 
         timeline.to(clientsPanel, { autoAlpha: 1, duration: 0.22 }, clientsStart);
@@ -2989,27 +3056,42 @@ function HomeUnifiedScrollExperience() {
         }
 
         clientItems.forEach((item, itemIndex) => {
+          const column = itemIndex % clientGridColumns;
+          const row = Math.floor(itemIndex / clientGridColumns);
+          const fromLeft = column < clientGridColumns / 2;
+          const isMiddleRow = clientGridRows % 2 === 1 && row === Math.floor(clientGridRows / 2);
+          const fromTop = isMiddleRow ? column % 2 === 0 : row < clientGridRows / 2;
+          const delay = 0.1 + ((itemIndex * 5) % clientItems.length) * 0.055;
+          const rotate = (fromLeft ? -1 : 1) * (fromTop ? 1 : -1) * 8;
+
+          gsap.set(item, {
+            autoAlpha: 0,
+            x: fromLeft ? -viewportX : viewportX,
+            y: fromTop ? -viewportY : viewportY,
+            scale: 0.72,
+            rotate
+          });
+
           timeline.to(
             item,
-            { autoAlpha: 1, y: 0, scale: 1, duration: 0.52, ease: "power3.out" },
-            clientsStart + 0.1 + itemIndex * 0.04
+            { autoAlpha: 1, x: 0, y: 0, scale: 1, rotate: 0, duration: 0.85, ease: "power3.out" },
+            clientsStart + delay
           );
         });
 
         timeline.to(
           clientItems,
           { autoAlpha: 0, y: -30, scale: 1.08, duration: 0.4, ease: "power2.in", stagger: 0.018 },
-          clientsStart + 1.08
+          clientsExitAt
         );
 
         if (clientsLabel) {
-          timeline.to(clientsLabel, { autoAlpha: 0, y: -12, duration: 0.3 }, clientsStart + 1.12);
+          timeline.to(clientsLabel, { autoAlpha: 0, y: -12, duration: 0.3 }, clientsExitAt + 0.04);
         }
 
-        timeline.to(clientsPanel, { autoAlpha: 0, duration: 0.28 }, clientsStart + 1.34);
+        timeline.to(clientsPanel, { autoAlpha: 0, duration: 0.28 }, clientsExitAt + 0.26);
       }
 
-      const experienceStart = statsEnd + (hasClients ? 1.75 : 0.4);
       timeline
         .to(experiencePanel, { autoAlpha: 1, duration: 0.3 }, experienceStart)
         .to(whitePanel, { autoAlpha: 0, duration: 0.5 }, experienceStart + 0.55);
@@ -3019,6 +3101,13 @@ function HomeUnifiedScrollExperience() {
           experienceHeading,
           { autoAlpha: 1, y: 0, duration: 0.5, ease: "power3.out" },
           experienceStart + 0.15
+        );
+        timeline.to(
+          experienceHeading,
+          { autoAlpha: 0, y: "-28vh", duration: 0.46, ease: "power2.inOut" },
+          // The title belongs to the first role. It clears the viewport as
+          // the second role takes focus, leaving the role sequence unobscured.
+          experienceStart + 0.66
         );
       }
 
@@ -3208,12 +3297,37 @@ function HomeUnifiedScrollExperience() {
           }
           playback.autoAt = isFinal ? Number.POSITIVE_INFINITY : now;
           playback.awaitingExitGesture = isFinal;
-          if (isFinal) {
-            moveToExperience(0, 1, true);
-          } else {
+          if (!isFinal) {
             moveToFact(index + 1, 1);
           }
         }, "none");
+      };
+
+      const moveToClients = (direction: 1 | -1, step = 0) => {
+        if (!hasClients) {
+          moveToExperience(0, direction, true);
+          return;
+        }
+
+        playback.chapter = "clients";
+        playback.clientStep = step;
+        playback.awaitingExitGesture = false;
+        const targetTime = step === 0 ? clientsIntroTime : clientsFocusTime;
+        const timelineDistance = Math.abs(targetTime - playback.time);
+        moveTo(
+          targetTime,
+          Math.max(0.35, Math.min(0.85, timelineDistance)),
+          direction,
+          () => {
+            const now = gsap.ticker.time;
+            playback.cooldownUntil = Math.max(playback.cooldownUntil, now + 0.55);
+            playback.minimumUntil = now;
+            playback.holdUntil = now + 0.5;
+            playback.autoAt = Number.POSITIVE_INFINITY;
+            playback.awaitingExitGesture = false;
+          },
+          "power2.inOut"
+        );
       };
 
       const moveToExperience = (
@@ -3303,6 +3417,21 @@ function HomeUnifiedScrollExperience() {
             moveToFact(playback.activeFact + direction, direction);
             return;
           }
+          if (playback.chapter === "clients") {
+            if (direction < 0) {
+              if (playback.clientStep === 0) {
+                playback.chapter = "facts";
+                moveToFact(factFocusTimes.length - 1, -1);
+              } else {
+                moveToClients(-1, 0);
+              }
+            } else if (playback.clientStep === 0) {
+              moveToClients(1, 1);
+            } else {
+              moveToExperience(0, 1, true);
+            }
+            return;
+          }
           if (direction < 0) {
             if (playback.activeExperience === 0) {
               playback.chapter = "facts";
@@ -3357,10 +3486,26 @@ function HomeUnifiedScrollExperience() {
           playback.holdUntil = now;
           playback.autoAt = now;
           if (playback.activeFact >= factFocusTimes.length - 1) {
-            moveToExperience(0, 1, true);
+            moveToClients(1);
             return;
           }
           moveToFact(playback.activeFact + 1, 1);
+          return;
+        }
+
+        if (playback.chapter === "clients") {
+          if (direction < 0) {
+            if (playback.clientStep === 0) {
+              playback.chapter = "facts";
+              moveToFact(factFocusTimes.length - 1, -1);
+            } else {
+              moveToClients(-1, 0);
+            }
+          } else if (playback.clientStep === 0) {
+            moveToClients(1, 1);
+          } else {
+            moveToExperience(0, 1, true);
+          }
           return;
         }
 
@@ -3642,7 +3787,11 @@ function HomeUnifiedScrollExperience() {
           </div>
         </div>
 
-        <div className="dw-home-unified-phase dw-home-unified-experience" aria-label="Work experience">
+        <div
+          className="dw-home-unified-phase dw-home-unified-experience"
+          aria-label="Work experience"
+          data-experience-theme={experienceTheme(experiences[activeIndex]?.company ?? "")}
+        >
           <ExperienceList
             activeIndex={activeIndex}
             onSelect={(index) => selectExperienceRef.current(index)}
@@ -4365,15 +4514,19 @@ const partnerBrands: Array<{ name: string; domain: string; wordmark?: string; no
 ];
 
 export function HomePartnerLogosSection() {
-  const doubled = [...partnerBrands, ...partnerBrands];
+  useEffect(() => {
+    (window as unknown as { motion?: { scan?: () => void } }).motion?.scan?.();
+  }, []);
+
   return (
-    <section className="dw-partner-marquee" aria-label="Partner companies and organizations">
+    <section className="dw-partner-marquee" aria-label="Partner companies and organizations" data-anim="fade">
       <div className="dw-partner-marquee-track">
-        {doubled.map((item, index) => (
+        {partnerBrands.map((item, index) => (
           <span
             className="dw-partner-marquee-item"
-            key={`${item.name}-${index}`}
-            aria-hidden={index >= partnerBrands.length}
+            key={item.name}
+            data-anim="rise"
+            style={{ "--i": index } as CSSProperties}
           >
             {item.wordmark ? (
               <img className="dw-partner-marquee-wordmark" src={item.wordmark} alt={item.name} loading="lazy" />

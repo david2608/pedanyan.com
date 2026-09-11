@@ -181,17 +181,23 @@ html.dw-scrolled .dw-page .dw-logo {
   max-width: none;
 }
 
+/* Typographic wordmark. Sets its own size rather than inheriting the
+   legacy .dw-logo font sizes, which were scaled for the hand-drawn mark.
+   The header uses mix-blend-mode: difference, so plain text inverts
+   against any background on its own — no filter needed. */
 .dw-logo-word {
   display: flex;
   align-items: center;
   white-space: nowrap;
-}
-
-.dw-logo-word img {
-  display: block;
-  width: auto;
-  height: 48px;
-  object-fit: contain;
+  font-family: inherit;
+  font-size: clamp(19px, 1.55vw, 25px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.26em;
+  /* letter-spacing adds a trailing gap after the last glyph; pull it back
+     so the wordmark is optically flush with the page margin */
+  margin-right: -0.26em;
+  text-transform: uppercase;
 }
 
 .dw-nav {
@@ -374,18 +380,19 @@ html.dw-scrolled .dw-page .dw-logo {
 
 .dw-fixed-music-control {
   position: fixed;
-  right: 18px;
-  bottom: 58px;
+  left: 8px;
+  right: auto;
+  bottom: 8px;
   z-index: 260;
   display: grid;
-  width: 44px;
-  height: 44px;
+  width: auto;
+  height: auto;
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--dw-text) 22%, transparent);
-  border-radius: 50%;
+  border: 0;
+  border-radius: 0;
   color: var(--dw-text);
-  background: color-mix(in srgb, var(--dw-bg) 82%, transparent);
-  backdrop-filter: blur(12px);
+  background: transparent;
+  backdrop-filter: none;
   pointer-events: auto;
 }
 
@@ -530,14 +537,24 @@ html.dw-home-loader-done .dw-home-intro {
   opacity: 0;
   transform: translateY(0.3em) scale(0.96);
   filter: blur(3px);
-  animation: dwIntroGreeting 720ms cubic-bezier(0.2, 0.82, 0.2, 1) both;
-  animation-delay: calc(260ms + var(--greeting-index) * 520ms);
+  animation: dwIntroGreeting var(--intro-dur, 720ms) cubic-bezier(0.2, 0.82, 0.2, 1) both;
+  animation-delay: calc(var(--intro-lead, 260ms) + var(--greeting-index) * var(--intro-step, 520ms));
   will-change: opacity, transform, filter;
 }
 
 .dw-home-intro-greetings > span.is-armenian {
   animation-name: dwIntroGreetingFinal;
-  animation-duration: 1160ms;
+  animation-duration: var(--intro-final-dur, 1160ms);
+}
+
+/* Returning visitor: two greetings instead of eight, so the step can stay
+   long enough to read each one and the whole intro still ends in ~1.1s.
+   Timings pair with the reveal timers in HomeIntroSection. */
+html.dw-home-intro-brief .dw-home-intro-greetings > span {
+  --intro-lead: 100ms;
+  --intro-step: 420ms;
+  --intro-dur: 420ms;
+  --intro-final-dur: 620ms;
 }
 
 html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw-header,
@@ -661,6 +678,8 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
 .dw-home-hero-portrait-card {
   position: absolute;
   z-index: 3;
+  cursor: pointer;
+  outline: none;
   left: 5.026%;
   top: auto;
   bottom: calc(100% - 100svh + 6svh);
@@ -684,93 +703,57 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   filter: none;
 }
 
-/* Stacked pose variants: all preloaded, swapped as an instant hard cut -
-   no transition at all, like a comic-strip frame change. */
-.dw-home-hero-portrait-card .dw-hero-pose {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-}
-
-.dw-home-hero-portrait-card.is-pose-neutral .dw-hero-pose-neutral,
-.dw-home-hero-portrait-card.is-pose-idk .dw-hero-pose-idk,
-.dw-home-hero-portrait-card.is-pose-good .dw-hero-pose-good,
-.dw-home-hero-portrait-card.is-pose-scroll .dw-hero-pose-scroll {
-  opacity: 1;
-}
-
-/* Living-portrait video layer: transparent alpha WebM above the stills.
-   Works on any background (day and night). Hidden under reduced motion and
-   on browsers without alpha-video support, where the stills take over. */
-.dw-hero-clip {
+/* Main character: one keyed frame at a time, swapped as an instant hard
+   cut - no transition, like a comic-strip frame change. The driver's few
+   pixels of pointer parallax ride on custom properties so the transform
+   stays on the compositor. Works on any background (day and night). */
+.dw-hero-character {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center bottom;
-  opacity: 0;
   pointer-events: none;
-}
-
-.dw-hero-clip.is-active {
-  opacity: 1;
-}
-
-/* Flipbook frames: preloaded stack, instant hard-cut visibility. */
-.dw-hero-frame {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center bottom;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.dw-hero-frame.is-active {
-  opacity: 1;
-}
-
-/* While a frame sequence runs, the still layer hides (transparent frames
-   would ghost over it). Under reduced motion the frames are off, so the
-   stills must stay - hence the no-preference guard. */
-@media (prefers-reduced-motion: no-preference) {
-  .dw-home-hero-portrait-card.has-frames .dw-hero-pose {
-    opacity: 0;
-  }
-
-  .dw-home-hero-portrait-card.has-frames .dw-hero-stool {
-    opacity: 1;
-  }
-}
-
-/* Static stool under-layer: the background remover kept only the person,
-   so the stool from the calm still sits beneath the animated frames. */
-.dw-hero-stool {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center bottom;
-  opacity: 0;
-  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  transform: translate3d(var(--character-px, 0px), var(--character-py, 0px), 0);
+  transition: transform var(--character-ease, 250ms) ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dw-hero-frame { display: none; }
+  .dw-hero-character { transition: none; transform: none; }
 }
 
-/* When alpha video is running, the still layer stays fully hidden. */
-.dw-home-hero-portrait-card.has-clips .dw-hero-pose {
+/* Test variant: the clips with the studio background baked in, shown as a
+   9:16 portrait card. Stays light in night mode - it is a photograph. */
+.dw-hero-video {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  height: 100%;
+  width: auto;
+  aspect-ratio: 9 / 16;
+  transform: translateX(-50%);
+  object-fit: cover;
   opacity: 0;
+  pointer-events: none;
+  /* The studio backdrop is a shade darker than the page; brighten it to
+     paper (blacks stay black) and feather every edge so no rectangle
+     shows. The head sits close to the top, so that feather is short. */
+  filter: brightness(1.045);
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, #000 15%, #000 85%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 5%, #000 91%, transparent 100%);
+  mask-image:
+    linear-gradient(to right, transparent 0%, #000 15%, #000 85%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 5%, #000 91%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 
-
-@media (prefers-reduced-motion: reduce) {
-  .dw-hero-clip { display: none; }
+.dw-hero-video.is-active {
+  opacity: 1;
 }
 
 .dw-home-hero-statement {
@@ -804,7 +787,49 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
 }
 
 .dw-figma-hero-line-products {
+  position: relative;
   padding-left: min(9.85vw, 149px);
+}
+
+/* Sits in the indent the line already had, flush with the left edge of the
+   line above it. Square, hard-edged, no radius — it is a frame of work, not
+   a card. */
+.dw-hero-reel {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: clamp(58px, 6.4vw, 104px);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: clamp(8px, 0.9vw, 14px);
+  background: color-mix(in srgb, currentColor 6%, transparent);
+  opacity: 0;
+  /* The line box is taller than the letters and sits lower than they do, so
+     centring on it left the tile riding high next to "products". Nudge down
+     to the optical middle of the word itself — measured at 0.054em from the
+     ink extents of Archivo at this size, so it holds as the headline scales. */
+  transform: translateY(calc(-50% + 0.054em)) scale(0.86);
+  transition: opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.dw-hero-reel.is-shown {
+  opacity: 1;
+  transform: translateY(calc(-50% + 0.054em)) scale(1);
+}
+
+.dw-hero-reel img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-hero-reel {
+    transition: none;
+  }
 }
 
 .dw-figma-type-segment {
@@ -858,6 +883,10 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
     animation: none;
   }
 
+  .dw-figma-hero.is-copy-typing .dw-figma-hero-word {
+    animation: none;
+  }
+
   .dw-figma-hero-word::after {
     transform: none;
     animation: none;
@@ -886,37 +915,26 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   cursor: pointer;
 }
 
+/* The hero stays visually quiet at rest. After its type-in completes, each
+   destination gets a small, patient scale pulse in turn: a cue to explore,
+   not a permanently louder treatment. */
+.dw-figma-hero-word {
+  isolation: isolate;
+  display: inline-block;
+  font-weight: 400;
+  color: inherit;
+  -webkit-text-stroke: 0 transparent;
+  transform-origin: left 58%;
+  will-change: transform;
+  transition: color 180ms ease;
+}
+
+.dw-figma-hero-word::before {
+  display: none;
+}
+
 .dw-figma-hero-word::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: -0.18em;
-  left: 0;
-  height: 0.12em;
-  min-height: 6px;
-  background: currentColor;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8' viewBox='0 0 24 8'%3E%3Cpath d='M0 4C3 0 9 0 12 4s9 4 12 0' fill='none' stroke='black' stroke-width='3'/%3E%3C/svg%3E") repeat-x left center / 24px 8px;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8' viewBox='0 0 24 8'%3E%3Cpath d='M0 4C3 0 9 0 12 4s9 4 12 0' fill='none' stroke='black' stroke-width='3'/%3E%3C/svg%3E") repeat-x left center / 24px 8px;
-  pointer-events: none;
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-}
-
-/* Each underline draws in only after its word has finished typing. */
-.dw-figma-hero.is-copy-typing .dw-figma-copy-products.dw-figma-hero-word::after {
-  animation: dwHeroUnderlineIn 560ms cubic-bezier(0.22, 1, 0.36, 1) 1260ms forwards;
-}
-
-.dw-figma-hero.is-copy-typing .dw-figma-copy-designers.dw-figma-hero-word::after {
-  animation: dwHeroUnderlineIn 560ms cubic-bezier(0.22, 1, 0.36, 1) 2120ms forwards;
-}
-
-.dw-figma-hero.is-copy-typing .dw-figma-copy-culture.dw-figma-hero-word::after {
-  animation: dwHeroUnderlineIn 620ms cubic-bezier(0.22, 1, 0.36, 1) 3620ms forwards;
-}
-
-@keyframes dwHeroUnderlineIn {
-  to { transform: scaleX(1); }
+  display: none;
 }
 
 .dw-figma-hero-word:focus-visible {
@@ -928,20 +946,49 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   color: #6f6f6f;
 }
 
+.dw-figma-hero.has-focus .dw-figma-hero-word::after {
+  display: none;
+}
+
 .dw-figma-hero.is-products .dw-figma-copy-products,
 .dw-figma-hero.is-designers .dw-figma-copy-designers,
 .dw-figma-hero.is-culture .dw-figma-copy-culture {
   color: var(--dw-hero-copy);
 }
 
+.dw-figma-hero.is-products .dw-figma-hero-word.dw-figma-copy-products::after,
+.dw-figma-hero.is-designers .dw-figma-hero-word.dw-figma-copy-designers::after,
+.dw-figma-hero.is-culture .dw-figma-hero-word.dw-figma-copy-culture::after {
+  display: none;
+}
+
+.dw-figma-hero.is-products .dw-figma-hero-word.dw-figma-copy-products::before,
+.dw-figma-hero.is-designers .dw-figma-hero-word.dw-figma-copy-designers::before,
+.dw-figma-hero.is-culture .dw-figma-hero-word.dw-figma-copy-culture::before {
+  display: none;
+}
+
 .dw-figma-hero.is-products .dw-figma-hero-word.dw-figma-copy-products,
 .dw-figma-hero.is-designers .dw-figma-hero-word.dw-figma-copy-designers,
 .dw-figma-hero.is-culture .dw-figma-hero-word.dw-figma-copy-culture {
-  text-decoration-line: underline;
-  text-decoration-style: wavy;
-  text-decoration-color: currentColor;
-  text-decoration-thickness: 10px;
-  text-underline-offset: 14px;
+  color: var(--dw-hero-copy);
+}
+
+.dw-figma-hero.is-copy-typing .dw-figma-hero-word {
+  animation: dwHeroKeywordPulse 10.8s cubic-bezier(0.22, 1, 0.36, 1) 4.35s infinite;
+}
+
+.dw-figma-hero.is-copy-typing .dw-figma-copy-designers {
+  animation-delay: 7.05s;
+}
+
+.dw-figma-hero.is-copy-typing .dw-figma-copy-culture {
+  animation-delay: 9.75s;
+}
+
+@keyframes dwHeroKeywordPulse {
+  0%, 19%, 100% { transform: scale(1); }
+  7%, 12% { transform: scale(1.055); }
 }
 
 .dw-figma-hero-ornaments,
@@ -2402,11 +2449,6 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   color: var(--dw-text);
   opacity: 0.26;
   will-change: transform, opacity;
-  border-bottom: 1px solid color-mix(in srgb, currentColor 22%, transparent);
-}
-
-.dw-experience-list li:last-child {
-  border-bottom: 0;
 }
 
 .dw-experience-item-button {
@@ -2495,7 +2537,7 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   place-items: center;
   overflow: hidden;
   border: 0;
-  border-radius: 0;
+  border-radius: 8px;
   background: #fff;
   color: var(--dw-bg);
   font-size: clamp(13px, 0.9vw, 17px);
@@ -2504,7 +2546,7 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
 }
 
 .dw-experience-logo.is-fallback {
-  border-radius: 50%;
+  border-radius: 8px;
   background: var(--dw-text);
   color: var(--dw-bg);
 }
@@ -2514,9 +2556,10 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  padding: 0;
+  object-fit: contain;
+  padding: 8%;
   background: #fff;
+  border-radius: inherit;
 }
 
 .dw-experience-logo span {
@@ -2575,7 +2618,6 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
 .dw-experience-static-list article {
   position: relative;
   padding: 24px 0 26px 28px;
-  border-bottom: 1px solid var(--dw-line);
 }
 
 .dw-experience-static-list article::before {
@@ -6385,12 +6427,6 @@ button.dw-public-journal-entry {
     padding-left: 14%;
   }
 
-  .dw-figma-hero.is-products .dw-figma-hero-word.dw-figma-copy-products,
-  .dw-figma-hero.is-designers .dw-figma-hero-word.dw-figma-copy-designers,
-  .dw-figma-hero.is-culture .dw-figma-hero-word.dw-figma-copy-culture {
-    text-decoration-thickness: 4px;
-    text-underline-offset: 8px;
-  }
 
   .dw-figma-ornament-header {
     display: none;
@@ -6651,14 +6687,6 @@ button.dw-public-journal-entry {
   color: #ffffff;
 }
 
-.dw-header .dw-logo-word img {
-  filter: invert(1);
-}
-
-:root[data-dw-theme="night"] .dw-header .dw-logo-word img {
-  filter: invert(1);
-}
-
 /* === Media carousel (reference style: counter, arrows, staggered strip, captions) === */
 .dw-carousel {
   margin-top: clamp(22px, 3vw, 40px);
@@ -6883,4 +6911,156 @@ button.dw-public-journal-entry {
   line-height: 1.08;
   letter-spacing: -0.03em;
   color: var(--dw-text);
+}
+
+/* Work experience uses the brands as chapters. The colors transition only
+   when the visitor advances to a role; the text palette is assigned with the
+   scene so contrast stays stable across every company. */
+.dw-home-unified-experience,
+.dw-experience-scroll,
+.dw-experience-static {
+  --dw-experience-bg: var(--dw-bg);
+  --dw-experience-fg: var(--dw-text);
+  --dw-experience-muted: var(--dw-muted);
+  background: var(--dw-experience-bg);
+  color: var(--dw-experience-fg);
+  transition: background-color 680ms cubic-bezier(0.22, 1, 0.36, 1), color 360ms ease;
+}
+
+.dw-home-unified-experience[data-experience-theme],
+.dw-experience-scroll[data-experience-theme],
+.dw-experience-static[data-experience-theme] {
+  background: var(--dw-experience-bg);
+}
+
+[data-experience-theme="freedx"] { --dw-experience-bg: #5d43f2; --dw-experience-fg: #ffffff; --dw-experience-muted: #ddd7ff; }
+[data-experience-theme="lynon"] { --dw-experience-bg: #ed3e03; --dw-experience-fg: #ffffff; --dw-experience-muted: #ffe0d4; }
+[data-experience-theme="tbank"] { --dw-experience-bg: #ffdd2d; --dw-experience-fg: #191919; --dw-experience-muted: #5c5012; }
+[data-experience-theme="delux"] { --dw-experience-bg: #00a8e4; --dw-experience-fg: #020035; --dw-experience-muted: #073c7b; }
+[data-experience-theme="cloudchipr"] { --dw-experience-bg: #1443ea; --dw-experience-fg: #ffffff; --dw-experience-muted: #e3ddff; }
+[data-experience-theme="webb-fontaine"] { --dw-experience-bg: #020035; --dw-experience-fg: #ffffff; --dw-experience-muted: #cccaff; }
+[data-experience-theme="material-exchange"] { --dw-experience-bg: #090909; --dw-experience-fg: #ffffff; --dw-experience-muted: #bdbdbd; }
+[data-experience-theme="bank-of-london"] { --dw-experience-bg: #4d64ff; --dw-experience-fg: #ffffff; --dw-experience-muted: #e0e4ff; }
+[data-experience-theme="uphold"] { --dw-experience-bg: #84fb7f; --dw-experience-fg: #092d1a; --dw-experience-muted: #27633a; }
+[data-experience-theme="liga"] { --dw-experience-bg: #a20005; --dw-experience-fg: #ffffff; --dw-experience-muted: #ffd8d9; }
+
+[data-experience-theme="cloudchipr"] {
+  background-image: linear-gradient(135deg, #1443ea, #7334f1);
+}
+
+.dw-home-unified-experience .dw-experience-list,
+.dw-experience-scroll .dw-experience-list {
+  color: var(--dw-experience-fg);
+}
+
+.dw-home-unified-experience .dw-experience-list li,
+.dw-experience-scroll .dw-experience-list li,
+.dw-home-unified-experience .dw-experience-active-detail,
+.dw-experience-scroll .dw-experience-active-detail,
+.dw-home-unified-experience .dw-experience-meta span:first-child,
+.dw-experience-scroll .dw-experience-meta span:first-child {
+  color: var(--dw-experience-fg);
+}
+
+.dw-home-unified-experience .dw-experience-meta,
+.dw-experience-scroll .dw-experience-meta,
+.dw-home-unified-experience .dw-experience-description,
+.dw-experience-scroll .dw-experience-description,
+.dw-experience-static-list p + p {
+  color: var(--dw-experience-muted);
+}
+
+.dw-experience-scroll .dw-experience-scene {
+  background: transparent;
+}
+
+.dw-experience-heading {
+  top: clamp(90px, 12vh, 150px);
+  right: auto;
+  left: 5vw;
+  display: block;
+  max-width: min(86vw, 1280px);
+  text-align: left;
+}
+
+.dw-experience-heading h2,
+.dw-experience-static-title {
+  margin: 0;
+  font-size: clamp(58px, 7vw, 124px);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: 0;
+  color: inherit;
+}
+
+.dw-home-unified-experience .dw-experience-list {
+  padding-top: 62vh;
+  padding-bottom: 45vh;
+}
+
+.dw-experience-static {
+  min-height: 100svh;
+}
+
+.dw-experience-static-list h3,
+.dw-experience-static-list p,
+.dw-experience-static-headline > span:last-child {
+  color: inherit;
+}
+
+/* The mobile partner wall is normal page content. It only moves when the
+   visitor scrolls, replacing the previous automatic marquee. */
+.dw-partner-marquee {
+  padding: clamp(44px, 8vw, 72px) 14px;
+}
+
+.dw-partner-marquee-track {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(22px, 3vw, 42px) clamp(16px, 2vw, 32px);
+  animation: none;
+}
+
+.dw-partner-marquee-item {
+  min-width: 0;
+  margin: 0;
+  justify-content: center;
+  text-align: center;
+  white-space: normal;
+}
+
+.dw-clients-wordmark,
+.dw-partner-marquee-wordmark {
+  border-radius: 8px;
+}
+
+@media (max-width: 760px) {
+  .dw-experience-static {
+    padding-top: 92px;
+  }
+
+  .dw-experience-heading {
+    top: 96px;
+    left: 14px;
+  }
+
+  .dw-experience-heading h2,
+  .dw-experience-static-title {
+    font-size: clamp(48px, 15vw, 82px);
+  }
+
+  .dw-experience-static-list h3 {
+    font-weight: 400;
+  }
+
+  .dw-partner-marquee-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dw-partner-marquee-item {
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+  }
 }

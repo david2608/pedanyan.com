@@ -975,7 +975,12 @@ function Marquee({ children }: { children: ReactNode }) {
 }
 
 function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(false);
+  // Resolve synchronously on first render: a pinned scene must never mount
+  // for one frame on a phone, because ScrollTrigger's pin wraps it in a
+  // spacer and React then cannot remove it (removeChild NotFoundError).
+  const [matches, setMatches] = useState(() =>
+    typeof window !== "undefined" && typeof window.matchMedia === "function" ? window.matchMedia(query).matches : false
+  );
 
   useEffect(() => {
     const media = window.matchMedia(query);
@@ -1808,7 +1813,7 @@ function DesignerScrollStory() {
   const compactMotion = useMediaQuery("(max-width: 760px)");
   const useStaticMode = reducedMotion || compactMotion;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (useStaticMode || !sectionRef.current || !stickyRef.current) return;
 
     const section = sectionRef.current;
@@ -2643,7 +2648,7 @@ function ExperienceScrollSection() {
   const [staticDetail, setStaticDetail] = useState<ExperienceModalPayload | null>(null);
   const [staticActiveIndex, setStaticActiveIndex] = useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (useStaticMode || !sectionRef.current || !sceneRef.current) return;
 
     const section = sectionRef.current;
@@ -2711,13 +2716,6 @@ function ExperienceScrollSection() {
     }, scene);
 
     return () => ctx.revert();
-  }, [useStaticMode]);
-
-  // The compact variant is a normal scrolling section, so its title uses the
-  // site-wide motion.min.js reveal. Nudge the script once it has mounted.
-  useEffect(() => {
-    if (!useStaticMode) return;
-    (window as unknown as { motion?: { scan?: () => void } }).motion?.scan?.();
   }, [useStaticMode]);
 
   useEffect(() => {
@@ -2813,7 +2811,7 @@ function HomeUnifiedScrollExperience() {
   const compactMotion = useMediaQuery("(max-width: 760px)");
   const useStaticMode = reducedMotion || compactMotion;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (useStaticMode || !sectionRef.current || !sceneRef.current) return;
 
     const section = sectionRef.current;
@@ -4529,10 +4527,6 @@ const partnerBrands: Array<{ name: string; domain: string; wordmark?: string; no
 ];
 
 export function HomePartnerLogosSection() {
-  useEffect(() => {
-    (window as unknown as { motion?: { scan?: () => void } }).motion?.scan?.();
-  }, []);
-
   return (
     <section className="dw-partner-marquee" aria-label="Partner companies and organizations" data-anim="fade">
       <div className="dw-partner-marquee-track">

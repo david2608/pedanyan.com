@@ -37,7 +37,11 @@ body {
   --dw-hero-bg: #f5f5f5;
   --dw-hero-copy: #262625;
   min-height: 100vh;
-  overflow-x: hidden;
+  /* Guard against sideways overflow WITHOUT making the page a scroll
+     container: `hidden` turned <main> into one, which silently disabled
+     position: sticky for everything inside (the case-study walkthrough
+     stage, for one). `clip` clips and nothing else. */
+  overflow-x: clip;
   background: var(--dw-bg);
   color: var(--dw-text);
   font-family: Archivo, Arial, Helvetica, sans-serif;
@@ -386,6 +390,35 @@ html.dw-scrolled .dw-page .dw-logo {
   text-underline-offset: 4px;
 }
 
+.dw-fixed-portrait {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 50%;
+  background: #b7b7b7;
+  cursor: pointer;
+}
+
+.dw-fixed-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: none;
+}
+
+.dw-fixed-portrait:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+}
+
+.dw-mobile-menu-toggle {
+  display: none;
+}
+
 .dw-fixed-music-control {
   position: fixed;
   left: 8px;
@@ -692,7 +725,7 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   top: auto;
   bottom: calc(100% - 100svh + 6svh);
   width: auto;
-  height: min(71.16vw, 79svh);
+  height: 100svh;
   aspect-ratio: 1076 / 1471;
   margin: 0;
   overflow: visible;
@@ -768,40 +801,138 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   opacity: 1;
 }
 
-/* What he says: a bubble just off his mouth (mouth sits at ~50% / 21% of
-   the 9:16 clip), its tail pointing down at him. Pops in, fades on its own. */
-.dw-hero-bubble {
+/* What he says: a comic-strip bubble whose tail comes out of his mouth.
+   It renders in a layer over the whole hero screen (above the headline,
+   which on phones runs across his head) and is positioned by the driver
+   from the clip's box: tail tip on the mouth, body up and to the right,
+   clear of the face. Hand-lettered, hard black stroke, always white -
+   ink on the page, so it ignores the night theme. */
+.dw-hero-bubble-layer {
   position: absolute;
-  left: 51.5%;
-  bottom: 84%;
-  z-index: 2;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+}
+
+.dw-hero-bubble {
+  --bubble-ink: #000;
+  --bubble-paper: #fff;
+  --tail-reach: 44px;
+  --tail-drop: 36px;
+  --tail-w: 56px;
+  position: absolute;
+  left: 0;
+  top: 0;
   max-width: 200px;
-  padding: 9px 13px 10px;
-  border: 1px solid color-mix(in srgb, var(--dw-hero-copy) 28%, transparent);
-  border-radius: 14px;
-  background: var(--dw-hero-bg);
-  color: var(--dw-hero-copy);
-  font-size: 13px;
-  line-height: 1.3;
+  padding: 10px 14px 11px;
+  border: 2px solid var(--bubble-ink);
+  border-radius: 8px;
+  background: var(--bubble-paper);
+  color: var(--bubble-ink);
+  font-family: "Permanent Marker", "Comic Sans MS", cursive;
+  font-size: 15px;
+  line-height: 1.25;
   letter-spacing: 0.01em;
+  text-transform: uppercase;
   white-space: normal;
   pointer-events: none;
-  transform-origin: 8% 100%;
+  transform-origin: 0% 100%;
   animation: dwHeroBubbleIn 320ms cubic-bezier(0.2, 0.9, 0.2, 1.2) both;
 }
 
-/* The tail: a bordered square, rotated, tucked under the bottom-left corner. */
-.dw-hero-bubble::after {
+/* The CodePen tail: one box, one rounded corner, three inset shadows. The
+   box's near edge sits over the bubble's border, so the white inset opens
+   the border where the tail joins; the corner nearest the mouth is the tip.
+   Four placements = the same wedge mirrored across x and/or y. */
+.dw-hero-bubble::before {
   content: "";
   position: absolute;
-  left: 12px;
-  bottom: -7px;
-  width: 12px;
-  height: 12px;
-  background: inherit;
-  border-right: 1px solid color-mix(in srgb, var(--dw-hero-copy) 28%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--dw-hero-copy) 28%, transparent);
-  transform: rotate(45deg);
+  width: var(--tail-w, 56px);
+  height: var(--tail-drop);
+}
+
+.dw-hero-bubble.at-up-right::before {
+  left: calc(-1 * var(--tail-reach));
+  bottom: calc(-1 * var(--tail-drop));
+  border-radius: 0 0 100% 0;
+  box-shadow:
+    -2px -2px 0 0 var(--bubble-ink) inset,
+    calc(-0.14 * var(--tail-w, 56px)) 0 0 0 var(--bubble-paper) inset,
+    calc(-0.14 * var(--tail-w, 56px) - 2px) -2px 0 0 var(--bubble-ink) inset;
+}
+
+.dw-hero-bubble.at-up-left::before {
+  right: calc(-1 * var(--tail-reach));
+  bottom: calc(-1 * var(--tail-drop));
+  border-radius: 0 0 0 100%;
+  box-shadow:
+    2px -2px 0 0 var(--bubble-ink) inset,
+    calc(0.14 * var(--tail-w, 56px)) 0 0 0 var(--bubble-paper) inset,
+    calc(0.14 * var(--tail-w, 56px) + 2px) -2px 0 0 var(--bubble-ink) inset;
+}
+
+.dw-hero-bubble.at-down-right::before {
+  left: calc(-1 * var(--tail-reach));
+  top: calc(-1 * var(--tail-drop));
+  border-radius: 0 100% 0 0;
+  box-shadow:
+    -2px 2px 0 0 var(--bubble-ink) inset,
+    calc(-0.14 * var(--tail-w, 56px)) 0 0 0 var(--bubble-paper) inset,
+    calc(-0.14 * var(--tail-w, 56px) - 2px) 2px 0 0 var(--bubble-ink) inset;
+}
+
+.dw-hero-bubble.at-down-left::before {
+  right: calc(-1 * var(--tail-reach));
+  top: calc(-1 * var(--tail-drop));
+  border-radius: 100% 0 0 0;
+  box-shadow:
+    2px 2px 0 0 var(--bubble-ink) inset,
+    calc(0.14 * var(--tail-w, 56px)) 0 0 0 var(--bubble-paper) inset,
+    calc(0.14 * var(--tail-w, 56px) + 2px) 2px 0 0 var(--bubble-ink) inset;
+}
+
+/* Pop in from the tail corner. */
+.dw-hero-bubble.at-up-right { transform-origin: 0% 100%; }
+.dw-hero-bubble.at-up-left { transform-origin: 100% 100%; }
+.dw-hero-bubble.at-down-right { transform-origin: 0% 0%; }
+.dw-hero-bubble.at-down-left { transform-origin: 100% 0%; }
+
+/* Yell: squarer, a touch bigger and cocked. */
+.dw-hero-bubble.is-yell {
+  border-radius: 3px;
+  font-size: 17px;
+  transform: rotate(-3deg);
+}
+
+/* Thought: three shrinking dots trailing down-left to the mouth (up-right placement). */
+.dw-hero-bubble.is-think::before {
+  left: calc(-1 * var(--tail-reach) + 12px);
+  right: auto;
+  top: auto;
+  bottom: -10px;
+  width: 2px;
+  height: 2px;
+  border-radius: 100%;
+  background: var(--bubble-paper);
+  box-shadow:
+    0 0 0 4px var(--bubble-paper),
+    0 0 0 6px var(--bubble-ink),
+    -20px 12px 0 3px var(--bubble-paper),
+    -20px 12px 0 5px var(--bubble-ink),
+    -38px 22px 0 1px var(--bubble-paper),
+    -38px 22px 0 3px var(--bubble-ink);
+}
+
+@media (max-width: 900px) {
+  .dw-hero-bubble {
+    max-width: 190px;
+    padding: 8px 12px 9px;
+    font-size: 13px;
+  }
+
+  .dw-hero-bubble.is-yell {
+    font-size: 14px;
+  }
 }
 
 @keyframes dwHeroBubbleIn {
@@ -871,9 +1002,9 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
      centring on it left the tile riding high next to "products". Nudge down
      to the optical middle of the word itself — measured at 0.054em from the
      ink extents of Archivo at this size, so it holds as the headline scales. */
-  transform: translateY(calc(-50% + 0.054em)) scale(0.86);
-  transition: opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
-              transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(calc(-50% + 0.054em)) scale(0);
+  transition: opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1050ms cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
 }
 
@@ -1338,11 +1469,23 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   display: grid;
   justify-items: center;
   gap: 7px;
+  padding: 8px 14px;
+  margin: 0;
+  border: 0;
+  background: transparent;
   color: #fff;
+  font: inherit;
   mix-blend-mode: difference;
   opacity: 0.32;
   transform: translateX(-50%);
-  pointer-events: none;
+  cursor: pointer;
+  transition: opacity 240ms ease;
+}
+
+.dw-scroll-hint:hover,
+.dw-scroll-hint:focus-visible {
+  opacity: 0.9;
+  outline: none;
 }
 
 .dw-scroll-hint-line {
@@ -1368,6 +1511,8 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
 .dw-scroll-hint-text {
   font-size: 10px;
   letter-spacing: 0.2em;
+  text-transform: lowercase;
+  white-space: nowrap;
 }
 
 @keyframes dw-scroll-hint-drop {
@@ -6041,6 +6186,11 @@ button.dw-public-journal-entry {
     font-size: 12px;
   }
 
+  .dw-fixed-portrait {
+    width: 18px;
+    height: 18px;
+  }
+
   .dw-theme-dock {
     left: 12px;
     bottom: 10px;
@@ -6487,7 +6637,13 @@ button.dw-public-journal-entry {
   }
 
   .dw-figma-hero-line-products {
-    padding-left: 14%;
+    padding-left: 56px;
+  }
+
+  /* The reel has to fit the indent, not the other way round. */
+  .dw-hero-reel {
+    width: 46px;
+    border-radius: 6px;
   }
 
 
@@ -7125,5 +7281,388 @@ button.dw-public-journal-entry {
     flex-direction: column;
     gap: 8px;
     font-size: 13px;
+  }
+}
+
+/* Mobile navigation stays discoverable without competing with the hero. */
+@media (max-width: 900px) {
+  .dw-page .dw-header {
+    align-items: center;
+    justify-content: space-between;
+    mix-blend-mode: difference;
+  }
+
+  .dw-mobile-menu-toggle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    display: inline-grid;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    place-items: center;
+    color: currentColor;
+    background: transparent;
+    cursor: pointer;
+    pointer-events: auto;
+    transform: translate(-50%, -50%);
+  }
+
+  .dw-mobile-menu-toggle svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .dw-nav,
+  .dw-page .dw-header .dw-nav {
+    position: fixed;
+    top: 72px;
+    right: 0;
+    left: 0;
+    z-index: 199;
+    display: grid;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    padding: 20px;
+    gap: 14px;
+    justify-items: start;
+    border: 0;
+    color: var(--dw-text);
+    background: var(--dw-hero-bg);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 180ms ease, transform 220ms ease, visibility 0s linear 220ms;
+  }
+
+  .dw-nav.is-open,
+  .dw-page .dw-header .dw-nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition-delay: 0s;
+  }
+
+  .dw-nav a,
+  .dw-page .dw-header .dw-nav a {
+    color: var(--dw-text);
+    font-size: 28px;
+    line-height: 1.15;
+  }
+
+  .dw-header.has-menu-open {
+    mix-blend-mode: normal;
+    background: var(--dw-hero-bg);
+    color: var(--dw-text);
+  }
+
+  .dw-header.has-menu-open .dw-logo,
+  .dw-header.has-menu-open .dw-right,
+  .dw-header.has-menu-open .dw-pill {
+    color: var(--dw-text);
+  }
+
+  .dw-right {
+    top: auto;
+    right: auto;
+  }
+
+  .dw-pill {
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+  }
+
+  .dw-pill > span {
+    display: none;
+  }
+
+  .dw-talk-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .dw-fixed-socials {
+    right: 16px;
+    bottom: 16px;
+    align-items: center;
+    gap: 14px;
+    mix-blend-mode: normal;
+  }
+
+  .dw-fixed-socials a {
+    font-size: 16px;
+    color: #ffffff;
+    mix-blend-mode: difference;
+  }
+
+  .dw-fixed-portrait {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #b7b7b7;
+  }
+
+  .dw-fixed-portrait img {
+    filter: none;
+    object-position: center;
+  }
+}
+
+/* Compact screens use ordinary section headings and touch-first chapters. */
+.dw-mobile-section-title,
+.dw-mobile-cube-orbit {
+  display: none;
+}
+
+.dw-experience-static-list article::before {
+  display: none;
+}
+
+.dw-experience-static-list {
+  border-top: 0;
+}
+
+.dw-experience-more {
+  width: max-content;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.dw-experience-more:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .dw-page .dw-mobile-section-title {
+    display: block;
+    margin: 0;
+    color: var(--dw-text);
+    font-size: 30px !important;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 0;
+  }
+
+  .dw-partner-marquee {
+    padding-top: 42px;
+  }
+
+  .dw-partner-marquee .dw-mobile-section-title {
+    margin: 0 0 30px;
+  }
+
+  .dw-designer-static {
+    min-height: 0;
+    padding-top: 42px;
+    padding-bottom: 64px;
+    gap: 0;
+  }
+
+  .dw-designer-static .dw-mobile-section-title {
+    margin-bottom: 32px;
+  }
+
+  .dw-designer-static-head {
+    display: none;
+  }
+
+  .dw-mobile-designer-stat {
+    min-height: 62svh;
+    display: grid;
+    align-content: center;
+    scroll-snap-align: center;
+    opacity: 0.42;
+    transform: translateY(16px) scale(0.97);
+    transition: opacity 360ms ease, transform 460ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dw-mobile-designer-stat.is-focused {
+    opacity: 1;
+    transform: none;
+  }
+
+  .dw-mobile-designer-stat h3 {
+    margin: 0;
+    font-size: clamp(58px, 19vw, 84px);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: 0;
+  }
+
+  .dw-mobile-designer-stat p {
+    max-width: 25ch;
+    margin: 14px 0 0;
+    font-size: 18px;
+    line-height: 1.18;
+  }
+
+  .dw-experience-static {
+    height: 100svh;
+    min-height: 100svh;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .dw-page .dw-experience-static-title {
+    position: absolute;
+    z-index: 3;
+    top: 30px;
+    left: 14px;
+    margin: 0;
+    max-width: none;
+    font-size: 30px !important;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 0;
+    pointer-events: none;
+  }
+
+  .dw-experience-static-list {
+    height: 100%;
+    display: block;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dw-experience-static-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dw-experience-static-list article {
+    box-sizing: border-box;
+    min-height: 100%;
+    padding: 102px 24px 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .dw-experience-static-headline {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .dw-experience-static-list h3 {
+    margin-top: 26px;
+    font-size: clamp(48px, 15vw, 70px);
+    line-height: 0.92;
+  }
+
+  .dw-experience-static-list p {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .dw-experience-static-list p + p {
+    margin-top: 18px;
+  }
+
+  .dw-experience-static-more {
+    margin-top: auto;
+    color: var(--dw-experience-fg);
+  }
+
+  .dw-footer-glass-cubes {
+    display: none;
+  }
+
+  .dw-mobile-cube-orbit {
+    position: absolute;
+    right: 24px;
+    bottom: 30px;
+    z-index: 2;
+    display: block;
+    width: 96px;
+    height: 96px;
+    pointer-events: none;
+  }
+
+  .dw-mobile-cube-orbit span {
+    position: absolute;
+    width: 32px;
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in srgb, var(--dw-text) 46%, transparent);
+    background: color-mix(in srgb, var(--dw-bg) 44%, transparent);
+    box-shadow: 8px 8px 0 color-mix(in srgb, var(--dw-text) 10%, transparent);
+    transform: rotate(18deg);
+    animation: dwMobileCubeFloat 4.8s ease-in-out infinite;
+  }
+
+  .dw-mobile-cube-orbit span:nth-child(1) { top: 8px; left: 8px; }
+  .dw-mobile-cube-orbit span:nth-child(2) { right: 4px; bottom: 16px; animation-delay: -1.6s; }
+  .dw-mobile-cube-orbit span:nth-child(3) { right: 34px; top: 36px; animation-delay: -3.2s; }
+}
+
+@keyframes dwMobileCubeFloat {
+  50% { transform: translate3d(0, -10px, 0) rotate(42deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-mobile-cube-orbit span {
+    animation: none;
+  }
+}
+
+/* === Header order: menu on the left, wordmark centred, talk on the right ===
+   The wordmark leaves the flex flow and sits on the true centre line, so the
+   menu and the talk button can hug the page margins regardless of width. */
+.dw-page .dw-header .dw-nav {
+  flex: 0 0 auto;
+  width: auto;
+  justify-content: flex-start;
+}
+
+.dw-page .dw-header .dw-logo,
+.dw-page .dw-header.is-scrolled .dw-logo,
+html.dw-scrolled .dw-page .dw-header .dw-logo {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  flex: none;
+  width: auto;
+  transform: translateX(-50%);
+}
+
+/* the tracking after the last glyph is balanced on the left instead of pulled back */
+.dw-page .dw-header .dw-logo-word {
+  margin-right: 0;
+  padding-left: 0.26em;
+}
+
+.dw-page .dw-header .dw-right {
+  margin-left: auto;
+}
+
+@media (max-width: 900px) {
+  .dw-page .dw-header .dw-mobile-menu-toggle {
+    left: 12px;
+    transform: translateY(-50%);
+  }
+
+  .dw-page .dw-header .dw-logo,
+  .dw-page .dw-header.is-scrolled .dw-logo,
+  html.dw-scrolled .dw-page .dw-header .dw-logo {
+    height: 72px;
   }
 }

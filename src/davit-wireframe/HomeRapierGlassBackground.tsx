@@ -265,6 +265,8 @@ export function RapierGlassCubes({ containerRef, className = "" }: RapierGlassCu
     const layer = layerRef.current;
     const container = containerRef.current;
     if (!layer || !container) return;
+    // This decorative physics layer is costly on phones and can fail on mobile WebGL/WASM.
+    if (window.matchMedia("(max-width: 900px), (prefers-reduced-motion: reduce)").matches) return;
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,

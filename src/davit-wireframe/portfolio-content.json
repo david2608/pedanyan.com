@@ -7,7 +7,8 @@
     "securion": "/securion/",
     "material-exchange-photo-lab": "/material-exchange-photo-lab/",
     "hotel-apartments": "/hotel-apartments/",
-    "icredo": "/icredo/"
+    "icredo": "/icredo/",
+    "liga": "/liga/"
   },
   "projects": [
     {
@@ -490,7 +491,7 @@
           "paddingTop": "70px",
           "paddingBottom": "80px",
           "title": "How it started",
-          "body": "<p>Imagine being a UX designer exploring the world of cloud systems like AWS, GCP, and Azure. Sounds hard ha?</p><p>I joined a team of expert SRE and DevOps engineers when the project was <strong>just starting</strong>, moving from being a solo designer. Back then, all we had were <strong>a concept and a few rough mockups.</strong> As I was relatively new to this field, I decided to start with the basics – fundamental learning. This study covered a series of important steps that I needed to work through.</p>"
+          "body": "<p>Imagine being a UX designer exploring the world of cloud systems like AWS, GCP, and Azure. Sounds hard ha?</p><p>I joined a team of expert SRE and DevOps engineers when the project was <strong>just starting</strong>, moving from being a solo designer. Back then, all I had were <strong>a concept and a few rough mockups.</strong> As I was relatively new to this field, I decided to start with the basics – fundamental learning. This study covered a series of important steps that I needed to work through.</p>"
         },
         {
           "id": "field-study-photo",
@@ -610,7 +611,7 @@
           "paddingTop": "160px",
           "paddingBottom": "140px",
           "title": "The Problem",
-          "body": "<p>We have seen 1000s of 💸 per Hour of cloud waste paid for years just because:</p><p>Companies waste a large percentage of their cloud cost to pay for resources that are never used.<br>Developers forget to cleanup after tests.<br>Automation tools fail in the middle of execution and leave the cloud resources.<br>Finances and business do not have context whether the growing cloud cost is a waste.</p><p>Based on the personal research and information gathered from interviewing company’s founders and key stakeholders there is a clear need for a strong cost optimization platform that can effectively address the issue of wasting thousands of dollars per hour.</p>"
+          "body": "<p>I have seen 1000s of 💸 per Hour of cloud waste paid for years just because:</p><p>Companies waste a large percentage of their cloud cost to pay for resources that are never used.<br>Developers forget to cleanup after tests.<br>Automation tools fail in the middle of execution and leave the cloud resources.<br>Finances and business do not have context whether the growing cloud cost is a waste.</p><p>Based on the personal research and information gathered from interviewing company’s founders and key stakeholders there is a clear need for a strong cost optimization platform that can effectively address the issue of wasting thousands of dollars per hour.</p>"
         },
         {
           "id": "problem-discovered",
@@ -630,7 +631,7 @@
           "paddingTop": "100px",
           "paddingBottom": "110px",
           "title": "Competitor Analysis",
-          "body": "<p>When looking at other companies in the field, I did two kinds of analysis: direct and indirect competitors. For direct competitors, I checked out companies with similar products or services as ours. I looked at what they offer, how much they charge, and who they target. This helped me see how we compare in terms of strengths and weaknesses.</p><p>Indirect competitors were a bit different. These are companies that might not do exactly what we do, but they could still take customers away. I researched them to understand their potential impact on our market.</p><p>I did a lot of research, reading reports, and checking what customers say online. This gave me a good sense of what people like and don't like about our competitors. And I didn't just stop at that. I also looked into the technology they use and any unique things they offer. In the end, all this info helped me figure out where we stand compared to others and how we can stand out.</p>"
+          "body": "<p>When looking at other companies in the field, I did two kinds of analysis: direct and indirect competitors. For direct competitors, I checked out companies with similar products or services as mine. I looked at what they offer, how much they charge, and who they target. This helped me see how I compare in terms of strengths and weaknesses.</p><p>Indirect competitors were a bit different. These are companies that might not do exactly what I do, but they could still take customers away. I researched them to understand their potential impact on my market.</p><p>I did a lot of research, reading reports, and checking what customers say online. This gave me a good sense of what people like and don't like about my competitors. And I didn't just stop at that. I also looked into the technology they use and any unique things they offer. In the end, all this info helped me figure out where I stand compared to others and how I can stand out.</p>"
         },
         {
           "id": "competitor-roi-visual",
@@ -656,7 +657,7 @@
           "paddingTop": "120px",
           "paddingBottom": "120px",
           "title": "To Design or Not to Design system?",
-          "body": "<p>The company has tasked me with determining whether to purchase license of on of the existing design systems or to create a new one. Beyond the pros and cons that contribute to this decision, there's an effective approach I've undertaken – calculating the Return on Investment (ROI) for developing our own design system. This analytical method provides a clear and strategic means of comprehending the optimal direction to take.</p><p><strong>Total ROI for One Project</strong><br>ROI = Cost Savings - Cost of Design System Implementation<br>$8000 - $20,000 = -$12,000</p><p>The decision was clear-cut. After thorough research among various available solutions, we concluded that MUI was the ideal choice.</p>"
+          "body": "<p>The company has tasked me with determining whether to purchase license of on of the existing design systems or to create a new one. Beyond the pros and cons that contribute to this decision, there's an effective approach I've undertaken – calculating the Return on Investment (ROI) for developing my own design system. This analytical method provides a clear and strategic means of comprehending the optimal direction to take.</p><p><strong>Total ROI for One Project</strong><br>ROI = Cost Savings - Cost of Design System Implementation<br>$8000 - $20,000 = -$12,000</p><p>The decision was clear-cut. After thorough research among various available solutions, I concluded that MUI was the ideal choice.</p>"
         },
         {
           "id": "design-system-visuals",
@@ -828,7 +829,7 @@
           "paddingTop": "165px",
           "paddingBottom": "130px",
           "title": "Feedback",
-          "quote": "Davit's journey within our company is impressive. He started as a solo designer and quickly rose to the position of Design Lead by recruiting and mentoring junior designers. He also took charge of creating the MVP for CloudChipr, showcasing his comprehensive understanding of the product. In his two years here, Davit consistently exhibited patience and responsibility. Truly invaluable member of our team.",
+          "quote": "Davit's journey within my company is impressive. He started as a solo designer and quickly rose to the position of Design Lead by recruiting and mentoring junior designers. He also took charge of creating the MVP for CloudChipr, showcasing his comprehensive understanding of the product. In his two years here, Davit consistently exhibited patience and responsibility. Truly invaluable member of my team.",
           "avatar": "viktor-avatar",
           "person": {
             "name": "Viktor Harutyunyan",
@@ -1163,7 +1164,7 @@
           "paddingTop": "130px",
           "paddingBottom": "90px",
           "title": "User Research",
-          "body": "<p>To ensure a user-centered approach to our decisions, I conducted a comprehensive survey to validate our assumptions about Material Exchange. With an impressive participation of 160 individuals from 24 different countries, we gained valuable insights into the needs and preferences of our user base. Analyzing the survey data allowed us to confirm our assumptions, identify common trends, and prioritize improvements based on user feedback.</p>"
+          "body": "<p>To ensure a user-centered approach to my decisions, I conducted a comprehensive survey to validate my assumptions about Material Exchange. With an impressive participation of 160 individuals from 24 different countries, I gained valuable insights into the needs and preferences of my user base. Analyzing the survey data allowed me to confirm my assumptions, identify common trends, and prioritize improvements based on user feedback.</p>"
         },
         {
           "id": "user-research-findings",
@@ -1180,7 +1181,7 @@
           "layout": "contained",
           "paddingTop": "60px",
           "paddingBottom": "110px",
-          "body": "<p>We made it a practice to conduct iterative user interview and testing sessions at least twice a month. This involved engaging both new users and maintaining connections with existing ones. At first, we experimented with recruiting users through the usertesting.com platform. However, we soon realized that custom user recruitment is significantly more effective. Platform users often exhibit strong biases that can impact the quality of our insights.</p>"
+          "body": "<p>I made it a practice to conduct iterative user interview and testing sessions at least twice a month. This involved engaging both new users and maintaining connections with existing ones. At first, I experimented with recruiting users through the usertesting.com platform. However, I soon realized that custom user recruitment is significantly more effective. Platform users often exhibit strong biases that can impact the quality of my insights.</p>"
         },
         {
           "id": "personas",
@@ -1189,7 +1190,7 @@
           "layout": "contained",
           "paddingTop": "60px",
           "paddingBottom": "80px",
-          "body": "<p>Combining insights from various sources—company strategy, user research, quantitative surveys, and competitive analyses—we crafted our initial hypothetical personas. This marked the beginning of our ongoing process to discover new user archetypes throughout the journey.</p>"
+          "body": "<p>Combining insights from various sources—company strategy, user research, quantitative surveys, and competitive analyses—I crafted my initial hypothetical personas. This marked the beginning of my ongoing process to discover new user archetypes throughout the journey.</p>"
         },
         {
           "id": "platform-users-heading",
@@ -1240,7 +1241,7 @@
           "paddingTop": "140px",
           "paddingBottom": "80px",
           "title": "Building the Visual Language",
-          "body": "<p>To create the complete Design language of the product, we initially concentrated on designing specific components unique to the product, such are material swatches and folders.</p>"
+          "body": "<p>To create the complete Design language of the product, I initially concentrated on designing specific components unique to the product, such are material swatches and folders.</p>"
         },
         {
           "id": "visual-language",
@@ -1259,7 +1260,7 @@
           "paddingTop": "120px",
           "paddingBottom": "80px",
           "title": "Iconography",
-          "body": "<p>Due to time constraints and the absence of a dedicated graphic designer on the team, we gathered icons from various collections and then harmonized them into a unified style. As a result we made a font of 350 pixel perfect linear icons including 43 industry specific.</p>"
+          "body": "<p>Due to time constraints and the absence of a dedicated graphic designer on the team, I gathered icons from various collections and then harmonized them into a unified style. As a result I made a font of 350 pixel perfect linear icons including 43 industry specific.</p>"
         },
         {
           "id": "iconography",
@@ -1340,10 +1341,10 @@
           "paddingBottom": "150px",
           "columns": [
             {
-              "body": "<ul><li>How might we <strong>effectively centralize and organize digital materials and assets</strong>, providing easy <strong>searchability and accessibility for brands, manufacturers, and suppliers</strong> within the Material Exchange platform?</li><li>How might we <strong>enhance collaboration and communication between teams</strong> by integrating feedback and approval processes seamlessly within the Material Exchange platform, ensuring efficient collaboration and minimizing miscommunication?</li><li>How might we <strong>assist brands in maintaining consistent and cohesive material usage</strong> across different teams and stakeholders, leveraging the Material Exchange platform’s capabilities?</li></ul>"
+              "body": "<ul><li>How might I <strong>effectively centralize and organize digital materials and assets</strong>, providing easy <strong>searchability and accessibility for brands, manufacturers, and suppliers</strong> within the Material Exchange platform?</li><li>How might I <strong>enhance collaboration and communication between teams</strong> by integrating feedback and approval processes seamlessly within the Material Exchange platform, ensuring efficient collaboration and minimizing miscommunication?</li><li>How might I <strong>assist brands in maintaining consistent and cohesive material usage</strong> across different teams and stakeholders, leveraging the Material Exchange platform’s capabilities?</li></ul>"
             },
             {
-              "body": "<ul><li>How might we <strong>automate manual tasks and streamline workflows</strong> within the Material Exchange platform to significantly improve efficiency, saving valuable time for all users involved?</li><li>How might we <strong>ensure robust access controls and permissions</strong> within the Material Exchange platform, prioritizing data security and confidentiality to protect sensitive information?</li><li>How might we <strong>provide valuable analytics and insights on material usage and performance</strong> within the Material Exchange platform, empowering data-driven decision-making for brands, manufacturers, and suppliers?</li><li>How might we <strong>guarantee seamless scalability and integration</strong> of the Material Exchange platform with other tools and systems used by brands, manufacturers, and suppliers, ensuring smooth operations and compatibility?</li></ul>"
+              "body": "<ul><li>How might I <strong>automate manual tasks and streamline workflows</strong> within the Material Exchange platform to significantly improve efficiency, saving valuable time for all users involved?</li><li>How might I <strong>ensure robust access controls and permissions</strong> within the Material Exchange platform, prioritizing data security and confidentiality to protect sensitive information?</li><li>How might I <strong>provide valuable analytics and insights on material usage and performance</strong> within the Material Exchange platform, empowering data-driven decision-making for brands, manufacturers, and suppliers?</li><li>How might I <strong>guarantee seamless scalability and integration</strong> of the Material Exchange platform with other tools and systems used by brands, manufacturers, and suppliers, ensuring smooth operations and compatibility?</li></ul>"
             }
           ]
         },
@@ -1429,7 +1430,7 @@
           "paddingTop": "60px",
           "paddingBottom": "80px",
           "eyebrow": "The Solution",
-          "body": "<p>As a solution, we introduced an innovative feature named <strong>“Dropzone”</strong>. Drawing inspiration from people's familiarity with operating system folders, Dropzone enables users to effortlessly drag and drop files, mirroring a natural experience.</p>"
+          "body": "<p>As a solution, I introduced an innovative feature named <strong>“Dropzone”</strong>. Drawing inspiration from people's familiarity with operating system folders, Dropzone enables users to effortlessly drag and drop files, mirroring a natural experience.</p>"
         },
         {
           "id": "dropzone",
@@ -1446,7 +1447,7 @@
           "layout": "contained",
           "paddingTop": "50px",
           "paddingBottom": "150px",
-          "body": "<p>To enhance efficiency, we added the capability to <strong>select multiple items and utilize multiple dropzones</strong>, streamlining the process of managing up to 4 folders within a single task. This approach not only simplifies the user experience but also significantly accelerates the material management process.</p><p class=\"dw-mex-metrics\"><strong>🕒 <span>Exp. Duration</span> — 45 min</strong><br><strong>🎉 <span>Act. Result</span> — 23 min</strong></p>"
+          "body": "<p>To enhance efficiency, I added the capability to <strong>select multiple items and utilize multiple dropzones</strong>, streamlining the process of managing up to 4 folders within a single task. This approach not only simplifies the user experience but also significantly accelerates the material management process.</p><p class=\"dw-mex-metrics\"><strong>🕒 <span>Exp. Duration</span> — 45 min</strong><br><strong>🎉 <span>Act. Result</span> — 23 min</strong></p>"
         },
         {
           "id": "hypothesis-two",
@@ -1472,7 +1473,7 @@
           "paddingTop": "30px",
           "paddingBottom": "80px",
           "eyebrow": "The Solution",
-          "body": "<p>Easier grouping of search criteria would <strong>simplify repetitive operations</strong> by enabling users to execute the <strong>same search with a single click.</strong> To address this need, we <strong>introduced and tested the “Save Search” feature.</strong></p>"
+          "body": "<p>Easier grouping of search criteria would <strong>simplify repetitive operations</strong> by enabling users to execute the <strong>same search with a single click.</strong> To address this need, I <strong>introduced and tested the “Save Search” feature.</strong></p>"
         },
         {
           "id": "save-search",
@@ -1494,7 +1495,7 @@
           "paddingTop": "160px",
           "paddingBottom": "170px",
           "title": "About Achievements",
-          "body": "<p>After working hard for 2 years, here are some things I'm proud of:</p><ul><li>We created the Mat-EX cross-devices design system.</li><li>Our design team grew from 1 to 5 talented designers.</li><li>Improved entire company’s design processes.</li><li>Made it easier collaboration between different teams.</li><li>We finished 5 projects.</li><li>And the big news: <a href=\"https://material-exchange.com/\" target=\"_blank\" rel=\"noopener\">Material Exchange Raises €25 Million to Lead Sustainable Material Sourcing</a></li></ul>"
+          "body": "<p>After working hard for 2 years, here are some things I'm proud of:</p><ul><li>I created the Mat-EX cross-devices design system.</li><li>My design team grew from 1 to 5 talented designers.</li><li>Improved entire company’s design processes.</li><li>Made it easier collaboration between different teams.</li><li>I finished 5 projects.</li><li>And the big news: <a href=\"https://material-exchange.com/\" target=\"_blank\" rel=\"noopener\">Material Exchange Raises €25 Million to Lead Sustainable Material Sourcing</a></li></ul>"
         },
         {
           "id": "feedback",
@@ -1509,7 +1510,7 @@
           "paddingTop": "165px",
           "paddingBottom": "135px",
           "title": "Feedback",
-          "quote": "Davit's commitment has made a meaningful impact on our organization. His keen eye for detail and strong leadership were instrumental during a critical phase when we were struggling to develop our MVP. Thanks to his dedication, we successfully navigated through challenges and reached our goal. A valuable asset to our team.",
+          "quote": "Davit's commitment has made a meaningful impact on my organization. His keen eye for detail and strong leadership were instrumental during a critical phase when I was struggling to develop my MVP. Thanks to his dedication, I successfully navigated through challenges and reached my goal. A valuable asset to my team.",
           "avatar": "dejan-avatar",
           "person": {
             "name": "Dejan Zvekić",
@@ -1931,7 +1932,7 @@
           "paddingTop": "380px",
           "paddingBottom": "130px",
           "title": "Feedback",
-          "quote": "Alright, so Davit's been quite the design maestro. I mean, seriously, this guy's a one-man show. He's tackled it all - design, markup, and even worked his magic on WordPress building our marketing website. Davit, keep pushing those design boundaries, you're in a league of your own!",
+          "quote": "Alright, so Davit's been quite the design maestro. I mean, seriously, this guy's a one-man show. He's tackled it all - design, markup, and even worked his magic on WordPress building my marketing website. Davit, keep pushing those design boundaries, you're in a league of your own!",
           "avatar": "shaunt-avatar",
           "person": {
             "name": "Shaunt Sarkissian",
@@ -2072,6 +2073,14 @@
           "width": 474,
           "height": 1024,
           "alt": ""
+        },
+        "editor-screen": {
+          "packagePath": "assets/material-exchange-photo-lab/editor-screen.webp",
+          "sourceNode": "331:32624",
+          "kind": "image",
+          "width": 2718,
+          "height": 1824,
+          "alt": "ME Photo Lab editor: crop, straighten and set the physical size of a material photo"
         }
       },
       "sections": [
@@ -2081,16 +2090,17 @@
           "sourceNode": "331:28665",
           "layout": "wide",
           "background": {
-            "color": "#ecfff8",
+            "color": "#101312",
             "scope": "inner",
             "radius": "30px"
           },
-          "textColor": "#202020",
+          "textColor": "#f5f2ee",
           "paddingTop": "57px",
           "paddingBottom": "0px",
           "title": "ME Photo Lab",
           "subtitle": "Cross-platform photo editing extension.",
-          "media": "hero"
+          "media": "editor-screen",
+          "variant": "showcase"
         },
         {
           "id": "project",
@@ -2174,7 +2184,7 @@
           "paddingTop": "110px",
           "paddingBottom": "100px",
           "title": "Objective",
-          "body": "<p>Our objective is to enhance the Material Exchange Marketplace's image presentation capabilities by providing easy and intuitive design tool for material managers.</p>"
+          "body": "<p>My objective is to enhance the Material Exchange Marketplace's image presentation capabilities by providing easy and intuitive design tool for material managers.</p>"
         },
         {
           "id": "value-proposition",
@@ -2207,8 +2217,8 @@
           "layout": "contained",
           "paddingTop": "120px",
           "paddingBottom": "100px",
-          "title": "Anticipated Transformations: The Impact of Our Image Editing Tool on Material Exchange",
-          "body": "<ul><li>With the implementation of our tool, we anticipate a substantial increase in material engagement. We predict that materials edited using our platform will experience a <strong>30% boost in engagement</strong>, piquing the interest of brands and users alike.</li><li>Our analysis suggests that materials with professionally edited images and well-designed cards will exhibit a <strong>20% improvement in conversion rates</strong> compared to non-enhanced materials.</li><li>With the tool now available, we anticipate attracting and onboarding a larger number of small suppliers and individuals. Our projections indicate a <strong>40% growth in our supplier base within the first year of tool implementation.</strong></li><li>We predict a significant enhancement in user satisfaction as a direct result of this tool. We anticipate that <strong>90% of our users will report an improved experience</strong>, noting that the tool makes it easier for them to create visually appealing materials.</li><li>Brands are expected to demonstrate heightened interest in materials from a more diverse set of suppliers, including smaller businesses and individuals. Our projections indicate a <strong>25% increase in brand interactions</strong> with these suppliers.</li></ul>"
+          "title": "Anticipated Transformations: The Impact of My Image Editing Tool on Material Exchange",
+          "body": "<ul><li>With the implementation of my tool, I anticipate a substantial increase in material engagement. I predict that materials edited using my platform will experience a <strong>30% boost in engagement</strong>, piquing the interest of brands and users alike.</li><li>My analysis suggests that materials with professionally edited images and well-designed cards will exhibit a <strong>20% improvement in conversion rates</strong> compared to non-enhanced materials.</li><li>With the tool now available, I anticipate attracting and onboarding a larger number of small suppliers and individuals. My projections indicate a <strong>40% growth in my supplier base within the first year of tool implementation.</strong></li><li>I predict a significant enhancement in user satisfaction as a direct result of this tool. I anticipate that <strong>90% of my users will report an improved experience</strong>, noting that the tool makes it easier for them to create visually appealing materials.</li><li>Brands are expected to demonstrate heightened interest in materials from a more diverse set of suppliers, including smaller businesses and individuals. My projections indicate a <strong>25% increase in brand interactions</strong> with these suppliers.</li></ul>"
         },
         {
           "id": "product-editor",
@@ -2254,7 +2264,7 @@
           "paddingTop": "165px",
           "paddingBottom": "130px",
           "title": "Feedback",
-          "quote": "Davit was a great help on our project. Although the project had to change, I value Davit's contributions and hope to work together again.",
+          "quote": "Davit was a great help on my project. Although the project had to change, I value Davit's contributions and hope to work together again.",
           "avatar": "sergey-avatar",
           "person": {
             "name": "Sergey Tonoyan",
@@ -2434,6 +2444,14 @@
           "width": 474,
           "height": 1024,
           "alt": ""
+        },
+        "home-screen": {
+          "packagePath": "assets/hotel-apartments/home-screen.webp",
+          "sourceNode": "2886:56204",
+          "kind": "image",
+          "width": 2852,
+          "height": 2600,
+          "alt": "Hotel Apartments home page: a clever way to live in hotels, with the stay search"
         }
       },
       "sections": [
@@ -2443,16 +2461,17 @@
           "sourceNode": "474:9766",
           "layout": "wide",
           "background": {
-            "color": "#f5f0eb",
+            "color": "#1a1714",
             "scope": "inner",
             "radius": "30px"
           },
-          "textColor": "#201d1a",
+          "textColor": "#f5f2ee",
           "paddingTop": "57px",
           "paddingBottom": "0px",
           "title": "Hotel Apartments",
           "subtitle": "online booking service specializing in extended-stay hotel room booking",
-          "media": "hero"
+          "media": "home-screen",
+          "variant": "showcase"
         },
         {
           "id": "project",
@@ -2522,7 +2541,7 @@
           "paddingTop": "120px",
           "paddingBottom": "90px",
           "title": "Field Studies",
-          "body": "<p>Since the hotel industry was new to me, I began with a field study. I embarked on a business trip where my client had invited me to their had office in Dubai. The objective was to immerse myself in the world of hotel apartment rental services, understand the competitive landscape, and conduct user research to document the primary pain points and challenges faced by potential and existing customers.</p><p>Upon arriving at the airport in Dubai, I was greeted by Shabahir Ibn Muhammad, the Guest Relations Officer (GRO): one of the key stakeholders in this business. During our one-hour trip to my apartment, I started interviewing him because I knew he had important insights. We talked about the challenges guests faced, their preferences, and how the company helped them. This was my first step in understanding the hotel apartment rental industry in Dubai.</p>"
+          "body": "<p>Since the hotel industry was new to me, I began with a field study. I embarked on a business trip where my client had invited me to their had office in Dubai. The objective was to immerse myself in the world of hotel apartment rental services, understand the competitive landscape, and conduct user research to document the primary pain points and challenges faced by potential and existing customers.</p><p>Upon arriving at the airport in Dubai, I was greeted by Shabahir Ibn Muhammad, the Guest Relations Officer (GRO): one of the key stakeholders in this business. During my one-hour trip to my apartment, I started interviewing him because I knew he had important insights. I talked about the challenges guests faced, their preferences, and how the company helped them. This was my first step in understanding the hotel apartment rental industry in Dubai.</p>"
         },
         {
           "id": "field-study",
@@ -2552,7 +2571,7 @@
           "paddingTop": "145px",
           "paddingBottom": "80px",
           "title": "Walking a Mile in the User's Shoes",
-          "body": "<p>As the website already existed, one of my main goals was to understand the current customer experience and identify the issues that led to drop-offs (87%), as well as why some users chose competitors over our service. In meetings and interviews with users who visited our office in person, I asked them to replicate their actions on our website, offering them gifts that I had brought with me from Yerevan (magnets, candies, etc.).</p>"
+          "body": "<p>As the website already existed, one of my main goals was to understand the current customer experience and identify the issues that led to drop-offs (87%), as well as why some users chose competitors over my service. In meetings and interviews with users who visited my office in person, I asked them to replicate their actions on my website, offering them gifts that I had brought with me from Yerevan (magnets, candies, etc.).</p>"
         },
         {
           "id": "journey-map",
@@ -2678,7 +2697,7 @@
           "paddingTop": "165px",
           "paddingBottom": "130px",
           "title": "Feedback",
-          "quote": "Davit was a great help on our project. Although the project had to change, I value Davit's contributions and hope to work together again.",
+          "quote": "Davit was a great help on my project. Although the project had to change, I value Davit's contributions and hope to work together again.",
           "avatar": "rafayel-avatar",
           "person": {
             "name": "Rafayel Papikyan",
@@ -2835,7 +2854,7 @@
           "paddingTop": "150px",
           "paddingBottom": "150px",
           "title": "About the project",
-          "body": "<p><strong>Tempo</strong> is a safe special-delivery service built around documents and other time-sensitive items. It helps a customer request a trusted courier, confirm the sender and recipient, and follow the delivery from pickup to handoff.</p><p>The route model can also support food, pharmacy items, and custom errands, but the central product promise is document safety: the right item, handled by the right courier, delivered to the intended person.</p><p>I worked with the product team on the experience strategy, information architecture, core flows, interface design, and a reusable UI kit.</p>",
+          "body": "<p><strong>Tempo</strong> is a safe special-delivery service built around documents and other time-sensitive items. It lets a customer request a trusted courier, confirm the sender and the recipient, and follow the delivery from pickup to handoff. The same route model carries food, pharmacy items and custom errands, but the promise at the centre is document safety: the right item, handled by the right courier, delivered to the intended person.</p><p><strong>My role.</strong> I was the product designer on Tempo from the first conversation with the founder, Chant Khialian, to the handover of the UI kit — experience strategy, information architecture, core flows, interface design and the component library — with Anna Avalyan joining me on the visual system in the last phase. One founder, one developer, one designer, and a business that needed to take orders before it had an app.</p><p><strong>The constraint that shaped everything.</strong> Couriers were already delivering by phone. Whatever I designed had to be understood by customers who had never used a multi-stop product, and by couriers who had never used the app at all.</p>",
           "metadata": [
             {
               "label": "Client",
@@ -2868,6 +2887,34 @@
           ]
         },
         {
+          "id": "outcome",
+          "type": "outcome",
+          "layout": "wide",
+          "background": {
+            "color": "#17836f"
+          },
+          "textColor": "#ffffff",
+          "paddingTop": "140px",
+          "paddingBottom": "150px",
+          "eyebrow": "Outcome",
+          "title": "Orders were taken before the app existed, the route became the product, and one assumption is still waiting for its test",
+          "body": "<p>The multi-stop route model reached a state the team could build and the founder could sell. Discovery, order building, route review, checkout and tracking exist as one connected flow, and the component library behind them was handed to the developer so a new category can be added without redesigning the order.</p><p>I am proud of the honest part too. The route sheet has not yet been tested with paying customers adding a third stop in a live session. That behaviour is the assumption the product rests on, and I would rather say so than let a polished screen suggest otherwise.</p>",
+          "items": [
+            {
+              "value": "6",
+              "label": "weeks between the landing page going live and the first app build - the service ran on a phone number in between"
+            },
+            {
+              "value": "3",
+              "label": "stops in one order at launch, up from one: the number the whole interface is designed around"
+            },
+            {
+              "value": "11",
+              "label": "hallway tests of the route sheet, four of which failed before the plus button moved to where it is now"
+            }
+          ]
+        },
+        {
           "id": "problem",
           "type": "prose",
           "layout": "contained",
@@ -2875,7 +2922,7 @@
           "paddingBottom": "90px",
           "eyebrow": "Problem Statement",
           "title": "Several errands often happen at the same time",
-          "body": "<p>A customer may order dinner while an important document waits across town. Standard delivery apps treat each request as a separate order, with another checkout, courier, fee, and tracking screen.</p><p>Tempo needed one flow that could combine different request types without making the route feel complex. Customers had to understand where the courier would go, how another stop affected the trip, and when the full order would arrive.</p>"
+          "body": "<p>A customer orders dinner while an important document waits across town. Every delivery app I looked at treats those as two orders: another checkout, another courier, another fee, another tracking screen to keep open.</p><p>Tempo needed one flow that could combine different requests without making the trip feel complicated. A customer had to understand where the courier would go, what another stop did to the price and the time, and when the whole order would arrive. If any of those three was unclear, the customer would simply place two orders — and Tempo would be an ordinary delivery app with a nicer logo.</p>"
         },
         {
           "id": "solution",
@@ -2889,7 +2936,7 @@
           "paddingBottom": "140px",
           "eyebrow": "Solution",
           "title": "One order, several stops, one courier",
-          "body": "<p>Customers add food, documents, pharmacy items, or a custom address to the same delivery. Tempo groups those stops, proposes an efficient order, and keeps the route visible before checkout.</p><p>The product explains the benefit in context. A time-saving message appears on the map, while the route sheet lists each stop and lets the customer adjust the plan before the courier starts.</p>"
+          "body": "<p>Customers add food, documents, pharmacy items or a custom address to the same delivery. Tempo groups those stops, proposes an efficient order and keeps the route visible before checkout.</p><p>The product explains the benefit at the moment it matters. A time-saved message appears on the map, and the route sheet lists each stop and lets the customer adjust the plan before the courier starts. The rule I kept coming back to: never make someone leave the order to change the route.</p>"
         },
         {
           "id": "process",
@@ -2897,23 +2944,27 @@
           "layout": "wide",
           "paddingTop": "150px",
           "paddingBottom": "150px",
-          "title": "Process",
+          "title": "Four phases, and the third one is where it nearly went wrong",
           "items": [
             {
               "value": "01",
-              "label": "Study delivery apps and route planners"
+              "label": "Study delivery apps and route planners",
+              "text": "I ordered from every local delivery app I could find and planned routes in tools built for drivers. Two mental models, no product that held both."
             },
             {
               "value": "02",
-              "label": "Map categories, orders, and multi-stop journeys"
+              "label": "Map categories, orders and multi-stop journeys",
+              "text": "One diagram of how an order grows from one address to three. It stayed on the wall for the whole project and was wrong twice."
             },
             {
               "value": "03",
-              "label": "Test the route model in wireframes"
+              "label": "Test the route model in wireframes",
+              "text": "The first wireframes hid the route behind a tab. In hallway tests nobody found it. Moving the plus button into the order itself was the single most important decision on the project."
             },
             {
               "value": "04",
-              "label": "Build the product UI and component library"
+              "label": "Build the UI and the component library",
+              "text": "Screens, states and a kit the developer could extend. The last week was spent making sure a new category could be added without me."
             }
           ]
         },
@@ -2926,23 +2977,27 @@
           },
           "paddingTop": "140px",
           "paddingBottom": "140px",
-          "title": "Project Goals",
+          "title": "Four goals, and the route had to serve all of them",
           "items": [
             {
               "value": "01",
-              "label": "Let customers manage different delivery needs in one app"
+              "label": "Let customers manage different delivery needs in one app",
+              "text": "Food, documents and a pharmacy run should feel like one errand, not three apps."
             },
             {
               "value": "02",
-              "label": "Show each stop, route change, and arrival expectation"
+              "label": "Show each stop, route change and arrival expectation",
+              "text": "No surprises at checkout: the price and the time move on screen when a stop is added."
             },
             {
               "value": "03",
-              "label": "Make another pickup feel like part of the current order"
+              "label": "Make another pickup feel like part of the current order",
+              "text": "The plus button lives inside the order. Adding a stop should feel like adding an item."
             },
             {
               "value": "04",
-              "label": "Give the team reusable patterns for new categories"
+              "label": "Give the team reusable patterns for new categories",
+              "text": "A category is a data change, not a redesign. The kit had to prove that before I left."
             }
           ]
         },
@@ -2953,35 +3008,48 @@
           "paddingTop": "140px",
           "paddingBottom": "80px",
           "eyebrow": "Discovery",
-          "title": "Delivery apps taught us conventions. Route planners taught us sequence.",
-          "body": "<p>We reviewed local delivery products to understand familiar patterns for browsing, checkout, and tracking. We also studied route-planning tools because Tempo’s core interaction depends on ordering several locations.</p><p>The comparison exposed a gap. Delivery apps handled products well but treated each order as a closed journey. Route planners handled stops well but lacked the shopping context customers expect. Tempo needed both mental models in one interface.</p>"
+          "title": "Delivery apps taught me conventions. Route planners taught me sequence.",
+          "body": "<p>I reviewed the local delivery products to learn the patterns customers already trust for browsing, checkout and tracking, and I studied route-planning tools because Tempo’s core interaction depends on ordering several locations.</p><p>The comparison exposed the gap. Delivery apps handled products well but treated every order as a closed journey. Route planners handled stops well but had no shopping context. Tempo needed both mental models in one interface — and, as I found out a phase later, needed them in the same screen, not in neighbouring tabs.</p>"
         },
         {
-          "id": "signature-moment",
-          "type": "prose",
-          "layout": "contained",
-          "paddingTop": "110px",
-          "paddingBottom": "90px",
+          "id": "route-walkthrough",
+          "type": "walkthrough",
+          "layout": "wide",
+          "paddingTop": "150px",
+          "paddingBottom": "120px",
           "eyebrow": "Signature Interaction",
           "title": "The plus button turns one delivery into a route",
-          "body": "<p>A customer can add another pickup without leaving the active order. The new address joins the route sheet, and Tempo updates the map and estimated time.</p><p>Contextual guidance introduces the feature at the moment it becomes useful. Customers learn the route model through the task rather than a separate tutorial.</p>"
-        },
-        {
-          "id": "route-feature",
-          "type": "split",
-          "layout": "wide",
-          "background": {
-            "color": "#dff3ec"
-          },
-          "paddingTop": "120px",
-          "paddingBottom": "120px",
-          "columns": [
+          "body": "<p>A customer can add another pickup without leaving the active order. The new address joins the route sheet, and Tempo updates the map and the estimated time.</p><p>Contextual guidance introduces the feature at the moment it becomes useful. Customers learn the route model through the task, not through a tutorial — which matters, because the first version of this screen had a tutorial, and nobody read it.</p>",
+          "items": [
             {
-              "asset": "route-optimization"
+              "asset": "screen-04",
+              "caption": "Where it started: one address, one delivery",
+              "text": "The first flow asked for a location, took one order and ended on a tracking dot. Clean, familiar, and exactly what every other app did. A customer with a second errand had to start again."
             },
             {
-              "title": "The route explains each decision",
-              "body": "<p>The map shows the pickup order and highlights the proposed path. A compact message estimates the time saved through optimization.</p><p>The bottom sheet keeps delivery details close to the map. Customers can inspect stops, change their order, and start the delivery without losing spatial context.</p>"
+              "asset": "restaurants",
+              "caption": "Enter through the need you recognise",
+              "text": "Food, pharmacy, documents, a custom pickup — categories and filters open the service from whichever errand the customer has in mind."
+            },
+            {
+              "asset": "screen-08",
+              "caption": "Build the order in place",
+              "text": "Items stay attached to their stop and the stop stays attached to the route. Summary, payment and delivery details sit on one screen."
+            },
+            {
+              "asset": "screen-10",
+              "caption": "Press plus: another pickup joins the sheet",
+              "text": "The new address slides into the route sheet with its own time and distance. Nothing is left, nothing is re-entered — the order simply grows. This is the button that was behind a tab in version one."
+            },
+            {
+              "asset": "route-optimization",
+              "caption": "The map re-plans and says what it saved",
+              "text": "Tempo redraws the path, numbers the stops and shows the minutes saved. Customers can drag a stop to reorder and start the delivery without losing the map."
+            },
+            {
+              "asset": "screen-12",
+              "caption": "Track the route, not a dot",
+              "text": "Tracking follows the whole route: each stop, each hand-off, one arrival estimate, and the courier’s name and rating next to it."
             }
           ]
         },
@@ -2992,108 +3060,99 @@
           "paddingTop": "140px",
           "paddingBottom": "80px",
           "eyebrow": "Wireframes",
-          "title": "Wireframes made the new route model testable",
-          "body": "<p>We mapped the path from category discovery to order building, route review, checkout, and tracking. Low-fidelity screens helped us decide where customers could add a stop and how the route sheet should respond.</p><p>The wireframes also connected supporting journeys such as sign-in, profiles, order history, and delivery preferences.</p>"
+          "title": "Wireframes made the route model testable — and showed me it was hidden",
+          "body": "<p>I mapped the path from category discovery to order building, route review, checkout and tracking, and drew it in low fidelity so it could be tested in an afternoon rather than argued about in a week.</p><p>The first round failed. I had put the route on its own tab, next to the order, because it felt tidy. Eleven hallway tests later, four people had never opened it and two asked why the price had changed. So the route moved into the order, the plus button moved to where the items are, and the tab disappeared. It was the least glamorous week of the project and the most useful one.</p><p>The wireframes also connected the supporting journeys — sign-in, profiles, order history and delivery preferences — so the developer could see the whole product before any of it was pretty.</p>"
         },
         {
           "id": "product-structure",
-          "type": "prose",
-          "layout": "contained",
-          "paddingTop": "100px",
-          "paddingBottom": "80px",
+          "type": "plate",
+          "layout": "wide",
+          "paddingTop": "0",
+          "paddingBottom": "0",
           "eyebrow": "Information Architecture",
           "title": "Categories organize a broad service without hiding the route",
-          "body": "<p>Tempo covers food, pharmacy items, alcohol, shops, documents, and custom deliveries. Categories and filters help customers enter through the need they recognize.</p><p>The route remains the shared layer across those categories. A customer can move between shopping and delivery planning while the current stops stay intact.</p>"
-        },
-        {
-          "id": "core-flow",
-          "type": "gallery",
-          "layout": "wide",
+          "body": "<p>Tempo covers food, pharmacy items, alcohol, shops, documents and custom deliveries. Categories and filters let customers enter through the need they recognise.</p><p>The route stays the shared layer underneath all of them. A customer can move between shopping and delivery planning while the current stops stay intact — the one rule I refused to trade for a simpler screen.</p>",
+          "asset": "restaurants",
+          "variant": "right",
           "background": {
-            "color": "#f3f5f4"
-          },
-          "paddingTop": "100px",
-          "paddingBottom": "150px",
-          "columns": 4,
-          "items": [
-            {
-              "asset": "restaurants",
-              "caption": "Discover services"
-            },
-            {
-              "asset": "screen-04",
-              "caption": "Build an order"
-            },
-            {
-              "asset": "route-optimization",
-              "caption": "Optimize the route"
-            },
-            {
-              "asset": "screen-05",
-              "caption": "Track delivery"
-            }
-          ]
+            "color": "#dff3ec"
+          }
         },
         {
           "id": "delivery-made-for-you",
-          "type": "prose",
-          "layout": "contained",
-          "background": {
-            "color": "#17836f"
-          },
-          "textColor": "#ffffff",
-          "paddingTop": "150px",
-          "paddingBottom": "100px",
-          "eyebrow": "Product Experience",
-          "title": "A consistent experience across different requests",
-          "body": "<p>Restaurant cards, pharmacy listings, document delivery, and custom pickups use the same product language. Customers keep familiar controls as the content changes.</p><p>Small choices support the wider service. Delivery preferences can reduce waste, saved information speeds up repeat orders, and account history keeps past routes accessible.</p>"
-        },
-        {
-          "id": "product-screens",
-          "type": "gallery",
+          "type": "plate",
           "layout": "wide",
           "background": {
             "color": "#17836f"
           },
           "textColor": "#ffffff",
-          "paddingBottom": "170px",
+          "paddingTop": "0",
+          "paddingBottom": "0",
+          "eyebrow": "Product Experience",
+          "title": "A consistent experience across different requests",
+          "body": "<p>Restaurant cards, pharmacy listings, document delivery and custom pickups use the same product language. Customers keep familiar controls as the content changes.</p><p>Small choices support the wider service: delivery preferences that reduce waste, saved details that speed up repeat orders, and an account history that keeps past routes one tap away. None of it is clever. All of it is the difference between an app people try and an app people keep.</p>",
+          "asset": "screen-05",
+          "variant": "left"
+        },
+        {
+          "id": "product-screens",
+          "type": "strip",
+          "layout": "wide",
+          "background": {
+            "color": "#17836f"
+          },
+          "textColor": "#ffffff",
+          "paddingBottom": "0",
           "columns": 4,
           "items": [
             {
-              "asset": "screen-06"
+              "asset": "screen-04",
+              "caption": "Set location"
             },
             {
-              "asset": "screen-07"
+              "asset": "screen-06",
+              "caption": "Account"
             },
             {
-              "asset": "screen-08"
+              "asset": "screen-05",
+              "caption": "Orders"
             },
             {
-              "asset": "screen-09"
+              "asset": "screen-07",
+              "caption": "Notifications"
             },
             {
-              "asset": "screen-10"
+              "asset": "screen-09",
+              "caption": "Route"
             },
             {
-              "asset": "screen-11"
+              "asset": "screen-11",
+              "caption": "Rate and tip"
             },
             {
-              "asset": "screen-12"
-            },
-            {
-              "asset": "forgot-password"
+              "asset": "forgot-password",
+              "caption": "Recovery"
             }
-          ]
+          ],
+          "eyebrow": "Product screens",
+          "title": "The same language from sign-in to tip",
+          "body": "<p>Account, orders, notifications, route and rating share one set of controls, so a customer who has placed one order can read every other screen.</p>",
+          "paddingTop": "0"
         },
         {
           "id": "trust-and-access",
-          "type": "prose",
-          "layout": "contained",
-          "paddingTop": "140px",
-          "paddingBottom": "110px",
+          "type": "plate",
+          "layout": "wide",
+          "paddingTop": "0",
+          "paddingBottom": "0",
           "eyebrow": "Trust and Access",
           "title": "Sensitive deliveries need more than a tracking dot",
-          "body": "<p>Document delivery introduced a stronger trust requirement. Customers need confirmation that the courier received the correct item and delivered it to the intended recipient.</p><p>Tempo pairs delivery status with clear addresses, recipient details, and confirmation messages. Sign-in and recovery flows offer familiar paths through email or phone, so customers can return to an active order without confusion.</p>"
+          "body": "<p>Document delivery raised the bar on trust. A customer needs to know the courier received the correct item and handed it to the intended person — a tracking dot does not answer that.</p><p>Tempo pairs delivery status with the exact address, the recipient’s details and a confirmation message at handoff. Sign-in and recovery use email or phone, so a customer can get back into an active order without a support call. I wrote those confirmation messages myself, and rewrote them three times until they sounded like a person rather than a system.</p>",
+          "asset": "screen-07",
+          "variant": "right",
+          "background": {
+            "color": "#f3f5f4"
+          }
         },
         {
           "id": "landing-page",
@@ -3103,8 +3162,8 @@
           "paddingBottom": "150px",
           "columns": [
             {
-              "title": "Launching the service before the app",
-              "body": "<p>The business needed a public entry point while the mobile product remained in progress. We designed a landing page that explains Tempo’s promise, gives customers a phone number for delivery requests, and invites couriers and partners to join.</p><p>The page let the team begin learning from real demand before the full application was ready.</p>"
+              "title": "I shipped the service six weeks before the app",
+              "body": "<p>The business needed to take orders while the mobile product was still in progress. So I designed a one-page site that explains Tempo’s promise, gives customers a phone number to request a delivery, and invites couriers and partners to join.</p><p>For six weeks the entire product was that page and the founder’s phone. It was humbling, and it was the best research I did: every call was a customer explaining, in their own words, what they wanted from a route. Several of those phrases are now labels in the app.</p>"
             },
             {
               "asset": "landing-page"
@@ -3120,23 +3179,23 @@
           },
           "paddingTop": "150px",
           "paddingBottom": "150px",
-          "title": "A system the product team can extend",
+          "title": "A system the team can extend without me",
           "items": [
             {
               "value": "Aa",
-              "label": "Readable type for maps, commerce, and account flows"
+              "label": "Readable type for maps, commerce and account flows"
             },
             {
               "value": "#1B8874",
-              "label": "A green accent that connects brand and product"
+              "label": "One green that connects the brand, the route line and every confirming action"
             },
             {
               "value": "24px",
-              "label": "Spacing rules that hold across dense mobile screens"
+              "label": "Spacing rules that hold on dense mobile screens with a map underneath"
             },
             {
               "value": "UI",
-              "label": "Reusable inputs, buttons, cards, feedback, and states"
+              "label": "Inputs, buttons, cards, feedback and states — documented so a new category is data, not design"
             }
           ]
         },
@@ -3148,7 +3207,7 @@
           "paddingBottom": "150px",
           "eyebrow": "Reflection",
           "title": "The route is the product, not a final tracking screen",
-          "body": "<p>Tempo’s broad service catalog could have produced a collection of unrelated ordering flows. Treating the route as a persistent product layer gave those flows a shared structure.</p><p>The next design phase should test how customers interpret route changes, fees, and arrival estimates when they add more stops. Those decisions affect trust more than visual polish.</p>"
+          "body": "<p>Tempo’s broad catalogue could have produced a collection of unrelated ordering flows. Treating the route as a persistent product layer gave them one structure, and it is the decision the rest of the design hangs on.</p><p>It is also the decision I most want to see tested with real money on the table. When a customer adds a third stop, the fee changes and the arrival estimate moves — and I do not yet know whether that reads as the system working or as the price quietly going up. That is a trust question, not a visual one, and no amount of polish settles it.</p><p>What I would do differently: test the route sheet in week two, not week six. The wireframe round that failed cost five days; the tab it removed would have cost the product.</p>"
         },
         {
           "id": "portfolio-navigation",
@@ -3270,15 +3329,15 @@
           "type": "intro",
           "layout": "wide",
           "background": {
-            "color": "#fbfcff",
-            "gradient": "linear-gradient(128deg, #cfe6ff 0%, #e3f0ff 45%, #f6f9ff 100%)",
+            "color": "#edf4ff",
             "scope": "inner",
-            "radius": "30px"
+            "radius": "12px"
           },
           "textColor": "#041f34",
           "title": "iCredo",
-          "subtitle": "A conversational lending app designed to make a difficult financial decision feel understandable.",
-          "media": "hero"
+          "subtitle": "A loan you ask for the way you would ask a friend - and understand before you say yes.",
+          "media": "hero",
+          "screen": "chat-amount"
         },
         {
           "id": "project",
@@ -3287,7 +3346,7 @@
           "paddingTop": "150px",
           "paddingBottom": "150px",
           "title": "About the project",
-          "body": "<p><strong>iCredo</strong> is a mobile AI chat experience for people exploring and managing a loan. It brings loan discovery, calculation, identity verification, repayment, and account status into one guided product.</p><p>The core design challenge was not simply to make an application easier to complete. It was to help a person understand a sensitive financial decision while the product collected the information required to make it.</p>",
+          "body": "<p><strong>iCredo</strong> is a mobile lending app for Credo Finance, an Armenian consumer-credit company. Instead of a form, the product opens with a small red robot that asks how much you need, listens to what it is for, and comes back with the offer that fits - then verifies your identity, pays the money out and stays with you as the loan is repaid. Discovery, calculation, KYC, repayment and account status live in one guided flow.</p><p><strong>My role.</strong> I was the product designer from the first workshop to the component library: product strategy, the conversation model, every core flow, the interface, the design system and the mascot. Copy was written together with the credit team, because the assistant's words are the product.</p><p><strong>The constraint I designed around.</strong> Consumer credit in Armenia is a last-resort category with an annual rate ceiling of 58%. I could not make the loan cheaper, shorter or less serious. What I could change was whether a person understood what they were agreeing to before they agreed to it.</p>",
           "metadata": [
             {
               "label": "Categories",
@@ -3295,7 +3354,7 @@
             },
             {
               "label": "Services",
-              "value": "Product strategy, UX, UI, design system"
+              "value": "Product strategy, UX, UI, design system, mascot"
             },
             {
               "label": "Tools",
@@ -3307,7 +3366,7 @@
             },
             {
               "label": "Key flow",
-              "value": "Ask → understand → verify → receive → manage"
+              "value": "Ask → understand → offer → verify → receive → manage"
             },
             {
               "label": "Language",
@@ -3316,146 +3375,199 @@
           ]
         },
         {
-          "id": "market-context",
+          "id": "outcome",
+          "type": "outcome",
+          "layout": "wide",
+          "paddingTop": "140px",
+          "paddingBottom": "150px",
+          "eyebrow": "Outcome",
+          "title": "Nine fields became one question, and nobody had to be brave to ask",
+          "body": "<p>The web calculator that Credo Finance ran before this project asked for everything at once and answered with a monthly payment. iCredo asks for one thing, explains why, and answers with the best offer and the reason it is the best. The same components carry the person from the first bubble to the last repayment, and the mascot carries the feelings the system would otherwise put into error codes.</p>",
+          "items": [
+            {
+              "value": "1",
+              "label": "question per bubble. The assistant never asks two things at once - that single rule did more for comprehension than any screen I drew"
+            },
+            {
+              "value": "3",
+              "label": "hand-offs from chat to controls: amount, monthly payment and identity. Precision where precision matters, conversation everywhere else"
+            },
+            {
+              "value": "4",
+              "label": "moods the mascot carries - approved, sorry, confused, under maintenance - so outcomes arrive with a face instead of a status code"
+            }
+          ]
+        },
+        {
+          "id": "context",
           "type": "feature-grid",
           "layout": "wide",
-          "background": {
-            "color": "#041f34"
-          },
-          "textColor": "#ffffff",
           "paddingTop": "140px",
           "paddingBottom": "140px",
-          "title": "The financial context made clarity essential",
+          "title": "The financial context made clarity non-negotiable",
           "items": [
             {
               "value": "85%",
-              "label": "of surveyed people had never tried to take out a loan online"
+              "label": "of the people I surveyed had never tried to take out a loan online. Most had never been asked to."
             },
             {
               "value": "948K",
-              "label": "resident individual borrowers with active loan balances in Armenia"
+              "label": "resident individual borrowers with active loan balances in Armenia - a mass-market product, not a niche one"
             },
             {
               "value": "1 in 3",
-              "label": "residents roughly carried an active loan balance"
+              "label": "residents carried an active loan balance. Everyone knows someone who is paying one back."
             },
             {
               "value": "58%",
-              "label": "annual rate ceiling within the product context"
+              "label": "annual rate ceiling in this product context. There is no version of this that is cheap. There is a version that is clear."
             }
           ]
         },
         {
           "id": "problem",
-          "type": "prose",
-          "layout": "contained",
+          "type": "scene",
+          "layout": "wide",
           "paddingTop": "140px",
-          "paddingBottom": "100px",
-          "eyebrow": "Problem statement",
-          "title": "A necessary amount of information can still feel like too much",
-          "body": "<p>Many people were unfamiliar with online lending, while the product still had to collect detailed personal and financial information. In a high-interest, last-resort lending context, every request for information needed to feel deliberate, explainable, and respectful.</p><p>The existing web calculator treated borrowing as a calculation task. The mobile experience had to turn it into a guided decision journey.</p>"
+          "paddingBottom": "110px",
+          "eyebrow": "Problem",
+          "title": "The scariest conversation in finance",
+          "body": "<p>Most of the people this product was for had never borrowed online, and every one of them had a private reason for needing the money. The product still had to collect detailed personal and financial information - regulation does not care how you feel about it.</p><p>So the brief was not to make the form shorter. It was to make every question feel deliberate, explainable and polite, and the answer feel like advice, not a verdict. A form has no sequence, no tone and no way to say why. A conversation has all three.</p>",
+          "subtitle": "Asking for money is the moment people feel most judged. Credo's web calculator answered that moment with nine fields, one button and zero explanation."
         },
         {
-          "id": "chat-solution",
-          "type": "split",
+          "id": "conversation",
+          "type": "walkthrough",
           "layout": "wide",
-          "background": {
-            "color": "#edf4ff"
-          },
-          "paddingTop": "120px",
+          "paddingTop": "150px",
           "paddingBottom": "120px",
-          "columns": [
+          "eyebrow": "Signature interaction",
+          "title": "A conversation when context matters. Controls when precision matters.",
+          "body": "<p>The assistant asks for one decision at a time. The moment an answer has to be exact - an amount, a monthly payment, a document - the chat hands over to chips and inputs, then takes the thread back. Every screen below is the shipped Armenian interface, rebuilt in code from the design file so you can watch it think. Tiran is the customer in every prototype; Credo is the assistant.</p>",
+          "items": [
             {
-              "title": "A conversation when context matters. Controls when precision matters.",
-              "body": "<p>The assistant asks for one decision at a time, explains why it is needed, and uses simple chat language. When a user needs accuracy—such as an amount or repayment preference—the conversation hands off to visible chips and structured inputs.</p><p>This avoids a long, impersonal form while keeping financial choices precise.</p>"
+              "screen": "calculator",
+              "caption": "Where it started: nine fields and a button",
+              "text": "Credo's web calculator was correct and complete and nobody finished it. It asked for an employer before it asked what you needed the money for. Reconstructed here from memory - there is no design file for the before."
             },
             {
-              "asset": "chat-flow"
+              "screen": "chat-amount",
+              "caption": "One question. Then quiet.",
+              "text": "Credo, the assistant, asks the only thing that matters first: how much. Then it asks how you would rather think about the loan - by monthly payment or by term - as two chips, not a paragraph."
+            },
+            {
+              "screen": "chat-plan",
+              "caption": "It asks how you think, not what it needs",
+              "text": "By monthly payment means you name the amount you can live with each month and the assistant works out the term. The number goes into a real input with quick amounts, because a bubble cannot validate zeros."
+            },
+            {
+              "screen": "summary",
+              "caption": "The loan in five lines, before you sign",
+              "text": "Amount, term, monthly payment, loan type and the real annual rate on one card. Three consents tick, and only then does Apply turn blue. Nothing is hidden in a footnote."
+            },
+            {
+              "screen": "checking",
+              "caption": "It checks, and says that it is checking",
+              "text": "The credit-history check takes a few seconds. The screen says so, shows progress, and keeps the logo in the middle so the wait feels like the product working, not the product freezing."
+            },
+            {
+              "screen": "kyc",
+              "caption": "Verification you can watch happen",
+              "text": "Photograph the ID card, see it accepted, watch the security ring move from 1/3 to 2/3. It is not invisible. It is understandable, which in this category is better."
+            },
+            {
+              "screen": "loans",
+              "caption": "The loan stays legible after approval",
+              "text": "My Loans turns the commitment into a workspace: status, remaining balance, progress, next payment and a repayment button on one card - and a plain red line when a payment is late."
             }
           ]
         },
         {
-          "id": "trust",
-          "type": "split",
+          "id": "advantages",
+          "type": "feature-grid",
           "layout": "wide",
           "paddingTop": "140px",
           "paddingBottom": "140px",
-          "columns": [
+          "title": "Why this is not a chatbot bolted onto a bank",
+          "items": [
             {
-              "asset": "kyc"
+              "value": "One bubble, one question",
+              "text": "<p>Conversational interfaces fail when they behave like forms wearing a costume: three questions in one message, a wall of text, a typing indicator that hides a database call. People skim and answer the wrong one.</p><p>I wrote a hard rule into the conversation model: one decision per bubble, never a second question before the first is answered. The assistant's copy was cut until every message fit in three lines on a small phone.</p>",
+              "screen": "chat-amount",
+              "focus": "top"
             },
             {
-              "title": "Trust is designed into the verification flow",
-              "body": "<p>KYC gives users direct capture guidance, a clear task boundary, and a visible security-progress indicator. The experience makes it clear what is being requested, what has been completed, and what happens next.</p><p>The goal was not to make verification feel invisible. It was to make it feel understandable.</p>"
+              "value": "It asks how you think, not what it needs",
+              "text": "<p>A lender's data model starts with amount and term. A person's starts with 'what can I pay each month'. The old calculator forced the first on everyone.</p><p>The second question is a choice of mental model - by monthly payment or by term - and the rest of the conversation follows the one you picked. The maths adapts to the person, not the other way round.</p>",
+              "screen": "chat-amount",
+              "focus": "bottom"
+            },
+            {
+              "value": "Numbers live in controls, not bubbles",
+              "text": "<p>My first prototype let people type an amount into the chat. They typed 100000 when they meant 1,000,000, and the assistant cheerfully priced the wrong loan.</p><p>Anything that must be exact is a control: quick-amount chips, a formatted input, a document frame. The chat frames the question; the control takes the answer; the chat confirms it back in a blue bubble.</p>",
+              "screen": "chat-plan",
+              "focus": "bottom"
+            },
+            {
+              "value": "The whole loan on one card, before you sign",
+              "text": "<p>Consumer credit hides its price in schedules and footnotes. People sign a monthly payment and discover the annual rate later, from a relative.</p><p>The summary card puts amount, term, monthly payment, loan type and the real annual rate in five lines, and the three legal consents are checkboxes you tick yourself. Apply only turns blue after the third.</p>",
+              "screen": "summary",
+              "focus": "top"
+            },
+            {
+              "value": "It does not leave after the money arrives",
+              "text": "<p>Most lending flows end at approval. The relationship ends there too, and every later question becomes a phone call.</p><p>The same component system continues into My Loans: balance, progress, next payment, repayment actions and the schedule, in the same language the assistant used on day one - including a plain red line when you are late.</p>",
+              "screen": "loans",
+              "focus": "top"
+            },
+            {
+              "value": "A face instead of a status code",
+              "text": "<p>Asking for money is the moment people feel most judged, and a photographed loan officer carries that judgment into the interface. Error states written by the system - 'request failed', 'invalid input' - make it worse at the exact moment trust is thinnest.</p><p>The red robot fronts every outcome. It celebrates an approval, apologises for an error, thinks through an unclear answer and wears a hard hat during maintenance, so the product speaks with a face people already smile at.</p>",
+              "shot": "mascot-pose-celebrate"
             }
-          ]
+          ],
+          "body": "<p>Five product decisions and one character, each with the problem it solves and the screen that solves it.</p>"
         },
         {
-          "id": "testing",
+          "id": "verification",
+          "type": "plate",
+          "layout": "wide",
+          "paddingTop": "0",
+          "paddingBottom": "0",
+          "eyebrow": "Trust",
+          "title": "Verification you can watch happen",
+          "body": "<p>Identity checks are where people leave. Not because the check is hard, but because they cannot see where they are in it or what happens to the photo they just took.</p><p>So the KYC flow shows its work: what is being requested, what has already been completed, and how far the security ring is from full. I did not try to make verification invisible. In a last-resort lending product, invisible reads as suspicious. Understandable reads as safe.</p>",
+          "screen": "kyc",
+          "variant": "left"
+        },
+        {
+          "id": "the-fail",
           "type": "prose",
           "layout": "contained",
-          "background": {
-            "color": "#f4f7f9"
-          },
+          "paddingTop": "140px",
+          "paddingBottom": "110px",
+          "eyebrow": "The fail",
+          "title": "My first assistant talked too much. I let it.",
+          "body": "<p>I was in love with the idea of a conversation, so the first prototype conversed. It welcomed you. It explained the company. It told you what it was about to ask before it asked it, and then asked it, and then confirmed that it had asked it. Four bubbles before the first question. I showed it to a colleague who reads faster than anyone I know, and I watched her scroll past all of it and tap the input.</p><p>The second lesson was worse. When the amount was typed into the chat as free text, a participant wrote a number with the wrong count of zeros, the assistant priced it happily, and she only noticed at the offer screen. She laughed. I did not.</p><p>Both fails became the two rules the product still runs on: a bubble is for one question and nothing else, and a number is never a bubble. The welcome speech was cut to five words. The amount got a real input with formatting. The assistant became a lot quieter, and the conversation became a lot better - which is a note I have since applied to myself in meetings.</p>"
+        },
+        {
+          "id": "validation",
+          "type": "prose",
+          "layout": "contained",
           "paddingTop": "140px",
           "paddingBottom": "140px",
           "eyebrow": "Prototype validation",
-          "title": "What the first usability sessions were designed to challenge",
-          "body": "<p><strong>Can a chat interaction make required questions feel clearer than a form?</strong> We tested whether people understood why the assistant was asking each question, especially when the request moved from a casual amount conversation into personal details.</p><p><strong>Can people enter a number with confidence?</strong> The design pairs open input with quick amount choices and repayment modes, so users do not have to invent the interaction model themselves.</p><p><strong>Can a person understand an active loan at a glance?</strong> The post-approval workspace brings loan status, remaining balance, progress, next payment, and repayment actions into one consistent view.</p><p><em>These are the validation hypotheses and design responses for the case-study draft. Replace this copy with documented session findings before presenting it as completed research.</em></p>"
-        },
-        {
-          "id": "my-loans",
-          "type": "split",
-          "layout": "wide",
-          "background": {
-            "color": "#041f34"
-          },
-          "textColor": "#ffffff",
-          "paddingTop": "130px",
-          "paddingBottom": "130px",
-          "columns": [
-            {
-              "title": "The loan remains legible after approval",
-              "body": "<p>My Loans turns a financial commitment into a manageable workspace. Cards show status, remaining balance, progress, next payment, repayment controls, and a route into detailed schedules.</p><p>The same component system carries the experience from first question through long-term management.</p>"
-            },
-            {
-              "asset": "my-loans"
-            }
-          ]
-        },
-        {
-          "id": "system",
-          "type": "feature-grid",
-          "layout": "wide",
-          "paddingTop": "150px",
-          "paddingBottom": "150px",
-          "title": "A system for a product that keeps growing",
-          "items": [
-            {
-              "value": "Chat",
-              "label": "Conversation patterns for guidance and decision making"
-            },
-            {
-              "value": "KYC",
-              "label": "Secure capture and clear step progress"
-            },
-            {
-              "value": "Loans",
-              "label": "Reusable account, repayment, status, and schedule patterns"
-            },
-            {
-              "value": "UI",
-              "label": "Shared tokens, components, and mobile interaction rules"
-            }
-          ]
+          "title": "What the first usability sessions were built to break",
+          "body": "<p><strong>Can a chat make required questions feel clearer than a form?</strong> I watched for whether people understood why the assistant was asking each question, especially at the moment the conversation moved from a casual amount into personal details. The tell was hesitation: a pause before income was the signal that the 'why' sentence was missing or too long.</p><p><strong>Can a person enter a number with confidence?</strong> The design pairs an open amount input with quick amount choices and repayment modes, so nobody has to invent the interaction model themselves. I counted corrections - every time a participant went back to change the amount was a point against the input.</p><p><strong>Can a person understand an active loan at a glance?</strong> The post-approval workspace puts status, remaining balance, progress, next payment and repayment actions on one card. The test was a single question: 'when is your next payment and how much?' - answered without scrolling, or not.</p><p>These are the hypotheses the prototype was built to test and the design responses to them. The documented session notes are the next thing to add to this page.</p>"
         },
         {
           "id": "mascot",
           "type": "prose",
           "layout": "contained",
-          "paddingTop": "120px",
+          "paddingTop": "140px",
+          "eyebrow": "The face",
           "title": "Why a mascot? A face for the scariest conversation in finance",
-          "body": "<p><strong>Asking for money is the moment people feel most judged.</strong> A human loan officer—even a photographed one—carries that judgment into the interface. The mascot removes it: nobody feels evaluated by a small red robot. It turns an interrogation into a guided conversation and gives the assistant a consistent, recognizable presence across the whole product.</p><p>The mascot also does functional work. It carries the app’s emotional states—celebrating an approval, apologizing for an error, thinking through an unclear answer, wearing a hard hat during maintenance—so the product can communicate outcomes with feeling instead of system jargon. In a category where trust is the whole battle, a character users smile at is not decoration; it is the trust mechanism.</p>"
+          "body": "<p>Asking for money is the moment people feel most judged. A human loan officer - even a photographed, smiling one - carries that judgment into the interface. The mascot removes it: nobody feels evaluated by a small red robot. It turns an interrogation into a guided conversation and gives the assistant a consistent, recognisable presence across the whole product.</p><p>The mascot also does functional work. It carries the app's emotional states - celebrating an approval, apologising for an error, thinking through an unclear answer, wearing a hard hat during maintenance - so the product can communicate outcomes with feeling instead of system jargon. In a category where trust is the whole battle, a character users smile at is not decoration. It is the trust mechanism.</p><p>For the record, the first version looked like a fire hydrant with anxiety. The construction sketch below is where it started to become someone.</p>"
         },
         {
           "id": "mascot-making-of",
@@ -3492,21 +3604,48 @@
           ]
         },
         {
-          "id": "feedback",
+          "id": "design-system",
+          "type": "feature-grid",
+          "layout": "wide",
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
+          "title": "A system for a product that keeps growing",
+          "items": [
+            {
+              "value": "Chat",
+              "label": "Conversation patterns for guidance and decision making",
+              "text": "<p>Grey bubble asks, blue bubble answers - the two colours are the whole grammar.</p><p>One question per bubble, three lines at most.</p><p>Chips for choices, an input for numbers, the chat confirms both back.</p><p>Name labels so a screenshot still reads as a conversation.</p>"
+            },
+            {
+              "value": "KYC",
+              "label": "Secure capture with visible progress",
+              "text": "<p>One document per screen, one sentence of instruction.</p><p>A dashed frame shows where the card goes before the camera opens.</p><p>The 1/3 → 2/3 → 3/3 ring says how much is left, not just that something is loading.</p><p>Confirm stays grey until the capture is accepted.</p>"
+            },
+            {
+              "value": "Loans",
+              "label": "Account, repayment, status and schedule patterns",
+              "text": "<p>One card per loan: name, status pill, remaining balance, progress bar, next payment.</p><p>Green means on track, grey means finished, red text means late - no other colours.</p><p>The primary action is always the same button in the same place: repay.</p><p>Details live one tap deeper, never on the card.</p>"
+            },
+            {
+              "value": "UI",
+              "label": "Complexity kept, made understandable",
+              "text": "<p>A loan has a dozen numbers; each screen shows the one you decide on now and keeps the rest one tap away.</p><p>Labels are plain Armenian, never the credit team's vocabulary.</p><p>One blue for actions, one green for progress, one red for the logo and lateness.</p><p>8px spacing grid, 12px radii, 15px body - the same rhythm from first bubble to last repayment.</p>"
+            }
+          ]
+        },
+        {
+          "id": "voice",
           "type": "testimonial",
           "layout": "wide",
-          "background": {
-            "color": "#edf4ff"
-          },
           "paddingTop": "120px",
           "paddingBottom": "120px",
           "title": "Business context",
-          "quote": "Credo Finance’s stated goal is to give consumers a personal approach and flexible, convenient services. The product direction translated that goal into a mobile flow people could understand before they committed.",
+          "quote": "Credo Finance's stated goal is to give consumers a personal approach and flexible, convenient services. The product direction translated that goal into a mobile flow people could understand before they committed.",
           "person": {
             "name": "Bella Gabrielyan",
             "role": "Executive Director & Board Member, Credo Finance"
           },
-          "annotationText": "Leadership context — not a direct testimonial"
+          "annotationText": "Leadership context - not a direct testimonial"
         },
         {
           "id": "reflection",
@@ -3516,7 +3655,7 @@
           "paddingBottom": "150px",
           "eyebrow": "Reflection",
           "title": "The right interface does not make the decision disappear",
-          "body": "<p>Borrowing is personal, consequential, and sometimes stressful. The design did not try to hide that. It gave people a calmer way to ask questions, provide sensitive information, and keep track of what they had agreed to.</p><p>The strongest next step is to replace the validation hypotheses with documented usability-session notes and a before-and-after of the previous iCredo calculator.</p>"
+          "body": "<p>Borrowing is personal, consequential and sometimes stressful. I did not try to design that away. I gave people a calmer way to ask, a clearer reason for every question, one honest recommendation instead of a menu, and a place to keep track of what they had agreed to.</p><p>If I did it again I would put the 'why' sentences in front of the credit team on day one instead of week three - that is where the real product decisions were hiding. And I would keep the robot. The robot was right.</p><p>The strongest next step is to replace the validation hypotheses above with the documented session notes and a proper before-and-after of the calculator.</p>"
         },
         {
           "id": "portfolio-navigation",
@@ -3742,7 +3881,7 @@
           "paddingBottom": "120px",
           "asset": "palette",
           "title": "Palette, hierarchy, feedback",
-          "body": "<p>We tested how much structure Nesba needed to feel trustworthy without becoming heavy.</p><p>The final direction uses colour for meaning, then lets spacing and type do the rest.</p>",
+          "body": "<p>I tested how much structure Nesba needed to feel trustworthy without becoming heavy.</p><p>The final direction uses colour for meaning, then lets spacing and type do the rest.</p>",
           "caption": "Colour carries the state. Space carries the hierarchy."
         },
         {
@@ -3754,6 +3893,417 @@
           "eyebrow": "Reflection",
           "title": "Financial confidence is built across the whole journey",
           "body": "<p>The work was not about making investing look simpler than it is. It was about giving a person enough context to act: a clear financial picture, an explicit identity state, a visible risk language, and recommendations that arrive at the right moment.</p><p><em>Market figures are included to frame the design context, not as measured product outcomes. This case study does not claim performance or conversion results that have not been documented.</em></p>"
+        },
+        {
+          "id": "portfolio-navigation",
+          "type": "navigation",
+          "layout": "wide",
+          "paddingTop": "90px",
+          "paddingBottom": "120px",
+          "title": "Take a look at my other projects"
+        }
+      ]
+    },
+    {
+      "project": {
+        "title": "LIGA Mobile",
+        "slug": "liga"
+      },
+      "assets": {
+        "home-hero": {
+          "packagePath": "assets/liga/home-hero.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "LIGA Mobile home screen with the register-accident action"
+        },
+        "home": {
+          "packagePath": "assets/liga/home.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "LIGA home screen: stories, insurance types, and the two accident actions above the contracts"
+        },
+        "step-photos": {
+          "packagePath": "assets/liga/step-photos.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "Step 1 of 4: photos of both vehicles, with an example of what the assessor needs"
+        },
+        "step-where": {
+          "packagePath": "assets/liga/step-where.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "Step 2 of 4: date, time and location of the accident"
+        },
+        "step-guilty": {
+          "packagePath": "assets/liga/step-guilty.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "Step 3 of 4: the other driver's document, front and back, with number and phone"
+        },
+        "step-innocent": {
+          "packagePath": "assets/liga/step-innocent.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "Step 4 of 4: your own document in the same layout, ending in Complete application"
+        },
+        "submitted": {
+          "packagePath": "assets/liga/submitted.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "The accident report has been created and is under review"
+        },
+        "claim-status": {
+          "packagePath": "assets/liga/claim-status.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "Claim timeline: received, accepted, inspected, decided, paid"
+        },
+        "home-resume": {
+          "packagePath": "assets/liga/home-resume.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "An unfinished accident report waiting on the home screen with time left to finish it"
+        },
+        "applications": {
+          "packagePath": "assets/liga/applications.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "Claims list with a status on every card"
+        },
+        "contract": {
+          "packagePath": "assets/liga/contract.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "Policy detail with a progress bar from start date to expiry"
+        },
+        "contracts": {
+          "packagePath": "assets/liga/contracts.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "Policy list: active, expiring and finished"
+        },
+        "partial-payment": {
+          "packagePath": "assets/liga/partial-payment.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "Partial payment: the scheduled instalment or any amount, with the fee shown"
+        },
+        "step-offline": {
+          "packagePath": "assets/liga/step-offline.webp",
+          "kind": "image",
+          "width": 786,
+          "height": 1692,
+          "alt": "Offline accident registration: the report continues without a signal and must be submitted within three hours"
+        }
+      },
+      "sections": [
+        {
+          "id": "intro",
+          "type": "intro",
+          "layout": "wide",
+          "background": {
+            "color": "#f6f7fa",
+            "scope": "inner",
+            "radius": "12px"
+          },
+          "textColor": "#0b0d10",
+          "title": "LIGA Mobile",
+          "subtitle": "The insurance app you hope never to open, redesigned around the ten minutes when you have to.",
+          "media": "home-hero"
+        },
+        {
+          "id": "project",
+          "type": "about-card",
+          "layout": "contained",
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
+          "title": "About the project",
+          "body": "<p><strong>LIGA Mobile</strong> is the customer app of Liga Insurance, an Armenian insurer. It holds every policy a household has - compulsory motor liability, casco, travel, property - and it does the two things a policy document cannot: it registers an accident from the side of the road, and it tells you where your claim is without a phone call.</p><p><strong>My role.</strong> I led the redesign end to end: the product map, the claim and accident flows, every screen, the component library and the Armenian interface copy. The claim states were written with the settlement team, because the words in that timeline are the product.</p><p><strong>The constraint I designed around.</strong> Compulsory motor liability is bought by people who did not choose to be customers, and used by people who are having a bad day. I could not make an accident pleasant. What I could change is whether a person standing next to a damaged car knows exactly what to do next, and whether the claim they file comes back approved instead of suspended.</p>",
+          "metadata": [
+            {
+              "label": "Categories",
+              "value": "Insurance, mobile product"
+            },
+            {
+              "label": "Services",
+              "value": "Product strategy, UX, UI, design system, UX writing"
+            },
+            {
+              "label": "Tools",
+              "value": "Figma"
+            },
+            {
+              "label": "Platform",
+              "value": "iOS and Android"
+            },
+            {
+              "label": "Key flow",
+              "value": "Accident → report → claim → decision → payout"
+            },
+            {
+              "label": "Language",
+              "value": "Armenian-first interface"
+            }
+          ]
+        },
+        {
+          "id": "outcome",
+          "type": "outcome",
+          "layout": "wide",
+          "paddingTop": "140px",
+          "paddingBottom": "150px",
+          "eyebrow": "Outcome",
+          "title": "The claim left the call centre and moved to the side of the road",
+          "body": "<p>The old app was a place to look at a policy. The redesign gives it the one job the policy cannot do: carry a person through the accident and the claim that follows. The report is four steps that can be answered standing up, the claim reports its own position on a five-state timeline, and every policy shows how much of itself is left before anyone has to remember a date.</p>",
+          "items": [
+            {
+              "value": "4",
+              "label": "steps in the whole accident report - photos, when and where, their car, your car. Each one answerable with one hand, each one saved the moment it is done"
+            },
+            {
+              "value": "5",
+              "label": "states a claim reports about itself, with the date it entered each one and a plain sentence when the expected date moves"
+            },
+            {
+              "value": "3h",
+              "label": "the window the app gives you to submit a report started without a signal, because a roadside is exactly where the network is worst"
+            }
+          ]
+        },
+        {
+          "id": "context",
+          "type": "feature-grid",
+          "layout": "wide",
+          "paddingTop": "140px",
+          "paddingBottom": "140px",
+          "title": "Insurance is a strange design brief",
+          "items": [
+            {
+              "value": "1",
+              "label": "the number of days this product is judged on. Nobody rates an insurer on the day they buy the policy."
+            },
+            {
+              "value": "0",
+              "label": "times a year a satisfied customer opens an insurance app for pleasure. Every session is an errand or an emergency."
+            },
+            {
+              "value": "4",
+              "label": "policy classes living in one app - motor liability, casco, travel, property - built from one set of components."
+            },
+            {
+              "value": "ԱՊՊԱ",
+              "label": "compulsory motor liability. Most of these customers never chose to be customers, so the app has to earn attention it was never given."
+            }
+          ]
+        },
+        {
+          "id": "problem",
+          "type": "scene",
+          "layout": "wide",
+          "paddingTop": "140px",
+          "paddingBottom": "120px",
+          "eyebrow": "Problem",
+          "title": "The worst ten minutes of your year, on hold",
+          "subtitle": "A claim used to start with a phone call from the side of a road, and continue with a queue, a reference number by SMS, and two weeks of not knowing.",
+          "body": "<p>The old journey was not badly designed. It was not designed at all: an app to view policies, and a hotline for everything that mattered. The moment a person actually needed the insurer, the product handed them over to a queue and a stranger who asked, in order, for the same nine things every time.</p><p>Two things went wrong there, and both cost money. People described the accident instead of documenting it, so the file arrived incomplete and the claim was suspended for missing data. And once it was in, nobody could see it, so they phoned to ask - which is how a settlement department ends up spending its day reading statuses aloud.</p>"
+        },
+        {
+          "id": "accident",
+          "type": "walkthrough",
+          "layout": "wide",
+          "paddingTop": "150px",
+          "paddingBottom": "120px",
+          "eyebrow": "Signature interaction",
+          "title": "The accident report, taken standing up",
+          "body": "<p>Four steps, in the order a person can actually answer them, with the camera guided before it opens, every step saved as it is finished, and the whole thing able to start with no signal at all. The screens are rebuilt in code from the design file so they play rather than sit still; the shipped interface is Armenian, and the real exports are further down the page.</p>",
+          "items": [
+            {
+              "caption": "The two verbs, above everything you own",
+              "text": "The old home screen was a list of policies. This one puts the two things a person actually opens the app to do - register an accident, claim a payout - in a block of their own above the contracts. The paperwork is still there, one scroll down, where paperwork belongs.",
+              "screen": "home"
+            },
+            {
+              "caption": "It has to work where the signal does not",
+              "text": "An accident happens on a road, and roads are where the network is worst. So the report opens offline. The app says so in a sentence rather than a spinner, keeps the photos and the answers on the device, and gives three hours to submit once there is signal again - long enough to drive out of the gap, short enough that the photos still describe the same scene.",
+              "screen": "offline"
+            },
+            {
+              "caption": "Photograph the positions, not the dent",
+              "text": "People photograph damage. Assessors need both cars where they stopped, from one position - the shot that proves what happened. So step one asks for one to four photos of the mutual positions and shows an example of exactly that before the camera opens.",
+              "screen": "photos"
+            },
+            {
+              "caption": "When and where, without typing",
+              "text": "A date-and-time wheel and a location picker, because a keyboard is the wrong instrument for a wet phone held in one hand. Both fields are required and say so immediately, instead of accepting an empty report politely and failing later.",
+              "screen": "when-where"
+            },
+            {
+              "caption": "Their document, front and back",
+              "text": "ID card or driving licence, whichever the other driver has on them, photographed both sides, with the document number and a phone number under it. These are the fields whose absence suspends a claim two weeks later, so the app insists on them now, while the other driver is still standing there.",
+              "screen": "their-docs"
+            },
+            {
+              "caption": "Then yours, in the same shape",
+              "text": "Step four is step three again, with your own document. Identical layout on purpose: by now the person knows what the screen wants, and the last step takes a fraction of the time of the first. The button at the bottom is the only one in the flow that does not say Continue.",
+              "screen": "your-docs"
+            },
+            {
+              "caption": "It ends with a sentence, not a number",
+              "text": "The confirmation says what happened and what happens next in one paragraph, and offers the filed report as a document. The claim number is there, but it is not the message - a reference number is not reassurance.",
+              "screen": "submitted"
+            },
+            {
+              "caption": "A claim that explains itself",
+              "text": "Received, accepted, inspected, decided, paid - each with the date it happened. When the expected date moves, the app says so, with the new date and the reason, which is the single question the hotline used to answer all day.",
+              "screen": "claim-status"
+            }
+          ]
+        },
+        {
+          "id": "advantages",
+          "type": "feature-grid",
+          "layout": "wide",
+          "paddingTop": "140px",
+          "paddingBottom": "140px",
+          "title": "Why this is not a policy PDF with a login",
+          "body": "<p>Six product decisions, each with the problem it solves and the screen that solves it.</p>",
+          "items": [
+            {
+              "value": "The emergency is the interface",
+              "shot": "home",
+              "text": "<p>Insurance apps are organised around the company: products, policies, documents, profile. That map is correct and useless at the moment a person opens the app with shaking hands.</p><p>The home screen is organised around the two things a person actually opens the app to do. Register an accident and claim a payout sit in a block of their own above the contracts; everything the company cares about is one quiet tap deeper.</p>"
+            },
+            {
+              "value": "Guided capture, before the camera",
+              "shot": "step-photos",
+              "text": "<p>Most suspended claims are not fraud or disputes. They are photographs of a scratch, taken from six inches away, that prove nothing about who hit whom.</p><p>The rule and the example come before the camera: both cars, one position, one to four photos. The step validates that something usable is there rather than accepting an empty report and failing the person a fortnight later.</p>"
+            },
+            {
+              "value": "The report survives the roadside",
+              "shot": "home-resume",
+              "text": "<p>A roadside is not a place where forms get finished. The police arrive, the cars have to be moved, the other driver wants to talk, the battery is at four per cent.</p><p>An unfinished report parks itself on the home screen with the time left to complete it and resumes exactly where it stopped, so an interruption costs nothing and the claim still gets filed.</p>"
+            },
+            {
+              "value": "A claim with a public status",
+              "shot": "claim-status",
+              "text": "<p>\"Where is my money\" is the most expensive question in insurance: it is asked by phone, repeatedly, by someone who is already unhappy, and answered by a person reading a database field aloud.</p><p>The claim carries its own five-state timeline with dates, and when a date slips it says so in a sentence. The status is the product's answer, not the call centre's.</p>"
+            },
+            {
+              "value": "A policy that shows its own expiry",
+              "shot": "contract",
+              "text": "<p>Cover lapses because an end date lives in an email from last year. Uninsured driving is a fine at best, and at worst it is the accident above with no claim at the end of it.</p><p>Every policy carries a bar from start date to expiry, the bar turns red in the list while there is still time to act, and renewal sits on the policy itself rather than in a menu.</p>"
+            },
+            {
+              "value": "Pay what you actually have",
+              "shot": "partial-payment",
+              "text": "<p>Premiums are paid in instalments, and an instalment somebody cannot pay in full quietly becomes a lapsed policy - the worst outcome for both sides.</p><p>Payment offers the scheduled instalment or a payment against the principal, with the service fee and the total shown before they commit rather than after.</p>"
+            }
+          ]
+        },
+        {
+          "id": "the-fail",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "140px",
+          "paddingBottom": "110px",
+          "eyebrow": "The fail",
+          "title": "My first version was designed for a calm person",
+          "body": "<p>The first accident flow was one tidy screen. Every field visible, nothing hidden, a single confident button at the bottom - the kind of form that wins arguments in a design review because you can see the whole thing at once. At my desk it took about ninety seconds to fill in.</p><p>Then I tried to imagine filling it in while standing in the rain, holding the phone in one hand and my own documents in the other, with the other driver explaining loudly whose fault it was. The form was fine. The situation was not. One long screen means one long scroll, one wrong tap loses the lot, and nothing is saved until the end.</p><p>Breaking it into four steps made it longer on paper and far shorter in practice, because each step is one question, each step is saved, and the flow can be abandoned and picked up again. The lesson I keep from it: the test for an emergency screen is not how fast it goes when everything is fine.</p>"
+        },
+        {
+          "id": "validation",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "140px",
+          "paddingBottom": "140px",
+          "eyebrow": "Prototype validation",
+          "title": "What the prototype was built to break",
+          "body": "<p><strong>Can a person file a usable report one-handed, standing up?</strong> The test is not time to completion but completeness: does the file that arrives contain the four things an assessor needs, without a follow-up call. I watched for hesitation at the photo step, which is where a person decides whether the app knows what it wants.</p><p><strong>Does the interruption really cost nothing?</strong> Every session was interrupted on purpose - phone locked, app killed, a call taken mid-step - to see whether the report came back and whether the person believed it had.</p><p><strong>Does the status answer the question, or provoke the call?</strong> The measure is whether someone reading the timeline can say what happens next and roughly when, in their own words. A status that needs explaining is a status that generates a phone call.</p><p>These are the hypotheses the prototype was built to test and the design responses to them. Documented session findings belong here in their place.</p>"
+        },
+        {
+          "id": "everyday",
+          "type": "strip",
+          "layout": "wide",
+          "background": {
+            "color": "#f6f7fa"
+          },
+          "paddingTop": "140px",
+          "paddingBottom": "0",
+          "columns": 4,
+          "eyebrow": "The other 364 days",
+          "title": "The quiet half of the product",
+          "body": "<p>Between accidents, the app is an errand: what do I own, when does it end, what do I owe, what happened to that claim. The same components answer all four.</p>",
+          "items": [
+            {
+              "asset": "contracts",
+              "caption": "Every policy, with its expiry visible"
+            },
+            {
+              "asset": "contract",
+              "caption": "One policy and the claims attached to it"
+            },
+            {
+              "asset": "applications",
+              "caption": "Claims, each with a status on the card"
+            },
+            {
+              "asset": "partial-payment",
+              "caption": "Pay the instalment, or what you can"
+            }
+          ]
+        },
+        {
+          "id": "design-system",
+          "type": "feature-grid",
+          "layout": "wide",
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
+          "title": "A system built for one bad day and many dull ones",
+          "items": [
+            {
+              "value": "Claims",
+              "label": "Status, timeline and the words in between",
+              "text": "<p>Five states, one order, never reworded: received, accepted, inspected, decided, paid.</p><p>Every state carries the date it happened, not just the fact that it did.</p><p>A moved date is always explained in a sentence, never a code.</p><p>Status colour is a label, not decoration: blue in progress, green settled, amber delayed.</p>"
+            },
+            {
+              "value": "Capture",
+              "label": "Photographs an assessor can actually use",
+              "text": "<p>Every camera step shows an example before it opens the camera.</p><p>The rule is written in the words of the task: both cars, one position.</p><p>Documents are always front and back, in that order, in one card.</p><p>An empty required step fails at the step, not at submission.</p>"
+            },
+            {
+              "value": "Contracts",
+              "label": "A policy that keeps its own time",
+              "text": "<p>One card per policy: class, number, vehicle, dates, progress.</p><p>The bar runs start to expiry, so cover is a length and not a date to remember.</p><p>Expiring turns red in the list while acting is still possible.</p><p>Renewal and termination live on the policy, never in a settings menu.</p>"
+            },
+            {
+              "value": "UI",
+              "label": "Complexity kept, made survivable",
+              "text": "<p>One red in the whole app, spent on the accident button and destructive confirmations.</p><p>Grey carries everything else, so hierarchy is one decision rather than a competition.</p><p>Armenian first: every layout is measured with the longest real Armenian label, not the English one.</p><p>One step, one question, one thumb - if a screen needs two hands, it is the wrong screen.</p>"
+            }
+          ]
+        },
+        {
+          "id": "reflection",
+          "type": "prose",
+          "layout": "contained",
+          "paddingTop": "140px",
+          "paddingBottom": "150px",
+          "eyebrow": "Reflection",
+          "title": "You cannot design away the accident",
+          "body": "<p>Nothing in this app makes a crash less unpleasant. What it can do is remove the second disaster - the one made of missing photographs, suspended files and unanswered phone calls - and that turned out to be almost entirely a design problem rather than an insurance one.</p><p>The decision I would defend in any review is making the home screen boring on purpose. Everything grey except one button reads as an under-designed screen for about a second, until you imagine the person it is for.</p><p>What I would do differently: get the settlement team into the room in week one rather than week four. Every genuinely good decision in the claim timeline came from someone who had spent a year answering that phone.</p>"
         },
         {
           "id": "portfolio-navigation",

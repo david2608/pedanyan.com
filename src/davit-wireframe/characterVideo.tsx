@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
+import { createPortal } from "react-dom";
 import { POKE_EVENT, type HoverKind } from "./characterMotion";
 
 /**
@@ -29,20 +30,58 @@ function pickQuality(): "4k" | "1080" {
   const tallest = Math.max(window.innerHeight, window.innerWidth) * dpr;
   const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
   const hevc = document.createElement("video").canPlayType('video/mp4; codecs="hvc1.1.6.L153.B0"');
-  return dpr >= 1.5 && tallest >= 1800 && !saveData && hevc !== "" ? "4k" : "1080";
+  const phone = Math.min(window.innerWidth, window.innerHeight) < 700; // the card is small there; 1080p is plenty
+  return dpr >= 1.5 && tallest >= 1800 && !phone && !saveData && hevc !== "" ? "4k" : "1080";
 }
 const QUALITY = pickQuality();
 const srcFor = (clip: VideoClip) => (QUALITY === "4k" ? `/hero-video/4k/${clip}.mp4` : `/hero-video/${clip}.mp4`);
 
-/** What he says, in a bubble by his face. */
-const LINES = {
-  poke: ["Hey. Don't do that.", "Seriously, stop.", "That's it. I'm out."],
-  invite: "There's more below. Scroll.",
-  gone: "He left. The stool is all yours."
-} as const;
+/** What he says, in a comic bubble by his face. `yell` gets the jagged tail. */
+type BubbleKind = "say" | "yell" | "think";
+type Line = { text: string; kind?: BubbleKind };
+const LINES: { poke: Line[]; invite: Line } = {
+  poke: [
+    { text: "Hey. Don't do that." },
+    { text: "Seriously, stop." },
+    { text: "That's it. I'm out!", kind: "yell" }
+  ],
+  invite: { text: "There's more below. Scroll." }
+};
 const BUBBLE_MS = 2600;
-/** Where in a clip (0..1) the line lands - as the gesture settles, not as it starts. */
-const SAY_AT = 0.68;
+/**
+ * The tail is the CodePen one: a single ::before box with a rounded corner
+ * and three inset shadows, hanging off the bubble's bottom-left, tip at its
+ * own bottom-left corner. The box starts TAIL_REACH left of the bubble so
+ * the tip lands on the mouth while the body stays beside the head.
+ * Phones get a shorter drop so the bubble clears the headline.
+ */
+const TAIL = {
+  /** How far left of the bubble the tip lands (past the cheek). */
+  reach: 44,
+  reachCompact: 34,
+  /** How far below the bubble the tip lands. */
+  drop: 36,
+  dropCompact: 22,
+  /** Width of the tail's root, under the bubble. Halved from the CodePen - a slimmer wedge. */
+  root: 12
+};
+/** Where the mouth is in the 9:16 clip, measured from the approved still. */
+const MOUTH = { x: 0.505, y: 0.206 };
+
+/**
+ * Where the bubble sits relative to the mouth. The tail always ends on the
+ * mouth; the body is up or down, left or right of it. Consecutive lines
+ * come from different sides. Phones only use the right-hand ones - the
+ * figure bleeds off the left edge there.
+ */
+type Placement = "up-right" | "down-left" | "up-left" | "down-right";
+const PLACEMENTS: Placement[] = ["up-right", "down-left", "up-left", "down-right"];
+const PLACEMENTS_COMPACT: Placement[] = ["up-right", "down-right"];
+/** Keep the body out of the fixed header and off the screen edges. */
+const HEADER_CLEARANCE = 72;
+const EDGE_CLEARANCE = 10;
+/** The line lands this long after the clip ends - once he has settled. */
+const SAY_AFTER_S = 0.12;
 
 const IDLE_REST_MS = 4200;
 const HOVER_DEBOUNCE_MS = 450;
@@ -59,12 +98,18 @@ export function isHeroGone() {
 
 export function HeroCharacterVideo({
   start,
-  focus
+  focus,
+  bubbleLayer
 }: {
   /** The entrance waits for this (the intro handing over the page). */
   start: boolean;
   /** Hovered hero word, mapped to a reaction like the frame driver does. */
   focus: "products" | "designers" | "culture" | null;
+  /**
+   * Where the bubble renders: a layer above the headline (the figure sits
+   * under the headline on phones, so a bubble inside it would be covered).
+   */
+  bubbleLayer?: RefObject<HTMLElement | null>;
 }) {
   const videos = useRef<Partial<Record<VideoClip, HTMLVideoElement | null>>>({});
   const [gone, setGone] = useState(false);
@@ -82,23 +127,41 @@ export function HeroCharacterVideo({
   const lastHover = useRef<HoverKind | null>(null);
   const pendingHover = useRef<HoverKind | null>(null);
 
-  const [bubble, setBubble] = useState<{ text: string; key: number } | null>(null);
+  const [bubble, setBubble] = useState<{ line: Line; key: number; at: Placement } | null>(null);
   const bubbleTimer = useRef(0);
   const sayTimer = useRef(0);
-  const say = useCallback((text: string, holdMs = BUBBLE_MS) => {
+  const placementIndex = useRef(0);
+  const say = useCallback((line: Line, holdMs = BUBBLE_MS) => {
     window.clearTimeout(bubbleTimer.current);
-    setBubble({ text, key: Date.now() });
+    const options = window.innerWidth < 900 ? PLACEMENTS_COMPACT : PLACEMENTS;
+    const at = options[placementIndex.current % options.length];
+    placementIndex.current += 1;
+    setBubble({ line, key: Date.now(), at });
     bubbleTimer.current = window.setTimeout(() => setBubble(null), holdMs);
   }, []);
   /** Say it once the clip reaches SAY_AT of its (rate-adjusted) length. */
   const sayLater = useCallback(
-    (text: string, video: HTMLVideoElement | null, rate = 1, holdMs = BUBBLE_MS) => {
+    (line: Line, video: HTMLVideoElement | null, rate = 1, holdMs = BUBBLE_MS) => {
       window.clearTimeout(sayTimer.current);
       const seconds = ((video && video.duration) || 4) / rate;
-      sayTimer.current = window.setTimeout(() => say(text, holdMs), seconds * SAY_AT * 1000);
+      sayTimer.current = window.setTimeout(() => say(line, holdMs), (seconds + SAY_AFTER_S) * 1000);
     },
     [say]
   );
+  useEffect(() => {
+    // Dev only: let the console (or a test) put a line up for a while.
+    if (!/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) return;
+    (window as unknown as { __heroSay?: (text: string, kind?: BubbleKind, ms?: number, at?: number) => void }).__heroSay = (
+      text,
+      kind,
+      ms = 60_000,
+      at
+    ) => {
+      if (at !== undefined) placementIndex.current = at;
+      say({ text, kind }, ms);
+    };
+  }, [say]);
+
   const hush = useCallback(() => {
     window.clearTimeout(sayTimer.current);
     window.clearTimeout(bubbleTimer.current);
@@ -362,6 +425,77 @@ export function HeroCharacterVideo({
     if (state === "gone" || state === "considering" || state === "approval") hush();
   }, [state, hush]);
 
+  /**
+   * Pin the tail tip to the mouth. The bubble lives in a layer over the hero
+   * screen, so its position is measured from the visible clip's box: mouth =
+   * (49.2%, 20.6%) of it; the bubble sits TAIL.reach to the right and
+   * TAIL.drop above that, and the tail bridges the gap.
+   */
+  const bubbleRef = useRef<HTMLSpanElement | null>(null);
+  const placeBubble = useCallback(() => {
+    const el = bubbleRef.current;
+    const layer = bubbleLayer?.current;
+    const video = active() ?? videos.current.idle;
+    if (!el || !layer || !video) return;
+    const box = video.getBoundingClientRect();
+    const host = layer.getBoundingClientRect();
+    const mouthX = box.left - host.left + box.width * MOUTH.x;
+    const mouthY = box.top - host.top + box.height * MOUTH.y;
+    const compact = window.innerWidth < 900;
+    const reach = compact ? TAIL.reachCompact : TAIL.reach;
+    const drop = compact ? TAIL.dropCompact : TAIL.drop;
+    el.style.setProperty("--tail-reach", `${reach}px`);
+    el.style.setProperty("--tail-drop", `${drop}px`);
+    el.style.setProperty("--tail-w", `${reach + TAIL.root}px`);
+    // The tail tip is the box corner nearest the mouth; put that corner on the mouth.
+    const position = (at: Placement) => {
+      const right = at.endsWith("right");
+      const up = at.startsWith("up");
+      return {
+        left: right ? mouthX + reach : mouthX - reach - el.offsetWidth,
+        top: up ? mouthY - drop - el.offsetHeight : mouthY + drop
+      };
+    };
+    // A side that would run into the header or off the screen hands over
+    // to the next one; up-right is the last resort.
+    // ...and never over the headline.
+    const headline = layer.parentElement?.querySelector<HTMLElement>(".dw-home-hero-statement")?.getBoundingClientRect();
+    const clearOfHeadline = ({ left, top }: { left: number; top: number }) => {
+      if (!headline) return true;
+      const l = left + host.left, t = top + host.top, r = l + el.offsetWidth, b = t + el.offsetHeight;
+      return r < headline.left || l > headline.right || b < headline.top || t > headline.bottom;
+    };
+    const fits = (p: { left: number; top: number }) =>
+      p.top >= HEADER_CLEARANCE &&
+      p.left >= EDGE_CLEARANCE &&
+      p.left + el.offsetWidth <= host.width - EDGE_CLEARANCE &&
+      p.top + el.offsetHeight <= host.height - EDGE_CLEARANCE &&
+      clearOfHeadline(p);
+    const wanted = el.dataset.at as Placement;
+    const order = [wanted, ...PLACEMENTS.filter((p) => p !== wanted)];
+    const at = order.find((p) => fits(position(p))) ?? "up-right";
+    if (at !== wanted) {
+      setBubble((current) => (current && current.at !== at ? { ...current, at } : current));
+      return;
+    }
+    const { left, top } = position(at);
+    el.style.left = `${Math.round(left)}px`;
+    el.style.top = `${Math.round(top)}px`;
+  }, [bubbleLayer]);
+
+  useLayoutEffect(() => {
+    if (!bubble) return;
+    // The figure drifts under the pointer (parallax) and with the home
+    // timeline, so follow it frame by frame while the bubble is up.
+    let raf = 0;
+    const follow = () => {
+      placeBubble();
+      raf = window.requestAnimationFrame(follow);
+    };
+    follow();
+    return () => window.cancelAnimationFrame(raf);
+  }, [bubble, placeBubble]);
+
   useEffect(
     () => () => {
       window.clearTimeout(bubbleTimer.current);
@@ -373,13 +507,17 @@ export function HeroCharacterVideo({
   // Gone: the leave element, parked on its last frame, is the empty stool.
   const visible: VideoClip | null = state === "gone" ? "leave" : state;
 
+  const kind: BubbleKind = bubble?.line.kind ?? "say";
+  const bubbleNode =
+    bubble && state !== "gone" ? (
+      <span className={`dw-hero-bubble is-${kind} at-${bubble.at}`} data-at={bubble.at} role="status" key={bubble.key} ref={bubbleRef}>
+        {bubble.line.text}
+      </span>
+    ) : null;
+
   return (
     <>
-      {bubble && state !== "gone" && (
-        <span className="dw-hero-bubble" role="status" key={bubble.key}>
-          {bubble.text}
-        </span>
-      )}
+      {bubbleNode && (bubbleLayer?.current ? createPortal(bubbleNode, bubbleLayer.current) : bubbleNode)}
       {ORDER.map((name) => (
         <video
           className={`dw-hero-video${visible === name ? " is-active" : ""}`}

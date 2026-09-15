@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import "./contactChat.css";
 
 const DAVIT_TELEGRAM_URL = "https://t.me/pedanyan";
-const CHAT_AVATAR = "/hero-frames/avatar.webp";
+export const CHAT_AVATAR = "/hero-frames/avatar.webp";
 
 export type ChatIntent = {
   id: string;

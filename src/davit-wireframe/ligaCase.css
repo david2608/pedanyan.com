@@ -1,0 +1,745 @@
+/* ==========================================================================
+   LIGA Mobile case study.
+   Same craft rules as the iCredo page (the Linear reference): a quiet canvas,
+   hairline borders, restrained type, one accent - here the product's own red.
+   The walkthrough screens are rebuilt in code (ligaScreens.tsx) and translated;
+   the advantages cards and the everyday strip use the real Armenian exports.
+   ========================================================================== */
+
+.dw-case-study.dw-case-liga {
+  --lg-paper: #ffffff;       /* the page */
+  --lg-canvas: #f6f7fa;      /* the product's own surface */
+  --lg-line: #e9ebf1;        /* hairline */
+  --lg-smoke: #d4d8e1;
+  --lg-ash: #8f9093;         /* the product's muted grey */
+  --lg-fog: #5b606a;
+  --lg-mist: #262b33;        /* body */
+  --lg-ink: #0b0d10;         /* headings */
+  --lg-red: #da2c43;         /* the one accent */
+  --lg-red-soft: #fdeef1;
+  --lg-green: #2f9e4f;
+
+  /* the site's editorial frame, retuned the same way the iCredo page is */
+  --case-reading: clamp(360px, 52vw, 760px);
+  --case-section-title: clamp(32px, 3.1vw, 52px);
+  --case-title: clamp(30px, 2.5vw, 44px);
+  --case-body: clamp(16px, 1.2vw, 20px);
+
+  background: var(--lg-paper);
+  color: var(--lg-mist);
+}
+
+/* ---- page type: the site's faces, only the colours change ---------------- */
+.dw-page .dw-case-liga h1,
+.dw-page .dw-case-liga h2,
+.dw-page .dw-case-liga h3 { color: var(--lg-ink); }
+.dw-page .dw-case-liga :is(p, li, blockquote, dd, figcaption) { color: var(--lg-mist); }
+.dw-page .dw-case-liga :is(p, li) :is(strong, b) { color: var(--lg-ink); background: none; padding: 0; }
+.dw-page .dw-case-liga :is(.dw-case-eyebrow, .dw-case-opening-eyebrow, figcaption, .dw-about-card-eyebrow) { color: var(--lg-ash); }
+.dw-case-liga .dw-case-richtext { font-size: clamp(17px, 1.3vw, 21px); line-height: 1.6; }
+.dw-case-liga .dw-case-richtext p + p { margin-top: 1.1em; }
+.dw-case-liga .dw-case-richtext strong { background: none; padding: 0; }
+
+/* ---- opening: the product's own canvas, the phone cropped by the panel --- */
+.dw-case-liga .dw-case-opening-panel {
+  min-height: 0;
+  background: var(--lg-canvas);
+  box-shadow: var(--lg-line) 0 0 0 1px inset;
+  border-radius: 12px;
+}
+.dw-case-liga .dw-case-opening-copy { display: flex; flex-direction: column; }
+.dw-case-liga .dw-case-opening-meta { margin-top: clamp(40px, 5vw, 80px); }
+.dw-case-liga .dw-case-opening-meta dt { color: var(--lg-ash); }
+.dw-case-liga .dw-case-opening-meta dd { color: var(--lg-mist); }
+.dw-case-liga .dw-case-opening-media { right: 8%; bottom: -10%; width: auto; }
+.dw-case-liga .dw-case-opening-media img { width: clamp(230px, 21vw, 300px) !important; height: auto !important; max-height: none !important; border-radius: calc(clamp(230px, 21vw, 300px) / 393 * 53); box-shadow: 0 40px 80px -30px rgba(11, 13, 16, 0.35), 0 0 0 1px rgba(11, 13, 16, 0.06); }
+@media (max-width: 1100px) {
+  .dw-case-liga .dw-case-opening-media { position: relative; right: auto; bottom: auto; margin: 40px auto -14%; display: grid; justify-content: center; }
+}
+
+/* ---- surfaces ------------------------------------------------------------ */
+.dw-case-liga .dw-case-section { background: transparent; }
+.dw-case-liga .dw-case-section.dw-walk, .dw-case-liga .dw-case-section-problem { overflow: visible; }
+.dw-case-liga .dw-outcome,
+.dw-case-liga .dw-case-section-context,
+.dw-case-liga .dw-case-section-everyday { background: var(--lg-canvas) !important; }
+.dw-case-liga .dw-outcome-stats { border-top-color: var(--lg-line); }
+.dw-case-liga .dw-outcome-stat strong { color: var(--lg-ink); }
+.dw-case-liga .dw-outcome-stat dt { color: var(--lg-mist); }
+.dw-case-liga .dw-walk-step { border-top-color: var(--lg-line); }
+.dw-case-liga .dw-walk-dots li { background: var(--lg-smoke); }
+.dw-case-liga .dw-walk-dots li.is-active { background: var(--lg-red); }
+
+/* feature grids as hairline cards */
+.dw-case-liga .dw-case-feature-grid { gap: 12px; }
+.dw-case-liga .dw-case-feature-grid article {
+  background: var(--lg-paper);
+  box-shadow: var(--lg-line) 0 0 0 1px inset;
+  border-radius: 12px;
+  padding: 24px;
+  color: var(--lg-mist);
+}
+.dw-case-liga .dw-case-feature-grid article strong { color: var(--lg-ink); background: none; }
+.dw-case-liga .dw-case-feature-grid article span { color: var(--lg-ash); }
+.dw-case-liga .dw-case-feature-title { color: var(--lg-ink); }
+.dw-case-liga .dw-case-section-context .dw-case-feature-grid article { background: var(--lg-paper); }
+
+/* design system: a headline, a label, then the component itself */
+.dw-case-liga .dw-case-section-design-system .dw-case-feature-grid article { overflow: hidden; padding-bottom: 0; }
+.dw-case-liga .dw-case-system-fragment {
+  margin: 20px -1px -1px;
+  padding-top: 20px;
+  border-top: 1px solid var(--lg-line);
+  display: grid;
+  justify-items: center;
+}
+.dw-case-liga .lg-fragment {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 18px 40px -26px rgba(11, 13, 16, 0.4), 0 0 0 1px rgba(11, 13, 16, 0.07);
+}
+.dw-case-liga .lg-fragment-inner { position: absolute; top: 0; left: 0; width: 393px; transform-origin: top left; }
+.dw-case-liga .lg-fragment-inner .lg-phone-screen.is-bare { position: relative; width: 393px; height: 854px; border-radius: 0; }
+
+/* --------------------------------------------------------------------------
+   Advantages, on the v2 card treatment: a three-across grid of flat cards on
+   the product's own canvas - no border, no shadow, 24px radius - with the
+   problem as a ghost typographic tag above the claim, and the screen that
+   answers it floating out of the bottom of the card as the only elevated
+   thing in the section.
+   -------------------------------------------------------------------------- */
+.dw-case-liga .dw-case-section-advantages .dw-case-feature-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+.dw-case-liga .dw-case-section-advantages .dw-case-feature-grid article {
+  display: flex;
+  flex-direction: column;
+  background: var(--lg-canvas);
+  border: 0;
+  border-radius: 24px;
+  box-shadow: none;
+  padding: 28px 24px 0;
+  min-height: 0;
+  overflow: hidden;
+}
+.dw-page .dw-case-liga .dw-case-section-advantages .dw-case-feature-grid article > strong {
+  order: 2;
+  display: block;
+  font-size: clamp(19px, 1.35vw, 22px);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+  color: var(--lg-ink);
+}
+.dw-case-liga .dw-case-section-advantages .dw-case-feature-grid article > div { order: 3; padding: 0; }
+.dw-page .dw-case-liga .dw-case-section-advantages .dw-case-feature-grid article > div > p {
+  font-size: clamp(14px, 1vw, 16px);
+  line-height: 1.5;
+  margin: 0;
+  color: var(--lg-mist);
+}
+/* the problem is lifted above the claim and set as a quiet tag */
+.dw-case-liga .dw-case-section-advantages .dw-case-feature-grid article > div > p:first-of-type {
+  order: 1;
+  color: var(--lg-fog);
+  margin-bottom: 18px;
+}
+.dw-case-liga .dw-case-section-advantages .dw-case-feature-grid article > div {
+  display: contents;
+}
+.dw-case-liga .dw-case-section-advantages .dw-case-feature-grid article > div > p:first-of-type::before {
+  content: "Problem";
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--lg-ash);
+}
+.dw-case-liga .dw-case-section-advantages .dw-case-feature-grid article > div > p:last-of-type { order: 3; }
+.dw-case-liga .dw-case-section-advantages .dw-case-feature-grid article > div > p:last-of-type::before {
+  content: "What I did";
+  display: block;
+  margin: 0 0 6px;
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--lg-ash);
+}
+/* the screen rises out of the bottom of the card */
+.dw-case-liga .dw-case-feature-shot {
+  order: 4;
+  position: relative;
+  margin: 24px -24px -1px;
+  min-height: 178px;
+  padding: 0;
+  overflow: hidden;
+  display: grid;
+  justify-items: center;
+}
+.dw-case-liga .dw-case-feature-shot::before { content: none; }
+.dw-case-liga .dw-case-feature-shot.is-image { display: grid; }
+.dw-page .dw-case-study.dw-case-liga .dw-case-feature-shot.is-image img {
+  position: relative;
+  left: auto;
+  top: auto;
+  width: 188px !important;
+  height: auto !important;
+  max-width: none !important;
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 24px 50px -28px rgba(11, 13, 16, 0.42), 0 0 0 1px rgba(11, 13, 16, 0.06);
+}
+@media (max-width: 1100px) {
+  .dw-case-liga .dw-case-section-advantages .dw-case-feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 680px) {
+  .dw-case-liga .dw-case-section-advantages .dw-case-feature-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* the one red action on the page: the pull to the next case */
+.dw-case-liga .dw-pull-next small, .dw-case-liga .dw-pull-next-hint { color: var(--lg-ash); }
+.dw-case-liga .dw-pull-next strong { color: var(--lg-ink); }
+.dw-case-liga .dw-pull-next-meter, .dw-case-liga .dw-pull-arrow { color: var(--lg-red); }
+
+/* ---- the problem, staged on a plate -------------------------------------- */
+.dw-case-liga .dw-ic-scene-head { width: min(calc(100% - (var(--case-gutter) * 2)), var(--case-big, 1400px)); margin: 0 auto clamp(36px, 4vw, 64px); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); align-items: end; }
+.dw-case-liga .dw-ic-scene-head .dw-case-eyebrow { grid-column: 1 / -1; margin-bottom: 0; }
+.dw-page .dw-case-liga .dw-ic-scene-head h2 { margin: 0; max-width: 14ch; line-height: 1; font-size: clamp(38px, 4.2vw, 62px); }
+.dw-case-liga .dw-ic-scene-lead { margin: 0; max-width: 36ch; font-size: clamp(18px, 1.45vw, 24px); line-height: 1.4; color: var(--lg-mist); }
+.dw-case-liga .dw-ic-scene { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 90px); align-items: center; width: min(calc(100% - (var(--case-gutter) * 2)), var(--case-big, 1400px)); margin: 0 auto; }
+.dw-case-liga .dw-ic-scene-copy { max-width: 40ch; }
+.dw-case-liga .dw-ic-scene-copy p { font-size: clamp(15px, 1.1vw, 18px); line-height: 1.55; }
+.dw-case-liga .dw-ic-scene-copy p + p { margin-top: 1em; }
+@media (max-width: 900px) {
+  .dw-case-liga .dw-ic-scene-head { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .dw-case-liga .dw-ic-scene { grid-template-columns: minmax(0, 1fr); }
+  .dw-case-liga .dw-ic-scene-copy { max-width: none; }
+}
+
+.lg-ui {
+  --p-ink: #0b0d10; --p-slate: #5b606a; --p-mute: #8f9093; --p-line: #e9ebf1; --p-fill: #f6f7fa;
+  --p-red: #da2c43; --p-green: #2f9e4f;
+  color: var(--p-ink);
+  font-family: Inter, "Inter Variable", system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.35;
+}
+.lg-ui *, .lg-ui *::before, .lg-ui *::after { box-sizing: border-box; }
+.lg-story { position: relative; aspect-ratio: 4 / 3; border-radius: 24px; overflow: hidden; background: linear-gradient(155deg, #eef0f5 0%, #f6f7fa 55%, #fdfdfe 100%); box-shadow: inset 0 0 0 1px rgba(11, 13, 16, 0.06); }
+.lg-call, .lg-report { position: absolute; border-radius: 18px; background: #fff; box-shadow: 0 24px 60px -30px rgba(11, 13, 16, 0.35), 0 0 0 1px var(--p-line); transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 500ms, filter 700ms; }
+
+.lg-call { left: 8%; top: 12%; width: min(46%, 300px); padding: 18px; opacity: 0; transform: translateY(24px); }
+.lg-call.is-in { opacity: 1; transform: none; }
+.lg-call.is-back { transform: translate(-7%, -5%) rotate(-4deg) scale(0.92); opacity: 0.5; filter: saturate(0.55); }
+.lg-call-head { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.lg-call-head strong { display: block; font-weight: 590; font-size: 14px; }
+.lg-call-head small { display: block; font-size: 12px; color: var(--p-mute); }
+.lg-call-dial { display: inline-flex; align-items: flex-end; gap: 2px; width: 32px; height: 32px; padding: 8px; border-radius: 50%; background: var(--p-fill); }
+.lg-call-dial i { flex: 1; border-radius: 1px; background: var(--p-mute); animation: lg-dial 1.2s ease-in-out infinite; }
+.lg-call-dial i:nth-child(1) { height: 40%; }
+.lg-call-dial i:nth-child(2) { height: 80%; animation-delay: 160ms; }
+.lg-call-dial i:nth-child(3) { height: 55%; animation-delay: 320ms; }
+@keyframes lg-dial { 0%, 100% { transform: scaleY(0.6); } 50% { transform: scaleY(1); } }
+.lg-call-queue { margin: 0 0 10px; font-size: 14px; color: var(--p-slate); }
+.lg-call-queue b { color: var(--p-ink); font-weight: 590; }
+.lg-call-bar { display: block; height: 4px; border-radius: 999px; background: var(--p-fill); overflow: hidden; }
+.lg-call-bar i { display: block; width: 30%; height: 100%; border-radius: inherit; background: var(--p-mute); animation: lg-crawl 2.6s linear infinite; }
+@keyframes lg-crawl { from { transform: translateX(-100%); } to { transform: translateX(330%); } }
+.lg-call-note { margin: 12px 0 0; font-size: 12px; color: var(--p-mute); }
+
+.lg-report { right: 7%; bottom: 8%; width: min(52%, 330px); padding: 16px; opacity: 0; transform: translateY(40px) scale(0.96); }
+.lg-report.is-in { opacity: 1; transform: none; }
+.lg-report-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.lg-report-head strong { display: block; font-weight: 590; font-size: 15px; }
+.lg-report-head small { display: block; font-size: 12px; color: var(--p-mute); margin-top: 2px; }
+.lg-steps { display: inline-flex; gap: 4px; padding-top: 6px; }
+.lg-steps i { width: 14px; height: 3px; border-radius: 999px; background: var(--p-line); }
+.lg-steps i.is-on { background: var(--p-ink); }
+.lg-report-rule { margin: 0 0 12px; font-size: 13px; line-height: 1.4; color: var(--p-ink); }
+.lg-guide { border: 1px solid var(--p-line); border-radius: 12px; background: var(--p-fill); padding: 10px; opacity: 0; transform: translateY(8px); transition: opacity 320ms, transform 360ms; }
+.lg-guide.is-in { opacity: 1; transform: none; }
+.lg-guide-label { display: block; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--p-mute); margin-bottom: 6px; }
+.lg-guide-art { display: block; width: 100%; height: auto; }
+.lg-guide-art .lg-car path { fill: #c7ccd6; }
+.lg-guide-art .lg-car .lg-glass { fill: #eef0f5; }
+.lg-guide-art .lg-car .lg-wheel { fill: #6b7280; }
+.lg-guide-art .lg-car-a path { fill: var(--p-red); }
+.lg-guide-art .lg-car-a .lg-glass { fill: #f7c3cb; }
+.lg-shots { display: flex; gap: 8px; margin-top: 12px; opacity: 0; transform: translateY(8px); transition: opacity 320ms, transform 360ms; }
+.lg-shots.is-in { opacity: 1; transform: none; }
+.lg-shot { flex: 1; aspect-ratio: 4 / 3; border-radius: 8px; background: linear-gradient(135deg, #dfe3ea, #c9cfda); }
+.lg-shot.is-two { background: linear-gradient(135deg, #e6d3d6, #d5b7bd); }
+.lg-shot.is-add { display: grid; place-items: center; background: var(--p-fill); border: 1px dashed var(--p-line); color: var(--p-mute); font-size: 18px; }
+.lg-saved { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 12px; color: var(--p-green); opacity: 0; transition: opacity 300ms; }
+.lg-saved.is-in { opacity: 1; }
+.lg-saved svg { width: 12px; height: 10px; }
+.lg-cta { display: block; margin-top: 12px; padding: 12px; border-radius: 12px; background: var(--p-red); color: #fff; text-align: center; font-size: 14px; font-weight: 500; opacity: 0; transform: translateY(6px); transition: opacity 260ms, transform 300ms; }
+.lg-cta.is-in { opacity: 1; transform: none; }
+@media (max-width: 600px) {
+  .lg-story { aspect-ratio: 4 / 5; }
+  .lg-call { left: 5%; top: 6%; width: min(72%, 300px); }
+  .lg-report { right: 5%; bottom: 5%; width: min(80%, 330px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lg-call, .lg-report, .lg-guide, .lg-shots, .lg-saved, .lg-cta { opacity: 1 !important; transform: none !important; transition: none; }
+  .lg-call-dial i, .lg-call-bar i { animation: none; }
+}
+
+/* ==========================================================================
+   Coded LIGA screens (ligaScreens.tsx).
+
+   Device treatment is the site-wide one: a bare screen, rounded corners, a
+   hairline ring, a soft drop shadow, a Dynamic Island cut out of the top, no
+   bezel. Every dimension scales with the width, and because the design frame
+   is 393px wide, 1em inside the screen == 15px of the Figma file. So the
+   numbers below are the file's numbers divided by 15.
+
+   Tokens read off the file:
+     ink #1a1d23 · hairline #e9ebf1 · separator #f0f2f8 · surface #f6f7fa
+     attach border #caced5 · brand #da2c43 · muted brand #ff9fab
+     cover green #84cc4c · badge #e51717 · progress done #373d48
+     status pill blue bg #e6f1ff / border #d8e9fe / ink #124b8f
+   Everything is scoped under .lg-phone-screen so it cannot collide with the
+   problem scene, which shares some class names on the page.
+   ========================================================================== */
+.dw-case-liga { --lg-phone-w: clamp(230px, 22vw, 320px); }
+.dw-case-liga .dw-walk { --walk-phone: var(--lg-phone-w); }
+.dw-case-liga .dw-walk-step-shot .lg-phone { --lg-phone-w: 230px; }
+.dw-case-liga .dw-plate-phone .lg-phone { --lg-phone-w: var(--plate-phone, 300px); }
+
+.lg-phone {
+  --p-ink: #1a1d23;
+  --p-line: #e9ebf1;
+  --p-sep: #f0f2f8;
+  --p-surface: #f6f7fa;
+  --p-attach: #caced5;
+  --p-red: #da2c43;
+  --p-red-muted: #ff9fab;
+  --p-green: #84cc4c;
+  --p-badge: #e51717;
+  --p-progress: #373d48;
+  --p-blue-bg: #e6f1ff;
+  --p-blue-line: #d8e9fe;
+  --p-blue-ink: #124b8f;
+  --p-amber: #b8730f;
+  --p-mute: #7c828d;      /* the file leaves sublabels at ink; the export reads grey */
+  --lg-unit: calc(var(--lg-phone-w, 300px) / 393);
+  width: var(--lg-phone-w, 300px);
+  aspect-ratio: 393 / 854;
+  border-radius: calc(var(--lg-unit) * 24);
+  padding: 0;
+  background: #fff;
+  box-shadow:
+    0 40px 80px -30px rgba(26, 29, 35, 0.35),
+    0 0 0 1px rgba(26, 29, 35, 0.06);
+  color: var(--p-ink);
+  font-family: var(--lg-font, "Noto Sans", Inter, system-ui, sans-serif);
+  container-type: inline-size;
+}
+.lg-phone-screen {
+  position: relative;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  background: #fff;
+  /* 1em == 15px of the 393px design */
+  font-size: clamp(7px, 3.816cqw, 15px);
+  line-height: 1.4667;              /* 22/15 */
+}
+/* A bare screen has no .lg-phone parent, so it has to carry the tokens, the
+   type scale and its own query container. Used for cropped UI fragments. */
+.lg-phone-screen.is-bare {
+  --p-ink: #1a1d23;
+  --p-line: #e9ebf1;
+  --p-sep: #f0f2f8;
+  --p-surface: #f6f7fa;
+  --p-attach: #caced5;
+  --p-red: #da2c43;
+  --p-red-muted: #ff9fab;
+  --p-green: #84cc4c;
+  --p-badge: #e51717;
+  --p-progress: #373d48;
+  --p-blue-bg: #e6f1ff;
+  --p-blue-line: #d8e9fe;
+  --p-blue-ink: #124b8f;
+  --p-amber: #b8730f;
+  --p-mute: #7c828d;
+  container-type: inline-size;
+  color: var(--p-ink);
+  font-family: var(--lg-font, "Noto Sans", Inter, system-ui, sans-serif);
+  border-radius: 6cqw;
+}
+.lg-phone-screen .lg-screen { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 0 1.0667em 2.7333em; background: #fff; }
+.lg-phone-screen .lg-art { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+/* ---- chrome (status bar 393x50, home indicator 139x5) -------------------- */
+.lg-phone-screen .lg-status { display: flex; justify-content: space-between; align-items: center; height: 1.4667em; margin: 1.4em 0.2667em 0.8em; flex: none; }
+.lg-phone-screen .lg-status-time { font-size: 1.1333em; font-weight: 600; letter-spacing: -0.01em; }
+.lg-phone-screen .lg-status-right { display: inline-flex; gap: 0.4em; align-items: center; color: var(--p-ink); }
+.lg-phone-screen .lg-status-right svg { height: 0.8em; width: auto; fill: currentColor; display: block; }
+.lg-phone-screen .lg-home { position: absolute; left: 50%; bottom: 0.5333em; width: 9.2667em; height: 0.3333em; border-radius: 100px; background: var(--p-ink); transform: translateX(-50%); }
+
+/* ---- step header (label 15/600, sublabel 13/400) ------------------------- */
+.lg-phone-screen .lg-head { display: flex; align-items: center; gap: 0.6667em; flex: none; margin-bottom: 0.7333em; }
+.lg-phone-screen .lg-back { width: 1.6em; height: 1.6em; flex: none; }
+.lg-phone-screen .lg-head-text { display: flex; flex-direction: column; min-width: 0; }
+.lg-phone-screen .lg-head-text strong { font-size: 1em; font-weight: 600; line-height: 1.4667; }
+.lg-phone-screen .lg-head-text small { font-size: 0.8667em; font-weight: 400; line-height: 1.3846; color: var(--p-mute); }
+.lg-phone-screen .lg-head.is-plain { margin-bottom: 1em; }
+.lg-phone-screen .lg-dots { display: inline-flex; flex-direction: column; gap: 0.1467em; margin-left: auto; }
+.lg-phone-screen .lg-dots i { width: 0.2em; height: 0.2em; border-radius: 50%; background: var(--p-ink); }
+
+/* progress: the active step is a wide subdivided bar, the rest are stubs */
+.lg-phone-screen .lg-stepbar { display: flex; align-items: center; gap: 0.2667em; flex: none; height: 0.5333em; margin-bottom: 1.3333em; }
+.lg-phone-screen .lg-stepbar-stub { flex: 0 0 2.8667em; height: 100%; border-radius: 0.5333em; background: var(--p-line); }
+.lg-phone-screen .lg-stepbar-stub.is-done { background: var(--p-progress); }
+.lg-phone-screen .lg-stepbar-wide { flex: 1; display: flex; gap: 0.0533em; height: 100%; border-radius: 0.5333em; overflow: hidden; }
+.lg-phone-screen .lg-stepbar-wide i { flex: 1; background: var(--p-line); transition: background 300ms ease; }
+.lg-phone-screen .lg-stepbar-wide i.is-done { background: var(--p-progress); }
+
+/* ---- shared ------------------------------------------------------------- */
+.lg-phone-screen .lg-lead { font-size: 1em; font-weight: 600; line-height: 1.4667; color: var(--p-ink); margin: 0 0 0.5333em; padding: 0 0.2667em; opacity: 0; transform: translateY(0.3em); transition: opacity 340ms, transform 380ms; }
+.lg-phone-screen .lg-lead.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-sub { display: block; font-size: 0.8667em; line-height: 1.3846; color: var(--p-mute); padding: 0 0.2667em; margin-bottom: 0.6667em; opacity: 0; transition: opacity 340ms 80ms; }
+.lg-phone-screen .lg-sub.is-in { opacity: 1; }
+.lg-phone-screen .lg-spacer { flex: 1; min-height: 0.5em; }
+/* buttons: 361x56 r18, label 15/700 */
+.lg-phone-screen .lg-cta {
+  display: flex; align-items: center; justify-content: center; gap: 0.4em;
+  margin-top: auto; flex: none; min-height: 3.7333em; padding: 0.5333em 1.0667em;
+  border-radius: 1.2em; background: var(--p-red); color: #fff;
+  font-size: 1em; font-weight: 700; line-height: 1.4667; text-align: center;
+  opacity: 0; transform: translateY(0.4em); transition: opacity 280ms, transform 320ms;
+}
+.lg-phone-screen .lg-cta.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-cta.is-ghost { background: var(--p-surface); color: var(--p-ink); box-shadow: inset 0 0 0 1px var(--p-line); }
+.lg-phone-screen .lg-cta.is-muted { background: var(--p-red-muted); color: #fff; }
+.lg-phone-screen .lg-dl { width: 1.6em; height: 1.6em; flex: none; }
+
+/* inputs: 361x58 r16, hairline, label 13/400 over value 15/400 */
+.lg-phone-screen .lg-fields { display: flex; flex-direction: column; gap: 0.6667em; flex: none; }
+.lg-phone-screen .lg-fields.is-tight { gap: 0.5333em; margin-top: 0.8em; }
+.lg-phone-screen .lg-field {
+  display: flex; align-items: center; gap: 0.6em; position: relative;
+  min-height: 3.8667em; padding: 0.5333em 0.8em;
+  border-radius: 1.0667em; background: #fff; box-shadow: inset 0 0 0 1px var(--p-line);
+  transition: box-shadow 300ms;
+}
+.lg-phone-screen .lg-field.is-filled { box-shadow: inset 0 0 0 1px #dfe3ec; }
+.lg-phone-screen .lg-field-text { display: flex; flex-direction: column; gap: 0.0667em; min-width: 0; flex: 1; padding-left: 0.2667em; }
+.lg-phone-screen .lg-field-text small { font-size: 0.8667em; line-height: 1.3846; color: var(--p-mute); }
+.lg-phone-screen .lg-field-text strong { font-size: 1em; font-weight: 400; line-height: 1.4667; color: var(--p-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; animation: lg-fill 360ms ease both; }
+.lg-phone-screen .lg-field-ico { width: 2.4em; height: 2.6667em; flex: none; }
+@keyframes lg-fill { from { opacity: 0; transform: translateY(0.3em); } to { opacity: 1; transform: none; } }
+.lg-phone-screen .lg-field.is-ping::after {
+  content: ""; position: absolute; right: 1.2em; top: 50%; width: 1.2em; height: 1.2em;
+  margin-top: -0.6em; border-radius: 50%; border: 1.5px solid var(--p-red);
+  animation: lg-ping 900ms ease-out 2;
+}
+@keyframes lg-ping { from { opacity: 0.8; transform: scale(0.4); } to { opacity: 0; transform: scale(2.4); } }
+
+/* cards: r20/r24 on white with a hairline */
+.lg-phone-screen .lg-card { border-radius: 1.3333em; background: #fff; box-shadow: inset 0 0 0 1px var(--p-line); }
+
+/* ---- home --------------------------------------------------------------- */
+.lg-phone-screen .lg-home-screen { padding: 0; background: var(--p-surface); }
+.lg-phone-screen .lg-home-screen > .lg-status { margin-left: 1.2667em; margin-right: 1.2667em; }
+.lg-phone-screen .lg-user { display: flex; align-items: center; gap: 0.6667em; flex: none; padding: 0 1.0667em; margin-bottom: 0.8em; opacity: 0; transform: translateY(0.4em); transition: opacity 340ms, transform 380ms; }
+.lg-phone-screen .lg-user.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-avatar { width: 2.9333em; height: 2.9333em; flex: none; border-radius: 50%; }
+.lg-phone-screen .lg-user-text { display: flex; flex-direction: column; min-width: 0; flex: 1; padding-left: 0.2667em; }
+.lg-phone-screen .lg-user-text strong { font-size: 1em; font-weight: 600; line-height: 1.4667; }
+.lg-phone-screen .lg-user-text small { font-size: 0.8667em; line-height: 1.3846; color: var(--p-mute); }
+.lg-phone-screen .lg-user-icons { display: inline-flex; align-items: center; gap: 0.6667em; }
+.lg-phone-screen .lg-ico { width: 1.6em; height: 1.6em; }
+.lg-phone-screen .lg-bell { position: relative; display: inline-block; width: 1.6em; height: 1.6em; }
+.lg-phone-screen .lg-badge {
+  position: absolute; top: -0.3em; right: -0.35em; min-width: 1.0667em; height: 1.0667em;
+  padding: 0 0.2667em; border-radius: 0.6667em; background: var(--p-badge);
+  font-size: 0.6em; font-style: normal; font-weight: 600; color: #fff;
+  display: grid; place-items: center; transform: scale(0); transition: transform 380ms cubic-bezier(.2,1.5,.4,1) 240ms;
+}
+.lg-phone-screen .lg-badge.is-in { transform: scale(1); }
+/* offers: 100x100 r24, #f3f4f7 under a 2px white ring, gap 16, left inset 16 */
+.lg-phone-screen .lg-offers { display: flex; gap: 1.0667em; flex: none; padding: 0 1.0667em; margin-bottom: 1.3333em; opacity: 0; transform: translateY(0.4em); transition: opacity 340ms, transform 380ms; }
+.lg-phone-screen .lg-offers.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-offer { width: 6.6667em; height: 6.6667em; flex: none; border-radius: 1.6em; overflow: hidden; background: #f3f4f7; box-shadow: 0 0 0 2px #fff; }
+.lg-phone-screen .lg-offer .lg-art { object-fit: cover; }
+/* the white sheet: r28 top, 20 top padding, 32 gaps */
+.lg-phone-screen .lg-sheet {
+  flex: 1; min-height: 0; padding: 1.3333em 1.0667em 0;
+  background: #fff; border-radius: 1.8667em 1.8667em 0 0;
+  opacity: 0; transform: translateY(0.6em); transition: opacity 380ms, transform 420ms; overflow: hidden;
+}
+.lg-phone-screen .lg-sheet.is-in { opacity: 1; transform: none; }
+/* section labels: 18/600 lh26 */
+.lg-phone-screen .lg-sec { font-size: 1.2em; font-weight: 600; line-height: 1.4444; color: var(--p-ink); margin: 0 0 0.9333em; padding: 0 0.2667em; opacity: 0; transform: translateY(0.3em); transition: opacity 320ms, transform 360ms; }
+.lg-phone-screen .lg-sheet .lg-sec:first-child { opacity: 1; transform: none; }
+.lg-phone-screen .lg-sec.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-sec.is-caps { font-size: 0.8em; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--p-mute); margin: 1.0667em 0 0.6667em; }
+/* insurance types: 68px art, 13/500 label, 20 gap */
+.lg-phone-screen .lg-types { display: flex; gap: 1.3333em; margin-bottom: 2.1333em; }
+.lg-phone-screen .lg-type { display: flex; flex-direction: column; align-items: center; gap: 0.6em; flex: 1; min-width: 0; opacity: 0; transform: translateY(0.4em) scale(0.94); transition: opacity 320ms, transform 360ms; }
+.lg-phone-screen .lg-type.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-type .lg-art { width: 4.5333em; height: 4.5333em; }
+.lg-phone-screen .lg-type small { font-size: 0.8667em; font-weight: 500; line-height: 1.3846; color: var(--p-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+/* the two actions: one card, 56-tall rows, hairline between */
+.lg-phone-screen .lg-actions { margin-bottom: 2.1333em; overflow: hidden; opacity: 0; transform: translateY(0.4em); transition: opacity 340ms, transform 380ms; }
+.lg-phone-screen .lg-actions.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-row { display: flex; align-items: center; gap: 0.6667em; padding: 0.5333em 1.0667em; min-height: 3.7333em; }
+.lg-phone-screen .lg-row + .lg-row { box-shadow: inset 0 1px 0 var(--p-sep); }
+.lg-phone-screen .lg-row-ico { width: 1.8667em; height: 1.8667em; flex: none; }
+.lg-phone-screen .lg-row strong { flex: 1; font-size: 1em; font-weight: 400; line-height: 1.4667; color: var(--p-ink); }
+.lg-phone-screen .lg-chev { width: 1.6em; height: 1.6em; flex: none; }
+/* the policy card */
+.lg-phone-screen .lg-policy { padding: 0.4em 0 0.9333em; opacity: 0; transform: translateY(0.4em); transition: opacity 340ms, transform 380ms; }
+.lg-phone-screen .lg-policy.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-policy-top { display: flex; align-items: center; gap: 0.6667em; padding: 0.8em 1.0667em; box-shadow: inset 0 -1px 0 var(--p-sep); }
+.lg-phone-screen .lg-policy-ico { width: 2.6667em; height: 2.6667em; flex: none; }
+.lg-phone-screen .lg-policy-name { display: flex; flex-direction: column; align-items: flex-start; gap: 0.3333em; flex: 1; min-width: 0; }
+.lg-phone-screen .lg-policy-name strong { font-size: 1em; font-weight: 600; line-height: 1.4667; }
+.lg-phone-screen .lg-chip { display: inline-flex; align-items: center; gap: 0.2667em; font-style: normal; font-size: 0.8667em; font-weight: 400; line-height: 1; color: var(--p-ink); background: var(--p-surface); border-radius: 0.5333em; padding: 0.3em 0.4em; box-shadow: inset 0 0 0 1px var(--p-sep); }
+.lg-phone-screen .lg-copy { width: 1.0667em; height: 1.0667em; flex: none; }
+.lg-phone-screen .lg-policy-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.8em; }
+.lg-phone-screen .lg-policy-right small { font-size: 0.8667em; line-height: 1; color: var(--p-mute); }
+/* cover bar: ten blocks, the file shows two spent and eight left */
+.lg-phone-screen .lg-cover { display: flex; gap: 0.1333em; width: 5.8667em; height: 0.4em; }
+.lg-phone-screen .lg-cover i { flex: 1; border-radius: 0.5333em; background: var(--p-line); transition: background 320ms ease; }
+.lg-phone-screen .lg-cover i.is-on { background: var(--p-green); }
+.lg-phone-screen .lg-policy-block { display: flex; flex-direction: column; gap: 0.2667em; padding: 0.8em 1.0667em 0; }
+.lg-phone-screen .lg-policy-block small { font-size: 0.8667em; line-height: 1; color: var(--p-mute); }
+.lg-phone-screen .lg-policy-block strong { display: flex; align-items: center; gap: 0.8em; font-size: 1em; font-weight: 400; line-height: 1.4667; color: var(--p-ink); }
+.lg-phone-screen .lg-policy-block strong em { font-style: normal; }
+.lg-phone-screen .lg-pill { font-style: normal; font-size: 0.8667em; font-weight: 500; line-height: 1.3846; padding: 0.2667em 0.6667em; border-radius: 1.0667em; }
+.lg-phone-screen .lg-pill.is-blue { background: var(--p-blue-bg); color: var(--p-blue-ink); box-shadow: inset 0 0 0 1px var(--p-blue-line); }
+.lg-phone-screen .lg-pill.is-amber { background: #fdf3e3; color: var(--p-amber); box-shadow: inset 0 0 0 1px #f6e4c6; }
+.lg-phone-screen .lg-pill.is-green { background: #eef8e4; color: #4c7f22; box-shadow: inset 0 0 0 1px #dcefca; }
+/* tab bar: 24px icons, 11/600 labels */
+.lg-phone-screen .lg-tabs { display: flex; flex: none; padding: 0.5333em 0 2.2em; background: #fff; border-radius: 1.3333em 1.3333em 0 0; box-shadow: 0 -1px 0 var(--p-sep); }
+.lg-phone-screen .lg-tabs span { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.4em; }
+.lg-phone-screen .lg-tabs .lg-art { width: 1.6em; height: 1.6em; opacity: 0.45; }
+.lg-phone-screen .lg-tabs span.is-on .lg-art { opacity: 1; }
+.lg-phone-screen .lg-tabs small { font-size: 0.7333em; font-weight: 600; line-height: 1.4545; color: var(--p-mute); }
+.lg-phone-screen .lg-tabs span.is-on small { color: var(--p-ink); }
+
+/* ---- offline modal ------------------------------------------------------ */
+.lg-phone-screen .lg-offline-screen { overflow: hidden; }
+.lg-phone-screen .lg-behind { display: flex; flex-direction: column; flex: 1; min-height: 0; transition: filter 420ms, opacity 420ms; }
+.lg-phone-screen .lg-behind.is-dim { filter: blur(2px); opacity: 0.55; }
+.lg-phone-screen .lg-confirm-title { font-size: 1.2em; font-weight: 500; line-height: 1.4444; color: var(--p-ink); margin: 0 0 1.0667em; }
+.lg-phone-screen .lg-confirm { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.0667em; }
+.lg-phone-screen .lg-confirm li { font-size: 1em; font-weight: 500; line-height: 1.4667; color: var(--p-ink); }
+.lg-phone-screen .lg-scrim { position: absolute; inset: 0; background: rgba(26, 29, 35, 0.32); opacity: 0; transition: opacity 380ms; }
+.lg-phone-screen .lg-scrim.is-in { opacity: 1; }
+/* the modal is 361x358 r24, sitting 248 from the top */
+.lg-phone-screen .lg-modal {
+  position: absolute; left: 1.0667em; right: 1.0667em; top: 16.5333em;
+  padding: 1.3333em; border-radius: 1.6em; background: #fff;
+  box-shadow: 0 24px 50px -20px rgba(26, 29, 35, 0.4); text-align: center;
+  opacity: 0; transform: translateY(0.6em) scale(0.94);
+  transition: opacity 360ms, transform 420ms cubic-bezier(.2,1.1,.3,1);
+}
+.lg-phone-screen .lg-modal.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-modal-x { position: absolute; top: 0.9333em; right: 0.9333em; width: 2.1333em; height: 2.1333em; }
+.lg-phone-screen .lg-wifi { display: block; width: 4.8em; height: 4.8em; margin: 0.5333em auto 1.0667em; transform: scale(0.9); opacity: 0.55; transition: transform 420ms cubic-bezier(.2,1.3,.3,1), opacity 420ms; }
+.lg-phone-screen .lg-wifi.is-off { transform: none; opacity: 1; }
+.lg-phone-screen .lg-modal-title { display: block; font-size: 1.2em; font-weight: 600; line-height: 1.4444; color: var(--p-ink); margin-bottom: 1.0667em; }
+.lg-phone-screen .lg-modal-body { font-size: 1em; font-weight: 400; line-height: 1.4667; color: var(--p-ink); margin: 0 1.3333em 1.3333em; }
+.lg-phone-screen .lg-modal-body b { font-weight: 700; }
+.lg-phone-screen .lg-modal-btns { display: flex; gap: 1.0667em; opacity: 0; transform: translateY(0.4em); transition: opacity 300ms, transform 340ms; }
+.lg-phone-screen .lg-modal-btns.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-modal-btns .lg-cta { flex: 1; margin: 0; }
+
+/* ---- attach areas: r20 on #f6f7fa inside a #caced5 hairline -------------- */
+.lg-phone-screen .lg-attach {
+  display: flex; align-items: center; gap: 0.8em; flex: none;
+  min-height: 5.0667em; padding: 0.9333em 1.0667em; border-radius: 1.3333em;
+  background: var(--p-surface); box-shadow: inset 0 0 0 1px var(--p-attach);
+  opacity: 0; transform: translateY(0.4em); transition: opacity 340ms, transform 380ms, box-shadow 320ms;
+}
+.lg-phone-screen .lg-attach.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-attach.is-doc { min-height: 8.2667em; margin-top: 0.8em; }
+.lg-phone-screen .lg-attach.is-doc.is-filled { box-shadow: inset 0 0 0 1px var(--p-line); background: #fff; }
+.lg-phone-screen .lg-attach-text { display: flex; flex-direction: column; gap: 0.2em; flex: 1; min-width: 0; }
+.lg-phone-screen .lg-attach-text strong { font-size: 1em; font-weight: 400; line-height: 1.4667; color: var(--p-ink); }
+.lg-phone-screen .lg-attach-text small { font-size: 0.8667em; line-height: 1.4667; color: var(--p-mute); }
+.lg-phone-screen .lg-cam { width: 2.4em; height: 2.4em; flex: none; border-radius: 1.6em; background: var(--p-ink); display: grid; place-items: center; }
+.lg-phone-screen .lg-cam .lg-art { width: 100%; height: 100%; }
+.lg-phone-screen .lg-cam.is-pulse { animation: lg-pulse 1100ms ease-in-out infinite; }
+@keyframes lg-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.09); } }
+/* the document thumb is 156x96 r16 */
+.lg-phone-screen .lg-doc { width: 10.4em; height: 6.4em; flex: none; border-radius: 1.0667em; overflow: hidden; background: #fff; display: grid; place-items: center; }
+.lg-phone-screen .lg-doc .lg-art { object-fit: cover; animation: lg-scan 460ms ease both; }
+@keyframes lg-scan { from { opacity: 0.15; transform: translateY(0.3em) scale(0.96); } to { opacity: 1; transform: none; } }
+.lg-phone-screen .lg-thumbs { display: flex; gap: 0.5333em; flex: none; margin-top: 0.6667em; }
+.lg-phone-screen .lg-thumb { width: 5.3333em; height: 3.7333em; border-radius: 0.8em; overflow: hidden; background: var(--p-surface); box-shadow: inset 0 0 0 1px var(--p-line); opacity: 0; transform: translateY(0.6em) scale(0.9); transition: opacity 320ms, transform 380ms cubic-bezier(.2,1.2,.3,1); }
+.lg-phone-screen .lg-thumb.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-thumb .lg-art { object-fit: cover; }
+/* image guide: 361x220 r24 with a #f6f7fa r20 plate inside */
+.lg-phone-screen .lg-guide { margin-top: 1.6em; padding: 1.3333em 1.0667em 1.0667em; border-radius: 1.6em; background: #fff; box-shadow: inset 0 0 0 1px var(--p-line); flex: none; opacity: 0; transform: translateY(0.7em); transition: opacity 380ms, transform 440ms; }
+.lg-phone-screen .lg-guide.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-guide-head { display: flex; align-items: center; gap: 0.5333em; margin-bottom: 0.6667em; }
+.lg-phone-screen .lg-info { width: 1.3333em; height: 1.3333em; flex: none; }
+.lg-phone-screen .lg-guide-head strong { flex: 1; font-size: 1em; font-weight: 400; line-height: 1.4667; }
+.lg-phone-screen .lg-guide-x { width: 1.8667em; height: 1.8667em; flex: none; }
+.lg-phone-screen .lg-guide p { font-size: 0.8667em; line-height: 1.5385; color: var(--p-ink); margin: 0 0 0.8em; }
+.lg-phone-screen .lg-guide-shot { display: grid; place-items: center; height: 5.8667em; padding: 0.8em; border-radius: 1.3333em; background: var(--p-surface); }
+.lg-phone-screen .lg-guide-shot .lg-art { width: auto; max-width: 100%; height: 100%; }
+
+/* ---- segmented control -------------------------------------------------- */
+.lg-phone-screen .lg-seg { position: relative; display: flex; gap: 0.5333em; flex: none; margin-bottom: 0.8em; padding: 0 0.2667em; }
+.lg-phone-screen .lg-seg span { padding: 0.4em 0.8em; border-radius: 0.6667em; font-size: 1em; font-weight: 400; line-height: 1.4667; color: var(--p-ink); box-shadow: inset 0 0 0 1px var(--p-line); transition: font-weight 240ms, background 240ms, box-shadow 240ms; }
+.lg-phone-screen .lg-seg span:first-child { font-weight: 500; background: var(--p-surface); }
+.lg-phone-screen .lg-seg.is-second span:first-child { font-weight: 400; background: transparent; }
+.lg-phone-screen .lg-seg.is-second span:last-child { font-weight: 500; background: var(--p-surface); }
+
+/* ---- submitted ---------------------------------------------------------- */
+.lg-phone-screen .lg-submitted-screen { text-align: center; }
+.lg-phone-screen .lg-close-top { position: absolute; top: 4.2em; right: 1.2em; width: 2.1333em; height: 2.1333em; }
+.lg-phone-screen .lg-done { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.0667em; padding: 0 0.2667em; }
+.lg-phone-screen .lg-success { width: 4.8em; height: 4.8em; display: block; opacity: 0; transform: scale(0.6); transition: opacity 320ms, transform 480ms cubic-bezier(.2,1.4,.35,1); }
+.lg-phone-screen .lg-success.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-done-title { display: block; font-size: 1.6em; font-weight: 600; line-height: 1.3333; color: var(--p-ink); opacity: 0; transform: translateY(0.3em); transition: opacity 340ms, transform 380ms; }
+.lg-phone-screen .lg-done-title.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-done-body { font-size: 1em; line-height: 1.4667; color: var(--p-ink); margin: 0; opacity: 0; transform: translateY(0.4em); transition: opacity 340ms, transform 380ms; }
+.lg-phone-screen .lg-done-body.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-done-btns { flex: none; display: flex; flex-direction: column; gap: 1.0667em; opacity: 0; transform: translateY(0.5em); transition: opacity 340ms, transform 380ms; }
+.lg-phone-screen .lg-done-btns.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-done-btns .lg-cta { margin: 0; }
+
+/* ---- claim status ------------------------------------------------------- */
+.lg-phone-screen .lg-claim-screen { background: #fff; }
+.lg-phone-screen .lg-claim-chip { display: flex; align-items: center; gap: 0.6667em; padding: 0.8em 1.0667em; flex: none; opacity: 0; transform: translateY(0.4em); transition: opacity 340ms, transform 380ms; }
+.lg-phone-screen .lg-claim-chip.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-timeline { position: relative; display: flex; flex-direction: column; gap: 0.7333em; flex: none; padding: 0 0.2667em; }
+.lg-phone-screen .lg-tl { display: flex; align-items: center; gap: 0.6em; opacity: 0; transform: translateX(-0.4em); transition: opacity 320ms, transform 360ms; }
+.lg-phone-screen .lg-tl.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-tl-dot { width: 1.3333em; height: 1.3333em; flex: none; }
+.lg-phone-screen .lg-tl-dot svg { width: 100%; height: 100%; display: block; }
+.lg-phone-screen .lg-tl-ring { fill: none; stroke: #c9ced8; stroke-width: 1.4; }
+.lg-phone-screen .lg-tl-tick { fill: none; stroke: #4c7f22; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 13; stroke-dashoffset: 13; }
+.lg-phone-screen .lg-tl.is-done .lg-tl-ring { stroke: var(--p-green); transition: stroke 300ms; }
+.lg-phone-screen .lg-tl.is-done .lg-tl-tick { transition: stroke-dashoffset 400ms ease 160ms; stroke-dashoffset: 0; }
+.lg-phone-screen .lg-tl small { margin-left: auto; font-size: 0.8667em; line-height: 1.3846; color: var(--p-mute); }
+.lg-phone-screen .lg-tl small.is-amber { color: var(--p-amber); }
+.lg-phone-screen .lg-tip {
+  align-self: flex-end; max-width: 74%; margin-top: -0.2em;
+  padding: 0.5333em 0.6667em; border-radius: 0.8em; background: #fff;
+  box-shadow: 0 8px 22px -8px rgba(26, 29, 35, 0.28), inset 0 0 0 1px var(--p-line);
+  font-size: 0.8em; line-height: 1.4; color: var(--p-mute);
+  opacity: 0; transform: translateY(-0.3em); transition: opacity 340ms, transform 380ms;
+}
+.lg-phone-screen .lg-tip.is-in { opacity: 1; transform: none; }
+.lg-phone-screen .lg-details { display: flex; flex-direction: column; gap: 0.8em; padding: 0 0.2667em; opacity: 0; transition: opacity 340ms; }
+.lg-phone-screen .lg-details.is-in { opacity: 1; }
+.lg-phone-screen .lg-details span { display: flex; flex-direction: column; gap: 0.2em; }
+.lg-phone-screen .lg-details small { font-size: 0.8667em; line-height: 1; color: var(--p-mute); }
+.lg-phone-screen .lg-details strong { font-size: 1em; font-weight: 400; line-height: 1.4667; color: var(--p-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lg-phone-screen :is(.lg-lead, .lg-sub, .lg-user, .lg-offers, .lg-offer, .lg-sheet, .lg-sec, .lg-type, .lg-actions, .lg-policy, .lg-cta, .lg-attach, .lg-thumb, .lg-guide, .lg-modal, .lg-modal-btns, .lg-success, .lg-done-title, .lg-done-body, .lg-done-btns, .lg-claim-chip, .lg-tl, .lg-tip, .lg-details, .lg-badge, .lg-wifi) { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .lg-phone-screen .lg-cam { animation: none; }
+  .lg-phone-screen .lg-field.is-ping::after { display: none; }
+  .lg-phone-screen .lg-tl-tick { stroke-dashoffset: 0 !important; transition: none !important; }
+  .lg-phone-screen :is(.lg-cover i, .lg-stepbar-wide i) { transition: none; }
+  .lg-phone-screen .lg-doc .lg-art { animation: none; }
+}
+
+/* ==========================================================================
+   Shield. The page has a global "on dark" rule set (white p/strong with
+   !important) and a global Archivo body font. The phone is the product, not
+   the page, so the type inside the frame is pinned to Noto Sans and every
+   colour the screens set is restated at higher specificity.
+   ========================================================================== */
+.dw-page .dw-case-study .lg-phone-screen,
+.dw-page .dw-case-study .lg-phone-screen :is(p, li, ol, span, strong, b, i, em, small, label, a, div, article, header, nav, figcaption) {
+  font-family: var(--lg-font, "Noto Sans", Inter, system-ui, sans-serif) !important;
+}
+.dw-page .dw-case-study .lg-phone-screen :is(p, span, small, label, strong, b, a, li, em) { color: var(--p-ink) !important; text-decoration: none; letter-spacing: normal; }
+.dw-page .dw-case-study .lg-phone-screen p { max-width: none; margin: 0; }
+.dw-page .dw-case-study .lg-phone-screen :is(strong, b) { display: inline; margin: 0; font-size: inherit; line-height: inherit; background: none; padding: 0; }
+.dw-page .dw-case-study .lg-phone-screen :is(.lg-head-text strong, .lg-user-text strong, .lg-policy-name strong, .lg-chip-text strong) { display: block; }
+.dw-page .dw-case-study .lg-phone-screen .lg-policy-block strong { display: flex; }
+.dw-page .dw-case-study .lg-phone-screen :is(small, .lg-head-text small, .lg-user-text small, .lg-field-text small, .lg-attach-text small, .lg-details small, .lg-policy-block small, .lg-policy-right small, .lg-tabs small, .lg-tl small, .lg-tip) { color: var(--p-mute) !important; }
+.dw-page .dw-case-study .lg-phone-screen .lg-tabs span.is-on small { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .lg-phone-screen .lg-tl small.is-amber { color: var(--p-amber) !important; }
+.dw-page .dw-case-study .lg-phone-screen :is(.lg-cta, .lg-badge) { color: #fff !important; }
+.dw-page .dw-case-study .lg-phone-screen .lg-cta.is-ghost { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .lg-phone-screen .lg-pill.is-blue { color: var(--p-blue-ink) !important; }
+.dw-page .dw-case-study .lg-phone-screen .lg-pill.is-amber { color: var(--p-amber) !important; }
+.dw-page .dw-case-study .lg-phone-screen .lg-pill.is-green { color: #4c7f22 !important; }
+.dw-page .dw-case-study .lg-phone-screen .lg-sec.is-caps { color: var(--p-mute) !important; }
+.dw-page .dw-case-study .lg-phone-screen :is(.lg-status-right, .lg-user-icons, .lg-dots, .lg-chip, .lg-pill) { display: inline-flex; }
+.dw-page .dw-case-study .lg-phone-screen .lg-status-right { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .lg-phone-screen :is(.lg-cam, .lg-doc, .lg-guide-shot, .lg-thumb, .lg-badge) { display: grid; }
+.dw-page .dw-case-study .lg-phone-screen .lg-confirm { list-style: none; padding: 0; }
+.dw-page .dw-case-study .lg-phone-screen .lg-confirm li::marker { content: none; }
+.dw-page .dw-case-study .lg-phone-screen .lg-art { margin: 0; border-radius: 0; box-shadow: none; max-width: none; }
+
+/* --------------------------------------------------------------------------
+   The page forces every <img> inside a walkthrough step shot to
+   `width:100% !important` on small screens (it is meant for screenshots).
+   The coded phone is not a screenshot, so art sizes are carried in custom
+   properties and restated here, above that rule.
+   -------------------------------------------------------------------------- */
+.dw-page .dw-case-study .lg-phone-screen img.lg-art {
+  width: var(--art-w, 100%) !important;
+  height: var(--art-h, 100%) !important;
+  object-fit: var(--art-fit, contain);
+  display: block;
+}
+.dw-page .dw-case-study .lg-phone-screen img.lg-avatar { --art-w: 2.9333em; --art-h: 2.9333em; border-radius: 50%; }
+.dw-page .dw-case-study .lg-phone-screen img.lg-back { --art-w: 1.6em; --art-h: 1.6em; }
+.dw-page .dw-case-study .lg-phone-screen img.lg-ico { --art-w: 1.6em; --art-h: 1.6em; }
+.dw-page .dw-case-study .lg-phone-screen img.lg-chev { --art-w: 1.6em; --art-h: 1.6em; }
+.dw-page .dw-case-study .lg-phone-screen img.lg-row-ico { --art-w: 1.8667em; --art-h: 1.8667em; }
+.dw-page .dw-case-study .lg-phone-screen img.lg-policy-ico { --art-w: 2.6667em; --art-h: 2.6667em; }
+.dw-page .dw-case-study .lg-phone-screen img.lg-copy { --art-w: 1.0667em; --art-h: 1.0667em; }
+.dw-page .dw-case-study .lg-phone-screen img.lg-field-ico { --art-w: 2.4em; --art-h: 2.6667em; }
+.dw-page .dw-case-study .lg-phone-screen img.lg-dl { --art-w: 1.6em; --art-h: 1.6em; }
+.dw-page .dw-case-study .lg-phone-screen img.lg-modal-x { --art-w: 2.1333em; --art-h: 2.1333em; }
+.dw-page .dw-case-study .lg-phone-screen img.lg-guide-x { --art-w: 1.8667em; --art-h: 1.8667em; }
+.dw-page .dw-case-study .lg-phone-screen img.lg-info { --art-w: 1.3333em; --art-h: 1.3333em; }
+.dw-page .dw-case-study .lg-phone-screen .lg-type img.lg-art { --art-w: 4.5333em; --art-h: 4.5333em; }
+.dw-page .dw-case-study .lg-phone-screen .lg-tabs img.lg-art { --art-w: 1.6em; --art-h: 1.6em; }
+.dw-page .dw-case-study .lg-phone-screen .lg-guide-shot img.lg-art { --art-w: auto; --art-h: 100%; max-width: 100%; }
+.dw-page .dw-case-study .lg-phone-screen :is(.lg-offer, .lg-doc, .lg-thumb) img.lg-art { --art-fit: cover; }
+
+/* --------------------------------------------------------------------------
+   The fail, marked in red. This is the one place in the case study where the
+   product's accent is spent on the writing rather than on a control: a red
+   rule down the side, a red eyebrow, and the opening sentence carried in red
+   so the admission reads as a marked moment rather than another prose block.
+   -------------------------------------------------------------------------- */
+.dw-case-liga .dw-case-section-the-fail {
+  position: relative;
+  /* the section-background blend sets every section's background-color to
+     transparent with an inline !important, so the wash is painted with an
+     inset shadow instead, which the blend does not touch */
+  box-shadow: inset 0 0 0 9999px var(--lg-red-soft);
+  border-radius: 24px;
+  padding-left: clamp(24px, 3vw, 48px);
+  padding-right: clamp(24px, 3vw, 48px);
+}
+.dw-case-liga .dw-case-section-the-fail::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 28px;
+  bottom: 28px;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--lg-red);
+}
+.dw-page .dw-case-liga .dw-case-section-the-fail .dw-case-eyebrow { color: var(--lg-red); }
+.dw-page .dw-case-liga .dw-case-section-the-fail h2 { color: var(--lg-red); }
+.dw-page .dw-case-liga .dw-case-section-the-fail :is(p, li) :is(strong, b) { color: var(--lg-red); }
+.dw-page .dw-case-liga .dw-case-section-the-fail .dw-case-richtext p:first-of-type,
+.dw-page .dw-case-liga .dw-case-section-the-fail .dw-case-prose p:first-of-type {
+  color: #8f1f30;
+}

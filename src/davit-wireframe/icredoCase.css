@@ -1,0 +1,524 @@
+/* ==========================================================================
+   iCredo case study - midnight precision instrument.
+   Page chrome follows the Linear reference (void canvas, paper type, hairline
+   borders, one acid-lime action). The product screens inside the frames keep
+   iCredo's own light UI: they are the product, the page is the instrument.
+   ========================================================================== */
+
+.dw-case-study.dw-case-icredo {
+  /* light palette, in the product's own colours: white page, pale surfaces,
+     hairline borders, ink type, one blue action */
+  --ic-void: #ffffff;
+  --ic-carbon: #f4f7fb;
+  --ic-obsidian: #edf4ff;
+  --ic-graphite: #e2e8eb;
+  --ic-smoke: #c8d3d9;
+  --ic-ash: #748d9c;
+  --ic-fog: #4c5e6e;
+  --ic-mist: #223447;
+  --ic-paper: #041f34;
+  --ic-lime: #1e60e5;
+  --ic-blue: #1e60e5;     /* the product's own accent, inside the phones too */
+  --ic-red: #a60029;      /* the product's logo mark */
+  --ic-font: "Inter Variable", Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ic-phone-w: clamp(230px, 22vw, 320px);
+
+  background: var(--ic-void);
+  color: var(--ic-mist);
+}
+
+/* ---- page type: the site's own faces and scale (Archivo / Syne), only the
+   colours change. Inter lives inside the phones, where it is the product. -- */
+.dw-page .dw-case-icredo h1,
+.dw-page .dw-case-icredo h2,
+.dw-page .dw-case-icredo h3 { color: var(--ic-paper); }
+.dw-case-icredo .dw-case-eyebrow { color: var(--ic-fog); }
+.dw-case-icredo .dw-case-richtext,
+.dw-case-icredo .dw-case-richtext p,
+.dw-case-icredo .dw-walk-step p,
+.dw-case-icredo .dw-outcome-stat dt { color: var(--ic-mist); }
+.dw-case-icredo .dw-case-richtext strong { color: var(--ic-paper); background: none; padding: 0; }
+.dw-case-icredo .dw-case-richtext em { color: var(--ic-fog); font-style: normal; }
+
+.dw-page .dw-case-icredo :is(p, li, blockquote, dd, figcaption) { color: var(--ic-mist); }
+.dw-page .dw-case-icredo :is(p, li, blockquote) :is(strong, b) { color: var(--ic-paper); background: none; padding: 0; }
+.dw-page .dw-case-icredo :is(.dw-case-eyebrow, .dw-case-opening-eyebrow, figcaption, .dw-about-card-eyebrow) { color: var(--ic-fog); }
+
+/* ---- opening: a carbon card with a hairline, the phone as media --------- */
+.dw-case-icredo .dw-case-opening-panel {
+  min-height: 0;
+  background: var(--ic-obsidian);
+  box-shadow: var(--ic-graphite) 0 0 0 1px inset;
+  border-radius: 12px;
+  color: var(--ic-mist);
+}
+.dw-case-icredo .dw-case-opening-copy { display: flex; flex-direction: column; }
+.dw-case-icredo .dw-case-opening-meta { margin-top: clamp(40px, 5vw, 80px); }
+.dw-case-icredo .dw-case-opening-meta dt { color: var(--ic-ash); }
+.dw-case-icredo .dw-case-opening-meta dd { color: var(--ic-mist); }
+.dw-case-icredo .dw-case-opening-media.is-screen { right: 9%; bottom: -9%; width: auto; display: block; }
+.dw-case-icredo .dw-case-opening-media .ic-phone { --ic-phone-w: clamp(230px, 21vw, 300px); }
+@media (max-width: 1100px) {
+  .dw-case-icredo .dw-case-opening-media.is-screen { position: relative; right: auto; bottom: auto; margin: 40px auto -14%; display: grid; justify-content: center; }
+}
+
+/* ---- surfaces by section ------------------------------------------------- */
+.dw-case-icredo .dw-case-section { background: transparent; }
+/* the old light case clips every section; the sticky walkthrough needs the page as its scroller */
+.dw-case-icredo .dw-case-section.dw-walk, .dw-case-icredo .dw-case-section-problem { overflow: visible; }
+.dw-page .dw-case-study.dw-case-icredo .dw-icredo-title-highlight { color: var(--ic-paper); background: none; padding: 0; }
+.dw-case-icredo .dw-outcome,
+.dw-case-icredo .dw-plate,
+.dw-case-icredo .dw-strip,
+.dw-case-icredo .dw-case-section-context,
+.dw-case-icredo .dw-case-section-voice { background: var(--ic-carbon) !important; }
+.dw-case-icredo .dw-outcome-stats { border-top-color: var(--ic-graphite); }
+.dw-case-icredo .dw-outcome-stat strong { color: var(--ic-paper); }
+.dw-case-icredo .dw-walk-step { border-top-color: var(--ic-graphite); }
+.dw-case-icredo .dw-walk-dots li { background: var(--ic-fog); }
+.dw-case-icredo .dw-walk-dots li.is-active { background: var(--ic-lime); }
+
+/* feature grids as hairline cards */
+.dw-case-icredo .dw-case-feature-grid article {
+  background: #ffffff;
+  box-shadow: var(--ic-graphite) 0 0 0 1px inset;
+  border-radius: 12px;
+  padding: 24px;
+  color: var(--ic-mist);
+}
+.dw-case-icredo .dw-case-feature-grid article strong { color: var(--ic-paper); background: none; }
+.dw-case-icredo .dw-case-feature-grid article span { color: var(--ic-fog); }
+.dw-case-icredo .dw-case-feature-title { color: var(--ic-paper); }
+
+
+/* design system: a headline, a label, then tiny lines of the actual rules */
+.dw-case-icredo .dw-case-section-design-system .dw-case-feature-grid article > div { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--ic-graphite); }
+.dw-case-icredo .dw-case-section-design-system .dw-case-feature-grid article > div > p { margin: 0; padding: 5px 0 5px 14px; position: relative; font-size: clamp(13px, 0.95vw, 15px); line-height: 1.45; color: var(--ic-fog); }
+.dw-case-icredo .dw-case-section-design-system .dw-case-feature-grid article > div > p::before { content: ""; position: absolute; left: 0; top: 0.95em; width: 6px; height: 1px; background: var(--ic-ash); }
+
+/* advantages: problem / what I did / design solution - two columns, the
+   coded screen cropped into the card like a plate */
+.dw-case-icredo .dw-case-section-advantages .dw-case-feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.dw-case-icredo .dw-case-section-advantages .dw-case-feature-grid article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 224px;
+  grid-template-rows: auto 1fr;
+  column-gap: 28px;
+  padding: 28px 0 0 28px;
+  min-height: 420px;
+  overflow: hidden;
+}
+.dw-case-icredo .dw-case-section-advantages .dw-case-feature-grid article > strong { grid-column: 1 / -1; display: block; font-size: clamp(22px, 1.8vw, 28px); line-height: 1.1; margin: 0 28px 20px 0; }
+.dw-case-icredo .dw-case-section-advantages .dw-case-feature-grid article > div { grid-column: 1; padding-bottom: 28px; }
+.dw-case-icredo .dw-case-section-advantages .dw-case-feature-grid article > div > p { font-size: clamp(15px, 1.05vw, 17px); line-height: 1.55; margin: 0; color: var(--ic-mist); }
+.dw-case-icredo .dw-case-section-advantages .dw-case-feature-grid article > div > p:first-of-type { color: var(--ic-fog); }
+.dw-case-icredo .dw-case-section-advantages .dw-case-feature-grid article > div > p:first-of-type::before { content: "Problem"; color: var(--ic-ash); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 6px; }
+.dw-case-icredo .dw-case-section-advantages .dw-case-feature-grid article > div > p:last-of-type::before { content: "What I did"; color: var(--ic-ash); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin: 16px 0 6px; }
+.dw-case-icredo .dw-case-feature-shot {
+  grid-column: 2;
+  grid-row: 2;
+  position: relative;
+  margin: 0;
+  min-height: 300px;
+  padding-top: 26px;
+  overflow: hidden;
+}
+.dw-case-icredo .dw-case-feature-shot::before { content: "Design solution"; position: absolute; top: 0; left: 0; color: var(--ic-ash); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1; }
+.dw-case-icredo .dw-case-feature-shot .ic-inview { position: absolute; left: 0; width: 200px; }
+.dw-case-icredo .dw-case-feature-shot .dw-case-feature-clip { position: absolute; inset: 26px 0 0 0; overflow: hidden; }
+.dw-case-icredo .dw-case-feature-shot[data-focus="top"] .ic-inview { top: 0; }
+.dw-case-icredo .dw-case-feature-shot[data-focus="bottom"] .ic-inview { bottom: -22px; }
+.dw-case-icredo .dw-case-feature-shot[data-focus="bottom"] .dw-case-feature-clip { -webkit-mask-image: linear-gradient(to bottom, transparent, #000 56px); mask-image: linear-gradient(to bottom, transparent, #000 56px); }
+.dw-case-icredo .dw-case-feature-shot .ic-phone { --ic-phone-w: 200px; }
+.dw-case-icredo .dw-case-feature-shot.is-image { padding-right: 28px; padding-bottom: 28px; display: grid; align-items: end; }
+.dw-case-icredo .dw-case-feature-shot.is-image img { width: 100% !important; max-width: none !important; height: auto !important; border-radius: 12px; }
+@media (max-width: 1100px) {
+  .dw-case-icredo .dw-case-section-advantages .dw-case-feature-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .dw-case-icredo .dw-case-section-advantages .dw-case-feature-grid article { grid-template-columns: minmax(0, 1fr); padding: 24px 0 0 24px; min-height: 0; }
+  .dw-case-icredo .dw-case-section-advantages .dw-case-feature-grid article strong { margin-right: 24px; }
+  .dw-case-icredo .dw-case-section-advantages .dw-case-feature-grid article > div { padding-right: 24px; padding-bottom: 20px; }
+  .dw-case-icredo .dw-case-feature-shot { grid-column: 1; grid-row: auto; height: 300px; min-height: 0; margin-right: 24px; }
+  .dw-case-icredo .dw-case-feature-shot .ic-inview { left: 50%; transform: translateX(-50%); }
+  .dw-case-icredo .dw-case-feature-shot.is-image { padding-right: 0; }
+}
+.dw-case-icredo .dw-case-feature-grid { gap: 12px; }
+
+.dw-case-icredo .dw-case-section-advantages .dw-case-feature-grid article > div > p:first-of-type { color: var(--ic-fog); }
+
+/* testimonial + gallery + media on dark */
+.dw-case-icredo .dw-case-testimonial { background: #ffffff; box-shadow: var(--ic-graphite) 0 0 0 1px inset; border-radius: 12px; color: var(--ic-mist); }
+.dw-case-icredo .dw-case-testimonial blockquote, .dw-case-icredo .dw-case-testimonial p { color: var(--ic-mist); }
+.dw-case-icredo .dw-case-gallery figure,
+.dw-case-icredo .dw-case-media { background: var(--ic-carbon); box-shadow: var(--ic-graphite) 0 0 0 1px inset; border-radius: 12px; padding: 24px; }
+.dw-case-icredo .dw-case-gallery figcaption { color: var(--ic-fog); }
+.dw-case-icredo .dw-case-navigation, .dw-case-icredo .dw-case-section-portfolio-navigation { background: var(--ic-carbon) !important; color: var(--ic-mist); }
+.dw-case-icredo .dw-case-prevnext-card { box-shadow: var(--ic-graphite) 0 0 0 1px inset; border-radius: 12px; }
+
+/* the one acid-lime action on the page: the pull-to-next meter */
+.dw-case-icredo .dw-pull-next { color: var(--ic-mist); }
+.dw-case-icredo .dw-pull-next small, .dw-case-icredo .dw-pull-next-hint { color: var(--ic-fog); }
+.dw-case-icredo .dw-pull-next strong { color: var(--ic-paper); }
+.dw-case-icredo .dw-pull-next-meter { color: var(--ic-lime); }
+.dw-case-icredo .dw-pull-next-meter svg { color: var(--ic-lime); }
+.dw-case-icredo .dw-pull-arrow { color: var(--ic-lime); }
+
+.dw-case-icredo .dw-case-testimonial :is(strong, cite, h3, b) { color: var(--ic-paper); }
+.dw-case-icredo .dw-case-testimonial :is(cite, small, span:not(.dw-case-annotation-text)) { font-style: normal; }
+.dw-case-icredo .dw-case-testimonial-annotation { color: var(--ic-fog); }
+
+/* the motion sections size their phone slots from the same variable the frame uses,
+   so the coded phone always fills its slot exactly */
+.dw-case-icredo .dw-walk { --walk-phone: var(--ic-phone-w); }
+.dw-case-icredo .dw-plate { --plate-phone: clamp(260px, 26vw, 360px); }
+.dw-case-icredo .dw-plate-phone .ic-phone { --ic-phone-w: var(--plate-phone); }
+.dw-case-icredo .dw-walk-step-shot .ic-phone { --ic-phone-w: 230px; }
+
+/* the plates keep their phone but the phone is code now */
+.dw-case-icredo .dw-plate-phone { box-shadow: none; background: transparent; border-radius: 0; overflow: visible; margin-bottom: 0; width: auto; aspect-ratio: auto; }
+
+/* ==========================================================================
+   The phone and its screens - rebuilt from the Figma exports.
+   Inside the frame 1em = 15px of the 393px design (3.82cqw), so every value
+   below is the design's pixel value / 15. Palette is the product's:
+   ink #041f34, slate #4c5e6e, mist #748d9c, line #e2e8eb, blue #1e60e5.
+   ========================================================================== */
+.ic-phone {
+  --p-ink: #041f34;
+  --p-slate: #4c5e6e;
+  --p-mist: #748d9c;
+  --p-line: #e2e8eb;
+  --p-line-strong: #b9c0c9;
+  --p-fill: #f6f6f6;
+  --p-blue: #1e60e5;
+  --p-blue-soft: #e4ecfb;
+  --p-blue-bubble: #d2dffa;
+  --p-blue-bubble-line: #b9c8f5;
+  --p-green: #1cb785;
+  --p-green-soft: #e2f1ec;
+  --p-red: #c9302c;
+  --p-grad: linear-gradient(180deg, #64a8f6 0%, #1e60e5 100%);
+  /* the same device treatment as the other case studies' screen exports:
+     a bare screen with rounded corners, a hairline ring, a soft drop shadow
+     and a Dynamic Island cut out of the top. No bezel. Every dimension scales
+     with the width (1 unit = 1px of the 393px design). */
+  --ic-unit: calc(var(--ic-phone-w, 300px) / 393);
+  width: var(--ic-phone-w, 300px);
+  aspect-ratio: 1836 / 3953;
+  border-radius: calc(var(--ic-unit) * 53);
+  padding: 0;
+  background: #fff;
+  box-shadow:
+    0 40px 80px -30px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(0, 0, 0, 0.06);
+  color: var(--p-ink);
+  font-family: var(--ic-font, Inter, system-ui, sans-serif);
+  container-type: inline-size;
+}
+.ic-phone-screen {
+  position: relative;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  background: #fff;
+  font-size: clamp(7px, 3.82cqw, 15px);
+  line-height: 1.35;
+}
+.ic-screen { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 1em 1.07em 0.8em; }
+.ic-phone-screen.is-bare {
+  --p-ink: #041f34; --p-slate: #4c5e6e; --p-mist: #748d9c; --p-line: #e2e8eb; --p-line-strong: #b9c0c9; --p-fill: #f6f6f6;
+  --p-blue: #1e60e5; --p-blue-soft: #e4ecfb; --p-blue-bubble: #d2dffa; --p-blue-bubble-line: #b9c8f5; --p-green: #1cb785; --p-green-soft: #e2f1ec; --p-red: #c9302c;
+  --p-grad: linear-gradient(180deg, #64a8f6 0%, #1e60e5 100%);
+  border-radius: 7cqw;
+  color: var(--p-ink);
+  font-family: var(--ic-font, Inter, system-ui, sans-serif);
+}
+
+/* ---- the problem, staged on a plate ---- */
+.ic-ui {
+  --p-ink: #041f34; --p-slate: #4c5e6e; --p-mist: #748d9c; --p-line: #e2e8eb; --p-line-strong: #b9c0c9; --p-fill: #f6f6f6;
+  --p-blue: #1e60e5; --p-blue-soft: #e4ecfb; --p-blue-bubble: #d2dffa; --p-blue-bubble-line: #b9c8f5; --p-green: #1cb785; --p-green-soft: #e2f1ec; --p-red: #c9302c;
+  --p-grad: linear-gradient(180deg, #64a8f6 0%, #1e60e5 100%);
+  color: var(--p-ink);
+  font-family: var(--ic-font, Inter, system-ui, sans-serif);
+  font-size: 15px;
+  line-height: 1.35;
+}
+.ic-ui *, .ic-ui *::before, .ic-ui *::after { box-sizing: border-box; }
+.ic-story { position: relative; aspect-ratio: 4 / 3; border-radius: 24px; overflow: hidden; background: linear-gradient(160deg, #e3efff 0%, #eef5ff 55%, #f7faff 100%); box-shadow: inset 0 0 0 1px rgba(30, 96, 229, 0.08); }
+.ic-story-form, .ic-story-chat { position: absolute; width: min(52%, 340px); border-radius: 18px; background: #fff; box-shadow: 0 24px 60px -30px rgba(4, 31, 52, 0.35), 0 0 0 1px var(--p-line); transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 500ms, filter 700ms; }
+.ic-story-form { left: 8%; top: 10%; padding: 18px 18px 16px; opacity: 0; transform: translateY(24px); }
+.ic-story-form.is-in { opacity: 1; transform: none; }
+.ic-story-form.is-back { transform: translate(-6%, -4%) rotate(-4deg) scale(0.92); opacity: 0.55; filter: saturate(0.6); }
+.ic-story-form-title { margin: 0 0 12px; font-weight: 590; color: var(--p-ink); }
+.ic-story-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; margin-bottom: 14px; }
+.ic-story-fields span { display: grid; gap: 3px; }
+.ic-story-fields small { font-size: 10px; color: var(--p-slate); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ic-story-fields i { display: block; height: 22px; border: 1px solid var(--p-line-strong); border-radius: 5px; background: #fafafa; }
+.ic-story-form .ic-cta { padding: 10px; font-size: 13px; border-radius: 9px; }
+.ic-story-chat { right: 8%; bottom: 10%; padding: 14px 16px 16px; opacity: 0; transform: translateY(40px) scale(0.96); }
+.ic-story-chat.is-in { opacity: 1; transform: none; }
+.ic-story-chat-head { display: flex; align-items: center; gap: 8px; padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--p-line); font-weight: 590; font-size: 14px; }
+.ic-story-chat-head .ic-mark { width: 22px; height: 22px; }
+.ic-story-online { width: 7px; height: 7px; border-radius: 50%; background: var(--p-green); margin-left: auto; }
+.ic-story-chat .ic-thread { gap: 10px; min-height: 150px; }
+.ic-story-chat .ic-msg { max-width: 80%; }
+.ic-story-chat .ic-chips.is-inline { margin: 12px 0 0; }
+.ic-story-chat .ic-chips span { font-size: 12px; }
+@media (max-width: 600px) {
+  .ic-story { aspect-ratio: 4 / 5; }
+  .ic-story-form, .ic-story-chat { width: min(78%, 320px); }
+  .ic-story-form { left: 6%; top: 6%; }
+  .ic-story-chat { right: 6%; bottom: 6%; }
+}
+
+/* ---- the photographed phone with the live screen ---- */
+.ic-hands { --zoom: 1.5; position: relative; margin: 0; aspect-ratio: 4 / 5; border-radius: 12px; overflow: hidden; background: var(--ic-carbon); }
+.ic-hands-zoom { position: absolute; inset: 0; transform: scale(var(--zoom)); transform-origin: 50% 46%; }
+.ic-hands img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ic-hands-screen { position: absolute; container-type: inline-size; }
+.ic-hands-screen .ic-inview { position: absolute; inset: 0; container-type: inline-size; }
+.ic-hands-screen .ic-phone-screen.is-bare { position: absolute; inset: 0; height: auto; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35); }
+.ic-hands-screen .ic-phone-screen.is-bare::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(160deg, rgba(255, 255, 255, 0.16), transparent 45%); }
+
+/* problem section as a scene: a short head, then the plate with a compact lead beside it */
+.dw-case-icredo .dw-ic-scene-head { width: min(calc(100% - (var(--case-gutter) * 2)), var(--case-big, 1400px)); margin: 0 auto clamp(36px, 4vw, 64px); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); align-items: end; }
+.dw-case-icredo .dw-ic-scene-head .dw-case-eyebrow { grid-column: 1 / -1; margin-bottom: 0; }
+.dw-case-icredo .dw-case-section-problem { --case-section-title: clamp(38px, 4.2vw, 62px); }
+.dw-page .dw-case-icredo .dw-ic-scene-head h2 { margin: 0; max-width: 14ch; line-height: 1; font-size: clamp(38px, 4.2vw, 62px); }
+.dw-case-icredo .dw-ic-scene-lead { margin: 0; max-width: 34ch; font-size: clamp(18px, 1.45vw, 24px); line-height: 1.4; color: var(--ic-mist); }
+.dw-case-icredo .dw-ic-scene { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 90px); align-items: center; width: min(calc(100% - (var(--case-gutter) * 2)), var(--case-big, 1400px)); margin: 0 auto; }
+.dw-case-icredo .dw-ic-scene-copy { max-width: 40ch; }
+.dw-case-icredo .dw-ic-scene-copy p { font-size: clamp(15px, 1.1vw, 18px); line-height: 1.55; }
+.dw-case-icredo .dw-ic-scene-copy p + p { margin-top: 1em; }
+@media (max-width: 900px) {
+  .dw-case-icredo .dw-ic-scene-head { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .dw-case-icredo .dw-ic-scene { grid-template-columns: minmax(0, 1fr); }
+  .dw-case-icredo .dw-ic-scene-copy { max-width: none; }
+}
+
+.ic-screen *, .ic-screen *::before, .ic-screen *::after { box-sizing: border-box; }
+
+/* ---- chrome ---- */
+.ic-status { display: flex; justify-content: space-between; align-items: center; height: 1.6em; margin: 0 0.4em 1.1em; }
+.ic-status-time { font-size: 1em; font-weight: 590; letter-spacing: -0.01em; }
+.ic-status-right { display: inline-flex; gap: 0.4em; align-items: center; color: var(--p-ink); }
+.ic-status-right svg { height: 0.8em; width: auto; fill: currentColor; display: block; }
+.ic-status-battery { height: 0.8em; }
+.ic-home { position: absolute; left: 50%; bottom: 0.55em; width: 9em; height: 0.33em; border-radius: 999px; background: #d8dde3; transform: translateX(-50%); }
+.ic-head { position: relative; display: flex; align-items: center; justify-content: center; min-height: 2.13em; margin-bottom: 1.2em; }
+.ic-head.is-left { justify-content: flex-start; }
+.ic-head .ic-iconbtn { position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+.ic-wordmark { display: inline-flex; align-items: center; gap: 0.08em; font-size: 1.6em; font-weight: 500; letter-spacing: 0.01em; color: var(--p-ink); line-height: 1; }
+.ic-mark { width: 1.05em; height: 1.1em; display: inline-block; }
+.ic-iconbtn { display: inline-grid; place-items: center; width: 2.13em; height: 2.13em; border: 1px solid var(--p-line); border-radius: 0.53em; color: var(--p-ink); background: #fff; flex: none; }
+.ic-iconbtn svg { width: 1.07em; height: 1.07em; fill: currentColor; }
+.ic-iconbtn.is-plus { background: var(--p-blue-soft); border-color: var(--p-blue-soft); color: var(--p-blue); }
+.ic-iconbtn.is-eye { border: 0; background: var(--p-ink); color: #fff; border-radius: 50%; width: 1.6em; height: 1.6em; }
+.ic-iconbtn.is-eye svg { width: 1em; height: 1em; }
+.ic-iconbtn.is-trash { position: absolute; top: 0.5em; right: 0.5em; width: 1.5em; height: 1.5em; border-radius: 0.35em; color: var(--p-red); border-color: #fff; }
+
+/* ---- chat ---- */
+.ic-thread { display: flex; flex-direction: column; gap: 0.9em; flex: 1; min-height: 0; }
+.ic-msg { display: flex; flex-direction: column; max-width: 65%; opacity: 0; transform: translateY(8px); transition: opacity 320ms cubic-bezier(0, 0, 0.2, 1), transform 360ms cubic-bezier(0, 0, 0.2, 1); }
+.ic-msg.is-in { opacity: 1; transform: none; }
+.ic-msg.is-user { align-self: flex-end; align-items: flex-end; }
+.ic-msg-name { font-size: 0.87em; color: var(--p-slate); margin-bottom: 0.4em; }
+.ic-msg p { margin: 0; padding: 0.8em 0.93em; border: 1px solid var(--p-line); border-radius: 0.8em; background: var(--p-fill); color: var(--p-ink); font-size: 1em; line-height: 1.4; }
+.ic-msg.is-user p { background: var(--p-blue-bubble); border-color: var(--p-blue-bubble-line); }
+.ic-msg p strong { display: block; font-weight: 590; margin-bottom: 0.25em; color: var(--p-ink); }
+.ic-typing { display: inline-flex; gap: 0.25em; padding: 0.7em 0.85em; border: 1px solid var(--p-line); border-radius: 0.8em; background: var(--p-fill); opacity: 0; transition: opacity 200ms; width: max-content; height: 0; overflow: hidden; padding-top: 0; padding-bottom: 0; }
+.ic-typing.is-in { opacity: 1; height: auto; padding-top: 0.7em; padding-bottom: 0.7em; }
+.ic-typing i { width: 0.4em; height: 0.4em; border-radius: 50%; background: var(--p-mist); animation: ic-dot 900ms infinite ease-in-out; }
+.ic-typing i:nth-child(2) { animation-delay: 150ms; }
+.ic-typing i:nth-child(3) { animation-delay: 300ms; }
+@keyframes ic-dot { 0%, 60%, 100% { transform: translateY(0); opacity: 0.5; } 30% { transform: translateY(-0.25em); opacity: 1; } }
+.ic-dots { display: flex; justify-content: center; gap: 0.5em; margin: 0.8em 0 1.2em; }
+.ic-dots i { width: 0.33em; height: 0.33em; border-radius: 50%; background: var(--p-blue-bubble-line); }
+.ic-dots i.is-active { width: 0.53em; height: 0.53em; margin: -0.1em 0; background: var(--p-blue); }
+
+.ic-composer { margin: auto -0.4em 1.2em; padding: 0.93em; border-radius: 1.07em; background: #fff; box-shadow: 0 -0.27em 1.6em rgba(4, 31, 52, 0.09), 0 0.4em 1.2em rgba(4, 31, 52, 0.05); opacity: 0; transform: translateY(10px); transition: opacity 320ms, transform 360ms; }
+.ic-composer.is-in { opacity: 1; transform: none; }
+.ic-composer.is-flat { margin-top: auto; }
+.ic-chips { display: flex; gap: 0.53em; margin-bottom: 0.93em; overflow: hidden; }
+.ic-chips span { flex: 1 0 auto; padding: 0.53em 0.8em; border: 1px solid var(--p-line); border-radius: 999px; color: var(--p-ink); font-size: 0.87em; text-align: center; white-space: nowrap; transition: background 200ms, color 200ms, border-color 200ms; }
+.ic-chips span.is-picked { background: var(--p-blue); border-color: var(--p-blue); color: #fff; }
+.ic-input { display: flex; align-items: center; justify-content: space-between; gap: 0.6em; padding-left: 0.27em; }
+.ic-placeholder { color: var(--p-mist); font-size: 1.07em; }
+.ic-send { width: 2.93em; height: 2.93em; flex: none; border-radius: 50%; background: var(--p-grad); display: grid; place-items: center; box-shadow: 0 0.27em 0.8em rgba(30, 96, 229, 0.35); }
+.ic-send svg { width: 1.3em; height: 1.3em; }
+.ic-cta { display: block; box-sizing: border-box; width: 100%; padding: 1em; border-radius: 0.93em; background: var(--p-grad); color: #fff; text-align: center; font-size: 1em; font-weight: 500; opacity: 0; transform: translateY(6px); transition: opacity 260ms, transform 300ms, background 300ms, color 300ms; }
+.ic-cta.is-in { opacity: 1; transform: none; }
+.ic-cta.is-grey { background: var(--p-line); color: var(--p-mist); }
+
+/* ---- the "before": web calculator ---- */
+.ic-urlbar { display: flex; align-items: center; gap: 0.5em; margin: -0.4em 0 1em; padding: 0.45em 0.7em; border-radius: 0.6em; background: #eef0f3; color: var(--p-slate); font-size: 0.8em; }
+.ic-urlbar i { width: 0.7em; height: 0.7em; border-radius: 50%; border: 1.5px solid var(--p-mist); }
+.ic-calc-title { margin: 0 0 0.8em; font-weight: 590; font-size: 1.2em; color: var(--p-ink); }
+.ic-calc-form { display: grid; gap: 0.45em; flex: 1; min-height: 0; }
+.ic-field { display: grid; gap: 0.2em; opacity: 0; transform: translateY(6px); transition: opacity 220ms, transform 260ms; }
+.ic-field.is-in { opacity: 1; transform: none; }
+.ic-field span { font-size: 0.8em; color: var(--p-slate); }
+.ic-field i { display: block; height: 1.9em; border: 1px solid var(--p-line-strong); border-radius: 0.35em; background: #fafafa; }
+.ic-calc-check { display: flex; align-items: center; gap: 0.5em; font-size: 0.8em; color: var(--p-slate); opacity: 0; transition: opacity 220ms; }
+.ic-calc-check.is-in { opacity: 1; }
+.ic-calc-check i { width: 1em; height: 1em; border: 1px solid var(--p-line-strong); border-radius: 0.2em; }
+.ic-calc .ic-cta { margin: 0.8em 0 1.4em; }
+
+/* ---- summary + consents ---- */
+.ic-card { border: 1px solid var(--p-line); border-radius: 0.8em; background: #fff; padding: 0.93em; opacity: 0; transform: translateY(10px); transition: opacity 320ms, transform 360ms; }
+.ic-card.is-in { opacity: 1; transform: none; }
+.ic-summary-row { display: flex; flex-direction: column; gap: 0.15em; padding: 0.6em 0; border-bottom: 1px solid #e8e8e8; }
+.ic-summary-row:first-child { padding-top: 0; }
+.ic-summary-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.ic-summary-row span { font-size: 0.8em; color: var(--p-slate); }
+.ic-summary-row strong { font-size: 1em; font-weight: 590; color: var(--p-ink); }
+.ic-consents { list-style: none; margin: 1.07em 0 0; padding: 0 0.27em; display: grid; gap: 1em; }
+.ic-consents li { display: flex; gap: 0.6em; align-items: flex-start; font-size: 0.93em; color: var(--p-ink); line-height: 1.35; }
+.ic-consents a { display: block; color: var(--p-blue); text-decoration: underline; font-size: 0.86em; margin-top: 0.15em; }
+.ic-checkbox { flex: none; width: 1.2em; height: 1.2em; margin-top: 0.05em; border: 1px solid var(--p-line-strong); border-radius: 0.27em; display: grid; place-items: center; background: #fff; transition: background 220ms, border-color 220ms; }
+.ic-checkbox .ic-tick { width: 0.75em; height: 0.65em; opacity: 0; transition: opacity 200ms; }
+.ic-consents li.is-on .ic-checkbox { background: var(--p-blue); border-color: var(--p-blue); }
+.ic-consents li.is-on .ic-tick { opacity: 1; }
+.ic-summary .ic-composer .ic-cta { margin-top: 0; }
+
+/* ---- credit check ---- */
+.ic-checking-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 0.5em 3em; }
+.ic-checking-title { margin: 0 0 0.6em; font-size: 1.47em; font-weight: 590; line-height: 1.2; color: var(--p-ink); letter-spacing: -0.01em; }
+.ic-checking-sub { margin: 0; font-size: 1em; color: var(--p-slate); line-height: 1.45; }
+.ic-spinner { position: relative; width: 12em; height: 12em; margin: 0 auto 2.4em; }
+.ic-spinner i { position: absolute; left: 50%; top: 50%; width: 0.93em; height: 2.4em; margin: -6em 0 0 -0.47em; transform-origin: 50% 6em; border-radius: 999px; background: var(--p-line); transition: background 200ms; }
+.ic-spinner i.is-on { background: var(--p-green); }
+.ic-spinner i::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: inherit; }
+.ic-spinner-mark { position: absolute; left: 50%; top: 50%; width: 3.2em; height: 3.2em; transform: translate(-50%, -50%); }
+
+/* ---- KYC ---- */
+.ic-kyc-head { display: grid; grid-template-columns: auto 1fr auto; gap: 0.8em; align-items: start; margin-bottom: 2.4em; }
+.ic-kyc-copy { min-width: 0; }
+.ic-kyc-title { margin: 0.15em 0 0.35em; font-size: 1.2em; font-weight: 590; color: var(--p-ink); }
+.ic-kyc-sub { margin: 0; font-size: 0.93em; color: var(--p-slate); line-height: 1.4; }
+.ic-ring { --ring: 0.66; position: relative; width: 3.2em; height: 3.2em; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--p-green) calc(var(--ring) * 360deg), var(--p-line) 0); transition: --ring 600ms; font-size: 1em; }
+.ic-ring::before { content: ""; position: absolute; inset: 0.3em; border-radius: 50%; background: #fff; }
+.ic-ring span { position: relative; font-size: 0.87em; font-weight: 590; color: var(--p-ink); }
+.ic-id-frame { padding: 0.27em; border: 1px dashed var(--p-line-strong); border-radius: 0.8em; opacity: 0; transform: translateY(10px); transition: opacity 320ms, transform 360ms; }
+.ic-id-frame.is-in { opacity: 1; transform: none; }
+.ic-id-card { position: relative; aspect-ratio: 1.58; border-radius: 0.6em; overflow: hidden; background: linear-gradient(120deg, #c9d6ee 0%, #dfe7f5 35%, #e9e2f0 70%, #d7e3f2 100%); display: grid; grid-template-columns: 5.2em 1fr; grid-template-rows: auto 1fr auto; gap: 0.3em 0.6em; padding: 0.7em 0.8em; color: #2c3e73; }
+.ic-id-country { grid-column: 1 / -1; font-size: 0.55em; font-weight: 590; letter-spacing: 0.04em; line-height: 1.3; color: #2c3e73; }
+.ic-id-photo { align-self: end; width: 4.6em; height: 5.4em; border-radius: 0.3em; background: linear-gradient(#f2e9e0, #dccdc0); position: relative; overflow: hidden; }
+.ic-id-photo i { position: absolute; left: 50%; bottom: -0.2em; width: 2.4em; height: 2.6em; transform: translateX(-50%); border-radius: 1.2em 1.2em 0.4em 0.4em; background: #7a6357; box-shadow: 0 -1.5em 0 -0.55em #8d7266; }
+.ic-id-lines { display: grid; gap: 0.5em; align-self: center; }
+.ic-id-lines i { height: 0.4em; border-radius: 999px; background: rgba(44, 62, 115, 0.35); }
+.ic-id-lines i:nth-child(2) { width: 70%; }
+.ic-id-lines i:nth-child(4) { width: 45%; }
+.ic-id-number { grid-column: 2; font-size: 0.7em; letter-spacing: 0.1em; font-weight: 590; color: #2c3e73; }
+.ic-id-scan { position: absolute; left: 0; right: 0; top: 0; height: 0.2em; background: var(--p-green); box-shadow: 0 0 0.8em var(--p-green); opacity: 0; }
+.ic-id-scan.is-on { opacity: 1; animation: ic-scan 1.2s ease-in-out infinite alternate; }
+@keyframes ic-scan { from { top: 4%; } to { top: 94%; } }
+.ic-kyc .ic-cta { margin-top: auto; margin-bottom: 1.6em; padding: 1.07em; }
+
+/* ---- My Loans ---- */
+.ic-loans-tools { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.07em; }
+.ic-filter { display: inline-flex; align-items: center; gap: 0.3em; padding: 0.55em 0.8em; border-radius: 0.53em; background: #eef0f3; color: var(--p-ink); font-size: 0.87em; }
+.ic-filter b { font-weight: 400; color: var(--p-blue); }
+.ic-filter svg { width: 0.7em; height: 0.5em; }
+.ic-loans-tools-right { display: inline-flex; gap: 0.53em; }
+.ic-loans-list { display: grid; gap: 1.07em; flex: 1; min-height: 0; overflow: hidden; -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
+.ic-loan { padding: 1.07em; border-radius: 1.07em; }
+.ic-loan-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.6em; margin-bottom: 0.9em; }
+.ic-loan-head strong { display: block; font-size: 1.07em; font-weight: 590; color: var(--p-ink); }
+.ic-loan-head small { font-size: 0.8em; color: var(--p-mist); }
+.ic-pill { flex: none; padding: 0.35em 0.6em; border-radius: 0.4em; background: var(--p-green-soft); color: var(--p-green); font-size: 0.8em; }
+.ic-pill.is-grey { background: #eef0f3; color: var(--p-slate); }
+.ic-loan-row { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6em; margin: 0.45em 0; }
+.ic-loan-row span { font-size: 0.87em; color: var(--p-slate); }
+.ic-loan-row strong { font-size: 0.93em; font-weight: 590; color: var(--p-ink); font-variant-numeric: tabular-nums; }
+.ic-bar { display: block; height: 0.53em; border-radius: 999px; background: var(--p-line); overflow: hidden; margin: 0.2em 0 0.7em; }
+.ic-bar i { display: block; height: 100%; border-radius: inherit; background: var(--p-green); transition: width 900ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+.ic-loan-late { display: block; text-align: right; font-size: 0.8em; color: var(--p-red); margin-top: -0.2em; }
+.ic-loan-divider { display: block; height: 0; border-top: 1px dashed var(--p-line); margin: 0.9em 0; }
+.ic-loan-actions { display: flex; align-items: center; gap: 0.8em; }
+.ic-btn { flex: 1; display: block; padding: 0.7em; border-radius: 0.8em; background: var(--p-blue-soft); color: var(--p-blue); text-align: center; font-size: 0.93em; }
+.ic-btn.is-grey { background: #eef0f3; color: var(--p-ink); }
+.ic-tabs { position: absolute; left: 1.07em; right: 1.07em; bottom: 1.07em; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.3em; padding: 0.4em; border-radius: 1.6em; background: #fff; box-shadow: 0 0.6em 2em rgba(4, 31, 52, 0.14); }
+.ic-tabs span { display: flex; flex-direction: column; align-items: center; gap: 0.25em; padding: 0.5em 0.4em; border-radius: 1.2em; font-size: 0.73em; color: var(--p-slate); }
+.ic-tabs span svg { width: 1.6em; height: 1.6em; fill: currentColor; }
+.ic-tabs span.is-active { background: #dce4f3; color: var(--p-blue); }
+.ic-loans .ic-home { display: none; }
+
+/* ---- reduced motion: show the finished state ---- */
+@media (prefers-reduced-motion: reduce) {
+  .ic-msg, .ic-composer, .ic-cta, .ic-field, .ic-calc-check, .ic-card, .ic-id-frame { opacity: 1 !important; transform: none !important; transition: none; }
+  .ic-typing, .ic-typing.is-in { display: none; }
+  .ic-consents li .ic-checkbox { background: var(--p-blue); border-color: var(--p-blue); }
+  .ic-consents li .ic-tick { opacity: 1; }
+  .ic-spinner i { background: var(--p-green); }
+  .ic-bar i { transition: none; }
+  .ic-id-scan { display: none; }
+}
+
+
+/* ==========================================================================
+   Shield. The page has a global "on dark" rule set (white p/h/strong with
+   !important) and a global Archivo body font. The phone is the product, not
+   the page, so every colour the screens set is restated here at higher
+   specificity, and the type inside the frame is pinned to the phone font.
+   ========================================================================== */
+.dw-page .dw-case-study .ic-phone-screen,
+.dw-page .dw-case-study .ic-phone-screen :is(p, li, span, strong, b, i, em, dt, dd, h1, h2, h3, h4, a, small, label, div, article, header, nav, figcaption) {
+  font-family: var(--ic-font, Inter, system-ui, sans-serif) !important;
+}
+.dw-page .dw-case-study .ic-phone-screen :is(p, span, small, label, strong, b, a, li) { color: #041f34 !important; text-decoration: none; }
+.dw-page .dw-case-study .ic-phone-screen p { max-width: none; }
+.dw-page .dw-case-study .ic-phone-screen :is(strong, b) { display: inline; margin: 0; font-size: 1em; line-height: inherit; font-weight: 590; }
+.dw-page .dw-case-study .ic-phone-screen .ic-msg p strong { display: block; margin-bottom: 0.25em; }
+.dw-page .dw-case-study .ic-phone-screen .ic-loan-head strong { display: block; font-size: 1.07em; }
+.dw-page .dw-case-study .ic-phone-screen .ic-loan-row strong { font-size: 0.93em; }
+.dw-page .dw-case-study .ic-phone-screen :is(.ic-status-right, .ic-wordmark, .ic-filter, .ic-loans-tools-right) { display: inline-flex; }
+.dw-page .dw-case-study .ic-phone-screen :is(.ic-send, .ic-ring) { display: grid; }
+.dw-page .dw-case-study .ic-phone-screen .ic-iconbtn { display: inline-grid; }
+.dw-page .dw-case-study .ic-phone-screen :is(.ic-dots, .ic-tabs span) { display: flex; }
+.dw-page .dw-case-study .ic-phone-screen .ic-mark { display: inline-block; }
+.dw-page .dw-case-study .ic-phone-screen .ic-status-right { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-wordmark { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-iconbtn { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-iconbtn.is-plus { color: var(--p-blue) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-iconbtn.is-eye { color: #fff !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-iconbtn.is-trash { color: var(--p-red) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-msg-name { color: var(--p-slate) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-msg p { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-msg p strong { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-chips span { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-chips span.is-picked { color: #fff !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-placeholder { color: var(--p-mist) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-cta { color: #fff !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-cta.is-grey { color: var(--p-mist) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-calc-title { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-field span { color: var(--p-slate) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-calc-check { color: var(--p-slate) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-summary-row span { color: var(--p-slate) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-summary-row strong { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-consents li { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-consents a { color: var(--p-blue) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-checking-title { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-checking-sub { color: var(--p-slate) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-kyc-title { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-kyc-sub { color: var(--p-slate) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-ring span { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-id-card { color: #2c3e73 !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-id-country { color: #2c3e73 !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-id-number { color: #2c3e73 !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-filter { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-filter b { color: var(--p-blue) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-loan-head strong { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-loan-head small { color: var(--p-mist) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-pill { color: var(--p-green) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-pill.is-grey { color: var(--p-slate) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-loan-row span { color: var(--p-slate) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-loan-row strong { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-loan-late { color: var(--p-red) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-btn { color: var(--p-blue) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-btn.is-grey { color: var(--p-ink) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-tabs span { color: var(--p-slate) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-tabs span.is-active { color: var(--p-blue) !important; }
+.dw-page .dw-case-study .ic-phone-screen .ic-consents a { text-decoration: underline; }

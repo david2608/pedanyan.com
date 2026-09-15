@@ -180,6 +180,157 @@
   }
 }
 
+/* Tempo V3 reference lock: Tempo's Figma case uses a deep green field, white
+   device studies and hairline route connectors. Until final screens are ready,
+   every device is a deliberately neutral design placeholder. */
+.dw-case-draft-tempo-v3 {
+  --tempo-green: #1b7d6d;
+  --tempo-green-deep: #126a5c;
+  --tempo-pale: #e3f1ec;
+  --tempo-ink: #161a19;
+  --tempo-sun: #1b7d6d;
+}
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel {
+  color: #fff;
+  background: var(--tempo-green);
+}
+.dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy h1,
+.dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy h2 { color: #fff; }
+.dw-case-draft-tempo-v3 .dw-case-opening-eyebrow { color: #d8f1e9; }
+.dw-case-draft-tempo-v3 .dw-tempo-secure-hero-copy { color: #dff1eb; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-primary { color: var(--tempo-green); background: #fff; border-color: #fff; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-primary:hover { color: #fff; background: transparent; border-color: #fff; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel .dw-tempo-v3-phone { padding: 8px; background: #fff; border-color: #fff; box-shadow: 0 28px 52px rgb(8 58 48 / 26%); }
+
+.dw-tempo-secure-phone { color: var(--tempo-ink); background: #fff; border-radius: 13px; }
+.dw-secure-phone-top { border-bottom: 1px solid #edf0ee; color: #303937; }
+.dw-secure-phone-top i { background: var(--tempo-ink); }
+.dw-secure-phone-content { position: relative; padding: 14px 15px; }
+.dw-secure-placeholder-label { color: var(--tempo-green); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.dw-secure-phone h3 { margin: 13px 0 16px; color: var(--tempo-ink); font-size: clamp(16px, 1.5vw, 23px); font-weight: 500; letter-spacing: -.055em; }
+.dw-secure-placeholder-art { position: relative; height: 42%; min-height: 138px; overflow: hidden; background: #edf3f0; border: 1px solid #d8e1dd; border-radius: 4px; }
+.dw-secure-placeholder-art::before, .dw-secure-placeholder-art::after { position: absolute; content: ""; border: 1px solid #c5d4ce; border-radius: 50%; }
+.dw-secure-placeholder-art::before { width: 120%; height: 72%; top: 24%; left: -28%; }.dw-secure-placeholder-art::after { width: 78%; height: 118%; top: -48%; right: -28%; }
+.dw-secure-placeholder-art i { position: absolute; z-index: 1; display: block; width: 10px; height: 10px; border-radius: 50%; }.dw-secure-placeholder-art i:nth-child(1) { top: 22%; left: 23%; background: var(--tempo-ink); }.dw-secure-placeholder-art i:nth-child(2) { top: 52%; left: 54%; background: var(--tempo-green); }.dw-secure-placeholder-art i:nth-child(3) { right: 18%; bottom: 20%; background: #94aca3; }.dw-secure-placeholder-art b { position: absolute; z-index: 1; top: 31%; left: 29%; width: 42%; border-top: 1px solid var(--tempo-green); transform: rotate(34deg); transform-origin: left; }
+.dw-secure-placeholder-lines { display: grid; gap: 8px; margin-top: 16px; }.dw-secure-placeholder-lines i { display: block; height: 7px; background: #e7ece9; border-radius: 2px; }.dw-secure-placeholder-lines i:nth-child(2) { width: 75%; }.dw-secure-placeholder-lines i:nth-child(3) { width: 54%; }.dw-secure-placeholder-foot { display: block; margin-top: auto; padding-top: 16px; color: #7b8983; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-secure-intro { background: #fff; }.dw-tempo-secure-intro > div > p, .dw-tempo-secure-metadata > p, .dw-tempo-secure-advantages header > p, .dw-tempo-secure-section-heading > p, .dw-tempo-secure-carousel header > p, .dw-tempo-secure-outcome header > p { color: var(--tempo-green); }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-intro h2 { color: var(--tempo-ink); }.dw-tempo-secure-intro > p { color: #5d6c65; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-secure-metadata { color: var(--tempo-ink); background: #f4f7f5; }.dw-tempo-secure-metadata > p { color: var(--tempo-green); }.dw-tempo-secure-metadata dl div { border-color: #cad6d1; }.dw-tempo-secure-metadata dt { color: #75847e; }.dw-tempo-secure-metadata dd { color: var(--tempo-ink); }
+.dw-case-draft-tempo-v3 .dw-tempo-secure-advantages { background: #fff; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages h2, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages h3 { color: var(--tempo-ink); }.dw-tempo-secure-advantages article > span { color: var(--tempo-green); }.dw-tempo-secure-advantages > div { border-color: var(--tempo-ink); }.dw-tempo-secure-advantages article { border-color: #d4ded9; }.dw-tempo-secure-risk { color: #8a5160 !important; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough { position: relative; overflow: hidden; color: #fff; background: var(--tempo-green); }.dw-tempo-secure-walkthrough::before { position: absolute; top: 31%; right: -12%; width: 65%; height: 44%; content: ""; border: 1px solid rgb(255 255 255 / 35%); border-radius: 50%; animation: dw-tempo-route-orbit 10s linear infinite; }.dw-tempo-secure-section-heading > p { color: #d9f0e8; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading h2 { color: #fff; }.dw-tempo-secure-section-heading > span, .dw-tempo-secure-walkthrough-copy p { color: #d8ece6; }.dw-tempo-secure-walkthrough-copy article { position: relative; z-index: 1; }.dw-tempo-secure-walkthrough-copy article > span { color: #bce1d5; }.dw-tempo-secure-walkthrough-copy h3 { color: #fff; }.dw-tempo-secure-walkthrough-copy .dw-tempo-secure-risk { color: #c8e8dc; }.dw-tempo-secure-walkthrough-copy article { border-color: rgb(255 255 255 / 22%); }.dw-tempo-secure-walkthrough-stage { z-index: 1; }.dw-tempo-secure-walkthrough-stage .dw-tempo-secure-phone { border-color: #fff; box-shadow: 0 35px 75px rgb(5 54 45 / 28%); }.dw-tempo-secure-walkthrough-stage > p { color: #d7ece5; }.dw-tempo-secure-walkthrough-stage > p strong { color: #fff; }
+@keyframes dw-tempo-route-orbit { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+.dw-case-draft-tempo-v3 .dw-tempo-secure-carousel { background: var(--tempo-green-deep); }.dw-tempo-secure-carousel header > p { color: #d8f1e9; }.dw-tempo-secure-carousel-track article { border-radius: 2px; }.dw-tempo-secure-carousel-device { padding: 6px; background: #fff; border-color: #fff; border-radius: 15px; }.dw-tempo-secure-carousel-device .dw-tempo-secure-phone { border-radius: 9px; }.dw-tempo-secure-carousel-track article > div:last-child > span { color: var(--tempo-green); }
+
+.dw-case-draft-tempo-v3 .dw-tempo-secure-outcome { color: var(--tempo-ink); background: #fff; }.dw-tempo-secure-outcome header > p { color: var(--tempo-green); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome h2 { color: var(--tempo-ink); }.dw-tempo-secure-outcome article { border-color: #aebdb6; }.dw-tempo-secure-outcome span, .dw-tempo-secure-outcome > p { color: #5b6a63; }.dw-tempo-secure-outcome strong { color: var(--tempo-green); }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-close { color: #fff; background: var(--tempo-green); }.dw-case-draft-tempo-v3 .dw-tempo-v3-close > p { color: #d8f1e9; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-close h2 { color: #fff; }.dw-case-draft-tempo-v3 .dw-tempo-v3-secondary { color: var(--tempo-green); background: #fff; border-color: #fff; }
+
+@media (max-width: 760px) {
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel .dw-tempo-v3-phone { padding: 4px; }.dw-secure-placeholder-art { min-height: 114px; }.dw-tempo-secure-walkthrough::before { display: none; }.dw-tempo-secure-walkthrough-copy article { border-top-color: rgb(255 255 255 / 25%); }.dw-tempo-secure-carousel-device { padding: 4px; }
+}
+
+/* Tempo Secure: a focused, product-led direction for sensitive deliveries.
+   The pinned route and horizontal sequence are purpose-built for this draft,
+   so they remain in normal document flow when motion is reduced or unavailable. */
+.dw-case-draft-tempo-v3 {
+  --tempo-sun: #3b82f6;
+  --tempo-soft: #eaf2ff;
+  --tempo-line: #d7dce5;
+}
+
+.dw-case-draft-tempo-v3 .dw-tempo-secure-hero-copy {
+  max-width: 35ch;
+  margin: 24px 0 0;
+  color: #4d5562;
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.45;
+}
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel .dw-tempo-v3-phone {
+  display: block;
+  padding: 7px;
+  aspect-ratio: 0.54;
+  background: #0d1117;
+  border: 2px solid #0d1117;
+}
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-phone .dw-tempo-secure-phone { height: 100%; }
+
+.dw-tempo-secure-phone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
+  color: #111827;
+  background: #fff;
+  border-radius: 15px;
+}
+
+.dw-secure-phone-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px 7px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.dw-secure-phone-top i { width: 54px; height: 13px; background: #15191f; border-radius: 999px; }
+.dw-secure-phone-content { display: flex; flex: 1; flex-direction: column; padding: 10px 14px 15px; }
+.dw-secure-phone-label { display: flex; align-items: center; gap: 6px; color: #3b82f6; font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.dw-secure-phone h3 { margin: 15px 0; font-size: clamp(17px, 1.65vw, 25px); font-weight: 650; line-height: .96; letter-spacing: -.05em; }
+.dw-secure-phone p { margin: -4px 0 18px; color: #5e6877; font-size: 11px; line-height: 1.4; }
+.dw-secure-phone button { display: flex; justify-content: center; align-items: center; gap: 7px; width: 100%; margin-top: auto; padding: 11px; color: #fff; background: #111827; border: 0; border-radius: 8px; font: inherit; font-size: 10px; font-weight: 700; }
+.dw-secure-profile { display: grid; grid-template-columns: 35px minmax(0, 1fr) 20px; gap: 9px; align-items: center; padding: 10px; background: #f5f7fa; border: 1px solid #e6eaf0; border-radius: 9px; }
+.dw-secure-profile > span { display: grid; width: 35px; height: 35px; place-items: center; color: #fff; background: #3b82f6; border-radius: 50%; font-size: 10px; font-weight: 700; }
+.dw-secure-profile strong, .dw-secure-profile small { display: block; }
+.dw-secure-profile strong { font-size: 10px; }.dw-secure-profile small { margin-top: 3px; color: #647084; font-size: 8px; }
+.dw-secure-profile svg { color: #3b82f6; }.dw-secure-facts { display: flex; gap: 6px; margin-top: 9px; }.dw-secure-facts span { padding: 5px 6px; color: #4f5b6b; background: #f5f7fa; border-radius: 5px; font-size: 8px; }
+.dw-secure-seal { display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; min-height: 150px; text-align: center; border: 1px dashed #9eabc0; border-radius: 10px; }.dw-secure-seal svg { color: #3b82f6; }.dw-secure-seal strong { margin-top: 12px; font-size: 11px; letter-spacing: .08em; }.dw-secure-seal span { margin-top: 6px; color: #697586; font-size: 8px; }
+.dw-secure-event { display: flex; gap: 9px; align-items: center; margin-top: 12px; padding: 9px; color: #3d4b5e; background: #f4f7fb; border-radius: 8px; font-size: 9px; line-height: 1.25; }.dw-secure-event svg { flex: 0 0 auto; color: #3b82f6; }
+.dw-secure-pin { display: flex; gap: 6px; margin-bottom: 12px; }.dw-secure-pin i { display: grid; width: 31px; height: 37px; place-items: center; color: #182030; background: #f5f7fa; border: 1px solid #dde3ec; border-radius: 7px; font-size: 14px; font-style: normal; font-weight: 700; }
+.dw-secure-value { padding: 14px; color: #fff; background: #111827; border-radius: 10px; }.dw-secure-value span, .dw-secure-value small { display: block; color: #bbc5d5; font-size: 9px; }.dw-secure-value strong { display: block; margin: 8px 0; font-size: 28px; line-height: .9; letter-spacing: -.06em; }
+.dw-secure-route-map { position: relative; height: 140px; margin-bottom: 4px; overflow: hidden; background: #edf3fd; border-radius: 10px; }.dw-secure-route-map::before, .dw-secure-route-map::after { position: absolute; content: ""; border: 1px solid #cfd9e9; border-radius: 50%; }.dw-secure-route-map::before { width: 180px; height: 120px; top: 18px; left: -33px; }.dw-secure-route-map::after { width: 150px; height: 170px; top: -60px; right: -30px; }.dw-secure-route-map i { position: absolute; z-index: 1; top: 35px; left: 44%; width: 2px; height: 75px; background: #3b82f6; transform: rotate(38deg); }.dw-secure-route-map span { position: absolute; z-index: 2; width: 10px; height: 10px; border-radius: 50%; }.dw-secure-route-map .is-start { top: 25px; left: 29%; background: #111827; }.dw-secure-route-map .is-end { right: 26%; bottom: 22px; background: #3b82f6; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-secure-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, .62fr);
+  gap: clamp(40px, 11vw, 180px);
+  align-items: end;
+  padding: clamp(210px, 23vw, 340px) max(var(--case-gutter), calc((100% - 1320px) / 2)) clamp(100px, 12vw, 190px);
+  background: #fff;
+}
+.dw-tempo-secure-intro > div > p, .dw-tempo-secure-metadata > p, .dw-tempo-secure-advantages header > p, .dw-tempo-secure-section-heading > p, .dw-tempo-secure-carousel header > p, .dw-tempo-secure-outcome header > p { margin: 0 0 16px; color: #3b82f6; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-intro h2 { max-width: 10ch; margin: 0; color: #111; font-size: clamp(52px, 7vw, 118px); font-weight: 650; line-height: .85; letter-spacing: -.07em; }
+.dw-tempo-secure-intro > p { max-width: 31ch; margin: 0 0 8px; color: #556070; font-size: clamp(18px, 1.55vw, 24px); line-height: 1.45; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-secure-metadata { padding: clamp(70px, 9vw, 120px) max(var(--case-gutter), calc((100% - 1320px) / 2)); background: #10131a; color: #fff; }.dw-tempo-secure-metadata > p { color: #9dc3ff; }.dw-tempo-secure-metadata dl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px 16px; margin: 0; }.dw-tempo-secure-metadata dl div { padding-top: 13px; border-top: 1px solid rgb(255 255 255 / 28%); }.dw-tempo-secure-metadata dt { margin-bottom: 9px; color: #9ba8bb; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }.dw-tempo-secure-metadata dd { margin: 0; color: #fff; font-size: 15px; line-height: 1.35; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-secure-advantages { padding: clamp(105px, 14vw, 210px) max(var(--case-gutter), calc((100% - 1240px) / 2)); background: #fff; }.dw-tempo-secure-advantages header { display: grid; grid-template-columns: minmax(110px, .33fr) minmax(0, 1.4fr); gap: 30px; align-items: start; margin-bottom: clamp(60px, 9vw, 120px); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages h2 { max-width: 11ch; margin: 0; font-size: clamp(48px, 6.3vw, 105px); font-weight: 650; line-height: .87; letter-spacing: -.07em; }.dw-tempo-secure-advantages > div { border-top: 1px solid #111; }.dw-tempo-secure-advantages article { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 28px; padding: 30px 0 34px; border-bottom: 1px solid #cdd3dd; }.dw-tempo-secure-advantages article > span { color: #3b82f6; font-size: 13px; font-weight: 700; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages h3 { margin: 0 0 14px; font-size: clamp(27px, 3vw, 48px); font-weight: 600; line-height: .94; letter-spacing: -.05em; }.dw-tempo-secure-advantages p { max-width: 64ch; margin: 9px 0 0; color: #596574; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.48; }.dw-tempo-secure-risk { color: #8a5160 !important; }.dw-tempo-secure-advantages strong { color: #111; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough { padding: clamp(95px, 12vw, 170px) max(var(--case-gutter), calc((100% - 1240px) / 2)); background: var(--tempo-soft); }.dw-tempo-secure-section-heading { display: grid; grid-template-columns: minmax(120px, .32fr) minmax(0, 1.25fr) minmax(210px, .55fr); gap: 26px; align-items: end; margin-bottom: clamp(58px, 9vw, 120px); }.dw-tempo-secure-section-heading > p { margin-bottom: 0; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading h2 { max-width: 9ch; margin: 0; color: #111827; font-size: clamp(52px, 6.4vw, 106px); font-weight: 650; line-height: .86; letter-spacing: -.07em; }.dw-tempo-secure-section-heading > span { max-width: 25ch; color: #526075; font-size: 16px; line-height: 1.45; }.dw-tempo-secure-walkthrough-layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(310px, .72fr); gap: clamp(44px, 12vw, 210px); align-items: start; }.dw-tempo-secure-walkthrough-copy article { min-height: min(74svh, 670px); padding: 13vh 0; opacity: .28; transition: opacity .3s ease; }.dw-tempo-secure-walkthrough-copy article.is-active { opacity: 1; }.dw-tempo-secure-walkthrough-copy article > span { color: #3b82f6; font-size: 12px; font-weight: 700; }.dw-tempo-secure-walkthrough-copy h3 { max-width: 8ch; margin: 22px 0; color: #111827; font-size: clamp(38px, 5.4vw, 82px); font-weight: 650; line-height: .88; letter-spacing: -.065em; }.dw-tempo-secure-walkthrough-copy p { max-width: 34ch; margin: 0; color: #526075; font-size: clamp(17px, 1.4vw, 21px); line-height: 1.46; }.dw-tempo-secure-walkthrough-copy .dw-tempo-secure-risk { margin-bottom: 17px; color: #8a5160; font-size: 13px; }.dw-tempo-secure-walkthrough-stage { position: sticky; top: 108px; display: grid; place-items: center; min-height: min(72svh, 700px); }.dw-tempo-secure-walkthrough-stage .dw-tempo-secure-phone { width: min(100%, 330px); height: min(64svh, 630px); min-height: 480px; border: 7px solid #111827; border-radius: 30px; box-shadow: 0 32px 65px rgb(32 65 112 / 22%); animation: dw-tempo-secure-screen-in .48s ease both; }.dw-tempo-secure-walkthrough-stage > p { margin: 24px 0 0; color: #637188; font-size: 12px; font-weight: 700; letter-spacing: .1em; }.dw-tempo-secure-walkthrough-stage > p strong { color: #3b82f6; }
+@keyframes dw-tempo-secure-screen-in { from { opacity: .25; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+.dw-case-draft-tempo-v3 .dw-tempo-secure-carousel { position: relative; min-height: 420vh; color: #fff; background: #111827; }.dw-tempo-secure-carousel-sticky { position: sticky; top: 0; display: flex; flex-direction: column; height: 100svh; overflow: hidden; padding: 104px max(var(--case-gutter), calc((100% - 1240px) / 2)) 54px; }.dw-tempo-secure-carousel header { display: grid; grid-template-columns: minmax(120px, .35fr) minmax(0, 1.2fr); gap: 26px; flex: 0 0 auto; align-items: start; margin-bottom: 34px; }.dw-tempo-secure-carousel header > p { color: #9dc3ff; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel h2 { max-width: 10ch; margin: 0; color: #fff; font-size: clamp(42px, 5.2vw, 84px); font-weight: 650; line-height: .88; letter-spacing: -.065em; }.dw-tempo-secure-carousel-window { flex: 1; overflow: hidden; }.dw-tempo-secure-carousel-track { display: flex; gap: 18px; height: 100%; width: max-content; will-change: transform; }.dw-tempo-secure-carousel-track article { display: grid; grid-template-columns: minmax(190px, 300px) minmax(220px, 320px); gap: clamp(22px, 4vw, 60px); align-items: center; width: min(78vw, 840px); padding: 28px; color: #111827; background: #fff; border-radius: 10px; }.dw-tempo-secure-carousel-device { display: grid; width: min(100%, 235px); height: min(49svh, 470px); min-height: 330px; place-self: center; overflow: hidden; background: #f6f8fb; border: 6px solid #0f141d; border-radius: 24px; }.dw-tempo-secure-carousel-device .dw-tempo-secure-phone { border-radius: 17px; }.dw-tempo-secure-carousel-device > img { width: 100%; height: 100%; object-fit: cover; }.dw-tempo-secure-carousel-track article > div:last-child > span { display: block; margin-bottom: 15px; color: #3b82f6; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track h3 { max-width: 8ch; margin: 0; font-size: clamp(32px, 4vw, 60px); font-weight: 650; line-height: .88; letter-spacing: -.06em; }.dw-tempo-secure-carousel-track p { max-width: 28ch; margin: 20px 0 0; color: #596574; font-size: 16px; line-height: 1.48; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-secure-outcome { padding: clamp(100px, 13vw, 190px) max(var(--case-gutter), calc((100% - 1240px) / 2)); color: #fff; background: #3b82f6; }.dw-tempo-secure-outcome header { display: grid; grid-template-columns: minmax(120px, .32fr) minmax(0, 1.2fr); gap: 26px; margin-bottom: clamp(55px, 9vw, 110px); }.dw-tempo-secure-outcome header > p { color: #e7f0ff; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome h2 { max-width: 10ch; margin: 0; color: #fff; font-size: clamp(48px, 6.4vw, 105px); font-weight: 650; line-height: .86; letter-spacing: -.07em; }.dw-tempo-secure-outcome > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }.dw-tempo-secure-outcome article { min-height: 245px; padding-top: 20px; border-top: 1px solid rgb(255 255 255 / 55%); }.dw-tempo-secure-outcome strong { display: block; margin-bottom: 20px; font-size: clamp(75px, 9vw, 148px); font-weight: 650; line-height: .72; letter-spacing: -.08em; }.dw-tempo-secure-outcome span { display: block; max-width: 27ch; color: #e4efff; font-size: 15px; line-height: 1.43; }.dw-tempo-secure-outcome > p { max-width: 50ch; margin: 60px 0 0; color: #fff; font-size: clamp(18px, 1.45vw, 22px); line-height: 1.48; }.dw-case-draft-tempo-v3 .dw-tempo-secure-next { background: #fff; }
+
+@media (max-width: 760px) {
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel .dw-tempo-v3-phone { padding: 4px; border-width: 1px; }
+  .dw-tempo-secure-phone { border-radius: 11px; }.dw-secure-phone-content { padding: 9px 10px 11px; }.dw-secure-phone h3 { margin: 10px 0; font-size: 15px; }.dw-secure-phone-top { padding: 7px 10px 4px; }.dw-secure-phone-top i { width: 42px; height: 10px; }.dw-secure-seal { min-height: 116px; }.dw-secure-route-map { height: 112px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-secure-intro { grid-template-columns: 1fr; gap: 30px; padding: 172px 20px 84px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-intro h2 { font-size: 53px; }.dw-tempo-secure-intro > p { font-size: 18px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-secure-metadata { padding: 68px 20px; }.dw-tempo-secure-metadata dl { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; }.dw-tempo-secure-metadata dd { font-size: 13px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages { padding: 88px 20px; }.dw-tempo-secure-advantages header { grid-template-columns: 1fr; gap: 18px; margin-bottom: 48px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages h2 { font-size: 50px; }.dw-tempo-secure-advantages article { grid-template-columns: 40px minmax(0, 1fr); gap: 14px; padding: 24px 0 27px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages h3 { font-size: 28px; }.dw-tempo-secure-advantages p { font-size: 14px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough { padding: 88px 20px; }.dw-tempo-secure-section-heading { grid-template-columns: 1fr; gap: 18px; margin-bottom: 40px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading h2 { font-size: 51px; }.dw-tempo-secure-walkthrough-layout { grid-template-columns: 1fr; gap: 0; }.dw-tempo-secure-walkthrough-stage { position: relative; top: auto; order: -1; min-height: 0; padding: 0 0 48px; }.dw-tempo-secure-walkthrough-stage .dw-tempo-secure-phone { width: 228px; height: 440px; min-height: 440px; border-width: 5px; border-radius: 23px; }.dw-tempo-secure-walkthrough-stage > p { margin-top: 15px; }.dw-tempo-secure-walkthrough-copy article { min-height: 0; padding: 34px 0; opacity: 1; border-top: 1px solid #c4cfdf; }.dw-tempo-secure-walkthrough-copy h3 { margin: 14px 0; font-size: 41px; }.dw-tempo-secure-walkthrough-copy .dw-tempo-secure-risk { font-size: 12px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel { min-height: 0; padding: 84px 0 88px; }.dw-tempo-secure-carousel-sticky { position: static; height: auto; padding: 0; overflow: visible; }.dw-tempo-secure-carousel header { display: block; padding: 0 20px; margin-bottom: 34px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel h2 { font-size: 49px; }.dw-tempo-secure-carousel-window { overflow-x: auto; overscroll-behavior-x: contain; padding: 0 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }.dw-tempo-secure-carousel-window::-webkit-scrollbar { display: none; }.dw-tempo-secure-carousel-track { gap: 14px; height: auto; transform: none !important; }.dw-tempo-secure-carousel-track article { grid-template-columns: 1fr; gap: 25px; width: min(82vw, 330px); min-height: 610px; padding: 18px; scroll-snap-align: start; }.dw-tempo-secure-carousel-device { width: 190px; height: 320px; min-height: 320px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track h3 { font-size: 37px; }.dw-tempo-secure-carousel-track p { margin-top: 14px; font-size: 14px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome { padding: 88px 20px; }.dw-tempo-secure-outcome header { grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome h2 { font-size: 51px; }.dw-tempo-secure-outcome > div { grid-template-columns: 1fr; gap: 0; }.dw-tempo-secure-outcome article { min-height: 170px; }.dw-tempo-secure-outcome strong { font-size: 90px; }.dw-tempo-secure-outcome > p { margin-top: 38px; font-size: 18px; }
+}
+
 @font-face {
   font-family: "Shadows Into Light";
   font-style: normal;
@@ -4455,7 +4606,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  padding-top: 122px;
+  padding-top: 0;
   overflow: clip;
   background: var(--dw-bg);
   color: var(--dw-text);
@@ -5473,7 +5624,7 @@ a.dw-case-testimonial-linkedin:hover {
   }
 
   .dw-case-study {
-    padding-top: 112px;
+    padding-top: 0;
   }
 
   .dw-case-wide,
@@ -9633,4 +9784,1546 @@ a.dw-case-testimonial-linkedin:hover {
   .dw-page .dw-case-study .dw-cloudchipr-feedback-inner { width: 100%; }
   .dw-page .dw-cloudchipr-feedback h2 { font-size: 58px !important; }
   .dw-page .dw-cloudchipr-feedback blockquote { font-size: 23px; line-height: 1.5; }
+}
+
+/* Shared editorial frame: text lives in a calm reading column while project
+   artefacts retain permission to become wide. */
+.dw-case-study {
+  --case-gutter: clamp(20px, 4vw, 72px);
+  --case-reading: clamp(360px, 33.333vw, 640px);
+  padding-top: 102px;
+}
+
+.dw-case-wide,
+.dw-case-intro {
+  width: min(calc(100% - (var(--case-gutter) * 2)), var(--case-wide));
+}
+
+.dw-case-intro-surface {
+  padding-top: clamp(24px, 3vw, 48px);
+  padding-right: var(--case-gutter);
+  padding-left: var(--case-gutter);
+}
+
+.dw-page .dw-case-study .dw-case-section .dw-case-prose,
+.dw-case-contained > .dw-case-media,
+.dw-case-contained > .dw-case-gallery,
+.dw-case-contained > .dw-case-split,
+.dw-case-contained > .dw-case-chips {
+  width: min(calc(100% - (var(--case-gutter) * 2)), var(--case-reading)) !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.dw-page .dw-case-study .dw-case-prose {
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(22px, 2vw, 32px);
+}
+
+.dw-case-prose > .dw-case-richtext:only-child {
+  grid-column: auto;
+}
+
+@media (max-width: 760px) {
+  .dw-case-study {
+    --case-gutter: 20px;
+    --case-reading: 100%;
+    padding-top: 66px;
+  }
+
+  .dw-case-intro-surface {
+    padding-top: 24px;
+  }
+}
+
+/* Tempo v3 adapts the Pop Site reference: monumental type, white space,
+   product-first screens, and one deliberately scarce signal-blue accent. */
+.dw-case-draft-tempo-v3 {
+  --tempo-ink: #000;
+  --tempo-deep: #171717;
+  --tempo-mint: #e3eeff;
+  --tempo-paper: #fff;
+  --tempo-sun: #3b82f6;
+  overflow: hidden;
+  background: var(--tempo-paper);
+}
+
+.dw-case-draft-tempo-v3 .dw-case-opening {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+
+/* A deliberately quiet, Pop-style header gives the display type room to be
+   the page's first signal rather than competing with site-level chrome. */
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-header,
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-header.is-scrolled {
+  height: 72px !important;
+  padding: 0 clamp(20px, 3.4vw, 56px);
+  color: #000;
+  background: #fff;
+  mix-blend-mode: normal;
+}
+
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-logo {
+  flex: 1 1 0;
+  width: auto;
+  height: 72px;
+  color: #000;
+}
+
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-logo-word {
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: #000;
+}
+
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-nav {
+  flex: 0 0 auto;
+  width: auto;
+  gap: 18px;
+}
+
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-nav a,
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-pill {
+  color: #171717;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-right {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-pill {
+  padding: 0;
+}
+
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-talk-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-opening-panel {
+  min-height: 100svh;
+  padding: clamp(116px, 10vw, 168px) clamp(28px, 8vw, 132px) clamp(56px, 7vw, 108px);
+  color: var(--tempo-ink);
+  background: #fff !important;
+  border-radius: 0;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-opening-panel::before,
+.dw-case-draft-tempo-v3 .dw-case-opening-panel::after {
+  position: absolute;
+  z-index: -1;
+  display: block;
+  content: "";
+}
+
+.dw-case-draft-tempo-v3 .dw-case-opening-panel::before {
+  top: 16%;
+  right: 8%;
+  width: clamp(34px, 4vw, 64px);
+  height: clamp(34px, 4vw, 64px);
+  background: var(--tempo-sun);
+  border-radius: 999px;
+  clip-path: none;
+  animation: dw-tempo-v3-tilt 12s ease-in-out infinite alternate;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-opening-panel::after {
+  display: none;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-opening-copy {
+  width: min(100%, 1100px);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-opening-eyebrow {
+  width: max-content;
+  margin: 0 auto 18px;
+  padding: 7px 12px;
+  color: var(--tempo-ink);
+  background: var(--tempo-sun);
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: .08em;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-case-opening-copy h1 {
+  max-width: none;
+  font-size: clamp(92px, 13vw, 228px);
+  font-weight: 700;
+  line-height: .82;
+  letter-spacing: -.07em;
+  text-transform: uppercase;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-case-opening-copy h2 {
+  max-width: 29ch;
+  margin: 28px auto 0;
+  color: var(--tempo-ink);
+  font-size: clamp(20px, 2vw, 34px);
+  font-weight: 500;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-opening-meta { display: none; }
+
+.dw-case-draft-tempo-v3 .dw-case-opening-media {
+  right: auto;
+  bottom: -29%;
+  left: 23%;
+  width: min(54%, 860px);
+  transform: rotate(-4deg);
+  transform-origin: center bottom;
+  animation: dw-tempo-v3-float 6s ease-in-out infinite alternate;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-opening-media img {
+  max-height: 78svh;
+  filter: none;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-opening-about {
+  max-width: 820px;
+  margin: 0;
+  padding: clamp(82px, 11vw, 160px) var(--case-gutter);
+}
+
+.dw-case-draft-tempo-v3 .dw-case-opening-about p {
+  font-size: clamp(24px, 3.1vw, 48px);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-opening-about strong { color: var(--tempo-deep); }
+
+.dw-case-draft-tempo-v3 .dw-case-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-section::before {
+  position: absolute;
+  top: clamp(26px, 4vw, 68px);
+  right: clamp(20px, 7vw, 120px);
+  color: rgb(0 0 0 / 5%);
+  font-size: clamp(82px, 16vw, 270px);
+  font-weight: 700;
+  line-height: .7;
+  letter-spacing: -.08em;
+  content: attr(id);
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-section .dw-case-prose { position: relative; z-index: 1; }
+
+.dw-page .dw-case-draft-tempo-v3 .dw-case-prose h2,
+.dw-page .dw-case-draft-tempo-v3 .dw-case-feature-grid > h2 {
+  max-width: 12ch;
+  font-size: clamp(48px, 6.4vw, 112px);
+  font-weight: 700;
+  line-height: .85;
+  letter-spacing: -.06em;
+  text-transform: uppercase;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-prose .dw-case-richtext {
+  max-width: 32rem;
+  margin-top: clamp(34px, 4vw, 66px);
+  font-size: clamp(18px, 1.5vw, 26px);
+  line-height: 1.42;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-section-solution { background: var(--tempo-mint) !important; }
+.dw-case-draft-tempo-v3 .dw-case-section-solution::before { color: rgb(0 0 0 / 5%); }
+
+.dw-case-draft-tempo-v3 .dw-case-feature-grid {
+  width: min(100% - (var(--case-gutter) * 2), 1380px);
+  margin-inline: auto;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-feature-grid article {
+  min-height: 230px;
+  padding: clamp(26px, 3vw, 46px);
+  color: var(--tempo-ink);
+  background: #fff;
+  border: 1px solid var(--tempo-ink);
+  border-radius: 22px;
+  box-shadow: none;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-feature-grid article:nth-child(2n) {
+  background: var(--tempo-mint);
+  transform: translateY(30px);
+}
+
+.dw-case-draft-tempo-v3 .dw-case-feature-grid article:nth-child(3n) { background: #fff; }
+.dw-case-draft-tempo-v3 .dw-case-feature-grid strong { font-size: clamp(40px, 4vw, 76px); line-height: .8; }
+
+.dw-case-draft-tempo-v3 .dw-case-type-media,
+.dw-case-draft-tempo-v3 .dw-case-type-gallery {
+  padding-inline: var(--case-gutter);
+  background: var(--tempo-paper) !important;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-media,
+.dw-case-draft-tempo-v3 .dw-case-gallery figure {
+  background: #fff;
+  border: 1px solid var(--tempo-ink);
+  border-radius: 22px;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.dw-case-draft-tempo-v3 .dw-case-section-outcome { background: #fff !important; }
+.dw-case-draft-tempo-v3 .dw-case-section-outcome::before { color: rgb(0 0 0 / 5%); }
+
+@keyframes dw-tempo-v3-tilt {
+  from { transform: rotate(-8deg) scale(.96); }
+  to { transform: rotate(8deg) scale(1.04); }
+}
+
+@keyframes dw-tempo-v3-float {
+  from { translate: 0 0; }
+  to { translate: 0 -18px; }
+}
+
+@media (max-width: 760px) {
+  .dw-page:has(.dw-case-draft-tempo-v3) .dw-header,
+  .dw-page:has(.dw-case-draft-tempo-v3) .dw-header.is-scrolled {
+    height: 64px !important;
+    padding-inline: 16px;
+  }
+
+  .dw-page:has(.dw-case-draft-tempo-v3) .dw-logo { height: 64px; }
+  .dw-page:has(.dw-case-draft-tempo-v3) .dw-logo-word { font-size: 15px; }
+
+  .dw-case-draft-tempo-v3 .dw-case-opening-panel {
+    min-height: 92svh;
+    padding: 122px 24px 52px;
+  }
+
+  .dw-case-draft-tempo-v3 .dw-case-opening-copy { width: 100%; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-case-opening-copy h1 { max-width: none; font-size: clamp(76px, 23vw, 114px); }
+  .dw-case-draft-tempo-v3 .dw-case-opening-copy h2 { max-width: 18ch; font-size: 20px; }
+  .dw-case-draft-tempo-v3 .dw-case-opening-panel::before { top: 18%; right: 7%; width: 34px; height: 34px; }
+  .dw-case-draft-tempo-v3 .dw-case-opening-panel::after { display: none; }
+
+  .dw-case-draft-tempo-v3 .dw-case-opening-media {
+    right: auto;
+    bottom: -4%;
+    left: 8%;
+    width: 84%;
+  }
+
+  .dw-case-draft-tempo-v3 .dw-case-opening-about { padding: 72px 20px; }
+  .dw-case-draft-tempo-v3 .dw-case-opening-about p { font-size: 28px; }
+  .dw-case-draft-tempo-v3 .dw-case-section::before { top: 22px; right: 16px; font-size: 70px; }
+
+  .dw-page .dw-case-draft-tempo-v3 .dw-case-prose h2,
+  .dw-page .dw-case-draft-tempo-v3 .dw-case-feature-grid > h2 { font-size: 48px; }
+
+  .dw-case-draft-tempo-v3 .dw-case-feature-grid article:nth-child(2n) { transform: none; }
+  .dw-case-draft-tempo-v3 .dw-case-feature-grid article { min-height: 180px; }
+  .dw-case-draft-tempo-v3 .dw-case-media,
+  .dw-case-draft-tempo-v3 .dw-case-gallery figure { border-radius: 18px; }
+}
+
+/* Pop-inspired Tempo case-study components. These deliberately replace the
+   generic JSON section rhythm only for the v3 draft. */
+.dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel {
+  min-height: min(1000px, 100svh);
+  padding-bottom: clamp(270px, 25vw, 420px);
+}
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-primary,
+.dw-case-draft-tempo-v3 .dw-tempo-v3-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+  padding: 14px 20px;
+  color: #fff;
+  background: var(--tempo-sun);
+  border: 1px solid var(--tempo-sun);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform .25s ease, background-color .25s ease, color .25s ease;
+}
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-primary:hover,
+.dw-case-draft-tempo-v3 .dw-tempo-v3-secondary:hover {
+  transform: translateY(-3px);
+  background: #000;
+  border-color: #000;
+}
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel {
+  position: absolute;
+  z-index: 2;
+  bottom: clamp(-220px, -17vw, -118px);
+  left: 50%;
+  width: min(86vw, 1060px);
+  height: clamp(340px, 42vw, 560px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-phone {
+  position: absolute;
+  bottom: 0;
+  width: clamp(185px, 22vw, 310px);
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1.5px solid #000;
+  border-radius: 22px;
+  box-shadow: 0 20px 36px rgb(0 0 0 / 15%);
+  aspect-ratio: 1836 / 3953;
+}
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-phone img,
+.dw-case-draft-tempo-v3 .dw-tempo-v3-card-phone img,
+.dw-case-draft-tempo-v3 .dw-tempo-v3-detail-device img { width: 100%; height: 100%; object-fit: cover; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-phone-left { left: 14%; transform: rotate(-15deg) translateY(18px); }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-phone-center { z-index: 2; left: 50%; transform: translateX(-50%); }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-phone-right { right: 14%; transform: rotate(15deg) translateY(18px); }
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-statement {
+  display: grid;
+  grid-template-columns: minmax(120px, .4fr) minmax(0, 1.55fr) minmax(240px, .75fr);
+  gap: clamp(20px, 4vw, 72px);
+  padding: clamp(220px, 22vw, 330px) var(--case-gutter) clamp(110px, 13vw, 200px);
+  color: #000;
+  background: #fff;
+}
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-statement > p { margin: 0; color: #5c5c5c; font-size: clamp(16px, 1.25vw, 19px); line-height: 1.5; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-statement .dw-tempo-v3-kicker { color: #000; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-statement h2 { margin: 0; font-size: clamp(48px, 6.25vw, 104px); font-weight: 650; line-height: .9; letter-spacing: -.065em; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-showcase,
+.dw-case-draft-tempo-v3 .dw-tempo-v3-outcome { padding: clamp(100px, 12vw, 180px) var(--case-gutter); background: #fff; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-heading { width: min(100%, 900px); margin: 0 auto clamp(48px, 7vw, 96px); text-align: center; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-heading > p,
+.dw-case-draft-tempo-v3 .dw-tempo-v3-detail-copy > p,
+.dw-case-draft-tempo-v3 .dw-tempo-v3-close > p { margin: 0 0 16px; color: #000; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-heading h2 { max-width: 11ch; margin: 0 auto; font-size: clamp(52px, 7vw, 118px); font-weight: 650; line-height: .86; letter-spacing: -.07em; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-heading > span { display: block; max-width: 38ch; margin: 26px auto 0; color: #5c5c5c; font-size: clamp(17px, 1.4vw, 22px); line-height: 1.45; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-showcase-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; width: min(100%, 1260px); }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-showcase-grid article { display: flex; flex-direction: column; min-height: 640px; padding: 20px; color: #000; background: #fff; border: 1px solid #000; border-radius: 8px; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-showcase-grid article:nth-child(2n) { background: #fff; transform: none; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-card-phone { width: min(100%, 250px); height: 390px; margin: 0 auto 32px; overflow: hidden; background: #fff; border: 1.5px solid #000; border-radius: 22px; box-shadow: 0 16px 30px rgb(0 0 0 / 13%); }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-showcase-grid h3 { margin: auto 0 8px; font-size: clamp(23px, 2vw, 30px); font-weight: 600; line-height: 1; letter-spacing: -.03em; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-showcase-grid p { margin: 0; color: #5c5c5c; font-size: 15px; line-height: 1.45; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .64fr); align-items: center; gap: clamp(42px, 10vw, 170px); padding: clamp(80px, 10vw, 150px) max(var(--case-gutter), calc((100% - 1240px) / 2)); background: var(--tempo-mint); }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-detail h2 { max-width: 10ch; margin: 0; color: #000; font-size: clamp(50px, 6.5vw, 112px); font-weight: 650; line-height: .88; letter-spacing: -.07em; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-detail-copy > p:not(:first-child) { max-width: 34ch; margin: 32px 0 0; color: #303030; font-size: clamp(18px, 1.5vw, 24px); line-height: 1.45; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-detail-notes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 38px; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-detail-notes span { padding: 8px 10px; border: 1px solid #000; border-radius: 999px; font-size: 12px; font-weight: 600; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-detail-device { width: min(100%, 330px); margin: 0 auto; overflow: hidden; background: #fff; border: 1.5px solid #000; border-radius: 22px; box-shadow: 0 22px 38px rgb(0 0 0 / 14%); aspect-ratio: 1836 / 3953; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-outcome { background: #000; color: #fff; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-outcome .dw-tempo-v3-heading > p { color: var(--tempo-sun); }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-outcome .dw-tempo-v3-heading h2 { color: #fff; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-outcome-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; width: min(100%, 1100px); margin: 0 auto; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-outcome-grid article { min-height: 260px; padding: 24px; border-top: 1px solid rgb(255 255 255 / 38%); }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-outcome-grid strong { display: block; margin-bottom: 22px; color: var(--tempo-sun); font-size: clamp(72px, 9vw, 148px); font-weight: 650; line-height: .75; letter-spacing: -.08em; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-outcome-grid span { max-width: 26ch; color: #d0d0d0; font-size: 15px; line-height: 1.42; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-close { padding: clamp(90px, 14vw, 210px) var(--case-gutter); color: #000; background: #fff; text-align: center; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-close h2 { max-width: 10ch; margin: 0 auto; font-size: clamp(52px, 7.5vw, 128px); font-weight: 650; line-height: .86; letter-spacing: -.07em; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-secondary { margin-top: 38px; color: #000; background: #fff; border-color: #000; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-story-intro {
+  padding: clamp(110px, 15vw, 230px) var(--case-gutter);
+  color: #fff;
+  background: #000;
+  text-align: center;
+}
+.dw-case-draft-tempo-v3 .dw-tempo-v3-story-intro p { margin: 0 0 18px; color: var(--tempo-sun); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-story-intro h2 { max-width: 10ch; margin: 0 auto; color: #fff; font-size: clamp(52px, 7.5vw, 126px); font-weight: 650; line-height: .86; letter-spacing: -.07em; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-story-intro span { display: block; max-width: 40ch; margin: 30px auto 0; color: #cfcfcf; font-size: clamp(17px, 1.4vw, 21px); line-height: 1.45; }
+
+/* The original complete Tempo narrative remains after the new story opening.
+   This keeps all research and decision evidence while sharing the v3 scale. */
+.dw-case-draft-tempo-v3 .dw-tempo-v3-story .dw-case-section { isolation: isolate; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-story .dw-case-section-outcome { color: #000; background: var(--tempo-mint) !important; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-story .dw-case-section-outcome .dw-case-metrics { color: #000; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-story .dw-case-section-outcome .dw-case-metrics article { border-color: #000; }
+
+/* Static counterparts for the Tempo research sections. The old page used
+   pinned prototype experiments here; on a long case study they could leave
+   empty viewports or hide evidence. These keep every screen and paragraph in
+   the normal document flow. */
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static {
+  position: relative;
+  width: 100%;
+  padding: clamp(92px, 12vw, 176px) var(--case-gutter);
+  color: #000;
+  background: #fff;
+}
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static > header,
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-copy-section > div:first-child { width: min(100%, 1100px); margin: 0 auto; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static header > p,
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-copy-section > div:first-child > p:first-child { margin: 0 0 16px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-static h2 { max-width: 12ch; margin: 0; font-size: clamp(48px, 6.3vw, 106px); font-weight: 650; line-height: .88; letter-spacing: -.065em; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-copy { max-width: 48rem; margin-top: 30px; color: #555; font-size: clamp(17px, 1.35vw, 22px); line-height: 1.55; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-copy p + p { margin-top: 1em; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-gallery { background: #f5f5f5; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-screen-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; width: min(100%, 1360px); margin: clamp(54px, 7vw, 100px) auto 0; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-screen-grid article { display: flex; flex-direction: column; min-width: 0; padding: 14px; background: #fff; border: 1px solid #000; border-radius: 8px; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-screen-grid figure { width: min(100%, 210px); margin: 0 auto 26px; overflow: hidden; border: 1px solid #000; border-radius: 18px; aspect-ratio: 1836 / 3953; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-screen-grid figure img { width: 100%; height: 100%; object-fit: cover; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-screen-grid span { margin-bottom: 10px; font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-static-screen-grid h3 { margin: 0 0 10px; font-size: clamp(20px, 1.7vw, 28px); font-weight: 600; line-height: 1; letter-spacing: -.03em; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-screen-grid p { margin: 0; color: #5c5c5c; font-size: 14px; line-height: 1.45; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-plate { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .7fr); align-items: center; gap: clamp(42px, 10vw, 160px); background: var(--tempo-mint); }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-plate.is-left > figure { order: -1; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-plate > div { width: min(100%, 650px); justify-self: end; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-plate figure { width: min(100%, 330px); margin: 0 auto; overflow: hidden; background: #fff; border: 1px solid #000; border-radius: 22px; aspect-ratio: 1836 / 3953; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-plate figure img { width: 100%; height: 100%; object-fit: cover; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 7vw, 120px); background: #fff; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-static-split h2 { max-width: 11ch; font-size: clamp(44px, 5.4vw, 90px); }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-split figure { margin: 0; border: 1px solid #000; border-radius: 12px; overflow: hidden; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-split figure img { width: 100%; height: auto; }
+
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-copy-section { background: #fff; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-copy-section dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; width: min(100%, 1100px); margin: 48px auto 0; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-copy-section dl div { padding-top: 12px; border-top: 1px solid #000; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-copy-section dt { margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-copy-section dd { margin: 0; color: #555; font-size: 15px; line-height: 1.4; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; width: min(100%, 1100px); margin: 56px auto 0; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-metrics article { padding: 20px 0; border-top: 1px solid #000; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-metrics strong { display: block; font-size: clamp(58px, 8vw, 126px); font-weight: 650; line-height: .75; letter-spacing: -.07em; }
+.dw-case-draft-tempo-v3 .dw-tempo-v3-static-metrics span { display: block; max-width: 25ch; margin-top: 18px; color: #555; font-size: 15px; line-height: 1.42; }
+
+@media (max-width: 760px) {
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel { min-height: 910px; padding: 122px 20px 340px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel { bottom: -105px; width: min(100vw - 28px, 480px); height: 310px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-phone { width: 158px; border-radius: 16px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-phone-left { left: 0; transform: rotate(-13deg) translateY(18px); }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-phone-right { right: 0; transform: rotate(13deg) translateY(18px); }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-statement { grid-template-columns: 1fr; gap: 22px; padding: 180px 20px 96px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-statement > p { max-width: 31ch; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-showcase,
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-outcome { padding: 88px 20px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-heading { margin-bottom: 48px; text-align: left; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-heading h2 { max-width: 10ch; margin-inline: 0; font-size: 50px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-heading > span { margin-inline: 0; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-showcase-grid,
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-outcome-grid { grid-template-columns: 1fr; gap: 12px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-showcase-grid article { min-height: 560px; padding: 16px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-card-phone { height: 320px; margin-bottom: 26px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-detail { grid-template-columns: 1fr; gap: 48px; padding: 80px 20px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-detail h2 { font-size: 52px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-detail-device { width: 240px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-outcome-grid article { min-height: 180px; padding: 18px 0; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-outcome-grid strong { font-size: 86px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-close { padding: 100px 20px; text-align: left; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-close h2 { margin-inline: 0; font-size: 56px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-story-intro { padding: 100px 20px; text-align: left; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-story-intro h2 { margin-inline: 0; font-size: 56px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-story-intro span { margin-inline: 0; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-static { padding: 82px 20px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-static h2 { font-size: 52px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-static-screen-grid { grid-template-columns: 1fr; margin-top: 46px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-static-screen-grid article { min-height: 0; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-static-screen-grid figure { width: 190px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-static-plate,
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-static-split { grid-template-columns: 1fr; gap: 42px; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-static-plate.is-left > figure { order: 0; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-static-plate > div { justify-self: auto; }
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-static-copy-section dl,
+  .dw-case-draft-tempo-v3 .dw-tempo-v3-static-metrics { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* Final Tempo V3 Figma overrides. Kept last so the earlier Pop draft rules
+   cannot reassert their blue/white direction. */
+.dw-page .dw-case-draft-tempo-v3 { --tempo-green: #1b7d6d; --tempo-green-deep: #126a5c; --tempo-pale: #e3f1ec; --tempo-ink: #161a19; --tempo-sun: #1b7d6d; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel { color: #fff; background: var(--tempo-green) !important; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy h1, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy h2 { color: #fff; }
+.dw-page .dw-case-draft-tempo-v3 .dw-case-opening-eyebrow, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-hero-copy { color: #dff1eb; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-primary { color: var(--tempo-green) !important; background: #fff !important; border-color: #fff !important; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-primary:hover { color: #fff !important; background: transparent !important; border-color: #fff !important; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel .dw-tempo-v3-phone { padding: 8px; background: #fff; border-color: #fff; box-shadow: 0 28px 52px rgb(8 58 48 / 26%); }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-phone { color: var(--tempo-ink); background: #fff; border-radius: 13px; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-phone-top { border-bottom: 1px solid #edf0ee; color: #303937; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-phone-top i { background: var(--tempo-ink); }.dw-page .dw-case-draft-tempo-v3 .dw-secure-phone-content { position: relative; padding: 14px 15px; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-label { color: var(--tempo-green); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-phone h3 { margin: 13px 0 16px; color: var(--tempo-ink); font-size: clamp(16px, 1.5vw, 23px); font-weight: 500; letter-spacing: -.055em; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-art { position: relative; height: 42%; min-height: 138px; overflow: hidden; background: #edf3f0; border: 1px solid #d8e1dd; border-radius: 4px; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-art::before, .dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-art::after { position: absolute; content: ""; border: 1px solid #c5d4ce; border-radius: 50%; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-art::before { width: 120%; height: 72%; top: 24%; left: -28%; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-art::after { width: 78%; height: 118%; top: -48%; right: -28%; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-art i { position: absolute; z-index: 1; display: block; width: 10px; height: 10px; border-radius: 50%; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-art i:nth-child(1) { top: 22%; left: 23%; background: var(--tempo-ink); }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-art i:nth-child(2) { top: 52%; left: 54%; background: var(--tempo-green); }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-art i:nth-child(3) { right: 18%; bottom: 20%; background: #94aca3; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-art b { position: absolute; z-index: 1; top: 31%; left: 29%; width: 42%; border-top: 1px solid var(--tempo-green); transform: rotate(34deg); transform-origin: left; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-lines { display: grid; gap: 8px; margin-top: 16px; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-lines i { display: block; height: 7px; background: #e7ece9; border-radius: 2px; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-lines i:nth-child(2) { width: 75%; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-lines i:nth-child(3) { width: 54%; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-foot { display: block; margin-top: auto; padding-top: 16px; color: #7b8983; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-intro { background: #fff; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-intro > div > p, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-metadata > p, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages header > p, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading > p, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel header > p, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome header > p { color: var(--tempo-green); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-intro h2, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages h2, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages h3 { color: var(--tempo-ink); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-intro > p { color: #5d6c65; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-metadata { color: var(--tempo-ink); background: #f4f7f5; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-metadata dl div { border-color: #cad6d1; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-metadata dt { color: #75847e; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-metadata dd { color: var(--tempo-ink); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages { background: #fff; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages article > span { color: var(--tempo-green); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages > div { border-color: var(--tempo-ink); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages article { border-color: #d4ded9; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough { position: relative; overflow: hidden; color: #fff; background: var(--tempo-green); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough::before { position: absolute; top: 31%; right: -12%; width: 65%; height: 44%; content: ""; border: 1px solid rgb(255 255 255 / 35%); border-radius: 50%; animation: dw-tempo-route-orbit 10s linear infinite; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading > p { color: #d9f0e8; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading h2, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy h3 { color: #fff; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading > span, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy p { color: #d8ece6; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy article > span { color: #bce1d5; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy .dw-tempo-secure-risk { color: #c8e8dc !important; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy article { border-color: rgb(255 255 255 / 22%); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage { z-index: 1; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage .dw-tempo-secure-phone { border-color: #fff; box-shadow: 0 35px 75px rgb(5 54 45 / 28%); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage > p { color: #d7ece5; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage > p strong { color: #fff; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel { background: var(--tempo-green-deep); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel header > p { color: #d8f1e9; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track article { border-radius: 2px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-device { padding: 6px; background: #fff; border-color: #fff; border-radius: 15px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-device .dw-tempo-secure-phone { border-radius: 9px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track article > div:last-child > span { color: var(--tempo-green); }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome { color: var(--tempo-ink); background: #fff; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome h2 { color: var(--tempo-ink); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome article { border-color: #aebdb6; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome span, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome > p { color: #5b6a63; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome strong { color: var(--tempo-green); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-close { color: #fff; background: var(--tempo-green); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-close > p, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-close h2 { color: #fff; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-secondary { color: var(--tempo-green); background: #fff; border-color: #fff; }
+@keyframes dw-tempo-route-orbit { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+@media (max-width: 760px) { .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel .dw-tempo-v3-phone { padding: 4px; }.dw-page .dw-case-draft-tempo-v3 .dw-secure-placeholder-art { min-height: 114px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough::before { display: none; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy article { border-top-color: rgb(255 255 255 / 25%); }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-device { padding: 4px; } }
+
+/* Tempo V3 visual QA pass: a constrained editorial column, legible support
+   copy, and devices that float inside the gallery rather than becoming cards. */
+.dw-page .dw-case-draft-tempo-v3 [id] { scroll-margin-top: 116px; }
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-intro {
+  grid-template-columns: minmax(0, 1.05fr) minmax(260px, .55fr);
+  gap: clamp(38px, 8vw, 110px);
+  padding-right: max(64px, calc((100% - 1000px) / 2));
+  padding-left: max(64px, calc((100% - 1000px) / 2));
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-intro h2 {
+  max-width: 8.5ch;
+  font-size: clamp(52px, 6.2vw, 88px);
+  line-height: .93;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-intro > p {
+  max-width: 29ch;
+  font-size: clamp(17px, 1.35vw, 20px);
+  line-height: 1.48;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-metadata {
+  padding-right: max(64px, calc((100% - 1000px) / 2));
+  padding-left: max(64px, calc((100% - 1000px) / 2));
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages {
+  padding: clamp(96px, 11vw, 160px) max(var(--case-gutter), calc((100% - 1080px) / 2));
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages header,
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome header {
+  grid-template-columns: minmax(150px, .35fr) minmax(0, 1.2fr);
+  gap: clamp(24px, 5vw, 74px);
+  margin-bottom: clamp(48px, 7vw, 88px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages h2,
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome h2 {
+  max-width: 11ch;
+  font-size: clamp(46px, 5.8vw, 82px);
+  line-height: .92;
+  letter-spacing: -.06em;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages > div,
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome > div {
+  width: 100%;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages article {
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 44px);
+  padding: 30px 0 34px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages article > span {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages h3 {
+  margin-bottom: 12px;
+  font-size: clamp(26px, 2.6vw, 38px);
+  line-height: 1;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages p {
+  max-width: 62ch;
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.5;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages .dw-tempo-secure-risk {
+  color: #56655f !important;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel {
+  min-height: 360vh;
+  background: var(--tempo-green-deep);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-sticky {
+  padding: 94px max(var(--case-gutter), calc((100% - 1080px) / 2)) 48px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel header {
+  grid-template-columns: minmax(150px, .35fr) minmax(0, 1.2fr);
+  gap: clamp(24px, 5vw, 74px);
+  margin-bottom: 28px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel h2 {
+  max-width: 12ch;
+  font-size: clamp(44px, 5.3vw, 76px);
+  line-height: .92;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track {
+  align-items: center;
+  gap: clamp(36px, 6vw, 84px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track article {
+  grid-template-columns: 235px minmax(230px, 310px);
+  gap: clamp(28px, 4.5vw, 64px);
+  width: min(68vw, 710px);
+  padding: 0;
+  color: #fff;
+  background: transparent !important;
+  border: 0;
+  border-radius: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-device {
+  align-self: center;
+  width: 220px;
+  height: min(52svh, 490px) !important;
+  min-height: 0 !important;
+  padding: 5px;
+  background: #fff;
+  border: 1px solid rgb(255 255 255 / 72%);
+  border-radius: 14px;
+  box-shadow: 0 20px 48px rgb(4 47 40 / 32%);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-device .dw-tempo-secure-phone {
+  width: 100%;
+  height: 100%;
+  min-height: 0 !important;
+  border: 0;
+  border-radius: 10px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-device > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 9px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track article > div:last-child > span {
+  color: #d9f0e8;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track h3 {
+  max-width: 9ch;
+  color: #fff;
+  font-size: clamp(32px, 3.8vw, 56px);
+  line-height: .92;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track p {
+  color: #d9ebe5;
+  font-size: 16px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome {
+  padding: clamp(98px, 11vw, 160px) max(var(--case-gutter), calc((100% - 1080px) / 2));
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome article {
+  min-height: 178px;
+  padding-top: 18px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome strong {
+  margin-bottom: 16px;
+  font-size: clamp(64px, 7.5vw, 112px);
+}
+
+@media (max-width: 760px) {
+  .dw-page .dw-case-draft-tempo-v3 [id] { scroll-margin-top: 82px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-intro,
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-metadata { padding-right: 20px; padding-left: 20px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages,
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome { padding: 80px 20px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages header,
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome header,
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel header { grid-template-columns: 1fr; gap: 14px; margin-bottom: 42px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages h2,
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome h2,
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel h2 { font-size: clamp(42px, 12vw, 52px); line-height: .94; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages article { grid-template-columns: 40px minmax(0, 1fr); gap: 14px; padding: 24px 0 28px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages h3 { font-size: 27px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages p { font-size: 14px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel { min-height: 0; padding: 82px 0 88px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-sticky { position: static; height: auto; padding: 0; overflow: visible; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel header { display: grid; padding: 0 20px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-window { padding: 0 20px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track { align-items: stretch; gap: 20px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track article { display: flex; flex: 0 0 auto; flex-direction: column; gap: 24px; width: min(76vw, 286px); min-height: 0; padding: 0 0 16px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-device { align-self: center; width: 190px; height: 326px !important; min-height: 326px !important; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track h3 { max-width: 11ch; font-size: 34px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track p { margin-top: 12px; font-size: 14px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome article { min-height: 0; padding: 22px 0; }
+}
+
+/* Tempo V3 narrative and motion correction. These rules intentionally sit
+   after the earlier explorations so the case behaves as one restrained story. */
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-header,
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-header.is-scrolled {
+  height: 60px !important;
+}
+
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-logo { height: 60px; }
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel {
+  min-height: calc(100svh - 60px);
+  padding-top: clamp(92px, 9vw, 132px);
+  padding-bottom: clamp(292px, 26vw, 390px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy {
+  position: relative;
+  z-index: 4;
+  max-width: 840px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy h1 {
+  font-size: clamp(88px, 12vw, 190px);
+  line-height: .84;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-hero-copy {
+  max-width: 39ch;
+  margin: 26px auto 0;
+  color: #e4f2ed;
+  font-size: clamp(16px, 1.35vw, 20px);
+  line-height: 1.45;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel {
+  bottom: -34px;
+  width: min(78vw, 880px);
+  height: clamp(330px, 33vw, 470px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel .dw-tempo-v3-phone {
+  width: clamp(154px, 16.5vw, 230px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages header {
+  display: block;
+  width: min(100%, 690px);
+  margin: 0 auto clamp(48px, 7vw, 88px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages h2 {
+  max-width: 10.5ch;
+  margin: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages article > div {
+  position: relative;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages .dw-tempo-secure-risk {
+  margin-bottom: 13px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages strong {
+  color: var(--tempo-green);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-bridge {
+  display: grid;
+  min-height: clamp(260px, 52svh, 560px);
+  place-items: center;
+  padding: 42px 24px;
+  color: var(--tempo-ink);
+  background: #fff;
+  text-align: center;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-bridge p {
+  max-width: 19ch;
+  margin: 0;
+  font-size: clamp(33px, 4.8vw, 68px);
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: -.055em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-bridge {
+    color: #fff;
+    background: var(--tempo-green);
+  }
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough {
+  overflow: visible;
+  padding-top: clamp(88px, 10vw, 140px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough::before {
+  pointer-events: none;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading {
+  grid-template-columns: minmax(0, 1.1fr) minmax(250px, .5fr);
+  gap: clamp(36px, 8vw, 120px);
+  width: min(100%, 1080px);
+  margin-inline: auto;
+  margin-bottom: clamp(52px, 8vw, 94px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading h2 {
+  max-width: 9.5ch;
+  font-size: clamp(46px, 5.7vw, 80px);
+  line-height: .92;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-layout {
+  grid-template-columns: minmax(0, .86fr) minmax(280px, .62fr);
+  gap: clamp(42px, 10vw, 150px);
+  width: min(100%, 1080px);
+  margin-inline: auto;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy article {
+  display: grid;
+  align-content: center;
+  min-height: 100svh;
+  padding: 13vh 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage {
+  align-self: start;
+  top: 78px;
+  min-height: calc(100svh - 100px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage .dw-tempo-secure-phone {
+  width: min(100%, 290px);
+  height: min(61svh, 570px);
+  min-height: 430px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel {
+  min-height: 300vh;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel header {
+  display: block;
+  width: min(100%, 760px);
+  margin: 0 auto 36px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel h2 {
+  max-width: 10.5ch;
+  margin: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-window {
+  overflow: hidden;
+  padding-inline: 10px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track {
+  gap: clamp(52px, 7vw, 96px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track article {
+  grid-template-columns: 220px minmax(220px, 300px);
+  width: min(61vw, 620px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-device {
+  width: 202px;
+  height: min(50svh, 452px) !important;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop {
+  display: grid;
+  grid-template-columns: minmax(0, .83fr) minmax(380px, 1.17fr);
+  gap: clamp(48px, 9vw, 138px);
+  align-items: center;
+  padding: clamp(92px, 12vw, 165px) max(64px, calc((100% - 1080px) / 2));
+  color: var(--tempo-ink);
+  background: var(--tempo-pale);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop-copy > p:first-child {
+  margin: 0 0 16px;
+  color: var(--tempo-green);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop h2 {
+  max-width: 9ch;
+  margin: 0;
+  color: var(--tempo-ink);
+  font-size: clamp(46px, 5.5vw, 78px);
+  font-weight: 600;
+  line-height: .92;
+  letter-spacing: -.06em;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop-copy > p:last-child {
+  max-width: 34ch;
+  margin: 26px 0 0;
+  color: #45554e;
+  font-size: clamp(17px, 1.3vw, 20px);
+  line-height: 1.5;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop > figure,
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop > img {
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgb(22 26 25 / 12%);
+  border-radius: 5px;
+  box-shadow: 0 22px 50px rgb(12 70 59 / 14%);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome {
+  padding-top: clamp(82px, 9vw, 132px);
+  padding-bottom: clamp(84px, 10vw, 142px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome header {
+  display: block;
+  width: min(100%, 690px);
+  margin: 0 auto 56px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome h2 { margin: 0; }
+
+@media (max-width: 760px) {
+  .dw-page:has(.dw-case-draft-tempo-v3) .dw-header,
+  .dw-page:has(.dw-case-draft-tempo-v3) .dw-header.is-scrolled,
+  .dw-page:has(.dw-case-draft-tempo-v3) .dw-logo { height: 56px !important; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel { min-height: calc(100svh - 56px); padding: 92px 20px 294px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy h1 { font-size: clamp(72px, 22vw, 104px); }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy h2 { margin-top: 20px; font-size: 20px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel { bottom: -20px; width: calc(100% - 28px); height: 292px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel .dw-tempo-v3-phone { width: 142px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-bridge { min-height: 178px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading { grid-template-columns: 1fr; gap: 18px; width: auto; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading h2 { font-size: 50px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-layout { display: block; width: auto; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage { position: relative; top: auto; min-height: 0; padding-bottom: 44px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy article { display: block; min-height: 0; padding: 38px 0; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel { min-height: 0; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-window { overflow-x: auto; padding: 0 20px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track article { width: min(76vw, 286px); }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-device { width: 190px; height: 326px !important; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop { grid-template-columns: 1fr; gap: 44px; padding: 80px 20px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop h2 { font-size: 50px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome header { width: auto; margin-bottom: 42px; }
+}
+
+/* Sticky positioning needs an unclipped ancestor. Individual visual sections
+   still manage their own artwork, while the walkthrough can now stay pinned. */
+.dw-page .dw-case-draft-tempo-v3 { overflow: visible; }
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough {
+  padding-top: clamp(68px, 7vw, 96px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading {
+  display: block;
+  width: min(100%, 690px);
+  margin: 0 auto clamp(38px, 5vw, 62px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading h2 {
+  max-width: 9ch;
+  margin: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage {
+  margin-top: -230px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy article:first-child {
+  min-height: 82svh;
+}
+
+@media (max-width: 760px) {
+  .dw-page .dw-case-draft-tempo-v3 { overflow: hidden; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough { padding-top: 76px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-section-heading { width: auto; margin-bottom: 36px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage { margin-top: 0; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy article:first-child { min-height: 0; }
+}
+
+/* Tempo V3 case-study corrections: stable full-width narrative panels. */
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages {
+  padding-bottom: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-bridge {
+  min-height: clamp(150px, 17vw, 230px);
+  background: linear-gradient(180deg, #e8f1ed 0%, var(--tempo-green) 58%);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-bridge p {
+  max-width: 21ch;
+  padding-top: 36px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel {
+  min-height: 220vh;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-sticky {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 54px);
+  height: 100svh;
+  padding: clamp(56px, 7vw, 96px) 0 clamp(36px, 5vw, 72px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel header {
+  width: min(100% - 48px, 1080px);
+  margin: 0 auto;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel h2 {
+  max-width: 14ch;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-window {
+  display: grid;
+  width: 100%;
+  padding: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  min-width: 100%;
+  height: 100%;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track article {
+  display: grid;
+  grid-template-columns: minmax(230px, .75fr) minmax(520px, 1.25fr);
+  align-items: center;
+  gap: clamp(40px, 7vw, 112px);
+  flex: 0 0 min(100vw, 1200px);
+  width: min(100vw, 1200px);
+  min-height: 0;
+  padding: 0 max(24px, calc((100vw - 1080px) / 2));
+  transform: none !important;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-sequence-copy {
+  min-width: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-sequence-copy > span {
+  display: block;
+  margin-bottom: 17px;
+  color: #b9d8cf;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-sequence-copy h3 {
+  max-width: 9ch;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(38px, 4.5vw, 66px);
+  font-weight: 600;
+  line-height: .91;
+  letter-spacing: -.06em;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-sequence-copy p {
+  max-width: 28ch;
+  margin: 20px 0 0;
+  color: #e6f4ef;
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.45;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-sequence-devices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+  gap: clamp(12px, 2.2vw, 32px);
+  min-width: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-sequence-devices .dw-tempo-secure-carousel-device {
+  width: 100%;
+  height: min(52svh, 470px) !important;
+  min-height: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-sequence-devices .dw-tempo-secure-carousel-device:nth-child(2) {
+  transform: translateY(-20px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop-copy > p:first-child {
+  margin-top: 26px;
+}
+
+@media (max-width: 760px) {
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages { padding-bottom: 0; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-bridge { min-height: 136px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-bridge p { padding-top: 18px; font-size: 34px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel { min-height: 0; padding: 74px 0 80px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-sticky { display: block; height: auto; padding: 0; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel header { width: auto; margin: 0 20px 34px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-window { overflow-x: auto; padding: 0 20px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-window { -webkit-mask-image: none; mask-image: none; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track { gap: 20px; height: auto; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track article { grid-template-columns: 1fr; gap: 28px; flex-basis: calc(100vw - 40px); width: calc(100vw - 40px); padding: 0; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-sequence-copy h3 { max-width: 10ch; font-size: 42px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-sequence-devices { gap: 8px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-sequence-devices .dw-tempo-secure-carousel-device { height: auto !important; aspect-ratio: .47; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-sequence-devices .dw-tempo-secure-carousel-device:nth-child(2) { transform: translateY(-9px); }
+}
+
+/* The existing route model is supporting evidence, not another hero. */
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop {
+  grid-template-columns: minmax(240px, .78fr) minmax(300px, .62fr);
+  justify-content: center;
+  gap: clamp(48px, 8vw, 108px);
+  padding: clamp(64px, 7vw, 88px) max(32px, calc((100% - 920px) / 2));
+  background: #fff;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop h2 {
+  max-width: 11ch;
+  font-size: clamp(36px, 3.4vw, 50px);
+  font-weight: 500;
+  line-height: .96;
+  letter-spacing: -.055em;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop-copy > p:last-child {
+  max-width: 30ch;
+  margin-top: 20px;
+  color: #53635d;
+  font-size: clamp(15px, 1.15vw, 17px);
+  line-height: 1.52;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop > figure,
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop > img {
+  justify-self: center;
+  width: min(100%, 280px);
+  border: 1px solid rgb(18 49 41 / 14%);
+  border-radius: 4px;
+  box-shadow: 0 18px 42px rgb(18 49 41 / 12%);
+}
+
+@media (max-width: 760px) {
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop {
+    gap: 34px;
+    padding: 64px 20px;
+  }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop h2 { font-size: 42px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop > figure,
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop > img { width: min(100%, 260px); }
+}
+
+/* Case-study heroes begin directly under the fixed site header. */
+.dw-page .dw-case-study {
+  padding-top: 0;
+}
+
+/* Tempo V3 repair: this case uses a continuous editorial canvas rather than
+   the rounded, marketing-page opening used by the other projects. */
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-header,
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-header.is-scrolled {
+  height: 60px !important;
+  margin: 0;
+}
+
+.dw-page:has(.dw-case-draft-tempo-v3) .dw-logo { height: 60px; }
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero {
+  padding: 0;
+  margin: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel {
+  min-height: max(620px, calc(100svh - 60px));
+  padding: clamp(96px, 11vw, 152px) max(24px, calc((100% - 1080px) / 2)) clamp(250px, 24vw, 354px);
+  border-radius: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel {
+  bottom: -26px;
+  height: clamp(280px, 25vw, 340px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel .dw-tempo-v3-phone {
+  width: clamp(144px, 14vw, 190px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-bridge {
+  min-height: clamp(240px, 42svh, 430px);
+  background: #fff;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-bridge p {
+  padding: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough {
+  overflow: visible;
+  padding: clamp(78px, 9vw, 126px) max(24px, calc((100% - 1080px) / 2)) 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough::before { display: none; }
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-layout {
+  align-items: start;
+  grid-template-columns: minmax(0, .82fr) minmax(300px, .58fr);
+  gap: clamp(48px, 10vw, 150px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy article,
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy article:first-child {
+  min-height: 88svh;
+  padding: 16svh 0;
+  opacity: .28;
+  transition: opacity .3s ease;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy article.is-active { opacity: 1; }
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage {
+  position: sticky;
+  top: 76px;
+  align-self: start;
+  min-height: calc(100svh - 76px);
+  margin-top: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage .dw-tempo-secure-phone {
+  width: min(100%, 286px);
+  height: min(66svh, 580px);
+  min-height: 410px;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel {
+  min-height: 0;
+  height: 100svh;
+  background: var(--tempo-green-deep);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-sticky {
+  height: 100svh;
+  padding: clamp(62px, 7vw, 88px) 0 clamp(28px, 4vw, 48px);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-window { overflow: hidden; }
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track article {
+  flex-basis: 100vw;
+  width: 100vw;
+  grid-template-columns: minmax(210px, .62fr) minmax(490px, 1.18fr);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-sequence-devices .dw-tempo-secure-carousel-device {
+  height: min(48svh, 430px) !important;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop {
+  grid-template-columns: minmax(230px, .77fr) minmax(320px, .83fr);
+  align-items: center;
+  gap: clamp(42px, 8vw, 94px);
+  padding: clamp(74px, 8vw, 106px) max(24px, calc((100% - 980px) / 2));
+  background: var(--tempo-pale);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop-preview {
+  overflow: hidden;
+  padding: clamp(22px, 3vw, 34px);
+  color: var(--tempo-ink);
+  background: #fff;
+  border: 1px solid rgb(18 49 41 / 14%);
+  border-radius: 6px;
+  box-shadow: 0 18px 42px rgb(18 49 41 / 12%);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-map {
+  position: relative;
+  height: 130px;
+  margin-bottom: 22px;
+  overflow: hidden;
+  border: 1px solid #dce9e4;
+  border-radius: 4px;
+  background: #eff7f3;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-map::before {
+  position: absolute;
+  top: 28px;
+  right: 14%;
+  bottom: 25px;
+  left: 13%;
+  content: "";
+  border: 2px dashed var(--tempo-green);
+  border-right-color: transparent;
+  border-radius: 50%;
+  transform: rotate(-9deg);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-map i,
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-map b {
+  position: absolute;
+  z-index: 1;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--tempo-green);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-map i:nth-child(1) { top: 70px; left: 18%; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-map i:nth-child(2) { top: 32px; left: 52%; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-map i:nth-child(3) { top: 77px; right: 17%; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-map b { width: 5px; height: 5px; background: #9fc9ba; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-map b:nth-of-type(1) { top: 24px; left: 23%; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-map b:nth-of-type(2) { top: 95px; left: 42%; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-map b:nth-of-type(3) { top: 34px; right: 20%; }
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-stops { display: grid; gap: 10px; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-stops span { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid #e2ece8; font-size: 13px; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-stops span:last-child { border-bottom: 0; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-stops b { color: var(--tempo-green); font-size: 11px; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-route-stops em { color: #5b766b; font-size: 11px; font-style: normal; }
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-appbar { display: flex; justify-content: space-between; align-items: baseline; color: var(--tempo-ink); font-size: 8px; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-appbar strong { color: var(--tempo-green); font-size: 12px; letter-spacing: -.06em; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-heading { margin-top: 18px; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-heading > span { display: block; color: var(--tempo-green); font-size: 8px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-heading h3 { margin: 7px 0 14px; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-visual { position: relative; height: 34%; min-height: 106px; overflow: hidden; border: 1px solid #d8e7e1; border-radius: 5px; background: #edf6f2; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-visual::before { position: absolute; top: 18%; right: 12%; bottom: 15%; left: 12%; content: ""; border: 1px dashed #72a998; border-radius: 50%; transform: rotate(-15deg); }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-visual i, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-visual b, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-visual em, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-visual small { position: absolute; z-index: 1; width: 12px; height: 12px; border-radius: 50%; background: var(--tempo-green); }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-visual i { top: 58%; left: 17%; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-visual b { top: 21%; left: 49%; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-visual em { right: 16%; bottom: 20%; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-visual small { top: 44%; left: 46%; width: 27px; height: 27px; border: 6px solid #fff; background: var(--tempo-green); }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-card { margin-top: 12px; padding: 11px; border: 1px solid #dce8e3; border-radius: 5px; background: #fff; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-card span, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-card p { display: block; margin: 0; color: #698077; font-size: 8px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-card strong { display: block; margin: 4px 0; color: var(--tempo-ink); font-size: 13px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-progress { display: flex; gap: 5px; margin-top: 14px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-progress i { display: block; width: 100%; height: 3px; border-radius: 999px; background: #dce9e4; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-progress i:first-child { background: var(--tempo-green); }
+
+@media (max-width: 760px) {
+  .dw-page:has(.dw-case-draft-tempo-v3) .dw-header,
+  .dw-page:has(.dw-case-draft-tempo-v3) .dw-header.is-scrolled,
+  .dw-page:has(.dw-case-draft-tempo-v3) .dw-logo { height: 56px !important; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel { min-height: calc(100svh - 56px); padding: 84px 20px 270px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel { bottom: -15px; height: 270px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-bridge { min-height: 190px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough { padding: 72px 20px 24px; overflow: hidden; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-layout { display: flex; flex-direction: column; gap: 0; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage { position: relative; top: auto; order: -1; min-height: 0; margin: 0 auto 30px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy article,
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-copy article:first-child { min-height: 0; padding: 34px 0; opacity: 1; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel { height: auto; padding: 74px 0 80px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-sticky { height: auto; padding: 0; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-window { overflow-x: auto; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track article { flex: 0 0 calc(100vw - 40px); width: calc(100vw - 40px); grid-template-columns: 1fr; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-sequence-devices .dw-tempo-secure-carousel-device { height: auto !important; aspect-ratio: .47; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop { grid-template-columns: 1fr; padding: 68px 20px; }
+}
+
+
+/* === Showcase opening (Fey pattern): product first, in a dark window with an
+   ambient glow, copy beneath. Opt in per case with intro.variant "showcase". === */
+.dw-case-opening.is-showcase { padding: clamp(20px, 2vw, 38px) clamp(20px, 2vw, 38px) 0; }
+.dw-case-showcase-frame {
+  position: relative;
+  padding: clamp(28px, 4vw, 72px) clamp(28px, 4vw, 72px) 0;
+  border-radius: 30px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.dw-case-showcase-glow {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  width: 70%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--case-accent) 55%, transparent) 0%, transparent 62%);
+  filter: blur(40px);
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 0;
+}
+.dw-case-showcase-window {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1400px);
+  margin: 0 auto;
+  border-radius: 18px 18px 0 0;
+  overflow: hidden;
+  background: #0b0b0c;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 -30px 90px -40px rgba(0, 0, 0, 0.6);
+}
+/* window chrome: a slim dark title bar with three quiet dots */
+.dw-case-showcase-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 16px;
+  background: linear-gradient(#1a1a1c, #121214);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+.dw-case-showcase-bar i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.16); }
+.dw-page .dw-case-study .dw-case-showcase-window img {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+.dw-case-showcase-copy {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: clamp(28px, 5vw, 96px);
+  align-items: end;
+  width: min(100%, 1400px);
+  margin: clamp(40px, 5vw, 80px) auto 0;
+  padding: 0 clamp(4px, 1vw, 16px);
+}
+.dw-page .dw-case-showcase-copy h1 { margin: 0; font-size: clamp(50px, 4.6vw, 92px); font-weight: 500; line-height: 0.94; letter-spacing: -0.02em; }
+.dw-page .dw-case-showcase-copy h2 { margin: 18px 0 0; max-width: 24ch; font-size: clamp(20px, 1.7vw, 30px); font-weight: 400; line-height: 1.25; }
+.dw-case-showcase-copy .dw-case-opening-meta { margin: 0; }
+@media (max-width: 900px) {
+  .dw-case-showcase-copy { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .dw-case-showcase-frame { border-radius: 18px; padding: 20px 20px 0; }
 }

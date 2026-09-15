@@ -131,3 +131,10 @@
   .dw-pull-next-hint { display: none; }
   .dw-page-leaving .dw-page > * { transition: none; opacity: 1; transform: none; }
 }
+
+/* Site-level end of page: replaces the footer on Home, Work and Public. */
+.dw-site-next {
+  position: relative;
+  padding: clamp(40px, 6vw, 90px) 0 clamp(30px, 4vw, 60px);
+  color: var(--dw-text, currentColor);
+}

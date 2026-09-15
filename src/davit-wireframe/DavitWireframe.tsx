@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { Observer } from "gsap/Observer";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ExternalLink, MessageCircle, Play, X } from "lucide-react";
+import { ExternalLink, Menu, MessageCircle, Play, X } from "lucide-react";
 import {
   Shader,
   Dither,
@@ -23,7 +23,7 @@ import { CosmicDustBackground } from "./CosmicDustBackground";
 import { RapierGlassCubes } from "./HomeRapierGlassBackground";
 import { PortfolioMusicToggle } from "./PortfolioMusicToggle";
 import { MediaCarousel } from "./MediaCarousel";
-import { ContactChat, openContactChat } from "./ContactChat";
+import { CHAT_AVATAR, ContactChat, openContactChat } from "./ContactChat";
 import { PullToContinue } from "./PullToContinue";
 import { OctagonField } from "./OctagonField";
 import {
@@ -1025,6 +1025,59 @@ function SlotMachineNumber() {
   );
 }
 
+function MobileDesignerStat({ value, caption }: { value: string; caption: string }) {
+  const statRef = useRef<HTMLElement | null>(null);
+  const [isFocused, setIsFocused] = useState(false);
+  const [number, setNumber] = useState(0);
+  const hasPlayedRef = useRef(false);
+  const numberMatch = value.match(/\d+/);
+  const target = Number(numberMatch?.[0] ?? 0);
+  const renderedValue = numberMatch
+    ? `${value.slice(0, numberMatch.index)}${number}${value.slice((numberMatch.index ?? 0) + numberMatch[0].length)}`
+    : value;
+
+  useEffect(() => {
+    const element = statRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setIsFocused(true);
+        observer.disconnect();
+      },
+      { threshold: 0.64 }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isFocused || hasPlayedRef.current || target === 0) return;
+    hasPlayedRef.current = true;
+    const startedAt = performance.now();
+    const duration = 760;
+    let frame = 0;
+
+    const animate = (now: number) => {
+      const progress = Math.min(1, (now - startedAt) / duration);
+      setNumber(Math.round(target * (1 - Math.pow(1 - progress, 3))));
+      if (progress < 1) frame = window.requestAnimationFrame(animate);
+    };
+
+    frame = window.requestAnimationFrame(animate);
+    return () => window.cancelAnimationFrame(frame);
+  }, [isFocused, target]);
+
+  return (
+    <article className={`dw-mobile-designer-stat${isFocused ? " is-focused" : ""}`} ref={statRef}>
+      <h3 aria-label={value}>{isFocused ? renderedValue : value.replace(/\d+/, "0")}</h3>
+      <p>{caption}</p>
+    </article>
+  );
+}
+
 function VisualStack({ label = "studio / school / culture" }: { label?: string }) {
   return (
     <div className="dw-media-stack" data-parallax>
@@ -1226,6 +1279,7 @@ const navCursorLabels: Record<string, string> = {
 
 export function SiteHeader({ activePage }: { activePage?: PageKey }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     // Clear a legacy theme value left behind by a hot reload after the switcher
@@ -1257,11 +1311,20 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
   }, []);
 
   return (
-    <header className={`dw-header ${isScrolled ? "is-scrolled" : ""}`}>
+    <header className={`dw-header ${isScrolled ? "is-scrolled" : ""}${isMenuOpen ? " has-menu-open" : ""}`}>
       <NavAnchor className="dw-logo" href="/am" poseOnHover="scroll" cursorLabel="To the Home">
         <span className="dw-logo-word">PDNYN</span>
       </NavAnchor>
-      <nav className="dw-nav" aria-label="Main navigation">
+      <button
+        className="dw-mobile-menu-toggle"
+        type="button"
+        aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={isMenuOpen}
+        onClick={() => setIsMenuOpen((open) => !open)}
+      >
+        {isMenuOpen ? <X aria-hidden="true" strokeWidth={1.8} /> : <Menu aria-hidden="true" strokeWidth={1.8} />}
+      </button>
+      <nav className={`dw-nav${isMenuOpen ? " is-open" : ""}`} aria-label="Main navigation" onClick={() => setIsMenuOpen(false)}>
         {websiteContent.navigation.primary.map((item) => (
           <NavAnchor
             href={item.href}
@@ -1278,15 +1341,6 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
           </NavAnchor>
         ))}
       </nav>
-      <NavAnchor
-        className="dw-school-link"
-        href={websiteContent.navigation.school.href}
-        isActive={activePage === "school"}
-        poseOnHover="idk"
-        cursorLabel={navCursorLabels[websiteContent.navigation.school.href]}
-      >
-        {websiteContent.navigation.school.label}
-      </NavAnchor>
       <div className="dw-right">
         <button
           className="dw-pill"
@@ -1309,11 +1363,23 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
 function FixedSocialLinks() {
   return (
     <div className="dw-fixed-socials" aria-label="Social links">
-      {websiteContent.navigation.socials.map((social) => (
+      {websiteContent.navigation.socials.filter((social) => social.label === "IN").map((social) => (
         <a href={social.href} key={social.label} rel="noreferrer" target="_blank">
           {social.label}
         </a>
       ))}
+      <button
+        className="dw-fixed-portrait"
+        type="button"
+        aria-label="Start a conversation with Davit"
+        onClick={() => openContactChat()}
+        onMouseEnter={() => emitHeroPose("good")}
+        onMouseLeave={() => emitHeroPose(null)}
+        onFocus={() => emitHeroPose("good")}
+        onBlur={() => emitHeroPose(null)}
+      >
+        <img src={CHAT_AVATAR} alt="Davit Pedanyan" />
+      </button>
     </div>
   );
 }
@@ -1321,13 +1387,31 @@ function FixedSocialLinks() {
 const DAVIT_TELEGRAM_URL = "https://t.me/pedanyan";
 
 
-function SiteFooter() {
+/**
+ * The site reads as one continuous document: reaching the end of a page and
+ * continuing to scroll opens the next one. Home -> Work -> Public -> Home.
+ * Case studies and articles keep their own next-item pull.
+ */
+const SITE_FLOW: Array<{ keys: PageKey[]; href: string; title: string; cursorLabel: string }> = [
+  { keys: ["home", "school", "letsTalk"], href: "/am", title: "Home", cursorLabel: "back to the start" },
+  { keys: ["designer", "designTalent"], href: "/am/designer", title: "Work", cursorLabel: "see the work" },
+  { keys: ["publicWork"], href: "/am/public-work", title: "Public", cursorLabel: "talks, writing, community" }
+];
+
+export function nextSitePage(activePage?: PageKey) {
+  const index = SITE_FLOW.findIndex((page) => activePage !== undefined && page.keys.includes(activePage));
+  return SITE_FLOW[(index + 1) % SITE_FLOW.length];
+}
+
+function SiteNextPage({ activePage }: { activePage?: PageKey }) {
+  const next = nextSitePage(activePage);
   return (
-    <footer className="dw-site-footer">
-      <HomeTalkRoutingSection />
-    </footer>
+    <section className="dw-site-next" id="next-page" aria-label="Next page">
+      <PullToContinue href={next.href} kicker="Next page" title={next.title} cursorLabel={next.cursorLabel} />
+    </section>
   );
 }
+
 
 function PageShell({
   children,
@@ -1349,7 +1433,7 @@ function PageShell({
         <PortfolioMusicToggle />
       </div>
       {children}
-      {showFooter ? <SiteFooter /> : null}
+      {showFooter ? <SiteNextPage activePage={activePage} /> : null}
       <ContactChat />
     </main>
   );
@@ -1465,8 +1549,10 @@ const INTRO_GREETINGS = ["Hello", "Bonjour", "Ciao", "Olá", "Hallå", "Guten Ta
 const INTRO_GREETINGS_BRIEF = ["Hello", "Բարև"];
 
 function HomeIntroSection() {
-  // Resolved once per page load, so the list and the pacing always agree.
-  const [brief] = useState(resolveIntroPacing);
+  // Keep the first visit on phones quick, so the greeting never reads as a blank page.
+  const [brief] = useState(
+    () => resolveIntroPacing() || window.matchMedia("(max-width: 900px)").matches
+  );
   const greetings = brief ? INTRO_GREETINGS_BRIEF : INTRO_GREETINGS;
 
   // Layout effect, not effect: the pacing class has to land before the
@@ -1487,6 +1573,9 @@ function HomeIntroSection() {
       document.documentElement.style.overflow = previousOverflow;
       window.requestAnimationFrame(() => window.dispatchEvent(new Event("scroll")));
       refreshTimer = window.setTimeout(() => {
+        // Remembered on the root so a hero that mounts late (or remounts)
+        // can still see the intro is over instead of waiting for nothing.
+        document.documentElement.classList.add("dw-home-intro-done");
         window.dispatchEvent(new CustomEvent("dw-home-intro-complete"));
         ScrollTrigger.refresh();
       }, reducedMotion ? 80 : 180);
@@ -1554,36 +1643,37 @@ function AnimatedHeroCopy({
 /**
  * Case-study reel that sits in the indent left of "products".
  *
- * Hard cuts, no crossfade — the point is the flicker of eight products, not a
- * slideshow. Sources are 480x360 WebP crops (about 46KB for all eight) rather
- * than the 1.3-2MB cards they came from, because this is the LCP screen.
- * They are preloaded so a cut never lands on an undecoded frame.
+ * A compact window into the work itself. These are source visuals from each
+ * case study, rather than the card thumbnails used on the work index.
  */
 const HERO_REEL_FRAMES = [
-  "/portfolio-assets/hero-reel/cloudchipr.webp",
-  "/portfolio-assets/hero-reel/material-exchange.webp",
-  "/portfolio-assets/hero-reel/tempo.webp",
-  "/portfolio-assets/hero-reel/icredo.webp",
-  "/portfolio-assets/hero-reel/securion.webp",
-  "/portfolio-assets/hero-reel/nesba.webp",
-  "/portfolio-assets/hero-reel/hotel-apartments.webp",
-  "/portfolio-assets/hero-reel/material-exchange-photo-lab.webp"
+  "/portfolio-assets/cloudchipr/product-overview.png",
+  "/portfolio-assets/material-exchange/hero-product.png",
+  "/portfolio-assets/tempo/route-optimization.png",
+  "/portfolio-assets/icredo/my-loans.png",
+  "/portfolio-assets/liga/step-photos.webp",
+  "/portfolio-assets/securion/hero-wallet.png",
+  "/portfolio-assets/nesba/open-banking.png",
+  "/portfolio-assets/hotel-apartments/web-overview.png",
+  "/portfolio-assets/material-exchange-photo-lab/hero-cover.png"
 ];
 
-const HERO_REEL_INTERVAL = 190;
+const HERO_REEL_INTERVAL = 370; // three cuts a second; the tile keeps growing 0 -> 100% underneath them
 
 function HeroCaseReel({ active, startDelay }: { active: boolean; startDelay: number }) {
   const [frame, setFrame] = useState(0);
   const [shown, setShown] = useState(false);
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
 
-  // Decode every frame up front; a cut should never wait on the network.
+  // Keep the first paint light; warm the remaining case-study visuals only
+  // after the reel has arrived on screen.
   useEffect(() => {
-    HERO_REEL_FRAMES.forEach((src) => {
+    if (!shown) return;
+    HERO_REEL_FRAMES.slice(1).forEach((src) => {
       const image = new Image();
       image.src = src;
     });
-  }, []);
+  }, [shown]);
 
   useEffect(() => {
     if (!active) return;
@@ -1609,9 +1699,10 @@ function HeroCaseReel({ active, startDelay }: { active: boolean; startDelay: num
 
 export function HeroSection() {
   const [heroFocus, setHeroFocus] = useState<"products" | "designers" | "culture" | null>(null);
-  const [isTyping, setIsTyping] = useState(false);
+  const [isTyping, setIsTyping] = useState(
+    () => typeof document !== "undefined" && document.documentElement.classList.contains("dw-home-intro-done")
+  );
   const productsLink = useResolvedNavLink("/am/designer");
-  const designersLink = useResolvedNavLink("/am/school");
   const cultureLink = useResolvedNavLink("/am/public-work");
 
   useEffect(() => {
@@ -1661,6 +1752,7 @@ export function HeroSection() {
     typeof window !== "undefined" && new URLSearchParams(window.location.search).get("hero") === "frames" ? "frames" : "video"
   );
   const [heroGone, setHeroGone] = useState(() => isHeroGone());
+  const heroBubbleLayerRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const onGone = () => setHeroGone(true);
     window.addEventListener(GONE_EVENT, onGone);
@@ -1720,7 +1812,7 @@ export function HeroSection() {
           }}
         >
           {heroMode === "video" ? (
-            <HeroCharacterVideo start={isTyping} focus={heroFocus} />
+            <HeroCharacterVideo start={isTyping} focus={heroFocus} bubbleLayer={heroBubbleLayerRef} />
           ) : (
             <img
               className="dw-hero-character"
@@ -1731,6 +1823,7 @@ export function HeroSection() {
             />
           )}
         </figure>
+        <div className="dw-hero-bubble-layer" ref={heroBubbleLayerRef} aria-hidden="true" />
 
         <div className="dw-home-hero-statement" data-speed="0.12" data-float-depth="-0.08">
           <h1 aria-label="I build products, designers, and culture.">
@@ -1753,15 +1846,9 @@ export function HeroSection() {
               </span>
             </span>
             <span className="dw-figma-hero-line">
-              <a
-                className="dw-figma-hero-word dw-figma-copy dw-figma-copy-designers"
-                href={designersLink.href}
-                target={designersLink.target}
-                data-cursor-label="Visit Pedanyan School"
-                {...focusHeroWord("designers")}
-              >
+              <span className="dw-figma-hero-word dw-figma-copy dw-figma-copy-designers">
                 <AnimatedHeroCopy text="designers," start={1140} step={70} />
-              </a>
+              </span>
             </span>
             <span className="dw-figma-hero-line">
               <span className="dw-figma-copy dw-figma-copy-and">
@@ -2055,15 +2142,13 @@ function DesignerScrollStory() {
   if (useStaticMode) {
     return (
       <section className="dw-designer-static" id="designer">
+        <h2 className="dw-mobile-section-title">Design facts</h2>
         <div className="dw-designer-static-head">
           <span>{websiteContent.navigation.logo}</span>
           <span>DESIGNER</span>
         </div>
         {designerStats.map((stat) => (
-          <div key={stat.value}>
-            <h1>{stat.value}</h1>
-            <p>{stat.caption}</p>
-          </div>
+          <MobileDesignerStat key={stat.value} value={stat.value} caption={stat.caption} />
         ))}
       </section>
     );
@@ -2456,7 +2541,7 @@ export function HomePathCardsSection() {
           next.
         </h2>
         <div className="dw-home-path-grid">
-          {websiteContent.home.pathCards.map((card) => (
+          {websiteContent.home.pathCards.filter((card) => card.href !== "/am/school").map((card) => (
             <NavAnchor className="dw-home-path-card" href={card.href} key={card.title}>
               <span className="dw-path-dot" aria-hidden="true" />
               <h3>{card.title}</h3>
@@ -2514,7 +2599,7 @@ export function HomeTalkRoutingSection() {
       </h2>
       <span className="dw-final-dot" aria-hidden="true" />
       <div className="dw-final-routes">
-        {websiteContent.home.talkRoutes.map((route) => (
+        {websiteContent.home.talkRoutes.filter((route) => route !== "Want to learn design?").map((route) => (
           <NavAnchor className="dw-final-route" href="/am/lets-talk" key={route}>
             <span data-glass-capture>{route}</span>
             <span data-glass-capture>+</span>
@@ -2525,6 +2610,11 @@ export function HomeTalkRoutingSection() {
         </NavAnchor>
       </div>
       <RapierGlassCubes containerRef={footerRef} className="dw-footer-glass-cubes" />
+      <div className="dw-mobile-cube-orbit" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
     </section>
   );
 }
@@ -2721,9 +2811,8 @@ function ExperienceScrollSection() {
   useEffect(() => {
     if (!useStaticMode) return;
 
-    const articles = Array.from(
-      sectionRef.current?.querySelectorAll<HTMLElement>(".dw-experience-static-list article") ?? []
-    );
+    const list = sectionRef.current?.querySelector<HTMLElement>(".dw-experience-static-list");
+    const articles = Array.from(list?.querySelectorAll<HTMLElement>("article") ?? []);
     if (!articles.length) return;
 
     const observer = new IntersectionObserver(
@@ -2735,7 +2824,7 @@ function ExperienceScrollSection() {
         const index = articles.indexOf(visible.target as HTMLElement);
         if (index >= 0) setStaticActiveIndex(index);
       },
-      { rootMargin: "-34% 0px -42% 0px", threshold: [0.1, 0.4, 0.7] }
+      { root: list, rootMargin: "-18% 0px -28% 0px", threshold: [0.2, 0.5, 0.8] }
     );
 
     articles.forEach((article) => observer.observe(article));
@@ -2805,6 +2894,10 @@ function HomeUnifiedScrollExperience() {
   const statsDustRef = useRef<HTMLDivElement | null>(null);
   const investmentRef = useRef<HTMLDivElement | null>(null);
   const selectExperienceRef = useRef<(index: number) => void>(() => undefined);
+  // The scroll hint at the foot of the scene names the next chapter and,
+  // on click, jumps straight to it. Wired from inside the scene effect.
+  const scrollHintRef = useRef<HTMLButtonElement | null>(null);
+  const scrollHintActionRef = useRef<() => void>(() => undefined);
   const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
@@ -3187,7 +3280,25 @@ function HomeUnifiedScrollExperience() {
         }
       };
 
+      // What comes next, per chapter - shown in the scroll hint.
+      let hintLabel = "";
+      const syncHint = () => {
+        const hint = scrollHintRef.current;
+        if (!hint) return;
+        const label =
+          playback.chapter === "hero" ? "facts"
+          : playback.chapter === "facts" ? (hasClients ? "clients" : "experience")
+          : playback.chapter === "clients" ? "experience"
+          : `next: ${nextSitePage("home").title.toLowerCase()}`;
+        if (label === hintLabel) return;
+        hintLabel = label;
+        const text = hint.querySelector<HTMLElement>(".dw-scroll-hint-text");
+        if (text) text.textContent = label;
+        hint.setAttribute("aria-label", `Continue to ${label}`);
+      };
+
       const renderPlayback = () => {
+        syncHint();
         timeline.time(playback.time, false);
         if (Number.isFinite(investmentStart) && playback.time >= investmentStart) {
           const elapsed = Math.max(
@@ -3399,6 +3510,40 @@ function HomeUnifiedScrollExperience() {
           motionTween?.timeScale(1);
         });
       };
+
+      // Click on the scroll hint: straight to the next chapter, no nudge, no
+      // cooldown. Past the last one it lets the page go and glides to the
+      // conversation section.
+      scrollHintActionRef.current = () => {
+        finalHandoffCall?.kill();
+        finalHandoffCall = null;
+        motionTween?.kill();
+        motionTween = null;
+        playback.speedMultiplier = 1;
+        playback.cooldownUntil = 0;
+        heroScrollNudgeDone = true;
+        if (playback.chapter === "hero") {
+          moveTo(heroTransitionEnd, 0.7, 1, () => {
+            enterFacts();
+            moveToFact(0, 1);
+          });
+          return;
+        }
+        if (playback.chapter === "facts") {
+          moveToClients(1, 0);
+          return;
+        }
+        if (playback.chapter === "clients") {
+          moveToExperience(0, 1, true);
+          return;
+        }
+        releaseToPage(1);
+        const end = document.getElementById("next-page") ?? document.getElementById("contact");
+        if (end) {
+          window.requestAnimationFrame(() => end.scrollIntoView({ behavior: "smooth", block: "end" }));
+        }
+      };
+      syncHint();
 
       const handleInput = (deltaY: number) => {
         if (Math.abs(deltaY) < 2) return;
@@ -3738,10 +3883,17 @@ function HomeUnifiedScrollExperience() {
   return (
     <section className="dw-home-unified-scroll" ref={sectionRef} aria-label="Davit Pedanyan overview">
       <div className="dw-home-unified-scene" ref={sceneRef}>
-        <div className="dw-scroll-hint" aria-hidden="true">
-          <span className="dw-scroll-hint-line" />
-          <span className="dw-scroll-hint-text">scroll</span>
-        </div>
+        <button
+          type="button"
+          className="dw-scroll-hint"
+          ref={scrollHintRef}
+          aria-label="Continue to facts"
+          data-cursor-label="next"
+          onClick={() => scrollHintActionRef.current()}
+        >
+          <span className="dw-scroll-hint-line" aria-hidden="true" />
+          <span className="dw-scroll-hint-text">facts</span>
+        </button>
         <div
           className="dw-home-unified-phase dw-home-unified-hero"
           ref={heroDustRef}
@@ -4466,12 +4618,11 @@ export function ContactSection() {
           we talk about?
         </h2>
         <p className="dw-lead">
-          Tell me whether you need design help, want to invite me, have a school question, or want
-          to work together.
+          Tell me whether you need design help, want to invite me, or want to work together.
         </p>
       </div>
       <div className="dw-cta-list">
-        {websiteContent.sharedContactRoutes.map((route) => (
+        {websiteContent.sharedContactRoutes.filter((route) => route !== "Want to learn design?").map((route) => (
           <NavAnchor className="dw-cta-row" href="/am/lets-talk" key={route}>
             <span>{route}</span>
             <span>+</span>
@@ -4491,7 +4642,7 @@ export function LetsTalkPage() {
           {renderMultilineText(websiteContent.letsTalk.headline)}
         </h1>
 
-        {websiteContent.letsTalk.routes.map((route) => (
+        {websiteContent.letsTalk.routes.filter((route) => route.className !== "dw-talk-route-students").map((route) => (
           <div className={`dw-talk-route ${route.className}`} key={route.label}>
             <div className="dw-talk-label">
               <span aria-hidden="true" />
@@ -4518,7 +4669,7 @@ const partnerBrands: Array<{ name: string; domain: string; wordmark?: string; no
   { name: "SoftLand", domain: "softland.am", noMark: true },
   { name: "Wirestock", domain: "wirestock.io" },
   { name: "Yerevan Mall", domain: "yerevanmall.am" },
-  { name: "Kinodaran", domain: "kinodaran.am", wordmark: "/logos/partners/kinodaran.svg" },
+  { name: "Kinodaran", domain: "kinodaran.am" },
   { name: "TCF", domain: "tcf.am", wordmark: "/logos/partners/tcf.png" },
   { name: "W8RK", domain: "w8rk.com" },
   { name: "8Imiges", domain: "", noMark: true },
@@ -4529,6 +4680,7 @@ const partnerBrands: Array<{ name: string; domain: string; wordmark?: string; no
 export function HomePartnerLogosSection() {
   return (
     <section className="dw-partner-marquee" aria-label="Partner companies and organizations" data-anim="fade">
+      <h2 className="dw-mobile-section-title">Partners</h2>
       <div className="dw-partner-marquee-track">
         {partnerBrands.map((item, index) => (
           <span
@@ -4579,7 +4731,7 @@ export function ProjectPage({ slug }: { slug: string }) {
   return (
     <PageShell activePage="designer" showFooter={false}>
       <Suspense fallback={<div className="dw-route-loading" aria-live="polite">Loading case study</div>}>
-        <LazyCaseStudyContent slug={slug} />
+        <LazyCaseStudyContent key={slug} slug={slug} />
       </Suspense>
     </PageShell>
   );
@@ -4684,7 +4836,7 @@ export function AppRouter() {
   if (legacyProjects[path]) return <ProjectPage slug={legacyProjects[path]} />;
   if (path === "/am/design-talent") return <DesignTalentPage />;
   if (path === "/am/story") return <PublicWorkPage />;
-  if (path === "/am/school") return <SchoolPage />;
+  if (path === "/am/school") return <HomePage />;
   const publicArticleMatch = path.match(/^\/am\/public-work\/([^/]+)$/);
   if (publicArticleMatch) return <PublicArticlePage slug={publicArticleMatch[1]} />;
   if (path === "/am/public-work") return <PublicWorkPage />;

@@ -6893,6 +6893,19 @@ button.dw-public-journal-entry {
   mix-blend-mode: difference;
 }
 
+/* Case-study headers are deliberately opaque. This prevents a chapter title
+   from visually colliding with the persistent navigation as it crosses it. */
+.dw-page:has(.dw-case-liga) .dw-header,
+.dw-page:has(.dw-case-liga) .dw-header.is-scrolled {
+  background: #ffffff;
+  color: #0b0d10;
+  mix-blend-mode: normal;
+  backdrop-filter: none;
+}
+.dw-page:has(.dw-case-liga) .dw-header :is(.dw-logo, .dw-nav, .dw-school-link, .dw-right, .dw-nav a, .dw-pill, .dw-theme-toggle) {
+  color: #0b0d10;
+}
+
 .dw-header .dw-logo,
 .dw-header .dw-nav,
 .dw-header .dw-school-link,

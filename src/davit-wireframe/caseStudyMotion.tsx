@@ -36,6 +36,8 @@ type SectionBase = {
   renderHtml: (html?: string, className?: string) => ReactNode;
   /** Optional: a code-built screen (see icredoScreens.tsx) instead of an image. */
   renderScreen?: (screenId: string, active: boolean) => ReactNode;
+  /** A compact closing observation that belongs to the walkthrough itself. */
+  footer?: ReactNode;
 };
 
 const itemKey = (item: Item) => item.screen ?? item.asset ?? "";
@@ -106,7 +108,7 @@ export function OutcomeSection({ id, className, style, eyebrow, title, body, ite
 
 /* -------------------------------------------------------------- walkthrough */
 
-export function WalkthroughSection({ id, className, style, eyebrow, title, body, items = [], renderImage, renderHtml, renderScreen }: SectionBase) {
+export function WalkthroughSection({ id, className, style, eyebrow, title, body, items = [], renderImage, renderHtml, renderScreen, footer }: SectionBase) {
   const ref = useRef<HTMLElement | null>(null);
   const [active, setActive] = useState(0);
   const steps = items.filter((item) => item.asset || (item.screen && renderScreen));
@@ -171,6 +173,7 @@ export function WalkthroughSection({ id, className, style, eyebrow, title, body,
           ))}
         </ol>
       </div>
+      {footer ? <div className="dw-walk-footer">{footer}</div> : null}
     </section>
   );
 }

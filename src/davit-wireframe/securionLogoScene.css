@@ -1,0 +1,94 @@
+/* Securion — the app mark, constructed.
+   One SVG carries the whole composition, so nothing GSAP touches is a clipping
+   box or a corner radius: only transforms, opacity and dash offsets move. */
+
+.sc-logo-scene {
+  position: relative;
+  display: block;
+  place-self: stretch;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* the square scene fits rather than fills, so the ground has to cover
+     whatever it leaves over at the sides */
+  background: linear-gradient(180deg, #2c2e36 0%, #15161c 100%);
+}
+.sc-svg {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+}
+
+/* ---- his own construction guides: dashed 6/6, at his own opacities ---- */
+.sc-guide {
+  fill: none;
+  stroke-dasharray: 5 5;
+}
+.sc-guide-ring { stroke: rgb(255 255 255 / 62%); stroke-width: 1.1; }
+.sc-guide-diag { stroke: rgb(255 255 255 / 78%); stroke-width: 1.1; }
+.sc-guide-link { stroke: rgb(255 255 255 / 46%); stroke-width: 1.1; stroke-dasharray: none; }
+
+/* ---- guides the mark itself rides in on, inside the plate ---- */
+.sc-ring,
+.sc-orbit,
+.sc-dot {
+  fill: none;
+  stroke: rgb(0 42 135 / 55%);
+  stroke-width: 1.1;
+  stroke-dasharray: 5 5;
+}
+
+/* ---- the tile: his real lockup, a frosted plate ---- */
+.sc-tile-face {
+  filter:
+    drop-shadow(0 10px 22px rgb(0 0 0 / 55%))
+    drop-shadow(0 0 26px rgb(255 255 255 / 14%));
+}
+.sc-tile-line {
+  fill: none;
+  stroke: rgb(255 255 255 / 70%);
+  stroke-width: 1.3;
+}
+/* his lockup's own 2px white stroke, scaled: 2 / 300 * 210 */
+.sc-tile-edge { stroke-width: 1.4; }
+
+/* The shield's own silhouette, drawn before it floods. Brand blue reads hard on
+   the frosted #EEEEEE plate; stroke-width is in GLYPH units (the group is scaled
+   1.3774), so 0.94 lands at ~1.3 scene units. */
+.sc-shield-line {
+  fill: none;
+  stroke: #2552f1;
+  stroke-width: .94;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sc-sweep { mix-blend-mode: screen; }
+
+/* Everything animated starts hidden, so the first paint — before GSAP has run —
+   is the empty stage rather than a flash of the finished mark. GSAP writes
+   inline opacity/visibility, which beats these rules. */
+.sc-guide,
+.sc-ring,
+.sc-orbit,
+.sc-dot,
+.sc-tile-face,
+.sc-tile-line,
+.sc-tile-edge,
+.sc-disc,
+.sc-shield,
+.sc-shield-line,
+.sc-keyhole,
+.sc-sweep { opacity: 0; }
+
+/* Reduced motion never builds the timeline, so its resting state has to be the
+   finished one: the mark on its plate, with the guides already spent. */
+@media (prefers-reduced-motion: reduce) {
+  .sc-tile-face,
+  .sc-tile-edge,
+  .sc-disc,
+  .sc-shield,
+  .sc-keyhole { opacity: 1; }
+}

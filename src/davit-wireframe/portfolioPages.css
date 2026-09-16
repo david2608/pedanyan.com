@@ -180,11 +180,157 @@
   }
 }
 
+/* Tempo landing hero, measured from Figma node 554:53903 ("Plavni", 1440x1024).
+   Every value below is the Figma number expressed against the 1440 reference
+   width, so the hero is the client's own landing design at full fidelity
+   rather than an approximation of it. */
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-scene {
+  position: relative;
+  display: grid;
+  align-content: center;
+  min-height: max(760px, calc(100svh - 60px));
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+  background: linear-gradient(180deg, #242c2c 0%, #1e2726 43.2%, #091916 100%);
+}
+
+.dw-tempo-landing-skyline,
+.dw-tempo-landing-horizon {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.dw-tempo-landing-skyline {
+  /* The Figma marquee is a 2016px tile in a 1440px frame, so one tile is 1.4x the
+     viewport. The element is two tiles wide and slides by exactly one, which loops
+     seamlessly; animating background-position by percentage does not, because a
+     background wider than its box resolves percentages to a fixed offset. */
+  z-index: -2;
+  right: auto;
+  width: 280%;
+  height: 63.6%;
+  opacity: .12;
+  background: url('/portfolio-assets/tempo/figma/tempo-hero-skyline.svg') 0 100% / 50% 100% repeat-x;
+  will-change: transform;
+  /* Figma: the 6048px strip slides two 2016px tiles over 10s LINEAR, then snaps
+     back with no transition - one tile every 5s. It travels RIGHT (the van reads
+     as moving left, which is why the wheels turn counter-clockwise). The element
+     is two tiles wide and slides -50% -> 0, so the loop is seamless either way. */
+  animation: tempo-landing-skyline 5s linear infinite;
+}
+.dw-tempo-landing-horizon {
+  z-index: -1;
+  top: 58.3%;
+  height: 16%;
+  opacity: .55;
+  background: url('/portfolio-assets/tempo/figma/tempo-hero-horizon.svg') 50% 50% / 100% 100% no-repeat;
+}
+.dw-tempo-landing-copy {
+  position: relative;
+  z-index: 2;
+  width: min(100% - 48px, 1118px);
+  margin: 0 auto;
+}
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-copy h1 {
+  max-width: 14ch;
+  margin: 0;
+  color: #fff;
+  /* Figma: Montserrat 64/78 (1.219). Line 1 Regular white, line 2 Bold -2px green. */
+  font: 400 clamp(34px, 4.45vw, 64px)/1.219 Montserrat, Archivo, Arial, sans-serif;
+  letter-spacing: 0;
+  animation: tempo-landing-enter .82s .15s both cubic-bezier(.2,.8,.2,1);
+}
+.dw-tempo-landing-copy h1 em { color: #1b8874; font-style: normal; font-weight: 700; letter-spacing: -.031em; }
+.dw-tempo-landing-copy > p {
+  max-width: 567px;
+  margin: 12px 0 0;
+  color: #c3cbca;
+  font: 400 clamp(15px, 1.39vw, 20px)/1.4 Montserrat, Archivo, Arial, sans-serif;
+  animation: tempo-landing-enter .7s .3s both cubic-bezier(.2,.8,.2,1);
+}
+.dw-tempo-landing-download { display: grid; gap: 16px; margin-top: clamp(34px, 3.9vw, 56px); animation: tempo-landing-enter .7s .4s both cubic-bezier(.2,.8,.2,1); }
+.dw-tempo-landing-download > span { color: #c3cbca; font: 500 clamp(15px, 1.39vw, 20px)/1.2 Montserrat, Archivo, Arial, sans-serif; }
+.dw-tempo-landing-download > div { display: flex; gap: clamp(14px, 1.74vw, 25px); }
+.dw-tempo-landing-download img { display: block; width: auto; height: clamp(38px, 3.47vw, 50px); }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-proof {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 2.9vw, 42px);
+  max-width: none;
+  margin: clamp(46px, 5.6vw, 80px) 0 0;
+  animation: tempo-landing-enter .7s .52s both cubic-bezier(.2,.8,.2,1);
+}
+.dw-tempo-landing-proof > span { display: flex; flex: none; }
+.dw-tempo-landing-proof img { display: block; width: clamp(40px, 3.75vw, 54px); height: clamp(40px, 3.75vw, 54px); border-radius: 50%; object-fit: cover; }
+.dw-tempo-landing-proof img + img { margin-left: clamp(-20px, -1.39vw, -15px); }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-proof b { color: #c3cbca; font: 500 clamp(15px, 1.39vw, 20px)/1.2 Montserrat, Archivo, Arial, sans-serif; }
+/* The van is three layers, not one image, because the Figma prototype animates
+   them separately: the wheels turn 90deg every 0.3s (a 4-variant chain, so 360deg
+   in 1.2s) and the ground shadow smart-animates between 313x12 and 545x4 on a
+   0.6s loop. Box is 425x273 at design (877, 387); every child is positioned as a
+   percentage of that box. */
+.dw-tempo-landing-van { position: absolute; z-index: 1; right: 9.6%; bottom: 35.5%; width: min(46vw, 425px); aspect-ratio: 425 / 273; transform-origin: 50% 100%; animation: tempo-landing-van .9s .34s both cubic-bezier(.14,.8,.25,1); }
+.dw-tempo-landing-van img, .dw-tempo-van-shadow { position: absolute; display: block; }
+.dw-tempo-van-body { top: 0; left: 0; width: 100%; height: 83.883%; }
+.dw-tempo-van-wheel { top: 63.37%; width: 23.529%; height: 36.63%; animation: tempo-van-wheel 1.2s linear infinite; }
+.dw-tempo-van-wheel.dw-is-front { left: 6.588%; }
+.dw-tempo-van-wheel.dw-is-rear { left: 70.118%; }
+.dw-tempo-van-shadow { top: 96.337%; left: -14.118%; width: 128.235%; height: 4.396%; }
+.dw-tempo-van-shadow b { display: block; width: 100%; height: 100%; background: rgb(0 0 0 / 55%); border-radius: 50%; filter: blur(1px); animation: tempo-van-shadow .6s linear infinite alternate; }
+@keyframes tempo-landing-enter { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes tempo-landing-van { from { opacity: 0; transform: translateX(16vw) translateY(24px) scale(.94); } to { opacity: 1; transform: none; } }
+/* The wheel component set has FOUR variants, 0.3s LINEAR apart, and each one
+   carries a vertical offset as well as a rotation - that offset is the bounce:
+     Default  rot    0  dy +10   (as placed, so this is the baseline)
+     Variant2 rot  -90  dy   0
+     Variant3 rot -180  dy  -2
+     Variant4 rot  +90  dy   0
+   Rotation direction is taken from the prototype as Davit sees it play: the
+   wheels turn counter-clockwise, i.e. negative in CSS.
+   translateY is a percentage of the wheel's own 100px-design height, so -10%
+   is -10 design px. The van body is static in the prototype - only the wheels
+   and the ground shadow move. */
+@keyframes tempo-van-wheel {
+  0%   { transform: translateY(0)    rotate(0deg); }
+  25%  { transform: translateY(-10%) rotate(-90deg); }
+  50%  { transform: translateY(-12%) rotate(-180deg); }
+  75%  { transform: translateY(-10%) rotate(-270deg); }
+  100% { transform: translateY(0)    rotate(-360deg); }
+}
+@keyframes tempo-van-shadow { from { transform: scale(.5743, 1); } to { transform: scale(1, .3333); } }
+@keyframes tempo-landing-skyline { from { transform: translate3d(-50%, 0, 0); } to { transform: translate3d(0, 0, 0); } }
+@media (max-width: 899px) {
+  /* The site-wide `img { width: 100% !important }` mobile rule would stretch the
+     store badges and the avatar row, so both are restated at higher specificity. */
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-download img,
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-proof img { width: auto !important; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-van-body { width: 100% !important; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-van-wheel { width: 23.529% !important; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-proof img { width: 44px !important; height: 44px; }
+}
+@media (max-width: 760px) {
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-scene { align-content: start; min-height: calc(100svh - 56px); padding: clamp(56px, 12vh, 104px) 0 0; }
+  .dw-tempo-landing-copy { width: auto; padding: 0 24px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-copy h1 { max-width: none; font-size: clamp(30px, 8.4vw, 40px); }
+  .dw-tempo-landing-copy > p { max-width: 36ch; font-size: 15px; }
+  .dw-tempo-landing-download { margin-top: 30px; gap: 12px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-download img { height: 42px !important; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-proof { gap: 16px; margin-top: 34px; }
+  .dw-tempo-landing-proof img + img { margin-left: -16px; }
+  /* Below 760 the van can no longer sit beside the copy, so it parks on the
+     road band under it and drops back to a scene layer. */
+  .dw-tempo-landing-van { right: -2vw; bottom: 5%; width: min(94vw, 352px); opacity: .95; }
+  .dw-tempo-landing-horizon { top: auto; bottom: 1%; height: 30%; opacity: .3; }
+  .dw-tempo-landing-skyline { width: 440%; height: 62%; background-size: 50% 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .dw-tempo-van-wheel, .dw-tempo-van-shadow b, .dw-tempo-landing-skyline, .dw-tempo-landing-van, .dw-tempo-landing-copy h1, .dw-tempo-landing-copy > p, .dw-tempo-landing-download, .dw-tempo-landing-proof { animation: none; } }
+
 /* Tempo V3 reference lock: Tempo's Figma case uses a deep green field, white
    device studies and hairline route connectors. Until final screens are ready,
    every device is a deliberately neutral design placeholder. */
 .dw-case-draft-tempo-v3 {
-  --tempo-green: #1b7d6d;
+  --tempo-green: #1b8874;
   --tempo-green-deep: #126a5c;
   --tempo-pale: #e3f1ec;
   --tempo-ink: #161a19;
@@ -9786,8 +9932,8 @@ a.dw-case-testimonial-linkedin:hover {
   .dw-page .dw-cloudchipr-feedback blockquote { font-size: 23px; line-height: 1.5; }
 }
 
-/* Shared editorial frame: text lives in a calm reading column while project
-   artefacts retain permission to become wide. */
+/* Shared editorial frame: body copy lives in a calm reading column while
+   display headings get enough room to read like statements, not paragraphs. */
 .dw-case-study {
   --case-gutter: clamp(20px, 4vw, 72px);
   --case-reading: clamp(360px, 33.333vw, 640px);
@@ -9810,7 +9956,7 @@ a.dw-case-testimonial-linkedin:hover {
 .dw-case-contained > .dw-case-gallery,
 .dw-case-contained > .dw-case-split,
 .dw-case-contained > .dw-case-chips {
-  width: min(calc(100% - (var(--case-gutter) * 2)), var(--case-reading)) !important;
+  width: min(calc(100% - (var(--case-gutter) * 2)), var(--case-big)) !important;
   margin-right: auto !important;
   margin-left: auto !important;
 }
@@ -9823,6 +9969,18 @@ a.dw-case-testimonial-linkedin:hover {
 .dw-case-prose > .dw-case-richtext:only-child {
   grid-column: auto;
 }
+
+.dw-page .dw-case-study .dw-case-prose > .dw-case-richtext {
+  max-width: var(--case-reading);
+}
+
+/* CloudChipr's product-direction headings are deliberately display scale.
+   Keep them broad enough to make a decisive three-line statement. */
+.dw-page .dw-case-cloudchipr #product-direction-one .dw-case-prose > h2,
+.dw-page .dw-case-cloudchipr #product-direction-two .dw-case-prose > h2 {
+  max-width: 19ch;
+}
+
 
 @media (max-width: 760px) {
   .dw-case-study {
@@ -10358,7 +10516,7 @@ a.dw-case-testimonial-linkedin:hover {
 
 /* Final Tempo V3 Figma overrides. Kept last so the earlier Pop draft rules
    cannot reassert their blue/white direction. */
-.dw-page .dw-case-draft-tempo-v3 { --tempo-green: #1b7d6d; --tempo-green-deep: #126a5c; --tempo-pale: #e3f1ec; --tempo-ink: #161a19; --tempo-sun: #1b7d6d; }
+.dw-page .dw-case-draft-tempo-v3 { --tempo-green: #1b8874; --tempo-green-deep: #126a5c; --tempo-pale: #e3f1ec; --tempo-ink: #161a19; --tempo-sun: #1b8874; }
 .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel { color: #fff; background: var(--tempo-green) !important; }
 .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy h1, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy h2 { color: #fff; }
 .dw-page .dw-case-draft-tempo-v3 .dw-case-opening-eyebrow, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-hero-copy { color: #dff1eb; }
@@ -10798,7 +10956,11 @@ a.dw-case-testimonial-linkedin:hover {
   box-shadow: 0 22px 50px rgb(12 70 59 / 14%);
 }
 
-.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop img {
+/* Scoped to the section's own imagery only. It used to be `.dw-tempo-multistop img`,
+   which at 0,3,1 outranked every rule inside the coded phone screen — the back
+   arrow rendered at 91px and the map filled a quarter of its box. */
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop > img,
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-multistop-copy img {
   display: block;
   width: 100%;
   height: auto;
@@ -11326,4 +11488,17 @@ a.dw-case-testimonial-linkedin:hover {
 @media (max-width: 900px) {
   .dw-case-showcase-copy { grid-template-columns: minmax(0, 1fr); align-items: start; }
   .dw-case-showcase-frame { border-radius: 18px; padding: 20px 20px 0; }
+}
+
+/* --------------------------------------------------------------------------
+   Tempo v3 advantages: the problem/solution pair is colour-coded, so it has
+   to read the conventional way round. The solution label carries the product
+   green; the problem label carries red. A solution marked green beside a
+   problem marked neutral reads as half a signal.
+   -------------------------------------------------------------------------- */
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages .dw-tempo-secure-risk {
+  color: #c02d3c !important;
+}
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages p strong {
+  color: var(--tempo-green, #1b8874) !important;
 }

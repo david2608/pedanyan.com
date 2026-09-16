@@ -7,6 +7,86 @@
   min-height: 0;
 }
 
+/* Original Tempo screens retain their own type, icons, imagery and device shape. */
+.dw-page .dw-case-draft-tempo-v3 .tp-phone {
+  display: block;
+  margin: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .tp-phone > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 22px 30px rgb(5 20 15 / 18%));
+  transform: translateZ(0);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .tp-phone.is-active > img {
+  animation: tempo-screen-settle 760ms cubic-bezier(.2, .8, .2, 1) both;
+}
+
+@keyframes tempo-screen-settle {
+  from { opacity: 0; transform: translateY(18px) scale(.975); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.dw-page .dw-case-draft-tempo-v3 .tp-route-board {
+  display: grid;
+  grid-template-columns: minmax(180px, .74fr) minmax(210px, 1fr);
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+  margin: 0;
+  padding: clamp(18px, 2.4vw, 32px);
+  overflow: hidden;
+  border: 1px solid rgb(18 49 41 / 12%);
+  border-radius: 18px;
+  background: #f7fbf8;
+  box-shadow: 0 20px 44px rgb(12 51 39 / 12%);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .tp-route-board > img {
+  display: block;
+  width: min(100%, 250px);
+  justify-self: center;
+  filter: drop-shadow(0 16px 18px rgb(7 22 17 / 16%));
+}
+
+.dw-page .dw-case-draft-tempo-v3 .tp-route-board-coded { overflow: hidden; }
+.dw-page .dw-case-draft-tempo-v3 .tp-route-board-coded .tp-route-board-phone { width: min(100%, 250px); justify-self: center; aspect-ratio: 390 / 844; overflow: hidden; border: 4px solid #101010; border-radius: 26px; background: #fff; box-shadow: 0 16px 18px rgb(7 22 17 / 16%); }
+.dw-page .dw-case-draft-tempo-v3 .tp-route-board-coded .tp-figma-route { border-radius: 21px; }
+
+.dw-page .dw-case-draft-tempo-v3 .tp-route-board figcaption {
+  display: grid;
+  gap: 12px;
+  color: var(--tempo-ink);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .tp-route-board figcaption span {
+  color: var(--tempo-green);
+  font: 700 11px/1 Archivo, Arial, sans-serif;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .tp-route-board figcaption strong {
+  max-width: 15ch;
+  font: 600 clamp(22px, 2.2vw, 34px)/1.05 Archivo, Arial, sans-serif;
+  letter-spacing: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .tp-route-board figcaption p {
+  max-width: 38ch;
+  margin: 0;
+  color: #527166;
+  font: 400 14px/1.5 Archivo, Arial, sans-serif;
+}
+
 .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-window {
   overflow: hidden;
   -webkit-mask-image: none;
@@ -26,6 +106,17 @@
 }
 
 @media (max-width: 760px) {
+  .dw-page .dw-case-draft-tempo-v3 .tp-route-board {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  .dw-page .dw-case-draft-tempo-v3 .tp-route-board > img { width: min(100%, 210px); }
+  .dw-page .dw-case-draft-tempo-v3 .tp-route-board figcaption { text-align: left; }
+  .dw-page .dw-case-draft-tempo-v3 .tp-route-board figcaption strong { font-size: 25px; }
+
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel {
     height: auto;
     padding: 72px 20px 80px;
@@ -61,4 +152,853 @@
     width: auto;
     min-height: 0;
   }
+}
+
+/* Coded Tempo app screens. Original Figma exports supply the food, map and
+   courier imagery; the product chrome, hierarchy and motion stay real UI. */
+.dw-page .dw-case-draft-tempo-v3 .tp-phone.tx-phone {
+  --tx-green: #17806e;
+  --tx-mint: #74dcb5;
+  --tx-ink: #12201c;
+  --tx-muted: #73817c;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  isolation: isolate;
+  border: clamp(3px, .32vw, 5px) solid #101311;
+  border-radius: clamp(20px, 2.3vw, 32px);
+  background: #fff;
+  box-shadow: 0 22px 42px rgb(7 29 20 / 25%);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .tp-phone.tx-phone > img { display: none; }
+.tx-screen { position: absolute; inset: 0; overflow: hidden; color: var(--tx-ink); background: #fff; font-family: Archivo, Arial, sans-serif; font-size: clamp(5.3px, .48vw, 8px); line-height: 1.25; }
+.tx-screen *, .tx-screen *::before, .tx-screen *::after { box-sizing: border-box; }
+.tx-status { position: relative; z-index: 3; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 8.7%; padding: 0 8.8%; font-size: 1em; font-weight: 700; }
+.tx-island { width: 7.8em; height: 2.15em; border-radius: 2em; background: #121212; }
+.tx-status-icons { justify-self: end; display: flex; align-items: end; gap: .28em; height: 1.5em; }
+.tx-status-icons i { width: .28em; background: currentColor; border-radius: 1em; }
+.tx-status-icons i:first-child { height: .65em; }.tx-status-icons i:nth-child(2) { height: 1em; }.tx-status-icons b { display: block; width: 1.5em; height: .72em; border: .12em solid currentColor; border-radius: .2em; }
+.tx-header { position: relative; z-index: 3; display: grid; grid-template-columns: 2.4em 1fr 2.4em; align-items: center; min-height: 7.4%; padding: 0 8%; }.tx-header strong { text-align: center; font-size: 1.22em; font-weight: 700; }.tx-header-action { display: grid; width: 2.4em; height: 2.4em; place-items: center; color: #14201c; }
+.tx-button { display: inline-flex; align-items: center; justify-content: center; gap: .65em; width: 100%; min-height: 4em; border: 0; border-radius: 1.25em; color: #fff; background: var(--tx-green); font: 700 1em/1 Archivo, Arial, sans-serif; }.tx-text-button { border: 0; color: var(--tx-green); background: none; font: 650 1em/1 Archivo, Arial, sans-serif; }
+.tx-location { display: flex; flex-direction: column; }.tx-location-visual { position: relative; width: 75%; aspect-ratio: 1; margin: 4% auto 0; opacity: 0; transform: scale(.82) rotate(-5deg); transition: .65s cubic-bezier(.2,.8,.2,1); }.tx-location-visual.is-in { opacity: 1; transform: none; }.tx-location-image { position: absolute; inset: 0; border-radius: 50%; background: #e6f5ed url('/portfolio-assets/tempo/screen-04.png') 50% 18% / 175% auto no-repeat; box-shadow: inset 0 0 0 .4em #d5ede2; }.tx-location-pin { position: absolute; top: 45%; left: 49%; display: grid; width: 4.3em; height: 4.3em; place-items: center; border-radius: 50% 50% 50% 0; color: #fff; background: var(--tx-green); box-shadow: 0 1em 2em rgb(23 128 110 / .3); transform: rotate(-45deg); }.tx-location-pin svg { transform: rotate(45deg); }.tx-location-copy { padding: 7% 11% 0; opacity: 0; transform: translateY(1.4em); transition: .45s ease; }.tx-location-copy.is-in,.tx-location-actions.is-in,.tx-search.is-in,.tx-category-row.is-in,.tx-discover-section.is-in,.tx-tabbar.is-in,.tx-route-map.is-in,.tx-route-summary.is-in,.tx-route-float.is-in,.tx-order-hero.is-in,.tx-order-items.is-in,.tx-order-total.is-in,.tx-order-action.is-in,.tx-track-map.is-in,.tx-tracking-sheet.is-in,.tx-tracking-footer.is-in,.tx-tracking-proof.is-in { opacity: 1; transform: none; }.tx-location-copy > span,.tx-route-kicker,.tx-order-total > span,.tx-tracking-footer > span { color: var(--tx-green); font-size: .86em; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }.tx-location-copy h3 { margin: .45em 0; font-size: 2.15em; line-height: 1.05; }.tx-location-copy p { margin: 0; color: var(--tx-muted); font-size: 1.05em; }.tx-location-actions { display: grid; gap: 1.8em; margin-top: auto; padding: 7% 11% 11%; opacity: 0; transform: translateY(1.5em); transition: .45s .14s ease; }
+.tx-search { display: grid; grid-template-columns: 2.2em 1fr 2.2em; align-items: center; min-height: 4.2em; margin: 4% 8% 0; padding: 0 .8em; border-radius: 1.15em; color: #8a9691; background: #f1f5f2; opacity: 0; transform: translateY(1em); transition: .45s ease; }.tx-search span { font-size: .96em; }.tx-category-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8em; padding: 5% 8%; opacity: 0; transform: translateY(1em); transition: .45s .08s ease; }.tx-category { display: grid; gap: .55em; place-items: center; }.tx-category > span { display: grid; width: 3.5em; height: 3.5em; place-items: center; border-radius: 1em; color: var(--tx-green); background: #e9f6ef; }.tx-category small { font-size: .75em; white-space: nowrap; }.tx-discover-section { padding: 0 8%; opacity: 0; transform: translateY(1em); transition: .45s .15s ease; }.tx-section-title { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.4em; }.tx-section-title strong { font-size: 1.22em; }.tx-section-title > span { color: var(--tx-green); font-size: .82em; font-weight: 700; }.tx-restaurant-card { display: grid; grid-template-columns: 4.8em 1fr; gap: 1em; align-items: center; padding-bottom: 1.25em; }.tx-food-photo { width: 4.8em; height: 4.8em; border-radius: 1em; background: #f3e9dc url('/portfolio-assets/tempo/restaurants.png') 48% 38% / 220% auto no-repeat; }.tx-food-photo-small { background-position: 51% 52%; }.tx-restaurant-card h3,.tx-order-items h4 { margin: 0 0 .22em; font-size: 1.1em; }.tx-restaurant-card p,.tx-order-items p { margin: 0 0 .45em; color: var(--tx-muted); font-size: .85em; }.tx-restaurant-card span { display: inline-flex; align-items: center; gap: .25em; color: #d49a00; font-size: .8em; font-weight: 700; }.tx-tabbar { position: absolute; right: 0; bottom: 3.2%; left: 0; display: flex; justify-content: space-around; padding: 0 5%; opacity: 0; transform: translateY(1.4em); transition: .45s .2s ease; }.tx-tabbar span { display: grid; gap: .3em; place-items: center; color: #87928d; font-size: .72em; }.tx-tabbar .is-selected { color: var(--tx-green); font-weight: 700; }
+.tx-route { background: #eef8f3; }.tx-route-map { position: absolute; top: 12%; right: 0; left: 0; height: 51%; overflow: hidden; opacity: 0; transform: scale(1.05); transition: .6s ease; }.tx-route-map-image,.tx-track-map-image,.tx-board-map-image { position: absolute; inset: 0; background: #dbece3 url('/portfolio-assets/tempo/route-optimization.png') 48% 25% / 155% auto no-repeat; filter: saturate(.84) contrast(.96); }.tx-route-line { position: absolute; inset: 5% 4%; width: 92%; height: 90%; }.tx-route-progress { stroke-dasharray: 500; stroke-dashoffset: 500; transition: stroke-dashoffset 1.6s .2s ease; }.is-in .tx-route-progress { stroke-dashoffset: 0; }.tx-stop,.tx-board-stop { position: absolute; display: grid; width: 2.8em; height: 2.8em; place-items: center; border: .23em solid #fff; border-radius: 50%; color: #fff; background: var(--tx-green); font-size: 1em; font-weight: 700; box-shadow: 0 .55em 1.1em rgb(7 49 36 / .2); }.tx-stop-one { right: 18%; bottom: 12%; }.tx-stop-two { left: 25%; top: 43%; }.tx-stop-three { right: 15%; top: 12%; }.tx-courier-dot { position: absolute; left: 48%; top: 47%; width: 2.8em; height: 2.8em; border: .5em solid #fff; border-radius: 50%; background: #111; box-shadow: 0 0 0 .8em rgb(116 220 181 / .35); animation: tx-courier 2.8s ease-in-out infinite; }.tx-route-summary { position: absolute; z-index: 2; right: 6%; bottom: 5%; left: 6%; padding: 1.6em; border-radius: 1.6em; background: #fff; box-shadow: 0 1.8em 3em rgb(16 57 40 / .18); opacity: 0; transform: translateY(2em); transition: .55s .2s ease; }.tx-route-kicker { display: inline-flex; align-items: center; gap: .45em; }.tx-route-summary h3 { margin: .55em 0 .25em; font-size: 1.75em; }.tx-route-summary > p { margin: 0; color: var(--tx-muted); }.tx-route-stops { display: grid; gap: .7em; margin: 1.25em 0; font-size: .82em; }.tx-route-stops span { display: flex; gap: .7em; align-items: center; }.tx-route-stops b { display: grid; width: 1.65em; height: 1.65em; place-items: center; border-radius: 50%; color: var(--tx-green); background: #e9f6ef; }.tx-route-summary .tx-button { min-height: 3.5em; }.tx-route-float { position: absolute; z-index: 4; top: 20%; right: 8%; display: flex; gap: .35em; align-items: center; padding: .7em .9em; border-radius: 1em; background: #fff; box-shadow: 0 .8em 1.5em rgb(15 57 40 / .15); font-size: .8em; font-weight: 700; opacity: 0; transform: translateY(-1em); transition: .45s .45s ease; }.tx-route-tabs { z-index: 4; }
+.tx-order-hero { margin: 2% 8% 0; padding: 1em; border-radius: 1.55em; color: #fff; background: var(--tx-green); opacity: 0; transform: translateY(1.3em); transition: .45s ease; }.tx-order-hero-image { height: 9em; margin-bottom: 1em; border-radius: 1.05em; background: #dcc8aa url('/portfolio-assets/tempo/screen-08.png') 49% 29% / 165% auto no-repeat; }.tx-order-hero > span { padding: .4em .65em; border-radius: .65em; color: #176d5e; background: var(--tx-mint); font-size: .72em; font-weight: 700; }.tx-order-hero h3 { margin: .65em 0 .2em; font-size: 1.5em; }.tx-order-hero p { margin: 0; font-size: .85em; opacity: .78; }.tx-order-items { padding: 6% 8% 0; opacity: 0; transform: translateY(1.4em); transition: .45s .1s ease; }.tx-order-items article { display: grid; grid-template-columns: 4.6em 1fr; gap: .95em; align-items: center; margin: 1em 0; }.tx-order-thumb { width: 4.6em; height: 4.6em; border-radius: .85em; background: #e6d0ac url('/portfolio-assets/tempo/screen-08.png') 47% 47% / 220% auto no-repeat; }.tx-order-thumb-two { background-position: 55% 54%; }.tx-order-items span { font-size: .82em; font-weight: 700; }.tx-order-total { display: grid; gap: .7em; margin: 2% 8%; padding: 1.2em; border: 1px solid #dce9e1; border-radius: 1.25em; opacity: 0; transform: translateY(1.4em); transition: .45s .17s ease; }.tx-order-total strong { display: inline-flex; align-items: center; gap: .5em; color: var(--tx-green); font-size: .9em; }.tx-order-total p { display: flex; justify-content: space-between; margin: 0; padding-top: .6em; border-top: 1px solid #e7efea; font-size: 1.05em; }.tx-order-action { position: absolute; right: 8%; bottom: 6%; left: 8%; opacity: 0; transform: translateY(1.4em); transition: .45s .25s ease; }
+.tx-handoff { background: #e7f5ed; }.tx-track-map { position: absolute; top: 12%; right: 0; left: 0; height: 48%; overflow: hidden; opacity: 0; transform: scale(1.04); transition: .55s ease; }.tx-track-map-image { background-image: url('/portfolio-assets/tempo/screen-12.png'); background-position: 50% 27%; background-size: 155% auto; }.tx-track-pulse { position: absolute; left: 53%; top: 47%; width: 5em; height: 5em; border-radius: 50%; background: rgb(116 220 181 / .45); animation: tx-pulse 2s ease-out infinite; }.tx-track-courier { position: absolute; left: 58%; top: 53%; width: 2.8em; height: 2.8em; border: .45em solid #fff; border-radius: 50%; background: #1c2b25 url('/portfolio-assets/tempo/screen-12.png') 51% 49% / 450% auto no-repeat; box-shadow: 0 .6em 1.5em rgb(7 49 36 / .25); animation: tx-courier 2.8s ease-in-out infinite; }.tx-tracking-sheet { position: absolute; z-index: 2; right: 5%; bottom: 12%; left: 5%; padding: 1.45em; border-radius: 1.6em; background: #fff; box-shadow: 0 1.8em 3em rgb(16 57 40 / .17); opacity: 0; transform: translateY(2em); transition: .55s .2s ease; }.tx-sheet-handle { width: 3em; height: .35em; margin: 0 auto 1em; border-radius: 2em; background: #d9e4de; }.tx-tracking-sheet h3 { margin: .55em 0 .35em; font-size: 1.55em; }.tx-tracking-sheet > p { margin: 0; color: var(--tx-muted); font-size: .88em; }.tx-courier-card { display: grid; grid-template-columns: 3.35em 1fr auto; gap: .85em; align-items: center; margin-top: 1.2em; padding-top: 1.15em; border-top: 1px solid #e8efeb; }.tx-courier-avatar { width: 3.35em; height: 3.35em; border-radius: 50%; background: #bcd1c4 url('/portfolio-assets/tempo/screen-12.png') 48% 52% / 420% auto no-repeat; }.tx-courier-card strong,.tx-courier-card span { display: block; }.tx-courier-card strong { font-size: .92em; }.tx-courier-card span { margin-top: .25em; color: var(--tx-muted); font-size: .74em; }.tx-courier-actions { display: flex; gap: .45em; }.tx-courier-actions button { display: grid; width: 2.55em; height: 2.55em; place-items: center; border: 0; border-radius: .85em; color: var(--tx-green); background: #e8f6ee; }.tx-tracking-footer { position: absolute; z-index: 3; right: 8%; bottom: 4%; left: 8%; display: grid; grid-template-columns: auto 1fr; gap: .25em 1em; padding: .9em 1.1em; border-radius: 1em; color: #fff; background: #15251f; opacity: 0; transform: translateY(1.4em); transition: .45s .35s ease; }.tx-tracking-footer strong { text-align: right; letter-spacing: .22em; }.tx-tracking-footer small { grid-column: 1 / -1; color: #b7cac0; font-size: .72em; }.tx-tracking-proof { position: absolute; z-index: 4; top: 17%; left: 8%; display: inline-flex; align-items: center; gap: .4em; padding: .7em .85em; border-radius: .9em; color: var(--tx-green); background: #fff; box-shadow: 0 .8em 1.5em rgb(15 57 40 / .12); font-size: .8em; font-weight: 700; opacity: 0; transform: translateY(-1em); transition: .45s .45s ease; }
+.dw-page .dw-case-draft-tempo-v3 .tp-route-board.tx-route-board { display: grid; grid-template-columns: minmax(160px, .8fr) 1fr; min-height: clamp(280px, 33vw, 390px); padding: 0; overflow: hidden; border: 0; border-radius: 1.8em; background: #eef8f3; }.tx-board-map { position: relative; min-height: 100%; overflow: hidden; background: #d9eae1; opacity: 0; transform: scale(1.05); transition: .7s ease; }.tx-board-map.is-in { opacity: 1; transform: none; }.tx-board-map-image { background-size: 190% auto; background-position: 46% 25%; }.tx-board-map .tx-route-line { inset: 5% 4%; }.tx-board-stop-one { left: 20%; bottom: 15%; }.tx-board-stop-two { right: 25%; top: 45%; }.tx-board-stop-three { left: 25%; top: 13%; }.tx-board-courier { position: absolute; right: 30%; bottom: 22%; width: 2.8em; height: 2.8em; border: .45em solid #fff; border-radius: 50%; background: #15251f; box-shadow: 0 0 0 .8em rgb(116 220 181 / .35); animation: tx-courier 2.8s ease-in-out infinite; }.dw-page .dw-case-draft-tempo-v3 .tp-route-board.tx-route-board figcaption { align-content: center; padding: clamp(22px, 3vw, 44px); opacity: 0; transform: translateX(1.4em); transition: .55s .2s ease; }.dw-page .dw-case-draft-tempo-v3 .tp-route-board.tx-route-board figcaption.is-in { opacity: 1; transform: none; }.tx-board-legend { display: flex; flex-wrap: wrap; gap: .7em; align-items: center; margin-top: 1.5em; color: #587268; font-size: .78em; opacity: 0; transition: .35s .28s ease; }.tx-board-legend.is-in { opacity: 1; }.tx-board-legend i { width: .75em; height: .75em; border-radius: 50%; background: var(--tx-mint); }.tx-board-legend i:nth-of-type(2) { background: var(--tx-green); }
+@keyframes tx-courier { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-.7em,-.55em); } } @keyframes tx-pulse { 0% { transform: scale(.35); opacity: .9; } 100% { transform: scale(1.5); opacity: 0; } }
+@media (max-width: 760px) { .dw-page .dw-case-draft-tempo-v3 .tp-route-board.tx-route-board { grid-template-columns: 1fr; min-height: 0; }.tx-board-map { min-height: 260px; }.dw-page .dw-case-draft-tempo-v3 .tp-route-board.tx-route-board figcaption { padding: 26px; }.tx-screen { font-size: clamp(6px, 2.1vw, 8px); } }
+@media (prefers-reduced-motion: reduce) { .tx-screen *, .tx-screen *::before, .tx-screen *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+/* Crop into the map artwork itself, leaving source-screen chrome out of the coded UI. */
+.tx-route-map-image,
+.tx-board-map-image { background-position: 50% 55%; }
+
+.tx-route-map-image::after,
+.tx-board-map-image::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 17%;
+  background: linear-gradient(180deg, #dceae4 0%, rgb(220 234 228 / .88) 76%, transparent 100%);
+}
+
+/* Exact Tempo Figma frame 209:2589: location setup. */
+.dw-page .dw-case-draft-tempo-v3 .tp-phone.tp-figma-device {
+  display: block;
+  overflow: hidden;
+  border: clamp(3px, .32vw, 5px) solid #101010;
+  border-radius: clamp(20px, 2.3vw, 32px);
+  background: #fff;
+  box-shadow: 0 22px 42px rgb(7 29 20 / 25%);
+}
+
+.dw-page .dw-case-draft-tempo-v3 .tp-phone.tp-figma-device > img {
+  display: none;
+}
+
+.tp-figma-location {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  container-type: inline-size;
+  color: #131313;
+  background: #fff;
+  font-family: Montserrat, Archivo, Arial, sans-serif;
+}
+
+.tp-figma-location *,
+.tp-figma-location *::before,
+.tp-figma-location *::after {
+  box-sizing: border-box;
+}
+
+.tp-figma-location-status {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.tp-figma-location-art {
+  position: absolute;
+  top: 20.96%;
+  left: 28.27%;
+  display: block;
+  width: 43.46%;
+  height: auto;
+  transform: translateY(10cqw) scale(.86);
+  opacity: 0;
+}
+
+.tp-figma-location-copy {
+  position: absolute;
+  top: 50.29%;
+  right: 4.1%;
+  left: 4.1%;
+  text-align: center;
+  transform: translateY(5cqw);
+  opacity: 0;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-location-copy h3 {
+  margin: 0;
+  color: #131313 !important;
+  font-size: 5.128cqw;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-location-copy p {
+  max-width: 90%;
+  margin: 3.08cqw auto 0;
+  color: #131313 !important;
+  font-size: 3.59cqw;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.tp-figma-location-action {
+  position: absolute;
+  top: 64.34%;
+  right: 4.74%;
+  left: 4.74%;
+  display: grid;
+  width: 90.52%;
+  height: 5.69%;
+  min-height: 0;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 3.85cqw;
+  color: #fff;
+  background: #131313;
+  box-shadow: none;
+  font: 500 4.103cqw/1 Montserrat, Archivo, Arial, sans-serif;
+  transform: translateY(5cqw);
+  opacity: 0;
+}
+
+/* Exact Tempo Figma frame 274:9635: restaurant discovery (390x1190). The frame
+   is a scrolling phone page; the device supplies its visible viewport. 1cqw of
+   the screen container = 3.9 design px, so every value below is the Figma
+   number divided by 3.9. */
+.tp-figma-food {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  container-type: inline-size;
+  color: #131313;
+  background: #fff;
+  font-family: Montserrat, Archivo, Arial, sans-serif;
+}
+
+.tp-figma-food *,
+.tp-figma-food *::before,
+.tp-figma-food *::after { box-sizing: border-box; }
+
+.tp-figma-food-status {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Header row: Figma frame at y 48, 44 tall; back icon 24 at (16, 58);
+   "Restaurants" Montserrat 20/24.4 w500 at (48, 58). */
+.tp-figma-food-header {
+  position: absolute;
+  top: 12.308cqw;
+  left: 4.103cqw;
+  display: flex;
+  align-items: center;
+  gap: 2.051cqw;
+  height: 11.282cqw;
+}
+
+.tp-figma-food-header img { width: 6.154cqw; height: 6.154cqw; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-food-header strong { color: #131313 !important; font-size: 5.128cqw; font-weight: 500; line-height: 1.22; white-space: nowrap; }
+
+/* Nav-bar icon button: 44x44 r20 on #f8f8f8 at (346, 48). */
+.tp-figma-food-navicon {
+  position: absolute;
+  top: 12.308cqw;
+  left: 88.718cqw;
+  width: 11.282cqw;
+  height: 11.282cqw;
+  border-radius: 5.128cqw;
+  background: #f8f8f8;
+}
+
+/* Search bar: 358x49 r15 on #f2f2f2 at (16, 124); icon at 36; text at 70,
+   Montserrat 16/24 w300 #505050. */
+.tp-figma-food-search {
+  position: absolute;
+  top: 31.795cqw;
+  left: 4.103cqw;
+  display: flex;
+  align-items: center;
+  gap: 2.564cqw;
+  width: 91.795cqw;
+  height: 12.564cqw;
+  padding: 0 5.128cqw;
+  border-radius: 3.846cqw;
+  color: #505050;
+  background: #f2f2f2;
+  font-size: 4.103cqw;
+  font-weight: 300;
+}
+
+.tp-figma-food-search img { width: 6.154cqw; height: 6.154cqw; }
+
+/* Filter chips: 56x56 r20 on #f8f8f8 at y 205, labels 12/14.6 w400 at y 265.
+   x = 16, then 104, 176, 248, 320 - so a 32 gap after "Filters" and 16 after. */
+.tp-figma-food-filters {
+  position: absolute;
+  top: 52.564cqw;
+  left: 4.103cqw;
+  display: flex;
+  gap: 4.103cqw;
+  width: max-content;
+}
+
+.tp-figma-food-filter:first-child { margin-right: 4.103cqw; }
+
+.tp-figma-food-filter {
+  display: grid;
+  gap: 1.026cqw;
+  place-items: center;
+  width: 14.359cqw;
+}
+
+.tp-figma-food-filter > span {
+  position: relative;
+  display: grid;
+  width: 14.359cqw;
+  height: 14.359cqw;
+  place-items: center;
+  border-radius: 5.128cqw;
+  background: #f8f8f8;
+}
+
+/* The unread dot is 12px at (59, 205) - flush with the chip's top edge. */
+.tp-figma-food-filter > span.has-alert::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: .256cqw;
+  width: 3.077cqw;
+  height: 3.077cqw;
+  border-radius: 50%;
+  background: #f3705b;
+}
+
+.tp-figma-food-filter img { width: 6.154cqw; height: 6.154cqw; }
+.tp-figma-food-filter small { color: #131313; font-size: 3.077cqw; font-weight: 400; line-height: 1.22; white-space: nowrap; }
+
+/* "Special offers" Montserrat 20/24.4 w500 #414141 at (16, 328); "View all"
+   at 297 with its chevron at 350. */
+.tp-figma-food-offers-heading {
+  position: absolute;
+  top: 84.103cqw;
+  left: 4.103cqw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 91.795cqw;
+  height: 6.256cqw;
+}
+
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-food-offers-heading h3 {
+  margin: 0;
+  color: #414141 !important;
+  font: 500 5.128cqw/1.22 Montserrat, Archivo, Arial, sans-serif;
+}
+
+.tp-figma-food-offers-heading > span {
+  display: flex;
+  align-items: center;
+  gap: 1.538cqw;
+  color: #131313;
+  font-size: 3.590cqw;
+}
+
+.tp-figma-food-offers-heading > span img { width: 6.154cqw; height: 6.154cqw; }
+
+/* Special offers is a horizontal rail of 300x222 cards at y 376, gap 16 -
+   it was a vertical list before, which is the one real structural drift. */
+.tp-figma-food-rail {
+  position: absolute;
+  top: 96.410cqw;
+  left: 4.103cqw;
+  display: flex;
+  gap: 4.103cqw;
+  width: max-content;
+}
+
+.tp-figma-food-rail .tp-figma-food-card { width: 76.923cqw; }
+
+/* Hairline divider: 350 wide at (17, 622). */
+.tp-figma-food-divider {
+  position: absolute;
+  top: 159.487cqw;
+  left: 4.359cqw;
+  width: 89.744cqw;
+  height: 1px;
+  background: #ececec;
+}
+
+/* Full-width cards: 358x222 at y 646 and 900, so a 32 gap. */
+.tp-figma-food-list {
+  position: absolute;
+  top: 165.641cqw;
+  left: 4.103cqw;
+  display: grid;
+  gap: 8.205cqw;
+  width: 91.795cqw;
+}
+
+.tp-figma-food-card { position: relative; height: 56.923cqw; }
+
+/* Card image 144 tall, r20; copy block starts at 150, so a 6 gap. */
+.tp-figma-food-card-image {
+  position: relative;
+  width: 100%;
+  height: 36.923cqw;
+  overflow: hidden;
+  border-radius: 5.128cqw;
+  background: #ddd;
+}
+
+.tp-figma-food-card-image > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* Discount pill: 51x25 r20 at (12, 12) inside the card. */
+.tp-figma-food-card-image em {
+  position: absolute;
+  top: 3.077cqw;
+  left: 3.077cqw;
+  display: grid;
+  width: 13.077cqw;
+  height: 6.410cqw;
+  place-items: center;
+  border-radius: 5.128cqw;
+  color: #131313;
+  background: #ffd15d;
+  font-size: 3.077cqw;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.tp-figma-food-card-copy { display: grid; gap: 1.026cqw; margin-top: 1.538cqw; }
+.tp-figma-food-card-copy > div { display: flex; align-items: center; justify-content: space-between; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-food-card-copy strong { color: #131313 !important; font-size: 4.103cqw; font-weight: 400; }
+.tp-figma-food-card-copy > div > span { display: flex; align-items: center; gap: 1.026cqw; color: #131313; font-size: 3.590cqw; }
+.tp-figma-food-card-copy > div > span img { width: 3.846cqw; height: 3.846cqw; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-food-card-copy p { margin: 0; color: #9a9a9a !important; font-size: 3.077cqw; font-weight: 400; }
+.tp-figma-food-card-copy footer { display: flex; gap: 2.051cqw; margin-top: .513cqw; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-food-card-copy b { min-width: 22.564cqw; padding: 1.282cqw 2.051cqw; border-radius: 2.564cqw; color: #131313 !important; background: #f8f8f8; font-size: 3.077cqw; font-weight: 400; text-align: center; }
+
+.tp-figma-food.is-active .tp-figma-food-header,
+.tp-figma-food.is-active .tp-figma-food-search,
+.tp-figma-food.is-active .tp-figma-food-filters,
+.tp-figma-food.is-active .tp-figma-food-offers-heading,
+.tp-figma-food.is-active .tp-figma-food-rail,
+.tp-figma-food.is-active .tp-figma-food-list {
+  animation: tempo-food-enter 520ms cubic-bezier(.2, .8, .2, 1) both;
+}
+.tp-figma-food.is-active .tp-figma-food-search { animation-delay: 70ms; }
+.tp-figma-food.is-active .tp-figma-food-filters { animation-delay: 130ms; }
+.tp-figma-food.is-active .tp-figma-food-offers-heading { animation-delay: 190ms; }
+.tp-figma-food.is-active .tp-figma-food-rail { animation-delay: 250ms; }
+.tp-figma-food.is-active .tp-figma-food-list { animation-delay: 320ms; }
+
+@keyframes tempo-food-enter {
+  from { opacity: 0; transform: translateY(3.077cqw); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Exact Tempo Figma frames 326:21313 and 326:21337: route and tracking. */
+.tp-figma-route, .tp-figma-tracking, .tp-figma-order { position: relative; width: 100%; height: 100%; overflow: hidden; container-type: inline-size; color: #131313; background: #fff; font-family: Montserrat, Archivo, Arial, sans-serif; }
+.tp-figma-route *, .tp-figma-tracking *, .tp-figma-order *, .tp-figma-route *::before, .tp-figma-tracking *::before, .tp-figma-order *::before { box-sizing: border-box; }
+.tp-figma-route-status, .tp-figma-tracking-status, .tp-figma-order-status { position: absolute; z-index: 4; top: 0; left: 0; width: 100%; }
+.tp-figma-route-header, .tp-figma-tracking-header, .tp-figma-order-header { position: absolute; z-index: 4; top: 10.26cqw; left: 4.1cqw; right: 4.1cqw; display: flex; align-items: center; gap: 2.05cqw; height: 15.38cqw; background: #fff; }
+.tp-figma-route-header > img, .tp-figma-tracking-header > img, .tp-figma-order-header > img { width: 6.15cqw; height: 6.15cqw; }
+.tp-figma-route-header strong, .tp-figma-tracking-header strong, .tp-figma-order-header strong { flex: 1; font-size: 5.13cqw; font-weight: 500; letter-spacing: .018em; }
+.tp-figma-route-header span { display: grid; width: 11.28cqw; height: 11.28cqw; place-items: center; border-radius: 5.13cqw; background: #f8f8f8; font-size: 5.13cqw; font-weight: 400; }
+.tp-figma-route-map, .tp-figma-tracking-map { position: absolute; top: 25.64cqw; left: 0; width: 100%; height: 190.77cqw; overflow: hidden; background: #dedede; }
+.tp-figma-route-map > img, .tp-figma-tracking-map > img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.8) contrast(.82) brightness(1.15); opacity: .95; }
+.tp-figma-route-map svg, .tp-figma-tracking-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* The route polyline is a stroked path, not a filled one - Figma draws it as
+   Line 10-13 vectors at 2px. */
+.tp-figma-route-map svg path, .tp-figma-tracking-map svg path { fill: none; stroke: #131313; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tp-figma-route-map path, .tp-figma-tracking-map path { fill: none; stroke: #131313; stroke-width: 2; vector-effect: non-scaling-stroke; stroke-dasharray: 800; stroke-dashoffset: 800; }
+.tp-figma-route-stop { position: absolute; top: 65.13cqw; left: 53.08cqw; display: grid; width: 8.21cqw; height: 8.21cqw; place-items: center; border-radius: 50%; color: #fff; background: #131313; font-size: 3.59cqw; font-weight: 400; }
+.tp-figma-route-marker, .tp-figma-tracking-marker { position: absolute; top: 110cqw; left: 50.3cqw; display: grid; width: 11.28cqw; height: 11.28cqw; place-items: center; border-radius: 50%; color: #131313; background: #4abaa5; font-size: 6cqw; font-style: normal; }
+.tp-figma-route-sheet, .tp-figma-tracking-sheet { position: absolute; z-index: 3; right: 0; bottom: 0; left: 0; min-height: 57.69cqw; padding: 5.13cqw 4.1cqw 6.15cqw; border-radius: 5.13cqw 5.13cqw 0 0; background: #fff; }
+.tp-figma-route-handle, .tp-figma-tracking-handle { width: 9.74cqw; height: 1.28cqw; margin: 0 auto 8.21cqw; border-radius: 2.56cqw; background: #f2f2f2; }
+.tp-figma-route-sheet > div:not(.tp-figma-route-handle), .tp-figma-tracking-title { display: flex; align-items: center; gap: 2.56cqw; }
+.tp-figma-route-sheet h3, .tp-figma-tracking-sheet h3 { margin: 0; font-size: 5.13cqw; font-weight: 500; }
+.tp-figma-route-sheet > div img, .tp-figma-tracking-title img { width: 6.15cqw; height: 6.15cqw; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-route-sheet p, .dw-page .dw-case-draft-tempo-v3 .tp-figma-tracking-sheet > p { margin: 2.56cqw 0 5.13cqw 8.97cqw; color: #131313 !important; font-size: 3.59cqw; }
+.tp-figma-route-sheet button, .tp-figma-order footer button { width: 100%; height: 12.31cqw; border: 0; border-radius: 3.85cqw; color: #fff; background: #131313; font: 500 4.1cqw/1 Montserrat, Archivo, Arial, sans-serif; }
+.tp-figma-tracking-courier-pin { position: absolute; top: 53.85cqw; left: 57.2cqw; width: 7.18cqw; height: auto; animation: tempo-pin-float 2.8s ease-in-out infinite; }
+.tp-figma-tracking-courier { display: flex; align-items: center; gap: 1.79cqw; padding-top: 5.13cqw; border-top: 1px solid #f2f2f2; }
+.tp-figma-tracking-courier > img { width: 13.33cqw; height: 13.33cqw; border-radius: 3.85cqw; object-fit: cover; object-position: 50% 10%; }
+.tp-figma-tracking-courier span { display: grid; gap: 1.03cqw; }
+.tp-figma-tracking-courier small { color: #9a9a9a; font-size: 3.08cqw; }.tp-figma-tracking-courier b { font-size: 4.1cqw; font-weight: 400; }.tp-figma-tracking-courier em { display: flex; align-items: center; gap: 1.03cqw; margin-left: auto; font-size: 3.59cqw; font-style: normal; }.tp-figma-tracking-courier em img { width: 3.85cqw; height: 3.85cqw; }
+.tp-figma-tracking-sheet footer { display: grid; grid-template-columns: 1fr 11.28cqw 11.28cqw; gap: 2.05cqw; margin-top: 6.15cqw; }.tp-figma-tracking-sheet footer span, .tp-figma-tracking-sheet footer button { display: grid; height: 12.31cqw; place-items: center; border: 0; border-radius: 3.85cqw; background: #f2f2f2; color: #505050; font-size: 4.1cqw; }.tp-figma-tracking-sheet footer button { font-size: 4.62cqw; }
+.tp-figma-route.is-active .tp-figma-route-map path, .tp-figma-tracking.is-active .tp-figma-tracking-map path { animation: tempo-route-draw 1.35s .15s ease-out both; }.tp-figma-route.is-active .tp-figma-route-sheet, .tp-figma-tracking.is-active .tp-figma-tracking-sheet { animation: tempo-sheet-enter 620ms .25s cubic-bezier(.2,.8,.2,1) both; }
+
+/* Original order-detail screen rebuilt as layout, with its genuine Figma food assets. */
+.tp-figma-order-header { top: 10.26cqw; }.tp-figma-order-info { position: absolute; top: 31.79cqw; left: 4.1cqw; right: 4.1cqw; }.tp-figma-order dl { display: grid; gap: 7.18cqw; margin: 0 0 9.23cqw; }.tp-figma-order dl div { display: grid; gap: 2.05cqw; }.tp-figma-order dt { font-size: 7.18cqw; font-weight: 400; }.tp-figma-order dd { margin: 0; color: #9a9a9a; font-size: 5.13cqw; font-weight: 300; }.dw-page .dw-case-draft-tempo-v3 .tp-figma-order-info h3 { margin: 0 0 5.13cqw; color: #131313 !important; font: 600 7.18cqw/1 Montserrat, Archivo, Arial, sans-serif; }.tp-figma-order-item { display: grid; grid-template-columns: 18.46cqw 1fr auto; gap: 4.1cqw; align-items: center; margin-bottom: 6.15cqw; }.tp-figma-order-item > img { width: 18.46cqw; height: 18.46cqw; border-radius: 4.1cqw; object-fit: cover; }.tp-figma-order-item span { display: grid; gap: 2.05cqw; }.tp-figma-order-item b { font-size: 5.13cqw; font-weight: 500; }.tp-figma-order-item small { color: #9a9a9a; font-size: 4.1cqw; }.tp-figma-order-item > strong { font-size: 5.13cqw; font-weight: 600; }.tp-figma-order-summary { margin-top: 7.18cqw; padding-top: 7.18cqw; border-top: 1px solid #f2f2f2; }.tp-figma-order-summary p { display: flex; justify-content: space-between; margin: 4.1cqw 0; font-size: 5.13cqw; }.tp-figma-order-summary p span { color: #505050; }.tp-figma-order footer { position: absolute; right: 0; bottom: 0; left: 0; padding: 7.18cqw 4.1cqw 5.13cqw; border-radius: 5.13cqw 5.13cqw 0 0; background: #fff; box-shadow: 0 -2.56cqw 5.13cqw rgb(0 0 0 / .04); }.tp-figma-order.is-active .tp-figma-order-info, .tp-figma-order.is-active footer { animation: tempo-order-enter 580ms cubic-bezier(.2,.8,.2,1) both; }.tp-figma-order.is-active footer { animation-delay: 180ms; }
+@keyframes tempo-route-draw { to { stroke-dashoffset: 0; } } @keyframes tempo-sheet-enter { from { opacity: 0; transform: translateY(10cqw); } to { opacity: 1; transform: none; } } @keyframes tempo-order-enter { from { opacity: 0; transform: translateY(4cqw); } to { opacity: 1; transform: none; } } @keyframes tempo-pin-float { 50% { transform: translateY(-2cqw); } }
+
+.tp-figma-location.is-active .tp-figma-location-art {
+  animation: tp-figma-location-art .68s cubic-bezier(.2, .8, .2, 1) .08s both;
+}
+
+.tp-figma-location.is-active .tp-figma-location-copy {
+  animation: tp-figma-location-copy .48s cubic-bezier(.2, .8, .2, 1) .3s both;
+}
+
+.tp-figma-location.is-active .tp-figma-location-action {
+  animation: tp-figma-location-action .5s cubic-bezier(.2, .8, .2, 1) .46s both;
+}
+
+@keyframes tp-figma-location-art {
+  from { transform: translateY(10cqw) scale(.86); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes tp-figma-location-copy {
+  from { transform: translateY(5cqw); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes tp-figma-location-action {
+  from { transform: translateY(5cqw); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tp-figma-location-art,
+  .tp-figma-location-copy,
+  .tp-figma-location-action {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage .dw-tempo-secure-phone {
+    width: 228px;
+    height: 440px;
+    min-height: 440px;
+    margin-inline: auto;
+  }
+}
+
+/* ==========================================================================
+   Tempo V3 device treatment — matched to the iCredo mockup.
+   iCredo's `.ic-phone` is a bare screen: no bezel, aspect-ratio 1836/3953,
+   corner radius 53 units of a 393-wide design, a hairline ring and one soft
+   drop shadow. Tempo V3 previously used chunky 6-7px dark bezels in three
+   different sizes; these rules replace all of them with the same device so the
+   two case studies read as one system.
+   ========================================================================== */
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-phone {
+  --tp-unit: calc(var(--tp-phone-w, 300px) / 393);
+  display: block;
+  width: var(--tp-phone-w, 300px);
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1836 / 3953;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: calc(var(--tp-unit) * 53);
+  background: #fff;
+  box-shadow:
+    0 40px 80px -30px rgb(0 0 0 / 35%),
+    0 0 0 1px rgb(0 0 0 / 6%);
+  container-type: inline-size;
+}
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-phone > .tp-phone,
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-phone > .tp-phone.tp-figma-device {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: inherit;
+  background: #fff;
+  box-shadow: none;
+}
+
+/* The walkthrough stage and the carousel each set only the width; the shape,
+   radius and shadow come from the block above. */
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage .dw-tempo-secure-phone {
+  --tp-phone-w: clamp(230px, 22vw, 320px);
+  width: var(--tp-phone-w);
+  height: auto;
+  min-height: 0;
+  border: 0;
+  border-radius: calc(var(--tp-unit) * 53);
+  box-shadow:
+    0 40px 80px -30px rgb(0 0 0 / 35%),
+    0 0 0 1px rgb(0 0 0 / 6%);
+}
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track .dw-tempo-secure-carousel-device {
+  display: grid;
+  place-items: center;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+/* `height: 100%` from the old fixed-height carousel frame was squashing these to
+   a 0.489 ratio while the walkthrough and multi-stop phones sat at iCredo's
+   0.4645. The aspect ratio is restated here so all three agree. */
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-track .dw-tempo-secure-carousel-device .dw-tempo-secure-phone {
+  --tp-phone-w: clamp(170px, 17vw, 235px);
+  width: var(--tp-phone-w);
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1836 / 3953;
+  border-radius: calc(var(--tp-unit) * 53);
+}
+
+@media (max-width: 760px) {
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage .dw-tempo-secure-phone {
+    --tp-phone-w: 240px;
+    width: var(--tp-phone-w);
+    height: auto;
+    min-height: 0;
+    border: 0;
+  }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-carousel-device .dw-tempo-secure-phone { --tp-phone-w: 190px; }
+}
+
+/* ==========================================================================
+   Measured corrections — Figma 326:21313 (Delivery route, 390x844) and
+   326:21337 (Delivery tracking, 390x976). Every value is the Figma number
+   divided by 3.9, because 1cqw of the screen container = 3.9 design px.
+   These come last so they win over the earlier hand-set values.
+   ========================================================================== */
+
+/* Both headers: row at y 48, 44 tall; back icon 24 at (16, 58); title
+   Montserrat 20/24.4 w500 at x 48. */
+.tp-figma-route-header,
+.tp-figma-tracking-header,
+.tp-figma-order-header {
+  top: 12.308cqw;
+  left: 4.103cqw;
+  width: 91.795cqw;
+  height: 11.282cqw;
+  gap: 2.051cqw;
+}
+.tp-figma-route-header img,
+.tp-figma-tracking-header img,
+.tp-figma-order-header img { width: 6.154cqw; height: 6.154cqw; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-route-header strong,
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-tracking-header strong,
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-order-header strong {
+  color: #131313 !important;
+  font-size: 5.128cqw;
+  font-weight: 500;
+  line-height: 1.22;
+  white-space: nowrap;
+}
+/* Route carries two nav-bar icons at x 278 and 330; tracking carries one at 346. */
+.tp-figma-route-header > span,
+.tp-figma-tracking-header > span {
+  display: grid;
+  width: 11.282cqw;
+  height: 11.282cqw;
+  place-items: center;
+  border-radius: 5.128cqw;
+  color: #131313;
+  background: #f8f8f8;
+  font-size: 4.103cqw;
+}
+.tp-figma-route-header > span:first-of-type { margin-left: auto; }
+.tp-figma-route-header > span + span { margin-left: 2.051cqw; }
+
+/* Map fills 0,100 390x744 on both. */
+.tp-figma-route-map, .tp-figma-tracking-map { top: 25.641cqw; height: 190.769cqw; }
+
+/* Destination pin: 44x44 r20 #4abaa5 at (198, 530) / (199, 531). */
+.tp-figma-route-marker { top: 110.256cqw; left: 50.769cqw; width: 11.282cqw; height: 11.282cqw; border-radius: 5.128cqw; background: #4abaa5; }
+.tp-figma-tracking-marker { top: 110.513cqw; left: 51.026cqw; width: 11.282cqw; height: 11.282cqw; border-radius: 5.128cqw; background: #4abaa5; }
+
+/* Courier marker: 45x44 at (214, 217) — it was stretched to the whole map. */
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-tracking-map img.tp-figma-tracking-courier-pin {
+  position: absolute;
+  top: 30cqw;
+  left: 54.872cqw;
+  width: 11.538cqw !important;
+  height: 11.282cqw !important;
+  object-fit: contain;
+}
+
+/* Route sheet: 0,619 390x225, radius 20 on the top corners only. */
+.tp-figma-route-sheet { top: 158.718cqw; height: 57.692cqw; border-radius: 5.128cqw 5.128cqw 0 0; padding: 0; }
+.tp-figma-route-handle { position: absolute; top: 5.128cqw; left: 45.128cqw; width: 9.744cqw; height: 1.282cqw; margin: 0; border-radius: 2.564cqw; background: #f2f2f2; }
+.tp-figma-route-sheet > div:not(.tp-figma-route-handle) { position: absolute; top: 14.615cqw; left: 5.128cqw; display: flex; align-items: center; gap: 2.564cqw; margin: 0; }
+.tp-figma-route-sheet > div:not(.tp-figma-route-handle) img { width: 6.154cqw; height: 6.154cqw; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-route-sheet h3 { max-width: none; margin: 0; color: #131313 !important; font: 500 5.128cqw/1.22 Montserrat, Archivo, Arial, sans-serif; white-space: nowrap; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-route-sheet > p { max-width: none; white-space: nowrap; position: absolute; top: 23.333cqw; left: 14.103cqw; margin: 0; color: #131313 !important; font: 400 3.590cqw/1.43 Montserrat, Archivo, Arial, sans-serif; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-route-sheet button { position: absolute; top: 39.231cqw; left: 5.128cqw; width: 89.744cqw; height: 12.308cqw; padding: 0; border: 0; border-radius: 3.846cqw; color: #fff; background: #131313; font: 500 4.103cqw/1.22 Montserrat, Archivo, Arial, sans-serif; box-shadow: none; }
+
+/* Tracking sheet: 1,634 390x342, radius 20 on the top corners only. */
+.tp-figma-tracking-sheet { top: 162.564cqw; height: 87.692cqw; border-radius: 5.128cqw 5.128cqw 0 0; padding: 0; }
+.tp-figma-tracking-handle { position: absolute; top: 5.128cqw; left: 44.359cqw; width: 9.744cqw; height: 1.282cqw; margin: 0; border-radius: 2.564cqw; background: #f2f2f2; }
+.tp-figma-tracking-title { position: absolute; top: 14.615cqw; left: 4.359cqw; display: flex; align-items: center; gap: 2.564cqw; margin: 0; }
+.tp-figma-tracking-title img { width: 6.154cqw; height: 6.154cqw; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-tracking-sheet h3 { max-width: none; margin: 0; color: #131313 !important; font: 500 5.128cqw/1.22 Montserrat, Archivo, Arial, sans-serif; white-space: nowrap; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-tracking-sheet > p { max-width: none; white-space: nowrap; position: absolute; top: 23.333cqw; left: 13.333cqw; margin: 0; color: #131313 !important; font: 400 3.590cqw/1.43 Montserrat, Archivo, Arial, sans-serif; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-tracking-sheet > p strong { color: #131313 !important; font-weight: 500; }
+/* Hairline above the courier row at y 787, then the row itself at 819. */
+.tp-figma-tracking-courier { position: absolute; top: 47.436cqw; left: 4.359cqw; display: flex; align-items: center; gap: 1.795cqw; width: 89.744cqw; height: 13.333cqw; padding-top: 0; border-top: 0; }
+.tp-figma-tracking-courier::before { content: ""; position: absolute; top: -8.205cqw; left: 0; width: 89.744cqw; height: 1px; background: #ececec; }
+.tp-figma-tracking-courier > img { width: 13.333cqw; height: 13.333cqw; border-radius: 3.846cqw; object-fit: cover; }
+.tp-figma-tracking-courier > span { display: grid; gap: .256cqw; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-tracking-courier small { color: #9a9a9a !important; font-size: 3.077cqw; font-weight: 400; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-tracking-courier b { color: #131313 !important; font-size: 4.103cqw; font-weight: 500; }
+.tp-figma-tracking-courier em { display: flex; align-items: center; gap: 1.026cqw; margin-left: auto; color: #131313; font-size: 3.590cqw; font-style: normal; }
+.tp-figma-tracking-courier em img { width: 3.846cqw; height: 3.846cqw; }
+/* Message bar 246x49 r15 at (17, 903), then two 44px icon buttons at 271 and 323. */
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-tracking-sheet footer { position: absolute; top: 68.974cqw; left: 4.359cqw; display: flex; align-items: center; gap: 2.051cqw; width: 89.744cqw; height: 12.564cqw; margin: 0; padding: 0; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-tracking-sheet footer > span { display: flex; align-items: center; width: 63.077cqw; height: 12.564cqw; padding: 0 5.128cqw; border-radius: 3.846cqw; color: #505050; background: #f2f2f2; font-size: 4.103cqw; font-weight: 300; }
+.dw-page .dw-case-draft-tempo-v3 .tp-figma-tracking-sheet footer button { display: grid; width: 11.282cqw; height: 11.282cqw; place-items: center; padding: 0; border: 0; border-radius: 5.128cqw; color: #131313; background: #f8f8f8; font-size: 4.103cqw; box-shadow: none; }
+
+/* The multi-stop route board used to be a white card with its own figcaption:
+   the caption repeated the section's copy (and contradicted it — "Two stops"
+   against the heading's "Three accountable stops"), and the card's own
+   `grid-template-columns` asked for 390px inside a 280px column with
+   `overflow: hidden`, so the caption was clipped off entirely. It is now just
+   the phone, in the same device as every other mockup on the page. */
+.dw-page .dw-case-draft-tempo-v3 .tp-route-board.tp-route-board-coded {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 0;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.dw-page .dw-case-draft-tempo-v3 .tp-route-board-coded .dw-tempo-secure-phone {
+  --tp-phone-w: clamp(220px, 20vw, 300px);
+  width: var(--tp-phone-w);
+}
+
+/* ==========================================================================
+   Colour shield for the coded Tempo screens.
+
+   The case study's dark sections carry `color: #fff !important` rules that
+   cascade straight through the device and into the app UI — 44 text nodes were
+   rendering white on white, which is why the order screen looked half empty and
+   the search placeholder disappeared. The screens are always a white app on a
+   white screen regardless of the section behind them, so every colour is
+   restated here at high specificity.
+
+   Palette from Figma: ink #131313, secondary #505050, muted #9a9a9a,
+   section heading #414141, and white only on the #131313 fills.
+   ========================================================================== */
+.dw-page .dw-case-study :is(.tp-figma-location, .tp-figma-food, .tp-figma-route, .tp-figma-tracking, .tp-figma-order),
+.dw-page .dw-case-study :is(.tp-figma-location, .tp-figma-food, .tp-figma-route, .tp-figma-tracking, .tp-figma-order)
+  :is(p, li, span, strong, b, i, em, dt, dd, h1, h2, h3, h4, a, small, label, div, article, header, section, footer, figcaption, button) {
+  color: #131313 !important;
+}
+
+/* Every exception below repeats the screen's own class so it outranks the
+   default block. That default is 0,3,1 — the `:is(p, span, button, …)` list
+   contributes a type selector — so a 0,3,0 exception silently loses, which is
+   how "Set Location" ended up as black text on its black button. */
+
+/* Secondary — placeholders and helper text. */
+.dw-page .dw-case-study .tp-figma-food .tp-figma-food-search,
+.dw-page .dw-case-study .tp-figma-food .tp-figma-food-search span,
+.dw-page .dw-case-study .tp-figma-tracking .tp-figma-tracking-sheet footer > span { color: #505050 !important; }
+
+/* Muted — categories, field labels, captions. */
+.dw-page .dw-case-study .tp-figma-food .tp-figma-food-card-copy p,
+.dw-page .dw-case-study .tp-figma-tracking .tp-figma-tracking-courier small,
+.dw-page .dw-case-study .tp-figma-order .tp-figma-order-item small { color: #9a9a9a !important; }
+
+/* "Special offers" is #414141, not full ink. */
+.dw-page .dw-case-study .tp-figma-food .tp-figma-food-offers-heading h3 { color: #414141 !important; }
+
+/* White is reserved for text sitting on a #131313 fill — the three primary
+   buttons and the numbered route stop. Nowhere else. */
+.dw-page .dw-case-study .tp-figma-location .tp-figma-location-action,
+.dw-page .dw-case-study .tp-figma-route .tp-figma-route-sheet button,
+.dw-page .dw-case-study .tp-figma-order footer button[type],
+.dw-page .dw-case-study .tp-figma-route .tp-figma-route-stop { color: #fff !important; }
+
+/* The order screen's field labels were 28px and its values 20px grey — the
+   receipt read as headlines. Restored to the scale the other four screens use
+   (Montserrat 14 label / 16 value). NOTE: this screen's Figma node has not been
+   located, so these are system-consistent rather than measured. */
+.dw-page .dw-case-study .tp-figma-order .tp-figma-order-info dt { font-size: 3.590cqw !important; font-weight: 400 !important; color: #9a9a9a !important; }
+.dw-page .dw-case-study .tp-figma-order .tp-figma-order-info dd { font-size: 4.103cqw !important; font-weight: 400 !important; color: #131313 !important; }
+.dw-page .dw-case-study .tp-figma-order .tp-figma-order-info dl { gap: 4.103cqw !important; }
+
+/* The walkthrough step indicator was an "05 / 05" caption parked ~300px below
+   the phone, because the sticky stage centres its contents over a full-viewport
+   min-height. Every other case study uses `.dw-walk-dots`, so this one does too:
+   the stage is now a column that hugs the phone with a fixed 28px gap. */
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-dots {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  list-style: none;
+}
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-dots li {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: .25;
+  transition: opacity 200ms ease-out, transform 200ms ease-out;
+}
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-dots li.is-active { opacity: 1; transform: scale(1.35); }
+@media (max-width: 760px) {
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage { gap: 20px; }
+}
+
+/* The hero ran ~356px of empty canvas below the social-proof row, so the
+   project overview now lives there instead of as its own pale band underneath.
+   The scene becomes two rows — the copy centres in the first, the overview sits
+   on the floor of the second — and the van keeps its Figma anchor because it is
+   positioned against the section, not the grid. */
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-scene {
+  grid-template-rows: 1fr auto;
+  align-content: stretch;
+}
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-copy { align-self: center; }
+
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-meta {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 clamp(20px, 3vw, 44px);
+  width: min(100% - 48px, 1118px);
+  margin: 0 auto;
+  padding: clamp(12px, 1.5vw, 20px) 0 clamp(40px, 5vw, 72px);
+  border-top: 0;
+  animation: tempo-landing-enter .7s .62s both cubic-bezier(.2,.8,.2,1);
+}
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-meta > div {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: clamp(14px, 1.6vw, 20px) 0;
+}
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-meta dt {
+  color: #8a9a95;
+  font: 500 11px/1.2 Montserrat, Archivo, Arial, sans-serif;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-meta dd {
+  margin: 0;
+  color: #eef4f2;
+  font: 400 clamp(13px, 1.1vw, 15px)/1.45 Montserrat, Archivo, Arial, sans-serif;
+}
+
+@media (max-width: 1100px) {
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  /* At phone width the van can no longer be an absolute layer: the overview now
+     occupies the floor it used to park on, and it was sitting straight on top of
+     the text. It joins the flow instead — copy, van, overview — so the three
+     stack instead of colliding. */
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-scene {
+    align-content: start;
+    grid-template-rows: auto auto auto;
+    padding-bottom: 0;
+  }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-copy { grid-row: 1; align-self: start; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-van {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    grid-row: 2;
+    justify-self: end;
+    width: min(96vw, 360px);
+    margin: clamp(18px, 5vw, 34px) -4vw 0 0;
+    opacity: 1;
+  }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-meta {
+    grid-row: 3;
+    width: auto;
+    margin: 0 24px;
+    padding-top: 12px;
+    padding-bottom: 34px;
+  }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-meta > div { padding: 11px 0; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-horizon { top: auto; bottom: 26%; height: 22%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-meta { animation: none; }
 }

@@ -106,6 +106,14 @@
   align-items: start;
 }
 
+.dw-walk-footer {
+  width: min(calc(100% - 40px), var(--case-wide, 1400px));
+  margin: clamp(28px, 4vw, 64px) auto 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 120px);
+}
+
 .dw-walk-stage {
   position: sticky;
   /* centred on the viewport (frame + dots ≈ 2.15 × the phone width + 50px),
@@ -388,6 +396,10 @@
   }
 
   .dw-walk-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .dw-walk-footer {
     grid-template-columns: 1fr;
   }
 

@@ -2700,23 +2700,24 @@ function ExperienceList({
               </span>
               <span className="dw-experience-description">
                 {experienceSummary(experience.company, experience.description)}
+                {" "}
+                <button
+                  className="dw-experience-more"
+                  type="button"
+                  tabIndex={isActive ? 0 : -1}
+                  data-cursor-label="Read the full story"
+                  onClick={() =>
+                    setDetail({
+                      company: experience.company,
+                      role: experience.role,
+                      type: experience.type,
+                      body: experienceBody(experience.company, experience.description)
+                    })
+                  }
+                >
+                  Read more
+                </button>
               </span>
-              <button
-                className="dw-experience-more"
-                type="button"
-                tabIndex={isActive ? 0 : -1}
-                data-cursor-label="Read the full story"
-                onClick={() =>
-                  setDetail({
-                    company: experience.company,
-                    role: experience.role,
-                    type: experience.type,
-                    body: experienceBody(experience.company, experience.description)
-                  })
-                }
-              >
-                Read more
-              </button>
             </div>
           </li>
         );
@@ -2849,22 +2850,24 @@ function ExperienceScrollSection() {
               </div>
               <h3>{experience.company}</h3>
               <p>{experience.role}</p>
-              <p>{experienceSummary(experience.company, experience.description)}</p>
-              <button
-                className="dw-experience-more dw-experience-static-more"
-                type="button"
-                data-cursor-label="Read the full story"
-                onClick={() =>
-                  setStaticDetail({
-                    company: experience.company,
-                    role: experience.role,
-                    type: experience.type,
-                    body: experienceBody(experience.company, experience.description)
-                  })
-                }
-              >
-                Read more
-              </button>
+              <p>
+                {experienceSummary(experience.company, experience.description)} {" "}
+                <button
+                  className="dw-experience-more dw-experience-static-more"
+                  type="button"
+                  data-cursor-label="Read the full story"
+                  onClick={() =>
+                    setStaticDetail({
+                      company: experience.company,
+                      role: experience.role,
+                      type: experience.type,
+                      body: experienceBody(experience.company, experience.description)
+                    })
+                  }
+                >
+                  Read more
+                </button>
+              </p>
             </article>
           ))}
         </div>
@@ -3419,8 +3422,11 @@ function HomeUnifiedScrollExperience() {
             playback.awaitingExitGesture = false;
             return;
           }
-          playback.autoAt = isFinal ? Number.POSITIVE_INFINITY : now;
-          playback.awaitingExitGesture = isFinal;
+          // The final investment figure gets a moment to land, then the
+          // story carries into the founders scene without requiring another
+          // scroll. Wheel and touch gestures still use the same route.
+          playback.autoAt = isFinal ? now + 2.4 : now;
+          playback.awaitingExitGesture = false;
           if (!isFinal) {
             moveToFact(index + 1, 1);
           }
@@ -3447,6 +3453,14 @@ function HomeUnifiedScrollExperience() {
             playback.cooldownUntil = Math.max(playback.cooldownUntil, now + 0.55);
             playback.minimumUntil = now;
             playback.holdUntil = now + 0.5;
+            // A client chapter is one entrance: let every logo reach its
+            // grid position before pausing. The next scroll then advances to
+            // experience, rather than being spent finishing the grid.
+            if (step === 0 && direction > 0) {
+              playback.autoAt = now;
+              moveToClients(1, 1);
+              return;
+            }
             playback.autoAt = Number.POSITIVE_INFINITY;
             playback.awaitingExitGesture = false;
           },
@@ -3830,8 +3844,18 @@ function HomeUnifiedScrollExperience() {
 
         motionTween?.timeScale(playback.speedMultiplier);
 
-        // Chapter changes are gesture-driven. Nothing advances in the
-        // background while the user is reading or interacting elsewhere.
+        // Let the final $27M moment resolve into the next chapter even when
+        // the reader pauses. This preserves the scroll choreography while
+        // avoiding a dead-end at the end of the number sequence.
+        if (
+          playback.chapter === "facts" &&
+          playback.activeFact === factFocusTimes.length - 1 &&
+          !motionTween &&
+          now >= playback.autoAt
+        ) {
+          playback.autoAt = Number.POSITIVE_INFINITY;
+          moveToClients(1);
+        }
       };
 
       gsap.ticker.add(tick);

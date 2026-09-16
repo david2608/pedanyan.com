@@ -19,12 +19,15 @@ import { OutcomeSection, PlateSection, StripSection, WalkthroughSection } from "
 import { IcredoStoryPlate, IcredoPhone as IcredoCodedPhone, IcredoPhoneInView, isIcredoScreen } from "./icredoScreens";
 import "./icredoCase.css";
 import { LigaStoryPlate } from "./ligaScene";
-import { LigaPhone as LigaCodedPhone, LigaPhoneInView, LigaFragment, LIGA_SYSTEM_FRAGMENTS, isLigaScreen } from "./ligaScreens";
+import { LigaPhone as LigaCodedPhone, LigaPhoneInView, LigaFragment, LIGA_ADVANTAGE_FRAGMENTS, isLigaScreen } from "./ligaScreens";
 import { LigaSteepCaseStudy } from "./ligaSteepPage";
 import "./ligaCase.css";
 import { NesbaConsentFlow, NesbaPhoneInView } from "./nesbaScreens";
 import "./nesbaCase.css";
 import { TempoPhone, TempoRouteBoard, type TempoScreenId } from "./tempoScreens";
+import { TempoFlowCard } from "./tempoFlowCard";
+import { IcredoLogoScene } from "./icredoLogoScene";
+import { SecurionLogoScene } from "./securionLogoScene";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,6 +89,9 @@ type PortfolioSection = {
     value?: string;
     label?: string;
     url?: string;
+    /** what-changed rows: the pair either side of the redesign */
+    before?: string;
+    after?: string;
   } | string>;
   person?: { name: string; role: string; url?: string };
   showLinkedin?: boolean;
@@ -209,7 +215,23 @@ const portfolioCardVideos: Record<string, { src: string; poster: string }> = {
   nesba: { src: "/portfolio-assets/nesba/nesba-card.mp4", poster: "/portfolio-assets/nesba/nesba-card-poster.webp" }
 };
 
+function IcredoIdentitySection({ section }: { section: PortfolioSection }) {
+  return (
+    <section className="dw-ic-identity" id={section.id} aria-labelledby="icredo-identity-title">
+      <div>
+        {section.eyebrow ? <span>{section.eyebrow}</span> : null}
+        <h2 id="icredo-identity-title">{section.title}</h2>
+        {section.body ? <p>{section.body.replace(/<[^>]+>/g, "")}</p> : null}
+      </div>
+      <IcredoLogoScene variant="section" />
+    </section>
+  );
+}
+
 function PortfolioCardVisual({ project }: { project: PortfolioProject }) {
+  if (project.project.slug === "tempo") return <TempoFlowCard />;
+  if (project.project.slug === "icredo") return <IcredoLogoScene />;
+  if (project.project.slug === "securion") return <SecurionLogoScene />;
   const video = portfolioCardVideos[project.project.slug];
   if (video) {
     return (
@@ -2433,26 +2455,22 @@ function SplitSection({ project, section }: { project: PortfolioProject; section
 
 function FeatureGridSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   const ligaSystemFragment = baseSlug(project.project.slug) === "liga" && section.id === "design-system";
+  const ligaAdvantageFragment = baseSlug(project.project.slug) === "liga" && section.id === "advantages";
+  const items = section.items?.filter((item) => typeof item === "string" || !ligaSystemFragment || item.value !== "UI");
   return (
     <section className={sectionClass(section)} style={sectionStyle(project, section)} id={section.id}>
       {section.title ? <h2 className="dw-case-feature-title" data-portfolio-reveal><SectionHeading project={project} section={section} /></h2> : null}
       <div className="dw-case-feature-grid" data-portfolio-reveal>
-        {section.items?.map((item, index) => typeof item === "string" ? null : (
+        {items?.map((item, index) => typeof item === "string" ? null : (
           <article key={`${item.icon}-${index}`}>
             <ProjectImage project={project} assetKey={item.icon} />
             {item.value ? <strong>{item.value}</strong> : null}
             {item.label ? <span>{item.label}</span> : null}
-            {/* The LIGA system tiles show the component they describe, cropped
-                out of the screen it lives in, instead of a list of rules. */}
+            {/* The product-proof section above already carries the screens.
+                Here, the system is expressed through the rules that make those
+                screens coherent, so the case study does not repeat its mockups. */}
             {ligaSystemFragment ? (
-              (() => {
-                const frag = LIGA_SYSTEM_FRAGMENTS[item.value ?? ""];
-                return frag ? (
-                  <div className="dw-case-system-fragment">
-                    <LigaFragment screen={frag.screen} top={frag.top} h={frag.h} width={288} />
-                  </div>
-                ) : <Html html={item.text} />;
-              })()
+              <Html html={item.text} />
             ) : (
               <Html html={item.text} />
             )}
@@ -2464,6 +2482,23 @@ function FeatureGridSection({ project, section }: { project: PortfolioProject; s
               <figure className="dw-case-feature-shot" data-focus={item.focus ?? "top"} aria-hidden="true">
                 <span className="dw-case-feature-clip"><LigaPhoneInView screen={item.screen} /></span>
               </figure>
+            ) : ligaAdvantageFragment && LIGA_ADVANTAGE_FRAGMENTS[item.value ?? ""] ? (
+              /* The card shows the component that answers the problem, windowed
+                 to that component - not the top of a screenshot cut off. */
+              (() => {
+                const frag = LIGA_ADVANTAGE_FRAGMENTS[item.value ?? ""];
+                return (
+                  <figure className="dw-case-feature-shot is-fragment" aria-hidden="true">
+                    <LigaFragment
+                      screen={frag.screen}
+                      src={frag.shot ? `/portfolio-assets/liga/${frag.shot}.webp` : undefined}
+                      top={frag.top}
+                      h={frag.h}
+                      width={264}
+                    />
+                  </figure>
+                );
+              })()
             ) : item.shot ? (
               <figure className="dw-case-feature-shot is-image" aria-hidden="true">
                 <ProjectImage project={project} assetKey={item.shot} />
@@ -2586,6 +2621,142 @@ function NavigationSection({ project, section }: { project: PortfolioProject; se
         title={nextProject.project.title}
         cursorLabel={caseCursorLabel(nextProject.project.slug)}
       />
+    </section>
+  );
+}
+
+/**
+ * LIGA: what the redesign changed, as three before/after rows.
+ *
+ * This section used to be a block of big numerals - 4 steps, 5 states, 3h -
+ * which are counts of things I chose, not effects I caused. A numeral block
+ * under the word "Outcome" claims measurement, so it has to be spent on
+ * something measured. Until the analytics are in, the honest shape is the
+ * change itself: what a person used to do, and what they do now.
+ */
+function LigaChangedSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const items = (section.items ?? []).filter((item): item is Exclude<typeof item, string> => typeof item !== "string");
+  return (
+    <section className={`${sectionClass(section)} dw-changed`} style={sectionStyle(project, section)} id={section.id}>
+      <header data-portfolio-reveal>
+        {section.eyebrow ? <p className="dw-case-eyebrow">{section.eyebrow}</p> : null}
+        {section.title ? <h2><SectionHeading project={project} section={section} /></h2> : null}
+        <Html html={section.body} className="dw-case-richtext" />
+      </header>
+      <ol className="dw-changed-list" data-portfolio-reveal>
+        {items.map((item) => (
+          <li key={item.label}>
+            <h3>{item.label}</h3>
+            <div className="dw-changed-pair">
+              <p className="dw-changed-before"><span>Before</span>{item.before}</p>
+              <p className="dw-changed-after"><span>After</span>{item.after}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function LigaLaunchEvidence() {
+  const products = [
+    ["CMTPL", "553"],
+    ["Travel", "391"],
+    ["CMTPL cross-border", "40"],
+    ["CMTPL non-resident", "17"],
+    ["VMTPL", "13"]
+  ];
+  const signing = [
+    ["Vehicle lookup", "1,988", ""],
+    ["Description", "1,170", "1,170 of 1,988 (58.9%)"],
+    ["Preview", "779", "779 of 1,170 (66.6%)"],
+    ["Payment", "704", "704 of 779 (90.4%)"],
+    ["Signed", "553", "553 of 704 (78.6%)"]
+  ];
+
+  return (
+    <section className="dw-liga-results" aria-labelledby="liga-results-title" data-portfolio-reveal>
+      <header>
+        <p className="dw-case-eyebrow">What the data changed</p>
+        <h3 id="liga-results-title">The app could finally complete a policy sale.</h3>
+        <p>Before the release, I checked all 239 screens with traffic: there was no Signed screen, and only 32 users reached payment success. In the first 90 days after launch, the new signing paths recorded 1,014 policy completions. That total is not people: one user could complete more than one product.</p>
+      </header>
+      <div className="dw-liga-purchase-products" aria-label="Policy completions by product in the first 90 days after launch">
+        {products.map(([product, completions]) => (
+          <div key={product}><span>{product}</span><strong>{completions}</strong></div>
+        ))}
+      </div>
+      <div className="dw-liga-purchase-detail">
+        <div>
+          <p className="dw-liga-data-kicker">CMTPL: the comparable purchase flow</p>
+          <p>The wizard itself held: Step One to Step Six was 2,027 of 6,082 users (33.3%) before and 1,354 of 3,959 users (34.2%) after. The ending changed. After the redesign, 553 of 1,988 users (27.8%) reached Signed from vehicle lookup, or 553 of 3,959 users (14.0%) from all flow entries. The before comparison is only a proxy: 169 of 6,082 users (2.8%) reached Step Eight, with no completed sale recorded.</p>
+          <ol className="dw-liga-signing-funnel">
+            {signing.map(([step, users, retention]) => <li key={step}><span>{step}</span><strong>{users}</strong><small>{retention}</small></li>)}
+          </ol>
+        </div>
+        <div>
+          <p className="dw-liga-data-kicker">Travel: strongest new purchase flow</p>
+          <p>Travel was measured after launch only. It reached Signed for 391 of 876 users (44.6%) across eight screens. Payment retained 440 of 469 users (93.8%); the biggest loss was add-ons, where 495 of 593 users continued (83.5%).</p>
+          <p className="dw-liga-insight"><strong>The pattern was clear:</strong> payment was not where users left. The bigger losses appeared where the product and price were explained.</p>
+        </div>
+      </div>
+      <LigaCounterMetrics />
+    </section>
+  );
+}
+
+function LigaWalkthroughWithEvidence(props: React.ComponentProps<typeof WalkthroughSection>) {
+  return (
+    <WalkthroughSection
+      {...props}
+      footer={<><LigaFlowEvidence /><LigaLaunchEvidence /></>}
+    />
+  );
+}
+
+function LigaFlowEvidence() {
+  const stages = [
+    { label: "Flow entry", value: "1,873", detail: "users", fill: 100, tone: "is-entry" },
+    { label: "Both vehicles - photos", value: "931", detail: "931 of 1,873 users (49.7%)", fill: 50, tone: "is-warning" },
+    { label: "Steps 4-10", value: "650–705", detail: "users continued at each transition", fill: 97, tone: "is-strong" },
+    { label: "Submitted successfully", value: "515", detail: "515 of 622 users (82.8%)", fill: 83, tone: "is-submit" }
+  ];
+
+  return (
+    <section className="dw-liga-flow-evidence" aria-labelledby="liga-flow-evidence-title" data-portfolio-reveal>
+      <header>
+        <p className="dw-case-eyebrow">The accident report: craft evidence</p>
+        <h3 id="liga-flow-evidence-title">The middle of the report held together.</h3>
+        <p>The report was the fourth-largest mapped flow after launch: 907 users reached its first screen, compared with 3,959 in CMTPL purchase and 876 in Travel purchase. It was low-volume and high-stakes.</p>
+      </header>
+      <ol className="dw-liga-flow-stages">
+        {stages.map((stage) => (
+          <li className={stage.tone} key={stage.label}>
+            <span>{stage.label}</span>
+            <strong>{stage.value}</strong>
+            <i><b style={{ "--liga-fill": `${stage.fill}%` } as CSSProperties} /></i>
+            <small>{stage.detail}</small>
+          </li>
+        ))}
+      </ol>
+      <div className="dw-liga-flow-findings">
+        <p><strong>End to end:</strong> 515 of 1,873 users (27.5%) reached Submitted successfully. Across Steps 4-10, the observed range ran from 650 of 679 users (95.7%) to 642 of 650 users (98.8%) at each transition. The entry screen may be an information screen rather than a true first step, so the 931 of 1,873 users (49.7%) transition is ambiguous.</p>
+        <p><strong>Directional, not proven:</strong> completion was 229 of 907 users (25.2%) in the first 90 days and 270 of 938 users (28.8%) in the following 85 days. The old flow was renamed and had no Submitted screen; its 160 of 733 users (21.8%) final-step proxy is indicative only.</p>
+      </div>
+    </section>
+  );
+}
+
+function LigaCounterMetrics() {
+  return (
+    <section className="dw-liga-counter-metrics" aria-label="Counter-metrics and measurement limits">
+      <h4>What I watched for, and what did not improve</h4>
+      <div>
+        <p><strong>Standalone payment:</strong> the path was renamed, so this is positional rather than like-for-like. Its first hop rose from 247 of 2,398 users (10.3%) to 554 of 1,970 users (28.1%), but the back half fell to 317 of 554 users (57.2%) and 131 of 317 users (41.3%). End to end was 171 of 2,398 users (7.1%) before and 131 of 1,970 users (6.6%) after.</p>
+        <p><strong>Identity verification:</strong> the new gate touched 9,354 of 25,441 active users (36.8%) after launch, compared with 1 user before. Logins were 20,503 before and 20,868 after (+1.8%), which suggests a step inserted into existing journeys, not a larger login audience.</p>
+        <p><strong>Support contact:</strong> the main contacts screen reached 1,282 of 28,420 active users (4.51%) before, 1,497 of 25,441 (5.88%) after, and 1,231 of 23,449 (5.25%) in the sustain window. This is ambiguous: a second contacts screen used by 1,159 users before had zero traffic after, while total contact views fell from 3,748 to 2,250.</p>
+      </div>
+      <p className="dw-liga-measurement-note"><strong>What I could not measure:</strong> the property had no custom events. Offline capture, resumption, report completion time, status-timeline views and crashes were not measured. Before the next release, I would instrument each flow with custom events, keep old event names through a rename, extend GA4 event retention from two to 14 months, and enable BigQuery export.</p>
     </section>
   );
 }
@@ -2793,6 +2964,9 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
     return null;
   }
 
+  if (baseSlug(project.project.slug) === "liga" && section.id === "outcome") {
+    return <LigaChangedSection project={project} section={section} />;
+  }
   if (baseSlug(project.project.slug) === "liga" && section.type === "scene") {
     return <LigaSceneSection project={project} section={section} />;
   }
@@ -2810,6 +2984,9 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   }
   if (project.project.slug === "icredo" && section.id === "system") {
     return <IcredoSystemSection section={section} />;
+  }
+  if (project.project.slug === "icredo" && section.id === "identity") {
+    return <IcredoIdentitySection section={section} />;
   }
 
   // Every case study opens the same way now, and the metadata block that
@@ -2852,7 +3029,9 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
       }
     };
     if (section.type === "outcome") return <OutcomeSection {...shared} />;
-    if (section.type === "walkthrough") return <WalkthroughSection {...shared} />;
+    if (section.type === "walkthrough") {
+      return baseSlug(project.project.slug) === "liga" ? <LigaWalkthroughWithEvidence {...shared} /> : <WalkthroughSection {...shared} />;
+    }
     if (section.type === "plate") return <PlateSection {...shared} />;
     return <StripSection {...shared} />;
   }
@@ -3967,17 +4146,10 @@ function useTempoSecureMotion(containerRef: React.RefObject<HTMLElement | null>)
     const context = gsap.context(() => {
       const heroes = container.querySelectorAll<HTMLElement>(".dw-tempo-v3-hero-carousel .dw-tempo-v3-phone");
       const advantages = container.querySelectorAll<HTMLElement>(".dw-tempo-secure-advantages article");
-      const bridge = container.querySelector<HTMLElement>(".dw-tempo-secure-bridge");
-      const bridgeCopy = bridge?.querySelector<HTMLElement>("p");
-      const headings = container.querySelectorAll<HTMLElement>(".dw-tempo-secure-bridge, .dw-tempo-secure-section-heading, .dw-tempo-secure-carousel header, .dw-tempo-secure-outcome header, .dw-tempo-multistop");
+      const headings = container.querySelectorAll<HTMLElement>(".dw-tempo-secure-section-heading, .dw-tempo-secure-carousel header, .dw-tempo-secure-outcome header, .dw-tempo-multistop");
       const carouselCards = container.querySelectorAll<HTMLElement>(".dw-tempo-secure-carousel-track article");
       if (heroes.length) gsap.fromTo(heroes, { autoAlpha: 0, y: 150, rotate: (index) => index === 1 ? 0 : index ? 16 : -16, scale: .82 }, { autoAlpha: 1, y: 0, rotate: (index) => index === 1 ? 0 : index ? 12 : -12, scale: 1, duration: 1.2, stagger: .14, ease: "power4.out", delay: .3 });
       if (advantages.length) gsap.fromTo(advantages, { autoAlpha: 0, x: -42 }, { autoAlpha: 1, x: 0, duration: .7, stagger: .09, ease: "power3.out", scrollTrigger: { trigger: advantages[0], start: "top 83%", toggleActions: "play none none reverse" } });
-      if (bridge && bridgeCopy) {
-        const transition = { trigger: bridge, start: "top 78%", end: "bottom 28%", scrub: .8 };
-        gsap.fromTo(bridge, { backgroundColor: "#ffffff" }, { backgroundColor: "#1b7d6d", ease: "none", scrollTrigger: transition });
-        gsap.fromTo(bridgeCopy, { color: "#161a19" }, { color: "#ffffff", ease: "none", scrollTrigger: { ...transition } });
-      }
       headings.forEach((heading) => gsap.fromTo(heading, { autoAlpha: 0, y: 42 }, { autoAlpha: 1, y: 0, duration: .85, ease: "power3.out", scrollTrigger: { trigger: heading, start: "top 82%", toggleActions: "play none none reverse" } }));
       carouselCards.forEach((card, index) => gsap.to(card, { yPercent: index % 2 ? -4 : 4, rotate: index % 2 ? .8 : -.8, ease: "none", scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: 1 } }));
     }, container);
@@ -4012,7 +4184,12 @@ function TempoSecureWalkthrough() {
             <span>{step.number}</span><p className="dw-tempo-secure-risk">The risk / {step.risk}</p><h3>{step.title}</h3><p>{step.copy}</p>
           </article>)}
         </div>
-        <div className="dw-tempo-secure-walkthrough-stage"><TempoSecurePhone mode={tempoSecureFlow[active].mode} /><p><strong>{String(active + 1).padStart(2, "0")}</strong> / 05</p></div>
+        <div className="dw-tempo-secure-walkthrough-stage">
+          <TempoSecurePhone mode={tempoSecureFlow[active].mode} />
+          <ol className="dw-walk-dots dw-tempo-secure-dots" aria-hidden="true">
+            {tempoSecureFlow.map((step, index) => <li key={step.mode} className={active === index ? "is-active" : undefined} />)}
+          </ol>
+        </div>
       </div>
     </section>
   );
@@ -4070,6 +4247,30 @@ function TempoMultistopFoundation() {
   </section>;
 }
 
+function TempoLandingScene({ metadata }: { metadata: Array<{ label: string; value: string }> }) {
+  return <section className="dw-tempo-landing-scene" aria-labelledby="tempo-v3-title">
+    <div className="dw-tempo-landing-skyline" aria-hidden="true" />
+    <div className="dw-tempo-landing-horizon" aria-hidden="true" />
+    <div className="dw-tempo-landing-copy">
+      <h1 id="tempo-v3-title">Life is Fast,<br /><em>So Is Our Delivery.</em></h1>
+      <p>Whether it&apos;s a delicious meal, a special gift, or essential supplies, count on us to get it to you quickly and safely.</p>
+      <div className="dw-tempo-landing-download"><span>Download Now:</span><div><img src="/portfolio-assets/tempo/figma/google-play.svg" alt="Google Play" /><img src="/portfolio-assets/tempo/figma/app-store.svg" alt="App Store" /></div></div>
+      <p className="dw-tempo-landing-proof"><span aria-hidden="true"><img src="/portfolio-assets/tempo/figma/hero-user-1.png" alt="" /><img src="/portfolio-assets/tempo/figma/hero-user-2.png" alt="" /><img src="/portfolio-assets/tempo/figma/hero-user-3.png" alt="" /></span><b>12M + Active users</b></p>
+    </div>
+    {metadata.length ? (
+      <dl className="dw-tempo-landing-meta" aria-label="Tempo project information">
+        {metadata.map((item) => <div key={item.label}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}
+      </dl>
+    ) : null}
+    <div className="dw-tempo-landing-van">
+      <i className="dw-tempo-van-shadow" aria-hidden="true"><b /></i>
+      <img className="dw-tempo-van-body" src="/portfolio-assets/tempo/figma/tempo-hero-van-body.png" alt="Tempo delivery van from the original landing page design" />
+      <img className="dw-tempo-van-wheel dw-is-front" src="/portfolio-assets/tempo/figma/tempo-hero-wheel.png" alt="" aria-hidden="true" />
+      <img className="dw-tempo-van-wheel dw-is-rear" src="/portfolio-assets/tempo/figma/tempo-hero-wheel.png" alt="" aria-hidden="true" />
+    </div>
+  </section>;
+}
+
 function TempoV3CaseStudy({ project }: { project: PortfolioProject }) {
   const containerRef = useRef<HTMLElement | null>(null);
   usePortfolioMotion(containerRef);
@@ -4082,15 +4283,13 @@ function TempoV3CaseStudy({ project }: { project: PortfolioProject }) {
   const nextProject = projects.find((item) => item.project.slug === "cloudchipr") ?? projects[0];
 
   return <article className="dw-case-study dw-case-tempo dw-case-draft-tempo-v3 dw-motion-pilot" ref={containerRef}>
-    <section className="dw-case-opening dw-tempo-v3-hero" aria-labelledby="tempo-v3-title"><div className="dw-case-opening-panel"><div className="dw-case-opening-copy"><h1 id="tempo-v3-title">TEMPO</h1><h2>Deliver what cannot be replaced.</h2></div><div className="dw-tempo-v3-hero-carousel" aria-label="Tempo secure delivery screens"><div className="dw-tempo-v3-phone dw-tempo-v3-phone-left"><TempoSecurePhone mode="courier" /></div><div className="dw-tempo-v3-phone dw-tempo-v3-phone-center"><TempoSecurePhone mode="seal" /></div><div className="dw-tempo-v3-phone dw-tempo-v3-phone-right"><TempoSecurePhone mode="release" /></div></div></div></section>
+    <TempoLandingScene metadata={metadata as Array<{ label: string; value: string }>} />
 
     <section className="dw-tempo-secure-intro" aria-labelledby="tempo-v3-statement"><div><h2 id="tempo-v3-statement">Not faster delivery. More certain delivery.</h2></div><p>Tempo already has a solid route foundation. This direction gives it a focused reason to exist: help people move the things that are private, valuable or impossible to replace with a visible chain of care.</p></section>
 
-    <section className="dw-tempo-secure-metadata" aria-label="Tempo project information"><dl>{metadata.map((item) => <div key={item.label}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl></section>
 
     <section className="dw-tempo-secure-advantages" aria-labelledby="secure-advantages-title"><header><h2 id="secure-advantages-title">Make the moments that matter visible.</h2></header><div>{tempoSecureAdvantages.map((advantage) => <article key={advantage.number}><span>{advantage.number}</span><div><h3>{advantage.title}</h3><p className="dw-tempo-secure-risk">Problem / {advantage.risk}</p><p><strong>Solution / </strong>{advantage.solution}</p></div></article>)}</div></section>
 
-    <section className="dw-tempo-secure-bridge" aria-label="From problems to solutions"><p>Each handoff becomes a clear, private event.</p></section>
 
     <TempoSecureWalkthrough />
     <TempoSecureCarousel />

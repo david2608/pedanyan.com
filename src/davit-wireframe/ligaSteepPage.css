@@ -63,6 +63,22 @@
 .st-h3 { font-size: clamp(26px, 2.4vw, 34px); line-height: 1.18; letter-spacing: -0.015em; }
 .st-note { margin-top: 24px; max-width: 62ch; font-size: 17px; line-height: 1.5; color: var(--slate); }
 
+/* Evidence is deliberately editorial: one readable line at the point where
+   the surrounding story has earned it, rather than a separate analytics UI. */
+.st-evidence {
+  max-width: 66ch;
+  margin: 32px 0 0;
+  padding: 15px 0 15px 20px;
+  border-left: 2px solid var(--ink);
+  color: var(--slate);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.st-evidence strong { color: var(--ink); font-weight: 500; }
+.st-evidence.is-warning { border-color: #da2c43; }
+.st-submission-note { padding-top: 12px; padding-bottom: 12px; }
+.st-submission-note .st-evidence { margin: 0 auto; }
+
 /* --------------------------------------------------------------- the hero */
 /* a centred headline with product fragments floating around it - the page
    opens as a collage, not as a panel with a phone in the corner */
@@ -210,6 +226,7 @@
 /* ---------------------------------------------------------------- closing */
 .st-closing .st-inner { max-width: 760px; }
 .st-closing p { font-size: 20px; line-height: 1.5; margin-top: 24px; }
+.st-closing .st-evidence { margin-top: 40px; }
 
 /* -------------------------------------------------------------- next case */
 .st-next { background: var(--paper); }
@@ -239,8 +256,18 @@
   .st-row .st-artifact:nth-child(even) { transform: none; }
   .st-meta { grid-template-columns: minmax(0, 1fr); }
   .st-peach { padding: 28px 24px; }
+  .st-evidence { margin-top: 24px; padding-left: 16px; font-size: 14px; }
   .st-card .st-artifact.is-inline { margin-bottom: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .st-collage > * { transform: none !important; }
 }
+
+/* the outcome band as before/after rows, when there are no numbers to show */
+.st-changed { list-style: none; margin: 48px 0 0; padding: 0; border-top: 1px solid var(--hairline); }
+.st-changed li { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr); gap: 40px; padding: 28px 0; border-bottom: 1px solid var(--hairline); align-items: start; }
+.st-changed h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.015em; margin: 0; }
+.st-changed p { font-size: 16px; line-height: 1.5; }
+.st-changed span { display: block; margin-bottom: 6px; font-size: 14px; color: var(--ash); }
+.st-changed .st-changed-before { color: var(--smoke); }
+@media (max-width: 1100px) { .st-changed li { grid-template-columns: minmax(0, 1fr); gap: 16px; } }

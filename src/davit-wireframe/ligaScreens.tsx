@@ -467,12 +467,15 @@ export function LigaPhone({ screen, active = true, className = "", frame = true 
  */
 export function LigaFragment({
   screen,
+  src,
   top = 0,
   h = 260,
   width = 300,
   className = ""
 }: {
-  screen: LigaScreenId;
+  screen?: LigaScreenId;
+  /** An exported shot instead of a coded screen; same 393x854 coordinates. */
+  src?: string;
   top?: number;
   h?: number;
   width?: number;
@@ -499,21 +502,41 @@ export function LigaFragment({
       aria-hidden="true"
     >
       <div className="lg-fragment-inner" style={{ transform: `scale(${scale}) translateY(${-top}px)` }}>
-        <LigaPhone screen={screen} active={active} frame={false} />
+        {screen ? (
+          <LigaPhone screen={screen} active={active} frame={false} />
+        ) : (
+          <img src={src} alt="" width={393} height={854} loading="lazy" decoding="async" className="lg-fragment-shot" />
+        )}
       </div>
     </div>
   );
 }
 
 /**
+ * The component each advantage card is about, cropped out of the screen it
+ * lives in. Keyed by the card's title in the content file. `screen` uses a
+ * coded screen; `shot` windows an exported one - same 393x854 coordinates.
+ */
+export const LIGA_ADVANTAGE_FRAGMENTS: Record<string, { screen?: LigaScreenId; shot?: string; top: number; h: number }> = {
+  // measured off the rendered screens, not the file: the coded layout packs
+  // tighter than the Figma frame because the status bar is shorter
+  "The emergency is the interface": { screen: "home", top: 388, h: 392 },
+  "Guided capture, before the camera": { screen: "photos", top: 330, h: 250 },
+  "The report survives the roadside": { shot: "home-resume", top: 408, h: 292 },
+  "A claim with a public status": { screen: "claim-status", top: 90, h: 330 },
+  "A policy that shows its own expiry": { shot: "contract", top: 122, h: 300 },
+  "Pay what you actually have": { shot: "partial-payment", top: 118, h: 300 }
+};
+
+/**
  * The component each design-system tile is about, cropped out of the screen
  * it actually lives in. Keyed by the tile's label in the content file.
  */
 export const LIGA_SYSTEM_FRAGMENTS: Record<string, { screen: LigaScreenId; top: number; h: number }> = {
-  Claims: { screen: "claim-status", top: 150, h: 268 },
-  Capture: { screen: "photos", top: 492, h: 244 },
-  Contracts: { screen: "home", top: 572, h: 238 },
-  UI: { screen: "offline", top: 470, h: 152 }
+  Claims: { screen: "claim-status", top: 178, h: 236 },
+  Capture: { screen: "photos", top: 336, h: 216 },
+  Contracts: { screen: "home", top: 568, h: 206 },
+  UI: { screen: "offline", top: 452, h: 132 }
 };
 
 /**

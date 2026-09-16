@@ -134,18 +134,21 @@
 
 /* Trigger in the timeline + the compact list. */
 .dw-experience-more {
-  grid-column: 2;
-  justify-self: start;
-  margin-top: 8px;
-  padding: 0 0 4px;
+  display: inline;
+  width: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 0 0 2px;
   border: 0;
   border-bottom: 1px solid currentColor;
   background: transparent;
   color: var(--dw-text);
   font: inherit;
   font-size: clamp(13px, 0.9vw, 16px);
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  letter-spacing: 0;
   line-height: 1.2;
+  vertical-align: baseline;
   cursor: pointer;
   transition: opacity 200ms ease;
 }
@@ -160,6 +163,5 @@
 }
 
 .dw-experience-static-more {
-  grid-column: auto;
-  margin-top: 14px;
+  margin: 0;
 }

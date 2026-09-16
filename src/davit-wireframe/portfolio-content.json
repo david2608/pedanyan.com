@@ -3604,6 +3604,13 @@
           ]
         },
         {
+          "id": "identity",
+          "type": "identity",
+          "eyebrow": "Identity",
+          "title": "The mark arrives before the first question does.",
+          "body": "<p>A lending assistant asks people to trust it in the first ten seconds, and the first of those seconds happens on the home screen, next to every other app they already trust. So the mark is built to hold at icon size: four blades 90° apart, every edge landing on one of three circles, nothing fine enough to turn to mush at 60pt.</p>"
+        },
+        {
           "id": "design-system",
           "type": "feature-grid",
           "layout": "wide",
@@ -4021,7 +4028,7 @@
           },
           "textColor": "#0b0d10",
           "title": "LIGA Mobile",
-          "subtitle": "The insurance app you hope never to open, redesigned around the ten minutes when you have to.",
+          "subtitle": "The insurance app you hope never to open, redesigned around the ten minutes when you have to. That work exposed a wider gap: the app also had to help people complete a policy sale.",
           "media": "home-hero"
         },
         {
@@ -4031,8 +4038,12 @@
           "paddingTop": "150px",
           "paddingBottom": "150px",
           "title": "About the project",
-          "body": "<p><strong>LIGA Mobile</strong> is the customer app of Liga Insurance, an Armenian insurer. It holds every policy a household has - compulsory motor liability, casco, travel, property - and it does the two things a policy document cannot: it registers an accident from the side of the road, and it tells you where your claim is without a phone call.</p><p><strong>My role.</strong> I led the redesign end to end: the product map, the claim and accident flows, every screen, the component library and the Armenian interface copy. The claim states were written with the settlement team, because the words in that timeline are the product.</p><p><strong>The constraint I designed around.</strong> Compulsory motor liability is bought by people who did not choose to be customers, and used by people who are having a bad day. I could not make an accident pleasant. What I could change is whether a person standing next to a damaged car knows exactly what to do next, and whether the claim they file comes back approved instead of suspended.</p>",
+          "body": "<p><strong>LIGA Mobile</strong> is the customer app of Liga Insurance, an Armenian insurer. It holds every policy a household has - compulsory motor liability, casco, travel, property - and it does the two things a policy document cannot: it registers an accident from the side of the road, and it tells you where your claim is without a phone call.</p><p>An insurance app is judged on one day, and it is not the day you buy the policy. Nobody opens one for pleasure; every session is an errand or an emergency. The old app was built for the errand.</p><p><strong>My role.</strong> I led the redesign end to end: the product map, the claim and accident flows, every screen, the component library and the Armenian interface copy. The claim states were written with the settlement team, because the words in that timeline are the product.</p><p><strong>The constraint I designed around.</strong> Compulsory motor liability is bought by people who did not choose to be customers, and used by people who are having a bad day. I could not make an accident pleasant. What I could change is whether a person standing next to a damaged car knows exactly what to do next, and whether the claim they file comes back approved instead of suspended.</p><p><strong>On the numbers above.</strong> Those are the product’s reach, not this redesign’s result. What the redesign itself moved is further down, and measured.</p>",
           "metadata": [
+            {
+              "label": "Reach",
+              "value": "Live since March 2023 · 50,000+ installs · 3.8 on Google Play, 4.0 on the App Store — the most installed and highest rated insurance app in Armenia"
+            },
             {
               "label": "Categories",
               "value": "Insurance, mobile product"
@@ -4056,6 +4067,10 @@
             {
               "label": "Language",
               "value": "Armenian-first interface"
+            },
+            {
+              "label": "Policy classes",
+              "value": "Motor liability, casco, travel, property — from one component set"
             }
           ]
         },
@@ -4065,47 +4080,24 @@
           "layout": "wide",
           "paddingTop": "140px",
           "paddingBottom": "150px",
-          "eyebrow": "Outcome",
+          "eyebrow": "The redesign",
           "title": "The claim left the call centre and moved to the side of the road",
-          "body": "<p>The old app was a place to look at a policy. The redesign gives it the one job the policy cannot do: carry a person through the accident and the claim that follows. The report is four steps that can be answered standing up, the claim reports its own position on a five-state timeline, and every policy shows how much of itself is left before anyone has to remember a date.</p>",
+          "body": "<p>The redesign started with the moment a policy document cannot handle: an accident at the roadside. It became the lens for rebuilding the rest of the app, including the policy journeys that had to work before and after that moment. The evidence comes after the flows it explains.</p>",
           "items": [
             {
-              "value": "4",
-              "label": "steps in the whole accident report - photos, when and where, their car, your car. Each one answerable with one hand, each one saved the moment it is done"
+              "label": "Filing a claim",
+              "before": "Call the hotline, wait in a queue, and describe the scene to a stranger who asks the same nine questions every time.",
+              "after": "Four steps answered standing at the car, each one saved the moment it is finished."
             },
             {
-              "value": "5",
-              "label": "states a claim reports about itself, with the date it entered each one and a plain sentence when the expected date moves"
+              "label": "Knowing where the claim is",
+              "before": "Call and ask, and hope the person reading the database field says something you can act on.",
+              "after": "Five states on the claim itself, each with the date it was entered, and a plain sentence whenever an expected date moves."
             },
             {
-              "value": "3h",
-              "label": "the window the app gives you to submit a report started without a signal, because a roadside is exactly where the network is worst"
-            }
-          ]
-        },
-        {
-          "id": "context",
-          "type": "feature-grid",
-          "layout": "wide",
-          "paddingTop": "140px",
-          "paddingBottom": "140px",
-          "title": "Insurance is a strange design brief",
-          "items": [
-            {
-              "value": "1",
-              "label": "the number of days this product is judged on. Nobody rates an insurer on the day they buy the policy."
-            },
-            {
-              "value": "0",
-              "label": "times a year a satisfied customer opens an insurance app for pleasure. Every session is an errand or an emergency."
-            },
-            {
-              "value": "4",
-              "label": "policy classes living in one app - motor liability, casco, travel, property - built from one set of components."
-            },
-            {
-              "value": "ԱՊՊԱ",
-              "label": "compulsory motor liability. Most of these customers never chose to be customers, so the app has to earn attention it was never given."
+              "label": "No signal at the roadside",
+              "before": "Start again later, if the photographs are still any use by then.",
+              "after": "The report opens offline, keeps the photos on the device, and syncs when the network comes back."
             }
           ]
         },

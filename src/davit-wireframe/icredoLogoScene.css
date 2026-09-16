@@ -1,0 +1,179 @@
+/* iCredo — the mark arriving on a home screen.
+   One SVG carries the whole composition, so nothing GSAP touches is a clipping
+   box or a border radius: only transforms, opacity and dash offsets move. */
+
+.ic-logo-scene {
+  position: relative;
+  display: block;
+  place-self: stretch;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #a9e4dd;
+}
+.ic-id-svg,
+.ic-id-plate {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+}
+/* a real home-screen plate, when one is dropped in, replaces the coded one */
+.ic-id-plate { opacity: 0; object-fit: cover; }
+.ic-has-plate .ic-id-plate { opacity: 1; }
+.ic-has-plate .ic-id-home { display: none; }
+
+/* the apps either side: softened, out of focus, not the subject */
+.ic-id-neighbours {
+  opacity: .92;
+  filter: blur(1.1px) drop-shadow(0 2px 5px rgb(0 44 60 / 22%));
+}
+
+/* ---- construction guides, inked over a light screen ---- */
+.ic-id-grid line {
+  fill: none;
+  stroke: rgb(4 42 56 / 26%);
+  stroke-width: .7;
+}
+.ic-id-ring,
+.ic-id-spoke {
+  fill: none;
+  stroke: rgb(4 42 56 / 60%);
+  stroke-width: .9;
+}
+.ic-id-ring:first-of-type { stroke: rgb(4 42 56 / 30%); }
+.ic-id-box {
+  fill: none;
+  stroke: rgb(166 0 41 / 62%);
+  stroke-width: .9;
+  stroke-dasharray: 3 3.5;
+}
+
+/* ---- the icon ---- */
+.ic-id-tile-face { filter: drop-shadow(0 3px 8px rgb(0 40 56 / 32%)); }
+.ic-id-tile-line {
+  fill: none;
+  stroke: rgb(4 42 56 / 72%);
+  stroke-width: 1.1;
+}
+.ic-id-tile-edge { stroke-width: 1.4; }
+
+/* the mark stays flat brand crimson — never gradient-filled */
+.ic-id-mark { fill: #a60029; }
+
+.ic-id-sweep { mix-blend-mode: screen; }
+
+.ic-logo-scene .ic-id-label {
+  fill: #fff;
+  font-family: "SF Pro Text", Inter, system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  text-anchor: middle;
+  filter: drop-shadow(0 1px 3px rgb(0 30 42 / 55%));
+}
+
+/* ---- caption (section only), bottom-left as in the reference ---- */
+.ic-logo-scene .ic-id-caption {
+  position: absolute;
+  bottom: clamp(18px, 3.2cqw, 36px);
+  left: clamp(18px, 3.2cqw, 36px);
+  max-width: 32ch;
+  margin: 0;
+  text-align: left;
+}
+.ic-logo-scene .ic-id-caption span {
+  display: block;
+  margin-bottom: 8px;
+  color: rgb(255 255 255 / 76%);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 6px rgb(0 32 44 / 60%);
+}
+.ic-logo-scene .ic-id-caption p {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(14px, 1.1vw, 18px);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -.01em;
+  text-shadow: 0 2px 12px rgb(0 32 44 / 72%);
+  text-wrap: balance;
+}
+
+/* Everything animated starts hidden, so the first paint — before GSAP has run —
+   is the empty slot rather than a flash of the finished icon. GSAP writes
+   inline opacity/visibility, which beats these rules. */
+.ic-id-grid line,
+.ic-id-ring,
+.ic-id-spoke,
+.ic-id-box,
+.ic-id-tile-face,
+.ic-id-tile-line,
+.ic-id-tile-edge,
+.ic-id-blade,
+.ic-id-sweep,
+.ic-logo-scene .ic-id-label,
+.ic-logo-scene .ic-id-caption { opacity: 0; }
+
+/* Reduced motion never builds the timeline, so its resting state has to be the
+   finished one: the icon in place, guides already spent. */
+@media (prefers-reduced-motion: reduce) {
+  .ic-id-tile-face,
+  .ic-id-tile-edge,
+  .ic-id-blade,
+  .ic-logo-scene .ic-id-label,
+  .ic-logo-scene .ic-id-caption { opacity: 1; }
+}
+
+/* ---- the case-study section ---- */
+.dw-ic-identity {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(300px, 1fr);
+  gap: clamp(32px, 5vw, 84px);
+  align-items: center;
+  padding: clamp(84px, 10vw, 150px) max(var(--case-gutter), calc((100% - 1180px) / 2));
+  background: #eef7f5;
+}
+.dw-ic-identity .ic-logo-scene {
+  width: min(100%, 460px);
+  height: auto;
+  margin-inline: auto;
+  aspect-ratio: 400 / 560;
+  border-radius: 22px;
+  box-shadow: 0 30px 60px -30px rgb(4 42 56 / 45%);
+  container-type: inline-size;
+}
+.dw-page .dw-ic-identity h2 {
+  max-width: 16ch;
+  margin: 0 0 18px;
+  color: #041f34;
+  font-size: clamp(34px, 3.6vw, 62px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+.dw-page .dw-ic-identity p {
+  max-width: 46ch;
+  margin: 0;
+  color: #4c5e6e;
+  font-size: clamp(16px, 1.15vw, 20px);
+  line-height: 1.55;
+}
+.dw-ic-identity > div > span {
+  display: block;
+  margin-bottom: 14px;
+  color: #a60029;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+@media (max-width: 900px) {
+  .dw-ic-identity { grid-template-columns: 1fr; padding-right: 24px; padding-left: 24px; }
+  .dw-ic-identity .ic-logo-scene { width: min(100%, 360px); }
+}

@@ -181,6 +181,11 @@ function Band({ id, tone = "paper", children, className = "" }: { id?: string; t
   );
 }
 
+/** A quiet evidence note: part of the editorial rhythm, never a dashboard. */
+function EvidenceNote({ children, tone = "plain" }: { children: ReactNode; tone?: "plain" | "warning" }) {
+  return <aside className={`st-evidence is-${tone}`}>{children}</aside>;
+}
+
 /* -------------------------------------------------------------------- page */
 
 export function LigaSteepCaseStudy({ nextHref, nextTitle, nextCursor }: { nextHref: string; nextTitle: string; nextCursor: string }) {
@@ -199,7 +204,7 @@ export function LigaSteepCaseStudy({ nextHref, nextTitle, nextCursor }: { nextHr
 
   const meta = project.metadata ?? [];
 
-  const stats = outcome.items ?? [];
+  const stats = (outcome.items ?? []).filter((item) => item.value);
   const charts = [
     <Spark key="a" points={[9, 7, 6, 4, 4]} />,
     <Spark key="b" points={[2, 3, 4, 5, 5, 5]} />,
@@ -265,10 +270,25 @@ export function LigaSteepCaseStudy({ nextHref, nextTitle, nextCursor }: { nextHr
             </div>
           ))}
         </div>
+        {!stats.length ? (
+          <ol className="st-changed">
+            {(outcome.items ?? []).map((item) => (
+              <li key={item.label}>
+                <h3>{item.label}</h3>
+                <p className="st-changed-before"><span>Before</span>{item.before}</p>
+                <p><span>After</span>{item.after}</p>
+              </li>
+            ))}
+          </ol>
+        ) : null}
         <p className="st-note">{strip(outcome.body)}</p>
+        <EvidenceNote>
+          <strong>What happened after launch.</strong> 515 reports reached a confirmed in-app submission in the following six months. Completion moved from 25.2% in the first post-launch window to 28.8% in the next; the earlier 21.8% figure is a best estimate, because the previous flow did not record a confirmed submission.
+        </EvidenceNote>
       </Band>
 
       {/* ---- context: one headline over four ghost-tagged numerals ---- */}
+      {(context.items ?? []).length ? (
       <Band tone="paper" id="context">
         <h2 className="st-h2 is-wide">{context.title}</h2>
         <div className="st-numerals">
@@ -280,6 +300,7 @@ export function LigaSteepCaseStudy({ nextHref, nextTitle, nextCursor }: { nextHr
           ))}
         </div>
       </Band>
+      ) : null}
 
       {/* ---- problem: the one peach card in the page ---- */}
       <Band tone="paper" id="problem" className="st-problem">
@@ -301,6 +322,9 @@ export function LigaSteepCaseStudy({ nextHref, nextTitle, nextCursor }: { nextHr
         <p className="st-tag">{accident.eyebrow}</p>
         <h2 className="st-h2">{accident.title}</h2>
         <p className="st-note">{strip(accident.body)}</p>
+        <EvidenceNote>
+          <strong>The useful signal was inside the flow.</strong> Once a person reached the first photo step, the following eight photo and document steps retained 95.7% to 98.8% of people from one step to the next.
+        </EvidenceNote>
       </Band>
       {(accident.items ?? []).map((step, i) => (
         <Band tone={i % 2 ? "paper" : "fog"} key={step.screen} className="st-split">
@@ -316,6 +340,12 @@ export function LigaSteepCaseStudy({ nextHref, nextTitle, nextCursor }: { nextHr
           </div>
         </Band>
       ))}
+
+      <Band tone="paper" className="st-submission-note">
+        <EvidenceNote tone="warning">
+          <strong>The work is not finished at the button.</strong> 622 people reached Confirm &amp; Submit, but 515 reached the success screen. That 17.2% loss is the next problem: make validation, connection and retry state clear at the moment a report leaves the device.
+        </EvidenceNote>
+      </Band>
 
       {/* ---- six decisions: a three-across neutral card grid ---- */}
       <Band tone="paper" id="advantages">
@@ -387,6 +417,9 @@ export function LigaSteepCaseStudy({ nextHref, nextTitle, nextCursor }: { nextHr
         {paras(reflection.body).map((p, i) => (
           <p key={i}>{p}</p>
         ))}
+        <EvidenceNote>
+          <strong>What I would measure next.</strong> The app did not yet record offline sync, report resumption, field errors or photo retakes. The next release should instrument those moments, retain the raw events long enough to study them, and keep event names stable through a redesign.
+        </EvidenceNote>
       </Band>
 
       {/* ---- the pull to the next case, unchanged ---- */}

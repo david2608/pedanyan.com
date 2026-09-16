@@ -183,6 +183,11 @@ export function TempoFlowCard() {
 
   return (
     <div className="tp-flow-card" ref={rootRef} role="img" aria-label="Tempo app: the restaurants screen assembles, then the phone turns to show live delivery tracking">
+      {/* These case-study classes are borrowed ONLY so the coded screens inside
+          resolve their own CSS. They are not a page: every page-level rule that
+          keys off them uses a child combinator (`.dw-page:has(> .dw-case-…)`),
+          so this card cannot restyle the header or anything else global. Keep
+          it that way if you add more. */}
       <div className="tp-flow-inner dw-case-study dw-case-tempo dw-case-draft-tempo-v3">
         <div className="tp-flow-stage">
           <div className="tp-flow-device">

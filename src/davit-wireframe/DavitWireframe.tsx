@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
+import { createContext, lazy, Suspense, useContext, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { Observer } from "gsap/Observer";
@@ -1413,6 +1413,17 @@ function SiteNextPage({ activePage }: { activePage?: PageKey }) {
 }
 
 
+/* The chrome that must OUTLIVE a page change — the <main> itself, the header,
+   the social rail, the music player and the contact chat — is rendered once by
+   AppRouter and never unmounts. A page no longer owns any of it; PageShell just
+   reports which shell settings its page wants, and renders its own content.
+
+   This is what keeps the music playing: the toggle's <iframe> stays in the same
+   position in the tree across every route, so React never tears it down. */
+type ShellState = { className: string; showFooter: boolean; activePage?: PageKey };
+const DEFAULT_SHELL: ShellState = { className: "", showFooter: true, activePage: undefined };
+const ShellContext = createContext<(next: ShellState) => void>(() => {});
+
 function PageShell({
   children,
   className = "",
@@ -1424,18 +1435,18 @@ function PageShell({
   showFooter?: boolean;
   activePage?: PageKey;
 }) {
+  const setShell = useContext(ShellContext);
+  /* layout effect, not effect: the class lands before the browser paints, so a
+     route change never shows one frame of the previous page's shell class */
+  useLayoutEffect(() => {
+    setShell({ className, showFooter, activePage });
+  }, [setShell, className, showFooter, activePage]);
+
   return (
-    <main className={`dw-page ${className}`}>
-      <WireframeChrome />
-      <SiteHeader activePage={activePage} />
-      <FixedSocialLinks />
-      <div className="dw-fixed-music-control">
-        <PortfolioMusicToggle />
-      </div>
+    <>
       {children}
       {showFooter ? <SiteNextPage activePage={activePage} /> : null}
-      <ContactChat />
-    </main>
+    </>
   );
 }
 
@@ -4845,8 +4856,62 @@ export function FullWireframe() {
   return <HomePage />;
 }
 
-export function AppRouter() {
-  const path = window.location.pathname.replace(/\/$/, "");
+const normalisePath = (value: string) => value.replace(/\/+$/, "") || "/";
+
+/* Same-origin links are handled in the page instead of by the browser, so a
+   page change never reloads the document. Everything else — new tabs, modified
+   clicks, downloads, external hosts, mailto/tel, bare hashes — is left alone
+   and behaves exactly as it did before. */
+function useRoutePath() {
+  const [path, setPath] = useState(() => normalisePath(window.location.pathname));
+
+  useEffect(() => {
+    const sync = () => setPath(normalisePath(window.location.pathname));
+    window.addEventListener("popstate", sync);
+
+    const onClick = (event: globalThis.MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0) return;
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const anchor = (event.target as Element | null)?.closest?.("a");
+      if (!anchor) return;
+      if (anchor.hasAttribute("download")) return;
+      const target = anchor.getAttribute("target");
+      if (target && target !== "_self") return;
+      const href = anchor.getAttribute("href");
+      if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return;
+
+      let url: URL;
+      try {
+        url = new URL(anchor.href, window.location.href);
+      } catch {
+        return;
+      }
+      if (url.origin !== window.location.origin) return;
+
+      event.preventDefault();
+
+      /* an in-page anchor on the current route just scrolls */
+      if (normalisePath(url.pathname) === normalisePath(window.location.pathname) && url.hash) {
+        document.querySelector(url.hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
+        return;
+      }
+
+      window.history.pushState({}, "", url.pathname + url.search + url.hash);
+      setPath(normalisePath(url.pathname));
+    };
+
+    document.addEventListener("click", onClick);
+    return () => {
+      window.removeEventListener("popstate", sync);
+      document.removeEventListener("click", onClick);
+    };
+  }, []);
+
+  return path;
+}
+
+function resolveRoute(path: string): ReactNode {
   if (path === "/am/designer" || path === "/am/portfolio") return <DesignerPage />;
   const projectMatch = path.match(/^\/am\/projects\/([^/]+)$/);
   if (projectMatch) return <ProjectPage slug={projectMatch[1]} />;
@@ -4864,9 +4929,62 @@ export function AppRouter() {
   const publicArticleMatch = path.match(/^\/am\/public-work\/([^/]+)$/);
   if (publicArticleMatch) return <PublicArticlePage slug={publicArticleMatch[1]} />;
   if (path === "/am/public-work") return <PublicWorkPage />;
-  if (path === "/am/lets-talk") {
-    window.location.replace(DAVIT_LINKEDIN_URL);
-    return null;
-  }
   return <HomePage />;
+}
+
+export function AppRouter() {
+  const path = useRoutePath();
+  const [shell, setShell] = useState<ShellState>(DEFAULT_SHELL);
+
+  /* Lets Talk is an outbound redirect, not a page, so it stays a real navigation. */
+  const isOutbound = path === "/am/lets-talk";
+  useEffect(() => {
+    if (isOutbound) window.location.replace(DAVIT_LINKEDIN_URL);
+  }, [isOutbound]);
+
+  useLayoutEffect(() => {
+    if (isOutbound) return;
+    /* a new page starts at the top unless the link asked for an anchor */
+    if (window.location.hash) {
+      const target = document.querySelector(window.location.hash);
+      if (target) {
+        target.scrollIntoView({ block: "start" });
+        return;
+      }
+    }
+    window.scrollTo(0, 0);
+  }, [path, isOutbound]);
+
+  useEffect(() => {
+    if (isOutbound) return;
+    /* The outgoing page's gsap contexts revert on unmount, but a ScrollTrigger
+       whose element went with it would otherwise linger and hold stale
+       measurements against the new page. */
+    const frame = window.requestAnimationFrame(() => {
+      ScrollTrigger.getAll().forEach((trigger) => {
+        const element = trigger.trigger as Element | null | undefined;
+        if (element && !document.contains(element)) trigger.kill();
+      });
+      ScrollTrigger.refresh();
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [path, isOutbound]);
+
+  if (isOutbound) return null;
+
+  return (
+    <ShellContext.Provider value={setShell}>
+      <main className={`dw-page ${shell.className}`}>
+        {/* everything from here to {page} is mounted once for the whole visit */}
+        <WireframeChrome />
+        <SiteHeader activePage={shell.activePage} />
+        <FixedSocialLinks />
+        <div className="dw-fixed-music-control">
+          <PortfolioMusicToggle />
+        </div>
+        {resolveRoute(path)}
+        <ContactChat />
+      </main>
+    </ShellContext.Provider>
+  );
 }

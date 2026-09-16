@@ -51,19 +51,28 @@ const BUBBLE_MS = 2600;
 /**
  * The tail is the CodePen one: a single ::before box with a rounded corner
  * and three inset shadows, hanging off the bubble's bottom-left, tip at its
- * own bottom-left corner. The box starts TAIL_REACH left of the bubble so
- * the tip lands on the mouth while the body stays beside the head.
+ * own bottom-left corner. The box starts TAIL.reach left of the bubble, and
+ * the bubble is placed so the tip points at his mouth from `standoff` away.
  * Phones get a shorter drop so the bubble clears the headline.
  */
 const TAIL = {
-  /** How far left of the bubble the tip lands (past the cheek). */
-  reach: 44,
-  reachCompact: 34,
-  /** How far below the bubble the tip lands. */
-  drop: 36,
-  dropCompact: 22,
-  /** Width of the tail's root, under the bubble. Halved from the CodePen - a slimmer wedge. */
-  root: 12
+  /* The arrow itself, halved: the wedge is now 28 x 18 instead of 56 x 36.
+     `reach` is only the arrow's own span — how far it sticks out of the
+     bubble — and no longer doubles as the distance from the head. */
+  /** How far left of the bubble the tip reaches. */
+  reach: 22,
+  reachCompact: 17,
+  /** How far below the bubble the tip reaches. */
+  drop: 18,
+  dropCompact: 11,
+  /** Width of the tail's root, under the bubble. A slimmer wedge. */
+  root: 6,
+  /* How far short of the mouth the tip stops. This is what holds the whole
+     bubble off his head — previously the tip sat right on his mouth, so the
+     body was only `reach` away from his face. Separating the two means the
+     arrow can shrink and the bubble can still move further out. */
+  standoff: 34,
+  standoffCompact: 22
 };
 /** Where the mouth is in the 9:16 clip, measured from the approved still. */
 const MOUTH = { x: 0.505, y: 0.206 };
@@ -444,16 +453,21 @@ export function HeroCharacterVideo({
     const compact = window.innerWidth < 900;
     const reach = compact ? TAIL.reachCompact : TAIL.reach;
     const drop = compact ? TAIL.dropCompact : TAIL.drop;
+    const standoff = compact ? TAIL.standoffCompact : TAIL.standoff;
     el.style.setProperty("--tail-reach", `${reach}px`);
     el.style.setProperty("--tail-drop", `${drop}px`);
     el.style.setProperty("--tail-w", `${reach + TAIL.root}px`);
-    // The tail tip is the box corner nearest the mouth; put that corner on the mouth.
+    // The tail tip is the box corner nearest the mouth. It now stops `standoff`
+    // short of the mouth rather than landing on it, so the arrow still points
+    // at him but the bubble sits clear of his head.
     const position = (at: Placement) => {
       const right = at.endsWith("right");
       const up = at.startsWith("up");
+      const outX = standoff + reach;
+      const outY = standoff + drop;
       return {
-        left: right ? mouthX + reach : mouthX - reach - el.offsetWidth,
-        top: up ? mouthY - drop - el.offsetHeight : mouthY + drop
+        left: right ? mouthX + outX : mouthX - outX - el.offsetWidth,
+        top: up ? mouthY - outY - el.offsetHeight : mouthY + outY
       };
     };
     // A side that would run into the header or off the screen hands over

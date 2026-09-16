@@ -817,9 +817,12 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
 .dw-hero-bubble {
   --bubble-ink: #000;
   --bubble-paper: #fff;
-  --tail-reach: 44px;
-  --tail-drop: 36px;
-  --tail-w: 56px;
+  /* fallbacks only — the driver in characterVideo.tsx sets these per frame.
+     Halved: the wedge is 28 x 18, and the bubble's distance from his head is
+     now a separate `standoff` there rather than being baked into the reach. */
+  --tail-reach: 22px;
+  --tail-drop: 18px;
+  --tail-w: 28px;
   position: absolute;
   left: 0;
   top: 0;
@@ -6895,14 +6898,14 @@ button.dw-public-journal-entry {
 
 /* Case-study headers are deliberately opaque. This prevents a chapter title
    from visually colliding with the persistent navigation as it crosses it. */
-.dw-page:has(.dw-case-liga) .dw-header,
-.dw-page:has(.dw-case-liga) .dw-header.is-scrolled {
+.dw-page:has(> .dw-case-liga) .dw-header,
+.dw-page:has(> .dw-case-liga) .dw-header.is-scrolled {
   background: #ffffff;
   color: #0b0d10;
   mix-blend-mode: normal;
   backdrop-filter: none;
 }
-.dw-page:has(.dw-case-liga) .dw-header :is(.dw-logo, .dw-nav, .dw-school-link, .dw-right, .dw-nav a, .dw-pill, .dw-theme-toggle) {
+.dw-page:has(> .dw-case-liga) .dw-header :is(.dw-logo, .dw-nav, .dw-school-link, .dw-right, .dw-nav a, .dw-pill, .dw-theme-toggle) {
   color: #0b0d10;
 }
 
@@ -7677,5 +7680,47 @@ html.dw-scrolled .dw-page .dw-header .dw-logo {
   .dw-page .dw-header.is-scrolled .dw-logo,
   html.dw-scrolled .dw-page .dw-header .dw-logo {
     height: 72px;
+  }
+}
+
+
+/* === Global chrome: one header on every page ==============================
+   Two things kept the header from behaving the same everywhere.
+
+   1. The logo is absolutely centred but comes FIRST in the header, so any
+      sibling that stretches — the right-hand group does, it carries
+      `margin-left: auto` and can flex to fill — paints over it and swallows
+      the click. Lifting the logo fixes it for good, and the right group now
+      passes clicks through everywhere except on its own controls, matching
+      how `.dw-header` itself is already `pointer-events: none`.
+
+   2. Page-level `:has()` rules are scoped with a child combinator above, so a
+      card that borrows a case-study class for its screen CSS (the Tempo
+      thumbnail does) can no longer restyle the whole page's header. */
+.dw-page .dw-header .dw-logo { z-index: 2; }
+.dw-page .dw-header .dw-right { pointer-events: none; }
+.dw-page .dw-header .dw-right > * { pointer-events: auto; }
+
+/* === Phone header: a real surface once the page scrolls =====================
+   On desktop the header floats transparent with `mix-blend-mode: difference`,
+   which works because there is a wide gutter and the content under it is
+   mostly flat. On a phone there is no gutter: client logos, card mockups and
+   body copy pass directly under the logo and the hamburger, and `difference`
+   turns them into mush. Once the page has scrolled the header gets a real
+   surface and normal ink instead. At scroll-top it stays transparent, so the
+   hero is still edge-to-edge. */
+@media (max-width: 900px) {
+  html.dw-scrolled .dw-page .dw-header,
+  .dw-page .dw-header.is-scrolled {
+    background: rgb(255 255 255 / 88%);
+    border-bottom: 1px solid rgb(4 42 56 / 8%);
+    mix-blend-mode: normal;
+    -webkit-backdrop-filter: saturate(150%) blur(14px);
+    backdrop-filter: saturate(150%) blur(14px);
+  }
+
+  html.dw-scrolled .dw-page .dw-header :is(.dw-logo, .dw-logo-word, .dw-nav, .dw-nav a, .dw-right, .dw-pill, .dw-mobile-menu-toggle, .dw-talk-icon),
+  .dw-page .dw-header.is-scrolled :is(.dw-logo, .dw-logo-word, .dw-nav, .dw-nav a, .dw-right, .dw-pill, .dw-mobile-menu-toggle, .dw-talk-icon) {
+    color: #0b0d10;
   }
 }

@@ -5655,19 +5655,17 @@ a.dw-case-testimonial-linkedin:hover {
     gap: 110px 20px;
   }
 
-  .dw-portfolio-project-card {
+  /* Every card, not a hand-kept list. Cards 1-8 get `.card-N` rules at (0,2,0)
+     and cards 9+ get a repeating stagger at
+     `:nth-child(4n+k):nth-child(n+9)` = (0,3,0). A reset that only names
+     card-1..card-8 leaves the 9th card spanning eight columns that no longer
+     exist, which starves every track to 0px and the whole grid vanishes.
+     The trailing `:nth-child(n)` costs nothing and lifts this to (0,3,0) so it
+     beats both, for every card present and future. */
+  .dw-portfolio-project-grid > .dw-portfolio-project-card:nth-child(n) {
     grid-column: auto;
     margin-top: 0;
   }
-
-  .dw-portfolio-project-card.card-1,
-  .dw-portfolio-project-card.card-2,
-  .dw-portfolio-project-card.card-3,
-  .dw-portfolio-project-card.card-4,
-  .dw-portfolio-project-card.card-5,
-  .dw-portfolio-project-card.card-6,
-  .dw-portfolio-project-card.card-7,
-  .dw-portfolio-project-card.card-8 { grid-column: auto; margin-top: 0; }
 
   .dw-portfolio-card-media,
   .dw-portfolio-project-card.card-2 .dw-portfolio-card-media,
@@ -5739,11 +5737,10 @@ a.dw-case-testimonial-linkedin:hover {
     gap: 90px;
   }
 
-  .dw-portfolio-project-card { grid-column: auto; margin-top: 0; }
-
-  .dw-portfolio-project-card.card-5 {
+  .dw-portfolio-project-grid > .dw-portfolio-project-card:nth-child(n) {
     grid-column: auto;
     width: 100%;
+    margin-top: 0;
   }
 
   .dw-portfolio-card-media,
@@ -10014,8 +10011,8 @@ a.dw-case-testimonial-linkedin:hover {
 
 /* A deliberately quiet, Pop-style header gives the display type room to be
    the page's first signal rather than competing with site-level chrome. */
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-header,
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-header.is-scrolled {
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-header,
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-header.is-scrolled {
   height: 72px !important;
   padding: 0 clamp(20px, 3.4vw, 56px);
   color: #000;
@@ -10023,14 +10020,14 @@ a.dw-case-testimonial-linkedin:hover {
   mix-blend-mode: normal;
 }
 
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-logo {
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo {
   flex: 1 1 0;
   width: auto;
   height: 72px;
   color: #000;
 }
 
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-logo-word {
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo-word {
   font-size: 16px;
   line-height: 1;
   font-weight: 700;
@@ -10038,31 +10035,31 @@ a.dw-case-testimonial-linkedin:hover {
   color: #000;
 }
 
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-nav {
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-nav {
   flex: 0 0 auto;
   width: auto;
   gap: 18px;
 }
 
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-nav a,
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-pill {
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-nav a,
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-pill {
   color: #171717;
   font-size: 15px;
   font-weight: 500;
   line-height: 1;
 }
 
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-right {
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-right {
   flex: 1 1 0;
   display: flex;
   justify-content: flex-end;
 }
 
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-pill {
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-pill {
   padding: 0;
 }
 
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-talk-icon {
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-talk-icon {
   width: 16px;
   height: 16px;
 }
@@ -10256,14 +10253,14 @@ a.dw-case-testimonial-linkedin:hover {
 }
 
 @media (max-width: 760px) {
-  .dw-page:has(.dw-case-draft-tempo-v3) .dw-header,
-  .dw-page:has(.dw-case-draft-tempo-v3) .dw-header.is-scrolled {
+  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-header,
+  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-header.is-scrolled {
     height: 64px !important;
     padding-inline: 16px;
   }
 
-  .dw-page:has(.dw-case-draft-tempo-v3) .dw-logo { height: 64px; }
-  .dw-page:has(.dw-case-draft-tempo-v3) .dw-logo-word { font-size: 15px; }
+  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo { height: 64px; }
+  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo-word { font-size: 15px; }
 
   .dw-case-draft-tempo-v3 .dw-case-opening-panel {
     min-height: 92svh;
@@ -10734,12 +10731,12 @@ a.dw-case-testimonial-linkedin:hover {
 
 /* Tempo V3 narrative and motion correction. These rules intentionally sit
    after the earlier explorations so the case behaves as one restrained story. */
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-header,
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-header.is-scrolled {
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-header,
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-header.is-scrolled {
   height: 60px !important;
 }
 
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-logo { height: 60px; }
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo { height: 60px; }
 
 .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel {
   min-height: calc(100svh - 60px);
@@ -10980,9 +10977,9 @@ a.dw-case-testimonial-linkedin:hover {
 .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome h2 { margin: 0; }
 
 @media (max-width: 760px) {
-  .dw-page:has(.dw-case-draft-tempo-v3) .dw-header,
-  .dw-page:has(.dw-case-draft-tempo-v3) .dw-header.is-scrolled,
-  .dw-page:has(.dw-case-draft-tempo-v3) .dw-logo { height: 56px !important; }
+  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-header,
+  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-header.is-scrolled,
+  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo { height: 56px !important; }
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel { min-height: calc(100svh - 56px); padding: 92px 20px 294px; }
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy h1 { font-size: clamp(72px, 22vw, 104px); }
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy h2 { margin-top: 20px; font-size: 20px; }
@@ -11224,13 +11221,13 @@ a.dw-case-testimonial-linkedin:hover {
 
 /* Tempo V3 repair: this case uses a continuous editorial canvas rather than
    the rounded, marketing-page opening used by the other projects. */
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-header,
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-header.is-scrolled {
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-header,
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-header.is-scrolled {
   height: 60px !important;
   margin: 0;
 }
 
-.dw-page:has(.dw-case-draft-tempo-v3) .dw-logo { height: 60px; }
+.dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo { height: 60px; }
 
 .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero {
   padding: 0;
@@ -11398,9 +11395,9 @@ a.dw-case-testimonial-linkedin:hover {
 .dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-card { margin-top: 12px; padding: 11px; border: 1px solid #dce8e3; border-radius: 5px; background: #fff; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-card span, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-card p { display: block; margin: 0; color: #698077; font-size: 8px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-card strong { display: block; margin: 4px 0; color: var(--tempo-ink); font-size: 13px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-progress { display: flex; gap: 5px; margin-top: 14px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-progress i { display: block; width: 100%; height: 3px; border-radius: 999px; background: #dce9e4; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-progress i:first-child { background: var(--tempo-green); }
 
 @media (max-width: 760px) {
-  .dw-page:has(.dw-case-draft-tempo-v3) .dw-header,
-  .dw-page:has(.dw-case-draft-tempo-v3) .dw-header.is-scrolled,
-  .dw-page:has(.dw-case-draft-tempo-v3) .dw-logo { height: 56px !important; }
+  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-header,
+  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-header.is-scrolled,
+  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo { height: 56px !important; }
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel { min-height: calc(100svh - 56px); padding: 84px 20px 270px; }
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel { bottom: -15px; height: 270px; }
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-bridge { min-height: 190px; }

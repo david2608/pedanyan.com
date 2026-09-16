@@ -1,0 +1,143 @@
+/* LIGA Work-grid thumbnail: the Home screen assembling from its own five
+   declared groups on the card's pale field. */
+.lg-flow-card {
+  position: relative;
+  place-self: stretch;
+  display: block;
+  width: 100%;
+  height: 100%;
+  container-type: size;
+
+  /* The bezel is what the plate grows OUT PAST — without it the mockup would
+     end exactly on the composition's edge and its rounded corners would cut
+     into the top and bottom rows. */
+  --lg-bezel: calc(min(clamp(110px, 27cqw, 224px), calc(80cqh * 393 / 854)) * 0.028);
+}
+
+.lg-flow-inner {
+  /* .dw-case-study and .dw-case-liga are borrowed for their screen rules only.
+     Every page-level rule that keys off them uses a child combinator, so this
+     card cannot restyle the header. */
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  padding: clamp(14px, 3cqw, 40px);
+  overflow: visible;
+  background: transparent;
+}
+
+.lg-flow-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* No perspective — the bands keep their true size all the way in. */
+}
+
+.lg-flow-device {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  width: min(clamp(110px, 27cqw, 224px), calc(80cqh * 393 / 854));
+  aspect-ratio: 393 / 854;
+  /* The vertical centring stays HERE, not in the timeline: the band clones are
+     measured against this element at build time, so if the -50% only landed
+     once GSAP ran, every slot would be out by half the device's box. */
+  transform: translate(-50%, -50%);
+}
+
+/* The mockup itself, and the only thing that paints the device. `top/left/
+   width/height` rather than `inset`, because the timeline animates the box and
+   a `right`/`bottom` from `inset` would fight a tweened width. --lg-plate-r
+   travels with it: the grown radius is a share of a box that is itself
+   changing, so it cannot be a border-radius percentage.
+
+   The DEFAULT is the grown value, so the resting frame — no JS, reduced
+   motion, or a card too small to explode — is always the finished mockup. */
+.lg-flow-screen-plate {
+  --lg-plate-r: 8.4%;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: linear-gradient(170deg, #fdfdfe 0%, #eef0f5 100%);
+  border-radius: var(--lg-plate-r) / calc(var(--lg-plate-r) * 0.464);
+  box-shadow:
+    0 30px 56px -26px rgb(11 13 16 / 34%),
+    0 0 0 1px rgb(11 13 16 / 7%);
+}
+
+.lg-flow-screen-main {
+  position: absolute;
+  /* inset by the bezel: the plate is the mockup, this is only the glass */
+  inset: var(--lg-bezel);
+  z-index: 1;
+  overflow: hidden;
+  border-radius: calc(var(--lg-plate-r, 8.4%) * 0.8) / calc(var(--lg-plate-r, 8.4%) * 0.37);
+}
+.lg-flow-card .lg-phone {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+/* GSAP owns every movement, so the screens' own stepper transitions must not
+   fight it or re-show rows the timeline hid. */
+.lg-flow-card .lg-screen *,
+.lg-flow-card .lg-phone-screen * { transition: none !important; animation: none !important; }
+
+/* the screens' stepper hides rows until `is-in`; on this card every row is
+   present from the start and the timeline decides what shows */
+.lg-flow-card .lg-user,
+.lg-flow-card .lg-offers,
+.lg-flow-card .lg-sheet,
+.lg-flow-card .lg-types,
+.lg-flow-card .lg-type,
+.lg-flow-card .lg-sec,
+.lg-flow-card .lg-card,
+.lg-flow-card .lg-offer,
+.lg-flow-card .lg-badge,
+.lg-flow-card .lg-cover i { opacity: 1; transform: none; }
+
+/* ---- the ghost: unclipped, only the flying bands paint ---- */
+.lg-flow-ghost {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: visible;
+  pointer-events: none;
+}
+.lg-flow-ghost .lg-flow-band {
+  position: absolute;
+  /* CLIP LIKE THE REAL SCREEN — see the note on the Tempo card. Unclipped, a
+     band measures its layout box rather than its painted one and spills out of
+     the card. */
+  overflow: hidden;
+  background: transparent;
+  /* see the note in tempoFlowCard.css — animating `filter` while a band flies
+     re-rasterises the whole subtree every frame, and it clobbered this rule
+     besides. Depth is transform-only; the lift is a static box-shadow. */
+  will-change: transform;
+  backface-visibility: hidden;
+}
+/* The band's one surface — see the note on the Tempo card. Four of LIGA's six
+   rows are transparent in the real screen (they sit on .lg-screen's #f6f7fa)
+   and this card's field is also #f6f7fa, so detached they would be invisible
+   but for the ring. */
+.lg-flow-ghost .lg-flow-band-ground {
+  position: absolute;
+  z-index: -1;
+  display: block;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow:
+    0 0 0 1px rgb(11 13 16 / 10%),
+    0 6px 16px -10px rgb(11 13 16 / 24%);
+}
+.lg-flow-ghost .lg-flow-band .lg-screen { background: transparent; }
+
+

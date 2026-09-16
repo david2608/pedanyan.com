@@ -28,6 +28,7 @@ import { TempoPhone, TempoRouteBoard, type TempoScreenId } from "./tempoScreens"
 import { TempoFlowCard } from "./tempoFlowCard";
 import { IcredoLogoScene } from "./icredoLogoScene";
 import { SecurionLogoScene } from "./securionLogoScene";
+import { LigaFlowCard } from "./ligaFlowCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -232,6 +233,7 @@ function PortfolioCardVisual({ project }: { project: PortfolioProject }) {
   if (project.project.slug === "tempo") return <TempoFlowCard />;
   if (project.project.slug === "icredo") return <IcredoLogoScene />;
   if (project.project.slug === "securion") return <SecurionLogoScene />;
+  if (project.project.slug === "liga") return <LigaFlowCard />;
   const video = portfolioCardVideos[project.project.slug];
   if (video) {
     return (
@@ -4302,7 +4304,7 @@ function TempoV3CaseStudy({ project }: { project: PortfolioProject }) {
 
 export function CaseStudyContent({ slug }: { slug: string }) {
   const containerRef = useRef<HTMLElement | null>(null);
-  const dataSlug = slug === "material-exchange-motion-pilot" ? "material-exchange" : slug;
+  const dataSlug = slug === "tempo" ? "tempo-v3" : slug === "material-exchange-motion-pilot" ? "material-exchange" : slug;
   // A draft keeps its own content but wears the original's per-project CSS.
   const styleSlug = draftStyleSource[dataSlug] ?? dataSlug;
   const project = useMemo(

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found — Davit Pedanyan</title>
+    <meta name="description" content="That page does not exist. Browse the case studies, the designer profile, or the public work archive." />
+    <!-- A 404 must never be indexed, but its links should still be followed:
+         they are the fastest route back into the real pages. -->
+    <meta name="robots" content="noindex, follow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" />
+    <style>
+      :root { color-scheme: light; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100svh;
+        display: grid;
+        align-content: center;
+        gap: 40px;
+        padding: clamp(28px, 6vw, 96px);
+        color: #111;
+        background: #fff;
+        font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      p.eyebrow { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #6b7671; }
+      h1 { margin: 12px 0 0; max-width: 14ch; font-size: clamp(40px, 7vw, 92px); font-weight: 650; line-height: .95; letter-spacing: -.04em; }
+      p.lead { margin: 20px 0 0; max-width: 46ch; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.5; color: #4d5a55; }
+      nav { display: flex; flex-wrap: wrap; gap: 10px 28px; }
+      nav a { color: #111; font-size: 16px; text-decoration: none; border-bottom: 1px solid rgb(17 17 17 / 25%); padding-bottom: 2px; }
+      nav a:hover, nav a:focus-visible { border-bottom-color: #111; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <p class="eyebrow">404</p>
+      <h1>That page isn&rsquo;t here.</h1>
+      <p class="lead">
+        The address may have changed, or it may never have existed. Everything
+        below is a good place to pick the thread back up.
+      </p>
+    </header>
+    <nav aria-label="Site sections">
+      <a href="/">Home</a>
+      <a href="/am/portfolio">Work</a>
+      <a href="/am/designer">Designer</a>
+      <a href="/am/public-work">Public work</a>
+      <a href="/am/story">Story</a>
+    </nav>
+  </body>
+</html>

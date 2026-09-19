@@ -648,8 +648,15 @@ function CaseOpening({ project, section }: { project: PortfolioProject; section:
             </dl>
           ) : null}
         </div>
-        <div className={`dw-case-opening-media${section.screen ? " is-screen" : ""}`} data-portfolio-parallax>
-          {section.screen && isIcredoScreen(section.screen) ? (
+        <div className={`dw-case-opening-media${section.screen ? " is-screen" : ""}${slug === "liga" ? " is-assembly" : ""}`} data-portfolio-parallax>
+          {slug === "liga" ? (
+            /* The static home-hero export is replaced by the coded Home screen
+               assembling from its own five groups — the same move the Work-grid
+               card makes, at hero scale and driven by scroll rather than a
+               timer. It is the screen the case is about, so a still of it was
+               always the weakest thing this space could hold. */
+            <LigaFlowCard variant="hero" />
+          ) : section.screen && isIcredoScreen(section.screen) ? (
             <IcredoCodedPhone screen={section.screen} active />
           ) : (
             <ProjectImage project={project} assetKey={section.media} eager />
@@ -1840,23 +1847,20 @@ function CloudChiprConceptSelection({
           <Html html={section.body} className="dw-cloudchipr-concepts-intro" />
         </header>
 
-        <div className="dw-cloudchipr-concepts-stage">
-          <figure className="dw-cloudchipr-concept dw-cloudchipr-concept-favorite">
-            <ProjectImage project={project} assetKey="concept-favorite" />
-            <figcaption>My favorite.</figcaption>
-            <img className="dw-cloudchipr-concept-arrow" src="/portfolio-assets/cloudchipr/concept-arrow.svg" alt="" aria-hidden="true" />
-          </figure>
-
-          <figure className="dw-cloudchipr-concept dw-cloudchipr-concept-selected">
-            <ProjectImage project={project} assetKey="concept-selected" />
-            <figcaption>Selected by client</figcaption>
-            <img className="dw-cloudchipr-concept-arrow" src="/portfolio-assets/cloudchipr/concept-arrow.svg" alt="" aria-hidden="true" />
-          </figure>
-        </div>
-
-        <figure className="dw-cloudchipr-rejected">
-          <figcaption>Rejected variants:</figcaption>
-          <ProjectImage project={project} assetKey="concept-rejected" />
+        {/* One artwork from the original deck, replacing the three figures this
+            section used to compose from separate exports. The annotations —
+            "My favorite", "Selected by client", "Rejected variants" — are part
+            of the image, so the alt text carries them for anyone who cannot
+            see it. */}
+        <figure className="dw-cloudchipr-concepts-board">
+          <img
+            src="/portfolio-assets/cloudchipr/concept-selection.png"
+            alt="CloudChipr logo concepts. My favorite: an interlocking cloud outline in yellow, blue and red above a gradient CloudChipr wordmark. Selected by client: three overlapping rings reading cCo in yellow, blue and red above a navy CloudChipr wordmark. Below, four rejected variants — a filled cloud of three discs, a cloud with a folded page, a lighter cCo ring mark, and a cloud shaped like a bird."
+            width={2836}
+            height={1526}
+            loading="lazy"
+            decoding="async"
+          />
         </figure>
       </div>
     </section>
@@ -3304,38 +3308,35 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
 
         const concepts = container.querySelector<HTMLElement>("[data-cloudchipr-concepts]");
         if (concepts) {
+          /* This section used to be three separate figures — two concepts with
+             their own captions and hand-drawn arrows, plus a rejected strip —
+             and the timeline moved each of them independently. It is now one
+             artwork with the annotations inside it, so there is one thing to
+             reveal. The old code indexed `arrows[0]`/`arrows[1]` out of a
+             NodeList that is now empty, and GSAP threw on the undefined
+             target, which blanked the whole case study. */
           const title = concepts.querySelector<HTMLElement>(".dw-cloudchipr-concepts-copy h2");
           const intro = concepts.querySelector<HTMLElement>(".dw-cloudchipr-concepts-intro");
-          const favorite = concepts.querySelector<HTMLElement>(".dw-cloudchipr-concept-favorite");
-          const selected = concepts.querySelector<HTMLElement>(".dw-cloudchipr-concept-selected");
-          const favoriteNote = concepts.querySelector<HTMLElement>(".dw-cloudchipr-concept-favorite figcaption");
-          const selectedNote = concepts.querySelector<HTMLElement>(".dw-cloudchipr-concept-selected figcaption");
-          const arrows = concepts.querySelectorAll<SVGElement>(".dw-cloudchipr-concept-arrow");
-          const rejected = concepts.querySelector<HTMLElement>(".dw-cloudchipr-rejected");
+          const board = concepts.querySelector<HTMLElement>(".dw-cloudchipr-concepts-board");
+          const reveal = [title, intro, board].filter((n): n is HTMLElement => Boolean(n));
 
-          gsap.set([title, intro], { autoAlpha: 0, y: 28, filter: "blur(8px)" });
-          gsap.set(favorite, { autoAlpha: 0, x: -64, y: 28, scale: 0.88, filter: "blur(5px)" });
-          gsap.set(selected, { autoAlpha: 0, x: 64, y: 28, scale: 0.88, filter: "blur(5px)" });
-          gsap.set([favoriteNote, selectedNote], { autoAlpha: 0, y: 16 });
-          gsap.set(arrows, { autoAlpha: 0, scale: 0.5 });
-          gsap.set(rejected, { autoAlpha: 0, y: 26, filter: "blur(4px)" });
+          if (reveal.length) {
+            gsap.set([title, intro].filter(Boolean), { autoAlpha: 0, y: 28, filter: "blur(8px)" });
+            gsap.set(board, { autoAlpha: 0, y: 34, scale: 0.97, filter: "blur(5px)" });
 
-          gsap.timeline({
-            scrollTrigger: {
-              trigger: concepts,
-              start: "top 82%",
-              end: "top 18%",
-              scrub: 0.9,
-              invalidateOnRefresh: true
-            }
-          })
-            .to(title, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "power3.out" }, 0)
-            .to(intro, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, 0.18)
-            .to(favorite, { autoAlpha: 1, x: 0, y: 0, scale: 1, filter: "blur(0px)", duration: 0.85, ease: "power3.out" }, 0.48)
-            .to([favoriteNote, arrows[0]], { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: "power2.out" }, 0.88)
-            .to(selected, { autoAlpha: 1, x: 0, y: 0, scale: 1, filter: "blur(0px)", duration: 0.85, ease: "power3.out" }, 0.98)
-            .to([selectedNote, arrows[1]], { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: "power2.out" }, 1.34)
-            .to(rejected, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.72, ease: "power3.out" }, 1.52);
+            gsap.timeline({
+              scrollTrigger: {
+                trigger: concepts,
+                start: "top 82%",
+                end: "top 18%",
+                scrub: 0.9,
+                invalidateOnRefresh: true
+              }
+            })
+              .to(title, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "power3.out" }, 0)
+              .to(intro, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, 0.18)
+              .to(board, { autoAlpha: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.95, ease: "power3.out" }, 0.5);
+          }
         }
 
         const brandItems = container.querySelector<HTMLElement>("[data-cloudchipr-brand-items]");
@@ -4254,16 +4255,29 @@ function TempoLandingScene({ metadata }: { metadata: Array<{ label: string; valu
     <div className="dw-tempo-landing-skyline" aria-hidden="true" />
     <div className="dw-tempo-landing-horizon" aria-hidden="true" />
     <div className="dw-tempo-landing-copy">
-      <h1 id="tempo-v3-title">Life is Fast,<br /><em>So Is Our Delivery.</em></h1>
-      <p>Whether it&apos;s a delicious meal, a special gift, or essential supplies, count on us to get it to you quickly and safely.</p>
-      <div className="dw-tempo-landing-download"><span>Download Now:</span><div><img src="/portfolio-assets/tempo/figma/google-play.svg" alt="Google Play" /><img src="/portfolio-assets/tempo/figma/app-store.svg" alt="App Store" /></div></div>
-      <p className="dw-tempo-landing-proof"><span aria-hidden="true"><img src="/portfolio-assets/tempo/figma/hero-user-1.png" alt="" /><img src="/portfolio-assets/tempo/figma/hero-user-2.png" alt="" /><img src="/portfolio-assets/tempo/figma/hero-user-3.png" alt="" /></span><b>12M + Active users</b></p>
+      {/* Davit's own line, not the client's. The scene keeps the landing page's
+          skyline and van because they are the frame this work was made inside,
+          but the store badges and the "12M + Active users" row are the client's
+          conversion furniture and say nothing about the design — they are gone. */}
+      <h1 id="tempo-v3-title">Safe document delivery,<br /><em>from sender to recipient.</em></h1>
+      <p>Tempo already moved things quickly. This direction gives it the harder job: move the things that are private, valuable or impossible to replace, and show the chain of care the whole way.</p>
     </div>
     {metadata.length ? (
       <dl className="dw-tempo-landing-meta" aria-label="Tempo project information">
         {metadata.map((item) => <div key={item.label}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}
       </dl>
     ) : null}
+    {/* The assembling phone. It lives in the HERO, not in the section below,
+        for two reasons: it has to paint above the hero's dark gradient but
+        below the van, and that stacking order only exists inside the hero's
+        own context. The hero clips horizontally and not vertically
+        (`overflow-x: clip` pairs with `overflow-y: visible`, which is the one
+        combination the spec allows), so the phone's body carries on past the
+        hero's bottom edge into the right background of the white section. */}
+    <div className="dw-tempo-landing-assembly" aria-hidden="false">
+      <TempoFlowCard variant="hero" />
+    </div>
+
     <div className="dw-tempo-landing-van">
       <i className="dw-tempo-van-shadow" aria-hidden="true"><b /></i>
       <img className="dw-tempo-van-body" src="/portfolio-assets/tempo/figma/tempo-hero-van-body.png" alt="Tempo delivery van from the original landing page design" />

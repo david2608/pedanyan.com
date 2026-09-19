@@ -1,0 +1,298 @@
+{
+  "site": {
+    "origin": "https://pedanyan.com",
+    "name": "Davit Pedanyan",
+    "shortName": "Pedanyan",
+    "tagline": "Designer, educator, and creative culture builder from Armenia.",
+    "locale": "en",
+    "ogImage": "/brand/og-default.png",
+    "ogImageWidth": 1200,
+    "ogImageHeight": 630
+  },
+  "person": {
+    "name": "Davit Pedanyan",
+    "jobTitle": "Head of Design",
+    "description": "Davit Pedanyan is a product designer, design leader and educator from Armenia. He designs products, teaches beginners, and runs public formats for Armenia's creative community.",
+    "addressCountry": "AM",
+    "knowsAbout": [
+      "Product Design",
+      "Design Leadership",
+      "Design Strategy",
+      "DesignOps",
+      "Design Systems",
+      "User Experience Design",
+      "User Interface Design",
+      "Design Education",
+      "Mentoring"
+    ],
+    "sameAs": [
+      "https://am.linkedin.com/in/davit-pedanyan",
+      "https://medium.com/@pedanyandavid",
+      "https://t.me/pedanyan"
+    ],
+    "email": "davit@pedanyan.com",
+    "worksFor": {
+      "name": "Freedx"
+    },
+    "pastEmployers": [
+      "Lynon",
+      "T-Bank",
+      "Delux",
+      "CloudChipr",
+      "Webb Fontaine",
+      "Material Exchange",
+      "The Bank of London",
+      "Uphold",
+      "Liga Insurance",
+      "Armenian Code Academy"
+    ],
+    "founderOf": [
+      "Pedanyan School",
+      "artmart"
+    ]
+  },
+  "routes": [
+    {
+      "path": "/",
+      "title": "Davit Pedanyan — Product Designer and Design Leader, Armenia",
+      "description": "Product designer, design leader and educator from Armenia. Product design, design strategy, DesignOps and design systems for startup and enterprise teams.",
+      "type": "ProfilePage",
+      "priority": "1.0",
+      "changefreq": "monthly"
+    },
+    {
+      "path": "/am/portfolio",
+      "title": "Work — Case Studies by Davit Pedanyan",
+      "description": "Nine product design case studies: the decisions behind each one, what changed, and the trade-offs. Fintech, insurance, cloud operations, logistics and marketplace products.",
+      "type": "CollectionPage",
+      "priority": "0.9",
+      "changefreq": "monthly"
+    },
+    {
+      "path": "/am/designer",
+      "title": "Davit Pedanyan — Designer Profile, Experience and Practice",
+      "description": "Twenty years of product design across fintech, insurance and enterprise platforms, and nine years teaching design in Armenia.",
+      "type": "ProfilePage",
+      "priority": "0.9",
+      "changefreq": "monthly"
+    },
+    {
+      "path": "/am/public-work",
+      "title": "Talks, Events and Writing — Davit Pedanyan",
+      "description": "Public work in Armenia's design community: UX Storm events, workshops, jury appearances, conference talks and published writing.",
+      "type": "CollectionPage",
+      "priority": "0.8",
+      "changefreq": "monthly"
+    },
+    {
+      "path": "/am/story",
+      "title": "Story — Davit Pedanyan, Designer, Educator, Culture Builder",
+      "description": "How the work fits together: designing products, teaching beginners, and building creative culture in Armenia.",
+      "type": "AboutPage",
+      "priority": "0.7",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/design-talent",
+      "title": "Design Talent — Davit Pedanyan",
+      "description": "Design talent and placement: designers trained through project work, critique and one finished portfolio case.",
+      "type": "WebPage",
+      "priority": "0.6",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/projects/cloudchipr",
+      "title": "CloudChipr — Case Study by Davit Pedanyan",
+      "description": "$500K saved in cloud costs. Making cloud cost operations actionable for engineering and finance teams.",
+      "type": "CreativeWork",
+      "name": "CloudChipr",
+      "headline": "$500K saved in cloud costs.",
+      "priority": "0.8",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/projects/material-exchange",
+      "title": "Material Exchange — Case Study by Davit Pedanyan",
+      "description": "Cut material management from 61 to 23 minutes. Digital Asset Management Platform and Marketplace",
+      "type": "CreativeWork",
+      "name": "Material Exchange",
+      "headline": "Cut material management from 61 to 23 minutes.",
+      "priority": "0.8",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/projects/securion",
+      "title": "Securion — Case Study by Davit Pedanyan",
+      "description": "Multi-factor security for digital assets. Mobile Crypto Wallet and Exchange.",
+      "type": "CreativeWork",
+      "name": "Securion",
+      "headline": "Multi-factor security for digital assets.",
+      "priority": "0.8",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/projects/material-exchange-photo-lab",
+      "title": "ME Photo Lab — Case Study by Davit Pedanyan",
+      "description": "Designed for 30% more material engagement. Cross-platform photo editing extension.",
+      "type": "CreativeWork",
+      "name": "ME Photo Lab",
+      "headline": "Designed for 30% more material engagement.",
+      "priority": "0.8",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/projects/hotel-apartments",
+      "title": "Hotel Apartments — Case Study by Davit Pedanyan",
+      "description": "Made extended stays bookable online. online booking service specializing in extended-stay hotel room booking",
+      "type": "CreativeWork",
+      "name": "Hotel Apartments",
+      "headline": "Made extended stays bookable online.",
+      "priority": "0.8",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/projects/tempo",
+      "title": "Tempo — Case Study by Davit Pedanyan",
+      "description": "Safe document delivery, from sender to recipient. Safe special delivery for important documents and time-sensitive items.",
+      "type": "CreativeWork",
+      "name": "Tempo",
+      "headline": "Safe document delivery, from sender to recipient.",
+      "priority": "0.8",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/projects/icredo",
+      "title": "iCredo — Case Study by Davit Pedanyan",
+      "description": "A loan conversation, not a long form. A loan you ask for the way you would ask a friend - and understand before you say yes.",
+      "type": "CreativeWork",
+      "name": "iCredo",
+      "headline": "A loan conversation, not a long form.",
+      "priority": "0.8",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/projects/nesba",
+      "title": "Nesba — Case Study by Davit Pedanyan",
+      "description": "One clear path from cash flow to investing. A unified Saudi wealth experience that turns everyday financial activity into a clearer path to investing.",
+      "type": "CreativeWork",
+      "name": "Nesba",
+      "headline": "One clear path from cash flow to investing.",
+      "priority": "0.8",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/projects/liga",
+      "title": "LIGA Mobile — Case Study by Davit Pedanyan",
+      "description": "An accident report you can file standing up. The insurance app you hope never to open, redesigned around the ten minutes when you have to. That work exposed",
+      "type": "CreativeWork",
+      "name": "LIGA Mobile",
+      "headline": "An accident report you can file standing up.",
+      "priority": "0.8",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/public-work/ux-storm-1-4",
+      "title": "UX Storm 1.4 — the new era of product designers. — Davit Pedanyan",
+      "description": "UX Storm 1.4 — the new era of product designers. Public work by Davit Pedanyan, product designer and educator in Armenia.",
+      "type": "Article",
+      "name": "UX Storm 1.4 — the new era of product designers.",
+      "datePublished": "2025-12-12",
+      "inLanguage": "en",
+      "priority": "0.6",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/public-work/design-in-2030",
+      "title": "Design in 2030 — a workshop for 100+ thinkers and practitioners. — Davit Pedanyan",
+      "description": "Design in 2030 — a workshop for 100+ thinkers and practitioners. Public work by Davit Pedanyan, product designer and educator in Armenia.",
+      "type": "Article",
+      "name": "Design in 2030 — a workshop for 100+ thinkers and practitioners.",
+      "datePublished": "2025-10-11",
+      "inLanguage": "en",
+      "priority": "0.6",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/public-work/ux-storm-1-2",
+      "title": "UX Storm 1.2 — shaping the future in UX design. — Davit Pedanyan",
+      "description": "UX Storm 1.2 — shaping the future in UX design. Public work by Davit Pedanyan, product designer and educator in Armenia.",
+      "type": "Article",
+      "name": "UX Storm 1.2 — shaping the future in UX design.",
+      "datePublished": null,
+      "inLanguage": "en",
+      "priority": "0.6",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/public-work/ux-storm-1-0",
+      "title": "UX Storm 1.0 — 200 applications, 120 seats, one shared room. — Davit Pedanyan",
+      "description": "UX Storm 1.0 — 200 applications, 120 seats, one shared room. Public work by Davit Pedanyan, product designer and educator in Armenia.",
+      "type": "Article",
+      "name": "UX Storm 1.0 — 200 applications, 120 seats, one shared room.",
+      "datePublished": null,
+      "inLanguage": "en",
+      "priority": "0.6",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/public-work/ux-design-battle-jury",
+      "title": "UXBattle — joining the jury for ideas under pressure. — Davit Pedanyan",
+      "description": "UXBattle — joining the jury for ideas under pressure. Public work by Davit Pedanyan, product designer and educator in Armenia.",
+      "type": "Article",
+      "name": "UXBattle — joining the jury for ideas under pressure.",
+      "datePublished": null,
+      "inLanguage": "en",
+      "priority": "0.6",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/public-work/ux-storm-1-1",
+      "title": "UX Storm 1.1 — making room for an honest design conversation. — Davit Pedanyan",
+      "description": "UX Storm 1.1 — making room for an honest design conversation. Public work by Davit Pedanyan, product designer and educator in Armenia.",
+      "type": "Article",
+      "name": "UX Storm 1.1 — making room for an honest design conversation.",
+      "datePublished": null,
+      "inLanguage": "en",
+      "priority": "0.6",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/public-work/tech-week-vanadzor",
+      "title": "Speaking at Tech Week Vanadzor — design as a regional conversation. — Davit Pedanyan",
+      "description": "Speaking at Tech Week Vanadzor — design as a regional conversation. Public work by Davit Pedanyan, product designer and educator in Armenia.",
+      "type": "Article",
+      "name": "Speaking at Tech Week Vanadzor — design as a regional conversation.",
+      "datePublished": null,
+      "inLanguage": "en",
+      "priority": "0.6",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/public-work/2x-masnageter",
+      "title": "2X ՄԱՍՆԱԳԵՏՆԵՐ #1 — taste, design, and AI in product work. — Davit Pedanyan",
+      "description": "2X ՄԱՍՆԱԳԵՏՆԵՐ #1 — taste, design, and AI in product work. Public work by Davit Pedanyan, product designer and educator in Armenia.",
+      "type": "Article",
+      "name": "2X ՄԱՍՆԱԳԵՏՆԵՐ #1 — taste, design, and AI in product work.",
+      "datePublished": "2025-11-10",
+      "inLanguage": "hy",
+      "priority": "0.6",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/public-work/how2b-ui-ux-designer",
+      "title": "How to be a UI/UX designer — a How2B speed interview. — Davit Pedanyan",
+      "description": "How to be a UI/UX designer — a How2B speed interview. Public work by Davit Pedanyan, product designer and educator in Armenia.",
+      "type": "Article",
+      "name": "How to be a UI/UX designer — a How2B speed interview.",
+      "datePublished": "2024-12-24",
+      "inLanguage": "en",
+      "priority": "0.6",
+      "changefreq": "yearly"
+    }
+  ],
+  "noindex": [
+    "/am/projects/tempo-v2",
+    "/am/projects/tempo-v3",
+    "/am/projects/liga-steep"
+  ]
+}

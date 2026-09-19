@@ -186,10 +186,19 @@
    rather than an approximation of it. */
 .dw-page .dw-case-draft-tempo-v3 .dw-tempo-landing-scene {
   position: relative;
+  /* Above the white section below, so the assembling phone can carry on past
+     the hero's bottom edge and still paint over it. */
+  z-index: 1;
   display: grid;
   align-content: center;
   min-height: max(760px, calc(100svh - 60px));
-  overflow: hidden;
+  /* NOT `overflow: hidden`. The skyline strip is 280% wide and the van bleeds
+     off the right, so the horizontal axis still has to clip — but the phone
+     has to escape downwards. `clip` is the one value that lets the other axis
+     stay `visible`; `hidden` would silently force it to `auto` and give the
+     section its own scrollbar. */
+  overflow-x: clip;
+  overflow-y: visible;
   isolation: isolate;
   color: #fff;
   background: linear-gradient(180deg, #242c2c 0%, #1e2726 43.2%, #091916 100%);
@@ -270,6 +279,43 @@
    in 1.2s) and the ground shadow smart-animates between 313x12 and 545x4 on a
    0.6s loop. Box is 425x273 at design (877, 387); every child is positioned as a
    percentage of that box. */
+/* The assembling phone: low and right, under the van, with its head on the
+   hero and its body in the white section below.
+
+   THE DEVICE SITS AT THE FOOT OF ITS OWN STAGE, not in the middle of it (see
+   the .tp-flow-hero rules in tempoFlowCard.css). That is what lets one element
+   satisfy two things at once: the exploded fan spreads UPWARD, so the loose
+   components are up on the dark hero where there is room and contrast, while
+   the phone they collect into forms low and ends up mostly in the section
+   below. Centring the device instead put the whole object on the hero and
+   pushed the fan off the bottom of the page.
+
+   Inside the hero's stacking context it sits at z-index 0 — above the horizon
+   (-1) and the skyline (-2), below the van (1) and the copy (2).
+
+   The overlap with the van is deliberately small. The van is an opaque PNG
+   nearly half the hero wide; parking the phone behind its middle would leave a
+   sliver of an animation nobody can read. They meet at a corner instead. */
+.dw-tempo-landing-assembly {
+  position: absolute;
+  z-index: 0;
+  right: clamp(20px, 2.5vw, 56px);
+  /* Tuned against the van, not guessed: the top of the fan has to clear the
+     van's ground shadow by a few pixels for the phone to read as tucked BEHIND
+     the van rather than parked beside it. */
+  top: 56%;
+  width: clamp(215px, 19.5vw, 300px);
+  /* taller than the device, because the difference IS the fan's room */
+  height: clamp(500px, 48vw, 740px);
+  pointer-events: none;
+}
+
+@media (max-width: 1279px) {
+  /* Below this the hero has no lane to spare: the metadata grid reaches the
+     phone, and near-white metadata over a white mockup is unreadable. */
+  .dw-tempo-landing-assembly { display: none; }
+}
+
 .dw-tempo-landing-van { position: absolute; z-index: 1; right: 9.6%; bottom: 35.5%; width: min(46vw, 425px); aspect-ratio: 425 / 273; transform-origin: 50% 100%; animation: tempo-landing-van .9s .34s both cubic-bezier(.14,.8,.25,1); }
 .dw-tempo-landing-van img, .dw-tempo-van-shadow { position: absolute; display: block; }
 .dw-tempo-van-body { top: 0; left: 0; width: 100%; height: 83.883%; }
@@ -11498,4 +11544,32 @@ a.dw-case-testimonial-linkedin:hover {
 }
 .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-advantages p strong {
   color: var(--tempo-green, #1b8874) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   CloudChipr concept board.
+
+   The section used to compose three separate exports — two concept figures with
+   their own captions and hand-drawn arrows, plus a rejected-variants strip.
+   Davit replaced all of that with the single artwork from the original deck, so
+   the layout is now one image and the annotations live inside it. The heading
+   and the intro paragraph above are untouched.
+   --------------------------------------------------------------------------- */
+.dw-cloudchipr-concepts-board {
+  margin: clamp(56px, 5vw, 96px) 0 0;
+}
+
+.dw-page .dw-case-study .dw-cloudchipr-concepts-board img,
+.dw-cloudchipr-concepts-board img {
+  /* restates its own box: `.dw-case-study img` rules elsewhere force a height
+     and object-fit that would crop the annotations off the edges */
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  margin: 0 auto;
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
 }

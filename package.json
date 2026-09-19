@@ -5,12 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "vite build",
+    "build": "npm run seo && vite build && npm run prerender",
     "preview": "vite preview --host 127.0.0.1",
     "storybook": "storybook dev -p 6006 --host 127.0.0.1",
     "build-storybook": "storybook build",
     "sync:notion": "node scripts/sync-notion-content.mjs",
-    "organize:notion": "node scripts/organize-notion-cms.mjs"
+    "organize:notion": "node scripts/organize-notion-cms.mjs",
+    "seo": "node scripts/seo-build.mjs",
+    "prerender": "node scripts/prerender.mjs",
+    "build:fast": "vite build",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@dimforge/rapier3d-compat": "^0.19.3",

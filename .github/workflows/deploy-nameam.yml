@@ -39,6 +39,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # The build prerenders every route with a real browser (see
+      # scripts/prerender.mjs). Without this step `npm run build` produces the
+      # old empty-shell HTML and the site quietly stops being indexable.
+      - name: Install Chromium for prerendering
+        run: npx playwright install --with-deps chromium
+
       - name: Build production website
         run: npm run build
 
@@ -47,6 +53,16 @@ jobs:
           test -s dist/index.html
           test -s dist/.htaccess
           test -d dist/assets
+          test -s dist/robots.txt
+          test -s dist/sitemap.xml
+          test -s dist/404.html
+          # Prerendering must have produced real per-route HTML. An empty
+          # #root here means every crawler would see a blank page.
+          test -s dist/am/projects/cloudchipr/index.html
+          test -s dist/am/portfolio/index.html
+          grep -q 'Case Study by Davit Pedanyan' dist/am/projects/cloudchipr/index.html
+          grep -q 'application/ld+json' dist/index.html
+          ! grep -q '<div id="root"></div>' dist/am/projects/cloudchipr/index.html
 
       - name: Install secure FTP client
         run: sudo apt-get update && sudo apt-get install --yes lftp
@@ -84,3 +100,12 @@ jobs:
               --verbose --parallel=4 dist/ \"$NAMEAM_FTP_PATH\";
             bye;
           "
+
+      # Tell Bing, Yandex and Seznam that the URLs changed. Google does not
+      # participate in IndexNow, so for Google the sitemap plus Search Console
+      # remain the route. Production only — pinging on a staging deploy would
+      # submit URLs that do not reflect what is live.
+      - name: Notify IndexNow (Bing / Yandex / Seznam)
+        if: ${{ inputs.environment == 'production' }}
+        continue-on-error: true
+        run: npm run indexnow

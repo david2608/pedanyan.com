@@ -53,8 +53,40 @@
 .dw-case-liga .dw-case-opening-meta dd { color: var(--lg-mist); }
 .dw-case-liga .dw-case-opening-media { right: 8%; bottom: -10%; width: auto; }
 .dw-case-liga .dw-case-opening-media img { width: clamp(230px, 21vw, 300px) !important; height: auto !important; max-height: none !important; border-radius: calc(clamp(230px, 21vw, 300px) / 393 * 53); box-shadow: 0 40px 80px -30px rgba(11, 13, 16, 0.35), 0 0 0 1px rgba(11, 13, 16, 0.06); }
+/* The assembling Home screen replaces the static export. Unlike an <img> it has
+   no intrinsic size — it is a container-query root that fills whatever box it
+   is given — so the box has to be stated. It is TALLER than the device on
+   purpose: that surplus is the room the five bands explode into, and the
+   device is pinned to the foot of it so the parts rise and the phone they
+   collect into stays where the still used to sit. */
+.dw-case-liga .dw-case-opening-media.is-assembly {
+  right: 8%;
+  /* Flush with the panel, not hanging below it: `.dw-case-opening-panel` is
+     `overflow: hidden`, so anything past its bottom edge is simply cut — the
+     static export could afford that because its lower third was empty glass,
+     but the assembly's last band is the policy card. */
+  bottom: 0;
+  width: clamp(230px, 21vw, 300px);
+  height: clamp(700px, 52vw, 960px);
+  pointer-events: none;
+}
+
 @media (max-width: 1100px) {
   .dw-case-liga .dw-case-opening-media { position: relative; right: auto; bottom: auto; margin: 40px auto -14%; display: grid; justify-content: center; }
+  .dw-case-liga .dw-case-opening-media.is-assembly {
+    /* NOT the grid + justify-content: center the static image gets. The card
+       is `width: 100%` inside a content-sized column, which resolves to zero —
+       the phone measured 0x0 and the hero showed an empty gap. */
+    display: block;
+    right: auto;
+    bottom: auto;
+    width: min(300px, 78vw);
+    margin-inline: auto;
+    /* no explosion at this size (the card's own 150px floor takes over), so the
+       box only has to hold the settled phone */
+    height: auto;
+    aspect-ratio: 393 / 854;
+  }
 }
 
 /* ---- surfaces ------------------------------------------------------------ */

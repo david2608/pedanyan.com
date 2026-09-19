@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { TempoPhone } from "./tempoScreens";
+import { TempoPhone, TempoScreenId } from "./tempoScreens";
+import { driveFlowTimeline, FlowMotionMode } from "./flowMotion";
 import "./tempoFlowCard.css";
 
 /* Tempo's Work-grid thumbnail — the Restaurants screen, exploded and assembling.
@@ -44,7 +45,10 @@ import "./tempoFlowCard.css";
    alone. No rotateZ, no isometric tilt, no idle float, and no animated
    filter — animating blur re-rasterises the whole subtree every frame. */
 
-const BANDS: Array<{ key: string; sel: string[] }> = [
+type BandSpec = { key: string; sel: string[] };
+
+/* The Restaurants screen — the Work-grid thumbnail. */
+const FOOD_BANDS: BandSpec[] = [
   /* No .tp-figma-food-status: on this screen it is an empty 17px spacer with
      no text and no children, so including it gave the chrome band a ground
      with a blank half. The live screen still has it; the band does not. */
@@ -54,9 +58,53 @@ const BANDS: Array<{ key: string; sel: string[] }> = [
   { key: "list", sel: [".tp-figma-food-divider", ".tp-figma-food-list"] }
 ];
 
-export function TempoFlowCard() {
+/* The Delivery-tracking screen — the case-study hero.
+
+   NOT the Restaurants screen, which is what the thumbnail explodes. The hero's
+   headline is now "Safe document delivery, from sender to recipient", and an
+   assembling restaurant list under that line is a legible contradiction: the
+   van reads as generic delivery and survives the change, but a row with a
+   cuisine tag and a star rating does not. Tracking is the screen that actually
+   depicts sender → courier → recipient, so it is the one that assembles.
+
+   THREE BANDS, NOT FOUR. This screen has four structural groups, but the
+   status bar and the title bar are a single strip of chrome and separating
+   them would put a 10px sliver on the field. At hero scale each of these three
+   clears the legibility floor several times over. */
+const TRACKING_BANDS: BandSpec[] = [
+  { key: "chrome", sel: [".tp-figma-tracking-status", ".tp-figma-tracking-header"] },
+  { key: "map", sel: [".tp-figma-tracking-map"] },
+  { key: "sheet", sel: [".tp-figma-tracking-sheet"] }
+];
+
+const PRESETS: Record<string, { screen: TempoScreenId; root: string; bands: BandSpec[]; label: string }> = {
+  discover: {
+    screen: "discover",
+    root: ".tp-figma-food",
+    bands: FOOD_BANDS,
+    label: "Tempo: the restaurants screen assembling from its parts"
+  },
+  handoff: {
+    screen: "handoff",
+    root: ".tp-figma-tracking",
+    bands: TRACKING_BANDS,
+    label: "Tempo: the delivery-tracking screen assembling from its parts"
+  }
+};
+
+export function TempoFlowCard({
+  variant = "card",
+  preset = variant === "hero" ? "handoff" : "discover"
+}: {
+  variant?: "card" | "hero";
+  preset?: keyof typeof PRESETS;
+} = {}) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
+  const { screen: screenId, root: screenSel, bands: BANDS, label } = PRESETS[preset];
+  /* The hero plays once and settles; only the thumbnail loops. See the note in
+     flowMotion.ts for why scroll drives speed and never position. */
+  const mode: FlowMotionMode = variant === "hero" ? "scroll" : "loop";
 
   useEffect(() => {
     const root = rootRef.current;
@@ -76,7 +124,7 @@ export function TempoFlowCard() {
          so a row lifted into a plain wrapper resolves its units against the card
          and renders about three times too big. */
       void ghost.offsetWidth;
-      const screen = main.querySelector<HTMLElement>(".tp-figma-food");
+      const screen = main.querySelector<HTMLElement>(screenSel);
       const ghostBox = ghost.getBoundingClientRect();
       const screenBox = screen ? screen.getBoundingClientRect() : ghostBox;
       /* THE LEGIBILITY FLOOR. A band has to stay identifiable while it is
@@ -271,7 +319,7 @@ export function TempoFlowCard() {
 
       gsap.set([...made, main], { willChange: "transform", force3D: true });
 
-      const timeline = gsap.timeline({ repeat: -1, paused: true });
+      const timeline = gsap.timeline({ repeat: mode === "loop" ? -1 : 0, paused: true });
       tl = timeline;
 
       /* ---- t=0 : the bands on a bare field. No mockup anywhere. ----------- */
@@ -314,7 +362,12 @@ export function TempoFlowCard() {
         /* ---- beat 3: the settled screen is the frame that sells the case --- */
         .to({}, { duration: 2.6 }, landed + 0.7);
 
-      /* ---- and back apart, so the loop does not cut ------------------------ */
+      /* ---- and back apart, so the loop does not cut ------------------------
+         Only the looping thumbnail comes apart again. The hero ends on the
+         settled mockup and stays there: that frame is the payoff, and a hero
+         that dismantles its own product every seven seconds is a distraction
+         next to the copy the reader is trying to read. */
+      if (mode !== "loop") return;
       const out = landed + 3.3;
       timeline.set(ghost, { autoAlpha: 1 }, out)
         .to(main, { autoAlpha: 0, duration: 0.2 }, out)
@@ -338,26 +391,18 @@ export function TempoFlowCard() {
       timeline.to({}, { duration: 0.35 });
     }, root);
 
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (!tl) return;
-        if (entry.isIntersecting) tl.play();
-        else tl.pause();
-      },
-      { threshold: 0, rootMargin: "140px" }
-    );
-    io.observe(root);
+    const undrive = tl ? driveFlowTimeline(tl, root, mode) : null;
 
     return () => {
-      io.disconnect();
+      undrive?.();
       context.revert();
       cleanupRef.current?.();
       cleanupRef.current = null;
     };
-  }, []);
+  }, [mode, preset]);
 
   return (
-    <div className="tp-flow-card" ref={rootRef} role="img" aria-label="Tempo: the restaurants screen assembling from its parts">
+    <div className={`tp-flow-card${variant === "hero" ? " tp-flow-hero" : ""}`} ref={rootRef} role="img" aria-label={label}>
       <div className="tp-flow-inner dw-case-study dw-case-tempo dw-case-draft-tempo-v3">
         <div className="tp-flow-stage">
           <div className="tp-flow-device">
@@ -366,7 +411,7 @@ export function TempoFlowCard() {
                 invisible until the composition has formed. */}
             <i className="tp-flow-screen-plate" aria-hidden="true" />
             <div className="dw-tempo-secure-phone">
-              <div className="tp-flow-screen tp-flow-screen-main"><TempoPhone screen="discover" /></div>
+              <div className="tp-flow-screen tp-flow-screen-main"><TempoPhone screen={screenId} /></div>
             </div>
             {/* unclipped duplicate: only the flying bands are painted */}
             <div className="tp-flow-ghost" aria-hidden="true" />

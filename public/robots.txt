@@ -1,0 +1,68 @@
+# https://pedanyan.com — robots.txt
+# Everything is public. Nothing here is a paywall, a staging copy or a login.
+
+User-agent: *
+Allow: /
+
+# Working drafts kept reachable by URL for comparison, deliberately unlinked.
+# They are near-duplicates of the live case studies, so they are excluded from
+# crawling as well as carrying a noindex tag.
+Disallow: /am/projects/tempo-v2
+Disallow: /am/projects/tempo-v3
+Disallow: /am/projects/liga-steep
+
+# Search crawlers (explicit, for clarity — all are already covered by *)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# AI answer engines that surface links back to the source.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Model-training crawlers that do not send traffic back are a separate
+# decision from search indexing. They are ALLOWED here because Davit has not
+# asked to opt out; removing a name from this list does not block it — only
+# adding a Disallow line under that agent does.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://pedanyan.com/sitemap.xml

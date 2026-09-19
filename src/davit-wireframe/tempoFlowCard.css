@@ -22,6 +22,12 @@
   --tp-bezel: calc(var(--tp-device-w) * 0.028);
 }
 
+/* (0,3,0). This element also carries `dw-case-study` and the project's own
+   case class, because that is how it borrows the screen rules — and on the
+   case-study PAGE those same classes have page-level rules at (0,2,0) that
+   won: the hero's card inherited a white ground and painted a slab behind
+   the phone. Every reset here has to outrank them. */
+.dw-page .tp-flow-card .tp-flow-inner,
 .tp-flow-inner {
   /* .dw-case-study and .dw-case-draft-tempo-v3 are borrowed for their screen
      rules only — their page-level background and width must not apply here,
@@ -179,3 +185,36 @@
 /* No JS, reduced motion, or a card too small to explode: the settled mockup is
    the DOM default, so the poster frame is always the finished thing. */
 
+
+/* ==========================================================================
+   Hero variant. Same implementation, a bigger device and no card padding.
+   The thumbnail's device formula is capped at 224px because it has to sit in a
+   grid cell; here the container IS the device's frame, so the width is driven
+   by the container and only capped by its height.
+   ========================================================================== */
+.tp-flow-hero {
+  --tp-device-w: min(88cqw, calc(85cqh * 1836 / 3953));
+}
+.tp-flow-hero .tp-flow-inner { padding: 0; }
+/* At the FOOT of the stage, not centred in it: the stage is taller than the
+   device on purpose, and that surplus is the room the fan explodes into. With
+   the device at the bottom the components rise into it, which is what lets the
+   hero show loose parts up on the dark field and the settled phone down in the
+   white section. */
+.tp-flow-hero .tp-flow-device {
+  top: auto;
+  bottom: 0;
+  transform: translate(-50%, 0);
+}
+
+/* At hero scale the bands spend most of the loop over a WHITE section, where a
+   white ground with a hairline ring all but disappears. They get a cooler
+   ground and a real edge instead — still not a drop shadow, because for most
+   of the loop there is still no surface under them. */
+.tp-flow-hero .tp-flow-band-ground {
+  background: #fbfcfc;
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 1px rgb(8 40 33 / 14%),
+    0 10px 26px -14px rgb(4 40 32 / 34%);
+}

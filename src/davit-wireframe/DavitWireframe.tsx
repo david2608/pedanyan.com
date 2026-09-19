@@ -2,6 +2,7 @@ import { createContext, lazy, Suspense, useContext, useEffect, useLayoutEffect, 
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { Observer } from "gsap/Observer";
+import { applyHead } from "../seo/head";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ExternalLink, Menu, MessageCircle, Play, X } from "lucide-react";
 import {
@@ -4941,6 +4942,16 @@ export function AppRouter() {
   useEffect(() => {
     if (isOutbound) window.location.replace(DAVIT_LINKEDIN_URL);
   }, [isOutbound]);
+
+  /* Title, description, canonical, Open Graph and the JSON-LD graph, on every
+     navigation. The prerender step bakes the same output into each route's
+     static HTML, so this only has to keep the tags correct once the SPA takes
+     over — but it runs through the identical code path, which is what stops
+     the two versions from drifting apart. */
+  useEffect(() => {
+    if (isOutbound) return;
+    applyHead(path);
+  }, [path, isOutbound]);
 
   useLayoutEffect(() => {
     if (isOutbound) return;

@@ -14,6 +14,12 @@
   --lg-bezel: calc(min(clamp(110px, 27cqw, 224px), calc(80cqh * 393 / 854)) * 0.028);
 }
 
+/* (0,3,0). This element also carries `dw-case-study` and the project's own
+   case class, because that is how it borrows the screen rules — and on the
+   case-study PAGE those same classes have page-level rules at (0,2,0) that
+   won: the hero's card inherited a white ground and painted a slab behind
+   the phone. Every reset here has to outrank them. */
+.dw-page .lg-flow-card .lg-flow-inner,
 .lg-flow-inner {
   /* .dw-case-study and .dw-case-liga are borrowed for their screen rules only.
      Every page-level rule that keys off them uses a child combinator, so this
@@ -141,3 +147,32 @@
 .lg-flow-ghost .lg-flow-band .lg-screen { background: transparent; }
 
 
+
+/* ==========================================================================
+   Hero variant. Same implementation, a bigger device and no card padding.
+   The thumbnail's device is capped at 224px because it sits in a grid cell;
+   here the container is the device's frame, so width comes from the container
+   and is only capped by height.
+   ========================================================================== */
+.lg-flow-hero {
+  --lg-bezel: calc(min(88cqw, calc(84cqh * 393 / 854)) * 0.028);
+}
+.lg-flow-hero .lg-flow-inner { padding: 0; }
+.lg-flow-hero .lg-flow-device {
+  width: min(88cqw, calc(84cqh * 393 / 854));
+  /* At the FOOT of the stage, not centred in it — the surplus height above is
+     the room the fan explodes into, so the parts rise and the phone they
+     collect into stays put. */
+  top: auto;
+  bottom: 0;
+  transform: translate(-50%, 0);
+}
+
+/* The hero sits on the page's own pale field, the same #f6f7fa the screens use,
+   so a white ground with a hairline ring all but disappears at this size. */
+.lg-flow-hero .lg-flow-band-ground {
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 1px rgb(11 13 16 / 14%),
+    0 10px 26px -14px rgb(11 13 16 / 30%);
+}

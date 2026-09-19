@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { LigaPhone } from "./ligaScreens";
+import { driveFlowTimeline, FlowMotionMode } from "./flowMotion";
 import "./ligaFlowCard.css";
 
 /* LIGA's Work-grid thumbnail — the Home screen, exploded and assembling.
@@ -72,9 +73,12 @@ function stripTo(copy: HTMLElement, keep: HTMLElement[]) {
   });
 }
 
-export function LigaFlowCard() {
+export function LigaFlowCard({ variant = "card" }: { variant?: "card" | "hero" } = {}) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
+  /* The hero plays once and settles; only the thumbnail loops. See the note in
+     flowMotion.ts for why scroll drives speed and never position. */
+  const mode: FlowMotionMode = variant === "hero" ? "scroll" : "loop";
 
   useEffect(() => {
     const root = rootRef.current;
@@ -259,7 +263,7 @@ export function LigaFlowCard() {
       const seedR = 7;
       const grownR = grown.width * 0.084;
 
-      const timeline = gsap.timeline({ repeat: -1, paused: true });
+      const timeline = gsap.timeline({ repeat: mode === "loop" ? -1 : 0, paused: true });
       tl = timeline;
 
       /* ---- t=0 : the bands on a bare field. No mockup anywhere. ----------- */
@@ -299,7 +303,10 @@ export function LigaFlowCard() {
         /* ---- beat 3: the settled screen is the frame that sells the case --- */
         .to({}, { duration: 2.6 }, landed + 0.7);
 
-      /* ---- and back apart, so the loop does not cut ------------------------ */
+      /* ---- and back apart, so the loop does not cut ------------------------
+         Only the looping thumbnail comes apart again; the hero ends on the
+         settled mockup and stays there. */
+      if (mode !== "loop") return;
       const out = landed + 3.3;
       timeline.set(ghost, { autoAlpha: 1 }, out)
         .to(main, { autoAlpha: 0, duration: 0.2 }, out)
@@ -323,26 +330,18 @@ export function LigaFlowCard() {
       timeline.to({}, { duration: 0.35 });
     }, root);
 
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (!tl) return;
-        if (entry.isIntersecting) tl.play();
-        else tl.pause();
-      },
-      { threshold: 0, rootMargin: "140px" }
-    );
-    io.observe(root);
+    const undrive = tl ? driveFlowTimeline(tl, root, mode) : null;
 
     return () => {
-      io.disconnect();
+      undrive?.();
       context.revert();
       cleanupRef.current?.();
       cleanupRef.current = null;
     };
-  }, []);
+  }, [mode]);
 
   return (
-    <div className="lg-flow-card" ref={rootRef} role="img" aria-label="LIGA: the home screen assembling from its five parts — header, stories, insurance types, the two actions and the policy card">
+    <div className={`lg-flow-card${variant === "hero" ? " lg-flow-hero" : ""}`} ref={rootRef} role="img" aria-label="LIGA: the home screen assembling from its five parts — header, stories, insurance types, the two actions and the policy card">
       <div className="lg-flow-inner dw-case-study dw-case-liga">
         <div className="lg-flow-stage">
           <div className="lg-flow-device">

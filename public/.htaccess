@@ -1,9 +1,52 @@
 Options -MultiViews
 RewriteEngine On
 
+# ===========================================================================
+# 1. ONE CANONICAL ORIGIN
+# ---------------------------------------------------------------------------
+# Every page is reachable at up to four addresses (http/https × apex/www).
+# To a crawler those are four different sites sharing identical content, which
+# splits every signal the site earns four ways. A single 301 to https://apex
+# collapses them. The canonical <link> in the HTML says the same thing, but a
+# redirect is the only version a crawler cannot ignore.
+#
+# CONFIRM: if pedanyan.com should live on www, swap the two blocks below AND
+# change `origin` in scripts/seo/site-meta.mjs — they must agree.
+# ===========================================================================
+<IfModule mod_rewrite.c>
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ===========================================================================
+# 2. LEGACY SINGLE-SEGMENT PROJECT URLS
+# ---------------------------------------------------------------------------
+# The router still resolves /cloudchipr, /securion and friends, rendering the
+# same page as /am/projects/<slug>. That is a duplicate, not a feature, so the
+# old address 301s to the canonical one and keeps whatever links point at it.
+# ===========================================================================
+RewriteRule ^cloudchipr/?$                    /am/projects/cloudchipr [L,R=301]
+RewriteRule ^material-exchange/?$             /am/projects/material-exchange [L,R=301]
+RewriteRule ^securion/?$                      /am/projects/securion [L,R=301]
+RewriteRule ^material-exchange-photo-lab/?$   /am/projects/material-exchange-photo-lab [L,R=301]
+RewriteRule ^hotel-apartments/?$              /am/projects/hotel-apartments [L,R=301]
+
+# A trailing slash makes /am/portfolio/ a second URL for /am/portfolio.
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [L,R=301]
+
+# ===========================================================================
+# 3. CACHING
+# ---------------------------------------------------------------------------
 # Hashed Vite bundles can stay local for a year. Portfolio and character media
 # revalidate weekly, so replacing an export does not leave visitors on stale
-# artwork for long.
+# artwork for long. Prerendered HTML must revalidate every time or a visitor
+# keeps yesterday's page after a deploy.
+# ===========================================================================
 <IfModule mod_headers.c>
   <FilesMatch "\.(?:js|css|woff2)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
@@ -14,16 +57,50 @@ RewriteEngine On
   <FilesMatch "\.(?:html)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
+  <FilesMatch "\.(?:xml|txt)$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+
+  # NOTHING here sets X-Robots-Tag. A stray `X-Robots-Tag: noindex` on shared
+  # hosting is one of the few ways to be invisible to every engine at once
+  # while every on-page check still looks perfect, so this line exists to make
+  # its absence deliberate and greppable.
 </IfModule>
 
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/css application/javascript application/json image/svg+xml
+  AddOutputFilterByType DEFLATE text/css text/html text/plain text/xml application/javascript application/json application/xml image/svg+xml
 </IfModule>
 
-# Serve real files and folders without routing them through the React app.
+<IfModule mod_mime.c>
+  AddType application/xml .xml
+  AddType text/plain .txt
+</IfModule>
+
+# ===========================================================================
+# 4. ROUTING
+# ---------------------------------------------------------------------------
+# Real files and folders win first. Because the build now PRERENDERS each route
+# to its own index.html, /am/projects/cloudchipr is a real directory on disk
+# and is served directly — a crawler gets finished HTML with no JavaScript.
+# ===========================================================================
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Send direct portfolio routes such as /am/projects/cloudchipr to the SPA.
-RewriteRule ^ index.html [L]
+# ===========================================================================
+# 5. UNKNOWN URLS MUST 404, NOT 200
+# ---------------------------------------------------------------------------
+# The previous rule rewrote EVERY unmatched path to index.html with a 200, so
+# /am/projects/does-not-exist, /wp-admin and any typo all answered "200 OK,
+# here is the home page". That is a soft 404: the crawler indexes infinite
+# addresses for one page and the site's crawl budget goes on nothing.
+#
+# Known SPA prefixes still fall through to the app (a project slug added to the
+# content JSON works before the next prerender). Everything else gets a real
+# 404 with a page that still looks like the site.
+# ===========================================================================
+RewriteRule ^am(/.*)?$        /index.html [L]
+RewriteRule ^(cloudchipr|material-exchange|securion|material-exchange-photo-lab|hotel-apartments)(/.*)?$ /index.html [L]
+RewriteRule ^$                /index.html [L]
+
+ErrorDocument 404 /404.html

@@ -924,6 +924,70 @@
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-walkthrough-stage { gap: 20px; }
 }
 
+/* The case introduction shares the site's type and metadata hierarchy;
+   the client's animated landing artwork stays in its own visual area. */
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-case-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "heading art" "meta art";
+  gap: 32px 48px;
+  padding: 100px var(--case-gutter) 56px;
+  color: #122d27;
+  background: #edf5f2;
+}
+.dw-tempo-case-heading { grid-area: heading; align-self: end; }
+.dw-tempo-case-heading > p { margin: 0 0 20px; font: 400 14px/1.4 Archivo, sans-serif; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-case-heading h1 {
+  margin: 0 0 24px;
+  font: 500 66px/.96 Syne, sans-serif;
+  letter-spacing: 0;
+}
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-case-heading h2 {
+  max-width: 24ch;
+  margin: 0;
+  font: 400 27px/1.25 Syne, sans-serif;
+  letter-spacing: 0;
+}
+.dw-tempo-case-meta {
+  grid-area: meta;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 24px;
+  margin: 0;
+  align-content: start;
+}
+.dw-tempo-case-meta dt { margin-bottom: 6px; color: #526960; font: 400 13px/1.4 Archivo, sans-serif; }
+.dw-tempo-case-meta dd { margin: 0; font: 400 15px/1.5 Archivo, sans-serif; overflow-wrap: anywhere; }
+.dw-tempo-case-art { grid-area: art; position: relative; isolation: isolate; overflow: hidden; min-height: 440px; }
+.dw-tempo-case-art .dw-tempo-landing-skyline { height: 75%; opacity: .2; }
+.dw-tempo-case-art .dw-tempo-landing-horizon { top: 68%; height: 20%; opacity: .15; }
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-case-art .dw-tempo-landing-van {
+  position: absolute;
+  width: 85%;
+  right: 7.5%;
+  bottom: 16%;
+  margin: 0;
+}
+.dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-intro {
+  min-height: 0;
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+@media (max-width: 1000px) {
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-case-heading h1 { font-size: 56px; }
+}
+@media (max-width: 760px) {
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-case-intro {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "heading" "art" "meta";
+    gap: 24px;
+    padding: 80px 20px 40px;
+  }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-case-heading h1 { font-size: 42px; margin-bottom: 20px; }
+  .dw-page .dw-case-draft-tempo-v3 .dw-tempo-case-heading h2 { font-size: 24px; }
+  .dw-tempo-case-art { min-height: 0; aspect-ratio: 1.5; }
+}
+
 /* The hero ran ~356px of empty canvas below the social-proof row, so the
    project overview now lives there instead of as its own pale band underneath.
    The scene becomes two rows — the copy centres in the first, the overview sits

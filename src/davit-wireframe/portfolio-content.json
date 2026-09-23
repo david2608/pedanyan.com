@@ -12,6 +12,19 @@
   },
   "projects": [
     {
+      "project": {
+        "title": "Tinkoff Checkout",
+        "slug": "tinkoff-checkout",
+        "source": { "fileKey": "tTlELwfmiEUjsZ2du1rbul", "nodeId": "2:8" }
+      },
+      "assets": {
+        "hero": { "packagePath": "assets/tinkoff-checkout/checkout-variants.png", "alt": "Original Tinkoff Checkout design variants" }
+      },
+      "sections": [
+        { "id": "intro", "type": "intro", "title": "Tinkoff Checkout", "subtitle": "Restoring trust and purchase context in an e-commerce checkout.", "media": "hero" }
+      ]
+    },
+    {
       "schemaVersion": "2.0.0-alpha.2",
       "project": {
         "title": "CloudChipr",

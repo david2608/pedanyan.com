@@ -62,8 +62,8 @@ function HomeScreen() {
   </>;
 }
 
-function Ticker({ symbol, value, up }: { symbol: string; value: string; up?: boolean }) {
-  return <div className="ns-ticker"><FundMark tone={up ? "cyan" : "lime"} /><span><b>{symbol}</b><small>400 SAR</small></span><strong className={up ? "is-up" : "is-down"}>{up ? "▲" : "▼"} {value}</strong></div>;
+function Ticker({ symbol, company, value, up }: { symbol: string; company: string; value: string; up?: boolean }) {
+  return <div className="ns-ticker"><FundMark tone={up ? "cyan" : "lime"} /><span><b>{symbol}</b><small>{company}</small></span><strong className={up ? "is-up" : "is-down"}>{up ? "▲" : "▼"} {value}</strong></div>;
 }
 
 function ExploreScreen() {
@@ -72,7 +72,7 @@ function ExploreScreen() {
     <header className="ns-app-head"><span>Explore</span><span className="ns-head-icons"><Bell /><CircleUserRound /></span></header>
     <div className="ns-search"><Search /><span>Search stocks and ETFs</span></div>
     <div className="ns-chips"><b>Stocks</b><span>Crypto</span><span>Futures</span><span>ETFs</span></div>
-    <div className="ns-screen-section"><h4>Largest UAE Companies <ChevronRight /></h4><div className="ns-ticker-grid"><Ticker symbol="SOFI" value="2%" up /><Ticker symbol="Coin" value="32%" up /><Ticker symbol="NVDA" value="12%" /><Ticker symbol="PLTR" value="6%" /></div></div>
+    <div className="ns-screen-section"><h4>Stock watchlist <ChevronRight /></h4><div className="ns-ticker-grid"><Ticker symbol="SOFI" company="SoFi" value="2%" up /><Ticker symbol="COIN" company="Coinbase" value="3.2%" up /><Ticker symbol="NVDA" company="NVIDIA" value="1.2%" /><Ticker symbol="PLTR" company="Palantir" value="0.6%" /></div></div>
     <div className="ns-screen-section"><h4>Stock Categories <ChevronRight /></h4><div className="ns-category-grid"><span>Top 25 <b>+34</b></span><span>Technology <b>+63</b></span><span>Dividend stocks <b>+189</b></span><span>ETFs <b>+143</b></span></div></div>
     <aside className="ns-recommend-card"><button aria-label="Dismiss">×</button><b>Find the Right Portfolio for You</b><small>Get matched with portfolios that suit your financial goals and risk level.</small><span>Get My Recommendations</span></aside>
     <BottomNav page="explore" />
@@ -95,7 +95,7 @@ function ConsentScreen() {
 }
 
 function IdentityScreen() {
-  const rows = [["Full name", "John Doe"], ["Phone number", "+966 5X XXX XXXX"], ["Passcode", "••••••"], ["Investor profile", "Opt Out"], ["Language", "Arabic"]];
+  const rows = [["Full name", "Sara Alharbi"], ["Phone number", "+966 5• ••• ••42"], ["Passcode", "••••••"], ["Investor profile", "Opt Out"], ["Language", "English"]];
   return <>
     <Status />
     <header className="ns-app-head"><ChevronRight className="ns-back" /><span>Settings</span><span /></header>

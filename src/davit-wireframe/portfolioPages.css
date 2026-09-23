@@ -10,6 +10,13 @@
   --cloudchipr-full: 100%;
   --cloudchipr-middle: min(calc(100% - 40px), 1800px);
   --cloudchipr-small: min(calc(100% - 40px), 1400px);
+  /* From the Figma source (node 331:27645), as fractions of the 1920-wide
+     page: the research-step body copy, the keywords line and the chip field
+     are all 960 wide (50%); the Slack quote block is 1260 (65.6%). They had
+     been running at `--cloudchipr-middle` (1800) or full bleed, which is why
+     the chips spread right across the page instead of sitting in a column. */
+  --cloudchipr-narrow: min(calc(100% - 40px), 960px);
+  --cloudchipr-quote: min(calc(100% - 40px), 1260px);
 }
 
 .dw-cloudchipr-problem-inner,
@@ -24,29 +31,44 @@
 }
 
 .dw-cloudchipr-started-inner,
-.dw-cloudchipr-field-study-heading,
-.dw-cloudchipr-field-step-copy {
+.dw-cloudchipr-field-study-heading {
   width: var(--cloudchipr-small) !important;
   max-width: none !important;
 }
 
-.dw-case-section-interview-keywords-intro .dw-case-prose {
-  width: var(--cloudchipr-middle) !important;
+/* Figma: the step body is x 545, w 960 of 1920 — half the page, not the 1400
+   the rest of this case study uses. The heading above it ("I took 3 major
+   steps...") is x 482 w 960, so it shares the same column. */
+.dw-cloudchipr-field-step-copy {
+  width: var(--cloudchipr-narrow) !important;
   max-width: none !important;
 }
 
-.dw-cloudchipr-construction {
-  aspect-ratio: 1788 / 708 !important;
-  background: transparent !important;
-  border-radius: clamp(18px, 1.7vw, 30px) !important;
+/* Figma: x 482, w 960 of 1920 — centred, half the page. */
+/* `.dw-case-contained > .dw-case-chips` later in this file sets 1400 with
+   !important, so the chip field needs a child combinator and its own
+   !important to win — matching on the section alone lost. */
+.dw-case-section-interview-keywords-intro .dw-case-prose,
+.dw-case-section-interview-keywords-intro .dw-case-richtext,
+.dw-case-section.dw-case-section-interview-keywords > .dw-case-chips {
+  width: var(--cloudchipr-narrow) !important;
+  max-width: none !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
 }
 
-.dw-cloudchipr-construction > img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+/* The three research steps and the Slack quote are NOT their own sections at
+   runtime — CloudChiprFieldStudy consumes `field-study-gallery`,
+   `aws-learning`, `aws-course`, `stakeholder-interviews` and `sre-quote` and
+   renders them as `.dw-cloudchipr-field-step*`, so none of those ids exist in
+   the DOM. Selectors keyed to them match nothing. The real classes are used
+   below. */
+
+/* The banner is now a CODED SCENE, not a flat export. These overrides were
+   written for the <img> that used to sit here — `background: transparent` in
+   particular would erase the gradient the scene is drawn on — so only the
+   width override below survives. The scene's own box lives with the rest of
+   its rules further down this file. */
 
 .dw-cloudchipr-comparison-cloudchipr h3 img {
   display: block;
@@ -54,8 +76,10 @@
   height: auto;
 }
 
+/* The bottle photo is 2048x1166, so the stage matches its aspect and the base
+   plate is never cropped by its own frame. */
 .dw-cloudchipr-brand-items-stage {
-  aspect-ratio: 3600 / 2050 !important;
+  aspect-ratio: 2048 / 1166 !important;
   background: #f7e77d !important;
 }
 
@@ -69,20 +93,59 @@
   object-fit: cover;
 }
 
+/* INSIDE THE FRAME. Both layers used to be placed past the stage's edges while
+   the stage clips, which is what sliced the lanyard and the card. The bottle
+   occupies roughly 31%-67% of the width, so these sit in the clear space each
+   side of it and stop short of the bottle and of the frame. */
 .dw-cloudchipr-brand-layer {
+  position: absolute;
   z-index: 2 !important;
+  margin: 0;
 }
 
+.dw-cloudchipr-brand-layer img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+}
+
+/* SIZED BY THE ARTWORK, NOT BY THE FILE BOX.
+
+   Every one of these PNGs is padded with transparent glow — the details card's
+   artwork starts 14.8% into its own file and the logo card's 22.9% in — so
+   positioning the <img> box put the visible piece somewhere else entirely.
+   The numbers below are solved backwards from the reference composition:
+   measure where each object sits in the yellow field, measure where the
+   artwork sits inside its PNG, then place the box so the artwork lands on the
+   target. Verified against the reference to within ~2%.
+
+       badge         content 0.0-35.2% x,  6.0-87.1% y
+       card-details  content 71.5-96.5% x, 13.5-48.8% y
+       card-logo     content 81.7-99.9% x, 48.2-89.7% y   */
 .dw-cloudchipr-brand-layer-badge {
-  top: -13% !important;
-  left: -10% !important;
-  width: 38% !important;
+  top: 3.33% !important;
+  left: 0 !important;
+  right: auto !important;
+  width: 37.94% !important;
 }
 
 .dw-cloudchipr-brand-layer-details {
-  top: 16% !important;
-  right: -8% !important;
-  width: 38% !important;
+  top: 9.97% !important;
+  left: 66.65% !important;
+  right: auto !important;
+  width: 32.83% !important;
+}
+
+/* In front of the details card, as in the reference, where its top-left corner
+   laps over that card's bottom-right. */
+.dw-cloudchipr-brand-layer-logo {
+  z-index: 3 !important;
+  top: 41.07% !important;
+  left: 76.29% !important;
+  right: auto !important;
+  width: 23.61% !important;
 }
 
 .dw-cloudchipr-field-study {
@@ -142,6 +205,8 @@
     --cloudchipr-small: calc(100% - 32px);
   }
 
+  /* Portrait card: the bottle plate is cropped to a taller box, so the two
+     layers move to the top and bottom corners where there is still room. */
   .dw-cloudchipr-brand-items-stage {
     aspect-ratio: 0.92 !important;
   }
@@ -151,18 +216,24 @@
   }
 
   .dw-cloudchipr-brand-layer-badge {
-    top: 0 !important;
-    left: -20% !important;
-    width: 76% !important;
+    top: 2% !important;
+    left: 0 !important;
+    width: 54% !important;
   }
 
   .dw-cloudchipr-brand-layer-details {
-    top: 52% !important;
-    right: -25% !important;
-    width: 82% !important;
+    top: 46% !important;
+    left: 44% !important;
+    width: 56% !important;
   }
 
-  .dw-cloudchipr-field-study {
+  .dw-cloudchipr-brand-layer-logo {
+    top: 68% !important;
+    left: 56% !important;
+    width: 44% !important;
+  }
+
+      .dw-cloudchipr-field-study {
     background: linear-gradient(to bottom, #f4f5f8 0, #f4f5f8 calc(100% - 90px), #fff calc(100% - 90px), #fff 100%) !important;
   }
 
@@ -4088,10 +4159,14 @@
   background: #f5f6fb;
 }
 
+/* Geometry read from the Figma source (node 331:27645), not estimated.
+   The MUI block there spans y 19041-20009 across the 1920-wide page, so the
+   stage carries that ratio and every child below is a percentage of it. */
 .dw-cloudchipr-design-system-stage {
   position: relative;
   width: 100%;
-  min-height: clamp(700px, 57vw, 980px);
+  aspect-ratio: 1920 / 968;
+  min-height: 0;
   overflow: hidden;
   background: #f5f6fb;
 }
@@ -4107,18 +4182,21 @@
   height: auto;
 }
 
+/* Figma: x 246, y 19093, w 300 of 1920 */
 .dw-cloudchipr-design-system-logo {
-  z-index: 2;
-  top: 12%;
-  left: max(8%, calc((100vw - 1480px) / 2));
-  width: clamp(190px, 16vw, 300px);
+  z-index: 4;
+  top: 5.37%;
+  left: 12.81%;
+  width: 15.63%;
 }
 
+/* Figma: x 224, y 19426, w 479 of 1920 */
 .dw-cloudchipr-design-system-benefits {
   position: absolute;
-  z-index: 3;
-  top: 47%;
-  left: max(8%, calc((100vw - 1480px) / 2));
+  z-index: 1;
+  top: 39.77%;
+  left: 11.67%;
+  width: 24.95%;
   display: grid;
   margin: 0;
   padding-left: 1.1em;
@@ -4128,19 +4206,28 @@
   line-height: 1.16;
 }
 
+/* Figma: x 1005, y 19041, w 957 of 1920 — it starts PAST the midline and runs
+   off the right edge (52.34% + 49.84% = 102.2%), which the stage clips. It had
+   been centred with `inset: 0; margin: auto`, which pulled it into the middle
+   of the page and left the pricing card sitting inside it rather than lapping
+   over its edge. */
 .dw-cloudchipr-design-system-screen {
-  z-index: 1;
-  inset: 0;
-  width: min(58vw, 1000px);
+  z-index: 2;
+  inset: auto;
+  top: 0;
+  left: 52.34%;
+  width: 49.84%;
   height: fit-content;
-  margin: auto !important;
+  margin: 0 !important;
 }
 
+/* Figma: x 865, y 19317, w 434 of 1920 — in front of the collage, lapping
+   over its left edge */
 .dw-cloudchipr-design-system-price {
-  z-index: 4;
-  top: 35%;
-  left: 45%;
-  width: clamp(290px, 24vw, 470px);
+  z-index: 3;
+  top: 28.51%;
+  left: 45.05%;
+  width: 22.60%;
   filter: drop-shadow(0 24px 50px rgba(28, 34, 85, 0.16));
 }
 
@@ -6173,6 +6260,12 @@ a.dw-case-testimonial-linkedin:hover {
   position: relative;
   width: min(calc(100% - 20px), 2048px);
   aspect-ratio: 2090 / 866;
+  /* The guides, the lockup and the callouts are all positioned as percentages
+     of THIS box, so the type has to scale from it too. Keyed to `vw` (as it
+     was) the lockup drifted out of its own dashed guides at every width except
+     the one it was tuned at — the banner is a fixed-aspect figure, so `cqw` is
+     the unit that keeps every part in register. */
+  container-type: size;
   min-height: 0;
   margin: 0 auto;
   overflow: hidden;
@@ -6227,25 +6320,30 @@ a.dw-case-testimonial-linkedin:hover {
   border-left: 2px dashed rgba(28, 24, 151, 0.66);
 }
 
+/* Exactly the .dw-construction-guide-logo box — same top, same left, same
+   width. It used to be 4.7% right and 2.6% low of the guide it is supposed to
+   be constructed on, which is the one misalignment a construction diagram
+   cannot have. `justify-content: center` keeps the pair on the centreline at
+   45.8% even when the type metrics shift. */
 .dw-construction-logo {
   position: absolute;
-  top: 39.1%;
-  left: 26.8%;
+  top: 36.5%;
+  left: 22.1%;
   display: grid;
-  grid-template-columns: minmax(142px, 0.245fr) minmax(0, 0.755fr);
-  grid-template-areas:
-    "glyph wordmark"
-    "strapline strapline";
+  grid-template-columns: auto auto;
+  grid-template-areas: "glyph wordmark";
   align-items: center;
-  width: 45.5%;
+  justify-content: center;
+  column-gap: 0.9cqw;
+  width: 55.9%;
 }
 
 .dw-construction-glyph {
   position: relative;
   grid-area: glyph;
   display: block;
-  width: clamp(116px, 10.5vw, 214px);
-  height: clamp(64px, 5.55vw, 114px);
+  width: 11.8cqw;
+  height: 6.09cqw;
 }
 
 .dw-construction-glyph-blueprint {
@@ -6260,33 +6358,28 @@ a.dw-case-testimonial-linkedin:hover {
   vector-effect: non-scaling-stroke;
 }
 
-.dw-construction-ring {
+/* The finished mark, sharing the blueprint's box and viewBox so it lands ON
+   its construction circles. Same inset/size as .dw-construction-glyph-blueprint
+   — if one changes, so must the other. */
+.dw-construction-glyph-mark {
   position: absolute;
-  top: 50%;
-  display: block;
-  border: clamp(10px, 0.95vw, 19px) solid #fff;
-  border-radius: 50%;
-  transform: translateY(-50%);
+  inset: -10% -5%;
+  width: 110%;
+  height: 120%;
+  overflow: visible;
 }
 
-.dw-construction-ring-left,
-.dw-construction-ring-right {
-  width: 44%;
-  aspect-ratio: 1;
-}
-
-.dw-construction-ring-left {
-  left: 0;
-}
-
-.dw-construction-ring-center {
-  left: 28%;
-  width: 52%;
-  aspect-ratio: 1;
-}
-
-.dw-construction-ring-right {
-  right: 0;
+/* Arcs, stroked — not bordered boxes. The gap in each one is what makes the
+   mark read as the CloudChipr logo rather than as three links of a chain, and
+   a border on an <i> cannot have a gap. */
+.dw-construction-ring {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: butt;
+  /* the timeline scales these, and an SVG element needs to be told what
+     "centre" means before transform-origin works on it */
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .dw-construction-wordmark {
@@ -6295,7 +6388,7 @@ a.dw-case-testimonial-linkedin:hover {
   align-items: baseline;
   color: #fff;
   font-family: "Archivo", Arial, sans-serif;
-  font-size: clamp(52px, 5.15vw, 102px);
+  font-size: 5.8cqw;
   font-weight: 700;
   line-height: 0.92;
   letter-spacing: 0;
@@ -6305,11 +6398,19 @@ a.dw-case-testimonial-linkedin:hover {
   display: inline-block;
 }
 
+/* Positioned against its OWN guide, not flowed under the lockup. Relying on a
+   grid row plus a margin left it 4.7% of the banner's height below the dashed
+   box it belongs in, because the row grows with the wordmark's line box rather
+   than with the glyph. Anchored here it is in its place by construction and
+   cannot drift. */
 .dw-construction-strapline {
-  grid-area: strapline;
-  margin-top: clamp(18px, 1.85vw, 36px);
+  position: absolute;
+  top: 57.4%;
+  left: 27.1%;
+  width: 44.7%;
+  margin-top: 0;
   color: rgba(255, 255, 255, 0.67);
-  font-size: clamp(21px, 2vw, 39px);
+  font-size: 2.25cqw;
   font-weight: 400;
   line-height: 1.1;
   text-align: center;
@@ -6319,7 +6420,7 @@ a.dw-case-testimonial-linkedin:hover {
 .dw-construction-label {
   position: absolute;
   color: rgba(205, 202, 255, 0.67);
-  font-size: clamp(20px, 1.65vw, 33px);
+  font-size: 1.9cqw;
   font-weight: 600;
   line-height: 1;
 }
@@ -6353,19 +6454,19 @@ a.dw-case-testimonial-linkedin:hover {
 }
 
 .dw-construction-callout-circle {
-  width: clamp(62px, 5.3vw, 101px);
+  width: 5.96cqw;
   aspect-ratio: 1;
-  border: clamp(3px, 0.22vw, 4px) solid #fff438;
+  border: 0.25cqw solid #fff438;
   border-radius: 50%;
 }
 
 .dw-construction-callout-line {
-  height: clamp(3px, 0.2vw, 4px);
+  height: 0.22cqw;
   background: #fff438;
 }
 
 .dw-construction-callout-copy {
-  font-size: clamp(17px, 1.25vw, 24px);
+  font-size: 1.4cqw;
   font-weight: 500;
   line-height: 1;
   white-space: nowrap;
@@ -6546,40 +6647,6 @@ a.dw-case-testimonial-linkedin:hover {
   overflow: hidden;
   background: #f7e77d;
   border-radius: clamp(14px, 1.5vw, 24px);
-}
-
-.dw-cloudchipr-brand-layer {
-  position: absolute;
-  z-index: 1;
-  margin: 0;
-  transform-origin: center;
-  will-change: transform, opacity;
-}
-
-.dw-cloudchipr-brand-layer img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  will-change: transform;
-}
-
-.dw-cloudchipr-brand-layer-badge {
-  top: -14%;
-  left: -5%;
-  width: 42%;
-}
-
-.dw-cloudchipr-brand-layer-details {
-  top: 1%;
-  right: 5%;
-  width: 49%;
-}
-
-.dw-cloudchipr-brand-layer-logo {
-  right: -4%;
-  bottom: -27%;
-  width: 35%;
 }
 
 .dw-cloudchipr-started {
@@ -8356,7 +8423,14 @@ a.dw-case-testimonial-linkedin:hover {
   }
 
   .dw-construction-strapline {
-    margin-top: 28px;
+    /* The strapline is absolutely positioned now, so it needs THIS
+       breakpoint's guide coordinates (58% / 10% / 80%) — left on the desktop
+       ones it would sit in a box the mobile layout has moved. `margin-top` no
+       longer positions anything. */
+    top: 58%;
+    left: 10%;
+    width: 80%;
+    margin-top: 0;
     font-size: 15px;
     white-space: normal;
   }
@@ -8505,25 +8579,7 @@ a.dw-case-testimonial-linkedin:hover {
     border-radius: 12px;
   }
 
-  .dw-cloudchipr-brand-layer-badge {
-    top: -2%;
-    left: -12%;
-    width: 76%;
-  }
-
-  .dw-cloudchipr-brand-layer-details {
-    top: 42%;
-    right: -18%;
-    width: 88%;
-  }
-
-  .dw-cloudchipr-brand-layer-logo {
-    right: -18%;
-    bottom: -16%;
-    width: 68%;
-  }
-
-  .dw-cloudchipr-started {
+        .dw-cloudchipr-started {
     padding: 82px 0 100px !important;
   }
 
@@ -11572,4 +11628,14 @@ a.dw-case-testimonial-linkedin:hover {
   border-radius: 0;
   box-shadow: none;
   background: transparent;
+}
+
+/* Figma: the Slack quote block is x 332, w 1260 of 1920 — wider than the copy
+   above it, and centred. */
+.dw-cloudchipr-field-step-interviews .dw-cloudchipr-field-media,
+.dw-cloudchipr-field-step-course .dw-cloudchipr-field-media {
+  width: var(--cloudchipr-quote);
+  max-width: none;
+  margin-right: auto;
+  margin-left: auto;
 }

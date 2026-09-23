@@ -1,0 +1,132 @@
+.tk-case { --tk-yellow: #ffdd2d; --tk-gutter: clamp(20px, 4vw, 72px); background: #fff; color: #080808; font-family: Archivo, Arial, Helvetica, sans-serif; letter-spacing: 0; }
+.tk-case *, .tk-case *::before, .tk-case *::after { box-sizing: border-box; letter-spacing: 0; }
+.tk-case h1, .tk-case h2, .tk-case h3, .tk-case p, .tk-case figure, .tk-case dl { margin: 0; }
+.tk-case h1, .tk-case h2, .tk-case h3 { font-family: Syne, Archivo, Arial, sans-serif; }
+.tk-case p, .tk-case li, .tk-case dd { font-size: 20px; line-height: 1.5; }
+.tk-case p + p { margin-top: 20px; }
+.tk-inner { width: min(1400px, calc(100% - var(--tk-gutter) * 2)); margin-inline: auto; }
+.tk-section { padding-block: 96px; }
+.tk-case .tk-label { font-size: 12px; font-weight: 650; text-transform: uppercase; line-height: 1.5; color: #5a5d65; }
+.tk-case mark { color: #111; background: var(--tk-yellow); }
+.tk-hero { padding-top: 102px; display: flex; flex-direction: column; background: #f7f7f9; }
+.tk-hero-copy { padding-block: 32px 64px; }
+.tk-hero .tk-label mark { display: inline-block; padding: 6px 12px; }
+.tk-case .tk-hero h1 { font-size: 66px; line-height: 1.05; font-weight: 500; margin: 12px 0 24px; }
+.tk-case .tk-deck { max-width: 720px; font-family: Syne, Archivo, Arial, sans-serif; font-size: 27px; line-height: 1.4; color: #242424; }
+.tk-author { margin-top: 42px; padding-top: 28px; position: relative; display: grid; gap: 5px; }
+.tk-author::before { content: ''; position: absolute; top: 0; width: 100px; height: 3px; background: var(--tk-yellow); }
+.tk-author strong { font-family: Syne, Archivo, Arial, sans-serif; font-size: 20px; font-weight: 500; }
+.tk-author span { color: #5a5d65; font-size: 14px; }
+.tk-hero-footer { border-top: 1px solid #dddfe3; display: flex; align-items: center; justify-content: space-between; padding-block: 22px; font-size: 12px; color: #5a5d65; }
+.tk-hero-footer a { display: grid; place-items: center; min-width: 44px; min-height: 44px; color: inherit; }
+.tk-heading { margin-bottom: 42px; }
+.tk-case .tk-heading h2 { max-width: 1100px; font-size: 48px; font-weight: 500; line-height: 1.15; margin-top: 18px; text-wrap: balance; }
+.tk-case h3 { font-size: 25px; font-weight: 500; line-height: 1.3; margin-bottom: 18px; }
+.tk-prose { max-width: 640px; color: #4a4d55; margin-bottom: 42px !important; }
+.tk-two-col { display: grid; grid-template-columns: 1.1fr 1fr; gap: 90px; }
+.tk-two-col p, .tk-role-grid li { color: #4a4d55; }
+.tk-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.tk-metrics dt { font-family: Syne, Archivo, Arial, sans-serif; font-size: 64px; line-height: 1.1; }
+.tk-metrics dd { margin: 16px 0 0; font-size: 15px; }
+.tk-metrics small { display: block; margin-top: 12px; color: #666a73; line-height: 1.5; }
+.tk-flow { list-style: none; padding: 0; margin: 40px 0; display: flex; gap: 20px; }
+.tk-flow li { flex: 1; min-width: 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; border-top: 2px solid #d9dce1; font-size: 16px; line-height: 1.4; }
+.tk-flow li:last-child { border-color: var(--tk-yellow); }
+.tk-flow li:last-child > svg { display: none; }
+.tk-flow svg { flex-shrink: 0; }
+.tk-role-band, .tk-design-band { background: #fff; }
+.tk-role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+.tk-role-grid ul { margin: 0; padding-left: 20px; }
+.tk-role-grid li { font-size: 16px; padding-bottom: 12px; }
+.tk-collaborators { border-top: 1px solid #dddfe3; padding-top: 28px; margin-top: 36px !important; font-size: 14px !important; color: #5a5d65; }
+.tk-funnel-row { padding-block: 28px; border-top: 1px solid #d9dce1; display: grid; grid-template-columns: 50px 1fr auto; gap: 24px; align-items: start; }
+.tk-funnel-row h3 { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin-bottom: 8px; }
+.tk-funnel-row p { color: #5a5d65; font-size: 16px; }
+.tk-number { font-family: Syne, Archivo, Arial, sans-serif; font-size: 16px; color: #656974; }
+.tk-drop { background: #fff0d1; color: #795400; padding: 5px 9px; font-size: 12px; }
+.tk-case .tk-note { font-size: 13px; line-height: 1.65; color: #626670; max-width: 830px; margin-top: 28px; }
+.tk-trust { margin-top: 80px; padding-block: 48px; border-top: 1px solid #dddfe3; }
+.tk-case .tk-trust h2 { font-size: 64px; font-weight: 500; line-height: 1.13; margin: 24px 0 32px; }
+.tk-trust p:last-child { max-width: 600px; color: #4a4d55; }
+.tk-process { display: grid; grid-template-columns: 1fr 1.1fr; gap: 100px; align-items: start; }
+.tk-process-map { position: sticky; top: 120px; padding-top: 30px; }
+.tk-process-map ol { list-style: none; padding: 0; margin: 30px 0; }
+.tk-process-map li { position: relative; border-left: 2px solid #d9dce1; }
+.tk-process-map a { display: flex; gap: 20px; padding: 16px 20px; color: #626670; text-decoration: none; font-size: 17px; transition: background .45s, color .45s; }
+.tk-process-map a span { font-variant-numeric: tabular-nums; }
+.tk-process-map li.is-done { border-left-color: #111; }
+.tk-process-map li.is-active { border-left-color: #111; }
+.tk-process-map li.is-active a { background: var(--tk-yellow); color: #111; }
+.tk-feedback { display: flex; gap: 12px; align-items: center; font-size: 13px; color: #626670; padding: 15px 0; transition: color .4s; }
+.tk-feedback svg { flex-shrink: 0; }
+.tk-feedback.is-active { color: #111; }
+.tk-feedback.is-active svg { animation: tk-loop 1.5s ease both; }
+@keyframes tk-loop { from { transform: rotate(0); } to { transform: rotate(-360deg); } }
+.tk-process-step { min-height: 65svh; padding-block: 80px; scroll-margin-top: 140px; display: flex; flex-direction: column; justify-content: center; }
+.tk-process-step h3 { font-size: 36px; margin: 20px 0; }
+.tk-process-step > p { color: #4a4d55; }
+.tk-process-tags { display: flex; gap: 18px; flex-wrap: wrap; list-style: none; padding: 0; margin: 24px 0; }
+.tk-process-tags li { font-size: 12px; border-bottom: 2px solid var(--tk-yellow); padding-bottom: 6px; }
+.tk-process-step .tk-process-evidence { border-left: 3px solid var(--tk-yellow); padding-left: 18px; font-size: 15px; margin: 12px 0 0; color: #111; }
+.tk-evidence { min-width: 0; }
+.tk-evidence-open { display: block; position: relative; padding: 24px; width: 100%; border: 0; border-radius: 8px; overflow: hidden; background: #f7f7f9; cursor: zoom-in; }
+.tk-evidence-open img { display: block; width: 100%; height: auto; }
+.tk-zoom { position: absolute; top: 12px; right: 12px; display: grid; place-items: center; width: 32px; height: 32px; background: #fff; color: #111; border: 1px solid #d9dce1; }
+.tk-evidence figcaption { font-size: 12px; line-height: 1.6; color: #626670; margin-top: 14px; max-width: 850px; }
+.tk-image-pair { display: grid; grid-template-columns: .8fr 1.2fr; gap: 28px; align-items: start; }
+.tk-design-band .tk-heading:not(:first-child) { margin-top: 100px; }
+.tk-lightbox { padding: 60px 24px 24px; width: min(1600px, 95vw); max-height: 92svh; border: 0; background: #fff; }
+.tk-lightbox::backdrop { background: #000b; }
+.tk-lightbox > button { position: sticky; float: right; top: 0; margin-top: -48px; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid #ddd; background: #fff; cursor: pointer; }
+.tk-lightbox img { display: block; width: 100%; height: auto; }
+.tk-lightbox p { font: 14px/1.5 Archivo, Arial, sans-serif; margin-top: 18px; }
+.tk-user-flow { display: grid; grid-template-columns: repeat(4, 1fr); }
+.tk-user-flow li { align-items: flex-start; flex-wrap: wrap; padding: 24px 16px 30px 0; }
+.tk-user-flow strong { flex-basis: 100%; order: 1; font-weight: 550; }
+.tk-impact { background: var(--tk-yellow); }
+.tk-impact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+.tk-case .tk-impact-number { font-family: Syne, Archivo, Arial, sans-serif; font-size: 140px; font-weight: 500; line-height: 1.05; }
+.tk-case .tk-impact-label { max-width: 320px; font-size: 24px; line-height: 1.35; }
+.tk-impact .tk-note { color: #4d461d; border-top: 1px solid #a48a1a; padding-top: 24px; margin-top: 50px; }
+.tk-case a:focus-visible, .tk-case button:focus-visible { outline: 3px solid #2353cb; outline-offset: 5px; }
+@media (max-width: 1000px) {
+  .tk-case .tk-hero h1 { font-size: 56px; }
+  .tk-two-col, .tk-process, .tk-impact-grid { gap: 40px; }
+  .tk-role-grid { gap: 24px; }
+  .tk-case .tk-heading h2 { font-size: 40px; }
+  .tk-drop { display: none; }
+  .tk-funnel-row { grid-template-columns: 35px 1fr; }
+}
+@media (max-width: 700px) {
+  .tk-inner { width: calc(100% - 40px); }
+  .tk-section { padding-block: 64px; }
+  .tk-hero { padding-top: 66px; }
+  .tk-hero-copy { padding-block: 24px 40px; }
+  .tk-case .tk-hero h1 { font-size: 42px; max-width: 400px; }
+  .tk-case .tk-deck { font-size: 22px; }
+  .tk-author span { max-width: 100%; line-height: 1.6; text-wrap: balance; }
+  .tk-case .tk-heading h2 { font-size: 34px; }
+  .tk-heading { margin-bottom: 28px; }
+  .tk-case p { font-size: 16px; }
+  .tk-two-col, .tk-role-grid, .tk-impact-grid, .tk-image-pair { grid-template-columns: 1fr; gap: 32px; }
+  .tk-metrics dt { font-size: 50px; }
+  .tk-flow { flex-direction: column; gap: 0; }
+  .tk-flow li { padding-block: 18px; }
+  .tk-flow svg { transform: rotate(90deg); }
+  .tk-funnel-row { gap: 12px; }
+  .tk-funnel-row h3 { font-size: 22px; }
+  .tk-case .tk-trust h2 { font-size: 42px; }
+  .tk-trust { margin-top: 48px; }
+  .tk-process { display: block; }
+  .tk-process-map { position: static; padding: 0; }
+  .tk-process-map ol { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .tk-process-map a { padding: 12px 8px; font-size: 12px; gap: 6px; }
+  .tk-process-step { min-height: auto; padding: 42px 0; border-top: 1px solid #dddfe3; }
+  .tk-process-step h3 { font-size: 30px; }
+  .tk-evidence-open { padding: 8px; }
+  .tk-design-band .tk-heading:not(:first-child) { margin-top: 64px; }
+  .tk-user-flow { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .tk-case .tk-impact-number { font-size: 100px; }
+  .tk-case .tk-impact-label { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) { .tk-case *, .tk-case *::before, .tk-case *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

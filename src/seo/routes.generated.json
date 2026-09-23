@@ -101,6 +101,16 @@
       "changefreq": "yearly"
     },
     {
+      "path": "/am/projects/tinkoff-checkout",
+      "title": "Tinkoff Checkout — Case Study by Davit Pedanyan",
+      "description": "Restoring trust and purchase context in an e-commerce checkout.",
+      "type": "CreativeWork",
+      "name": "Tinkoff Checkout",
+      "headline": null,
+      "priority": "0.8",
+      "changefreq": "yearly"
+    },
+    {
       "path": "/am/projects/cloudchipr",
       "title": "CloudChipr — Case Study by Davit Pedanyan",
       "description": "$500K saved in cloud costs. Making cloud cost operations actionable for engineering and finance teams.",

@@ -14,7 +14,7 @@ function TempoLocationScreen({ active }: { active: boolean }) {
         alt=""
       />
       <div className="tp-figma-location-copy">
-        <h3>Hello, Name</h3>
+        <h3>Welcome to Tempo</h3>
         <p>Please, set up your location to start exploring what&apos;s near you.</p>
       </div>
       <button className="tp-figma-location-action" type="button">
@@ -25,16 +25,17 @@ function TempoLocationScreen({ active }: { active: boolean }) {
 }
 
 const foodRail = [
-  { image: "offer-pizza.png", title: "Restaurant name", category: "Pizza \u00b7 Italian \u00b7 Spicy" },
-  { image: "offer-sushi.png", title: "Name", category: "Sushi \u00b7 Chinese" }
+  { image: "offer-pizza.png", title: "Piazza Pizza", category: "Pizza \u00b7 Italian", rating: "4.7", time: "25-35 min", delivery: "Free delivery" },
+  { image: "offer-sushi.png", title: "Nori Kitchen", category: "Sushi \u00b7 Japanese", rating: "4.6", time: "35-45 min", delivery: "500 AMD delivery" }
 ];
 
 const foodList = [
-  { image: "offer-burger.png", title: "Name", category: "Burger \u00b7 Fast food" },
-  { image: "offer-breakfast.png", title: "Name", category: "Breakfast \u00b7" }
+  { image: "offer-burger.png", title: "Burger Yard", category: "Burgers \u00b7 Fast food", rating: "4.5", time: "20-30 min", delivery: "400 AMD delivery" },
+  { image: "offer-breakfast.png", title: "Morning Table", category: "Breakfast \u00b7 Cafe", rating: "4.8", time: "15-25 min", delivery: "300 AMD delivery" }
 ];
 
-function FoodCard({ offer, badge }: { offer: { image: string; title: string; category: string }; badge?: boolean }) {
+// Illustrative merchant data, not a claim about Tempo's live partners.
+function FoodCard({ offer, badge }: { offer: typeof foodRail[number]; badge?: boolean }) {
   return (
     <article className="tp-figma-food-card">
       <div className="tp-figma-food-card-image">
@@ -44,10 +45,10 @@ function FoodCard({ offer, badge }: { offer: { image: string; title: string; cat
       <div className="tp-figma-food-card-copy">
         <div>
           <strong>{offer.title}</strong>
-          <span><img src="/portfolio-assets/tempo/figma/food/star.svg" alt="" />4.1</span>
+          <span><img src="/portfolio-assets/tempo/figma/food/star.svg" alt="" />{offer.rating}</span>
         </div>
         <p>{offer.category}</p>
-        <footer><b>25-35min</b><b>Free delivery</b></footer>
+        <footer><b>{offer.time}</b><b>{offer.delivery}</b></footer>
       </div>
     </article>
   );
@@ -154,7 +155,13 @@ function TempoOrderScreen({ active }: { active: boolean }) {
     <div className={`tp-figma-order${active ? " is-active" : ""}`}>
       <img className="tp-figma-order-status" src="/portfolio-assets/tempo/figma/route/status-bar.svg" alt="" />
       <header className="tp-figma-order-header"><img src="/portfolio-assets/tempo/figma/route/back.svg" alt="" /><strong>Order details</strong></header>
-      <section className="tp-figma-order-info"><dl><div><dt>Order ID</dt><dd>#12346567</dd></div><div><dt>Date &amp; Time</dt><dd>14/02/2023, 21:32 PM</dd></div><div><dt>Delivered to</dt><dd>Chukhadjyan 50 street</dd></div><div><dt>Payment method</dt><dd>•••• •••• •••• 1121</dd></div></dl><h3>KFC</h3><div className="tp-figma-order-item"><img src="/portfolio-assets/tempo/figma/food/offer-burger.png" alt="" /><span><b>Name</b><small>Description</small></span><strong>2000 AMD</strong></div><div className="tp-figma-order-item"><img src="/portfolio-assets/tempo/figma/food/offer-burger.png" alt="" /><span><b>Name</b><small>Description</small></span><strong>2000 AMD</strong></div><div className="tp-figma-order-summary"><h3>Summary</h3><p><span>Products</span><b>4000 AMD</b></p><p><span>Delivery</span><b>500 AMD</b></p></div></section><footer><button type="button">Reorder</button></footer>
+      <section className="tp-figma-order-info">
+        <dl><div><dt>Order ID</dt><dd>#12346567</dd></div><div><dt>Date &amp; Time</dt><dd>14/02/2023, 21:32</dd></div><div><dt>Delivered to</dt><dd>50 Chukhadjyan Street</dd></div><div><dt>Payment method</dt><dd>•••• •••• •••• 1121</dd></div></dl>
+        <h3>Burger Yard</h3>
+        <div className="tp-figma-order-item"><img src="/portfolio-assets/tempo/figma/food/offer-burger.png" alt="" /><span><b>Classic burger</b><small>Beef, lettuce, house sauce</small></span><strong>2400 AMD</strong></div>
+        <div className="tp-figma-order-item"><img src="/portfolio-assets/tempo/figma/food/offer-breakfast.png" alt="" /><span><b>Breakfast plate</b><small>Eggs and toast</small></span><strong>1600 AMD</strong></div>
+        <div className="tp-figma-order-summary"><h3>Summary</h3><p><span>Products</span><b>4000 AMD</b></p><p><span>Delivery</span><b>400 AMD</b></p></div>
+      </section><footer><button type="button">Reorder</button></footer>
     </div>
   );
 }

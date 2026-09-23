@@ -29,6 +29,7 @@ import { TempoFlowCard } from "./tempoFlowCard";
 import { IcredoLogoScene } from "./icredoLogoScene";
 import { SecurionLogoScene } from "./securionLogoScene";
 import { LigaFlowCard } from "./ligaFlowCard";
+import { TinkoffCaseStudy } from "./tinkoffCase";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -110,6 +111,7 @@ export type PortfolioProject = {
 };
 
 const portfolioFilterMetadata: Record<string, { year: string; category: string }> = {
+  "tinkoff-checkout": { year: "", category: "Fintech" },
   cloudchipr: { year: "2023", category: "FinOps" },
   "material-exchange": { year: "2021", category: "SaaS" },
   securion: { year: "2018", category: "Crypto" },
@@ -200,6 +202,7 @@ const portfolioCardImages: Record<string, string> = {
 };
 
 const portfolioCardHeadlines: Record<string, string> = {
+  "tinkoff-checkout": "From checkout drop-off to a clearer path to payment.",
   cloudchipr: "$500K saved in cloud costs.",
   "material-exchange": "Cut material management from 61 to 23 minutes.",
   securion: "Multi-factor security for digital assets.",
@@ -1817,13 +1820,115 @@ function ProseSection({ project, section }: { project: PortfolioProject; section
   );
 }
 
+/* The CloudChipr logo-construction banner.
+
+   This used to be a flat SVG export, which is why the mark was missing and the
+   strapline floated loose: the stylesheet and the scroll timeline for a fully
+   coded scene already existed — 57 rules and a thirteen-step timeline keyed to
+   .dw-construction-* — but nothing ever rendered the markup they target, so
+   every selector matched nothing and the animation ran against an empty set.
+   This component is that missing markup.
+
+   The construction circles are the REAL ones from the Figma source, not
+   approximations: three positions, each with an outer and an inner radius,
+   which is how the mark is actually built. The three white rings sit on those
+   same centres, so the dashed blueprint and the finished glyph line up instead
+   of merely resembling each other.
+
+   The lockup is a grid — glyph beside wordmark, strapline spanning beneath —
+   so the strapline is positioned BY the lockup rather than placed near it. It
+   cannot drift out of register when the banner resizes. */
+const CLOUDCHIPR_WORDMARK = "cloudchipr";
+
 function CloudChiprLogoConstruction() {
   return (
-    <div className="dw-cloudchipr-construction" data-cloudchipr-construction>
-      <img
-        src="/portfolio-assets/cloudchipr/logo-construction-reference.svg"
-        alt="CloudChipr logo construction, glyph, wordmark, and strapline"
-      />
+    <div className="dw-cloudchipr-construction" data-cloudchipr-construction role="img"
+      aria-label="CloudChipr logo construction: the glyph built from three overlapping rings on dashed guide circles, the cloudchipr wordmark, and the strapline Workflow Automation for Cloud Operations.">
+      <div className="dw-construction-guides" aria-hidden="true">
+        <i className="dw-construction-guide dw-construction-guide-logo" />
+        <i className="dw-construction-guide dw-construction-guide-strapline" />
+        <i className="dw-construction-centerline" />
+      </div>
+
+      <div className="dw-construction-logo">
+        <span className="dw-construction-glyph">
+          {/* viewBox is the circles' own bounds from the Figma file, so the
+              geometry below is copied rather than redrawn by eye. */}
+          <svg className="dw-construction-glyph-blueprint" viewBox="480 256 192 118" fill="none" aria-hidden="true">
+            <circle cx="523" cy="332" r="36.5" />
+            <circle cx="523" cy="332" r="19.5" />
+            <circle cx="571.5" cy="315.5" r="53" />
+            <circle cx="571.5" cy="315.5" r="35" />
+            <circle cx="626.5" cy="328.5" r="40" />
+            <circle cx="626.5" cy="328.5" r="22" />
+            <path d="M486.5 332h180" />
+            <path d="M571.5 262.5v106" />
+          </svg>
+          {/* THE MARK ITSELF — three ARCS, not three closed rings.
+
+              The real CloudChipr logo is a yellow c, a blue C and a red
+              reversed C, each with a real opening; closed donuts read as a
+              chain, which is not the logo. The gaps below were measured off
+              the brand artwork pixel by pixel rather than judged by eye: at
+              each arc's mid-radius, the angular span where the colour is
+              absent AND the pixel underneath is white (not another arc
+              overlapping it).
+
+                  left    gap  95° centred 342°
+                  centre  gap  91° centred   0°
+                  right   gap 137° centred 157°
+
+              `pathLength="360"` makes one dash unit equal one degree, so the
+              dasharray IS the arc in degrees and stays right at any size. The
+              gap is rotated by stroke-dashoffset rather than a transform,
+              because the timeline scales these same elements and a transform
+              here would be overwritten.
+
+              Same viewBox as the blueprint above, so the finished mark sits on
+              its own construction circles instead of merely near them. */}
+          <svg className="dw-construction-glyph-mark" viewBox="480 256 192 118" fill="none" aria-hidden="true">
+            <circle className="dw-construction-ring" cx="523" cy="332" r="28" strokeWidth="17"
+              pathLength={360} strokeDasharray="265 95" strokeDashoffset={-29.5} />
+            <circle className="dw-construction-ring" cx="571.5" cy="315.5" r="44" strokeWidth="18"
+              pathLength={360} strokeDasharray="269 91" strokeDashoffset={314.5} />
+            <circle className="dw-construction-ring" cx="626.5" cy="328.5" r="31" strokeWidth="18"
+              pathLength={360} strokeDasharray="223 137" strokeDashoffset={134.5} />
+          </svg>
+        </span>
+
+        {/* one span per letter: the timeline staggers them, so the wordmark
+            sets itself rather than fading in as one block */}
+        <span className="dw-construction-wordmark" aria-hidden="true">
+          {CLOUDCHIPR_WORDMARK.split("").map((letter, index) => (
+            <span key={`${letter}-${index}`}>{letter}</span>
+          ))}
+        </span>
+
+      </div>
+
+      {/* A sibling of the lockup, not a row inside it: the strapline is
+          registered to its OWN dashed guide, so its coordinates are the
+          guide's coordinates and the two cannot come apart. */}
+      <span className="dw-construction-strapline" aria-hidden="true">
+        Workflow Automation for Cloud Operations
+      </span>
+
+      <span className="dw-construction-label dw-construction-label-glyph" aria-hidden="true">Glyph.</span>
+      <span className="dw-construction-label dw-construction-label-lookup" aria-hidden="true">Lockup.</span>
+      <span className="dw-construction-label dw-construction-label-wordmark" aria-hidden="true">Wordmark.</span>
+      <span className="dw-construction-label dw-construction-label-strapline" aria-hidden="true">Strapline.</span>
+
+      <div className="dw-construction-callout dw-construction-callout-cloud" aria-hidden="true">
+        <i className="dw-construction-callout-circle" />
+        <i className="dw-construction-callout-line" />
+        <span className="dw-construction-callout-copy">Cloud + Chart</span>
+      </div>
+
+      <div className="dw-construction-callout dw-construction-callout-type" aria-hidden="true">
+        <i className="dw-construction-callout-circle" />
+        <i className="dw-construction-callout-line" />
+        <span className="dw-construction-callout-copy">Geometric sans</span>
+      </div>
     </div>
   );
 }
@@ -1870,13 +1975,31 @@ function CloudChiprConceptSelection({
 function CloudChiprBrandItems({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   return (
     <section className="dw-case-section dw-cloudchipr-brand-items" id={section.id} data-cloudchipr-brand-items>
+      {/* Three layers, not one flat image: the yellow bottle photo is the
+          base plate, and the badge and the business card are transparent PNGs
+          floated over it so the timeline can bring them in separately.
+
+          They used to be positioned OUTSIDE the frame — top: -13%, left: -10%,
+          right: -8% — while the stage clips its overflow, so the lanyard and
+          the card were sliced off at the edges. They now sit inside the yellow
+          field, clear of the bottle on both sides. */}
       <div className="dw-cloudchipr-brand-items-stage">
-        <img className="dw-cloudchipr-brand-bottle" src="/portfolio-assets/cloudchipr/brand-bottle.png" alt="CloudChipr branded bottle" />
+        <img
+          className="dw-cloudchipr-brand-bottle"
+          src="/portfolio-assets/cloudchipr/brand-bottle.png"
+          alt="A white CloudChipr branded water bottle with a carabiner, on a yellow field"
+        />
         <figure className="dw-cloudchipr-brand-layer dw-cloudchipr-brand-layer-badge">
           <ProjectImage project={project} assetKey="brand-badge" />
         </figure>
         <figure className="dw-cloudchipr-brand-layer dw-cloudchipr-brand-layer-details">
           <ProjectImage project={project} assetKey="brand-card-details" />
+        </figure>
+        {/* The logo card. It exists as an asset and is in the reference
+            composition — lower right, overlapping the details card — but was
+            never rendered, which is why that corner of the field was empty. */}
+        <figure className="dw-cloudchipr-brand-layer dw-cloudchipr-brand-layer-logo">
+          <ProjectImage project={project} assetKey="brand-card-logo" />
         </figure>
       </div>
     </section>
@@ -3344,10 +3467,17 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
           const stage = brandItems.querySelector<HTMLElement>(".dw-cloudchipr-brand-items-stage");
           const badge = brandItems.querySelector<HTMLElement>(".dw-cloudchipr-brand-layer-badge");
           const details = brandItems.querySelector<HTMLElement>(".dw-cloudchipr-brand-layer-details");
+          const logoCard = brandItems.querySelector<HTMLElement>(".dw-cloudchipr-brand-layer-logo");
 
+          /* The entrance offsets are deliberately small. At the old values
+             (xPercent -34 / +30, yPercent 18 / -22) the two layers started far
+             enough outside the stage that its overflow clipped them for most of
+             the scrub — they were cut on the way in as well as at rest. These
+             keep both pieces whole from the first frame to the last. */
           gsap.set(stage, { autoAlpha: 0.35, scale: 0.985, filter: "blur(4px)" });
-          gsap.set(badge, { autoAlpha: 0, xPercent: -34, yPercent: 18, rotation: -8, scale: 0.82 });
-          gsap.set(details, { autoAlpha: 0, xPercent: 30, yPercent: -22, rotation: 8, scale: 0.84 });
+          gsap.set(badge, { autoAlpha: 0, xPercent: -12, yPercent: 7, rotation: -5, scale: 0.9 });
+          gsap.set(details, { autoAlpha: 0, xPercent: 11, yPercent: -8, rotation: 5, scale: 0.9 });
+          gsap.set(logoCard, { autoAlpha: 0, xPercent: 9, yPercent: 10, rotation: 4, scale: 0.9 });
 
           gsap.timeline({
             scrollTrigger: {
@@ -3360,24 +3490,8 @@ function usePortfolioMotion(containerRef: React.RefObject<HTMLElement | null>) {
           })
             .to(stage, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.7, ease: "power2.out" }, 0)
             .to(badge, { autoAlpha: 1, xPercent: 0, yPercent: 0, rotation: 0, scale: 1, duration: 1, ease: "power3.out" }, 0.05)
-            .to(details, { autoAlpha: 1, xPercent: 0, yPercent: 0, rotation: 0, scale: 1, duration: 1, ease: "power3.out" }, 0.24);
-
-          const badgeImg = badge?.querySelector("img");
-          if (badgeImg) {
-            gsap.to(badgeImg, {
-              yPercent: -5,
-              ease: "none",
-              scrollTrigger: { trigger: brandItems, start: "top bottom", end: "bottom top", scrub: 0.8 }
-            });
-          }
-          const detailsImg = details?.querySelector("img");
-          if (detailsImg) {
-            gsap.to(detailsImg, {
-              yPercent: 4,
-              ease: "none",
-              scrollTrigger: { trigger: brandItems, start: "top bottom", end: "bottom top", scrub: 0.8 }
-            });
-          }
+            .to(details, { autoAlpha: 1, xPercent: 0, yPercent: 0, rotation: 0, scale: 1, duration: 1, ease: "power3.out" }, 0.24)
+            .to(logoCard, { autoAlpha: 1, xPercent: 0, yPercent: 0, rotation: 0, scale: 1, duration: 1, ease: "power3.out" }, 0.38);
         }
 
         const howItStarted = container.querySelector<HTMLElement>("[data-cloudchipr-started]");
@@ -4251,38 +4365,26 @@ function TempoMultistopFoundation() {
 }
 
 function TempoLandingScene({ metadata }: { metadata: Array<{ label: string; value: string }> }) {
-  return <section className="dw-tempo-landing-scene" aria-labelledby="tempo-v3-title">
-    <div className="dw-tempo-landing-skyline" aria-hidden="true" />
-    <div className="dw-tempo-landing-horizon" aria-hidden="true" />
-    <div className="dw-tempo-landing-copy">
-      {/* Davit's own line, not the client's. The scene keeps the landing page's
-          skyline and van because they are the frame this work was made inside,
-          but the store badges and the "12M + Active users" row are the client's
-          conversion furniture and say nothing about the design — they are gone. */}
-      <h1 id="tempo-v3-title">Safe document delivery,<br /><em>from sender to recipient.</em></h1>
-      <p>Tempo already moved things quickly. This direction gives it the harder job: move the things that are private, valuable or impossible to replace, and show the chain of care the whole way.</p>
+  return <section className="dw-tempo-case-intro" aria-labelledby="tempo-v3-title">
+    <div className="dw-tempo-case-heading">
+      <p>Delivery / Mobile app</p>
+      <h1 id="tempo-v3-title">Tempo</h1>
+      <h2>Safe document delivery, from sender to recipient.</h2>
     </div>
     {metadata.length ? (
-      <dl className="dw-tempo-landing-meta" aria-label="Tempo project information">
+      <dl className="dw-tempo-case-meta" aria-label="Tempo project information">
         {metadata.map((item) => <div key={item.label}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}
       </dl>
     ) : null}
-    {/* The assembling phone. It lives in the HERO, not in the section below,
-        for two reasons: it has to paint above the hero's dark gradient but
-        below the van, and that stacking order only exists inside the hero's
-        own context. The hero clips horizontally and not vertically
-        (`overflow-x: clip` pairs with `overflow-y: visible`, which is the one
-        combination the spec allows), so the phone's body carries on past the
-        hero's bottom edge into the right background of the white section. */}
-    <div className="dw-tempo-landing-assembly" aria-hidden="false">
-      <TempoFlowCard variant="hero" />
-    </div>
-
+    <div className="dw-tempo-case-art">
+    <div className="dw-tempo-landing-skyline" aria-hidden="true" />
+    <div className="dw-tempo-landing-horizon" aria-hidden="true" />
     <div className="dw-tempo-landing-van">
       <i className="dw-tempo-van-shadow" aria-hidden="true"><b /></i>
       <img className="dw-tempo-van-body" src="/portfolio-assets/tempo/figma/tempo-hero-van-body.png" alt="Tempo delivery van from the original landing page design" />
       <img className="dw-tempo-van-wheel dw-is-front" src="/portfolio-assets/tempo/figma/tempo-hero-wheel.png" alt="" aria-hidden="true" />
       <img className="dw-tempo-van-wheel dw-is-rear" src="/portfolio-assets/tempo/figma/tempo-hero-wheel.png" alt="" aria-hidden="true" />
+    </div>
     </div>
   </section>;
 }
@@ -4336,6 +4438,7 @@ export function CaseStudyContent({ slug }: { slug: string }) {
   }
 
   if (dataSlug === "tempo-v3") return <TempoV3CaseStudy project={project} />;
+  if (dataSlug === "tinkoff-checkout") return <TinkoffCaseStudy />;
   if (dataSlug === "liga-steep") {
     // A different page architecture, not a restyle of the shell: see ligaSteepPage.tsx.
     const index = projects.findIndex((item) => item.project.slug === "liga");

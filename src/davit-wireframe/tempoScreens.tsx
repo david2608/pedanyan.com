@@ -30,8 +30,8 @@ const foodRail = [
 ];
 
 const foodList = [
-  { image: "offer-burger.png", title: "Burger Yard", category: "Burgers \u00b7 Fast food", rating: "4.5", time: "20-30 min", delivery: "400 AMD delivery" },
-  { image: "offer-breakfast.png", title: "Morning Table", category: "Breakfast \u00b7 Cafe", rating: "4.8", time: "15-25 min", delivery: "300 AMD delivery" }
+  { image: "offer-burger.png", title: "Garden Kitchen", category: "Pizza \u00b7 Vegetarian", rating: "4.5", time: "20-30 min", delivery: "400 AMD delivery" },
+  { image: "offer-breakfast.png", title: "Burger Yard", category: "Burgers \u00b7 Fast food", rating: "4.8", time: "15-25 min", delivery: "300 AMD delivery" }
 ];
 
 // Illustrative merchant data, not a claim about Tempo's live partners.
@@ -157,9 +157,9 @@ function TempoOrderScreen({ active }: { active: boolean }) {
       <header className="tp-figma-order-header"><img src="/portfolio-assets/tempo/figma/route/back.svg" alt="" /><strong>Order details</strong></header>
       <section className="tp-figma-order-info">
         <dl><div><dt>Order ID</dt><dd>#12346567</dd></div><div><dt>Date &amp; Time</dt><dd>14/02/2023, 21:32</dd></div><div><dt>Delivered to</dt><dd>50 Chukhadjyan Street</dd></div><div><dt>Payment method</dt><dd>•••• •••• •••• 1121</dd></div></dl>
-        <h3>Burger Yard</h3>
-        <div className="tp-figma-order-item"><img src="/portfolio-assets/tempo/figma/food/offer-burger.png" alt="" /><span><b>Classic burger</b><small>Beef, lettuce, house sauce</small></span><strong>2400 AMD</strong></div>
-        <div className="tp-figma-order-item"><img src="/portfolio-assets/tempo/figma/food/offer-breakfast.png" alt="" /><span><b>Breakfast plate</b><small>Eggs and toast</small></span><strong>1600 AMD</strong></div>
+        <h3>Garden Kitchen</h3>
+        <div className="tp-figma-order-item"><img src="/portfolio-assets/tempo/figma/food/offer-burger.png" alt="" /><span><b>Garden pizza</b><small>Mushrooms, peppers, cheese</small></span><strong>2400 AMD</strong></div>
+        <div className="tp-figma-order-item"><img src="/portfolio-assets/tempo/figma/food/offer-pizza.png" alt="" /><span><b>Cheese pizza</b><small>Tomato and mozzarella</small></span><strong>1600 AMD</strong></div>
         <div className="tp-figma-order-summary"><h3>Summary</h3><p><span>Products</span><b>4000 AMD</b></p><p><span>Delivery</span><b>400 AMD</b></p></div>
       </section><footer><button type="button">Reorder</button></footer>
     </div>

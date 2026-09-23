@@ -985,6 +985,25 @@ const hotelColors = [
   { name: "Gold", hex: "#E6BC73", rgb: "230 188 115" }
 ];
 
+const HOTEL_LOGO_PATHS = [
+  "M90.46 74.318V505H0V147.985",
+  "M453 147.984V505H362.54V74.317",
+  "M271.73 30.649V214.84H181.27V30.649L226.5 0L271.73 30.649Z",
+  "M271.73 305.584H181.27V454.921H271.73V305.584Z",
+  "M284.56 465.738H164.746V480.762H284.56V465.738Z",
+  "M309.522 490.777H139.784V505.801H309.522V490.777Z"
+];
+
+function HotelLogoGlyph() {
+  return (
+    <svg viewBox="0 0 453 506" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      {HOTEL_LOGO_PATHS.map((d) => (
+        <path key={d} d={d} />
+      ))}
+    </svg>
+  );
+}
+
 function HotelBrandConstructionSvg() {
   return (
     <svg className="dw-hotel-brand-construction-notes" viewBox="0 0 742 873" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hotel Apartments logo construction geometry">
@@ -993,7 +1012,7 @@ function HotelBrandConstructionSvg() {
           <feDropShadow dx="0" dy="34" stdDeviation="27" floodColor="#3C3C3C" floodOpacity=".25" />
         </filter>
       </defs>
-      <g stroke="#DBDBDB" strokeOpacity=".5" strokeWidth="4">
+      <g className="dw-hotel-construction-guide" stroke="#DBDBDB" strokeOpacity=".5" strokeWidth="4">
         <circle cx="320.5" cy="239.5" r="46.5" />
         <path d="M284 208 97 21" />
         <circle cx="239.5" cy="647.5" r="46.5" />
@@ -1001,65 +1020,66 @@ function HotelBrandConstructionSvg() {
         <circle cx="406.5" cy="430.5" r="46.5" />
         <path d="M443 399 728 114" />
       </g>
-      <g fill="#DBDBDB" fontFamily="Arial, sans-serif" fontSize="22">
+      <g className="dw-hotel-construction-label" fill="#DBDBDB" fontSize="24" fontWeight="500">
         <text x="76" y="38" transform="rotate(45 76 38)">Luxury villa windows</text>
         <text x="42" y="835" transform="rotate(-45 42 835)">Letter H</text>
         <text x="614" y="215" transform="rotate(-45 614 215)">Letter A</text>
       </g>
       <g filter="url(#hotel-construction-shadow)" fill="#fff">
-        <path d="M394.73 508.584H304.27V657.921H394.73V508.584Z" />
-        <path d="M407.56 668.738H287.746V683.762H407.56V668.738Z" />
-        <path d="M432.522 693.777H262.784V708.801H432.522V693.777Z" />
-        <path d="M213.46 277.318V708H123V350.985" />
-        <path d="M576 350.984V708H485.54V277.317" />
-        <path d="M394.73 233.649V417.84H304.27V233.649L349.5 203L394.73 233.649Z" />
+        <g transform="translate(123 203)">
+          {HOTEL_LOGO_PATHS.map((d) => (
+            <path key={d} d={d} />
+          ))}
+        </g>
       </g>
     </svg>
   );
 }
 
-function HotelPreferenceSvg() {
-  const mark = (x: number, y: number, scale: number, color: string, framed = false) => (
-    <g transform={`translate(${x} ${y}) scale(${scale})`} fill={color}>
-      {framed ? <path d="M3.27 0H134V134H0V0h3.27Zm124.27 6.5H6.54v121h121V6.5Z" /> : null}
-      <path d="M57.92 76.05h18.12v34.19H57.92V76.05ZM57.92 23.79h18.12v34.15H57.92V23.79ZM21.71 23.73h18.12v86.5H21.71v-86.5ZM94.17 23.73h18.13v86.5H94.17v-86.5Z" />
-    </g>
-  );
+function HotelChatBubble({ variant, time, body }: { variant: string; time: string; body: string }) {
   return (
-    <svg className="dw-hotel-preference-svg" viewBox="0 0 1054 245" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Client preference: three Hotel Apartments logo options with the center option selected">
-      <text x="0" y="34" fill="white" fontFamily="Syne, Arial, sans-serif" fontSize="34" fontWeight="600">Client&apos;s preference</text>
-      {mark(0, 126, 0.8, "#DBDBDB")}
-      {mark(460, 110, 1, "white", true)}
-      {mark(963, 126, 0.8, "#DBDBDB")}
-    </svg>
+    <div className={`dw-hotel-chat-bubble dw-hotel-chat-bubble-${variant}`} data-portfolio-reveal>
+      <span className="dw-hotel-chat-avatar" aria-hidden="true">RP</span>
+      <div className="dw-hotel-chat-body">
+        <p className="dw-hotel-chat-meta"><strong>Rafayel</strong> <small>{time}</small></p>
+        <p>{body}</p>
+      </div>
+    </div>
   );
 }
 
 function HotelBrand({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   return (
     <section className="dw-case-section dw-hotel-brand" id={section.id} data-hotel-brand>
-      <div className="dw-hotel-brand-stage" style={{ "--hotel-brand-texture": `url(${assetUrl(project, "brand-foundation")})` } as CSSProperties}>
-        <header data-portfolio-reveal>
-          <h2>{section.title}</h2>
-          <Html html={section.body} className="dw-hotel-brand-intro" />
-        </header>
+      <div className="dw-hotel-brand-stage">
+        <h2 className="dw-hotel-brand-title" data-portfolio-reveal>{section.title}</h2>
+        <Html html={section.body} className="dw-hotel-brand-intro" />
+
+        <HotelChatBubble
+          variant="brief"
+          time="2h ago"
+          body="I want something really simple. Try to mix Hotel with Letter H or A. Black or other dark color maybe..."
+        />
+
         <div className="dw-hotel-brand-construction" data-portfolio-reveal>
           <HotelBrandConstructionSvg />
-          <div className="dw-hotel-chat-bubble dw-hotel-chat-bubble-brief" data-portfolio-reveal>
-            <span className="dw-hotel-chat-avatar" aria-hidden="true">RP</span>
-            <div>
-              <p className="dw-hotel-chat-meta"><strong>Rafayel</strong> <small>2h ago</small></p>
-              <p>I want something really simple. Try to mix Hotel with Letter H or A. Black or other dark color maybe...</p>
-            </div>
-          </div>
         </div>
-        <div className="dw-hotel-preference" data-portfolio-reveal>
-          <HotelPreferenceSvg />
+
+        <p className="dw-hotel-preference-title" data-portfolio-reveal>Client&rsquo;s preference</p>
+        <div className="dw-hotel-variants">
+          <span className="dw-hotel-variant dw-hotel-variant-a" data-portfolio-reveal><HotelLogoGlyph /></span>
+          <span className="dw-hotel-variant dw-hotel-variant-b" data-portfolio-reveal><HotelLogoGlyph /></span>
+          <span className="dw-hotel-variant dw-hotel-variant-c" data-portfolio-reveal><HotelLogoGlyph /></span>
         </div>
+
+        <HotelChatBubble variant="approval" time="1h ago" body="This one is really good. What do you think?" />
+
+        <figure className="dw-hotel-brand-table" data-portfolio-reveal>
+          <ProjectImage project={project} assetKey="brand-detail-01" />
+        </figure>
       </div>
 
       <div className="dw-hotel-brand-applications">
-        <figure className="dw-hotel-brand-table dw-overlap-up" data-portfolio-reveal><ProjectImage project={project} assetKey="brand-detail-01" /></figure>
         <div className="dw-hotel-brand-rationale" data-portfolio-reveal>
           <p>I carried the <strong>calm, residential character</strong> across each touchpoint. The window-inspired mark, muted palette, and restrained typography connect booking materials with the <strong>in-room experience.</strong></p>
         </div>

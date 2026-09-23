@@ -6,6 +6,9 @@ import "./pullToContinue.css";
 const PULL_DISTANCE = 620;
 // Idle time before an unfinished pull relaxes back to zero.
 const DECAY_AFTER_MS = 420;
+// Trailing trackpad momentum from the page we just left keeps firing wheel
+// events for a moment after the new page mounts. Ignore that window.
+const ARM_DELAY_MS = 700;
 
 /**
  * End-of-page continuation. Reading to the bottom and continuing to scroll
@@ -33,6 +36,7 @@ export function PullToContinue({
   const firedRef = useRef(false);
   const decayRef = useRef<number | null>(null);
   const rafRef = useRef<number | null>(null);
+  const armedRef = useRef(false);
 
   const go = useCallback(() => {
     if (firedRef.current) return;
@@ -43,11 +47,28 @@ export function PullToContinue({
     window.setTimeout(() => { window.location.href = href; }, 420);
   }, [href, onNavigate]);
 
+  /* `go()` is a real navigation, so the browser would otherwise restore the
+     previous scroll offset - which was the very bottom - and the pull would be
+     primed again the instant the next page mounted. That chained one case study
+     into the next for as long as the wheel kept turning. */
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
+  }, []);
+
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    const mountedAt = performance.now();
+
     const atBottom = () =>
       window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+
+    /* The pull only arms once the page has been somewhere other than the very
+       bottom, so arriving at the bottom is always something the reader did. */
+    const arm = () => {
+      if (!atBottom()) armedRef.current = true;
+    };
+    arm();
 
     const relax = () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
@@ -66,6 +87,7 @@ export function PullToContinue({
 
     const push = (delta: number) => {
       if (firedRef.current) return;
+      if (!armedRef.current || performance.now() - mountedAt < ARM_DELAY_MS) return;
       if (delta <= 0 || !atBottom()) {
         if (delta < 0) {
           accRef.current = Math.max(0, accRef.current + delta * 2);
@@ -92,11 +114,13 @@ export function PullToContinue({
     };
     const onTouchEnd = () => { touchY = null; scheduleDecay(); };
 
+    window.addEventListener("scroll", arm, { passive: true });
     window.addEventListener("wheel", onWheel, { passive: true });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("touchend", onTouchEnd, { passive: true });
     return () => {
+      window.removeEventListener("scroll", arm);
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);

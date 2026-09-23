@@ -968,84 +968,6 @@
   }
 }
 
-/* Hotel brand: real construction notes + Figma chat bubbles */
-.dw-hotel-brand-construction-notes {
-  display: block;
-  width: min(72%, 742px);
-  height: auto;
-  margin: clamp(80px, 12.6vw, 200px) auto;
-}
-
-.dw-hotel-chat-bubble {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  max-width: 300px;
-  padding: 12px 14px;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 10px 28px rgb(20 22 18 / 22%);
-  color: #2a2a2a;
-}
-
-.dw-hotel-chat-bubble p {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.dw-hotel-chat-meta {
-  margin-bottom: 3px !important;
-}
-
-.dw-hotel-chat-meta strong {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.dw-hotel-chat-meta small {
-  margin-left: 6px;
-  color: #9a9a9a;
-  font-size: 11px;
-}
-
-.dw-hotel-chat-avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #37a169;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.dw-hotel-chat-bubble-brief {
-  position: absolute;
-  top: -10%;
-  right: 0;
-}
-
-.dw-hotel-preference {
-  position: relative;
-}
-
-.dw-hotel-chat-bubble-approval {
-  position: absolute;
-  left: 52%;
-  bottom: -76px;
-}
-
-@media (max-width: 900px) {
-  .dw-hotel-chat-bubble-brief,
-  .dw-hotel-chat-bubble-approval {
-    position: static;
-    margin: 18px auto 0;
-  }
-}
 
 /* Hotel Apartments feedback: olive theme per Figma */
 .dw-case-hotel-apartments .dw-case-section-feedback .dw-case-testimonial {
@@ -2737,144 +2659,192 @@
   font-weight: 600;
 }
 
+/* ---- Hotel Apartments · "The Brand" ------------------------------------
+   Laid out 1:1 against Figma node 474:9766. The plate is node 538:9869
+   (1800 x 2560), so every offset below is a percentage of that plate and
+   every type size is `px / 1800 * 100` in cqw. See
+   claude/hotel-brand-figma-spec.md for the measurement table. */
+
 .dw-hotel-brand {
   padding: clamp(100px, 11vw, 200px) 0;
 }
 
 .dw-hotel-brand-stage {
+  container-type: size;
   position: relative;
-  min-height: clamp(760px, 78vw, 1320px);
-  padding: clamp(64px, 7vw, 126px);
-  overflow: hidden;
+  aspect-ratio: 1800 / 2560;
+  overflow: visible;
   color: #fff;
-  background-color: #656978;
-  background-image: linear-gradient(rgb(80 86 102 / 84%), rgb(68 73 87 / 92%)), var(--hotel-brand-texture);
-  background-position: center;
-  background-size: cover;
-  border-radius: 28px;
 }
 
-.dw-hotel-brand-stage header {
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
+.dw-hotel-brand-stage::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: var(--hotel-slate);
+  border-radius: 0 2.778cqw 2.778cqw 2.778cqw;
+}
+
+.dw-hotel-brand-stage > * {
+  position: absolute;
+  z-index: 1;
+}
+
+.dw-page .dw-hotel-brand .dw-hotel-brand-title {
+  top: 7.62%;
+  left: 20.72%;
+  width: 60.78%;
+  margin: 0;
+  color: #fff;
+  font-size: 4.444cqw;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 .dw-hotel-brand-intro {
-  width: min(100%, 650px);
-  max-width: 650px;
-  margin-top: 30px;
-  color: rgb(255 255 255 / 78%);
-  font-size: clamp(18px, 1.35vw, 25px);
-  line-height: 1.5;
+  top: 12.89%;
+  left: 20.78%;
+  width: 58.5%;
+  margin: 0;
+  color: #dbdbdb;
+  font-size: 1.778cqw;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
 }
+
+.dw-page .dw-hotel-brand .dw-hotel-brand-intro p { margin: 0; color: inherit; font-size: inherit; font-weight: inherit; line-height: inherit; }
+.dw-page .dw-hotel-brand .dw-hotel-brand-intro strong { color: #fff; font-weight: 500; }
+
+/* -- construction ------------------------------------------------------- */
 
 .dw-hotel-brand-construction {
-  position: absolute;
-  inset: 27% 14% 28%;
-  display: grid;
-  place-items: center;
+  top: 26.48%;
+  left: 30.61%;
+  width: 41.19%;
 }
 
-.dw-hotel-brand-construction .dw-hotel-mark {
-  width: clamp(180px, 18vw, 340px);
-  gap: clamp(12px, 1.2vw, 22px);
-  padding: clamp(24px, 2.7vw, 50px);
-  border-width: clamp(7px, 0.75vw, 14px);
-}
-
-.dw-hotel-brand-axis {
-  position: absolute;
-  color: rgb(255 255 255 / 70%);
-  font-size: clamp(12px, 1vw, 17px);
-}
-
-.dw-hotel-brand-axis::after {
-  content: "";
+.dw-hotel-brand-construction-notes {
   display: block;
-  width: clamp(95px, 11vw, 210px);
-  height: 1px;
-  margin-top: 5px;
-  background: currentColor;
-  transform-origin: left;
+  width: 100%;
+  height: auto;
+  overflow: visible;
 }
 
-.dw-hotel-brand-axis.axis-one { top: 2%; left: 8%; transform: rotate(45deg); }
-.dw-hotel-brand-axis.axis-two { right: 8%; bottom: 9%; transform: rotate(-45deg); }
-.dw-hotel-brand-axis.axis-three { top: 19%; right: 4%; transform: rotate(-40deg); }
+/* -- client's preference ------------------------------------------------ */
 
-.dw-hotel-brand-construction blockquote {
-  position: absolute;
-  top: 5%;
-  right: -4%;
-  max-width: 260px;
+.dw-page .dw-hotel-brand .dw-hotel-preference-title {
+  top: 66.95%;
+  left: 20.72%;
   margin: 0;
-  padding: 17px 20px;
-  color: #4c5144;
-  background: #fff;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 1.35;
+  color: #fff;
+  font-size: 2.556cqw;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
-.dw-hotel-brand-construction blockquote small {
-  display: block;
-  margin-top: 6px;
-  opacity: 0.62;
-  font-size: 10px;
+.dw-hotel-variants {
+  inset: 0;
+  pointer-events: none;
 }
 
-.dw-hotel-preference {
+.dw-hotel-variant {
   position: absolute;
-  right: clamp(50px, 8vw, 145px);
-  bottom: clamp(50px, 7vw, 120px);
-  left: clamp(50px, 8vw, 145px);
+  display: block;
+  color: #dbdbdb;
 }
 
-.dw-hotel-preference-svg {
+.dw-hotel-variant svg {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.dw-hotel-preference h3 {
-  margin: 0 0 28px;
-  font-size: clamp(23px, 2vw, 36px);
-  font-weight: 500;
-}
+.dw-hotel-variant-a { top: 72.27%; left: 20.72%; width: 5.041%; }
+.dw-hotel-variant-c { top: 72.3%;  left: 74.22%; width: 5.041%; }
 
-.dw-hotel-preference-options {
+.dw-hotel-variant-b {
+  top: 71.64%;
+  left: 46.28%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-}
-
-.dw-hotel-preference-options > span {
-  display: grid;
-  min-height: 116px;
+  width: 7.444%;
+  aspect-ratio: 1;
   place-items: center;
-  color: rgb(255 255 255 / 54%);
-  border: 1px solid rgb(255 255 255 / 18%);
-}
-
-.dw-hotel-preference-options > span.is-selected {
   color: #fff;
-  border-color: #fff;
+  border: 0.361cqw solid #fff;
 }
 
-.dw-hotel-preference .dw-hotel-mark {
-  width: 52px;
-  gap: 3px;
-  padding: 7px;
-  border-width: 2px;
+.dw-hotel-variant-b svg { width: 67.72%; }
+
+/* -- chat bubbles ------------------------------------------------------- */
+
+.dw-hotel-chat-bubble {
+  display: flex;
+  gap: 0.722cqw;
+  align-items: flex-start;
+  width: 22.56%;
+  padding: 0.833cqw 0.889cqw 0.833cqw 0.944cqw;
+  color: #646464;
+  background: #fff;
+  border-radius: 0.667cqw;
+  box-shadow: 0 0.778cqw 0.889cqw rgb(24 26 33 / 22%);
+  font-size: 0.889cqw;
+  line-height: 1.3;
 }
+
+.dw-hotel-chat-bubble-brief    { top: 22.34%; left: 61.78%; }
+.dw-hotel-chat-bubble-approval { top: 78.48%; left: 54.17%; }
+
+.dw-hotel-chat-avatar {
+  display: grid;
+  flex: none;
+  width: 2.667cqw;
+  height: 2.667cqw;
+  place-items: center;
+  color: #fff;
+  background: #70a979;
+  border-radius: 50%;
+  font-size: 1.333cqw;
+  font-weight: 600;
+}
+
+.dw-hotel-chat-body { flex: 1 1 auto; min-width: 0; }
+.dw-hotel-chat-bubble p { margin: 0; }
+
+.dw-hotel-chat-meta {
+  display: flex;
+  gap: 0.278cqw;
+  align-items: baseline;
+  margin-bottom: 0.389cqw;
+}
+
+.dw-hotel-chat-meta strong { color: #000; font-size: 1cqw; font-weight: 400; }
+.dw-hotel-chat-meta small  { color: #646464; font-size: 0.778cqw; font-weight: 500; }
+
+/* -- the table photo, overhanging the plate ----------------------------- */
+
+.dw-hotel-brand-table {
+  top: 84.41%;
+  left: 6.28%;
+  width: 40.33%;
+  margin: 0;
+}
+
+.dw-hotel-brand-table img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* -- the applications band below the plate ------------------------------ */
 
 .dw-hotel-brand-applications {
   position: relative;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: clamp(30px, 5vw, 86px) 30px;
-  padding: clamp(90px, 10vw, 180px) clamp(34px, 5vw, 90px) 0;
+  padding: 5% clamp(34px, 5vw, 90px) 0;
 }
 
 .dw-hotel-brand-applications figure,
@@ -2886,14 +2856,78 @@
   width: 100%;
 }
 
-.dw-hotel-brand-table { grid-column: 1 / span 5; }
-.dw-hotel-brand-table { margin-top: clamp(-200px, -14vw, -100px) !important; }
-.dw-hotel-brand-rationale { grid-column: 7 / -1; align-self: center; }
+.dw-hotel-brand-rationale { grid-column: 7 / -1; align-self: start; }
 .dw-hotel-brand-rationale p { max-width: 30ch; margin: 0; }
 .dw-hotel-brand-rationale strong { color: #20201e; font-weight: 600; }
-.dw-hotel-brand-suite { grid-column: 1 / -1; margin-top: clamp(-300px, -20vw, -150px) !important; }
+.dw-hotel-brand-suite { grid-column: 1 / -1; margin-top: 4%; }
 .dw-hotel-brand-craft { grid-column: 1 / -1; }
 .dw-hotel-brand-collage { grid-column: 1 / -1; margin-top: clamp(60px, 8vw, 140px) !important; }
+
+/* -- narrow screens: drop the measured plate, stack the layers ---------- */
+
+@media (max-width: 860px) {
+  .dw-hotel-brand-stage {
+    container-type: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    aspect-ratio: auto;
+    padding: 40px 22px 0;
+  }
+
+  .dw-hotel-brand-stage::before { border-radius: 0 18px 18px 18px; }
+
+  .dw-hotel-brand-stage > * {
+    position: static;
+    width: auto;
+  }
+
+  .dw-page .dw-hotel-brand .dw-hotel-brand-title { font-size: clamp(38px, 10vw, 60px); }
+  .dw-hotel-brand-intro { font-size: 17px; letter-spacing: 0; }
+  .dw-hotel-brand-construction { width: min(100%, 420px); align-self: center; }
+  .dw-page .dw-hotel-brand .dw-hotel-preference-title { font-size: clamp(26px, 6.5vw, 36px); }
+
+  .dw-hotel-variants {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+    pointer-events: auto;
+  }
+
+  .dw-hotel-variant { position: static; width: 54px; }
+  .dw-hotel-variant-b { width: 80px; border-width: 4px; }
+
+  .dw-hotel-chat-bubble {
+    gap: 13px;
+    width: min(100%, 360px);
+    padding: 15px 16px 15px 17px;
+    border-radius: 12px;
+    box-shadow: 0 14px 16px rgb(24 26 33 / 22%);
+    font-size: 15px;
+  }
+
+  .dw-hotel-chat-bubble-brief { align-self: flex-end; }
+  .dw-hotel-chat-avatar { width: 42px; height: 42px; font-size: 20px; }
+  .dw-hotel-chat-meta { gap: 5px; margin-bottom: 6px; }
+  .dw-hotel-chat-meta strong { font-size: 17px; }
+  .dw-hotel-chat-meta small { font-size: 13px; }
+
+  .dw-hotel-brand-table {
+    width: calc(100% + 44px);
+    margin: 8px -22px -18%;
+  }
+
+  .dw-hotel-brand-applications {
+    display: block;
+    padding: 22% 0 0;
+  }
+
+
+  .dw-hotel-brand-suite,
+  .dw-hotel-brand-collage { margin-top: 0 !important; }
+}
 
 .dw-hotel-brand-applications p {
   max-width: 34ch;
@@ -3070,8 +3104,6 @@
 
   .dw-hotel-project-meta { grid-template-columns: 1fr 1fr; }
   .dw-hotel-migration-columns { gap: 45px; }
-  .dw-hotel-brand-stage { min-height: 920px; padding: 54px 38px; }
-  .dw-hotel-brand-construction { inset: 27% 8% 31%; }
   .dw-hotel-system { grid-template-columns: 0.8fr 1.2fr; gap: 48px; }
   .dw-hotel-feedback blockquote { grid-column: 1; grid-row: auto; }
   .dw-hotel-feedback-person { grid-column: 1; margin-top: -92px; }
@@ -3105,23 +3137,8 @@
   .dw-hotel-migration-columns { grid-template-columns: 1fr; }
   .dw-hotel-walking { min-height: 760px; padding: 84px 0; background-position: 42% center; }
   .dw-hotel-walking-copy { margin-left: 0; }
-  .dw-hotel-brand { padding: 84px 0; }
-  .dw-hotel-brand-stage { min-height: 850px; padding: 36px 24px; border-radius: 12px; }
-  .dw-hotel-brand-construction { inset: 38% 4% 29%; }
-  .dw-hotel-brand-construction .dw-hotel-mark { width: 150px; }
-  .dw-hotel-brand-construction blockquote {
-    top: 0;
-    right: 0;
-    left: 0;
-    max-width: none;
-  }
-  .dw-hotel-brand-axis { display: none; }
-  .dw-hotel-preference { right: 24px; bottom: 40px; left: 24px; }
-  .dw-hotel-preference-options { gap: 8px; }
-  .dw-hotel-brand-applications { display: block; padding: 70px 0 0; }
   .dw-hotel-brand-applications figure,
   .dw-hotel-brand-applications p { margin: 0 0 42px !important; }
-  .dw-hotel-brand-rationale { margin-bottom: 42px; }
   .dw-hotel-web { padding-top: 70px; }
   .dw-hotel-web-hero { height: 420px; }
   .dw-hotel-web-browser { width: 96%; margin-top: -30px; }
@@ -8283,7 +8300,7 @@ a.dw-case-testimonial-linkedin:hover {
   .dw-mex-testing > h2,
   .dw-mex-hmw h2,
   .dw-hotel-project h2,
-  .dw-hotel-brand h2,
+  .dw-hotel-brand h2:not(.dw-hotel-brand-title),
   .dw-hotel-web h2,
   .dw-hotel-walking h2,
   .dw-hotel-feedback h2,

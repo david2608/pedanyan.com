@@ -2613,7 +2613,7 @@
           "paddingTop": "120px",
           "paddingBottom": "80px",
           "title": "The Brand",
-          "body": "<p>Even when you're reselling hotel apartments, it's important to have your own special style and appearance. This helps you create a distinct identity and attract customers.</p>"
+          "body": "<p>Even when you're <strong>reselling</strong> hotel apartments, it's important to have your <strong>own special style and appearance.</strong> This helps you create a distinct <strong>identity</strong> and attract customers.</p>"
         },
         {
           "id": "brand-foundation",

@@ -1020,19 +1020,26 @@ function DepthTextReveal({ children }: { children: string }) {
   );
 }
 
-function SlotMachineNumber() {
+/* The figure has to be in the markup, not only in the GSAP tween that writes it
+   on scroll: the prerenderer snapshots long before any of that runs, so a
+   hardcoded "$0M" here is what every crawler - and every reader with JS off -
+   sees. updateSlot() overwrites this the moment the counter starts. */
+function SlotMachineNumber({ value }: { value: string }) {
   return (
-    <div className="dw-designer-slot-number" aria-label="$0M">$0M</div>
+    <div className="dw-designer-slot-number" aria-label={value}>{value}</div>
   );
 }
 
 function MobileDesignerStat({ value, caption }: { value: string; caption: string }) {
   const statRef = useRef<HTMLElement | null>(null);
   const [isFocused, setIsFocused] = useState(false);
-  const [number, setNumber] = useState(0);
   const hasPlayedRef = useRef(false);
   const numberMatch = value.match(/\d+/);
   const target = Number(numberMatch?.[0] ?? 0);
+  /* Starts at the real figure, not at zero. The count-up resets it to 0 the
+     instant it begins, so the animation is unchanged - but the static HTML the
+     prerenderer captures now carries the true number instead of "0 startups". */
+  const [number, setNumber] = useState(target);
   const renderedValue = numberMatch
     ? `${value.slice(0, numberMatch.index)}${number}${value.slice((numberMatch.index ?? 0) + numberMatch[0].length)}`
     : value;
@@ -1057,6 +1064,7 @@ function MobileDesignerStat({ value, caption }: { value: string; caption: string
   useEffect(() => {
     if (!isFocused || hasPlayedRef.current || target === 0) return;
     hasPlayedRef.current = true;
+    setNumber(0);
     const startedAt = performance.now();
     const duration = 760;
     let frame = 0;
@@ -1073,7 +1081,7 @@ function MobileDesignerStat({ value, caption }: { value: string; caption: string
 
   return (
     <article className={`dw-mobile-designer-stat${isFocused ? " is-focused" : ""}`} ref={statRef}>
-      <h3 aria-label={value}>{isFocused ? renderedValue : value.replace(/\d+/, "0")}</h3>
+      <h3 aria-label={value}>{renderedValue}</h3>
       <p>{caption}</p>
     </article>
   );
@@ -2195,7 +2203,7 @@ function DesignerScrollStory() {
               <div className="dw-depth-content">
                 {isFinal ? (
                   <div ref={investmentRef}>
-                    <SlotMachineNumber />
+                    <SlotMachineNumber value={stat.value} />
                   </div>
                 ) : (
                   <strong>{stat.value}</strong>
@@ -3957,7 +3965,7 @@ function HomeUnifiedScrollExperience() {
               >
                 <div className="dw-depth-content">
                   {isFinal ? (
-                    <div ref={investmentRef}><SlotMachineNumber /></div>
+                    <div ref={investmentRef}><SlotMachineNumber value={stat.value} /></div>
                   ) : (
                     <strong>{stat.value}</strong>
                   )}

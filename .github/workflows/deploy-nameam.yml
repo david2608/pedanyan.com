@@ -46,6 +46,9 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Build production website
+        # The GA4 measurement ID lives in .env.production. It is a public
+        # identifier - it ships inside the bundle either way - so it is not a
+        # secret, and keeping it in the repo means a deploy needs no setup.
         run: npm run build
 
       - name: Verify deployable output

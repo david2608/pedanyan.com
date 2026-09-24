@@ -5,3 +5,10 @@ storybook-static/
 .env
 .env.local
 .env.*.local
+
+# Credentials. Never committed, never referenced by the app.
+token.figma-token.json
+*.figma-token.json
+
+# Scratch: files moved aside because this environment cannot delete them.
+_to_delete/

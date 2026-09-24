@@ -26,6 +26,7 @@ import { PortfolioMusicToggle } from "./PortfolioMusicToggle";
 import { MediaCarousel } from "./MediaCarousel";
 import { CHAT_AVATAR, ContactChat, openContactChat } from "./ContactChat";
 import { PullToContinue } from "./PullToContinue";
+import { initAnalytics, trackPageView } from "../analytics/ga";
 import { OctagonField } from "./OctagonField";
 import {
   ExperienceDetailModal,
@@ -4959,6 +4960,11 @@ export function AppRouter() {
   useEffect(() => {
     if (isOutbound) return;
     applyHead(path);
+    /* After applyHead, so the page_title GA records is the one this route
+       actually sets rather than the previous route's leftover. The router is
+       client-side, so without this only the first load would ever be counted. */
+    initAnalytics();
+    trackPageView(path);
   }, [path, isOutbound]);
 
   useLayoutEffect(() => {

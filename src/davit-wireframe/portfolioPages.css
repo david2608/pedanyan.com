@@ -10128,61 +10128,6 @@ a.dw-case-testimonial-linkedin:hover {
   padding: 0;
 }
 
-/* A deliberately quiet, Pop-style header gives the display type room to be
-   the page's first signal rather than competing with site-level chrome. */
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-header,
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-header.is-scrolled {
-  height: 72px !important;
-  padding: 0 clamp(20px, 3.4vw, 56px);
-  color: #000;
-  background: #fff;
-  mix-blend-mode: normal;
-}
-
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo {
-  flex: 1 1 0;
-  width: auto;
-  height: 72px;
-  color: #000;
-}
-
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo-word {
-  font-size: 16px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: .12em;
-  color: #000;
-}
-
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-nav {
-  flex: 0 0 auto;
-  width: auto;
-  gap: 18px;
-}
-
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-nav a,
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-pill {
-  color: #171717;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1;
-}
-
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-right {
-  flex: 1 1 0;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-pill {
-  padding: 0;
-}
-
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-talk-icon {
-  width: 16px;
-  height: 16px;
-}
-
 .dw-case-draft-tempo-v3 .dw-case-opening-panel {
   min-height: 100svh;
   padding: clamp(116px, 10vw, 168px) clamp(28px, 8vw, 132px) clamp(56px, 7vw, 108px);
@@ -10372,15 +10317,6 @@ a.dw-case-testimonial-linkedin:hover {
 }
 
 @media (max-width: 760px) {
-  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-header,
-  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-header.is-scrolled {
-    height: 64px !important;
-    padding-inline: 16px;
-  }
-
-  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo { height: 64px; }
-  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo-word { font-size: 15px; }
-
   .dw-case-draft-tempo-v3 .dw-case-opening-panel {
     min-height: 92svh;
     padding: 122px 24px 52px;
@@ -10848,14 +10784,7 @@ a.dw-case-testimonial-linkedin:hover {
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome article { min-height: 0; padding: 22px 0; }
 }
 
-/* Tempo V3 narrative and motion correction. These rules intentionally sit
-   after the earlier explorations so the case behaves as one restrained story. */
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-header,
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-header.is-scrolled {
-  height: 60px !important;
-}
-
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo { height: 60px; }
+/* Tempo V3 narrative and motion correction. */
 
 .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel {
   min-height: calc(100svh - 60px);
@@ -11096,9 +11025,6 @@ a.dw-case-testimonial-linkedin:hover {
 .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-outcome h2 { margin: 0; }
 
 @media (max-width: 760px) {
-  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-header,
-  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-header.is-scrolled,
-  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo { height: 56px !important; }
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel { min-height: calc(100svh - 56px); padding: 92px 20px 294px; }
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy h1 { font-size: clamp(72px, 22vw, 104px); }
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-copy h2 { margin-top: 20px; font-size: 20px; }
@@ -11338,16 +11264,6 @@ a.dw-case-testimonial-linkedin:hover {
   padding-top: 0;
 }
 
-/* Tempo V3 repair: this case uses a continuous editorial canvas rather than
-   the rounded, marketing-page opening used by the other projects. */
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-header,
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-header.is-scrolled {
-  height: 60px !important;
-  margin: 0;
-}
-
-.dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo { height: 60px; }
-
 .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero {
   padding: 0;
   margin: 0;
@@ -11514,9 +11430,6 @@ a.dw-case-testimonial-linkedin:hover {
 .dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-card { margin-top: 12px; padding: 11px; border: 1px solid #dce8e3; border-radius: 5px; background: #fff; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-card span, .dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-card p { display: block; margin: 0; color: #698077; font-size: 8px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-card strong { display: block; margin: 4px 0; color: var(--tempo-ink); font-size: 13px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-progress { display: flex; gap: 5px; margin-top: 14px; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-progress i { display: block; width: 100%; height: 3px; border-radius: 999px; background: #dce9e4; }.dw-page .dw-case-draft-tempo-v3 .dw-tempo-phone-progress i:first-child { background: var(--tempo-green); }
 
 @media (max-width: 760px) {
-  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-header,
-  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-header.is-scrolled,
-  .dw-page:has(> .dw-case-draft-tempo-v3) .dw-logo { height: 56px !important; }
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero .dw-case-opening-panel { min-height: calc(100svh - 56px); padding: 84px 20px 270px; }
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-v3-hero-carousel { bottom: -15px; height: 270px; }
   .dw-page .dw-case-draft-tempo-v3 .dw-tempo-secure-bridge { min-height: 190px; }
@@ -11655,4 +11568,254 @@ a.dw-case-testimonial-linkedin:hover {
   max-width: none;
   margin-right: auto;
   margin-left: auto;
+}
+
+/* ---- 8 Images ----------------------------------------------------------
+   Tokens are the product's own, pulled from Figma 9cBLrnEHUYTC56jt0NiPeT
+   (node 7008:68582): Poppins 14/22, #242424 black, #505050 text, #F5F5F5
+   panels, #B3B3B3 / #BCBCBC greys, #748087 for a count on an active row.
+   The app has no chromatic accent; neither does this case study. */
+
+.dw-ei-section {
+  --ei-black: #242424;
+  --ei-text: #505050;
+  --ei-grey: #b3b3b3;
+  --ei-light: #bcbcbc;
+  --ei-panel: #f5f5f5;
+  padding: clamp(90px, 10vw, 150px) 0;
+}
+
+.dw-ei-inner {
+  width: min(calc(100% - 40px), 1260px);
+  margin: 0 auto;
+}
+
+.dw-ei-section header {
+  max-width: 720px;
+  margin-bottom: clamp(36px, 4vw, 64px);
+}
+
+.dw-ei-eyebrow {
+  margin: 0 0 18px;
+  color: var(--ei-grey);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dw-page .dw-ei-section h2 {
+  margin: 0;
+  color: var(--ei-black);
+  font-size: clamp(34px, 3.6vw, 58px);
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+.dw-ei-lede {
+  margin-top: 22px;
+  color: var(--ei-text);
+  font-size: clamp(17px, 1.3vw, 21px);
+  line-height: 1.62;
+}
+
+.dw-ei-lede p { margin: 0 0 14px; }
+.dw-ei-lede p:last-child { margin-bottom: 0; }
+.dw-ei-lede code {
+  padding: 2px 6px;
+  background: var(--ei-panel);
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+}
+
+/* -- the real model ----------------------------------------------------- */
+
+.dw-ei-model {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 257px;
+  gap: clamp(20px, 2.5vw, 44px);
+  align-items: stretch;
+}
+
+.dw-ei-model-stage {
+  position: relative;
+  display: grid;
+  min-height: 380px;
+  aspect-ratio: 16 / 11;
+  place-items: center;
+  background: var(--ei-panel);
+  border-radius: 20px;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.dw-ei-model-stage:active { cursor: grabbing; }
+.dw-ei-model-stage canvas {
+  /* Absolute, so the canvas can never feed its own attribute size back into the
+     host's clientWidth - that loop grew it to 455,077px once. */
+  position: absolute;
+  display: block;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 20px;
+}
+
+.dw-ei-model-status {
+  position: absolute;
+  margin: 0;
+  color: var(--ei-light);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+/* The parts list is the product's own sidebar: 257 wide, 20px panel radius,
+   8px rows, selected row on #F5F5F5. */
+.dw-ei-model-parts {
+  padding: 24px 16px;
+  background: #fff;
+  border: 1px solid #ededed;
+  border-radius: 20px;
+}
+
+.dw-ei-model-parts-label,
+.dw-ei-model-hint {
+  margin: 0;
+  color: var(--ei-grey);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.dw-ei-model-parts ul {
+  margin: 14px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dw-ei-model-parts li + li { margin-top: 2px; }
+
+.dw-ei-model-parts button {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  padding: 8px 8px 8px 6px;
+  color: var(--ei-text);
+  background: none;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.dw-ei-model-parts button::before {
+  content: "";
+  flex: none;
+  width: 10px;
+  height: 10px;
+  background: var(--ei-light);
+  border-radius: 50%;
+  transition: background 0.16s ease, transform 0.16s ease;
+}
+
+.dw-ei-model-parts button:hover { background: #fafafa; }
+
+.dw-ei-model-parts button.is-active {
+  color: var(--ei-black);
+  background: var(--ei-panel);
+}
+
+.dw-ei-model-parts button.is-active::before {
+  background: var(--ei-black);
+  transform: scale(1.15);
+}
+
+.dw-ei-model-hint { margin-top: 14px; }
+
+/* -- the live widget ---------------------------------------------------- */
+
+.dw-ei-widget-frame {
+  position: relative;
+  width: 100%;
+  height: clamp(420px, 46vw, 640px);
+  overflow: hidden;
+  background: var(--ei-panel);
+  border-radius: 20px;
+  resize: none;
+}
+
+.dw-ei-widget-frame eight-images-widget {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.dw-ei-widget-load {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  gap: 10px;
+  place-content: center;
+  place-items: center;
+  color: var(--ei-black);
+  background: none;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.dw-ei-widget-load span {
+  padding: 13px 26px;
+  color: #fff;
+  background: var(--ei-black);
+  border-radius: 999px;
+  font-size: 15px;
+}
+
+.dw-ei-widget-load small { color: var(--ei-grey); font-size: 13px; }
+
+.dw-ei-widget-handle {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  background:
+    linear-gradient(135deg, transparent 48%, var(--ei-light) 48%, var(--ei-light) 56%, transparent 56%),
+    linear-gradient(135deg, transparent 68%, var(--ei-light) 68%, var(--ei-light) 76%, transparent 76%);
+  border: 0;
+  border-radius: 4px;
+  cursor: nwse-resize;
+  touch-action: none;
+}
+
+.dw-ei-widget-readout {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  margin: 16px 0 0;
+  color: var(--ei-grey);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.dw-ei-widget-readout strong {
+  color: var(--ei-black);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 15px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 860px) {
+  .dw-ei-model { grid-template-columns: 1fr; }
+  .dw-ei-model-stage { aspect-ratio: 4 / 3; min-height: 300px; }
+  .dw-ei-model-parts { padding: 18px 12px; }
+  .dw-ei-widget-frame { height: clamp(360px, 90vw, 460px); }
+  .dw-ei-widget-handle { display: none; }
 }

@@ -13,6 +13,8 @@ import "./tempoCase.css";
 import "./tempoCaseGuards.css";
 import { MediaCarousel } from "./MediaCarousel";
 import { PullToContinue } from "./PullToContinue";
+import { EightImagesModel } from "./eightImagesModel";
+import { EightImagesWidget } from "./eightImagesWidget";
 import { useTextMotion } from "./textMotion";
 import { useSectionBackgroundBlend } from "./sectionBlend";
 import { OutcomeSection, PlateSection, StripSection, WalkthroughSection } from "./caseStudyMotion";
@@ -105,7 +107,7 @@ type PortfolioSection = {
 };
 
 export type PortfolioProject = {
-  project: { title: string; slug: string };
+  project: { title: string; slug: string; draft?: boolean };
   assets: Record<string, PortfolioAsset>;
   sections: PortfolioSection[];
 };
@@ -120,6 +122,7 @@ const portfolioFilterMetadata: Record<string, { year: string; category: string }
   tempo: { year: "2026", category: "Delivery" },
   icredo: { year: "2026", category: "Fintech" },
   liga: { year: "2025", category: "Insurance" },
+  "8images": { year: "2026", category: "3D commerce" },
   "liga-steep": { year: "2025", category: "Insurance" },
   nesba: { year: "2025", category: "Wealthtech" }
 };
@@ -135,9 +138,21 @@ function caseEyebrow(slug: string) {
   return meta ? `${meta.category} / ${meta.year}` : "Case study";
 }
 
-const projects = (portfolioManifest.projects as unknown as PortfolioProject[])
+const allManifestProjects = portfolioManifest.projects as unknown as PortfolioProject[];
+
+/**
+ * `draft: true` in portfolio-content.json means "in the repository, not on the
+ * site yet". The page stays reachable at its own URL so it can be reviewed,
+ * but it is out of the Work grid, out of the year filters, out of the
+ * next-project chain, out of the sitemap and out of the heading that counts
+ * the case studies. Removing the flag is the whole of publishing it.
+ */
+const projects = allManifestProjects
+  .filter((item) => !item.project.draft)
   .slice()
   .sort((a, b) => Number(portfolioFilterMetadata[b.project.slug]?.year ?? 0) - Number(portfolioFilterMetadata[a.project.slug]?.year ?? 0));
+
+const manifestDrafts = allManifestProjects.filter((item) => item.project.draft);
 
 /**
  * Working drafts. Reachable by URL so they can be compared against the live
@@ -158,8 +173,7 @@ const tempoV3 = {
  * two treatments can be compared side by side at /am/projects/liga-steep.
  * It is a draft, so it stays out of the Work grid and the next-project chain.
  */
-const ligaSource = (portfolioManifest.projects as unknown as PortfolioProject[])
-  .find((item) => item.project.slug === "liga");
+const ligaSource = allManifestProjects.find((item) => item.project.slug === "liga");
 const ligaSteep = ligaSource
   ? ({ ...ligaSource, project: { ...ligaSource.project, slug: "liga-steep" } } as PortfolioProject)
   : null;
@@ -167,7 +181,8 @@ const ligaSteep = ligaSource
 const draftProjects = [
   tempoV2 as unknown as PortfolioProject,
   tempoV3 as unknown as PortfolioProject,
-  ...(ligaSteep ? [ligaSteep] : [])
+  ...(ligaSteep ? [ligaSteep] : []),
+  ...manifestDrafts
 ];
 
 /** Every project the router can resolve, live or draft. */
@@ -185,6 +200,7 @@ const projectAccents: Record<string, { accent: string; surface: string }> = {
   tempo: { accent: "#1b8874", surface: "#daf2e8" },
   icredo: { accent: "#1e60e5", surface: "#edf4ff" },
   liga: { accent: "#da2c43", surface: "#f6f7fa" },
+  "8images": { accent: "#242424", surface: "#f5f5f5" },
   "liga-steep": { accent: "#17191c", surface: "#ffffff" },
   nesba: { accent: "#2e6042", surface: "#edf2ed" }
 };
@@ -198,6 +214,7 @@ const portfolioCardImages: Record<string, string> = {
   tempo: "/portfolio-assets/cards/tempo-card.png",
   icredo: "/portfolio-assets/icredo/portfolio-thumbnail.png",
   liga: "/portfolio-assets/cards/liga-card.png",
+  "8images": "/portfolio-assets/8images/viewer-hero.png",
   nesba: "/portfolio-assets/nesba/home-zero-state.png"
 };
 
@@ -211,6 +228,7 @@ const portfolioCardHeadlines: Record<string, string> = {
   tempo: "Safe document delivery, from sender to recipient.",
   icredo: "A loan conversation, not a long form.",
   liga: "An accident report you can file standing up.",
+  "8images": "A configurator that works inside someone else’s page.",
   nesba: "One clear path from cash flow to investing."
 };
 
@@ -3116,6 +3134,21 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   if (baseSlug(project.project.slug) === "liga" && section.id === "outcome") {
     return <LigaChangedSection project={project} section={section} />;
   }
+  if (project.project.slug === "8images" && (section.id === "model" || section.id === "widget")) {
+    return (
+      <section className={`dw-case-section dw-ei-section dw-ei-section-${section.id}`} id={section.id}>
+        <div className="dw-ei-inner">
+          <header data-portfolio-reveal>
+            {section.eyebrow ? <p className="dw-ei-eyebrow">{section.eyebrow}</p> : null}
+            {section.title ? <h2>{section.title}</h2> : null}
+            <Html html={section.body} className="dw-ei-lede" />
+          </header>
+          {section.id === "model" ? <EightImagesModel /> : <EightImagesWidget />}
+        </div>
+      </section>
+    );
+  }
+
   if (baseSlug(project.project.slug) === "liga" && section.type === "scene") {
     return <LigaSceneSection project={project} section={section} />;
   }
@@ -4117,6 +4150,16 @@ export function caseCursorLabel(slug: string) {
 }
 
 
+/* The heading has been wrong twice - "Eight products" with ten published, then
+   eleven with one unshipped - because the number was typed rather than counted.
+   It is now derived, so publishing a case study updates it. */
+const COUNT_WORDS: Record<number, string> = {
+  1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven",
+  8: "Eight", 9: "Nine", 10: "Ten", 11: "Eleven", 12: "Twelve", 13: "Thirteen",
+  14: "Fourteen", 15: "Fifteen", 16: "Sixteen", 17: "Seventeen", 18: "Eighteen",
+  19: "Nineteen", 20: "Twenty"
+};
+
 export function PortfolioIndexContent() {
   const containerRef = useRef<HTMLElement | null>(null);
   const [selectedYear, setSelectedYear] = useState("All years");
@@ -4133,7 +4176,7 @@ export function PortfolioIndexContent() {
     <section className="dw-portfolio-index" ref={containerRef}>
       <header className="dw-portfolio-index-hero" data-portfolio-reveal>
         <p>Selected work / case studies</p>
-        <h1>Eight products. The decisions behind them.</h1>
+        <h1>{COUNT_WORDS[projects.length] ?? projects.length} products. The decisions behind them.</h1>
         <div>
           <p>Fintech, delivery, crypto, SaaS — most of them taken from an unclear brief to a system that shipped. Each case study shows the research that changed direction, the structure that made scale possible, and the trade-offs I would still defend in a review.</p>
         </div>
@@ -4385,18 +4428,19 @@ function TempoMultistopFoundation() {
 }
 
 function TempoLandingScene({ metadata }: { metadata: Array<{ label: string; value: string }> }) {
-  return <section className="dw-tempo-case-intro" aria-labelledby="tempo-v3-title">
-    <div className="dw-tempo-case-heading">
+  return <section className="dw-case-intro dw-case-wide dw-tempo-case-intro" aria-labelledby="tempo-v3-title">
+    <div className="dw-case-intro-surface dw-tempo-case-surface">
+    <div className="dw-case-intro-heading dw-tempo-case-heading">
       <p>Delivery / Mobile app</p>
       <h1 id="tempo-v3-title">Tempo</h1>
       <h2>Safe document delivery, from sender to recipient.</h2>
     </div>
     {metadata.length ? (
-      <dl className="dw-tempo-case-meta" aria-label="Tempo project information">
+      <dl className="dw-case-meta dw-tempo-case-meta" aria-label="Tempo project information">
         {metadata.map((item) => <div key={item.label}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}
       </dl>
     ) : null}
-    <div className="dw-tempo-case-art">
+    <div className="dw-case-intro-media dw-tempo-case-art">
     <div className="dw-tempo-landing-skyline" aria-hidden="true" />
     <div className="dw-tempo-landing-horizon" aria-hidden="true" />
     <div className="dw-tempo-landing-van">
@@ -4404,6 +4448,7 @@ function TempoLandingScene({ metadata }: { metadata: Array<{ label: string; valu
       <img className="dw-tempo-van-body" src="/portfolio-assets/tempo/figma/tempo-hero-van-body.png" alt="Tempo delivery van from the original landing page design" />
       <img className="dw-tempo-van-wheel dw-is-front" src="/portfolio-assets/tempo/figma/tempo-hero-wheel.png" alt="" aria-hidden="true" />
       <img className="dw-tempo-van-wheel dw-is-rear" src="/portfolio-assets/tempo/figma/tempo-hero-wheel.png" alt="" aria-hidden="true" />
+    </div>
     </div>
     </div>
   </section>;

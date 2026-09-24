@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { trackEvent } from "../analytics/ga";
 import "./contactChat.css";
 
 const DAVIT_TELEGRAM_URL = "https://t.me/pedanyan";
@@ -60,9 +61,16 @@ export const chatIntents: ChatIntent[] = [
   }
 ];
 
-/** Any CTA anywhere on the site can open the chat, optionally pre-picking an intent. */
-export function openContactChat(intentId?: string) {
-  window.dispatchEvent(new CustomEvent("dw:open-chat", { detail: intentId ?? null }));
+export type ChatOpenDetail = { intent: string | null; source: string };
+
+/**
+ * Any CTA anywhere on the site can open the chat, optionally pre-picking an
+ * intent. `source` names the button, so the reports can tell the header pill
+ * apart from the floating portrait rather than counting one number for both.
+ */
+export function openContactChat(intentId?: string, source = "unknown") {
+  const detail: ChatOpenDetail = { intent: intentId ?? null, source };
+  window.dispatchEvent(new CustomEvent<ChatOpenDetail>("dw:open-chat", { detail }));
 }
 
 export function ContactChat() {
@@ -82,11 +90,18 @@ export function ContactChat() {
 
   useEffect(() => {
     const onOpen = (event: Event) => {
-      const requested = (event as CustomEvent<string | null>).detail;
+      const { intent: requested, source } =
+        (event as CustomEvent<ChatOpenDetail>).detail ?? { intent: null, source: "unknown" };
       returnFocusRef.current = document.activeElement as HTMLElement | null;
-      setIntent(requested ? chatIntents.find((item) => item.id === requested) ?? null : null);
+      const picked = requested ? chatIntents.find((item) => item.id === requested) ?? null : null;
+      setIntent(picked);
       setDetail("");
       setIsOpen(true);
+      trackEvent("contact_open", { source });
+      /* A CTA that pre-picks an intent skips the chip screen, so record the
+         intent here too - otherwise that path looks like a chat nobody
+         answered. */
+      if (picked) trackEvent("contact_intent", { intent: picked.id, source });
     };
     window.addEventListener("dw:open-chat", onOpen);
     return () => window.removeEventListener("dw:open-chat", onOpen);
@@ -116,6 +131,13 @@ export function ContactChat() {
     if (!intent) return;
     if (intent.requiresDetail && !detail.trim()) return;
     const body = detail.trim() ? `${intent.opener}\n\n${detail.trim()}` : intent.opener;
+    /* The last thing measurable. Past this point the conversation is in
+       Telegram, where analytics cannot follow - so this is the conversion. */
+    trackEvent("contact_send", {
+      intent: intent.id,
+      has_detail: detail.trim().length > 0,
+      detail_length: detail.trim().length
+    });
     window.open(`${DAVIT_TELEGRAM_URL}?text=${encodeURIComponent(body)}`, "_blank", "noopener");
     close();
   }, [intent, detail, close]);
@@ -199,7 +221,10 @@ export function ContactChat() {
                 className="dw-chat-chip"
                 type="button"
                 key={item.id}
-                onClick={() => setIntent(item)}
+                onClick={() => {
+                  setIntent(item);
+                  trackEvent("contact_intent", { intent: item.id, source: "chip" });
+                }}
                 data-cursor-label={item.chip.toLowerCase()}
               >
                 {item.chip}

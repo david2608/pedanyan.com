@@ -27,6 +27,7 @@ import { MediaCarousel } from "./MediaCarousel";
 import { CHAT_AVATAR, ContactChat, openContactChat } from "./ContactChat";
 import { PullToContinue } from "./PullToContinue";
 import { initAnalytics, trackPageView } from "../analytics/ga";
+import { useReadDepth } from "../analytics/readDepth";
 import { OctagonField } from "./OctagonField";
 import {
   ExperienceDetailModal,
@@ -1355,7 +1356,7 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
         <button
           className="dw-pill"
           type="button"
-          onClick={() => openContactChat()}
+          onClick={() => openContactChat(undefined, "header")}
           data-cursor-label="start a conversation"
           onMouseEnter={() => emitHeroPose("good")}
           onMouseLeave={() => emitHeroPose(null)}
@@ -1382,7 +1383,7 @@ function FixedSocialLinks() {
         className="dw-fixed-portrait"
         type="button"
         aria-label="Start a conversation with Davit"
-        onClick={() => openContactChat()}
+        onClick={() => openContactChat(undefined, "portrait")}
         onMouseEnter={() => emitHeroPose("good")}
         onMouseLeave={() => emitHeroPose(null)}
         onFocus={() => emitHeroPose("good")}
@@ -4966,6 +4967,9 @@ export function AppRouter() {
     initAnalytics();
     trackPageView(path);
   }, [path, isOutbound]);
+
+  /* Whether a case study was read to the end, not merely opened. */
+  useReadDepth(isOutbound ? "" : path);
 
   useLayoutEffect(() => {
     if (isOutbound) return;

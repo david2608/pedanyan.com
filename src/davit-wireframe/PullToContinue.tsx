@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
+import { trackEvent } from "../analytics/ga";
 import "./pullToContinue.css";
 
 // How much overscroll past the very bottom counts as a full pull.
@@ -41,6 +42,9 @@ export function PullToContinue({
   const go = useCallback(() => {
     if (firedRef.current) return;
     firedRef.current = true;
+    /* Choosing to read a second case study is the strongest engagement signal
+       on the site, and it is only observable here. */
+    trackEvent("case_continue", { from: window.location.pathname, to: href });
     setProgress(1);
     document.documentElement.classList.add("dw-page-leaving");
     onNavigate?.();

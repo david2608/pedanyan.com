@@ -31,73 +31,11 @@
          survive a crawler that runs no JavaScript at all. The per-route graph
          (WebPage / CreativeWork / Article) is added on top of this by
          src/seo/head.ts and baked in per route by scripts/prerender.mjs. -->
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://pedanyan.com/#person",
-      "name": "Davit Pedanyan",
-      "url": "https://pedanyan.com/",
-      "jobTitle": "Head of Design",
-      "description": "Davit Pedanyan is a product designer, design leader and educator from Armenia. He designs products, teaches beginners, and runs public formats for Armenia's creative community.",
-      "email": "mailto:davit@pedanyan.com",
-      "nationality": {
-        "@type": "Country",
-        "name": "Armenia"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "AM"
-      },
-      "knowsAbout": [
-        "Product Design",
-        "Design Leadership",
-        "Design Strategy",
-        "DesignOps",
-        "Design Systems",
-        "User Experience Design",
-        "User Interface Design",
-        "Design Education",
-        "Mentoring"
-      ],
-      "sameAs": [
-        "https://am.linkedin.com/in/davit-pedanyan",
-        "https://medium.com/@pedanyandavid",
-        "https://t.me/pedanyan"
-      ],
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Freedx"
-      },
-      "hasOccupation": {
-        "@type": "Occupation",
-        "name": "Product Designer",
-        "occupationLocation": {
-          "@type": "Country",
-          "name": "Armenia"
-        },
-        "skills": "Product Design, Design Leadership, Design Strategy, DesignOps, Design Systems, User Experience Design, User Interface Design, Design Education, Mentoring"
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://pedanyan.com/#website",
-      "url": "https://pedanyan.com/",
-      "name": "Davit Pedanyan",
-      "description": "Designer, educator, and creative culture builder from Armenia.",
-      "inLanguage": "en",
-      "publisher": {
-        "@id": "https://pedanyan.com/#person"
-      },
-      "about": {
-        "@id": "https://pedanyan.com/#person"
-      }
-    }
-  ]
-}
-    </script>
+    <!-- The JSON-LD graph is injected by src/seo/head.ts on every route, which
+         the prerender step bakes into each static file. A second copy used to
+         sit here; it shared the same @id values so nothing conflicted, but it
+         was a hand-maintained duplicate that had already fallen behind the
+         generated one. One source. -->
     <!-- Noto Sans is the LIGA app's own typeface; the coded case-study screens use it. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

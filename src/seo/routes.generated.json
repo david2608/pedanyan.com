@@ -11,7 +11,26 @@
   },
   "person": {
     "name": "Davit Pedanyan",
-    "jobTitle": "Head of Design",
+    "jobTitle": [
+      "Head of Design",
+      "Product Designer",
+      "Design Leader"
+    ],
+    "image": "/hero-frames/avatar.webp",
+    "knowsLanguage": [
+      {
+        "code": "hy",
+        "name": "Armenian"
+      },
+      {
+        "code": "ru",
+        "name": "Russian"
+      },
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
     "description": "Davit Pedanyan is a product designer, design leader and educator from Armenia. He designs products, teaches beginners, and runs public formats for Armenia's creative community.",
     "addressCountry": "AM",
     "knowsAbout": [
@@ -63,7 +82,7 @@
     {
       "path": "/am/portfolio",
       "title": "Work — Case Studies by Davit Pedanyan",
-      "description": "Nine product design case studies: the decisions behind each one, what changed, and the trade-offs. Fintech, insurance, cloud operations, logistics and marketplace products.",
+      "description": "Ten product design case studies: the decisions behind each one, what changed, and the trade-offs. Fintech, insurance, cloud and marketplace products.",
       "type": "CollectionPage",
       "priority": "0.9",
       "changefreq": "monthly"
@@ -103,17 +122,17 @@
     {
       "path": "/am/projects/tinkoff-checkout",
       "title": "Tinkoff Checkout — Case Study by Davit Pedanyan",
-      "description": "Restoring trust and purchase context in an e-commerce checkout.",
+      "description": "Rebuilding trust and purchase context in the Tinkoff e-commerce checkout, for roughly a 30% relative improvement in conversion.",
       "type": "CreativeWork",
       "name": "Tinkoff Checkout",
-      "headline": null,
+      "headline": "From checkout drop-off to a clearer path to payment.",
       "priority": "0.8",
       "changefreq": "yearly"
     },
     {
       "path": "/am/projects/cloudchipr",
       "title": "CloudChipr — Case Study by Davit Pedanyan",
-      "description": "$500K saved in cloud costs. Making cloud cost operations actionable for engineering and finance teams.",
+      "description": "A cloud-cost platform that saved customers $500K, by making cost operations something engineering and finance teams could act on together.",
       "type": "CreativeWork",
       "name": "CloudChipr",
       "headline": "$500K saved in cloud costs.",
@@ -123,7 +142,7 @@
     {
       "path": "/am/projects/material-exchange",
       "title": "Material Exchange — Case Study by Davit Pedanyan",
-      "description": "Cut material management from 61 to 23 minutes. Digital Asset Management Platform and Marketplace",
+      "description": "A digital asset management platform and marketplace for material sourcing, where one core task went from 61 minutes to 23.",
       "type": "CreativeWork",
       "name": "Material Exchange",
       "headline": "Cut material management from 61 to 23 minutes.",
@@ -133,7 +152,7 @@
     {
       "path": "/am/projects/securion",
       "title": "Securion — Case Study by Davit Pedanyan",
-      "description": "Multi-factor security for digital assets. Mobile Crypto Wallet and Exchange.",
+      "description": "Multi-factor security for a mobile crypto wallet and exchange, designed so the protection is visible without becoming the obstacle.",
       "type": "CreativeWork",
       "name": "Securion",
       "headline": "Multi-factor security for digital assets.",
@@ -143,7 +162,7 @@
     {
       "path": "/am/projects/material-exchange-photo-lab",
       "title": "ME Photo Lab — Case Study by Davit Pedanyan",
-      "description": "Designed for 30% more material engagement. Cross-platform photo editing extension.",
+      "description": "A cross-platform photo editing extension for material photography, designed for 30% more engagement with the materials themselves.",
       "type": "CreativeWork",
       "name": "ME Photo Lab",
       "headline": "Designed for 30% more material engagement.",
@@ -153,7 +172,7 @@
     {
       "path": "/am/projects/hotel-apartments",
       "title": "Hotel Apartments — Case Study by Davit Pedanyan",
-      "description": "Made extended stays bookable online. online booking service specializing in extended-stay hotel room booking",
+      "description": "Making extended stays bookable online: a booking service for long-stay hotel rooms, and the brand identity that had to carry it.",
       "type": "CreativeWork",
       "name": "Hotel Apartments",
       "headline": "Made extended stays bookable online.",
@@ -163,7 +182,7 @@
     {
       "path": "/am/projects/tempo",
       "title": "Tempo — Case Study by Davit Pedanyan",
-      "description": "Safe document delivery, from sender to recipient. Safe special delivery for important documents and time-sensitive items.",
+      "description": "Safe delivery for important documents and time-sensitive items, designed around the handover between sender and recipient.",
       "type": "CreativeWork",
       "name": "Tempo",
       "headline": "Safe document delivery, from sender to recipient.",
@@ -173,7 +192,7 @@
     {
       "path": "/am/projects/icredo",
       "title": "iCredo — Case Study by Davit Pedanyan",
-      "description": "A loan conversation, not a long form. A loan you ask for the way you would ask a friend - and understand before you say yes.",
+      "description": "A loan you ask for the way you would ask a friend, and understand before you say yes — a lending conversation instead of a long form.",
       "type": "CreativeWork",
       "name": "iCredo",
       "headline": "A loan conversation, not a long form.",
@@ -183,7 +202,7 @@
     {
       "path": "/am/projects/nesba",
       "title": "Nesba — Case Study by Davit Pedanyan",
-      "description": "One clear path from cash flow to investing. A unified Saudi wealth experience that turns everyday financial activity into a clearer path to investing.",
+      "description": "A unified Saudi wealth experience that turns everyday cash flow into one clear path to investing.",
       "type": "CreativeWork",
       "name": "Nesba",
       "headline": "One clear path from cash flow to investing.",
@@ -193,7 +212,7 @@
     {
       "path": "/am/projects/liga",
       "title": "LIGA Mobile — Case Study by Davit Pedanyan",
-      "description": "An accident report you can file standing up. The insurance app you hope never to open, redesigned around the ten minutes when you have to. That work exposed",
+      "description": "The insurance app you hope never to open, redesigned around the ten minutes when you have to file an accident report standing up.",
       "type": "CreativeWork",
       "name": "LIGA Mobile",
       "headline": "An accident report you can file standing up.",
@@ -303,6 +322,7 @@
   "noindex": [
     "/am/projects/tempo-v2",
     "/am/projects/tempo-v3",
-    "/am/projects/liga-steep"
+    "/am/projects/liga-steep",
+    "/am/projects/8images"
   ]
 }

@@ -10,6 +10,8 @@ import seo from "./routes.generated.json";
    the same code path both times, which is the only way the two can't drift.
    =========================================================================== */
 
+type Org = { name: string };
+
 type Route = {
   path: string;
   title: string;
@@ -104,20 +106,38 @@ function graphFor(route: Route) {
   const siteId = `${SITE.origin}/#website`;
   const pageId = `${url}#webpage`;
 
+  /* The employers the site lists. `affiliation` rather than `worksFor`, which
+     schema.org defines as the CURRENT organization — putting ten past employers
+     there would assert he works at all of them today. No dates: most `years`
+     values in the content read "Verify dates", and a date that contradicts the
+     visible page is worse than no date. */
+  const foundedIds = PERSON.founderOf.map(
+    (name: string) => `${SITE.origin}/#org-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
+  );
+
   const person: Record<string, unknown> = {
     "@type": "Person",
     "@id": personId,
     name: PERSON.name,
     url: `${SITE.origin}/`,
+    image: `${SITE.origin}${PERSON.image}`,
     jobTitle: PERSON.jobTitle,
     description: PERSON.description,
     email: `mailto:${PERSON.email}`,
     nationality: { "@type": "Country", name: "Armenia" },
     address: { "@type": "PostalAddress", addressCountry: PERSON.addressCountry },
     knowsAbout: PERSON.knowsAbout,
+    knowsLanguage: PERSON.knowsLanguage.map((l: { code: string; name: string }) => ({
+      "@type": "Language",
+      name: l.name,
+      alternateName: l.code
+    })),
     sameAs: PERSON.sameAs,
     worksFor: { "@type": "Organization", name: PERSON.worksFor.name },
-    alumniOf: undefined,
+    affiliation: (PERSON.pastEmployers as string[]).map((name) => ({
+      "@type": "Organization",
+      name
+    })),
     hasOccupation: {
       "@type": "Occupation",
       name: "Product Designer",
@@ -125,7 +145,6 @@ function graphFor(route: Route) {
       skills: PERSON.knowsAbout.join(", ")
     }
   };
-  delete person.alumniOf;
 
   const website = {
     "@type": "WebSite",
@@ -160,7 +179,19 @@ function graphFor(route: Route) {
      signal available for a personal site. */
   if (pageType === "ProfilePage") page.mainEntity = { "@id": personId };
 
-  const graph: Record<string, unknown>[] = [person, website, page];
+  /* The two organizations he started are entities of their own, each linking
+     back to him as founder — which is what lets an answer engine say "he
+     founded X" rather than "X is mentioned on his site". The link is declared
+     on the Organization, because schema.org defines `founder` there and has no
+     inverse on Person. */
+  const founded = (PERSON.founderOf as string[]).map((name, i) => ({
+    "@type": "Organization",
+    "@id": foundedIds[i],
+    name,
+    founder: { "@id": personId }
+  }));
+
+  const graph: Record<string, unknown>[] = [person, ...founded, website, page];
 
   if (route.type === "CreativeWork") {
     graph.push({

@@ -39,8 +39,22 @@ export const SITE = {
    --------------------------------------------------------------------------- */
 export const PERSON = {
   name: "Davit Pedanyan",
-  /* notionContent.generated.json:166-167 — current role */
-  jobTitle: "Head of Design",
+  /* notionContent.generated.json:166-167 — current role. An array because the
+     site describes him all three ways and an entity resolver should match any
+     of them, not just the current title. */
+  jobTitle: ["Head of Design", "Product Designer", "Design Leader"],
+  /* public/hero-frames/avatar.webp — the portrait the site already uses in the
+     contact chat. A Person node with no image is a weaker entity. */
+  image: "/hero-frames/avatar.webp",
+  /* CONFIRMED BY DAVIT, 24 Sep 2026, from his own CV — the only fact in this
+     file that is not quoted from the repo, and it is here because working
+     language is decisive for the remote roles this site is aimed at. Delete
+     these three lines if that ever stops being accurate. */
+  knowsLanguage: [
+    { code: "hy", name: "Armenian" },
+    { code: "ru", name: "Russian" },
+    { code: "en", name: "English" }
+  ],
   /* siteData.ts:5, :7 and notionContent.generated.json:44-49 */
   description:
     "Davit Pedanyan is a product designer, design leader and educator from Armenia. He designs products, teaches beginners, and runs public formats for Armenia's creative community.",
@@ -106,8 +120,10 @@ export const STATIC_ROUTES = [
   {
     path: "/am/portfolio",
     title: "Work — Case Studies by Davit Pedanyan",
+    /* {CASE_COUNT} is filled in by seo-build from the published project list,
+       so this sentence cannot go stale the way "Nine" did. */
     description:
-      "Nine product design case studies: the decisions behind each one, what changed, and the trade-offs. Fintech, insurance, cloud operations, logistics and marketplace products.",
+      "{CASE_COUNT} product design case studies: the decisions behind each one, what changed, and the trade-offs. Fintech, insurance, cloud and marketplace products.",
     type: "CollectionPage",
     priority: "0.9",
     changefreq: "monthly"
@@ -154,6 +170,7 @@ export const STATIC_ROUTES = [
    study makes. Used as the meta description's first sentence, so the snippet
    says something specific rather than repeating the project name. */
 export const PROJECT_HEADLINES = {
+  "tinkoff-checkout": "From checkout drop-off to a clearer path to payment.",
   cloudchipr: "$500K saved in cloud costs.",
   "material-exchange": "Cut material management from 61 to 23 minutes.",
   securion: "Multi-factor security for digital assets.",
@@ -162,7 +179,52 @@ export const PROJECT_HEADLINES = {
   tempo: "Safe document delivery, from sender to recipient.",
   icredo: "A loan conversation, not a long form.",
   liga: "An accident report you can file standing up.",
+  "8images": "A configurator that works inside someone else’s page.",
   nesba: "One clear path from cash flow to investing."
+};
+
+/* ---------------------------------------------------------------------------
+   HAND-WRITTEN META DESCRIPTIONS.
+
+   The generated fallback is `headline + standfirst`, and for most projects that
+   reads badly: the standfirst was written as a subtitle sitting UNDER the
+   headline, so on its own it repeats it ("Made extended stays bookable online.
+   online booking service specializing in extended-stay hotel room booking"),
+   starts lowercase, and carries no full stop.
+
+   A meta description is the two lines a hiring manager reads in a results page
+   before deciding whether to open the case. Ten of them is an hour's work, so
+   they are written by hand here. Every claim is one the case study itself
+   makes — nothing is added.
+
+   A project with no entry falls back to the generated join, which is now
+   normalised and cut on sentence boundaries, so a new case study is never
+   blocked on this list.
+   --------------------------------------------------------------------------- */
+export const PROJECT_DESCRIPTIONS = {
+  /* tinkoffCase.tsx — "Conversion improved by approximately 30%." */
+  "tinkoff-checkout":
+    "Rebuilding trust and purchase context in the Tinkoff e-commerce checkout, for roughly a 30% relative improvement in conversion.",
+  cloudchipr:
+    "A cloud-cost platform that saved customers $500K, by making cost operations something engineering and finance teams could act on together.",
+  "material-exchange":
+    "A digital asset management platform and marketplace for material sourcing, where one core task went from 61 minutes to 23.",
+  securion:
+    "Multi-factor security for a mobile crypto wallet and exchange, designed so the protection is visible without becoming the obstacle.",
+  "material-exchange-photo-lab":
+    "A cross-platform photo editing extension for material photography, designed for 30% more engagement with the materials themselves.",
+  "hotel-apartments":
+    "Making extended stays bookable online: a booking service for long-stay hotel rooms, and the brand identity that had to carry it.",
+  tempo:
+    "Safe delivery for important documents and time-sensitive items, designed around the handover between sender and recipient.",
+  icredo:
+    "A loan you ask for the way you would ask a friend, and understand before you say yes — a lending conversation instead of a long form.",
+  liga:
+    "The insurance app you hope never to open, redesigned around the ten minutes when you have to file an accident report standing up.",
+  nesba:
+    "A unified Saudi wealth experience that turns everyday cash flow into one clear path to investing.",
+  "8images":
+    "A 3D product configurator built to work inside someone else's page, at a size you do not control, on a model you did not choose."
 };
 
 /* Drafts are reachable by URL so they can be compared against the live page

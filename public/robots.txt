@@ -10,6 +10,7 @@ Allow: /
 Disallow: /am/projects/tempo-v2
 Disallow: /am/projects/tempo-v3
 Disallow: /am/projects/liga-steep
+Disallow: /am/projects/8images
 
 # Search crawlers (explicit, for clarity — all are already covered by *)
 User-agent: Googlebot
@@ -52,6 +53,30 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Kagibot
+Allow: /
+
+User-agent: PetalBot
+Allow: /
+
 # Model-training crawlers that do not send traffic back are a separate
 # decision from search indexing. They are ALLOWED here because Davit has not
 # asked to opt out; removing a name from this list does not block it — only
@@ -65,4 +90,23 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: Ai2Bot
+Allow: /
+
 Sitemap: https://pedanyan.com/sitemap.xml
+
+# A curated index for answer engines, in the format at https://llmstxt.org.
+# Same source as the sitemap, so the two cannot disagree.
+# https://pedanyan.com/llms.txt

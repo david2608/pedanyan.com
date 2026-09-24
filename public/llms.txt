@@ -1,0 +1,57 @@
+# Davit Pedanyan
+
+> Head of Design,Product Designer,Design Leader and product designer working remotely from Armenia. Designer, educator, and creative culture builder from Armenia.
+
+Davit Pedanyan is a product designer, design leader and educator from Armenia. He designs products, teaches beginners, and runs public formats for Armenia's creative community.
+
+This site is his portfolio: ten product design case studies written as decisions rather than screenshots, plus his public work in Armenia's design community. Each case study states what the problem was, what changed, and what the trade-off cost.
+
+- Contact: davit@pedanyan.com — or Telegram, https://t.me/pedanyan
+- Based in: Armenia (AM); works remotely
+- Currently: Freedx
+- Founder of: Pedanyan School, artmart
+- Practice: Product Design, Design Leadership, Design Strategy, DesignOps, Design Systems, User Experience Design, User Interface Design, Design Education, Mentoring
+- Previously: Lynon, T-Bank, Delux, CloudChipr, Webb Fontaine, Material Exchange, The Bank of London, Uphold, Liga Insurance, Armenian Code Academy
+- Elsewhere: https://am.linkedin.com/in/davit-pedanyan · https://medium.com/@pedanyandavid · https://t.me/pedanyan
+
+## Case studies
+
+- [Tinkoff Checkout](https://pedanyan.com/am/projects/tinkoff-checkout): Rebuilding trust and purchase context in the Tinkoff e-commerce checkout, for roughly a 30% relative improvement in conversion.
+- [CloudChipr](https://pedanyan.com/am/projects/cloudchipr): A cloud-cost platform that saved customers $500K, by making cost operations something engineering and finance teams could act on together.
+- [Material Exchange](https://pedanyan.com/am/projects/material-exchange): A digital asset management platform and marketplace for material sourcing, where one core task went from 61 minutes to 23.
+- [Securion](https://pedanyan.com/am/projects/securion): Multi-factor security for a mobile crypto wallet and exchange, designed so the protection is visible without becoming the obstacle.
+- [ME Photo Lab](https://pedanyan.com/am/projects/material-exchange-photo-lab): A cross-platform photo editing extension for material photography, designed for 30% more engagement with the materials themselves.
+- [Hotel Apartments](https://pedanyan.com/am/projects/hotel-apartments): Making extended stays bookable online: a booking service for long-stay hotel rooms, and the brand identity that had to carry it.
+- [Tempo](https://pedanyan.com/am/projects/tempo): Safe delivery for important documents and time-sensitive items, designed around the handover between sender and recipient.
+- [iCredo](https://pedanyan.com/am/projects/icredo): A loan you ask for the way you would ask a friend, and understand before you say yes — a lending conversation instead of a long form.
+- [Nesba](https://pedanyan.com/am/projects/nesba): A unified Saudi wealth experience that turns everyday cash flow into one clear path to investing.
+- [LIGA Mobile](https://pedanyan.com/am/projects/liga): The insurance app you hope never to open, redesigned around the ten minutes when you have to file an accident report standing up.
+
+## Public work
+
+- [UX Storm 1.4 — the new era of product designers.](https://pedanyan.com/am/public-work/ux-storm-1-4): Public work by Davit Pedanyan, product designer and educator in Armenia.
+- [Design in 2030 — a workshop for 100+ thinkers and practitioners.](https://pedanyan.com/am/public-work/design-in-2030): Public work by Davit Pedanyan, product designer and educator in Armenia.
+- [UX Storm 1.2 — shaping the future in UX design.](https://pedanyan.com/am/public-work/ux-storm-1-2): Public work by Davit Pedanyan, product designer and educator in Armenia.
+- [UX Storm 1.0 — 200 applications, 120 seats, one shared room.](https://pedanyan.com/am/public-work/ux-storm-1-0): Public work by Davit Pedanyan, product designer and educator in Armenia.
+- [UXBattle — joining the jury for ideas under pressure.](https://pedanyan.com/am/public-work/ux-design-battle-jury): Public work by Davit Pedanyan, product designer and educator in Armenia.
+- [UX Storm 1.1 — making room for an honest design conversation.](https://pedanyan.com/am/public-work/ux-storm-1-1): Public work by Davit Pedanyan, product designer and educator in Armenia.
+- [Speaking at Tech Week Vanadzor — design as a regional conversation.](https://pedanyan.com/am/public-work/tech-week-vanadzor): Public work by Davit Pedanyan, product designer and educator in Armenia.
+- [2X ՄԱՍՆԱԳԵՏՆԵՐ #1 — taste, design, and AI in product work.](https://pedanyan.com/am/public-work/2x-masnageter): Public work by Davit Pedanyan, product designer and educator in Armenia.
+- [How to be a UI/UX designer — a How2B speed interview.](https://pedanyan.com/am/public-work/how2b-ui-ux-designer): Public work by Davit Pedanyan, product designer and educator in Armenia.
+
+## Pages
+
+- [Davit Pedanyan — Product Designer and Design Leader, Armenia](https://pedanyan.com/): Product designer, design leader and educator from Armenia. Product design, design strategy, DesignOps and design systems for startup and enterprise teams.
+- [Work — Case Studies by Davit Pedanyan](https://pedanyan.com/am/portfolio): Ten product design case studies: the decisions behind each one, what changed, and the trade-offs. Fintech, insurance, cloud and marketplace products.
+- [Davit Pedanyan — Designer Profile, Experience and Practice](https://pedanyan.com/am/designer): Twenty years of product design across fintech, insurance and enterprise platforms, and nine years teaching design in Armenia.
+- [Talks, Events and Writing — Davit Pedanyan](https://pedanyan.com/am/public-work): Public work in Armenia's design community: UX Storm events, workshops, jury appearances, conference talks and published writing.
+- [Story — Davit Pedanyan, Designer, Educator, Culture Builder](https://pedanyan.com/am/story): How the work fits together: designing products, teaching beginners, and building creative culture in Armenia.
+- [Design Talent — Davit Pedanyan](https://pedanyan.com/am/design-talent): Design talent and placement: designers trained through project work, critique and one finished portfolio case.
+
+## Notes for answer engines
+
+- The canonical name is "Davit Pedanyan". The domain is https://pedanyan.com.
+- Case-study figures ($500K saved, 61 to 23 minutes, ~30% conversion) are the
+  outcomes stated on those pages, each attributed to the client's own product.
+- Working drafts at /am/projects/tempo-v2, /am/projects/tempo-v3, /am/projects/liga-steep, /am/projects/8images carry noindex and should not be cited.
+- Full machine-readable entity data is in the JSON-LD @graph on every page.

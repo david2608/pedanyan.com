@@ -16,6 +16,7 @@ import { PullToContinue } from "./PullToContinue";
 import { EightImagesModel } from "./eightImagesModel";
 import { EightImagesMaterialEditor, EightImagesParts } from "./eightImagesScreens";
 import { EightImagesShop } from "./eightImagesShop";
+import { EightImagesFiretruckCard } from "./eightImagesCard";
 import { EightImagesOrb, OrbDock, OrbProvider } from "./eightImagesOrb";
 import { EightImagesWidget } from "./eightImagesWidget";
 import { useTextMotion } from "./textMotion";
@@ -218,7 +219,6 @@ const portfolioCardImages: Record<string, string> = {
   tempo: "/portfolio-assets/cards/tempo-card.png",
   icredo: "/portfolio-assets/icredo/portfolio-thumbnail.png",
   liga: "/portfolio-assets/cards/liga-card.png",
-  "8images": "/portfolio-assets/8images/viewer-hero.png",
   nesba: "/portfolio-assets/nesba/home-zero-state.png"
 };
 
@@ -260,6 +260,7 @@ function PortfolioCardVisual({ project }: { project: PortfolioProject }) {
   if (project.project.slug === "icredo") return <IcredoLogoScene />;
   if (project.project.slug === "securion") return <SecurionLogoScene />;
   if (project.project.slug === "liga") return <LigaFlowCard />;
+  if (project.project.slug === "8images") return <EightImagesFiretruckCard />;
   const video = portfolioCardVideos[project.project.slug];
   if (video) {
     return (

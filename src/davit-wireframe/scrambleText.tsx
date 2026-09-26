@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
+import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./scrambleText.css";
 
-gsap.registerPlugin(ScrambleTextPlugin, ScrollTrigger);
+gsap.registerPlugin(ScrambleTextPlugin, SplitText, ScrollTrigger);
 
 /**
  * Short labels that resolve out of noise as their card arrives.
@@ -62,6 +63,73 @@ export function ScrambleText({
  * than per label, so the labels on a card resolve as a sequence and cards do
  * not fire independently as the grid scrolls.
  */
+/** One label's scramble. Shared so the reveal and the hover cannot drift apart. */
+function scrambleLabel(label: HTMLElement) {
+  const kind = (label.dataset.scramble as Kind) || "text";
+  return {
+    duration: 0.55 + label.textContent!.length * 0.008,
+    ease: "none",
+    /* A hover landing on a still-running reveal should replace it, not queue
+       behind it and scramble a second time after the text has settled. */
+    overwrite: true as const,
+    scrambleText: { text: "{original}", chars: CHARS[kind], speed: 0.7 }
+  };
+}
+
+/**
+ * THE HEADLINE GETS A DIFFERENT EFFECT, ON PURPOSE.
+ *
+ * The labels scramble character by character, which suits four to eleven
+ * characters and is unreadable across fifty. A headline is split into words
+ * instead: each word is scrambled briefly and they resolve in a tight
+ * left-to-right stagger, so the sentence assembles word by word and is
+ * readable almost at once rather than hissing as one long line.
+ *
+ * Each word is frozen at its measured width for the duration. Scrambled
+ * glyphs are not the same width as real ones, so without that a word grows
+ * mid-tween, shoves its neighbours along the line, and can re-wrap the whole
+ * headline. SplitText is reverted on completion, which removes the wrapper
+ * spans and the frozen widths and hands normal wrapping back.
+ */
+function scrambleTitleInto(timeline: gsap.core.Timeline, title: HTMLElement, at: number) {
+  /* `aria: "auto"` labels the heading with its own text and hides the word
+     spans, so splitting a sentence into pieces does not turn it into a list of
+     fragments for a screen reader. */
+  const split = SplitText.create(title, { type: "words", aria: "auto" });
+  const words = split.words as HTMLElement[];
+  if (!words.length) {
+    split.revert();
+    return;
+  }
+
+  words.forEach((word) => {
+    const { width } = word.getBoundingClientRect();
+    word.style.display = "inline-block";
+    word.style.width = `${width}px`;
+  });
+
+  timeline.to(
+    words,
+    {
+      duration: 0.3,
+      ease: "none",
+      scrambleText: { text: "{original}", chars: "upperCase", speed: 1 },
+      stagger: 0.05
+    },
+    at
+  );
+  /* Not onComplete of the tween: the timeline may still be running the labels,
+     and reverting early would fight them. */
+  timeline.eventCallback("onComplete", () => split.revert());
+}
+
+/**
+ * Drives every ScrambleText inside `scope`. One ScrollTrigger per card rather
+ * than per label, so the labels on a card resolve as a sequence and cards do
+ * not fire independently as the grid scrolls. Hovering the card replays the
+ * labels — the headline is left alone there, so crossing the grid with the
+ * pointer does not set whole sentences churning.
+ */
 export function useScrambleReveal(
   scopeRef: React.RefObject<HTMLElement | null>,
   cardSelector: string
@@ -73,12 +141,18 @@ export function useScrambleReveal(
        doing nothing. */
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    /* No hover replay where there is no hover: on a touch screen the event
+       fires once on tap, scrambling the label of the card being opened. */
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const teardown: Array<() => void> = [];
+
     const context = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(cardSelector).forEach((card) => {
         const labels = gsap.utils
           .toArray<HTMLElement>("[data-scramble]", card)
           .sort((a, b) => Number(a.dataset.scrambleOrder ?? 0) - Number(b.dataset.scrambleOrder ?? 0));
-        if (!labels.length) return;
+        const title = card.querySelector<HTMLElement>("[data-scramble-title]");
+        if (!labels.length && !title) return;
 
         const timeline = gsap.timeline({
           scrollTrigger: {
@@ -91,21 +165,20 @@ export function useScrambleReveal(
         });
 
         labels.forEach((label, i) => {
-          const kind = (label.dataset.scramble as Kind) || "text";
-          timeline.to(
-            label,
-            {
-              duration: 0.55 + label.textContent!.length * 0.008,
-              ease: "none",
-              scrambleText: {
-                text: "{original}",
-                chars: CHARS[kind],
-                speed: 0.7
-              }
-            },
-            i * 0.09
-          );
+          timeline.to(label, scrambleLabel(label), i * 0.09);
         });
+        /* The headline starts once the first label is already resolving, so
+           the two read as one arrival rather than two events. */
+        if (title) scrambleTitleInto(timeline, title, 0.14);
+
+        if (!canHover || !labels.length) return;
+        const replay = () => {
+          labels.forEach((label, i) => {
+            gsap.to(label, { ...scrambleLabel(label), delay: i * 0.06 });
+          });
+        };
+        card.addEventListener("pointerenter", replay);
+        teardown.push(() => card.removeEventListener("pointerenter", replay));
       });
     }, scope);
 
@@ -115,6 +188,9 @@ export function useScrambleReveal(
        before it rebuilds anything, leaving a page with no triggers at all.
        Nothing needs guarding anyway: `once: true` already fires each label a
        single time, and the context reverts cleanly. */
-    return () => context.revert();
+    return () => {
+      teardown.forEach((off) => off());
+      context.revert();
+    };
   }, [scopeRef, cardSelector]);
 }

@@ -4289,7 +4289,7 @@ export function PortfolioIndexContent() {
               <div className="dw-portfolio-card-copy">
                 <div>
                   <ScrambleText className="dw-portfolio-card-project-name" order={0}>{project.project.title}</ScrambleText>
-                  <h2>{portfolioCardHeadlines[project.project.slug] || project.project.title}</h2>
+                  <h2 data-scramble-title>{portfolioCardHeadlines[project.project.slug] || project.project.title}</h2>
                   <p>{intro.subtitle}</p>
                 </div>
                 <div className="dw-portfolio-card-meta">

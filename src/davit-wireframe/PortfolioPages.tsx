@@ -36,6 +36,7 @@ import { IcredoLogoScene } from "./icredoLogoScene";
 import { SecurionLogoScene } from "./securionLogoScene";
 import { LigaFlowCard } from "./ligaFlowCard";
 import { TinkoffCaseStudy, TinkoffScreenGridCard } from "./tinkoffCase";
+import { FreedxCaseStudy, FreedxScreenGridCard } from "./freedxCase";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,6 +118,7 @@ export type PortfolioProject = {
 };
 
 const portfolioFilterMetadata: Record<string, { year: string; category: string }> = {
+  freedx: { year: "2026", category: "Fintech" },
   "tinkoff-checkout": { year: "2023", category: "Fintech" },
   cloudchipr: { year: "2023", category: "FinOps" },
   "material-exchange": { year: "2023", category: "SaaS" },
@@ -161,7 +163,7 @@ const allManifestProjects = portfolioManifest.projects as unknown as PortfolioPr
  * (span 4) slots on a four-card cycle, so moving a case moves it into a
  * differently proportioned frame.
  */
-const GRID_ORDER = ["icredo", "nesba", "tempo", "liga"];
+const GRID_ORDER = ["freedx", "icredo", "nesba", "tempo", "liga"];
 
 const orderRank = (slug: string) => {
   const i = GRID_ORDER.indexOf(slug);
@@ -217,6 +219,7 @@ const routableProjects = [...projects, ...draftProjects];
 const draftStyleSource: Record<string, string> = { "tempo-v2": "tempo", "tempo-v3": "tempo" };
 
 const projectAccents: Record<string, { accent: string; surface: string }> = {
+  freedx: { accent: "#8a70ff", surface: "#edeaff" },
   "tinkoff-checkout": { accent: "#ffdd2d", surface: "#e8e9ed" },
   cloudchipr: { accent: "#5635ef", surface: "#ebe7ff" },
   "material-exchange": { accent: "#325d45", surface: "#eaf4ed" },
@@ -244,6 +247,7 @@ const portfolioCardImages: Record<string, string> = {
 };
 
 const portfolioCardHeadlines: Record<string, string> = {
+  freedx: "One exchange. A connected system.",
   "tinkoff-checkout": "From checkout drop-off to a clearer path to payment.",
   cloudchipr: "$500K saved in cloud costs.",
   "material-exchange": "Cut material management from 61 to 23 minutes.",
@@ -276,6 +280,7 @@ function IcredoIdentitySection({ section }: { section: PortfolioSection }) {
 }
 
 function PortfolioCardVisual({ project }: { project: PortfolioProject }) {
+  if (project.project.slug === "freedx") return <FreedxScreenGridCard />;
   if (project.project.slug === "tinkoff-checkout") return <TinkoffScreenGridCard />;
   if (project.project.slug === "tempo") return <TempoFlowCard />;
   if (project.project.slug === "icredo") return <IcredoLogoScene />;
@@ -4579,6 +4584,7 @@ export function CaseStudyContent({ slug }: { slug: string }) {
   }
 
   if (dataSlug === "tempo-v3") return <TempoV3CaseStudy project={project} />;
+  if (dataSlug === "freedx") return <FreedxCaseStudy />;
   if (dataSlug === "tinkoff-checkout") return <TinkoffCaseStudy />;
   if (dataSlug === "liga-steep") {
     // A different page architecture, not a restyle of the shell: see ligaSteepPage.tsx.

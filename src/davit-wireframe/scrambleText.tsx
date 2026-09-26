@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -66,11 +66,9 @@ export function useScrambleReveal(
   scopeRef: React.RefObject<HTMLElement | null>,
   cardSelector: string
 ) {
-  const done = useRef(false);
-
   useEffect(() => {
     const scope = scopeRef.current;
-    if (!scope || done.current) return;
+    if (!scope) return;
     /* The text is already correct in the DOM, so honouring this is simply
        doing nothing. */
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -111,7 +109,12 @@ export function useScrambleReveal(
       });
     }, scope);
 
-    done.current = true;
+    /* NO "have I already run" REF HERE. One was tried and it silently killed
+       the whole effect: StrictMode mounts, runs this, reverts it, and runs it
+       again — and a ref set on the first pass makes the second pass return
+       before it rebuilds anything, leaving a page with no triggers at all.
+       Nothing needs guarding anyway: `once: true` already fires each label a
+       single time, and the context reverts cleanly. */
     return () => context.revert();
   }, [scopeRef, cardSelector]);
 }

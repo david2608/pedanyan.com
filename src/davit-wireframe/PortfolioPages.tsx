@@ -17,6 +17,7 @@ import { EightImagesModel } from "./eightImagesModel";
 import { EightImagesMaterialEditor, EightImagesParts } from "./eightImagesScreens";
 import { EightImagesShop } from "./eightImagesShop";
 import { EightImagesFiretruckCard } from "./eightImagesCard";
+import { ScrambleText, useScrambleReveal } from "./scrambleText";
 import { EightImagesOrb, OrbDock, OrbProvider } from "./eightImagesOrb";
 import { EightImagesWidget } from "./eightImagesWidget";
 import { useTextMotion } from "./textMotion";
@@ -4235,6 +4236,9 @@ export function PortfolioIndexContent() {
   const [selectedYear, setSelectedYear] = useState("All years");
   usePortfolioMotion(containerRef);
   useTextMotion(containerRef);
+  /* Only the short labels scramble, and only as their card arrives — see the
+     note at the top of scrambleText.tsx for why the headlines are left alone. */
+  useScrambleReveal(containerRef, ".dw-portfolio-project-card");
 
   const years = ["All years", ...Array.from(new Set(projects.map((project) => portfolioFilterMetadata[project.project.slug]?.year).filter(Boolean))).sort((a, b) => b.localeCompare(a))];
   const visibleProjects = projects.filter((project) => {
@@ -4284,11 +4288,14 @@ export function PortfolioIndexContent() {
               </div>
               <div className="dw-portfolio-card-copy">
                 <div>
-                  <span className="dw-portfolio-card-project-name">{project.project.title}</span>
+                  <ScrambleText className="dw-portfolio-card-project-name" order={0}>{project.project.title}</ScrambleText>
                   <h2>{portfolioCardHeadlines[project.project.slug] || project.project.title}</h2>
                   <p>{intro.subtitle}</p>
                 </div>
-                <div className="dw-portfolio-card-meta"><span>{cardMeta?.category}</span><span>{cardMeta?.year}</span></div>
+                <div className="dw-portfolio-card-meta">
+                  <ScrambleText order={1}>{cardMeta?.category ?? ""}</ScrambleText>
+                  <ScrambleText order={2} kind="digits">{cardMeta?.year ?? ""}</ScrambleText>
+                </div>
               </div>
             </a>
           );

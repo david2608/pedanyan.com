@@ -1,0 +1,42 @@
+/* TWO COPIES, STACKED, EACH DOING ONE JOB.
+
+   The real text stays in normal flow and simply loses its colour: it keeps the
+   box at exactly the width of the finished string, so no character swap can
+   make the label jitter, and it stays in the accessibility tree and in a text
+   selection. `visibility: hidden` would have been the obvious way to hide it
+   and is wrong — it removes the element from the accessibility tree too, which
+   is the one thing this split exists to prevent.
+
+   The scrambling copy is painted over it and is aria-hidden, so a reader that
+   lands mid-animation is never read the noise. */
+/* No `display` here on purpose. The card's project name carries
+   `display: block` from its own rule and the meta labels were plain inline
+   spans; setting a display would quietly override one of them and change the
+   line box. Leaving it alone means the markup measures exactly as it did
+   before the wrapper existed. */
+.dw-scramble {
+  position: relative;
+  white-space: nowrap;
+}
+
+.dw-scramble-true {
+  color: transparent;
+}
+
+.dw-scramble-play {
+  position: absolute;
+  inset: 0;
+  /* Tabular figures so the year cannot shift width even between digits. */
+  font-variant-numeric: tabular-nums;
+}
+
+/* Nothing runs under reduced motion, so the overlay is redundant: drop it and
+   give the original its colour back. */
+@media (prefers-reduced-motion: reduce) {
+  .dw-scramble-true {
+    color: inherit;
+  }
+  .dw-scramble-play {
+    display: none;
+  }
+}

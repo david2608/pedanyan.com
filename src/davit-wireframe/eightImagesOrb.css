@@ -94,26 +94,48 @@
   }
 }
 
+/* A supporting role: small, low and to the right, where it reads as company
+   for the argument rather than competition with it. The object returns to
+   full size at the hero, the editor, the parts list and the player — the four
+   places it is the subject. */
 .dw-ei-staged-dock {
   position: absolute;
-  top: 50%;
-  right: max(2vw, calc((100vw - 1800px) / 2 + 2vw));
-  width: min(26vw, 400px);
-  height: min(26vw, 400px);
-  transform: translateY(-50%);
+  right: max(3vw, calc((100vw - 1700px) / 2 + 3vw));
+  bottom: clamp(24px, 5vw, 72px);
+  width: min(19vw, 280px);
+  height: min(19vw, 280px);
 }
 
 .dw-ei-widget-dock {
   width: min(34vw, 420px);
   height: min(34vw, 420px);
-  margin: 0 auto clamp(24px, 4vw, 56px);
+  margin: 0 auto clamp(32px, 5vw, 72px);
 }
+
+/* --- the handover ----------------------------------------------------------
+   The object's last stop is inside the player's own frame. It arrives there
+   already invisible and already behind, so the reader never sees two trucks:
+   the one they assembled becomes the one the shipped viewer is showing.
+   -------------------------------------------------------------------------- */
+
+.dw-ei-player { position: relative; }
+
+.dw-ei-player-dock {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: min(30vw, 380px);
+  height: min(30vw, 380px);
+  transform: translate(-50%, -50%);
+}
+
+/* The player has to sit above the incoming object for the handover to read. */
+.dw-ei-player .dw-ei-widget { position: relative; z-index: 1; }
 
 @media (max-width: 900px) {
   .dw-ei-staged-dock {
     position: relative;
-    top: auto;
-    right: auto;
+    inset: auto;
     width: min(62vw, 320px);
     height: min(62vw, 320px);
     margin: 0 auto clamp(20px, 6vw, 40px);

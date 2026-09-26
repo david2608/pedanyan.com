@@ -304,7 +304,7 @@ export function EightImagesMaterialEditor() {
 
         {/* The travelling sphere docks here and becomes this screen's subject. */}
         <div className="ei-canvas">
-          <OrbDock id="editor" stage={4} className="ei-canvas-dock" />
+          <OrbDock id="editor" className="ei-canvas-dock" />
         </div>
 
         <div className="ei-tools">
@@ -441,14 +441,10 @@ export function EightImagesParts() {
     const run = () => {
       if (!alive) return;
       if (!visible) { timer = window.setTimeout(run, 600); return; }
-      if (i >= order.length) {
-        /* Strip it back and do it again, so a reader arriving late still sees
-           the product come together rather than a finished truck. */
-        i = 0;
-        setParts(Object.fromEntries(ORB_PART_NAMES.map((n) => [n, false])));
-        timer = window.setTimeout(run, 1800);
-        return;
-      }
+      /* It assembles once and stops there. Looping back to nothing would mean
+         a reader who scrolls on carries a half-built truck into the player
+         section, where the whole point is that it is finished. */
+      if (i >= order.length) return;
       const name = order[i];
       i += 1;
       setParts({ ...Object.fromEntries(ORB_PART_NAMES.map((n) => [n, false])), ...Object.fromEntries(order.slice(0, i).map((n) => [n, true])) });
@@ -458,6 +454,25 @@ export function EightImagesParts() {
     timer = window.setTimeout(run, 700);
     return () => { alive = false; window.clearTimeout(timer); seen.disconnect(); };
   }, [demoOn, setParts]);
+
+  /* Whatever happened in this section, the reader leaves it with a whole
+     product. The next section hands the object to the live player, and a truck
+     missing its ladder would make that read as two different models. */
+  useEffect(() => {
+    const host = rootRef.current;
+    if (!host) return;
+    const done = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const past = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+          if (past) setParts(Object.fromEntries(ORB_PART_NAMES.map((n) => [n, true])));
+        });
+      },
+      { threshold: 0 }
+    );
+    done.observe(host);
+    return () => done.disconnect();
+  }, [setParts]);
 
   return (
     <div className="ei-parts" ref={rootRef}>

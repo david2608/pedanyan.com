@@ -16,14 +16,34 @@ const MIN_W = 320;
 const MIN_H = 320;
 
 export function EightImagesWidget() {
-  /* Loads on mount. It used to wait for a click, on the reasoning that 2,273 KB
-     should be opt-in — but the point of this section is that the shipped viewer
-     runs in a page it was never designed for, and a reader who has to press a
-     button to see that has been told rather than shown. */
-  const [loaded] = useState(true);
+  /* Loads on approach — never on a click, and not at mount either.
+
+     It used to wait for a button, which made the reader take the section's word
+     for it. Mounting it immediately is the other extreme: 2,273 KB and a second
+     WebGL context arriving while this page's own model is still decoding. So it
+     waits until the section is a screen and a half away and then loads without
+     being asked. */
+  const [loaded, setLoaded] = useState(false);
   const [size, setSize] = useState<{ w: number; h: number } | null>(null);
   const frameRef = useRef<HTMLDivElement | null>(null);
   const dragRef = useRef<{ x: number; y: number; w: number; h: number } | null>(null);
+
+  useEffect(() => {
+    if (loaded) return;
+    const host = frameRef.current;
+    if (!host) return;
+    const near = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setLoaded(true);
+          near.disconnect();
+        }
+      },
+      { rootMargin: "150% 0px" }
+    );
+    near.observe(host);
+    return () => near.disconnect();
+  }, [loaded]);
 
   useEffect(() => {
     if (!loaded) return;

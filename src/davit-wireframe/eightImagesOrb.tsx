@@ -135,13 +135,21 @@ export function OrbProvider({ children }: { children: ReactNode }) {
   return <OrbContext.Provider value={value}>{children}</OrbContext.Provider>;
 }
 
-/** A destination, and how much of the model should exist by the time it arrives. */
-export function OrbDock({ id, stage, className }: { id: string; stage: number; className?: string }) {
+/**
+ * A destination. Position and size come from the element's own rectangle, so
+ * a section decides where the object sits by laying out a box — small and in
+ * the corner when the section's content is the point, large and central when
+ * the object is.
+ *
+ * `fade` is the handover: a dock at 1 is a place the object arrives invisible,
+ * which is how it gives way to the live player.
+ */
+export function OrbDock({ id, fade = 0, className }: { id: string; fade?: number; className?: string }) {
   return (
     <div
       className={`ei-orb-dock${className ? ` ${className}` : ""}`}
       data-orb-dock={id}
-      data-orb-stage={stage}
+      data-orb-fade={fade}
       aria-hidden="true"
     />
   );
@@ -373,70 +381,119 @@ export function EightImagesOrb() {
 
     /* --- docking ----------------------------------------------------------- */
 
-    const OWN_AT = 0.55;
-    const current = { x: 0, y: 0, size: 0, stage: 0, set: false };
+    /* The path, and why it is computed in DOCUMENT space.
 
-    const dockRects = () =>
-      Array.from(document.querySelectorAll<HTMLElement>("[data-orb-dock]"))
+       The first version asked "which dock is more than half on screen" and
+       interpolated between the rest. That question changes answer abruptly —
+       a dock crosses the threshold and the target snaps — so the object
+       jumped. Anchoring every dock to its position in the document instead
+       makes the target a continuous function of scrollY: no thresholds, no
+       switching, nothing to snap.
+
+       DWELL holds the object still at each end of a leg, so it rests inside a
+       section rather than drifting through it. DWELL_MOVE is the shorter hold
+       used for position and size: a wider travel window means a slower one. */
+    const DWELL = 0.2;
+    const DWELL_MOVE = 0.1;
+    const smooth = (t: number) => t * t * (3 - 2 * t);
+
+    const current = { x: 0, y: 0, size: 0, fade: 0, set: false };
+
+    const dockRects = () => {
+      const scrollY = window.scrollY;
+      return Array.from(document.querySelectorAll<HTMLElement>("[data-orb-dock]"))
         .map((node) => {
           const r = node.getBoundingClientRect();
           if (r.width === 0 && r.height === 0) return null;
           return {
             cx: r.left + r.width / 2,
-            cy: r.top + r.height / 2,
+            docY: r.top + scrollY + r.height / 2,
             size: Math.min(r.width, r.height),
-            stage: Number(node.dataset.orbStage ?? 0)
+            fade: Number(node.dataset.orbFade ?? 0)
           };
         })
-        .filter(Boolean) as { cx: number; cy: number; size: number; stage: number }[];
+        .filter(Boolean)
+        .sort((a, b) => a!.docY - b!.docY) as {
+          cx: number; docY: number; size: number; fade: number;
+        }[];
+    };
 
     const target = () => {
       const docks = dockRects();
       const vh = window.innerHeight;
-      const mid = vh / 2;
-      if (docks.length === 0) return { x: window.innerWidth / 2, y: mid, size: 320, stage: 0 };
+      const scrollY = window.scrollY;
+      const reader = scrollY + vh / 2;
 
-      let best = -1;
-      let bestSeen = 0;
-      docks.forEach((d, i) => {
-        const seen =
-          Math.max(0, Math.min(d.cy + d.size / 2, vh) - Math.max(d.cy - d.size / 2, 0)) /
-          Math.max(1, d.size);
-        if (seen > bestSeen) { bestSeen = seen; best = i; }
+      if (docks.length === 0) {
+        return { x: window.innerWidth / 2, y: vh / 2, size: 320, fade: 0 };
+      }
+
+      const at = (d: typeof docks[number]) => ({
+        x: d.cx,
+        y: d.docY - scrollY,
+        size: d.size,
+        fade: d.fade
       });
-      if (best >= 0 && bestSeen >= OWN_AT) return { ...docks[best], x: docks[best].cx, y: docks[best].cy };
 
-      let above = -1;
-      for (let i = 0; i < docks.length; i += 1) if (docks[i].cy < mid) above = i;
-      const a = docks[Math.max(0, above)];
-      const b = docks[Math.min(docks.length - 1, above + 1)];
-      if (a === b) return { ...a, x: a.cx, y: a.cy };
+      if (docks.length === 1 || reader <= docks[0].docY) return at(docks[0]);
+      if (reader >= docks[docks.length - 1].docY) return at(docks[docks.length - 1]);
 
-      const t = clamp01((mid - a.cy) / Math.max(1, b.cy - a.cy));
-      const e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      let i = 0;
+      while (i < docks.length - 2 && reader > docks[i + 1].docY) i += 1;
+      const a = docks[i];
+      const b = docks[i + 1];
+
+      const raw = clamp01((reader - a.docY) / Math.max(1, b.docY - a.docY));
+
+      /* VERTICAL gets its own, flatter profile.
+​
+         Sharing one smoothstep with everything else was the lurch: a dock 1020px
+         further down the document, reached through a window narrowed by DWELL
+         and then accelerated by smoothstep's 1.5x peak, made the object travel
+         nearly three screen-pixels for every one the page moved. Linear over a
+         wider window holds it near 1.3x with no peak at all, and the follow
+         below rounds the two corners. Horizontal position and size keep the
+         smooth curve, where a little acceleration reads as intent rather than
+         as a jump. */
+      /* Constant velocity for everything that MOVES, eased only for the fade.
+         Smoothstep's 1.5x peak is what the eye reads as a lurch when the travel
+         is long — the corner-to-centre run is 558px of horizontal on its own.
+         A flat profile plus the follow below (which rounds both corners) is
+         calmer than any curve applied to the target. */
+      const move = clamp01((raw - DWELL_MOVE) / Math.max(0.0001, 1 - DWELL_MOVE * 2));
+      const e = smooth(clamp01((raw - DWELL) / Math.max(0.0001, 1 - DWELL * 2)));
+
       return {
-        x: lerp(a.cx, b.cx, e),
-        y: lerp(a.cy, b.cy, e),
-        size: lerp(a.size, b.size, e),
-        stage: lerp(a.stage, b.stage, t)
+        x: lerp(a.cx, b.cx, move),
+        y: lerp(a.docY, b.docY, move) - scrollY,
+        size: lerp(a.size, b.size, move),
+        fade: lerp(a.fade, b.fade, e)
       };
     };
 
     const layout = (immediate: boolean) => {
       const t = target();
       if (immediate || !current.set) {
-        Object.assign(current, { x: t.x, y: t.y, size: t.size, stage: t.stage, set: true });
+        Object.assign(current, { x: t.x, y: t.y, size: t.size, fade: t.fade, set: true });
       } else {
-        const k = reduceMotion ? 1 : 0.16;
+        /* The path is already smooth; this is only here to take the edge off
+           a fast flick. Too low and the object lags the page. */
+        const k = reduceMotion ? 1 : 0.22;
         current.x = lerp(current.x, t.x, k);
         current.y = lerp(current.y, t.y, k);
         current.size = lerp(current.size, t.size, k);
-        current.stage = lerp(current.stage, t.stage, k);
+        current.fade = lerp(current.fade, t.fade, k);
       }
       const size = Math.max(80, current.size);
       host.style.width = `${size}px`;
       host.style.height = `${size}px`;
       host.style.transform = `translate3d(${current.x - size / 2}px, ${current.y - size / 2}px, 0)`;
+      /* Handing over to the live player: the object slips behind the widget and
+         fades as the widget's own model takes its place, so the reader sees one
+         object change hands rather than two objects swap. */
+      host.style.opacity = String(1 - current.fade);
+      host.style.zIndex = current.fade > 0.02 ? "0" : "2";
+      host.style.pointerEvents = current.fade > 0.5 ? "none" : "auto";
       return size;
     };
 
@@ -554,13 +611,23 @@ export function EightImagesOrb() {
        suspends requestAnimationFrame entirely, and the first paint after the
        model loads should already show the right stage rather than assembling
        itself in front of a reader who has scrolled halfway down. */
-    const settle = () => {
-      const size = layout(true);
+    /* `setSize` REALLOCATES the drawing buffer. The loop guards it behind a
+       size check; this did not, and it is called from the scroll handler — so
+       a single flick reallocated a WebGL buffer dozens of times, which is
+       enough to wedge a tab that is also loading a second renderer. */
+    const resize = (size: number) => {
+      if (renderer.domElement.width === Math.round(size * renderer.getPixelRatio())) return;
       renderer.setSize(size, size, false);
       camera.aspect = 1;
       camera.updateProjectionMatrix();
+    };
+
+    const settle = () => {
+      const size = layout(true);
+      resize(size);
       assemble(true);
       applyMaterial();
+      if (current.fade > 0.99) return;
       renderer.render(scene, camera);
     };
 
@@ -571,17 +638,24 @@ export function EightImagesOrb() {
       frame = requestAnimationFrame(tick);
 
       const size = layout(false);
-      if (renderer.domElement.width !== Math.round(size * renderer.getPixelRatio())) {
-        renderer.setSize(size, size, false);
-        camera.aspect = 1;
-        camera.updateProjectionMatrix();
-      }
+      resize(size);
 
       if (!dragging) {
         velocity *= 0.94;
         spinner.rotation.y += (reduceMotion ? 0 : spin) + velocity;
       }
       pivot.rotation.x = -0.18;
+
+      /* Draw only when there is something to see. Two things make this matter
+         rather than being a micro-optimisation: the wheel alone is 21k
+         triangles, and the player section starts a SECOND WebGL context on the
+         same main thread. Once the object is mostly handed over, or has
+         scrolled out of the viewport, it stops. */
+      const halfway = current.fade > 0.5;
+      const offscreen =
+        current.y < -size || current.y > window.innerHeight + size ||
+        current.x < -size || current.x > window.innerWidth + size;
+      if (halfway || offscreen) return;
 
       assemble();
       applyMaterial();
@@ -592,7 +666,14 @@ export function EightImagesOrb() {
     tick();
 
     const onResize = () => settle();
-    const onScroll = () => { if (document.hidden) settle(); };
+    let scrollQueued = false;
+    const onScroll = () => {
+      /* Only for the case where nothing is drawing anyway. One settle per
+         frame's worth of scrolling, not one per event. */
+      if (!document.hidden || scrollQueued) return;
+      scrollQueued = true;
+      window.setTimeout(() => { scrollQueued = false; settle(); }, 16);
+    };
     const onVisibility = () => { if (!document.hidden) settle(); };
     window.addEventListener("resize", onResize);
     window.addEventListener("scroll", onScroll, { passive: true });

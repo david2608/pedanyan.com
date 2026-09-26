@@ -2969,21 +2969,17 @@ function IcredoSceneSection({ project, section }: { project: PortfolioProject; s
 /* Which section each stage of the fire truck belongs to. The object is a lone
    wheel in the hero and whole by the time the live widget appears, so a reader
    who has scrolled the argument has also watched the product assemble. */
-const EI_STAGES: Record<string, number> = {
-  outcome: 1,
-  problem: 2,
-  decisions: 3,
-  walkthrough: 5,
-  "the-fail": 6
-};
+/* Sections that give the object a corner to sit in while their own content
+   holds the floor. Everywhere else it is either absent or the main event. */
+const EI_CORNER_SECTIONS = new Set(["outcome", "problem", "decisions", "walkthrough", "the-fail"]);
 
 function ProjectSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
-  const stage = project.project.slug === "8images" ? EI_STAGES[section.id] : undefined;
-  if (stage === undefined) return <ProjectSectionBody project={project} section={section} />;
+  const corner = project.project.slug === "8images" && EI_CORNER_SECTIONS.has(section.id);
+  if (!corner) return <ProjectSectionBody project={project} section={section} />;
   return (
     <div className="dw-ei-staged">
       <ProjectSectionBody project={project} section={section} />
-      <OrbDock id={section.id} stage={stage} className="dw-ei-staged-dock" />
+      <OrbDock id={section.id} className="dw-ei-staged-dock" />
     </div>
   );
 }
@@ -3170,7 +3166,7 @@ function ProjectSectionBody({ project, section }: { project: PortfolioProject; s
             <Html html={section.body} className="dw-ei-lede" />
           </header>
           <div className="dw-ei-hero-stage">
-            <OrbDock id="hero" stage={0} className="dw-ei-hero-dock" />
+            <OrbDock id="hero" className="dw-ei-hero-dock" />
           </div>
           <p className="dw-ei-hero-hint">Drag it.</p>
         </div>
@@ -3190,14 +3186,21 @@ function ProjectSectionBody({ project, section }: { project: PortfolioProject; s
           {section.id === "model" ? (
             <div className="dw-ei-parts-row">
               <EightImagesParts />
-              <OrbDock id="model" stage={5} className="dw-ei-parts-dock" />
+              <OrbDock id="model" className="dw-ei-parts-dock" />
             </div>
           ) : null}
           {section.id === "widget" ? (
-            <>
-              <OrbDock id="widget" stage={6} className="dw-ei-widget-dock" />
-              <EightImagesWidget />
-            </>
+            <div className="dw-ei-handover">
+              {/* Last approach: the object is still itself here. */}
+              <OrbDock id="widget-approach" className="dw-ei-widget-dock" />
+              <div className="dw-ei-player">
+                {/* And here it arrives invisible, behind the player, exactly
+                    where the player's own model is — so the two never appear
+                    side by side. */}
+                <OrbDock id="widget-handover" fade={1} className="dw-ei-player-dock" />
+                <EightImagesWidget />
+              </div>
+            </div>
           ) : null}
           {section.id === "editor" ? <EightImagesMaterialEditor /> : null}
         </div>

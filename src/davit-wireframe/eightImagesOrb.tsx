@@ -463,11 +463,18 @@ export function EightImagesOrb() {
       const move = clamp01((raw - DWELL_MOVE) / Math.max(0.0001, 1 - DWELL_MOVE * 2));
       const e = smooth(clamp01((raw - DWELL) / Math.max(0.0001, 1 - DWELL * 2)));
 
+      /* Fade LATE. Spread across the whole leg, the object was still half
+         visible while the player was already on screen — two trucks at once,
+         which is the one thing the handover exists to prevent. It now holds
+         full opacity until the last third of the approach and goes out inside
+         the player's own frame. */
+      const fadeT = smooth(clamp01((move - 0.62) / 0.38));
+
       return {
         x: lerp(a.cx, b.cx, move),
         y: lerp(a.docY, b.docY, move) - scrollY,
         size: lerp(a.size, b.size, move),
-        fade: lerp(a.fade, b.fade, e)
+        fade: lerp(a.fade, b.fade, fadeT)
       };
     };
 

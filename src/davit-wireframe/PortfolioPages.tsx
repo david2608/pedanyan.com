@@ -3183,16 +3183,13 @@ function ProjectSectionBody({ project, section }: { project: PortfolioProject; s
             {section.title ? <h2>{section.title}</h2> : null}
             <Html html={section.body} className="dw-ei-lede" />
           </header>
-          {section.id === "model" ? (
-            <div className="dw-ei-parts-row">
-              <EightImagesParts />
-              <OrbDock id="model" className="dw-ei-parts-dock" />
-            </div>
-          ) : null}
+          {section.id === "model" ? <EightImagesParts /> : null}
           {section.id === "widget" ? (
             <div className="dw-ei-handover">
-              {/* Last approach: the object is still itself here. */}
-              <OrbDock id="widget-approach" className="dw-ei-widget-dock" />
+              {/* No separate stop above the player: a dock there parked the
+                  object at full size directly over the live viewer, and the
+                  reader saw two trucks. Its only destination here is inside
+                  the player's frame. */}
               <div className="dw-ei-player">
                 {/* And here it arrives invisible, behind the player, exactly
                     where the player's own model is — so the two never appear

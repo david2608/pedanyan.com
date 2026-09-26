@@ -45,6 +45,8 @@ const INITIAL: Record<MaterialMapId, MapState> = {
   transparency: { on: false, h: 0, s: 0, v: 0, value: 0.3 }
 };
 
+const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n);
+
 /** Figma renders the decimal with a comma. Keep it — it is what the UI says. */
 const decimal = (n: number) => n.toFixed(2).replace(".", ",");
 
@@ -392,126 +394,103 @@ export function EightImagesMaterialEditor() {
    The names are the GLB's own, in the file's order. Nothing is renamed here.
    --------------------------------------------------------------------------- */
 
-const PARTS_IDLE_BEFORE_RESUME = 9000;
+/* The order a truck actually goes together, which is not the order the file
+   happens to list its meshes in. */
+const ASSEMBLY_ORDER = [
+  "Wheels", "Hubcaps", "Base", "Body", "Cabin",
+  "Ladder Turret", "Ladder Railings", "Ladder Caps", "Flashing Lights", "Wire Parts"
+];
 
 export function EightImagesParts() {
   const { parts, togglePart, setParts } = useOrb();
-  const [demoOn, setDemoOn] = useState(true);
-  const lastTouch = useRef(0);
-  const rootRef = useRef<HTMLDivElement | null>(null);
-
-  const touched = useCallback(() => {
-    lastTouch.current = performance.now();
-    setDemoOn(false);
-  }, []);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const [progress, setProgress] = useState(0);
+  const appliedRef = useRef(-1);
 
   const count = ORB_PART_NAMES.filter((n) => parts[n]).length;
+  const done = progress >= 0.999;
 
+  /* SCROLL IS THE CONTROL. The section pins itself and the reader's scroll
+     checks the boxes one at a time; the page does not move on until the model
+     is whole. An autoplay loop used to do this on a timer, which meant the
+     reader watched rather than did it — and could leave mid-assembly. */
   useEffect(() => {
-    if (demoOn) return;
-    const id = window.setInterval(() => {
-      if (performance.now() - lastTouch.current > PARTS_IDLE_BEFORE_RESUME) setDemoOn(true);
-    }, 1000);
-    return () => window.clearInterval(id);
-  }, [demoOn]);
+    const track = trackRef.current;
+    if (!track) return;
 
-  /* The list builds itself while nobody is driving, in the order a truck would
-     actually go together rather than the order the file happens to list. */
-  useEffect(() => {
-    if (!demoOn) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const host = rootRef.current;
-    if (!host) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      setProgress(1);
+      setParts(Object.fromEntries(ORB_PART_NAMES.map((n) => [n, true])));
+      return;
+    }
 
-    const order = [
-      "Wheels", "Hubcaps", "Base", "Body", "Cabin",
-      "Ladder Turret", "Ladder Railings", "Ladder Caps", "Flashing Lights", "Wire Parts"
-    ];
-    let alive = true;
-    let timer = 0;
-    let i = 0;
-    let visible = false;
+    const read = () => {
+      const rect = track.getBoundingClientRect();
+      const travel = Math.max(1, rect.height - window.innerHeight);
+      const p = clamp01(-rect.top / travel);
+      setProgress((prev) => (Math.abs(prev - p) < 0.002 ? prev : p));
 
-    const seen = new IntersectionObserver(
-      (entries) => { visible = entries.some((e) => e.isIntersecting); },
-      { threshold: 0.3 }
-    );
-    seen.observe(host);
-
-    const run = () => {
-      if (!alive) return;
-      if (!visible) { timer = window.setTimeout(run, 600); return; }
-      /* It assembles once and stops there. Looping back to nothing would mean
-         a reader who scrolls on carries a half-built truck into the player
-         section, where the whole point is that it is finished. */
-      if (i >= order.length) return;
-      const name = order[i];
-      i += 1;
-      setParts({ ...Object.fromEntries(ORB_PART_NAMES.map((n) => [n, false])), ...Object.fromEntries(order.slice(0, i).map((n) => [n, true])) });
-      timer = window.setTimeout(run, 620);
+      /* One step per band, and the last band is spent whole so the reader sees
+         the finished truck before the pin releases. */
+      const step = Math.min(ASSEMBLY_ORDER.length, Math.floor(p * (ASSEMBLY_ORDER.length + 1)));
+      if (step === appliedRef.current) return;
+      appliedRef.current = step;
+      setParts(
+        Object.fromEntries(
+          ORB_PART_NAMES.map((n) => [n, ASSEMBLY_ORDER.indexOf(n) < step])
+        )
+      );
     };
 
-    timer = window.setTimeout(run, 700);
-    return () => { alive = false; window.clearTimeout(timer); seen.disconnect(); };
-  }, [demoOn, setParts]);
-
-  /* Whatever happened in this section, the reader leaves it with a whole
-     product. The next section hands the object to the live player, and a truck
-     missing its ladder would make that read as two different models. */
-  useEffect(() => {
-    const host = rootRef.current;
-    if (!host) return;
-    const done = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const past = !entry.isIntersecting && entry.boundingClientRect.top < 0;
-          if (past) setParts(Object.fromEntries(ORB_PART_NAMES.map((n) => [n, true])));
-        });
-      },
-      { threshold: 0 }
-    );
-    done.observe(host);
-    return () => done.disconnect();
+    /* Read on the scroll event itself rather than coalescing through
+       requestAnimationFrame: rAF is suspended in a background tab, which left
+       the sequence stuck at zero parts. One rect per event is cheap, and the
+       state setters below already bail when nothing changed. */
+    read();
+    window.addEventListener("scroll", read, { passive: true });
+    window.addEventListener("resize", read);
+    return () => {
+      window.removeEventListener("scroll", read);
+      window.removeEventListener("resize", read);
+    };
   }, [setParts]);
 
   return (
-    <div className="ei-parts" ref={rootRef}>
-      <header>
-        <h4>Parts</h4>
-        <span>{count} of {ORB_PART_NAMES.length}</span>
-      </header>
-      <ul>
-        {ORB_PART_NAMES.map((name) => (
-          <li key={name}>
-            <label className={parts[name] ? "is-on" : undefined}>
-              <input
-                type="checkbox"
-                checked={!!parts[name]}
-                onChange={() => { touched(); togglePart(name); }}
-              />
-              <span className="ei-parts-box" aria-hidden="true" />
-              {name}
-            </label>
-          </li>
-        ))}
-      </ul>
-      <footer>
-        <button
-          type="button"
-          onClick={() => { touched(); setParts(Object.fromEntries(ORB_PART_NAMES.map((n) => [n, true]))); }}
-        >
-          Select all
-        </button>
-        <button
-          type="button"
-          onClick={() => { touched(); setParts(Object.fromEntries(ORB_PART_NAMES.map((n) => [n, false]))); }}
-        >
-          Clear
-        </button>
-      </footer>
-      <p className={`ei-demo-flag${demoOn ? " is-on" : ""}`} aria-live="polite">
-        {demoOn ? "Assembling itself — tick anything to take over" : "You have it"}
-      </p>
+    <div className="ei-parts-track" ref={trackRef}>
+      <div className="ei-parts-pin">
+        <div className="ei-parts" data-complete={done ? "true" : undefined}>
+          <header>
+            <h4>Parts</h4>
+            <span>{count} of {ORB_PART_NAMES.length}</span>
+          </header>
+          <div className="ei-parts-progress" aria-hidden="true">
+            <i style={{ transform: `scaleX(${progress})` }} />
+          </div>
+          <ul>
+            {ORB_PART_NAMES.map((name) => (
+              <li key={name}>
+                <label className={parts[name] ? "is-on" : undefined}>
+                  <input
+                    type="checkbox"
+                    checked={!!parts[name]}
+                    /* Until the sequence finishes, scroll owns the state; after
+                       that the reader can take any part off again. */
+                    disabled={!done}
+                    onChange={() => togglePart(name)}
+                  />
+                  <span className="ei-parts-box" aria-hidden="true" />
+                  {name}
+                </label>
+              </li>
+            ))}
+          </ul>
+          <p className="ei-demo-flag is-on" aria-live="polite">
+            {done ? "Whole. Take a part off if you like." : "Keep scrolling — the product assembles itself"}
+          </p>
+        </div>
+        <OrbDock id="model" className="dw-ei-parts-dock" />
+      </div>
     </div>
   );
 }

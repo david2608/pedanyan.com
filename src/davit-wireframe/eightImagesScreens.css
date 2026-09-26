@@ -621,3 +621,59 @@
   line-height: 16px;
 }
 .ei-parts .ei-demo-flag::before { width: 6px; height: 6px; }
+
+/* --- the pinned assembly ----------------------------------------------------
+   The section holds the viewport while the reader's scroll checks the boxes,
+   and releases only once the model is whole. The track is the scroll budget;
+   the pin is what stays on screen.
+   -------------------------------------------------------------------------- */
+
+.ei-parts-track {
+  /* Eleven bands: ten parts and one at the end spent whole, so the reader sees
+     the finished truck before the pin lets go. About four hundred pixels of
+     scroll per part — enough to read as a deliberate step, short enough that
+     the section does not outstay its argument. */
+  height: 440vh;
+}
+
+.ei-parts-pin {
+  position: sticky;
+  top: 0;
+  display: grid;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+  height: 100vh;
+}
+
+@media (min-width: 901px) {
+  .ei-parts-pin { grid-template-columns: minmax(260px, 340px) minmax(0, 1fr); }
+}
+
+.dw-ei-parts-dock {
+  width: min(44vw, 520px);
+  height: min(44vw, 520px);
+  margin: 0 auto;
+}
+
+/* Progress under the header, so "keep scrolling" has something to point at. */
+.ei-parts-progress {
+  height: 2px;
+  margin: 0 20px;
+  background: var(--bg03);
+  overflow: hidden;
+}
+.ei-parts-progress i {
+  display: block;
+  height: 100%;
+  background: var(--primary);
+  transform-origin: left center;
+  transition: transform 120ms linear;
+}
+
+/* Rows the reader cannot touch yet should not pretend otherwise. */
+.ei-parts input:disabled + .ei-parts-box { cursor: default; }
+.ei-parts label:has(input:disabled) { cursor: default; }
+.ei-parts label:has(input:disabled):hover { background: none; }
+.ei-parts label.is-on:has(input:disabled):hover { background: var(--input); }
+
+.ei-parts[data-complete] label { cursor: pointer; }

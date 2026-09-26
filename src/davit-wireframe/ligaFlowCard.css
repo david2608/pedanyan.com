@@ -11,7 +11,20 @@
   /* The bezel is what the plate grows OUT PAST — without it the mockup would
      end exactly on the composition's edge and its rounded corners would cut
      into the top and bottom rows. */
-  --lg-bezel: calc(min(clamp(110px, 27cqw, 224px), calc(80cqh * 393 / 854)) * 0.028);
+  /* THE PHONE HAS TO CLEAR THE LEGIBILITY FLOOR IN EITHER GRID SLOT.
+     The Work grid alternates wide (span 8) and narrow (span 4) slots, and the
+     card component refuses to explode at all below 150px of screen width —
+     the rows inside a detached band fall under 40px tall and read as grey
+     slivers. In a narrow slot 27cqw came to 86px, the old 110px clamp floor
+     took over, and the screen landed at 104px: no bands, no animation, a
+     static card that looked finished but was not.
+
+     The floor is now 168px, which leaves ~159px of screen after the bezel.
+     The height share is raised alongside it only so it stops capping that
+     floor in a short slot; in a wide slot 27cqw still governs and the device
+     is unchanged. 88cqw is a guard so a genuinely tiny card cannot overflow. */
+  --lg-device-w: min(clamp(168px, 27cqw, 224px), 88cqw, calc(92cqh * 393 / 854));
+  --lg-bezel: calc(var(--lg-device-w) * 0.028);
 }
 
 /* (0,3,0). This element also carries `dw-case-study` and the project's own
@@ -45,7 +58,7 @@
   z-index: 2;
   left: 50%;
   top: 50%;
-  width: min(clamp(110px, 27cqw, 224px), calc(80cqh * 393 / 854));
+  width: var(--lg-device-w);
   aspect-ratio: 393 / 854;
   /* The vertical centring stays HERE, not in the timeline: the band clones are
      measured against this element at build time, so if the -50% only landed

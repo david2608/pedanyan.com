@@ -151,10 +151,31 @@ const allManifestProjects = portfolioManifest.projects as unknown as PortfolioPr
  * next-project chain, out of the sitemap and out of the heading that counts
  * the case studies. Removing the flag is the whole of publishing it.
  */
+/**
+ * Hand-placed cases, in the order they should appear. The Work grid is a
+ * curated portfolio rather than a chronological archive — each card still
+ * shows its own year — so where a case belongs is a judgement, not a sort.
+ * Anything left off this list falls back to newest-first behind those on it.
+ *
+ * Position also decides shape: the grid alternates wide (span 8) and narrow
+ * (span 4) slots on a four-card cycle, so moving a case moves it into a
+ * differently proportioned frame.
+ */
+const GRID_ORDER = ["icredo", "nesba", "tempo", "liga"];
+
+const orderRank = (slug: string) => {
+  const i = GRID_ORDER.indexOf(slug);
+  return i === -1 ? GRID_ORDER.length : i;
+};
+
 const projects = allManifestProjects
   .filter((item) => !item.project.draft)
   .slice()
-  .sort((a, b) => Number(portfolioFilterMetadata[b.project.slug]?.year ?? 0) - Number(portfolioFilterMetadata[a.project.slug]?.year ?? 0));
+  .sort((a, b) => {
+    const rank = orderRank(a.project.slug) - orderRank(b.project.slug);
+    if (rank !== 0) return rank;
+    return Number(portfolioFilterMetadata[b.project.slug]?.year ?? 0) - Number(portfolioFilterMetadata[a.project.slug]?.year ?? 0);
+  });
 
 const manifestDrafts = allManifestProjects.filter((item) => item.project.draft);
 

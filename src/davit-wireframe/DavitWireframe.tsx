@@ -23,6 +23,7 @@ import figmaHeroCultureObject from "../assets/figma-hero/hover-culture.png";
 import { CosmicDustBackground } from "./CosmicDustBackground";
 import { RapierGlassCubes } from "./HomeRapierGlassBackground";
 import { PortfolioMusicToggle } from "./PortfolioMusicToggle";
+import { ScrambleHoverText } from "./scrambleText";
 import { MediaCarousel } from "./MediaCarousel";
 import { CHAT_AVATAR, ContactChat, openContactChat } from "./ContactChat";
 import { PullToContinue } from "./PullToContinue";
@@ -1348,7 +1349,7 @@ export function SiteHeader({ activePage }: { activePage?: PageKey }) {
             cursorLabel={navCursorLabels[item.href]}
             key={item.href}
           >
-            {item.label}
+            <ScrambleHoverText>{item.label}</ScrambleHoverText>
           </NavAnchor>
         ))}
       </nav>
@@ -2642,26 +2643,34 @@ export function HomeTalkRoutingSection() {
 }
 
 
+/* Real files only. Anything without one falls back to its name set in the
+   site's own type, which is consistent by construction. */
 const localCompanyLogos: Record<string, string> = {
   "Liga Insurance": "/logos/liga-icon.svg",
-  Delux: "/logos/delux-holiday-homes.png"
+  Delux: "/logos/delux-holiday-homes.png",
+  /* Was sitting unused in public/logos/partners while the strip scraped a
+     favicon for the same company. */
+  Kinodaran: "/logos/partners/kinodaran.svg",
+  TCF: "/logos/partners/tcf.png"
 };
 
-function getCompanyLogoUrl(domain: string, sourceIndex: number) {
-  const safeDomain = domain.trim();
-  if (!safeDomain) return "";
+/* NO MORE SCRAPED LOGOS.
+   This used to ask logo.clearbit.com for a mark and fall back to Google's
+   favicon service. Clearbit's logo API is gone — every one of those requests
+   now fails — so every brand silently landed on the fallback, and a favicon is
+   not a logo: measured from a real browser, the same strip was being served
+   images at 128x128, 36x36, 128x128 and 130x104. No CSS makes marks of
+   different shapes, paddings and colours sit evenly, which is why the row
+   looked broken.
 
-  const sources = [
-    `https://logo.clearbit.com/${safeDomain}`,
-    `https://www.google.com/s2/favicons?domain=${safeDomain}&sz=128`
-  ];
-
-  return sources[sourceIndex] ?? "";
+   So: a real file if we have one, the company's name otherwise. That also ends
+   two third-party requests per brand on a page that needs neither. */
+function getCompanyLogoUrl(company: string) {
+  return localCompanyLogos[company] ?? "";
 }
 
-function ExperienceLogo({ company, domain }: { company: string; domain: string }) {
-  const [sourceIndex, setSourceIndex] = useState(0);
-  const logoUrl = localCompanyLogos[company] ?? getCompanyLogoUrl(domain, sourceIndex);
+function ExperienceLogo({ company }: { company: string; domain?: string }) {
+  const logoUrl = getCompanyLogoUrl(company);
   const initials = company
     .split(/\s|\/|-/)
     .filter(Boolean)
@@ -2673,13 +2682,7 @@ function ExperienceLogo({ company, domain }: { company: string; domain: string }
   return (
     <span className={`dw-experience-logo ${logoUrl ? "" : "is-fallback"}`} aria-hidden="true">
       {logoUrl ? (
-        <img
-          src={logoUrl}
-          alt=""
-          onError={() => {
-            setSourceIndex((current) => current + 1);
-          }}
-        />
+        <img src={logoUrl} alt="" loading="lazy" />
       ) : null}
       {!logoUrl ? <span>{initials || company.slice(0, 2).toUpperCase()}</span> : null}
     </span>
@@ -4718,7 +4721,7 @@ const partnerBrands: Array<{ name: string; domain: string; wordmark?: string; no
   { name: "Kinodaran", domain: "kinodaran.am" },
   { name: "TCF", domain: "tcf.am", wordmark: "/logos/partners/tcf.png" },
   { name: "W8RK", domain: "w8rk.com" },
-  { name: "8Imiges", domain: "", noMark: true },
+  { name: "8 Images", domain: "8images.com", noMark: true },
   { name: "Insafe", domain: "insafe.am" },
   { name: "Sarkissian.pro", domain: "sarkissian.pro" }
 ];

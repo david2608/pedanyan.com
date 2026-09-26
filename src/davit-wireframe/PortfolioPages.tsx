@@ -4254,7 +4254,11 @@ export function PortfolioIndexContent() {
     <section className="dw-portfolio-index" ref={containerRef}>
       <header className="dw-portfolio-index-hero" data-portfolio-reveal>
         <p>Selected work / case studies</p>
-        <h1>{COUNT_WORDS[projects.length] ?? projects.length} products. The decisions behind them.</h1>
+        {/* No count. A heading that reports how many cards are below it is a
+            counter, not a sentence: it changes every time a case is published,
+            it says nothing about the work, and it invites the reader to judge
+            the quantity rather than read the reasoning. */}
+        <h1>The reasoning behind the work, not just the screens.</h1>
         <div>
           <p>Fintech, delivery, crypto, SaaS — most of them taken from an unclear brief to a system that shipped. Each case study shows the research that changed direction, the structure that made scale possible, and the trade-offs I would still defend in a review.</p>
         </div>

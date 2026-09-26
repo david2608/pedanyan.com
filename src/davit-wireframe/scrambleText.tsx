@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 import { SplitText } from "gsap/SplitText";
@@ -227,4 +227,69 @@ export function useScrambleReveal(
       context.revert();
     };
   }, [scopeRef, cardSelector]);
+}
+
+
+/**
+ * A label that scrambles when the pointer enters it — for the header nav,
+ * where there is no card reveal to hang a timeline on and nothing should run
+ * until the reader actually points at something.
+ *
+ * Same two-copy split as ScrambleText: the real text holds the box and stays
+ * in the accessibility tree, the overlay is filled only for the length of one
+ * run and emptied again, so a nav item is never in the DOM twice at rest.
+ */
+export function ScrambleHoverText({ children, className }: { children: string; className?: string }) {
+  const wrapRef = useRef<HTMLSpanElement | null>(null);
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (navigator.webdriver) return;
+    /* pointerenter fires once on tap, so on a touch screen this would scramble
+       the item being navigated to. */
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+    const truth = wrap.querySelector<HTMLElement>(".dw-scramble-true");
+    const play = wrap.querySelector<HTMLElement>(".dw-scramble-play");
+    if (!truth || !play) return;
+
+    /* The listener goes on the link, not the span: a nav item's padding is part
+       of its hit area, and entering the text only after crossing the padding
+       reads as a dead zone. */
+    const target = wrap.closest("a") ?? wrap;
+    let tween: gsap.core.Tween | null = null;
+
+    const run = () => {
+      if (tween?.isActive()) return;
+      play.textContent = truth.textContent;
+      wrap.classList.add("is-live");
+      tween = gsap.to(play, {
+        duration: 0.34 + (truth.textContent?.length ?? 0) * 0.012,
+        ease: "none",
+        overwrite: true,
+        scrambleText: { text: "{original}", chars: "upperCase", speed: 0.9 },
+        onComplete: () => {
+          wrap.classList.remove("is-live");
+          play.textContent = "";
+        }
+      });
+    };
+
+    target.addEventListener("pointerenter", run);
+    return () => {
+      target.removeEventListener("pointerenter", run);
+      tween?.kill();
+      wrap.classList.remove("is-live");
+      play.textContent = "";
+    };
+  }, []);
+
+  return (
+    <span className={className ? `dw-scramble ${className}` : "dw-scramble"} ref={wrapRef}>
+      <span className="dw-scramble-true">{children}</span>
+      <span className="dw-scramble-play" aria-hidden="true" />
+    </span>
+  );
 }

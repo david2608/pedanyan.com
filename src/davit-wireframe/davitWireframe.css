@@ -368,18 +368,37 @@ html.dw-scrolled .dw-page .dw-logo {
   text-underline-offset: 4px;
 }
 
+/* ONE RAIL HEIGHT FOR EVERY FIXED CORNER CONTROL.
+   The LinkedIn link, the portrait and the sound toggle are three separate
+   fixed elements pinned to the same `bottom`. Pinning by the bottom edge only
+   centres them if they are the same height, and they were not — 32px, 32px and
+   34px — so the sound icon sat a pixel high. They now share --dw-rail-h and
+   centre their contents inside it, which holds however their glyphs change.
+
+   The height is also a tap target: the LinkedIn link measured 18px wide, well
+   under any thumb. */
+:root {
+  --dw-rail-h: 36px;
+}
+
 .dw-fixed-socials {
   position: fixed;
   right: 8px;
   bottom: 8px;
   z-index: 260;
   display: flex;
+  align-items: center;
   gap: 16px;
+  height: var(--dw-rail-h);
   color: var(--dw-text);
   pointer-events: auto;
 }
 
 .dw-fixed-socials a {
+  display: grid;
+  place-items: center;
+  min-width: var(--dw-rail-h);
+  height: var(--dw-rail-h);
   font-size: clamp(18px, 1.25vw, 25px);
   line-height: 1;
   font-weight: 400;
@@ -427,7 +446,7 @@ html.dw-scrolled .dw-page .dw-logo {
   z-index: 260;
   display: grid;
   width: auto;
-  height: auto;
+  height: var(--dw-rail-h);
   place-items: center;
   border: 0;
   border-radius: 0;
@@ -7444,19 +7463,39 @@ button.dw-public-journal-entry {
   border-top: 0;
 }
 
+/* Part of the sentence, not a control beside it. It used to be a bordered
+   40px box at its own weight and size, which read as a call to action in the
+   middle of a paragraph. Now it inherits the paragraph's type entirely and
+   only steps back in colour, so the eye reads the line and finds the link
+   inside it. */
 .dw-experience-more {
-  width: max-content;
-  min-height: 40px;
-  padding: 8px 12px;
-  border: 1px solid currentColor;
+  display: inline;
+  width: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
   border-radius: 0;
-  color: inherit;
+  /* Greyed RELATIVE TO ITS OWN SENTENCE, not to a fixed token. A hardcoded
+     grey was measured at rgb(95,90,80) inside a paragraph whose text is
+     rgb(221,215,255) on a dark band — darker than its surroundings rather
+     than softer, and nearly invisible. Mixing currentColor down keeps the
+     link the same hue as the line it sits in and simply lowers its contrast,
+     which is the right behaviour on a light section and a dark one. */
+  color: color-mix(in srgb, currentColor 62%, transparent);
   background: transparent;
   font: inherit;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+  /* The underline is the affordance; the colour is what holds it back. */
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
   cursor: pointer;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+.dw-experience-more:hover {
+  color: inherit;
+  text-decoration-color: currentColor;
 }
 
 .dw-experience-more:focus-visible {

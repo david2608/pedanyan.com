@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./portfolioMusicToggle.css";
 
 const TRACKS = {
@@ -21,9 +21,33 @@ const TRACKS = {
 type TrackKey = keyof typeof TRACKS;
 
 export function PortfolioMusicToggle() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  /* ON BY DEFAULT — AS FAR AS A BROWSER PERMITS.
+
+     No browser will play audible sound on a page the visitor has not touched
+     yet: an autoplaying <iframe> is simply muted or refused. So defaulting
+     `isPlaying` to true on its own would show a control claiming to play while
+     nothing came out of the speakers, which is worse than starting off.
+
+     Instead the toggle starts ON and the embed is held back until the visitor's
+     first gesture anywhere on the page — a click, a key, a scroll, a touch —
+     which is the earliest moment sound is allowed. They never have to find the
+     button; they just have to do something. Turning it off before that gesture
+     cancels it, so the intent is still theirs to refuse. */
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [gestured, setGestured] = useState(false);
   const [activeTrack, setActiveTrack] = useState<TrackKey>("weightless");
   const track = TRACKS[activeTrack];
+  const audible = isPlaying && gestured;
+
+  useEffect(() => {
+    if (gestured) return;
+    const arm = () => setGestured(true);
+    const events = ["pointerdown", "keydown", "wheel", "touchstart"] as const;
+    /* `once` on each, and passive where it matters: this must not cost the
+       first interaction anything. */
+    events.forEach((type) => window.addEventListener(type, arm, { once: true, passive: true }));
+    return () => events.forEach((type) => window.removeEventListener(type, arm));
+  }, [gestured]);
 
   const selectTrack = (nextTrack: TrackKey) => {
     setActiveTrack(nextTrack);
@@ -35,7 +59,7 @@ export function PortfolioMusicToggle() {
   };
 
   return (
-    <aside className={`dw-music-control${isPlaying ? " is-playing" : ""}`} aria-live="polite">
+    <aside className={`dw-music-control${audible ? " is-playing" : ""}`} aria-live="polite">
       <button
         type="button"
         className="dw-music-button"
@@ -56,7 +80,7 @@ export function PortfolioMusicToggle() {
         </svg>
       </button>
 
-      {isPlaying ? (
+      {audible ? (
         <>
           <button
             type="button"

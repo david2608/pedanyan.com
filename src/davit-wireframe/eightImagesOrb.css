@@ -1,0 +1,61 @@
+/* The travelling object. Fixed to the viewport and moved by transform only, so
+   it never triggers layout while the page scrolls. */
+.ei-orb {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 320px;
+  height: 320px;
+  opacity: 0;
+  cursor: grab;
+  touch-action: pan-y;
+  transition: opacity 600ms ease;
+  will-change: transform;
+}
+.ei-orb.is-ready { opacity: 1; }
+.ei-orb.is-dragging { cursor: grabbing; }
+
+.ei-orb canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  /* The canvas must never drive its own container's size: the attribute size
+     feeds clientWidth, which feeds setSize, which feeds the attribute size. */
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Docks hold a rectangle and nothing else. */
+.ei-orb-dock { pointer-events: none; }
+
+/* --- the hero the object opens in ------------------------------------------
+   Lusion's opening density, in 8 Images' own greys: a lot of air, one object,
+   and type that does not compete with it.
+   -------------------------------------------------------------------------- */
+
+.dw-ei-hero .dw-ei-inner {
+  display: grid;
+  gap: clamp(32px, 4vw, 64px);
+  padding-block: clamp(72px, 10vw, 160px) clamp(48px, 6vw, 96px);
+}
+
+.dw-ei-hero-stage {
+  display: grid;
+  place-items: center;
+  min-height: min(62vh, 640px);
+}
+
+.dw-ei-hero-dock {
+  width: min(52vw, 560px);
+  height: min(52vw, 560px);
+}
+
+.dw-ei-hero-hint {
+  margin: 0;
+  color: #959595;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+}

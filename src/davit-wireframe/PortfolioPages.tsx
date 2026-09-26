@@ -15,6 +15,7 @@ import { MediaCarousel } from "./MediaCarousel";
 import { PullToContinue } from "./PullToContinue";
 import { EightImagesModel } from "./eightImagesModel";
 import { EightImagesMaterialEditor } from "./eightImagesScreens";
+import { EightImagesOrb, OrbDock, OrbProvider } from "./eightImagesOrb";
 import { EightImagesWidget } from "./eightImagesWidget";
 import { useTextMotion } from "./textMotion";
 import { useSectionBackgroundBlend } from "./sectionBlend";
@@ -3137,6 +3138,24 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   if (baseSlug(project.project.slug) === "liga" && section.id === "outcome") {
     return <LigaChangedSection project={project} section={section} />;
   }
+  if (project.project.slug === "8images" && section.id === "intro") {
+    return (
+      <section className="dw-case-section dw-ei-section dw-ei-hero" id="intro">
+        <div className="dw-ei-inner">
+          <header data-portfolio-reveal>
+            {section.eyebrow ? <p className="dw-ei-eyebrow">{section.eyebrow}</p> : null}
+            {section.title ? <h1>{section.title}</h1> : null}
+            <Html html={section.body} className="dw-ei-lede" />
+          </header>
+          <div className="dw-ei-hero-stage">
+            <OrbDock id="hero" className="dw-ei-hero-dock" />
+          </div>
+          <p className="dw-ei-hero-hint">Drag it.</p>
+        </div>
+      </section>
+    );
+  }
+
   if (project.project.slug === "8images" && (section.id === "model" || section.id === "widget" || section.id === "editor")) {
     return (
       <section className={`dw-case-section dw-ei-section dw-ei-section-${section.id}`} id={section.id}>
@@ -4522,11 +4541,26 @@ export function CaseStudyContent({ slug }: { slug: string }) {
     );
   }
 
-  return (
+  const body = (
     <article className={`dw-case-study dw-case-${styleSlug}${styleSlug !== dataSlug ? ` dw-case-draft-${dataSlug}` : ""} dw-motion-pilot`} ref={containerRef}>
       {project.sections.map((section) => <ProjectSection project={project} section={section} key={section.id} />)}
     </article>
   );
+
+  /* 8 Images carries one object through the whole page: it opens large in the
+     hero, shrinks alongside the argument, and finally docks inside the material
+     editor where it becomes the thing the editor edits. The provider holds the
+     material so every section is writing to the same object. */
+  if (dataSlug === "8images") {
+    return (
+      <OrbProvider>
+        {body}
+        <EightImagesOrb />
+      </OrbProvider>
+    );
+  }
+
+  return body;
 }
 
 export function getPortfolioProjects() {

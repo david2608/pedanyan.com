@@ -22,7 +22,7 @@
   container-type: size;
   position: relative;
   width: 100%;
-  aspect-ratio: 1440 / 1024;
+  aspect-ratio: 1440 / 952;
 }
 
 .ei-screen {
@@ -89,55 +89,18 @@
   cursor: pointer;
 }
 
-/* --- app bar --------------------------------------------------------------- */
-
-.ei-appbar {
-  position: absolute;
-  inset: 0 0 auto;
-  display: flex;
-  align-items: center;
-  gap: calc(38 * var(--px));
-  height: calc(80 * var(--px));
-  padding: calc(16 * var(--px)) calc(48 * var(--px));
-  border-bottom: max(1px, calc(1 * var(--px))) solid var(--input);
-  background: #fff;
-}
-
-.ei-logo { display: flex; align-items: center; gap: calc(9 * var(--px)); color: var(--ink); }
-.ei-logo svg { width: calc(23 * var(--px)); height: calc(34 * var(--px)); }
-.ei-logo b {
-  font-size: calc(15 * var(--px));
-  font-weight: 600;
-  line-height: calc(16 * var(--px));
-  letter-spacing: calc(-0.2 * var(--px));
-}
-
-.ei-appnav { display: flex; gap: calc(18 * var(--px)); }
-.ei-appnav span {
-  display: grid;
-  place-items: center;
-  padding: calc(12 * var(--px)) calc(16 * var(--px));
-  border-radius: calc(32 * var(--px));
-  font-weight: 500;
-  white-space: nowrap;
-}
-.ei-appnav span:first-child,
-.ei-appnav span:nth-child(2) { width: calc(118 * var(--px)); }
-
-.ei-avatar {
-  width: calc(48 * var(--px));
-  height: calc(48 * var(--px));
-  margin-left: auto;
-  border-radius: 50%;
-  background: var(--bg03) radial-gradient(circle at 50% 38%, #cfcfcf 0 26%, transparent 27%),
-    radial-gradient(ellipse at 50% 108%, #cfcfcf 0 42%, transparent 43%);
-}
+/* --- the frame ------------------------------------------------------------
+   The product header is not reproduced. On the real screen it sits at the top
+   of a 1024-tall frame; on this page it would sit two hundred pixels under the
+   site's own header, saying the same kind of thing twice. Removing it lifts
+   everything by 72px and shortens the frame to 952.
+   -------------------------------------------------------------------------- */
 
 /* --- floating action bar --------------------------------------------------- */
 
 .ei-actionbar {
   position: absolute;
-  top: calc(96 * var(--px));
+  top: calc(24 * var(--px));
   left: calc(24 * var(--px));
   display: flex;
   align-items: center;
@@ -208,7 +171,7 @@
 
 .ei-layers {
   position: absolute;
-  top: calc(200 * var(--px));
+  top: calc(128 * var(--px));
   left: calc(24 * var(--px));
   z-index: 2;
   display: flex;
@@ -279,68 +242,33 @@
 
 .ei-canvas {
   position: absolute;
-  top: calc(200 * var(--px));
+  top: calc(128 * var(--px));
   left: calc(24 * var(--px));
   display: grid;
   place-items: center;
   width: calc(1392 * var(--px));
   height: calc(800 * var(--px));
   border-radius: calc(16 * var(--px));
+  /* A soft studio floor, so the sphere has something to sit in rather than
+     floating on flat grey. */
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 42%, #ffffff 0%, rgba(255, 255, 255, 0) 70%),
+    radial-gradient(ellipse 13% 2.6% at 50% 78%, rgba(36, 36, 36, 0.16) 0%, rgba(36, 36, 36, 0) 72%);
 }
 
-/* The material sample. It is drawn, not photographed, so that switching a map
-   visibly changes it — a screenshot could not do that, and the whole argument
-   of this screen is that the stack drives the render. */
-.ei-material {
-  --ei-rough: 0;
-  --ei-emit: 0;
-  --ei-metal: 0;
-  --ei-alpha: 1;
-  --ei-hue: 0deg;
-  position: relative;
-  width: calc(447 * var(--px));
-  height: calc(381 * var(--px));
-  border-radius: 50%;
-  opacity: var(--ei-alpha);
-  filter: hue-rotate(var(--ei-hue));
-  background:
-    radial-gradient(
-      ellipse calc(160 * var(--px)) calc(120 * var(--px)) at 38% 26%,
-      rgba(255, 255, 255, calc(0.95 - var(--ei-rough) * 0.75)) 0%,
-      rgba(255, 255, 255, 0) 60%
-    ),
-    radial-gradient(
-      circle at 62% 76%,
-      rgba(255, 255, 255, calc(0.18 + var(--ei-emit) * 0.5)) 0%,
-      rgba(255, 255, 255, 0) 45%
-    ),
-    radial-gradient(circle at 44% 34%, #dcdcdc 0%, #c2c2c2 42%, #9a9a9a 74%, #767676 100%);
-  box-shadow: 0 calc(24 * var(--px)) calc(48 * var(--px)) rgba(0, 0, 0, 0.08);
-  transition: opacity 320ms ease, filter 320ms ease;
-}
-/* Metalness sharpens the falloff rather than recolouring it — contrast is what
-   reads as metal on a grey sphere. */
-.ei-material {
-  filter: hue-rotate(var(--ei-hue)) contrast(calc(1 + var(--ei-metal) * 0.45));
-}
-/* The seam that runs down the Figma render. */
-.ei-material::after {
-  content: "";
-  position: absolute;
-  top: 4%;
-  left: 49%;
-  width: calc(6 * var(--px));
-  height: 92%;
-  border-radius: calc(6 * var(--px));
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.04));
-  filter: blur(calc(1.5 * var(--px)));
+/* The rectangle the travelling sphere docks into. Square, so the object is
+   never scaled unevenly — the previous CSS sphere was a 447x381 ellipse, which
+   is exactly the kind of thing a real renderer cannot get wrong. */
+.ei-canvas-dock {
+  width: calc(440 * var(--px));
+  height: calc(440 * var(--px));
 }
 
 /* --- tool panels ----------------------------------------------------------- */
 
 .ei-tools {
   position: absolute;
-  top: calc(200 * var(--px));
+  top: calc(128 * var(--px));
   left: calc(1115 * var(--px));
   display: flex;
   flex-direction: column;
@@ -378,7 +306,9 @@
 }
 
 .ei-texture {
+  --ei-tex-hue: 0deg;
   flex: none;
+  filter: hue-rotate(var(--ei-tex-hue)) saturate(1.6);
   height: calc(104 * var(--px));
   box-shadow: inset 0 0 0 max(1px, calc(1 * var(--px))) var(--stroke);
   border-radius: calc(12 * var(--px));
@@ -522,4 +452,44 @@
     animation-duration: 1ms !important;
     transition-duration: 1ms !important;
   }
+}
+
+
+/* --- autoplay notice --------------------------------------------------------
+   The editor plays itself until someone takes over. Saying so is part of the
+   design: an interface that moves on its own without explanation reads as
+   broken, and a reader who does not know they can touch it will not.
+   -------------------------------------------------------------------------- */
+.ei-demo-flag {
+  position: absolute;
+  bottom: calc(24 * var(--px));
+  left: calc(24 * var(--px));
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--px));
+  margin: 0;
+  padding: calc(8 * var(--px)) calc(14 * var(--px));
+  border-radius: calc(999 * var(--px));
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(calc(8 * var(--px)));
+  color: var(--muted);
+  font-size: calc(13 * var(--px));
+  line-height: calc(18 * var(--px));
+  transition: opacity 400ms ease;
+}
+.ei-demo-flag::before {
+  content: "";
+  width: calc(7 * var(--px));
+  height: calc(7 * var(--px));
+  border-radius: 50%;
+  background: var(--grey);
+  transition: background 300ms ease;
+}
+.ei-demo-flag.is-on::before {
+  background: var(--primary);
+  animation: ei-pulse 2.4s ease-in-out infinite;
+}
+@keyframes ei-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .45; transform: scale(.82); }
 }

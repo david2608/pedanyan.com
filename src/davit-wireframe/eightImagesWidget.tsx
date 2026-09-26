@@ -1,80 +1,39 @@
-import { createElement, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
- * The shipped 8 Images viewer, embedded the same way a merchant embeds it, which
- * makes this page one of the arbitrary containers it was built to survive.
+ * The resizable frame the case study's argument is made in: a container the
+ * reader can drag to any size, reporting its own pixel dimensions as they do
+ * it. The viewer inside it is this site's own three.js rendering of the same
+ * toy-firetruck.glb the product ships — see eightImagesOrb.tsx, which docks the
+ * travelling model into this frame.
  *
- * It never auto-loads. 2,273 KB across 65 requests is not something to spend on a
- * reader who is scrolling past, and a page whose argument is "heavy 3D, handled
- * lightly" would refute itself by doing otherwise. The frame is resizable so the
- * claim can be tested rather than read.
+ * IT USED TO EMBED THE LIVE PRODUCT, loading a script from 8images.com and
+ * mounting <eight-images-widget>. That is gone, and the case is better for it:
+ *
+ *  - It needed the client's permission, because a personal site's traffic would
+ *    land in his analytics. That permission was never obtained.
+ *  - The shipped widget renders 8 Images' own "Create account" and "Log in"
+ *    buttons, which on a portfolio page read as an advert for the client rather
+ *    than as an exhibit of the work.
+ *  - It set document.title to "Toy Firetruck · Widget", overwriting the case
+ *    study's own title in the tab and in bookmarks. There was a MutationObserver
+ *    here purely to fight it back.
+ *  - A third-party custom element is invisible to the prerenderer and to
+ *    crawlers, so the page's central section was empty in the static HTML.
+ *  - It cost 2,273 KB across 65 requests on a page whose whole thesis is that
+ *    heavy 3D can be handled lightly.
+ *
+ * What the section claims changes with it, and the copy has to match: this is
+ * the model rendered here, not the merchant's embed running live.
  */
 
-const WIDGET_SRC = "https://8images.com/v1/widget.js";
-const PRODUCT_ID = "107";
 const MIN_W = 320;
 const MIN_H = 320;
 
 export function EightImagesWidget() {
-  /* Loads on approach — never on a click, and not at mount either.
-
-     It used to wait for a button, which made the reader take the section's word
-     for it. Mounting it immediately is the other extreme: 2,273 KB and a second
-     WebGL context arriving while this page's own model is still decoding. So it
-     waits until the section is a screen and a half away and then loads without
-     being asked. */
-  const [loaded, setLoaded] = useState(false);
   const [size, setSize] = useState<{ w: number; h: number } | null>(null);
   const frameRef = useRef<HTMLDivElement | null>(null);
   const dragRef = useRef<{ x: number; y: number; w: number; h: number } | null>(null);
-
-  useEffect(() => {
-    if (loaded) return;
-    const host = frameRef.current;
-    if (!host) return;
-    const near = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setLoaded(true);
-          near.disconnect();
-        }
-      },
-      { rootMargin: "150% 0px" }
-    );
-    near.observe(host);
-    return () => near.disconnect();
-  }, [loaded]);
-
-  useEffect(() => {
-    if (!loaded) return;
-
-    /* The widget sets document.title to the product it is showing ("Toy
-       Firetruck · Widget"), which would quietly overwrite the case study's own
-       title in the tab, in bookmarks and in anything reading the page after
-       hydration. Hold our title and put it back whenever it is changed. */
-    const ours = document.title;
-    const head = document.querySelector("head");
-    let titleGuard: MutationObserver | null = null;
-    if (head) {
-      titleGuard = new MutationObserver(() => {
-        if (document.title !== ours) document.title = ours;
-      });
-      titleGuard.observe(head, { subtree: true, childList: true, characterData: true });
-    }
-
-    if (!document.querySelector("script[data-eight-images-widget]")) {
-      const script = document.createElement("script");
-      script.async = true;
-      script.src = WIDGET_SRC;
-      script.setAttribute("data-eight-images-widget", "true");
-      document.body.appendChild(script);
-    }
-
-    return () => {
-      titleGuard?.disconnect();
-      if (document.title !== ours) document.title = ours;
-    };
-  }, [loaded]);
 
   /* Report the frame's own size, so the number on screen is the container the
      viewer is actually being asked to fill. */
@@ -112,9 +71,6 @@ export function EightImagesWidget() {
   return (
     <div className="dw-ei-widget">
       <div className="dw-ei-widget-frame" ref={frameRef}>
-        {loaded ? (
-          createElement("eight-images-widget", { "product-id": PRODUCT_ID })
-        ) : null}
         <button
           type="button"
           className="dw-ei-widget-handle"

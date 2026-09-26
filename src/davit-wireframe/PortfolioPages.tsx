@@ -19,7 +19,6 @@ import { EightImagesShop } from "./eightImagesShop";
 import { EightImagesFiretruckCard } from "./eightImagesCard";
 import { ScrambleText, useScrambleReveal } from "./scrambleText";
 import { EightImagesOrb, OrbDock, OrbProvider } from "./eightImagesOrb";
-import { EightImagesWidget } from "./eightImagesWidget";
 import { useTextMotion } from "./textMotion";
 import { useSectionBackgroundBlend } from "./sectionBlend";
 import { OutcomeSection, PlateSection, StripSection, WalkthroughSection } from "./caseStudyMotion";

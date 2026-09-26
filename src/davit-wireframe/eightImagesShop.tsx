@@ -9,7 +9,7 @@ import "./eightImagesShop.css";
  *
  * Everything before this section is about a viewer built to survive a page its
  * designer would never see. So the section stops describing that and does it:
- * the live viewer — the real one, loaded from 8images.com — shrinks out of the
+ * the viewer — this site's own render of the product's toy-firetruck.glb — shrinks out of the
  * portfolio and into a merchant's product page, browser chrome and all, until
  * it is one slot in somebody else's gallery next to a price and an Add to
  * basket button.

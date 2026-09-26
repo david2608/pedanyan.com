@@ -624,6 +624,8 @@ const publicArchiveEntries = [
       "/public-work/tech-week/talk-closeup.jpg",
       "/public-work/tech-week/audience.jpg"
     ],
+    /* The talk itself, 29 minutes, as Tech Week published it. */
+    facebookVideoUrl: "https://www.facebook.com/watch/?v=610096292035042",
     url: "https://techweek.am/"
   },
   {
@@ -2654,23 +2656,29 @@ const localCompanyLogos: Record<string, string> = {
   TCF: "/logos/partners/tcf.png"
 };
 
-/* NO MORE SCRAPED LOGOS.
-   This used to ask logo.clearbit.com for a mark and fall back to Google's
-   favicon service. Clearbit's logo API is gone — every one of those requests
-   now fails — so every brand silently landed on the fallback, and a favicon is
-   not a logo: measured from a real browser, the same strip was being served
-   images at 128x128, 36x36, 128x128 and 130x104. No CSS makes marks of
-   different shapes, paddings and colours sit evenly, which is why the row
-   looked broken.
+/* A real file if we have one, otherwise the best remote mark available.
 
-   So: a real file if we have one, the company's name otherwise. That also ends
-   two third-party requests per brand on a page that needs neither. */
-function getCompanyLogoUrl(company: string) {
-  return localCompanyLogos[company] ?? "";
+   This used to try logo.clearbit.com first. That API is gone — tested from a
+   real browser, all eight partner domains error — so every brand paid a failed
+   request before falling through. Only the fallback ever worked, so only the
+   fallback remains.
+
+   The fallback is a favicon, not a logo, and they arrive at whatever size and
+   padding each site happens to ship: 128x128, 36x36, 130x104. That is a real
+   problem and it is solved in CSS, not here — a fixed square box, contain, and
+   one flat treatment so a row of mismatched marks reads as a set. Dropping the
+   images instead just left holes, which was worse. */
+function getCompanyLogoUrl(company: string, domain?: string) {
+  const local = localCompanyLogos[company];
+  if (local) return local;
+  const safeDomain = (domain ?? "").trim();
+  return safeDomain ? `https://www.google.com/s2/favicons?domain=${safeDomain}&sz=128` : "";
 }
 
-function ExperienceLogo({ company }: { company: string; domain?: string }) {
-  const logoUrl = getCompanyLogoUrl(company);
+function ExperienceLogo({ company, domain }: { company: string; domain?: string }) {
+  const [failed, setFailed] = useState(false);
+  const source = getCompanyLogoUrl(company, domain);
+  const logoUrl = failed ? "" : source;
   const initials = company
     .split(/\s|\/|-/)
     .filter(Boolean)
@@ -2682,7 +2690,7 @@ function ExperienceLogo({ company }: { company: string; domain?: string }) {
   return (
     <span className={`dw-experience-logo ${logoUrl ? "" : "is-fallback"}`} aria-hidden="true">
       {logoUrl ? (
-        <img src={logoUrl} alt="" loading="lazy" />
+        <img src={logoUrl} alt="" loading="lazy" onError={() => setFailed(true)} />
       ) : null}
       {!logoUrl ? <span>{initials || company.slice(0, 2).toUpperCase()}</span> : null}
     </span>
@@ -4504,6 +4512,13 @@ function PublicArticlePage({ slug }: { slug: string }) {
   const entry = publicArchiveEntries.find((item) => item.slug === slug);
   const article = publicArticleCopy[slug];
   const videoId = entry && "videoId" in entry ? entry.videoId : undefined;
+  const facebookVideoUrl =
+    entry && "facebookVideoUrl" in entry ? (entry.facebookVideoUrl as string) : undefined;
+  /* CLICK TO LOAD, NOT AUTOLOAD. Facebook's player is a third-party frame that
+     sets its own cookies the moment it mounts, and this one is a 29-minute
+     talk nobody should be made to download for scrolling past an article. The
+     poster is already here; the frame arrives when someone asks for it. */
+  const [talkOpen, setTalkOpen] = useState(false);
   const gallery = (entry && "gallery" in entry ? entry.gallery : []) ?? [];
   const galleryCaptions = (entry && "galleryCaptions" in entry ? entry.galleryCaptions : []) ?? [];
   const inlineImages = (entry && "inlineImages" in entry ? entry.inlineImages : []) ?? [];
@@ -4551,6 +4566,21 @@ function PublicArticlePage({ slug }: { slug: string }) {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               />
+            ) : facebookVideoUrl && talkOpen ? (
+              <iframe
+                src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(facebookVideoUrl)}&show_text=false&autoplay=true`}
+                title={`${entry.title} — full talk`}
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            ) : facebookVideoUrl ? (
+              <button type="button" className="dw-talk-poster" onClick={() => setTalkOpen(true)}>
+                <img src={entry.image} alt={entry.imageAlt} width={pilotImageSizes[entry.image]?.[0]} height={pilotImageSizes[entry.image]?.[1]} />
+                <span className="dw-talk-poster-cue">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5 19 12 8 18.5V5.5Z" /></svg>
+                  Watch the talk · 29 min
+                </span>
+              </button>
             ) : <img src={entry.image} alt={entry.imageAlt} width={pilotImageSizes[entry.image]?.[0]} height={pilotImageSizes[entry.image]?.[1]} />}
             {entry.type.includes("UX Storm") ? (
               <span className="dw-uxstorm-badge" aria-hidden="true">
@@ -4721,7 +4751,7 @@ const partnerBrands: Array<{ name: string; domain: string; wordmark?: string; no
   { name: "Kinodaran", domain: "kinodaran.am" },
   { name: "TCF", domain: "tcf.am", wordmark: "/logos/partners/tcf.png" },
   { name: "W8RK", domain: "w8rk.com" },
-  { name: "8 Images", domain: "8images.com", noMark: true },
+  { name: "8 Images", domain: "8images.com" },
   { name: "Insafe", domain: "insafe.am" },
   { name: "Sarkissian.pro", domain: "sarkissian.pro" }
 ];

@@ -6788,9 +6788,35 @@ button.dw-public-journal-entry {
   filter: grayscale(1);
 }
 
+/* THE BOX IS WHAT MAKES A ROW OF FAVICONS LOOK LIKE A SET.
+   These marks arrive at whatever each site ships — measured from a real
+   browser, the same strip gets 128x128, 36x36, 128x128 and 130x104. A fixed
+   square, contain rather than cover, and centring inside it means a wide mark
+   and a tiny one occupy the same slot and sit on the same centre line. The
+   grayscale and 0.62 opacity on the item above finish the job by removing the
+   colour clash, which is the other half of why a partner strip looks untidy.
+
+   Deleting the images instead of normalising them was tried and was worse: it
+   left holes where brands used to be. */
 .dw-partner-marquee-item .dw-experience-logo {
+  display: grid;
+  place-items: center;
   width: 34px;
   height: 34px;
+  overflow: hidden;
+}
+
+.dw-partner-marquee-item .dw-experience-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* A brand whose favicon will not load keeps its initials rather than an empty
+   square, at a size that sits with the names beside it. */
+.dw-partner-marquee-item .dw-experience-logo.is-fallback {
+  font-size: 13px;
+  letter-spacing: 0.04em;
 }
 
 .dw-partner-marquee-wordmark {
@@ -7762,4 +7788,52 @@ html.dw-scrolled .dw-page .dw-header .dw-logo {
   .dw-page .dw-header.is-scrolled :is(.dw-logo, .dw-logo-word, .dw-nav, .dw-nav a, .dw-right, .dw-pill, .dw-mobile-menu-toggle, .dw-talk-icon) {
     color: #0b0d10;
   }
+}
+
+/* The talk poster: the article's own hero image, with the one affordance that
+   says a 29-minute recording is behind it. A third-party player is not
+   mounted until this is clicked — Facebook's frame sets its own cookies the
+   moment it exists, and the site has no consent banner yet. */
+.dw-talk-poster {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.dw-talk-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dw-talk-poster-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 16px 10px 13px;
+  border-radius: 999px;
+  background: rgba(16, 16, 18, 0.82);
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  transform: translateX(-50%);
+  backdrop-filter: blur(6px);
+  transition: background 200ms ease;
+}
+
+.dw-talk-poster:hover .dw-talk-poster-cue {
+  background: rgba(16, 16, 18, 0.94);
+}
+
+.dw-talk-poster-cue svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
 }

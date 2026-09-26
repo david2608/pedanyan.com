@@ -8,7 +8,7 @@ import {
   IconRedo,
   IconUndo
 } from "./eightImagesIcons";
-import { OrbDock, useOrb } from "./eightImagesOrb";
+import { ORB_PART_NAMES, OrbDock, useOrb } from "./eightImagesOrb";
 import "./eightImagesScreens.css";
 
 /**
@@ -128,6 +128,10 @@ export function EightImagesMaterialEditor() {
   const [zoom, setZoom] = useState(54);
   const [applyToSub, setApplyToSub] = useState(true);
   const [demoOn, setDemoOn] = useState(true);
+  /* The editor stays silent until it is actually in use. Announcing itself on
+     mount would repaint the tyres before the reader has scrolled anywhere near
+     this section. */
+  const [engaged, setEngaged] = useState(false);
 
   const { setMaterial } = useOrb();
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -137,6 +141,7 @@ export function EightImagesMaterialEditor() {
      these are the same six channels the product's maps stand for. */
   useEffect(() => {
     setMaterial({
+      active: engaged,
       diffuse: maps.diffuse.on,
       normal: maps.normal.on,
       roughness: maps.roughness.on,
@@ -151,10 +156,11 @@ export function EightImagesMaterialEditor() {
       metalnessValue: maps.metalness.value,
       transparencyValue: maps.transparency.value
     });
-  }, [maps, setMaterial]);
+  }, [maps, engaged, setMaterial]);
 
   const touched = useCallback(() => {
     lastTouch.current = performance.now();
+    setEngaged(true);
     setDemoOn(false);
   }, []);
 
@@ -210,6 +216,7 @@ export function EightImagesMaterialEditor() {
     const run = () => {
       if (!alive) return;
       if (!visible) { timer = window.setTimeout(run, 600); return; }
+      setEngaged(true);
 
       const step = DEMO[index % DEMO.length];
       index += 1;
@@ -370,6 +377,126 @@ export function EightImagesMaterialEditor() {
           {demoOn ? "Playing itself — touch anything to take over" : "You have it"}
         </p>
       </div>
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   The parts list.
+
+   This is the case study's argument you can operate. A shopper cannot choose a
+   material for a mesh; they choose one for the seat, the legs, the top. So the
+   meshes get names, and the names are what the configurator is built out of.
+   The reader switches them on and watches a pile of geometry become a product.
+
+   The names are the GLB's own, in the file's order. Nothing is renamed here.
+   --------------------------------------------------------------------------- */
+
+const PARTS_IDLE_BEFORE_RESUME = 9000;
+
+export function EightImagesParts() {
+  const { parts, togglePart, setParts } = useOrb();
+  const [demoOn, setDemoOn] = useState(true);
+  const lastTouch = useRef(0);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+
+  const touched = useCallback(() => {
+    lastTouch.current = performance.now();
+    setDemoOn(false);
+  }, []);
+
+  const count = ORB_PART_NAMES.filter((n) => parts[n]).length;
+
+  useEffect(() => {
+    if (demoOn) return;
+    const id = window.setInterval(() => {
+      if (performance.now() - lastTouch.current > PARTS_IDLE_BEFORE_RESUME) setDemoOn(true);
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, [demoOn]);
+
+  /* The list builds itself while nobody is driving, in the order a truck would
+     actually go together rather than the order the file happens to list. */
+  useEffect(() => {
+    if (!demoOn) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const host = rootRef.current;
+    if (!host) return;
+
+    const order = [
+      "Wheels", "Hubcaps", "Base", "Body", "Cabin",
+      "Ladder Turret", "Ladder Railings", "Ladder Caps", "Flashing Lights", "Wire Parts"
+    ];
+    let alive = true;
+    let timer = 0;
+    let i = 0;
+    let visible = false;
+
+    const seen = new IntersectionObserver(
+      (entries) => { visible = entries.some((e) => e.isIntersecting); },
+      { threshold: 0.3 }
+    );
+    seen.observe(host);
+
+    const run = () => {
+      if (!alive) return;
+      if (!visible) { timer = window.setTimeout(run, 600); return; }
+      if (i >= order.length) {
+        /* Strip it back and do it again, so a reader arriving late still sees
+           the product come together rather than a finished truck. */
+        i = 0;
+        setParts(Object.fromEntries(ORB_PART_NAMES.map((n) => [n, false])));
+        timer = window.setTimeout(run, 1800);
+        return;
+      }
+      const name = order[i];
+      i += 1;
+      setParts({ ...Object.fromEntries(ORB_PART_NAMES.map((n) => [n, false])), ...Object.fromEntries(order.slice(0, i).map((n) => [n, true])) });
+      timer = window.setTimeout(run, 620);
+    };
+
+    timer = window.setTimeout(run, 700);
+    return () => { alive = false; window.clearTimeout(timer); seen.disconnect(); };
+  }, [demoOn, setParts]);
+
+  return (
+    <div className="ei-parts" ref={rootRef}>
+      <header>
+        <h4>Parts</h4>
+        <span>{count} of {ORB_PART_NAMES.length}</span>
+      </header>
+      <ul>
+        {ORB_PART_NAMES.map((name) => (
+          <li key={name}>
+            <label className={parts[name] ? "is-on" : undefined}>
+              <input
+                type="checkbox"
+                checked={!!parts[name]}
+                onChange={() => { touched(); togglePart(name); }}
+              />
+              <span className="ei-parts-box" aria-hidden="true" />
+              {name}
+            </label>
+          </li>
+        ))}
+      </ul>
+      <footer>
+        <button
+          type="button"
+          onClick={() => { touched(); setParts(Object.fromEntries(ORB_PART_NAMES.map((n) => [n, true]))); }}
+        >
+          Select all
+        </button>
+        <button
+          type="button"
+          onClick={() => { touched(); setParts(Object.fromEntries(ORB_PART_NAMES.map((n) => [n, false]))); }}
+        >
+          Clear
+        </button>
+      </footer>
+      <p className={`ei-demo-flag${demoOn ? " is-on" : ""}`} aria-live="polite">
+        {demoOn ? "Assembling itself — tick anything to take over" : "You have it"}
+      </p>
     </div>
   );
 }

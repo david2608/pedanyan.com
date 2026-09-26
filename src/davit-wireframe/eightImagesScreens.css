@@ -493,3 +493,131 @@
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: .45; transform: scale(.82); }
 }
+
+/* --- the parts list ---------------------------------------------------------
+   A product panel, not prose: it speaks Poppins and uses the product's tokens,
+   because it is a piece of the tool's thinking rather than a piece of writing
+   about it. The names are the GLB's own.
+   -------------------------------------------------------------------------- */
+
+.dw-ei-parts-row {
+  display: grid;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+
+@media (min-width: 901px) {
+  .dw-ei-parts-row { grid-template-columns: minmax(260px, 340px) minmax(0, 1fr); }
+}
+
+.dw-ei-parts-dock {
+  width: min(46vw, 520px);
+  height: min(46vw, 520px);
+  margin: 0 auto;
+}
+
+.ei-parts {
+  --ink: #242424;
+  --muted: #5f5f5f;
+  --grey: #b3b3b3;
+  --bg01: #fafafa;
+  --bg02: #f5f5f5;
+  --bg03: #ededed;
+  --input: #f0f0f0;
+  --primary: #0c8ce9;
+
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bg01);
+  box-shadow: inset 0 0 0 1px var(--bg03);
+  color: var(--ink);
+  font-family: Poppins, system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  user-select: none;
+}
+
+.ei-parts > header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--input);
+}
+.ei-parts > header h4 { flex: 1 0 0; margin: 0; font-size: 16px; font-weight: 500; line-height: 24px; }
+.ei-parts > header span { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.ei-parts ul { margin: 0; padding: 12px; list-style: none; display: grid; gap: 2px; }
+.ei-parts li { margin: 0; }
+
+.ei-parts label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+.ei-parts label:hover { background: var(--bg03); }
+.ei-parts label.is-on { background: var(--input); color: var(--ink); }
+
+.ei-parts input { position: absolute; opacity: 0; pointer-events: none; }
+
+.ei-parts-box {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1.5px var(--grey);
+  transition: background 180ms ease, box-shadow 180ms ease;
+}
+.ei-parts label.is-on .ei-parts-box {
+  background: var(--primary);
+  box-shadow: inset 0 0 0 1.5px var(--primary);
+}
+.ei-parts label.is-on .ei-parts-box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: no-repeat center / 11px
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.ei-parts input:focus-visible + .ei-parts-box { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+.ei-parts > footer {
+  display: flex;
+  gap: 8px;
+  padding: 0 12px 12px;
+}
+.ei-parts > footer button {
+  flex: 1 0 0;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--bg02);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+.ei-parts > footer button:hover { background: var(--bg03); }
+
+/* The parts list reuses the editor's autoplay notice, but it sits in flow here
+   rather than floating over a canvas. */
+.ei-parts .ei-demo-flag {
+  position: static;
+  justify-content: center;
+  margin: 0;
+  padding: 10px 16px 16px;
+  background: none;
+  backdrop-filter: none;
+  border-radius: 0;
+  font-size: 12px;
+  line-height: 16px;
+}
+.ei-parts .ei-demo-flag::before { width: 6px; height: 6px; }

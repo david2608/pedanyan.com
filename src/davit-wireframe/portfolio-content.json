@@ -4552,7 +4552,7 @@
           "paddingBottom": "120px",
           "eyebrow": "The proof",
           "title": "The viewer, running in this page",
-          "body": "<p>This is the shipped product, embedded here the same way a merchant embeds it - which makes this portfolio page one of the arbitrary containers the thing was built to survive. Drag the frame and watch the chrome hold.</p><p>It loads on click, not on scroll, because it costs 2,273 KB across 65 requests: a megabyte of mesh, a 387 KB lighting environment, and a Draco decoder to unpack the geometry. A page that argues heavy 3D can feel light should be honest about what heavy means.</p>",
+          "body": "<p>This is the shipped product, embedded the same way a merchant embeds it — which makes this portfolio page one of the arbitrary containers the thing was built to survive. Drag the frame and watch the chrome hold.</p><p>It loads on sight, and it costs what it costs: 2,273 KB across 65 requests — a megabyte of mesh, a 387 KB lighting environment, and a Draco decoder to unpack the geometry. A page that argues heavy 3D can feel light should be honest about what heavy means.</p>",
           "asset": "widget-poster"
         },
         {

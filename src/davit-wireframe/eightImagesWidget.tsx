@@ -16,7 +16,11 @@ const MIN_W = 320;
 const MIN_H = 320;
 
 export function EightImagesWidget() {
-  const [loaded, setLoaded] = useState(false);
+  /* Loads on mount. It used to wait for a click, on the reasoning that 2,273 KB
+     should be opt-in — but the point of this section is that the shipped viewer
+     runs in a page it was never designed for, and a reader who has to press a
+     button to see that has been told rather than shown. */
+  const [loaded] = useState(true);
   const [size, setSize] = useState<{ w: number; h: number } | null>(null);
   const frameRef = useRef<HTMLDivElement | null>(null);
   const dragRef = useRef<{ x: number; y: number; w: number; h: number } | null>(null);
@@ -90,12 +94,7 @@ export function EightImagesWidget() {
       <div className="dw-ei-widget-frame" ref={frameRef}>
         {loaded ? (
           createElement("eight-images-widget", { "product-id": PRODUCT_ID })
-        ) : (
-          <button type="button" className="dw-ei-widget-load" onClick={() => setLoaded(true)}>
-            <span>Load the live viewer</span>
-            <small>2,273 KB · 65 requests · loads from 8images.com</small>
-          </button>
-        )}
+        ) : null}
         <button
           type="button"
           className="dw-ei-widget-handle"

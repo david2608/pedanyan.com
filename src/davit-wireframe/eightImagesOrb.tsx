@@ -37,29 +37,10 @@ import "./eightImagesOrb.css";
 const MODEL_URL = "/portfolio-assets/8images/toy-firetruck.glb";
 const DRACO_PATH = "/draco/";
 
-/* Which stage each part joins at. The numbers are the `data-orb-stage` values
-   the docks declare, so the model assembles in step with the argument. */
-const PART_STAGE: Record<string, number> = {
-  "Wheels#0": 0,
-  "Wheels#1": 1,
-  "Wheels#2": 1,
-  "Wheels#3": 1,
-  "Hubcaps#0": 1,
-  "Hubcaps#1": 1,
-  "Hubcaps#2": 1,
-  "Hubcaps#3": 1,
-  Base: 2,
-  Body: 3,
-  Cabin: 4,
-  "Ladder Turret": 5,
-  "Ladder Railings": 5,
-  "Ladder Caps": 5,
-  "Flashing Lights": 6,
-  "Wire Parts": 6
-};
-
-/** The parts a configurator would call "paint" — what the editor's maps drive. */
-const PAINTED = new Set(["Base", "Body", "Cabin", "Ladder Turret"]);
+/** The editor edits the tyres, and only the tyres. Everything else keeps the
+    material the file was authored with, so the truck looks like the truck the
+    live widget serves. */
+const EDITABLE = (name: string) => name.startsWith("Wheels") || name.startsWith("Hubcaps");
 
 export type OrbMaterial = {
   diffuse: boolean;
@@ -68,6 +49,9 @@ export type OrbMaterial = {
   emission: boolean;
   metalness: boolean;
   transparency: boolean;
+  /** False until the reader (or the editor's own demo) touches a control. Until
+      then every part renders exactly as the GLB authored it. */
+  active: boolean;
   hue: number;
   saturation: number;
   value: number;
@@ -78,6 +62,7 @@ export type OrbMaterial = {
 };
 
 export const DEFAULT_ORB: OrbMaterial = {
+  active: false,
   diffuse: false,
   normal: true,
   roughness: true,
@@ -93,21 +78,60 @@ export const DEFAULT_ORB: OrbMaterial = {
   transparencyValue: 0
 };
 
+/**
+ * GLTFLoader sanitises node names, turning every space into an underscore — so
+ * the file's "Flashing Lights" arrives as "Flashing_Lights". Matching the two
+ * spellings by eye is how five of the ten parts silently stopped responding to
+ * their own checkboxes. Everything is compared through this.
+ */
+const readable = (name: string) => name.replace(/_/g, " ");
+
+/** The part names, in the file's order — the section about naming uses these. */
+export const ORB_PART_NAMES = [
+  "Base", "Body", "Cabin", "Flashing Lights", "Hubcaps",
+  "Ladder Caps", "Ladder Railings", "Ladder Turret", "Wheels", "Wire Parts"
+];
+
+export type OrbParts = Record<string, boolean>;
+
+const NO_PARTS: OrbParts = Object.fromEntries(ORB_PART_NAMES.map((n) => [n, false]));
+
 type OrbContextValue = {
   material: OrbMaterial;
   setMaterial: (next: Partial<OrbMaterial>) => void;
+  parts: OrbParts;
+  togglePart: (name: string) => void;
+  setParts: (next: OrbParts) => void;
 };
 
-const OrbContext = createContext<OrbContextValue>({ material: DEFAULT_ORB, setMaterial: () => {} });
+const OrbContext = createContext<OrbContextValue>({
+  material: DEFAULT_ORB,
+  setMaterial: () => {},
+  parts: NO_PARTS,
+  togglePart: () => {},
+  setParts: () => {}
+});
 export const useOrb = () => useContext(OrbContext);
 
 export function OrbProvider({ children }: { children: ReactNode }) {
   const [material, setState] = useState(DEFAULT_ORB);
+  /* Nothing is checked to begin with, which is what leaves the page opening on
+     a single wheel. The reader turns the product on, part by part. */
+  const [parts, setParts] = useState<OrbParts>(NO_PARTS);
+
   const setMaterial = useCallback(
     (next: Partial<OrbMaterial>) => setState((prev) => ({ ...prev, ...next })),
     []
   );
-  const value = useMemo(() => ({ material, setMaterial }), [material, setMaterial]);
+  const togglePart = useCallback(
+    (name: string) => setParts((prev) => ({ ...prev, [name]: !prev[name] })),
+    []
+  );
+
+  const value = useMemo(
+    () => ({ material, setMaterial, parts, togglePart, setParts }),
+    [material, setMaterial, parts, togglePart]
+  );
   return <OrbContext.Provider value={value}>{children}</OrbContext.Provider>;
 }
 
@@ -122,12 +146,6 @@ export function OrbDock({ id, stage, className }: { id: string; stage: number; c
     />
   );
 }
-
-/** The part names, in the file's order — the section about naming uses these. */
-export const ORB_PART_NAMES = [
-  "Base", "Body", "Cabin", "Flashing Lights", "Hubcaps",
-  "Ladder Caps", "Ladder Railings", "Ladder Turret", "Wheels", "Wire Parts"
-];
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n);
@@ -199,19 +217,25 @@ type Part = {
   mesh: THREE.Mesh;
   material: THREE.MeshStandardMaterial;
   base: { colour: THREE.Color; roughness: number; metalness: number };
-  stage: number;
+  group: string;
   rest: THREE.Vector3;
   drift: THREE.Vector3;
   box: THREE.Box3;
-  painted: boolean;
+  editable: boolean;
   reveal: number;
 };
 
 export function EightImagesOrb() {
   const hostRef = useRef<HTMLDivElement | null>(null);
-  const { material } = useOrb();
+  const { material, parts: checkedParts } = useOrb();
   const materialRef = useRef(material);
   materialRef.current = material;
+  const partsRef = useRef(checkedParts);
+  partsRef.current = checkedParts;
+  /* The loop is the usual way the object redraws, but a backgrounded tab has no
+     loop — and ticking a part is a state change, not a scroll. Keep a handle to
+     the placer so a checkbox still takes effect. */
+  const settleRef = useRef<(() => void) | null>(null);
 
   const [ready, setReady] = useState(false);
 
@@ -309,16 +333,14 @@ export function EightImagesOrb() {
         geometry.scale(scale, scale, scale);
         geometry.computeBoundingBox();
 
-        const source = src as THREE.MeshStandardMaterial;
-        const mat = new THREE.MeshStandardMaterial({
-          color: source.color ? source.color.clone() : new THREE.Color("#b9b9b9"),
-          roughness: source.roughness ?? 0.5,
-          metalness: source.metalness ?? 0,
-          map: source.map ?? null,
-          envMapIntensity: 1.05,
-          transparent: true,
-          opacity: 0
-        });
+        /* CLONE the authored material rather than building a new one. The GLB
+           carries a base-colour, metallic-roughness AND normal texture on every
+           material; hand-copying three fields dropped all of them, which is why
+           the truck rendered flat and pale instead of like the product. */
+        const mat = (src as THREE.MeshStandardMaterial).clone();
+        mat.envMapIntensity = 1.05;
+        mat.transparent = true;
+        mat.opacity = 0;
 
         const mesh = new THREE.Mesh(geometry, mat);
         mesh.visible = false;
@@ -336,11 +358,11 @@ export function EightImagesOrb() {
           mesh,
           material: mat,
           base: { colour: mat.color.clone(), roughness: mat.roughness, metalness: mat.metalness },
-          stage: PART_STAGE[name] ?? 6,
+          group: readable(name.split("#")[0]),
           rest,
           drift,
           box,
-          painted: PAINTED.has(name),
+          editable: EDITABLE(name),
           reveal: 0
         };
       });
@@ -450,13 +472,16 @@ export function EightImagesOrb() {
 
     const applyMaterial = () => {
       const m = materialRef.current;
+      /* Until the editor is touched, every part renders as authored. Overriding
+         by default turned a red fire truck salmon. */
+      if (!m.active) return;
       if (m.diffuse) {
         tint.setHSL((m.hue % 360) / 360, clamp01(m.saturation / 360), 0.42 + clamp01(m.value / 360) * 0.3);
       }
       if (normalWasOn !== m.normal) normalWasOn = m.normal;
 
       parts.forEach((part) => {
-        if (!part.painted) return;
+        if (!part.editable) return;
         const mat = part.material;
         mat.color.copy(m.diffuse ? tint : part.base.colour);
         mat.roughness = m.roughness ? clamp01(m.roughnessValue) : part.base.roughness;
@@ -474,14 +499,18 @@ export function EightImagesOrb() {
 
     const assemble = (immediate = false) => {
       if (parts.length === 0) return;
-      const stage = current.stage;
+
+      /* What exists is what the reader has switched on. Before anything is
+         checked the page holds one wheel — a part with no product around it,
+         which is the state the case study opens in. */
+      const checked = partsRef.current;
+      const anyChecked = ORB_PART_NAMES.some((n) => checked[n]);
 
       visibleBox.makeEmpty();
       parts.forEach((part) => {
-        /* A part fades in over the single stage before its own, so it arrives
-           while the reader is travelling into the section that introduces it. */
-        const t = clamp01(stage - part.stage + 1);
-        part.reveal = immediate || reduceMotion ? t : lerp(part.reveal, t, 0.2);
+        const wanted = anyChecked ? !!checked[part.group] : part.name === "Wheels#0";
+        const t = wanted ? 1 : 0;
+        part.reveal = immediate || reduceMotion ? t : lerp(part.reveal, t, 0.16);
         const r = part.reveal;
 
         part.mesh.visible = r > 0.004;
@@ -489,6 +518,10 @@ export function EightImagesOrb() {
 
         const e = easeOut(r);
         part.material.opacity = e;
+        /* Transparency costs correct depth sorting, so only pay for it while a
+           part is actually fading. */
+        part.material.transparent = e < 0.995;
+        part.material.depthWrite = e >= 0.995;
         part.mesh.position.copy(part.rest).addScaledVector(part.drift, 1 - e);
         part.mesh.scale.setScalar(0.84 + 0.16 * e);
 
@@ -555,6 +588,7 @@ export function EightImagesOrb() {
       renderer.render(scene, camera);
     };
 
+    settleRef.current = settle;
     tick();
 
     const onResize = () => settle();
@@ -582,6 +616,10 @@ export function EightImagesOrb() {
       renderer.domElement.remove();
     };
   }, []);
+
+  useEffect(() => {
+    if (document.hidden) settleRef.current?.();
+  }, [checkedParts, material]);
 
   return <div className={`ei-orb${ready ? " is-ready" : ""}`} ref={hostRef} aria-hidden="true" />;
 }

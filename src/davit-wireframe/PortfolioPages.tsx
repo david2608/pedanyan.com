@@ -14,7 +14,7 @@ import "./tempoCaseGuards.css";
 import { MediaCarousel } from "./MediaCarousel";
 import { PullToContinue } from "./PullToContinue";
 import { EightImagesModel } from "./eightImagesModel";
-import { EightImagesMaterialEditor } from "./eightImagesScreens";
+import { EightImagesMaterialEditor, EightImagesParts } from "./eightImagesScreens";
 import { EightImagesOrb, OrbDock, OrbProvider } from "./eightImagesOrb";
 import { EightImagesWidget } from "./eightImagesWidget";
 import { useTextMotion } from "./textMotion";
@@ -2973,7 +2973,6 @@ const EI_STAGES: Record<string, number> = {
   outcome: 1,
   problem: 2,
   decisions: 3,
-  model: 5,
   walkthrough: 5,
   "the-fail": 6
 };
@@ -3188,7 +3187,12 @@ function ProjectSectionBody({ project, section }: { project: PortfolioProject; s
             {section.title ? <h2>{section.title}</h2> : null}
             <Html html={section.body} className="dw-ei-lede" />
           </header>
-          {section.id === "model" ? <EightImagesModel /> : null}
+          {section.id === "model" ? (
+            <div className="dw-ei-parts-row">
+              <EightImagesParts />
+              <OrbDock id="model" stage={5} className="dw-ei-parts-dock" />
+            </div>
+          ) : null}
           {section.id === "widget" ? (
             <>
               <OrbDock id="widget" stage={6} className="dw-ei-widget-dock" />

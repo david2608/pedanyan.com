@@ -14,6 +14,7 @@ import "./tempoCaseGuards.css";
 import { MediaCarousel } from "./MediaCarousel";
 import { PullToContinue } from "./PullToContinue";
 import { EightImagesModel } from "./eightImagesModel";
+import { EightImagesMaterialEditor } from "./eightImagesScreens";
 import { EightImagesWidget } from "./eightImagesWidget";
 import { useTextMotion } from "./textMotion";
 import { useSectionBackgroundBlend } from "./sectionBlend";
@@ -31,7 +32,7 @@ import { TempoFlowCard } from "./tempoFlowCard";
 import { IcredoLogoScene } from "./icredoLogoScene";
 import { SecurionLogoScene } from "./securionLogoScene";
 import { LigaFlowCard } from "./ligaFlowCard";
-import { TinkoffCaseStudy } from "./tinkoffCase";
+import { TinkoffCaseStudy, TinkoffScreenGridCard } from "./tinkoffCase";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -113,13 +114,13 @@ export type PortfolioProject = {
 };
 
 const portfolioFilterMetadata: Record<string, { year: string; category: string }> = {
-  "tinkoff-checkout": { year: "", category: "Fintech" },
+  "tinkoff-checkout": { year: "2023", category: "Fintech" },
   cloudchipr: { year: "2023", category: "FinOps" },
-  "material-exchange": { year: "2021", category: "SaaS" },
+  "material-exchange": { year: "2023", category: "SaaS" },
   securion: { year: "2018", category: "Crypto" },
   "material-exchange-photo-lab": { year: "2023", category: "Product tools" },
   "hotel-apartments": { year: "2022", category: "Travel" },
-  tempo: { year: "2026", category: "Delivery" },
+  tempo: { year: "2024", category: "Delivery" },
   icredo: { year: "2026", category: "Fintech" },
   liga: { year: "2025", category: "Insurance" },
   "8images": { year: "2026", category: "3D commerce" },
@@ -192,6 +193,7 @@ const routableProjects = [...projects, ...draftProjects];
 const draftStyleSource: Record<string, string> = { "tempo-v2": "tempo", "tempo-v3": "tempo" };
 
 const projectAccents: Record<string, { accent: string; surface: string }> = {
+  "tinkoff-checkout": { accent: "#ffdd2d", surface: "#e8e9ed" },
   cloudchipr: { accent: "#5635ef", surface: "#ebe7ff" },
   "material-exchange": { accent: "#325d45", surface: "#eaf4ed" },
   securion: { accent: "#6658ff", surface: "#eae8ff" },
@@ -251,6 +253,7 @@ function IcredoIdentitySection({ section }: { section: PortfolioSection }) {
 }
 
 function PortfolioCardVisual({ project }: { project: PortfolioProject }) {
+  if (project.project.slug === "tinkoff-checkout") return <TinkoffScreenGridCard />;
   if (project.project.slug === "tempo") return <TempoFlowCard />;
   if (project.project.slug === "icredo") return <IcredoLogoScene />;
   if (project.project.slug === "securion") return <SecurionLogoScene />;
@@ -3134,7 +3137,7 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
   if (baseSlug(project.project.slug) === "liga" && section.id === "outcome") {
     return <LigaChangedSection project={project} section={section} />;
   }
-  if (project.project.slug === "8images" && (section.id === "model" || section.id === "widget")) {
+  if (project.project.slug === "8images" && (section.id === "model" || section.id === "widget" || section.id === "editor")) {
     return (
       <section className={`dw-case-section dw-ei-section dw-ei-section-${section.id}`} id={section.id}>
         <div className="dw-ei-inner">
@@ -3143,7 +3146,9 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
             {section.title ? <h2>{section.title}</h2> : null}
             <Html html={section.body} className="dw-ei-lede" />
           </header>
-          {section.id === "model" ? <EightImagesModel /> : <EightImagesWidget />}
+          {section.id === "model" ? <EightImagesModel /> : null}
+          {section.id === "widget" ? <EightImagesWidget /> : null}
+          {section.id === "editor" ? <EightImagesMaterialEditor /> : null}
         </div>
       </section>
     );

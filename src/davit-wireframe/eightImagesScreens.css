@@ -1,0 +1,525 @@
+/* =============================================================================
+   8 Images — coded product screens.
+
+   One rule governs the whole file: every length is the Figma length.
+   `--px` is one Figma pixel expressed as a share of the plate's own width, so
+   `calc(16 * var(--px))` is 16px in the 1440-wide frame and stays proportional
+   at any rendered size. The plate is a size container; nothing inside it is
+   measured against the viewport.
+
+   Colours are the product's tokens, read out of the file:
+     #242424 Black   #505050 Text       #5F5F5F Dark bg   #959595 Inactive
+     #B3B3B3 Grey    #FAFAFA bg 01      #F5F5F5 bg 02     #EDEDED bg 03
+     #F0F0F0 Input   #D8DAE5 Stroke     #0C8CE9 Primary
+   ============================================================================= */
+
+/* An element cannot query ITSELF as a container — `cqw` inside a
+   `container-type: size` box resolves against the next container out, or the
+   viewport. So the plate declares the container and the screen inside it reads
+   from it. Getting this wrong is silent: the layout still renders, just at the
+   wrong scale. */
+.ei-plate {
+  container-type: size;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1440 / 1024;
+}
+
+.ei-screen {
+  --px: calc(100cqw / 1440);
+  --ink: #242424;
+  --text: #505050;
+  --muted: #5f5f5f;
+  --inactive: #959595;
+  --grey: #b3b3b3;
+  --bg01: #fafafa;
+  --bg02: #f5f5f5;
+  --bg03: #ededed;
+  --input: #f0f0f0;
+  --stroke: #d8dae5;
+  --primary: #0c8ce9;
+
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: calc(16 * var(--px));
+  background: var(--bg02);
+  color: var(--ink);
+  font-family: Poppins, "Poppins Fallback", system-ui, sans-serif;
+  font-size: calc(16 * var(--px));
+  line-height: calc(24 * var(--px));
+  letter-spacing: 0;
+  user-select: none;
+}
+
+.ei-screen *,
+.ei-screen *::before,
+.ei-screen *::after { box-sizing: border-box; }
+
+/* The case-study stylesheets style `header`, headings and paragraphs site-wide,
+   and a reconstructed product UI is not prose. Reset the block spacing inside
+   the plate rather than fighting each rule: a 59px margin on the panel header
+   was pushing every tool panel's body down. */
+.ei-screen header,
+.ei-screen h1, .ei-screen h2, .ei-screen h3, .ei-screen h4,
+.ei-screen p, .ei-screen ul, .ei-screen ol, .ei-screen li, .ei-screen figure {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  text-transform: none;
+  letter-spacing: inherit;
+}
+
+/* Figma frame widths INCLUDE their stroke; the CSS box model adds it outside
+   the content box. Drawing 1px edges as an inset shadow keeps the layout width
+   identical to the file, which is why every panel here uses it. */
+.ei-screen .ei-hairline { box-shadow: inset 0 0 0 max(1px, calc(1 * var(--px))) var(--bg03); }
+
+/* `font: inherit` here would be a trap: `.ei-screen button` is 0,1,1 and every
+   component class that sets its own size is 0,1,0, so the shorthand would win
+   and quietly hold the whole UI at one size. Inherit the family, leave the size
+   to the component. */
+.ei-screen button {
+  font-family: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* --- app bar --------------------------------------------------------------- */
+
+.ei-appbar {
+  position: absolute;
+  inset: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: calc(38 * var(--px));
+  height: calc(80 * var(--px));
+  padding: calc(16 * var(--px)) calc(48 * var(--px));
+  border-bottom: max(1px, calc(1 * var(--px))) solid var(--input);
+  background: #fff;
+}
+
+.ei-logo { display: flex; align-items: center; gap: calc(9 * var(--px)); color: var(--ink); }
+.ei-logo svg { width: calc(23 * var(--px)); height: calc(34 * var(--px)); }
+.ei-logo b {
+  font-size: calc(15 * var(--px));
+  font-weight: 600;
+  line-height: calc(16 * var(--px));
+  letter-spacing: calc(-0.2 * var(--px));
+}
+
+.ei-appnav { display: flex; gap: calc(18 * var(--px)); }
+.ei-appnav span {
+  display: grid;
+  place-items: center;
+  padding: calc(12 * var(--px)) calc(16 * var(--px));
+  border-radius: calc(32 * var(--px));
+  font-weight: 500;
+  white-space: nowrap;
+}
+.ei-appnav span:first-child,
+.ei-appnav span:nth-child(2) { width: calc(118 * var(--px)); }
+
+.ei-avatar {
+  width: calc(48 * var(--px));
+  height: calc(48 * var(--px));
+  margin-left: auto;
+  border-radius: 50%;
+  background: var(--bg03) radial-gradient(circle at 50% 38%, #cfcfcf 0 26%, transparent 27%),
+    radial-gradient(ellipse at 50% 108%, #cfcfcf 0 42%, transparent 43%);
+}
+
+/* --- floating action bar --------------------------------------------------- */
+
+.ei-actionbar {
+  position: absolute;
+  top: calc(96 * var(--px));
+  left: calc(24 * var(--px));
+  display: flex;
+  align-items: center;
+  width: calc(1392 * var(--px));
+  height: calc(88 * var(--px));
+  padding: calc(16 * var(--px));
+  box-shadow: inset 0 0 0 max(1px, calc(1 * var(--px))) var(--bg03);
+  border-radius: calc(16 * var(--px));
+  background: var(--bg01);
+}
+
+.ei-selects { display: flex; gap: calc(24 * var(--px)); }
+.ei-select {
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--px));
+  width: calc(300 * var(--px));
+  padding: calc(16 * var(--px)) calc(14 * var(--px));
+  box-shadow: inset 0 0 0 max(1px, calc(1 * var(--px))) var(--stroke);
+  border-radius: calc(10 * var(--px));
+  color: var(--inactive);
+}
+.ei-select svg { width: calc(24 * var(--px)); height: calc(24 * var(--px)); margin-left: auto; color: var(--ink); }
+
+.ei-actions { display: flex; align-items: center; gap: calc(16 * var(--px)); margin-left: auto; }
+
+.ei-iconbtn {
+  display: grid;
+  place-items: center;
+  padding: calc(8 * var(--px));
+  border-radius: calc(8 * var(--px));
+  background: var(--input);
+  color: var(--text);
+  transition: background 160ms ease;
+}
+.ei-iconbtn:hover { background: var(--bg03); }
+.ei-iconbtn svg { width: calc(24 * var(--px)); height: calc(24 * var(--px)); }
+
+.ei-zoom {
+  display: flex;
+  align-items: center;
+  gap: calc(16 * var(--px));
+  padding: calc(8 * var(--px)) calc(16 * var(--px));
+  border-radius: calc(8 * var(--px));
+  background: var(--input);
+}
+.ei-zoom svg { width: calc(24 * var(--px)); height: calc(24 * var(--px)); color: var(--ink); }
+.ei-zoom b { min-width: calc(46 * var(--px)); font-weight: 500; text-align: center; }
+.ei-zoom .ei-slider { width: calc(126 * var(--px)); }
+
+.ei-btn {
+  display: grid;
+  place-items: center;
+  height: calc(40 * var(--px));
+  padding: 0 calc(20 * var(--px));
+  border: max(1px, calc(1 * var(--px))) solid var(--stroke);
+  border-radius: calc(12 * var(--px));
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 160ms ease;
+}
+.ei-btn:hover { background: var(--input); }
+/* The product's one accent. It marks the primary action and nothing else. */
+.ei-btn.is-primary { border-color: var(--primary); background: var(--primary); color: #fff; }
+.ei-btn.is-primary:hover { background: #0a7ccd; }
+
+/* --- the layer stack ------------------------------------------------------- */
+
+.ei-layers {
+  position: absolute;
+  top: calc(200 * var(--px));
+  left: calc(24 * var(--px));
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: calc(16 * var(--px));
+  width: calc(193 * var(--px));
+  padding: calc(12 * var(--px));
+  box-shadow: inset 0 0 0 max(1px, calc(1 * var(--px))) var(--bg03);
+  border-radius: calc(12 * var(--px));
+  background: var(--bg01);
+}
+
+.ei-screen .ei-layer {
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--px));
+  padding: calc(12 * var(--px));
+  border-radius: calc(8 * var(--px));
+  color: var(--muted);
+  font-size: calc(14 * var(--px));
+  line-height: calc(22 * var(--px));
+  text-align: left;
+  transition: background 180ms ease, color 180ms ease;
+}
+.ei-layer:hover { background: var(--bg03); }
+.ei-layer.is-on { background: var(--input); color: var(--ink); }
+.ei-layer.is-focused { box-shadow: inset 0 0 0 max(1px, calc(1 * var(--px))) var(--stroke); }
+
+.ei-layer-check {
+  position: relative;
+  width: calc(16 * var(--px));
+  height: calc(16 * var(--px));
+  border-radius: 50%;
+  background: transparent;
+  transition: background 180ms ease, transform 220ms cubic-bezier(.2,.8,.2,1),
+    width 220ms cubic-bezier(.2,.8,.2,1), margin-right 220ms cubic-bezier(.2,.8,.2,1);
+  transform: scale(.6);
+}
+.ei-layer.is-on .ei-layer-check { background: var(--primary); transform: none; }
+/* Figma draws the tick only on an active row, and gives the label the freed
+   24px — which is why "Transparency" fits there and was clipping here. The
+   width animates, so the row reads as opening rather than jumping. */
+.ei-layer:not(.is-on) .ei-layer-check {
+  width: 0;
+  margin-right: calc(-8 * var(--px));
+}
+.ei-layer.is-on .ei-layer-check::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: no-repeat center/calc(9 * var(--px))
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* `flex: 1 0 0` collapsed this to zero: with a zero basis and no shrink, the
+   label only gets width from POSITIVE free space, and the row had none to give.
+   Auto basis plus a nowrap label matches Figma, where these never wrap. */
+.ei-layer-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ei-layer-icon { width: calc(24 * var(--px)); height: calc(24 * var(--px)); flex: none; }
+
+/* --- canvas ---------------------------------------------------------------- */
+
+.ei-canvas {
+  position: absolute;
+  top: calc(200 * var(--px));
+  left: calc(24 * var(--px));
+  display: grid;
+  place-items: center;
+  width: calc(1392 * var(--px));
+  height: calc(800 * var(--px));
+  border-radius: calc(16 * var(--px));
+}
+
+/* The material sample. It is drawn, not photographed, so that switching a map
+   visibly changes it — a screenshot could not do that, and the whole argument
+   of this screen is that the stack drives the render. */
+.ei-material {
+  --ei-rough: 0;
+  --ei-emit: 0;
+  --ei-metal: 0;
+  --ei-alpha: 1;
+  --ei-hue: 0deg;
+  position: relative;
+  width: calc(447 * var(--px));
+  height: calc(381 * var(--px));
+  border-radius: 50%;
+  opacity: var(--ei-alpha);
+  filter: hue-rotate(var(--ei-hue));
+  background:
+    radial-gradient(
+      ellipse calc(160 * var(--px)) calc(120 * var(--px)) at 38% 26%,
+      rgba(255, 255, 255, calc(0.95 - var(--ei-rough) * 0.75)) 0%,
+      rgba(255, 255, 255, 0) 60%
+    ),
+    radial-gradient(
+      circle at 62% 76%,
+      rgba(255, 255, 255, calc(0.18 + var(--ei-emit) * 0.5)) 0%,
+      rgba(255, 255, 255, 0) 45%
+    ),
+    radial-gradient(circle at 44% 34%, #dcdcdc 0%, #c2c2c2 42%, #9a9a9a 74%, #767676 100%);
+  box-shadow: 0 calc(24 * var(--px)) calc(48 * var(--px)) rgba(0, 0, 0, 0.08);
+  transition: opacity 320ms ease, filter 320ms ease;
+}
+/* Metalness sharpens the falloff rather than recolouring it — contrast is what
+   reads as metal on a grey sphere. */
+.ei-material {
+  filter: hue-rotate(var(--ei-hue)) contrast(calc(1 + var(--ei-metal) * 0.45));
+}
+/* The seam that runs down the Figma render. */
+.ei-material::after {
+  content: "";
+  position: absolute;
+  top: 4%;
+  left: 49%;
+  width: calc(6 * var(--px));
+  height: 92%;
+  border-radius: calc(6 * var(--px));
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.04));
+  filter: blur(calc(1.5 * var(--px)));
+}
+
+/* --- tool panels ----------------------------------------------------------- */
+
+.ei-tools {
+  position: absolute;
+  top: calc(200 * var(--px));
+  left: calc(1115 * var(--px));
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 * var(--px));
+  width: calc(300 * var(--px));
+}
+
+.ei-tool {
+  overflow: hidden;
+  box-shadow: inset 0 0 0 max(1px, calc(1 * var(--px))) var(--bg03);
+  border-radius: calc(12 * var(--px));
+  background: var(--bg01);
+  animation: ei-tool-in 320ms cubic-bezier(.2, .8, .2, 1) both;
+}
+@keyframes ei-tool-in {
+  from { opacity: 0; transform: translateY(calc(-8 * var(--px))); }
+  to { opacity: 1; transform: none; }
+}
+.ei-tool.is-focused { border-color: var(--stroke); }
+
+.ei-tool > header {
+  display: flex;
+  align-items: center;
+  gap: calc(10 * var(--px));
+  padding: calc(16 * var(--px)) calc(20 * var(--px));
+  border-bottom: max(1px, calc(1 * var(--px))) solid var(--input);
+}
+.ei-tool h4 { flex: 1 0 0; margin: 0; font-size: calc(16 * var(--px)); font-weight: 500; }
+
+.ei-tool-body {
+  display: flex;
+  flex-direction: column;
+  gap: calc(16 * var(--px));
+  padding: calc(16 * var(--px));
+}
+
+.ei-texture {
+  flex: none;
+  height: calc(104 * var(--px));
+  box-shadow: inset 0 0 0 max(1px, calc(1 * var(--px))) var(--stroke);
+  border-radius: calc(12 * var(--px));
+  background:
+    repeating-linear-gradient(104deg, rgba(0,0,0,.05) 0 calc(3 * var(--px)), rgba(255,255,255,.5) calc(3 * var(--px)) calc(7 * var(--px))),
+    repeating-linear-gradient(14deg, rgba(0,0,0,.04) 0 calc(5 * var(--px)), rgba(255,255,255,.4) calc(5 * var(--px)) calc(11 * var(--px))),
+    var(--bg02);
+}
+
+.ei-row { display: flex; align-items: center; gap: calc(12 * var(--px)); }
+.ei-axis {
+  width: calc(14 * var(--px));
+  font-weight: 500;
+  letter-spacing: calc(0.16 * var(--px));
+}
+.ei-value {
+  width: calc(70 * var(--px));
+  padding: calc(4 * var(--px)) calc(12 * var(--px));
+  border-radius: calc(8 * var(--px));
+  background: var(--input);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: calc(0.16 * var(--px));
+  text-align: right;
+}
+
+.ei-tabs {
+  display: flex;
+  gap: calc(8 * var(--px));
+  padding: calc(2 * var(--px));
+  box-shadow: inset 0 0 0 max(1px, calc(1 * var(--px))) var(--bg03);
+  border-radius: calc(12 * var(--px));
+  background: #fff;
+}
+.ei-tabs button {
+  flex: 1 0 0;
+  padding: calc(8 * var(--px)) calc(16 * var(--px));
+  border-radius: calc(10 * var(--px));
+  font-size: calc(14 * var(--px));
+  font-weight: 500;
+  line-height: calc(22 * var(--px));
+  white-space: nowrap;
+}
+.ei-tabs button.is-selected { background: var(--bg03); }
+
+.ei-check {
+  display: flex;
+  align-items: center;
+  gap: calc(11 * var(--px));
+  font-size: calc(12 * var(--px));
+  line-height: calc(16 * var(--px));
+  cursor: pointer;
+}
+.ei-check input { position: absolute; opacity: 0; pointer-events: none; }
+.ei-check span {
+  display: grid;
+  place-items: center;
+  width: calc(22 * var(--px));
+  height: calc(22 * var(--px));
+  border: max(1px, calc(1 * var(--px))) solid #323232;
+  border-radius: calc(4 * var(--px));
+  background: transparent;
+  transition: background 160ms ease;
+}
+.ei-check input:checked + span { background: #323232; }
+.ei-check input:checked + span::after {
+  content: "";
+  width: calc(12 * var(--px));
+  height: calc(12 * var(--px));
+  background: no-repeat center/100%
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.2l2.6 2.6L10 3.4' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.ei-check input:focus-visible + span { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+/* --- controls -------------------------------------------------------------- */
+
+.ei-slider {
+  flex: 1 0 0;
+  min-width: 0;
+  height: calc(24 * var(--px));
+  margin: 0;
+  background: none;
+  appearance: none;
+  cursor: pointer;
+}
+.ei-slider::-webkit-slider-runnable-track {
+  height: calc(4 * var(--px));
+  border-radius: calc(12 * var(--px));
+  background: linear-gradient(90deg, var(--ink) 0 var(--fill), #b3b3b3 var(--fill) 100%);
+}
+.ei-slider::-moz-range-track {
+  height: calc(4 * var(--px));
+  border-radius: calc(12 * var(--px));
+  background: linear-gradient(90deg, var(--ink) 0 var(--fill), #b3b3b3 var(--fill) 100%);
+}
+.ei-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: calc(20 * var(--px));
+  height: calc(20 * var(--px));
+  margin-top: calc(-8 * var(--px));
+  border: max(1px, calc(1 * var(--px))) solid #e2e2e2;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 calc(2 * var(--px)) calc(4 * var(--px)) rgba(0, 0, 0, 0.16);
+}
+.ei-slider::-moz-range-thumb {
+  width: calc(20 * var(--px));
+  height: calc(20 * var(--px));
+  border: max(1px, calc(1 * var(--px))) solid #e2e2e2;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 calc(2 * var(--px)) calc(4 * var(--px)) rgba(0, 0, 0, 0.16);
+}
+.ei-slider:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
+
+.ei-toggle {
+  position: relative;
+  width: calc(35 * var(--px));
+  height: calc(19 * var(--px));
+  flex: none;
+  border-radius: calc(19 * var(--px));
+  background: var(--grey);
+  transition: background 200ms ease;
+}
+.ei-toggle.is-on { background: var(--ink); }
+.ei-toggle-knob {
+  position: absolute;
+  top: calc(2 * var(--px));
+  left: calc(2 * var(--px));
+  width: calc(15 * var(--px));
+  height: calc(15 * var(--px));
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 200ms cubic-bezier(.2, .8, .2, 1);
+}
+.ei-toggle.is-on .ei-toggle-knob { transform: translateX(calc(16 * var(--px))); }
+.ei-toggle:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ei-screen *, .ei-screen *::before, .ei-screen *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}

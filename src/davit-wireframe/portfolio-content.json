@@ -4486,6 +4486,13 @@
           ]
         },
         {
+          "id": "editor",
+          "type": "prose",
+          "eyebrow": "The material editor",
+          "title": "Maps are a stack, not a form.",
+          "body": "<p>Switch a map on and the render answers. This is the screen I argued for and won.</p>"
+        },
+        {
           "id": "model",
           "type": "prose",
           "layout": "wide",

@@ -93,14 +93,18 @@ export function IcredoLogoScene({ variant = "card" }: { variant?: "card" | "sect
         tl.set(".ic-id-grid line", { autoAlpha: 0, scaleX: 0, scaleY: 0, transformOrigin: "50% 50%" })
           .set(rings, { autoAlpha: 0, strokeDashoffset: (i, t) => off(t as SVGGeometryElement) })
           .set(spokes, { autoAlpha: 0, strokeDashoffset: (i, t) => off(t as SVGGeometryElement) })
-          .set(".ic-id-box", { autoAlpha: 0, scale: 0.86, svgOrigin: "200 236" });
+          .set(".ic-id-box", { autoAlpha: 0, scale: 0.86, svgOrigin: "200 236" })
+          /* The caption is rendered only in the guided variant, so seeding it
+             belongs inside this guard with the rest of the guide furniture.
+             Outside it, the card variant asked GSAP for a selector that is not
+             in the DOM and got a warning on every mount. */
+          .set(".ic-id-caption", { autoAlpha: 0, y: 12 });
       }
       tl.set(".ic-id-tile-face", { autoAlpha: 0, scale: 0.94, svgOrigin: "200 236" })
         .set(".ic-id-tile-edge", { autoAlpha: 0 })
         .set(".ic-id-blade", { autoAlpha: 0, rotation: -32, scale: 0.78, svgOrigin: "200 236" })
         .set(".ic-id-sweep", { autoAlpha: 0, x: -140 })
-        .set(".ic-id-label", { autoAlpha: 0, y: 7 })
-        .set(".ic-id-caption", { autoAlpha: 0, y: 12 });
+        .set(".ic-id-label", { autoAlpha: 0, y: 7 });
       if (tile) tl.set(tile, { autoAlpha: 0, strokeDashoffset: off(tile) });
 
       /* ---- the slot is ruled ---- */

@@ -2966,7 +2966,30 @@ function IcredoSceneSection({ project, section }: { project: PortfolioProject; s
   );
 }
 
+/* Which section each stage of the fire truck belongs to. The object is a lone
+   wheel in the hero and whole by the time the live widget appears, so a reader
+   who has scrolled the argument has also watched the product assemble. */
+const EI_STAGES: Record<string, number> = {
+  outcome: 1,
+  problem: 2,
+  decisions: 3,
+  model: 5,
+  walkthrough: 5,
+  "the-fail": 6
+};
+
 function ProjectSection({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
+  const stage = project.project.slug === "8images" ? EI_STAGES[section.id] : undefined;
+  if (stage === undefined) return <ProjectSectionBody project={project} section={section} />;
+  return (
+    <div className="dw-ei-staged">
+      <ProjectSectionBody project={project} section={section} />
+      <OrbDock id={section.id} stage={stage} className="dw-ei-staged-dock" />
+    </div>
+  );
+}
+
+function ProjectSectionBody({ project, section }: { project: PortfolioProject; section: PortfolioSection }) {
   if (project.project.slug === "nesba" && section.id === "home-state") {
     return <NesbaProductSection project={project} section={section} screen="home" />;
   }
@@ -3148,7 +3171,7 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
             <Html html={section.body} className="dw-ei-lede" />
           </header>
           <div className="dw-ei-hero-stage">
-            <OrbDock id="hero" className="dw-ei-hero-dock" />
+            <OrbDock id="hero" stage={0} className="dw-ei-hero-dock" />
           </div>
           <p className="dw-ei-hero-hint">Drag it.</p>
         </div>
@@ -3166,7 +3189,12 @@ function ProjectSection({ project, section }: { project: PortfolioProject; secti
             <Html html={section.body} className="dw-ei-lede" />
           </header>
           {section.id === "model" ? <EightImagesModel /> : null}
-          {section.id === "widget" ? <EightImagesWidget /> : null}
+          {section.id === "widget" ? (
+            <>
+              <OrbDock id="widget" stage={6} className="dw-ei-widget-dock" />
+              <EightImagesWidget />
+            </>
+          ) : null}
           {section.id === "editor" ? <EightImagesMaterialEditor /> : null}
         </div>
       </section>

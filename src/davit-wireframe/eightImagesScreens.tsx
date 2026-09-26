@@ -297,7 +297,7 @@ export function EightImagesMaterialEditor() {
 
         {/* The travelling sphere docks here and becomes this screen's subject. */}
         <div className="ei-canvas">
-          <OrbDock id="editor" className="ei-canvas-dock" />
+          <OrbDock id="editor" stage={4} className="ei-canvas-dock" />
         </div>
 
         <div className="ei-tools">

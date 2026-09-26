@@ -36,19 +36,34 @@
 
 .dw-ei-hero .dw-ei-inner {
   display: grid;
-  gap: clamp(32px, 4vw, 64px);
-  padding-block: clamp(72px, 10vw, 160px) clamp(48px, 6vw, 96px);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+  padding-block: clamp(56px, 8vw, 120px) clamp(40px, 5vw, 80px);
+}
+
+@media (min-width: 901px) {
+  /* Type and object share one screen. Stacking them put the wheel below the
+     fold, so the page opened on a headline and nothing else. */
+  .dw-ei-hero .dw-ei-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+    grid-template-areas: "copy stage" "hint stage";
+    align-content: center;
+    min-height: min(84vh, 900px);
+  }
+  .dw-ei-hero .dw-ei-inner > header { grid-area: copy; }
+  .dw-ei-hero-stage { grid-area: stage; }
+  .dw-ei-hero-hint { grid-area: hint; text-align: left; }
 }
 
 .dw-ei-hero-stage {
   display: grid;
   place-items: center;
-  min-height: min(62vh, 640px);
+  min-height: min(52vh, 560px);
 }
 
 .dw-ei-hero-dock {
-  width: min(52vw, 560px);
-  height: min(52vw, 560px);
+  width: min(42vw, 520px);
+  height: min(42vw, 520px);
 }
 
 .dw-ei-hero-hint {
@@ -58,4 +73,50 @@
   letter-spacing: 0.1em;
   text-align: center;
   text-transform: uppercase;
+}
+
+/* --- docks in the body of the case -----------------------------------------
+   Prose sections hand the object a place in their right margin, so it stays
+   alongside the argument instead of interrupting it. Below the two-column
+   breakpoint it takes the full width and sits above the text.
+   -------------------------------------------------------------------------- */
+
+/* The object needs a column of its own, or it lands on top of the argument —
+   the four-up decisions grid runs the full width and the truck sat across its
+   last card. Staged sections give up a gutter on wide screens and take the
+   object inline below the two-column breakpoint. */
+.dw-ei-staged { position: relative; }
+
+@media (min-width: 901px) {
+  .dw-ei-staged > section,
+  .dw-ei-staged > article {
+    padding-inline-end: clamp(280px, 30vw, 460px);
+  }
+}
+
+.dw-ei-staged-dock {
+  position: absolute;
+  top: 50%;
+  right: max(2vw, calc((100vw - 1800px) / 2 + 2vw));
+  width: min(26vw, 400px);
+  height: min(26vw, 400px);
+  transform: translateY(-50%);
+}
+
+.dw-ei-widget-dock {
+  width: min(34vw, 420px);
+  height: min(34vw, 420px);
+  margin: 0 auto clamp(24px, 4vw, 56px);
+}
+
+@media (max-width: 900px) {
+  .dw-ei-staged-dock {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: min(62vw, 320px);
+    height: min(62vw, 320px);
+    margin: 0 auto clamp(20px, 6vw, 40px);
+    transform: none;
+  }
 }

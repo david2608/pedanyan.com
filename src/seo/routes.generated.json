@@ -82,7 +82,7 @@
     {
       "path": "/am/portfolio",
       "title": "Work — Case Studies by Davit Pedanyan",
-      "description": "Ten product design case studies: the decisions behind each one, what changed, and the trade-offs. Fintech, insurance, cloud and marketplace products.",
+      "description": "Twelve product design case studies: the decisions behind each one, what changed, and the trade-offs. Fintech, insurance, cloud and marketplace products.",
       "type": "CollectionPage",
       "priority": "0.9",
       "changefreq": "monthly"
@@ -220,6 +220,26 @@
       "changefreq": "yearly"
     },
     {
+      "path": "/am/projects/8images",
+      "title": "8 Images — Case Study by Davit Pedanyan",
+      "description": "A 3D product configurator built to work inside someone else's page, at a size you do not control, on a model you did not choose.",
+      "type": "CreativeWork",
+      "name": "8 Images",
+      "headline": "A configurator that works inside someone else’s page.",
+      "priority": "0.8",
+      "changefreq": "yearly"
+    },
+    {
+      "path": "/am/projects/freedx",
+      "title": "FreedX V2 — Case Study by Davit Pedanyan",
+      "description": "Leading design for a connected crypto exchange experience.",
+      "type": "CreativeWork",
+      "name": "FreedX V2",
+      "headline": null,
+      "priority": "0.8",
+      "changefreq": "yearly"
+    },
+    {
       "path": "/am/public-work/ux-storm-1-4",
       "title": "UX Storm 1.4 — the new era of product designers. — Davit Pedanyan",
       "description": "UX Storm 1.4 — the new era of product designers. Public work by Davit Pedanyan, product designer and educator in Armenia.",
@@ -322,7 +342,6 @@
   "noindex": [
     "/am/projects/tempo-v2",
     "/am/projects/tempo-v3",
-    "/am/projects/liga-steep",
-    "/am/projects/8images"
+    "/am/projects/liga-steep"
   ]
 }

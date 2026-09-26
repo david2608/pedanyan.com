@@ -10,7 +10,6 @@ Allow: /
 Disallow: /am/projects/tempo-v2
 Disallow: /am/projects/tempo-v3
 Disallow: /am/projects/liga-steep
-Disallow: /am/projects/8images
 
 # Search crawlers (explicit, for clarity — all are already covered by *)
 User-agent: Googlebot

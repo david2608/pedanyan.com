@@ -51,9 +51,13 @@ export function ScrambleText({
       {/* The truth: holds the box, stays in the accessibility tree, stays
           selectable — it is only transparent, never hidden. */}
       <span className="dw-scramble-true">{children}</span>
-      <span className="dw-scramble-play" aria-hidden="true" data-scramble={kind} data-scramble-order={order}>
-        {children}
-      </span>
+      {/* Deliberately EMPTY in the markup. The text is copied in by the effect
+          just before the first scramble. Rendering it here would put every
+          label in the DOM twice — which a screen reader survives, because this
+          copy is aria-hidden, but a text selection does not, and neither does
+          the prerendered HTML: every card name, category and year would appear
+          duplicated in the static page a crawler reads. */}
+      <span className="dw-scramble-play" aria-hidden="true" data-scramble={kind} data-scramble-order={order} />
     </span>
   );
 }
@@ -141,16 +145,45 @@ export function useScrambleReveal(
        doing nothing. */
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    /* NOT FOR THE PRERENDERER. scripts/prerender.mjs drives a real Chromium
+       and snapshots the DOM 400ms after networkidle — which lands in the
+       middle of these tweens, so the static HTML a crawler reads could carry
+       "PWQZHJ" where "iCredo" belongs. Skipping the effect under automation
+       makes the snapshot deterministic and identical to what a reader ends up
+       seeing; only the decoration is dropped, never a word of the text. */
+    if (navigator.webdriver) return;
+
     /* No hover replay where there is no hover: on a touch screen the event
        fires once on tap, scrambling the label of the card being opened. */
     const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const teardown: Array<() => void> = [];
 
+    /* Hand the overlay its text and switch the pair over. Until this runs — no
+       JS, reduced motion, a crawler — the real copy is simply the visible
+       label and the overlay is not rendered at all. */
+    const activate = (label: HTMLElement) => {
+      const wrap = label.closest<HTMLElement>(".dw-scramble");
+      const truth = wrap?.querySelector<HTMLElement>(".dw-scramble-true");
+      if (!wrap || !truth) return false;
+      label.textContent = truth.textContent;
+      wrap.classList.add("is-live");
+      return true;
+    };
+
+    /* And hand it back the moment the scramble is done. The overlay has no job
+       between runs, and leaving it populated would keep every label in the DOM
+       twice for the rest of the visit. */
+    const settle = (label: HTMLElement) => {
+      label.closest(".dw-scramble")?.classList.remove("is-live");
+      label.textContent = "";
+    };
+
     const context = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(cardSelector).forEach((card) => {
         const labels = gsap.utils
           .toArray<HTMLElement>("[data-scramble]", card)
-          .sort((a, b) => Number(a.dataset.scrambleOrder ?? 0) - Number(b.dataset.scrambleOrder ?? 0));
+          .sort((a, b) => Number(a.dataset.scrambleOrder ?? 0) - Number(b.dataset.scrambleOrder ?? 0))
+          .filter(activate);
         const title = card.querySelector<HTMLElement>("[data-scramble-title]");
         if (!labels.length && !title) return;
 
@@ -165,7 +198,7 @@ export function useScrambleReveal(
         });
 
         labels.forEach((label, i) => {
-          timeline.to(label, scrambleLabel(label), i * 0.09);
+          timeline.to(label, { ...scrambleLabel(label), onComplete: () => settle(label) }, i * 0.09);
         });
         /* The headline starts once the first label is already resolving, so
            the two read as one arrival rather than two events. */
@@ -174,7 +207,8 @@ export function useScrambleReveal(
         if (!canHover || !labels.length) return;
         const replay = () => {
           labels.forEach((label, i) => {
-            gsap.to(label, { ...scrambleLabel(label), delay: i * 0.06 });
+            if (!activate(label)) return;
+            gsap.to(label, { ...scrambleLabel(label), delay: i * 0.06, onComplete: () => settle(label) });
           });
         };
         card.addEventListener("pointerenter", replay);

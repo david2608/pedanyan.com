@@ -404,11 +404,15 @@ const ASSEMBLY_ORDER = [
 export function EightImagesParts() {
   const { parts, togglePart, setParts } = useOrb();
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const [progress, setProgress] = useState(0);
+  const barRef = useRef<HTMLElement | null>(null);
+  /* Only the two coarse facts live in state. The per-pixel progress is written
+     straight to the bar's transform below — routing a scrubbed value through
+     React would re-render this list on every scroll event, and the scheduler
+     batches, defers, and in a throttled tab stops flushing altogether. */
+  const [done, setDone] = useState(false);
   const appliedRef = useRef(-1);
 
   const count = ORB_PART_NAMES.filter((n) => parts[n]).length;
-  const done = progress >= 0.999;
 
   /* SCROLL IS THE CONTROL. The section pins itself and the reader's scroll
      checks the boxes one at a time; the page does not move on until the model
@@ -420,7 +424,8 @@ export function EightImagesParts() {
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
-      setProgress(1);
+      if (barRef.current) barRef.current.style.transform = "scaleX(1)";
+      setDone(true);
       setParts(Object.fromEntries(ORB_PART_NAMES.map((n) => [n, true])));
       return;
     }
@@ -429,7 +434,8 @@ export function EightImagesParts() {
       const rect = track.getBoundingClientRect();
       const travel = Math.max(1, rect.height - window.innerHeight);
       const p = clamp01(-rect.top / travel);
-      setProgress((prev) => (Math.abs(prev - p) < 0.002 ? prev : p));
+      if (barRef.current) barRef.current.style.transform = `scaleX(${p})`;
+      setDone((prev) => (prev === p >= 0.999 ? prev : p >= 0.999));
 
       /* One step per band, and the last band is spent whole so the reader sees
          the finished truck before the pin releases. */
@@ -465,7 +471,7 @@ export function EightImagesParts() {
             <span>{count} of {ORB_PART_NAMES.length}</span>
           </header>
           <div className="ei-parts-progress" aria-hidden="true">
-            <i style={{ transform: `scaleX(${progress})` }} />
+            <i ref={barRef} style={{ transform: "scaleX(0)" }} />
           </div>
           <ul>
             {ORB_PART_NAMES.map((name) => (

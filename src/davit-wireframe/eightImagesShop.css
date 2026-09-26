@@ -1,0 +1,317 @@
+/* =============================================================================
+   The viewer moving into a merchant's product page.
+
+   One rule governs the motion: the page around the viewer changes shape, the
+   viewer does not change identity. Every value below is driven by --p and the
+   three overlapping acts derived from it (--chrome, --shrink, --shop), which
+   the component writes once per scroll event. No keyframes, so the whole thing
+   is scrubbable in both directions.
+   ============================================================================= */
+
+.ei-shop-track {
+  /* Four screens: draw the browser, give up the room, fill it, and one to look
+     at the result before the pin lets go. */
+  height: 400vh;
+}
+
+.ei-shop-pin {
+  --p: 0;
+  --chrome: 0;
+  --shrink: 0;
+  --shop: 0;
+  --top: 116px;
+
+  --ink: #242424;
+  --muted: #5f5f5f;
+  --line: #ededed;
+  --page: #ffffff;
+
+  position: sticky;
+  top: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  height: 100vh;
+  /* --top is measured from the fixed site header on mount and resize; the
+     fallback keeps the frame clear of it before the first measurement. */
+  padding: var(--top, 116px) clamp(16px, 4vw, 64px) clamp(20px, 3vw, 40px);
+}
+
+/* --- the browser -------------------------------------------------------- */
+
+.ei-shop-browser {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: calc(760px + (1180 - 760) * var(--chrome) * 1px);
+  height: 100%;
+  margin: 0 auto;
+  border-radius: calc(16px + 8px * var(--chrome));
+  background: var(--page);
+  /* The window lifts off the page as it draws itself. */
+  box-shadow:
+    0 calc(2px + 26px * var(--chrome)) calc(8px + 60px * var(--chrome))
+      rgba(20, 20, 20, calc(0.04 + 0.10 * var(--chrome))),
+    inset 0 0 0 1px rgba(36, 36, 36, calc(0.04 + 0.04 * var(--chrome)));
+  transition: none;
+}
+
+.ei-shop-chrome {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: calc(44px * var(--chrome));
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(237, 237, 237, var(--chrome));
+  background: #fafafa;
+  opacity: var(--chrome);
+  overflow: hidden;
+}
+
+.ei-shop-dots { display: flex; gap: 6px; flex: none; }
+.ei-shop-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e0e0e0;
+}
+.ei-shop-dots i:first-child { background: #ffbdb5; }
+.ei-shop-dots i:nth-child(2) { background: #ffe0a8; }
+.ei-shop-dots i:last-child { background: #c6e6c1; }
+
+.ei-shop-url {
+  flex: 1 0 0;
+  min-width: 0;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #f0f0f0;
+  color: #8a8a8a;
+  font-size: 12px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- the merchant's page -------------------------------------------------- */
+
+.ei-shop-page {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  height: calc(100% - 44px * var(--chrome));
+  padding: calc(18px * var(--shop)) clamp(14px, 2.4vw, 30px) clamp(12px, 2vw, 24px);
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--ink);
+}
+
+.ei-shop-nav,
+.ei-shop-crumb,
+.ei-shop-thumbs,
+.ei-shop-info {
+  opacity: var(--shop);
+  /* The furniture arrives from just outside the frame, not from nowhere. */
+  transform: translateY(calc(10px * (1 - var(--shop))));
+}
+
+.ei-shop-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: calc(34px * var(--shop));
+  overflow: hidden;
+  font-size: 12px;
+}
+.ei-shop-nav b { font-size: 13px; letter-spacing: 0.16em; }
+.ei-shop-nav nav { display: flex; gap: 18px; flex: 1 0 0; color: var(--muted); }
+.ei-shop-bag { color: var(--muted); }
+
+.ei-shop-crumb {
+  height: calc(26px * var(--shop));
+  margin: 0;
+  overflow: hidden;
+  color: #909090;
+  font-size: 11px;
+  line-height: 26px;
+}
+
+.ei-shop-grid {
+  display: grid;
+  gap: calc(10px + 14px * var(--shop));
+  min-height: 0;
+  /* The thumbnail rail and the info panel take their width from --shop, so the
+     viewer is squeezed by the page filling in rather than by a separate
+     animation of its own. */
+  grid-template-columns:
+    calc(62px * var(--shop))
+    minmax(0, 1fr)
+    calc(340px * var(--shop));
+  align-items: stretch;
+}
+
+.ei-shop-thumbs {
+  display: grid;
+  grid-auto-rows: minmax(0, 1fr);
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 100%;
+  overflow: hidden;
+}
+.ei-shop-thumbs li {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+/* A colourway chip, not a stand-in for a photograph. */
+.ei-shop-thumbs li[style*="--chip"]::after {
+  content: "";
+  position: absolute;
+  inset: 22%;
+  border-radius: 4px;
+  background: var(--chip);
+}
+.ei-shop-thumbs li.is-live { border-color: #0c8ce9; background: #fff; }
+.ei-shop-thumbs li span {
+  position: absolute;
+  inset: auto 4px 4px auto;
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: #0c8ce9;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* --- the viewer's own slot ------------------------------------------------ */
+
+.ei-shop-stage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  /* The viewer only ever gets smaller. The browser frame widens around it while
+     --shrink pulls this cap down, so the stage never bulges past the size it
+     started at on its way to becoming a gallery image. It is centred so the
+     slack the cap leaves reads as gallery padding rather than a stranded gap. */
+  width: 100%;
+  max-width: calc(680px - 130px * var(--shrink));
+  justify-self: center;
+  border: 1px solid rgba(237, 237, 237, var(--shop));
+  border-radius: calc(8px + 8px * (1 - var(--shrink)));
+  overflow: hidden;
+}
+
+/* The viewer fills whatever it is given. That is the whole claim, so the frame
+   here is told to fill its slot rather than carry a size of its own. */
+.ei-shop-stage .dw-ei-widget,
+.ei-shop-stage .dw-ei-widget-frame {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+/* The travelling object hands over inside this slot, as before. */
+.ei-shop-dock {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: min(26vw, 340px);
+  height: min(26vw, 340px);
+  transform: translate(-50%, -50%);
+}
+
+/* --- the product panel ---------------------------------------------------- */
+
+.ei-shop-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  overflow: hidden;
+}
+.ei-shop-brand { margin: 0; color: #909090; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+.ei-shop-info h4 { margin: 0; font-size: 22px; font-weight: 600; line-height: 1.2; }
+.ei-shop-price { margin: 0; font-size: 18px; font-weight: 600; }
+.ei-shop-blurb { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+
+.ei-shop-variants { display: grid; gap: 6px; }
+.ei-shop-variants > span { color: #909090; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+.ei-shop-variants ul { display: flex; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ei-shop-variants li {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+.ei-shop-variants li.is-on { box-shadow: 0 0 0 2px #242424, 0 0 0 4px #fff inset; }
+
+.ei-shop-info button {
+  margin-top: 2px;
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #242424;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: default;
+}
+.ei-shop-note { margin: 0; color: #9a9a9a; font-size: 11px; }
+
+/* --- caption -------------------------------------------------------------- */
+
+.ei-shop-caption {
+  margin: clamp(10px, 1.6vw, 20px) 0 0;
+  color: #959595;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* --- narrow --------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .ei-shop-track { height: 320vh; }
+  .ei-shop-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+  .ei-shop-thumbs { display: none; }
+  .ei-shop-info { max-height: calc(210px * var(--shop)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ei-shop-track { height: auto; }
+  .ei-shop-pin { position: static; height: auto; min-height: 80vh; }
+}
+
+/* --- the viewer's portfolio chrome, inside the shop -------------------------
+   The resize handle and the pixel readout belong to the section that asks the
+   reader to test the claim by hand. Inside the merchant's page they would be
+   the portfolio talking over the demonstration — and the handle writes inline
+   width/height, which would fight the sequence for control of the layout.
+
+   They come back at the end, once the page has finished assembling, because by
+   then dragging the corner is the obvious next thing to try.
+   -------------------------------------------------------------------------- */
+
+.ei-shop-stage .dw-ei-widget-handle {
+  opacity: calc((var(--shop) - 0.85) * 6.6);
+  pointer-events: none;
+}
+.ei-shop-pin:has(.ei-shop-stage) .dw-ei-widget-readout {
+  height: calc(20px * var(--shop));
+  margin: 0;
+  overflow: hidden;
+  opacity: calc(var(--shop) * var(--shop));
+  font-size: 11px;
+}
+
+/* At rest the handle is live again. */
+.ei-shop-track[data-settled] .dw-ei-widget-handle { pointer-events: auto; }

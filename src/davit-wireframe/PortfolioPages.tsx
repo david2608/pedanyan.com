@@ -15,6 +15,7 @@ import { MediaCarousel } from "./MediaCarousel";
 import { PullToContinue } from "./PullToContinue";
 import { EightImagesModel } from "./eightImagesModel";
 import { EightImagesMaterialEditor, EightImagesParts } from "./eightImagesScreens";
+import { EightImagesShop } from "./eightImagesShop";
 import { EightImagesOrb, OrbDock, OrbProvider } from "./eightImagesOrb";
 import { EightImagesWidget } from "./eightImagesWidget";
 import { useTextMotion } from "./textMotion";
@@ -3185,19 +3186,10 @@ function ProjectSectionBody({ project, section }: { project: PortfolioProject; s
           </header>
           {section.id === "model" ? <EightImagesParts /> : null}
           {section.id === "widget" ? (
-            <div className="dw-ei-handover">
-              {/* No separate stop above the player: a dock there parked the
-                  object at full size directly over the live viewer, and the
-                  reader saw two trucks. Its only destination here is inside
-                  the player's frame. */}
-              <div className="dw-ei-player">
-                {/* And here it arrives invisible, behind the player, exactly
-                    where the player's own model is — so the two never appear
-                    side by side. */}
-                <OrbDock id="widget-handover" fade={1} className="dw-ei-player-dock" />
-                <EightImagesWidget />
-              </div>
-            </div>
+            /* The viewer's own section is the pinned sequence: it starts full
+               width in the portfolio and ends as one slot in a merchant's
+               product page. The travelling object hands over inside it. */
+            <EightImagesShop />
           ) : null}
           {section.id === "editor" ? <EightImagesMaterialEditor /> : null}
         </div>

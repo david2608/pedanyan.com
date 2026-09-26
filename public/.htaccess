@@ -1,5 +1,13 @@
-Options -MultiViews
+Options -MultiViews -Indexes
 RewriteEngine On
+
+# Every prerendered route is a folder (am/designer/index.html). With Apache's
+# default DirectorySlash On, /am/designer answered 301 -> /am/designer/, so the
+# address visitors actually landed on was the slash one while the canonical
+# tag, the sitemap and the router all say no slash - and Analytics counted
+# every page twice. Slash handling is done by the rules in section 2 instead.
+# (-Indexes above keeps a folder without index.html from being listed.)
+DirectorySlash Off
 
 # ===========================================================================
 # 1. ONE CANONICAL ORIGIN
@@ -35,9 +43,15 @@ RewriteRule ^securion/?$                      /am/projects/securion [L,R=301]
 RewriteRule ^material-exchange-photo-lab/?$   /am/projects/material-exchange-photo-lab [L,R=301]
 RewriteRule ^hotel-apartments/?$              /am/projects/hotel-apartments [L,R=301]
 
-# A trailing slash makes /am/portfolio/ a second URL for /am/portfolio.
-RewriteCond %{REQUEST_FILENAME} !-d
+# A trailing slash makes /am/portfolio/ a second URL for /am/portfolio, so
+# every slash address 301s to the slashless one (query string kept) ...
 RewriteRule ^(.+)/$ /$1 [L,R=301]
+
+# ... and the slashless address of a prerendered route is served its folder's
+# index.html directly, with no redirect.
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}/index.html -f
+RewriteRule ^(.+)$ /$1/index.html [L]
 
 # ===========================================================================
 # 3. CACHING

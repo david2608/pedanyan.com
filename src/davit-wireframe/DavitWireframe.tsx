@@ -635,9 +635,9 @@ const publicArchiveEntries = [
     type: "CreativeMornings / Yerevan",
     title: "KOORSOO — art as a small light through iterative uncertainty.",
     description: "The January 2026 CreativeMornings talk for the global Koorsoo theme, given to the Yerevan chapter.",
-    /* YouTube's own poster for the video this entry embeds. Not a new third
-       party: the frame below it is already YouTube's. */
-    image: "https://i.ytimg.com/vi/HlZEKmmLWrQ/maxresdefault.jpg",
+    /* The video's own frame, pulled from YouTube's poster for HlZEKmmLWrQ and
+       kept locally: no third-party request to render the archive card. */
+    image: "/public-work/creative-mornings-koorsoo.jpg",
     imageAlt: "Davit Pedanyan speaking at CreativeMornings Yerevan on the Koorsoo theme",
     videoId: "HlZEKmmLWrQ",
     url: "https://creativemornings.com/talks/david-pedanya-on-koorsoo/1"
@@ -661,7 +661,7 @@ const publicArchiveEntries = [
     type: "Podcast / career",
     title: "How to be a UI/UX designer — a How2B speed interview.",
     description: "A practical conversation for people entering UI/UX: how to start, build useful habits, and focus on the thinking behind a durable design career.",
-    image: "https://i.ytimg.com/vi/5GkLC2HoWb4/maxresdefault.jpg",
+    image: "/public-work/how2b-ui-ux-designer.jpg",
     imageAlt: "How2B speed interview with Davit Pedanyan about becoming a UI UX designer",
     videoId: "5GkLC2HoWb4",
     url: "https://www.youtube.com/watch?v=5GkLC2HoWb4"
@@ -4562,6 +4562,10 @@ function PublicArticlePage({ slug }: { slug: string }) {
   const nextArticle = articleIndex >= 0 && articleIndex < articleEntries.length - 1 ? articleEntries[articleIndex + 1] : undefined;
 
   const pilotImageSizes: Record<string, [number, number]> = {
+    /* Intrinsic size, so the card reserves its box before the file arrives —
+       one of the "images without dimensions" items on the audit list. */
+    "/public-work/creative-mornings-koorsoo.jpg": [960, 540],
+    "/public-work/how2b-ui-ux-designer.jpg": [960, 540],
     "/public-work/ux-storm-1-2/banner-cover.jpg": [2200, 1238],
     "/public-work/ux-storm-1-2/banner-alexandra.jpg": [2200, 1238],
     "/public-work/ux-storm-1-2/banner-davit.jpg": [2200, 1238],

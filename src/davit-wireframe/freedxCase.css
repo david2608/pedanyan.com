@@ -79,7 +79,7 @@
 }
 .dw-freedx-thumb-bottom i{background:#8cbf3f;box-shadow:none}
 @container (max-width:560px){
-  .dw-freedx-thumb-monitor{left:0;top:5%;width:82%;height:auto;aspect-ratio:16/10}
+  .dw-freedx-thumb-monitor{left:0;top:5%;width:88%;height:auto;aspect-ratio:1.42}
   .dw-freedx-thumb-topbar{height:14%;min-height:0;gap:3%}
   .dw-freedx-thumb-brand{font-size:8px}
   .dw-freedx-thumb-brand i{width:15px}

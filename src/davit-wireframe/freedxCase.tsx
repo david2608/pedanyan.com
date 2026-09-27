@@ -64,8 +64,7 @@ export function FreedxScreenGridCard() {
     const ctx = gsap.context(() => {
       const loop = gsap.timeline({ repeat: -1, yoyo: true, defaults: { ease: "sine.inOut" } });
       loop.to(".dw-freedx-thumb-monitor", { y: -3, duration: 5.5 }, 0)
-        .to(".dw-freedx-thumb-phone-a", { y: -5, duration: 6.2 }, .2)
-        .to(".dw-freedx-thumb-phone-b", { y: 4, duration: 6.8 }, .5);
+        .to(".dw-freedx-thumb-phone-a", { y: -4, duration: 6.2 }, .2);
     }, element);
     return () => ctx.revert();
   }, []);

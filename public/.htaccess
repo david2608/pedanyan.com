@@ -43,6 +43,10 @@ RewriteRule ^securion/?$                      /am/projects/securion [L,R=301]
 RewriteRule ^material-exchange-photo-lab/?$   /am/projects/material-exchange-photo-lab [L,R=301]
 RewriteRule ^hotel-apartments/?$              /am/projects/hotel-apartments [L,R=301]
 
+# Serve the language homepage directly so LiteSpeed does not alternate between
+# its directory slash and the canonical slashless URL.
+RewriteRule ^am/?$ /am/index.html [L]
+
 # A trailing slash makes /am/portfolio/ a second URL for /am/portfolio, so
 # every slash address 301s to the slashless one (query string kept) ...
 RewriteRule ^(.+)/$ /$1 [L,R=301]

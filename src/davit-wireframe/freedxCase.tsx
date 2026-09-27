@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowDown, ArrowUpRight, Blocks, ChartNoAxesCombined, Check, ChevronDown, Command, Fingerprint, Layers3, MessageCircle, MoveUpRight, PanelTop, Sparkles, Users, WalletCards } from "lucide-react";
@@ -56,177 +56,29 @@ function DesignSystemCard() {
   </div>;
 }
 
-type FreedxSurface = {
-  key: string;
-  head: string;
-  pill: string;
-  label: string;
-  value: string;
-  unit: string;
-  spark: string;
-  cols: [string, string];
-  caption: string;
-  rows: { chip?: string; name: string; sub?: string; val: string }[];
-};
-
-/* The same surface, tokenised three ways — the design system doing its job. */
-const FREEDX_SURFACES: FreedxSurface[] = [
-  {
-    key: "trade",
-    head: "Spot · BTC / USDT",
-    pill: "Trade",
-    label: "LAST PRICE",
-    value: "86,562.40",
-    unit: "USDT",
-    spark: "M0 40 C20 34 28 43 48 28 S82 32 104 19 S138 27 162 10 S196 19 220 3",
-    cols: ["PRICE (USDT)", "AMOUNT"],
-    caption: "EXCHANGE",
-    rows: [
-      { name: "86,612.40", val: "0.019" },
-      { name: "86,601.05", val: "0.033" },
-      { name: "86,594.70", val: "0.012" },
-      { name: "86,584.20", val: "0.024" },
-      { name: "86,571.80", val: "0.018" },
-      { name: "86,563.10", val: "0.032" },
-      { name: "86,550.00", val: "0.041" },
-      { name: "86,542.60", val: "0.027" },
-      { name: "86,531.90", val: "0.036" },
-      { name: "86,520.45", val: "0.029" }
-    ]
-  },
-  {
-    key: "wallet",
-    head: "Your balance",
-    pill: "Move money",
-    label: "TOTAL BALANCE",
-    value: "26,480.15",
-    unit: "USD",
-    spark: "M0 36 C26 33 40 35 62 27 S104 24 132 20 S172 14 220 8",
-    cols: ["ASSET", "VALUE"],
-    caption: "WALLET",
-    rows: [
-      { chip: "₿", name: "Bitcoin", sub: "0.148 BTC", val: "12,812.40" },
-      { chip: "Ξ", name: "Ethereum", sub: "2.40 ETH", val: "7,640.02" },
-      { chip: "◎", name: "Solana", sub: "46.2 SOL", val: "6,027.73" }
-    ]
-  },
-  {
-    key: "ops",
-    head: "Verification queue",
-    pill: "Review",
-    label: "OPEN REVIEWS",
-    value: "128",
-    unit: "IN QUEUE",
-    spark: "M0 30 L36 30 L36 18 L74 18 L74 34 L112 34 L112 12 L150 12 L150 26 L188 26 L188 16 L220 16",
-    cols: ["ACCOUNT", "STATUS"],
-    caption: "BACKOFFICE",
-    rows: [
-      { name: "FX-10482", val: "Verified" },
-      { name: "FX-10481", val: "In review" },
-      { name: "FX-10479", val: "Verified" },
-      { name: "FX-10478", val: "Escalated" },
-      { name: "FX-10475", val: "Verified" },
-      { name: "FX-10474", val: "In review" },
-      { name: "FX-10471", val: "Verified" },
-      { name: "FX-10470", val: "Verified" }
-    ]
-  }
-];
-
-const FREEDX_ROW_SLOTS = 10;
-const FREEDX_NARROW = 300;
-
 export function FreedxScreenGridCard() {
-  const host = useRef<HTMLDivElement | null>(null);
-  const [index, setIndex] = useState(0);
-
+  const scene = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    const element = host.current;
-    if (!element) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let narrow = element.clientWidth > 0 && element.clientWidth < FREEDX_NARROW;
-    let timer: number | undefined;
-    const stop = () => {
-      if (timer !== undefined) window.clearInterval(timer);
-      timer = undefined;
-    };
-    const start = () => {
-      stop();
-      if (reduced || narrow) return;
-      timer = window.setInterval(() => setIndex((i) => (i + 1) % FREEDX_SURFACES.length), 3600);
-    };
-    const observer = new ResizeObserver((entries) => {
-      const width = entries[0].contentRect.width;
-      if (width === 0) return;
-      const next = width < FREEDX_NARROW;
-      if (next === narrow) return;
-      narrow = next;
-      if (narrow) {
-        stop();
-        setIndex(0);
-      } else {
-        start();
-      }
-    });
-    observer.observe(element);
-    start();
-    return () => {
-      stop();
-      observer.disconnect();
-    };
+    const element = scene.current;
+    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const ctx = gsap.context(() => {
+      const loop = gsap.timeline({ repeat: -1, yoyo: true, defaults: { ease: "sine.inOut" } });
+      loop.to(".dw-freedx-thumb-monitor", { y: -3, duration: 5.5 }, 0)
+        .to(".dw-freedx-thumb-phone-a", { y: -4, duration: 6.2 }, .2);
+    }, element);
+    return () => ctx.revert();
   }, []);
 
-  const surface = FREEDX_SURFACES[index];
-  const stamp = surface.key;
-
-  return (
-    <div className="dw-freedx-card-visual" data-surface={surface.key} ref={host} aria-hidden="true">
-      <div className="dw-fx2-head">
-        <i className="dw-fx2-mark">f</i>
-        <b><span className="dw-fx2-swap" key={stamp}>{surface.head}</span></b>
-        <span className="dw-fx2-pill"><span className="dw-fx2-swap" key={stamp}>{surface.pill}</span></span>
+  return <div className="dw-freedx-card-visual" ref={scene} aria-hidden="true">
+    <div className="dw-freedx-thumb-parallax">
+      <div className="dw-freedx-thumb-monitor">
+        <div className="dw-freedx-thumb-topbar"><span className="dw-freedx-thumb-brand"><i>f</i> freedx</span><span className="dw-freedx-thumb-nav">Overview&nbsp;&nbsp;&nbsp; Markets&nbsp;&nbsp;&nbsp; Wallet</span><span className="dw-freedx-thumb-avatar">D</span></div>
+        <div className="dw-freedx-thumb-dashboard"><aside><i/><i/><i/><i/></aside><div className="dw-freedx-thumb-content"><div className="dw-freedx-thumb-greeting"><div><small>ACCOUNT OVERVIEW</small><b>Your assets, in one view.</b></div><span className="dw-freedx-thumb-live"><i/> PORTFOLIO</span></div><div className="dw-freedx-thumb-stats"><div><small>Total balance</small><b>•••••••• <span>USD</span></b><em>Account balance · private</em></div><div className="dw-freedx-thumb-chart"><svg viewBox="0 0 320 80" preserveAspectRatio="none"><path d="M0 64 C22 58 24 68 45 48 S78 58 96 42 S126 47 146 31 S176 42 195 26 S225 35 245 18 S279 27 297 12 S311 17 320 5"/></svg></div></div><div className="dw-freedx-thumb-assets"><div className="thumb-assets-head"><b>Top assets</b><span>View portfolio ↗</span></div>{[["₿","Bitcoin","BTC"],["Ξ","Ethereum","ETH"],["◎","Solana","SOL"]].map(([s,n,t])=><div className="thumb-asset" key={t}><i>{s}</i><span><b>{n}</b><small>{t}</small></span><strong>••••</strong></div>)}</div></div></div>
       </div>
-
-      <div className="dw-fx2-figure">
-        <div>
-          <small className="dw-fx2-swap" key={`l-${stamp}`}>{surface.label}</small>
-          <strong className="dw-fx2-swap" key={`v-${stamp}`}>{surface.value} <span>{surface.unit}</span></strong>
-        </div>
-        <svg className="dw-fx2-spark" viewBox="0 0 220 44" preserveAspectRatio="none">
-          <path d={surface.spark} pathLength={1} key={`p-${stamp}`} />
-        </svg>
-      </div>
-
-      <div className="dw-fx2-table">
-        <div className="dw-fx2-colhead">
-          <span />
-          <span className="dw-fx2-swap" key={`c0-${stamp}`}>{surface.cols[0]}</span>
-          <span className="dw-fx2-swap" key={`c1-${stamp}`}>{surface.cols[1]}</span>
-        </div>
-        <div className="dw-fx2-rows">
-          {Array.from({ length: FREEDX_ROW_SLOTS }, (_, i) => {
-            const row = surface.rows[i];
-            if (!row) return <div className="dw-fx2-row is-empty" key={i} />;
-            return (
-              <div className="dw-fx2-row" key={i}>
-                <i key={`i-${stamp}`}>{row.chip ?? ""}</i>
-                <span>
-                  <b key={`n-${stamp}`}>{row.name}</b>
-                  {row.sub ? <small key={`s-${stamp}`}>{row.sub}</small> : null}
-                </span>
-                <em key={`e-${stamp}`}>{row.val}</em>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="dw-fx2-foot">
-        <span><i /><span className="dw-fx2-swap" key={`f-${stamp}`}>{surface.caption}</span></span>
-        <span>ONE SYSTEM</span>
-      </div>
+      <div className="dw-freedx-thumb-phone dw-freedx-thumb-phone-a"><img src={appScreens[0].src} alt=""/><span>MOBILE · HOME</span></div>
     </div>
-  );
+    <div className="dw-freedx-thumb-bottom"><span><i/> EXCHANGE · WALLET · MOBILE</span><span>FREEDX / PRODUCT REBUILD</span></div>
+  </div>;
 }
 
 export function FreedxCaseStudy() {

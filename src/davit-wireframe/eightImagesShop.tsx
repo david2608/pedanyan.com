@@ -132,8 +132,11 @@ export function EightImagesShop() {
 
               {/* The same element from the first frame to the last. */}
               <div className="ei-shop-stage">
-                <OrbDock id="player" fade={1} className="ei-shop-dock" />
-                <EightImagesWidget />
+                {/* The viewer lives INSIDE the resizable frame: the frame is the
+                    claim, so it has to contain the thing being reframed. */}
+                <EightImagesWidget>
+                  <OrbDock id="player" fade={0} className="ei-shop-dock" />
+                </EightImagesWidget>
               </div>
 
               <div className="ei-shop-info" aria-hidden="true">

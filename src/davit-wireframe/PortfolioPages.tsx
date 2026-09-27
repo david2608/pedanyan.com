@@ -3185,6 +3185,11 @@ function ProjectSectionBody({ project, section }: { project: PortfolioProject; s
     return <LigaChangedSection project={project} section={section} />;
   }
   if (project.project.slug === "8images" && section.id === "intro") {
+    /* The bespoke hero replaced CaseOpening, and with it the project metadata
+       every other case shows. Same source (the about-card's metadata), same
+       markup, so it inherits the shared styling. */
+    const detail = project.sections.find((item) => item.id === "about" || item.id === "project");
+    const metadata = (section.metadata?.length ? section.metadata : detail?.metadata) ?? [];
     return (
       <section className="dw-case-section dw-ei-section dw-ei-hero" id="intro">
         <div className="dw-ei-inner">
@@ -3192,6 +3197,16 @@ function ProjectSectionBody({ project, section }: { project: PortfolioProject; s
             {section.eyebrow ? <p className="dw-ei-eyebrow">{section.eyebrow}</p> : null}
             {section.title ? <h1>{section.title}</h1> : null}
             <Html html={section.body} className="dw-ei-lede" />
+            {metadata.length ? (
+              <dl className="dw-case-opening-meta dw-ei-meta">
+                {metadata.map((item) => (
+                  <div className={caseMetaClass(item.label)} key={item.label}>
+                    <dt>{item.label.replace(/:$/, "")}</dt>
+                    <CaseOpeningValue project={project} item={item} />
+                  </div>
+                ))}
+              </dl>
+            ) : null}
           </header>
           <div className="dw-ei-hero-stage">
             <OrbDock id="hero" className="dw-ei-hero-dock" />

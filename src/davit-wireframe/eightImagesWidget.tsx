@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 /**
  * The resizable frame the case study's argument is made in: a container the
@@ -30,7 +30,7 @@ import { useEffect, useRef, useState } from "react";
 const MIN_W = 320;
 const MIN_H = 320;
 
-export function EightImagesWidget() {
+export function EightImagesWidget({ children }: { children?: React.ReactNode }) {
   const [size, setSize] = useState<{ w: number; h: number } | null>(null);
   const frameRef = useRef<HTMLDivElement | null>(null);
   const dragRef = useRef<{ x: number; y: number; w: number; h: number } | null>(null);
@@ -71,6 +71,7 @@ export function EightImagesWidget() {
   return (
     <div className="dw-ei-widget">
       <div className="dw-ei-widget-frame" ref={frameRef}>
+        {children}
         <button
           type="button"
           className="dw-ei-widget-handle"

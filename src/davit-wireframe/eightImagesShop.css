@@ -214,13 +214,17 @@
   margin: 0;
 }
 
-/* The travelling object hands over inside this slot, as before. */
+/* The object's last stop is inside the resizable frame itself, and it is sized
+   as a share of that frame rather than of the viewport — so dragging the corner
+   actually reframes the model, which is what this section claims. */
 .ei-shop-dock {
   position: absolute;
-  top: 48%;
+  top: 50%;
   left: 50%;
-  width: min(26vw, 340px);
-  height: min(26vw, 340px);
+  width: 78%;
+  aspect-ratio: 1;
+  height: auto;
+  max-height: 88%;
   transform: translate(-50%, -50%);
 }
 

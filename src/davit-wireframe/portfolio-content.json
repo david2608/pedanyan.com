@@ -4417,7 +4417,37 @@
           "paddingTop": "150px",
           "paddingBottom": "150px",
           "title": "About the project",
-          "body": "<p><strong>8 Images</strong> is a 3D product visualisation tool for furniture merchants. A merchant uploads a model, groups its meshes into named parts, builds materials, attaches them per part, and embeds the result on their own storefront - so a shopper can change the finish and look at the thing from any angle without anyone photographing every combination.</p><p>The hard part was never the rendering. It is that everyone in the chain has a different fluency: the merchant who has never opened Blender, the interior designer, and the 3D artist who has. One tool, three levels of comfort with 3D, and a viewer that ends up on a website none of them controls.</p><p><strong>My role.</strong> Principal product designer, December 2023 to May 2026, working for Ivan Bobrovnikov. I owned design across the model editor, the material system, the embeddable viewer, and the account and workspace surfaces.</p>"
+          "body": "<p><strong>8 Images</strong> is a 3D product visualisation tool for furniture merchants. A merchant uploads a model, groups its meshes into named parts, builds materials, attaches them per part, and embeds the result on their own storefront - so a shopper can change the finish and look at the thing from any angle without anyone photographing every combination.</p><p>The hard part was never the rendering. It is that everyone in the chain has a different fluency: the merchant who has never opened Blender, the interior designer, and the 3D artist who has. One tool, three levels of comfort with 3D, and a viewer that ends up on a website none of them controls.</p><p><strong>My role.</strong> Principal product designer, December 2023 to May 2026, working for Ivan Bobrovnikov. I owned design across the model editor, the material system, the embeddable viewer, and the account and workspace surfaces.</p>",
+          "metadata": [
+            {
+              "label": "Client",
+              "value": "8 Images"
+            },
+            {
+              "label": "Categories",
+              "value": "3D commerce, merchant tooling"
+            },
+            {
+              "label": "Duration",
+              "value": "December 2023 – May 2026"
+            },
+            {
+              "label": "Role",
+              "value": "Principal product designer"
+            },
+            {
+              "label": "Services",
+              "value": "Model editor, material system, embeddable viewer, account and workspace"
+            },
+            {
+              "label": "Platform",
+              "value": "Web, embedded in merchant storefronts"
+            },
+            {
+              "label": "Key flow",
+              "value": "Upload model → group meshes into parts → build materials → attach per part → embed"
+            }
+          ]
         },
         {
           "id": "outcome",

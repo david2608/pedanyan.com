@@ -629,6 +629,20 @@ const publicArchiveEntries = [
     url: "https://techweek.am/"
   },
   {
+    slug: "creative-mornings-koorsoo",
+    year: "2026",
+    publishedAt: "2026-01-31",
+    type: "CreativeMornings / Yerevan",
+    title: "KOORSOO — art as a small light through iterative uncertainty.",
+    description: "The January 2026 CreativeMornings talk for the global Koorsoo theme, given to the Yerevan chapter.",
+    /* YouTube's own poster for the video this entry embeds. Not a new third
+       party: the frame below it is already YouTube's. */
+    image: "https://i.ytimg.com/vi/HlZEKmmLWrQ/maxresdefault.jpg",
+    imageAlt: "Davit Pedanyan speaking at CreativeMornings Yerevan on the Koorsoo theme",
+    videoId: "HlZEKmmLWrQ",
+    url: "https://creativemornings.com/talks/david-pedanya-on-koorsoo/1"
+  },
+  {
     slug: "2x-masnageter",
     year: "2025",
     publishedAt: "2025-11-10",
@@ -696,6 +710,7 @@ const articleCursorLabels: Record<string, string> = {
   "ux-storm-1-0": "How UX Storm began",
   "ux-design-battle-jury": "Judging design under pressure",
   "tech-week-vanadzor": "Naming Armenia's design problem",
+  "creative-mornings-koorsoo": "Watch the KOORSOO talk",
   "2x-masnageter": "Is product design worth it?",
   "how2b-ui-ux-designer": "Where to start in UX",
   "undesign-armenia-medium": "The Անդիզայն essay",
@@ -769,6 +784,20 @@ const publicArticleCopy: Record<string, { eyebrow: string; standfirst: string; s
       { title: "The word on the first slide", paragraphs: ["The opening slide read: The global reasons behind “Անդիզայն” country. Անդիզայն — undesigned. Not ugly, not unfinished. Undesigned: built without anyone asking who it was for.", "The second slide put the definition on screen in one sentence. When products, systems, physical spaces and policies are built without human-centred thought, they become անդիզայն. That phrasing was deliberate, because it moves the conversation off screens. A bus stop with no shade is անդիզայն. A form that asks for the same information three times is անդիզայն. A regulation written so that only its author can follow it is անդիզայն. The same failure in different clothes, and none of it fixed by hiring a better illustrator.", "The third slide was the counter-position: beyond aesthetics, design is about function, user experience and systems thinking — interconnectedness and the big picture rather than the surface. In a hall of engineers, founders and students, that is the useful message. Most of them will never open Figma. All of them will decide, at some point, whether the thing they are building accounts for the person on the other end of it."] },
       { title: "A theatre in Vanadzor, not a hall in Yerevan", paragraphs: ["Tech Week is built on a refusal. TCF, Zealous and UATE keep it out of the capital and move it to a regional centre, because an ecosystem that exists in one city is not an ecosystem. In 2025 that city was Vanadzor: 4 to 6 July, roughly 2,800 participants, more than 60 speakers, over 50 partner companies and 300-plus workshop registrations. Alongside the talks ran DevHacks at the Vanadzor Technology Center — 68 teams selected from 95 applications, 48 hours, a $15,000 prize fund — the Wings competition with the Business Angel Network of Armenia, and an education expo with Teach For Armenia and Armath. Goris takes the event in 2026.", "The main stage was the Charles Aznavour Palace of Culture: a Soviet-era theatre with a crystal chandelier and plaster cornices, raked seating lit blue for the occasion, TWV 2025 spelled out in light-up letters along the stage lip. The banner behind me read Վանաձորը՝ տեխնոլոգիական մայրաքաղաք — Vanadzor, the technology capital. It is a large claim for a city of that size, and the distance between the claim and the present is more or less what I came to talk about.", "The audience was young and it was not a design crowd — students, people a few years into a first job, teams from local companies. That decided how the talk was built. A Yerevan design room arrives with the vocabulary and mostly agrees with you already. A regional room does not, which means every claim has to survive plain language in front of people with no professional reason to be generous about it. If the idea holds there, it holds."] },
       { title: "What happened to the word afterwards", paragraphs: ["Naming a problem in front of several hundred people changes its status. It stops being a private complaint and becomes something people can point at, in their own city, about things they walk past every day.", "Անդիզայն kept working after the stage lights went down. The talk came first; the essay came later — the same idea written up for a wider readership, as an argument about how Armenian public systems forget the people inside them. Ideas that survive a live room are the ones worth writing down.", "That is also the case for speaking outside the capital, and it is not charity. Opportunity that exists in only one place is not opportunity, it is a queue. The people who will build the next generation of Armenian products are not all going to move to Yerevan first, and the design conversation should not wait for them to."] }
+    ]
+  },
+  "creative-mornings-koorsoo": {
+    eyebrow: "CreativeMornings/Yerevan · 31 January 2026",
+    standfirst: "CreativeMornings gives every chapter in the world the same one-word theme each month and thirty-odd minutes to answer it. January 2026 was Koorsoo. This is the Yerevan answer.",
+    sections: [
+      {
+        title: "One word, a hundred cities, the same month",
+        paragraphs: [
+          "CreativeMornings is a breakfast lecture series that runs on a constraint: every chapter, in every city, works to one global theme per month, and each speaker gets roughly half an hour in front of a room that has come before work. The format is the argument — a theme handed to a hundred chapters at once produces a hundred genuinely different answers, and the differences are the point.",
+          "January 2026's theme was کورسو — Koor·Soo — glossed by CreativeMornings as a faint glimmer of hope. The Yerevan chapter's edition ran on 31 January, and the talk is thirty-three minutes long.",
+          "CreativeMornings introduced it this way: “With this month's global theme ‘Koorsoo’, Davit will explore art as a koorsoo — a small light guiding us through iterative uncertainty, helping us navigate the unknown with curiosity and imagination.” Their words, not mine — the recording above is the talk itself."
+        ]
+      }
     ]
   },
   "2x-masnageter": {

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowDown, ArrowUpRight, Blocks, ChartNoAxesCombined, Check, ChevronDown, Command, Fingerprint, Layers3, MessageCircle, MoveUpRight, PanelTop, Sparkles, Users, WalletCards } from "lucide-react";
@@ -33,10 +33,10 @@ function CodeProductBoard() {
     <div className="dw-freedx-board-body">
       <aside className="dw-freedx-board-rail"><span className="active"><PanelTop size={16} /></span><span><ChartNoAxesCombined size={16} /></span><span><WalletCards size={16} /></span><span><Layers3 size={16} /></span></aside>
       <div className="dw-freedx-board-main">
-        <div className="dw-freedx-board-heading"><div><small>MONDAY, 10:24 AM</small><h3>Good morning, Davit</h3></div><button type="button"><ChevronDown size={13} /> All accounts</button></div>
+        <div className="dw-freedx-board-heading"><div><small>ACCOUNT OVERVIEW</small><h3>Your assets, in one view.</h3></div><button type="button"><ChevronDown size={13} /> All accounts</button></div>
         <div className="dw-freedx-board-grid">
-          <article className="dw-freedx-balance"><span>Total portfolio</span><strong>$84,290.52</strong><small className="positive">↗ 4.28% <i>past 24 hours</i></small><div className="dw-freedx-chart" aria-hidden="true"><svg viewBox="0 0 360 92" preserveAspectRatio="none"><path className="chart-fill" d="M0 73 C24 67 30 76 51 57 S82 61 102 48 S133 56 153 39 S182 51 208 32 S238 45 258 24 S292 37 309 17 S340 28 360 8 V92 H0Z"/><path className="chart-line" d="M0 73 C24 67 30 76 51 57 S82 61 102 48 S133 56 153 39 S182 51 208 32 S238 45 258 24 S292 37 309 17 S340 28 360 8"/></svg></div></article>
-          <article className="dw-freedx-asset-list"><div className="dw-freedx-mini-heading"><span>My assets</span><span>View all <ArrowUpRight size={12} /></span></div>{[["₿","Bitcoin","BTC","$42,680.20","+2.4%"],["Ξ","Ethereum","ETH","$28,104.16","+1.8%"],["◎","Solana","SOL","$8,506.16","−0.6%"]].map(([symbol,name,ticker,value,change])=><div className="dw-freedx-asset" key={ticker}><b>{symbol}</b><span><strong>{name}</strong><small>{ticker}</small></span><span className="asset-value"><strong>{value}</strong><small>{change}</small></span></div>)}</article>
+          <article className="dw-freedx-balance"><span>Total portfolio</span><strong>•••••••• <small>USD</small></strong><small className="positive">Account balance <i>· private</i></small><div className="dw-freedx-chart" aria-hidden="true"><svg viewBox="0 0 360 92" preserveAspectRatio="none"><path className="chart-fill" d="M0 73 C24 67 30 76 51 57 S82 61 102 48 S133 56 153 39 S182 51 208 32 S238 45 258 24 S292 37 309 17 S340 28 360 8 V92 H0Z"/><path className="chart-line" d="M0 73 C24 67 30 76 51 57 S82 61 102 48 S133 56 153 39 S182 51 208 32 S238 45 258 24 S292 37 309 17 S340 28 360 8"/></svg></div></article>
+          <article className="dw-freedx-asset-list"><div className="dw-freedx-mini-heading"><span>My assets</span><span>View all <ArrowUpRight size={12} /></span></div>{[["₿","Bitcoin","BTC"],["Ξ","Ethereum","ETH"],["◎","Solana","SOL"]].map(([symbol,name,ticker])=><div className="dw-freedx-asset" key={ticker}><b>{symbol}</b><span><strong>{name}</strong><small>{ticker}</small></span><span className="asset-value"><strong>••••</strong><small>—</small></span></div>)}</article>
           <article className="dw-freedx-action-card"><span className="dw-freedx-action-icon"><WalletCards size={17} /></span><div><strong>Move money</strong><small>Deposit, convert or transfer</small></div><MoveUpRight size={15} /></article>
           <article className="dw-freedx-action-card"><span className="dw-freedx-action-icon violet"><Sparkles size={17} /></span><div><strong>Rewards Hub</strong><small>Your next milestone is close</small></div><MoveUpRight size={15} /></article>
         </div>
@@ -57,7 +57,29 @@ function DesignSystemCard() {
 }
 
 export function FreedxScreenGridCard() {
-  return <div className="dw-freedx-card-visual" aria-hidden="true"><div className="dw-freedx-card-orbit"/><img src={appScreens[0].src} alt=""/><img src={appScreens[1].src} alt=""/><span>FREEDX / BUILT FROM THE GROUND UP</span></div>;
+  const scene = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const element = scene.current;
+    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const ctx = gsap.context(() => {
+      const loop = gsap.timeline({ repeat: -1, yoyo: true, defaults: { ease: "sine.inOut" } });
+      loop.to(".dw-freedx-thumb-monitor", { y: -3, duration: 5.5 }, 0)
+        .to(".dw-freedx-thumb-phone-a", { y: -5, duration: 6.2 }, .2)
+        .to(".dw-freedx-thumb-phone-b", { y: 4, duration: 6.8 }, .5);
+    }, element);
+    return () => ctx.revert();
+  }, []);
+
+  return <div className="dw-freedx-card-visual" ref={scene} aria-hidden="true">
+    <div className="dw-freedx-thumb-parallax">
+      <div className="dw-freedx-thumb-monitor">
+        <div className="dw-freedx-thumb-topbar"><span className="dw-freedx-thumb-brand"><i>f</i> freedx</span><span className="dw-freedx-thumb-nav">Overview&nbsp;&nbsp;&nbsp; Markets&nbsp;&nbsp;&nbsp; Wallet</span><span className="dw-freedx-thumb-avatar">D</span></div>
+        <div className="dw-freedx-thumb-dashboard"><aside><i/><i/><i/><i/></aside><div className="dw-freedx-thumb-content"><div className="dw-freedx-thumb-greeting"><div><small>ACCOUNT OVERVIEW</small><b>Your assets, in one view.</b></div><span className="dw-freedx-thumb-live"><i/> PORTFOLIO</span></div><div className="dw-freedx-thumb-stats"><div><small>Total balance</small><b>•••••••• <span>USD</span></b><em>Account balance · private</em></div><div className="dw-freedx-thumb-chart"><svg viewBox="0 0 320 80" preserveAspectRatio="none"><path d="M0 64 C22 58 24 68 45 48 S78 58 96 42 S126 47 146 31 S176 42 195 26 S225 35 245 18 S279 27 297 12 S311 17 320 5"/></svg></div></div><div className="dw-freedx-thumb-assets"><div className="thumb-assets-head"><b>Top assets</b><span>View portfolio ↗</span></div>{[["₿","Bitcoin","BTC"],["Ξ","Ethereum","ETH"],["◎","Solana","SOL"]].map(([s,n,t])=><div className="thumb-asset" key={t}><i>{s}</i><span><b>{n}</b><small>{t}</small></span><strong>••••</strong></div>)}</div></div></div>
+      </div>
+      <div className="dw-freedx-thumb-phone dw-freedx-thumb-phone-a"><img src={appScreens[0].src} alt=""/><span>MOBILE · HOME</span></div>
+    </div>
+    <div className="dw-freedx-thumb-bottom"><span><i/> EXCHANGE · WALLET · MOBILE</span><span>FREEDX / PRODUCT REBUILD</span></div>
+  </div>;
 }
 
 export function FreedxCaseStudy() {

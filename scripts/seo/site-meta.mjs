@@ -257,7 +257,14 @@ export const LEGACY_ALIASES = {
    no page of their own here — listing them in the sitemap would be listing
    URLs that do not exist.
    --------------------------------------------------------------------------- */
+/* NOTE: this list is maintained by hand and duplicates the entries in
+   src/davit-wireframe/DavitWireframe.tsx. Adding a talk to the site does not
+   add it to the sitemap, llms.txt or the route meta — it has to be added here
+   too, and nothing enforces that. The KOORSOO talk was published and silently
+   left out of all three until the counts were checked. Worth deriving one list
+   from the other. */
 export const PUBLIC_WORK = [
+  { slug: "creative-mornings-koorsoo", title: "KOORSOO — art as a small light through iterative uncertainty.", published: "2026-01-31", year: "2026" },
   { slug: "ux-storm-1-4", title: "UX Storm 1.4 — the new era of product designers.", published: "2025-12-12", year: "2025" },
   { slug: "design-in-2030", title: "Design in 2030 — a workshop for 100+ thinkers and practitioners.", published: "2025-10-11", year: "2025" },
   { slug: "ux-storm-1-2", title: "UX Storm 1.2 — shaping the future in UX design.", year: "2024" },

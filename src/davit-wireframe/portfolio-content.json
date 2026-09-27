@@ -4594,25 +4594,6 @@
           "title": "Take a look at my other projects"
         }
       ]
-    },
-    {
-      "project": {
-        "title": "FreedX V2",
-        "slug": "freedx",
-        "source": {
-          "fileKey": "TT70rrR5Rrilz7tjUDPV4i",
-          "nodeId": "427:29"
-        }
-      },
-      "assets": {},
-      "sections": [
-        {
-          "id": "intro",
-          "type": "intro",
-          "title": "FreedX V2",
-          "subtitle": "Leading design for a connected crypto exchange experience."
-        }
-      ]
     }
   ]
 }

@@ -82,7 +82,7 @@
     {
       "path": "/am/portfolio",
       "title": "Work — Case Studies by Davit Pedanyan",
-      "description": "Twelve product design case studies: the decisions behind each one, what changed, and the trade-offs. Fintech, insurance, cloud and marketplace products.",
+      "description": "Eleven product design case studies: the decisions behind each one, what changed, and the trade-offs. Fintech, insurance, cloud and marketplace products.",
       "type": "CollectionPage",
       "priority": "0.9",
       "changefreq": "monthly"
@@ -226,16 +226,6 @@
       "type": "CreativeWork",
       "name": "8 Images",
       "headline": "A configurator that works inside someone else’s page.",
-      "priority": "0.8",
-      "changefreq": "yearly"
-    },
-    {
-      "path": "/am/projects/freedx",
-      "title": "FreedX V2 — Case Study by Davit Pedanyan",
-      "description": "Leading design for a connected crypto exchange experience.",
-      "type": "CreativeWork",
-      "name": "FreedX V2",
-      "headline": null,
       "priority": "0.8",
       "changefreq": "yearly"
     },

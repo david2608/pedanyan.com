@@ -4,7 +4,7 @@
 
 Davit Pedanyan is a product designer, design leader and educator from Armenia. He designs products, teaches beginners, and runs public formats for Armenia's creative community.
 
-This site is his portfolio: twelve product design case studies written as decisions rather than screenshots, plus his public work in Armenia's design community. Each case study states what the problem was, what changed, and what the trade-off cost.
+This site is his portfolio: eleven product design case studies written as decisions rather than screenshots, plus his public work in Armenia's design community. Each case study states what the problem was, what changed, and what the trade-off cost.
 
 - Contact: davit@pedanyan.com — or Telegram, https://t.me/pedanyan
 - Based in: Armenia (AM); works remotely
@@ -27,7 +27,6 @@ This site is his portfolio: twelve product design case studies written as decisi
 - [Nesba](https://pedanyan.com/am/projects/nesba): A unified Saudi wealth experience that turns everyday cash flow into one clear path to investing.
 - [LIGA Mobile](https://pedanyan.com/am/projects/liga): The insurance app you hope never to open, redesigned around the ten minutes when you have to file an accident report standing up.
 - [8 Images](https://pedanyan.com/am/projects/8images): A 3D product configurator built to work inside someone else's page, at a size you do not control, on a model you did not choose.
-- [FreedX V2](https://pedanyan.com/am/projects/freedx): Leading design for a connected crypto exchange experience.
 
 ## Public work
 
@@ -45,7 +44,7 @@ This site is his portfolio: twelve product design case studies written as decisi
 ## Pages
 
 - [Davit Pedanyan — Product Designer and Design Leader, Armenia](https://pedanyan.com/): Product designer, design leader and educator from Armenia. Product design, design strategy, DesignOps and design systems for startup and enterprise teams.
-- [Work — Case Studies by Davit Pedanyan](https://pedanyan.com/am/portfolio): Twelve product design case studies: the decisions behind each one, what changed, and the trade-offs. Fintech, insurance, cloud and marketplace products.
+- [Work — Case Studies by Davit Pedanyan](https://pedanyan.com/am/portfolio): Eleven product design case studies: the decisions behind each one, what changed, and the trade-offs. Fintech, insurance, cloud and marketplace products.
 - [Davit Pedanyan — Designer Profile, Experience and Practice](https://pedanyan.com/am/designer): Twenty years of product design across fintech, insurance and enterprise platforms, and nine years teaching design in Armenia.
 - [Talks, Events and Writing — Davit Pedanyan](https://pedanyan.com/am/public-work): Public work in Armenia's design community: UX Storm events, workshops, jury appearances, conference talks and published writing.
 - [Story — Davit Pedanyan, Designer, Educator, Culture Builder](https://pedanyan.com/am/story): How the work fits together: designing products, teaching beginners, and building creative culture in Armenia.

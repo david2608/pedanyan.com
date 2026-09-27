@@ -41,7 +41,7 @@ const defaultContent = {
     talk: { label: "Let's talk", href: "/am/lets-talk" },
     socials: [
       { label: "IN", href: "https://www.linkedin.com/in/davit-pedanyan/" },
-      { label: "IG", href: "https://www.instagram.com/pedanyan" },
+      { label: "IG", href: "https://www.instagram.com/" },
       { label: "FB", href: "https://www.facebook.com/" }
     ]
   },

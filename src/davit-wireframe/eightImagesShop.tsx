@@ -172,7 +172,6 @@ export function EightImagesShop() {
                     claim, so it has to contain the thing being reframed. */}
                 <EightImagesWidget>
                   <OrbDock id="player" fade={0} className="ei-shop-dock" />
-                  <EightImagesPlayerChrome />
                 </EightImagesWidget>
               </div>
 

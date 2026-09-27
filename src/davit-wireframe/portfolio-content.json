@@ -4407,7 +4407,7 @@
           },
           "textColor": "#242424",
           "title": "8 Images",
-          "subtitle": "A 3D product configurator that has to work inside someone else's page, at a size you don't control, on a model you didn't choose.",
+          "subtitle": "A tool for digitising materials, preparing models and composing scenes — and a player the merchant embeds on their own page.",
           "media": "viewer-hero"
         },
         {
@@ -4417,7 +4417,7 @@
           "paddingTop": "150px",
           "paddingBottom": "150px",
           "title": "About the project",
-          "body": "<p><strong>8 Images</strong> is a 3D product visualisation tool for furniture merchants. A merchant uploads a model, groups its meshes into named parts, builds materials, attaches them per part, and embeds the result on their own storefront - so a shopper can change the finish and look at the thing from any angle without anyone photographing every combination.</p><p>The hard part was never the rendering. It is that everyone in the chain has a different fluency: the merchant who has never opened Blender, the interior designer, and the 3D artist who has. One tool, three levels of comfort with 3D, and a viewer that ends up on a website none of them controls.</p><p><strong>My role.</strong> Principal product designer, December 2023 to May 2026, working for Ivan Bobrovnikov. I owned design across the model editor, the material system, the embeddable viewer, and the account and workspace surfaces.</p>",
+          "body": "<p><strong>8 Images</strong> is a 3D product visualisation tool for furniture merchants. I was principal product designer from December 2023 to May 2026, working for Ivan Bobrovnikov, across the model editor, the material system, scenes and the embeddable player.</p>",
           "metadata": [
             {
               "label": "Client",
@@ -4450,33 +4450,6 @@
           ]
         },
         {
-          "id": "outcome",
-          "type": "outcome",
-          "layout": "wide",
-          "paddingTop": "140px",
-          "paddingBottom": "150px",
-          "eyebrow": "The redesign",
-          "title": "The viewer had to survive a page I would never see",
-          "body": "<p>Three constraints shaped every other decision, and not one of them is about rendering. Each is a load the interface had to carry.</p>",
-          "items": [
-            {
-              "label": "The model",
-              "before": "An arbitrary mesh, exported by someone else, with no names in it.",
-              "after": "Seven named parts on one product, so a shopper has something to point at."
-            },
-            {
-              "label": "The library",
-              "before": "2,189 materials in one catalogue, 2,026 of them textile.",
-              "after": "Thirteen sets, sixteen swatches to a page, 127 options reachable on a single chair seat."
-            },
-            {
-              "label": "The embed",
-              "before": "Three fixed sizes, which is not how a merchant's page is shaped.",
-              "after": "Any size the merchant drags to, with the menu, the view strip and the zoom intact."
-            }
-          ]
-        },
-        {
           "id": "problem",
           "type": "prose",
           "layout": "contained",
@@ -4484,42 +4457,14 @@
           "paddingBottom": "110px",
           "eyebrow": "Problem",
           "title": "A file the web cannot open",
-          "body": "<p>A furniture merchant has two things that do not fit together: a 3D model built for a rendering package, and a product page built for photographs. The model is heavy - the demo firetruck alone is a megabyte of mesh before a single texture loads - and it arrives as an undifferentiated lump of geometry with no idea which triangles are the seat and which are the legs.</p><p>Between those two things there was nothing. Not a rendering problem: a naming problem, a reduction problem, and a fitting problem. The rest of this page is those three.</p>"
-        },
-        {
-          "id": "decisions",
-          "type": "feature-grid",
-          "layout": "wide",
-          "paddingTop": "130px",
-          "paddingBottom": "120px",
-          "eyebrow": "The argument I won",
-          "title": "I built a 3D editor out of 2D habits",
-          "body": "<p>Every convention here is borrowed from tools the audience already uses. That was the whole bet, and it is the one I argued hardest for.</p>",
-          "items": [
-            {
-              "value": "Meshes as layers",
-              "text": "<p>3D software presents geometry as a scene graph. Graphics tools present it as a stack of layers, and almost everyone in this market has used one of those.</p><p>So meshes are layers. Selecting, reordering and renaming work the way they do in an image editor, and the merchant never learns a new mental model to do the one job they came for.</p>"
-            },
-            {
-              "value": "Paths as groups",
-              "text": "<p>The same borrowing, one level down. A path is a group, because that is the word the audience already has for it.</p><p>Consistency here is not tidiness. It is what lets someone who has only ever grouped objects in Figma do the equivalent thing to a mesh without being taught.</p>"
-            },
-            {
-              "value": "Floating panels",
-              "text": "<p>Docked panels eat the canvas, and the canvas is the product. So the panels float, the way Figma's do, and the model keeps the room.</p><p>It also rehearses the real constraint: if the interface can give up its own space on a desktop, it can survive being squeezed into a merchant's page later.</p>"
-            },
-            {
-              "value": "Parts as the unit",
-              "text": "<p>A shopper cannot choose a material for a mesh. They choose one for the seat, the legs, the top.</p><p>So grouping meshes into named parts is not a modelling step, it is the step that makes the product shoppable. Chair back, chair base, chair seat, chair cushions, table top, table legs, vase - seven names, and the configurator writes itself.</p>"
-            }
-          ]
+          "body": "<p>A furniture merchant has a 3D model built for a rendering package and a product page built for photographs. The model is heavy — the demo firetruck is a megabyte of mesh before a single texture loads — and it arrives as one lump of geometry with no idea which triangles are the seat and which are the legs. The merchant also has real fabrics no renderer has heard of. 8 Images is what goes in between.</p>"
         },
         {
           "id": "editor",
           "type": "prose",
-          "eyebrow": "The material editor",
-          "title": "Maps are a stack, not a form.",
-          "body": "<p>Switch a map on and the render answers. This is the screen I argued for and won.</p>"
+          "eyebrow": "Materials",
+          "title": "Maps are a stack, not a form",
+          "body": "<p>A material here is built, not uploaded. Six maps stack to make one: diffuse, normal, roughness, emission, metalness, transparency. The obvious interface is a form — a column of numeric fields, each abstract until you render. I argued for a layer stack instead, the way every graphics tool shows layers: one row per map, toggled and reordered, the cube updating as you tune it. Someone builds a real fabric by hand until it matches the sample in front of them, without ever learning what a normal map is called.</p>"
         },
         {
           "id": "model",
@@ -4527,51 +4472,19 @@
           "layout": "wide",
           "paddingTop": "130px",
           "paddingBottom": "120px",
-          "eyebrow": "The file itself",
-          "title": "An arbitrary mesh, and the names that make it shoppable",
-          "body": "<p>This is the real thing - <code>toy-firetruck.glb</code>, exactly as the product serves it: Draco-compressed, 1,066 KB, straight out of Blender. The list beside it is not typed into this page. It is read back out of the file at runtime, which is why it says what it says.</p><p>Ten named meshes arrived with the model. Click one and the rest fall away. That is the entire argument of the product in one gesture: geometry is not shoppable, but <em>Ladder Turret</em> is.</p>"
+          "eyebrow": "Models",
+          "title": "The names that make a model shoppable",
+          "body": "<p>A model arrives as meshes named by whoever exported it. A shopper cannot point at <em>Ladder Turret</em>. Preparation is grouping those meshes into parts a person would ask for — seat, back, legs — and a material attaches to a part, not to the file. Paths become groups, because that is already what they are in every drawing tool. The naming is the work.</p>"
         },
         {
-          "id": "walkthrough",
-          "type": "walkthrough",
+          "id": "scenes",
+          "type": "prose",
           "layout": "wide",
           "paddingTop": "130px",
           "paddingBottom": "120px",
-          "eyebrow": "The loop",
-          "title": "From a lump of geometry to something a shopper can point at",
-          "body": "<p>Four moves. Each one exists because of the load named above it.</p>",
-          "items": [
-            {
-              "asset": "viewer-hero",
-              "caption": "Upload the model",
-              "text": "The merchant brings whatever their maker exported. Nothing is renamed, nothing is optimised by hand - the model arrives as it is, and the work of making it legible happens here rather than in a 3D package the merchant does not own."
-            },
-            {
-              "asset": "parts-menu",
-              "caption": "Name the parts",
-              "text": "Meshes are grouped into parts, and the parts get the words a shopper would use. This is the whole trick: after it, every other screen has something to talk about. Seven names on this product is what turns a mesh into a configurator."
-            },
-            {
-              "asset": "material-picker",
-              "caption": "Attach the materials",
-              "text": "Materials are built in their own editor - imported, or made from layers - and attached per part. One chair seat carries 127 of them, paged sixteen at a time, which is only usable because the library is already cut into thirteen sets."
-            },
-            {
-              "asset": "embed-sizes",
-              "caption": "Fit it to a page you will never see",
-              "text": "Desktop, tablet, phone, and a custom size the merchant drags to, with the pixel dimensions live while they drag. The viewer reflows and the chrome stays. This is the step the first version got wrong."
-            }
-          ]
-        },
-        {
-          "id": "the-fail",
-          "type": "prose",
-          "layout": "contained",
-          "paddingTop": "140px",
-          "paddingBottom": "110px",
-          "eyebrow": "The fail",
-          "title": "I designed for three screen sizes. Merchants have infinite.",
-          "body": "<p>The first version of the embed offered desktop, tablet and phone. Three breakpoints, the way a website is built, and it looked correct in every review because reviews happen at the sizes you designed for.</p><p>Then it went into a real page. A merchant's product column is not 1440, or 768, or 393. It is whatever is left after their header, their gallery and their sidebar have taken what they need - and at those in-between widths the viewer was wrong in the way only fixed breakpoints can be: a menu that overlapped the model, a thumbnail strip that clipped, controls that had nowhere to go.</p><p>The fix was to stop treating size as a set of cases and start treating it as a range. A custom size with a drag handle and a live pixel readout, and chrome that is laid out against the container rather than against a breakpoint. It is the least glamorous decision in the project and the one that made the product embeddable.</p>"
+          "eyebrow": "Scenes",
+          "title": "A set, and the photographs of it",
+          "body": "<p>One product on a white background is a swatch. Merchants sell sets. A scene puts several models in one space at the right size and position — chair to table, table to rug — so you can see whether the set holds together, and renders photographs out of that composition. It replaces the shoot: nobody photographs every finish in every combination.</p>"
         },
         {
           "id": "widget",
@@ -4579,31 +4492,20 @@
           "layout": "wide",
           "paddingTop": "120px",
           "paddingBottom": "120px",
-          "eyebrow": "The proof",
-          "title": "The viewer, running in this page",
-          "body": "<p>This is the shipped product, embedded the same way a merchant embeds it — which makes this portfolio page one of the arbitrary containers the thing was built to survive. Drag the frame and watch the chrome hold.</p><p>It loads on sight, and it costs what it costs: 2,273 KB across 65 requests — a megabyte of mesh, a 387 KB lighting environment, and a Draco decoder to unpack the geometry. A page that argues heavy 3D can feel light should be honest about what heavy means.</p>",
+          "eyebrow": "The player",
+          "title": "One output of the tool, not the tool",
+          "body": "<p>The player is what the merchant embeds: the named parts, the materials attached to them, the camera views, sitting in their own page as a gallery. Everything above it is what makes it possible. Drag the frame — the chrome is laid out against the container it is given.</p>",
           "asset": "widget-poster"
         },
         {
-          "id": "naming",
+          "id": "the-fail",
           "type": "prose",
           "layout": "contained",
-          "paddingTop": "120px",
-          "paddingBottom": "100px",
-          "eyebrow": "A small thing that was not small",
-          "title": "Models became Products, Showrooms became Scenes",
-          "body": "<p>The navigation shipped with different words than the ones it was designed with. Research moved them: <em>Models</em> and <em>Showrooms</em> are what the people who build 3D call these things, and they quietly told everyone else that the tool was not for them.</p><p><em>Products</em> and <em>Scenes</em> are what a merchant calls them. Renaming a primary navigation item late is expensive and worth it - it is the cheapest possible way to widen who thinks a tool is meant for them.</p>"
-        },
-        {
-          "id": "scenes",
-          "type": "prose",
-          "layout": "contained",
-          "paddingTop": "110px",
-          "paddingBottom": "100px",
-          "eyebrow": "Designed, not shipped",
-          "title": "Scenes is still a waiting room",
-          "body": "<p>The third module - putting several products into one room and rendering the set - is designed and not live. Open it in the product today and you get a sentence and a request-early-access link.</p><p>That empty state is the part I would defend. A module that does not exist yet still has a state, and the honest one tells you what it will do and offers you a way to be told when it does, rather than hiding the navigation item and pretending the ambition is not there.</p>",
-          "asset": "scenes-empty"
+          "paddingTop": "140px",
+          "paddingBottom": "110px",
+          "eyebrow": "What I got wrong",
+          "title": "I designed for three screen sizes. Merchants have infinite.",
+          "body": "<p>I designed the player for desktop, tablet and phone. It reviewed well, because reviews happen at the sizes you designed for. A merchant's product column is none of those — it is whatever is left after their header and sidebar take what they need, and at those widths the menu overlapped the model and the thumbnail strip clipped. The fix was a custom size with a drag handle and a live pixel readout, and chrome measured against the container instead of a breakpoint.</p>"
         },
         {
           "id": "reflection",
@@ -4613,7 +4515,7 @@
           "paddingBottom": "110px",
           "eyebrow": "Reflection",
           "title": "The 3D was the easy part",
-          "body": "<p>Two and a half years on this, and almost none of the work that mattered was about geometry. It was about naming: parts so a shopper can point, sets so a catalogue of two thousand textiles can be chosen from, panels and layers borrowed from tools people already knew so that nobody had to be taught.</p><p>The decision I would defend in any review is the boring one - laying the viewer out against its container instead of against three breakpoints. It is invisible when it works, and it is the only reason the thing can live on a page I will never see.</p>"
+          "body": "<p>Two and a half years, and almost none of the work was geometry. It was vocabulary. The navigation was designed as Models and Showrooms — what the people who build 3D call these things — and it shipped as Products and Scenes, because the first pair quietly told furniture people the tool was not for them. Renaming primary navigation late is expensive, and it is the cheapest way to widen who thinks a tool is meant for them.</p>"
         },
         {
           "id": "portfolio-navigation",

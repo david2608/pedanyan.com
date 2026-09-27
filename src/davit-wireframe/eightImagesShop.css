@@ -319,3 +319,108 @@
 
 /* At rest the handle is live again. */
 .ei-shop-track[data-settled] .dw-ei-widget-handle { pointer-events: auto; }
+
+/* --- the player's chrome ----------------------------------------------------
+   Figma: 8 Images file, Scenes screen 6879:59328 → widget card 6879:59359.
+   Top row 876 × 97 (title block 269 × 49, scale chip 78 × 44); control strip
+   763 × 61 with 24px arrows, four 64 × 44 view thumbnails, four named camera
+   views and a 96 × 44 action pair. Poppins, #242424 / #5F5F5F, accent #0C8CE9.
+   Sized in cqw against the frame so it holds at any width the reader drags to. */
+.dw-ei-widget-frame { container-type: inline-size; }
+
+.ei-player-chrome {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(10px, 2.6cqw, 22px);
+  font-family: Poppins, Archivo, Inter, sans-serif;
+  pointer-events: none;
+}
+
+.ei-player-top { display: flex; align-items: flex-start; gap: 12px; }
+.ei-player-title { display: grid; gap: 2px; min-width: 0; }
+.ei-player-title b {
+  color: #242424;
+  font-size: clamp(11px, 2.05cqw, 17px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.ei-player-title small {
+  color: #5f5f5f;
+  font-size: clamp(8px, 1.35cqw, 12px);
+}
+.ei-player-scale {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: clamp(4px, 1cqw, 9px) clamp(7px, 1.5cqw, 13px);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(3.6px);
+  color: #242424;
+  font-size: clamp(8px, 1.35cqw, 12px);
+}
+.ei-player-scale i {
+  width: 0; height: 0;
+  border-top: 4px solid currentColor;
+  border-right: 3px solid transparent;
+  border-left: 3px solid transparent;
+}
+
+.ei-player-controls {
+  display: flex;
+  align-items: center;
+  gap: clamp(4px, 1cqw, 9px);
+  align-self: center;
+  max-width: 100%;
+  padding: clamp(5px, 1.1cqw, 9px);
+  overflow: hidden;
+  border: 1px solid #ededed;
+  border-radius: 12px;
+  background: rgba(250, 250, 250, 0.82);
+  backdrop-filter: blur(6px);
+}
+.ei-player-arrow { flex: none; color: #5f5f5f; font-size: clamp(11px, 1.9cqw, 16px); line-height: 1; }
+.ei-player-shots { display: flex; gap: clamp(3px, 0.8cqw, 7px); margin: 0; padding: 0; list-style: none; }
+.ei-player-shots li {
+  width: clamp(26px, 6.2cqw, 54px);
+  height: clamp(18px, 4.3cqw, 37px);
+  flex: none;
+  border: 1px solid #ededed;
+  border-radius: 7px;
+  background: linear-gradient(140deg, #f2f2f2, #e4e4e4);
+}
+.ei-player-shots li.is-live { border: 2px solid #0c8ce9; }
+.ei-player-view {
+  flex: none;
+  padding: clamp(4px, 0.9cqw, 8px) clamp(5px, 1.2cqw, 11px);
+  border-radius: 8px;
+  color: #5f5f5f;
+  font-size: clamp(7px, 1.2cqw, 11px);
+  white-space: nowrap;
+}
+.ei-player-view.is-live { background: #f0f0f0; color: #242424; }
+.ei-player-actions { display: flex; flex: none; gap: clamp(3px, 0.8cqw, 7px); }
+.ei-player-actions i {
+  display: block;
+  width: clamp(16px, 3.4cqw, 30px);
+  aspect-ratio: 1;
+  border: 1px solid #ededed;
+  border-radius: 50%;
+  background: #fff;
+}
+.ei-player-actions i:first-child { border-color: #0c8ce9; border-width: 2px; }
+
+/* Below ~360px of frame the strip cannot hold its content; the view names go
+   first, then the thumbnails, in that order. */
+@container (max-width: 420px) {
+  .ei-player-view:not(.is-live) { display: none; }
+}
+@container (max-width: 300px) {
+  .ei-player-shots li:nth-child(n + 3) { display: none; }
+  .ei-player-title small { display: none; }
+}

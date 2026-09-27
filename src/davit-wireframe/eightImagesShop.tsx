@@ -4,6 +4,42 @@ import { OrbDock } from "./eightImagesOrb";
 import { EightImagesWidget } from "./eightImagesWidget";
 import "./eightImagesShop.css";
 
+/* --- the player's own chrome ------------------------------------------------
+   Coded from the 8 Images Figma file (Scenes screen 6879:59328, the widget card
+   6879:59359). The app-only affordances — device toggles, download, Edit — are
+   left out, because this frame is the merchant's page, not the 8 Images app.
+   What stays is what a shopper gets: the title block, the scale chip, and the
+   control strip of view thumbnails and named camera views. */
+const EI_PLAYER_VIEWS = ["3D view", "360 view", "Front", "Top"] as const;
+
+export function EightImagesPlayerChrome() {
+  return (
+    <div className="ei-player-chrome" aria-hidden="true">
+      <div className="ei-player-top">
+        <div className="ei-player-title">
+          <b>Toy Firetruck</b>
+          <small>© 2024 Northfold Toys</small>
+        </div>
+        <span className="ei-player-scale">100%<i /></span>
+      </div>
+
+      <div className="ei-player-controls">
+        <span className="ei-player-arrow">‹</span>
+        <ul className="ei-player-shots">
+          {[0, 1, 2, 3].map((i) => (
+            <li key={i} className={i === 3 ? "is-live" : undefined} />
+          ))}
+        </ul>
+        {EI_PLAYER_VIEWS.map((label, i) => (
+          <span className={`ei-player-view${i === 0 ? " is-live" : ""}`} key={label}>{label}</span>
+        ))}
+        <span className="ei-player-arrow">›</span>
+        <span className="ei-player-actions"><i /><i /></span>
+      </div>
+    </div>
+  );
+}
+
 /**
  * The argument, performed.
  *
@@ -136,6 +172,7 @@ export function EightImagesShop() {
                     claim, so it has to contain the thing being reframed. */}
                 <EightImagesWidget>
                   <OrbDock id="player" fade={0} className="ei-shop-dock" />
+                  <EightImagesPlayerChrome />
                 </EightImagesWidget>
               </div>
 

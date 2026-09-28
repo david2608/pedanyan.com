@@ -41,6 +41,25 @@
   padding-block: clamp(56px, 8vw, 120px) clamp(40px, 5vw, 80px);
 }
 
+/* The panel the case opens on - the same move every other case study makes,
+   with this one's own colour and radius coming from the content file. */
+.dw-ei-hero .dw-ei-hero-panel {
+  padding-inline: clamp(24px, 4vw, 80px);
+  overflow: hidden;
+}
+
+/* "8 Images" is the product's name; breaking it across two lines reads as two
+   things. It stays on one line at every width. */
+.dw-page .dw-ei-hero h1 {
+  margin: 0;
+  color: var(--ei-black);
+  font-size: clamp(40px, 4.2vw, 78px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
 @media (min-width: 901px) {
   /* Type and object share one screen. Stacking them put the wheel below the
      fold, so the page opened on a headline and nothing else. */

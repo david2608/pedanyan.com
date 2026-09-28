@@ -4447,6 +4447,10 @@
             {
               "label": "Key flow",
               "value": "Upload model → group meshes into parts → build materials → attach per part → embed"
+            },
+            {
+              "label": "Co-Designers",
+              "value": "Anna Avalyan"
             }
           ]
         },

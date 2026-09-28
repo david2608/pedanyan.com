@@ -3190,9 +3190,14 @@ function ProjectSectionBody({ project, section }: { project: PortfolioProject; s
        markup, so it inherits the shared styling. */
     const detail = project.sections.find((item) => item.id === "about" || item.id === "project");
     const metadata = (section.metadata?.length ? section.metadata : detail?.metadata) ?? [];
+    /* Same rounded panel every other case opens on: the section's own
+       background colour and radius from the content file, applied to the
+       inner, so this hero sits in the family instead of floating on white. */
+    const heroStyle = sectionStyle(project, section);
+    if (section.background?.radius) heroStyle.borderRadius = section.background.radius;
     return (
       <section className="dw-case-section dw-ei-section dw-ei-hero" id="intro">
-        <div className="dw-ei-inner">
+        <div className="dw-ei-inner dw-ei-hero-panel" style={heroStyle}>
           <header data-portfolio-reveal>
             {section.eyebrow ? <p className="dw-ei-eyebrow">{section.eyebrow}</p> : null}
             {section.title ? <h1>{section.title}</h1> : null}

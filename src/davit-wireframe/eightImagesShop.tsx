@@ -90,6 +90,9 @@ export function EightImagesShop() {
      stops flushing altogether. A style write is synchronous and free. */
   const [phase, setPhase] = useState<"start" | "arrived">("start");
   const [settled, setSettled] = useState(false);
+  /* Before the sequence has moved at all, the frame is still the portfolio's
+     own exhibit and the reader may resize it. */
+  const [own, setOwn] = useState(true);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -126,6 +129,7 @@ export function EightImagesShop() {
 
     let lastPhase = "start";
     let lastSettled = false;
+    let lastOwn = true;
 
     /* Read on the scroll event itself. Coalescing through requestAnimationFrame
        leaves this stuck at zero in a background tab, which is how the parts
@@ -140,6 +144,20 @@ export function EightImagesShop() {
       if (nextPhase !== lastPhase) { lastPhase = nextPhase; setPhase(nextPhase); }
       const nextSettled = p > 0.985;
       if (nextSettled !== lastSettled) { lastSettled = nextSettled; setSettled(nextSettled); }
+
+      const nextOwn = p < 0.02;
+      if (nextOwn !== lastOwn) {
+        lastOwn = nextOwn;
+        setOwn(nextOwn);
+        /* Whatever size the reader dragged the frame to is inline width and
+           height on the element. Handing the frame back to the sequence means
+           handing back control of its size too, or the shrink has nothing to
+           shrink. */
+        if (!nextOwn) {
+          const frame = pin.querySelector<HTMLElement>(".dw-ei-widget-frame");
+          if (frame) { frame.style.width = ""; frame.style.height = ""; }
+        }
+      }
     };
 
     read();
@@ -153,7 +171,7 @@ export function EightImagesShop() {
   }, []);
 
   return (
-    <div className="ei-shop-track" ref={trackRef} data-settled={settled ? "true" : undefined}>
+    <div className="ei-shop-track" ref={trackRef} data-settled={settled ? "true" : undefined} data-own={own ? "true" : undefined}>
       <div className="ei-shop-pin" ref={pinRef}>
         <div className="ei-shop-browser">
           <div className="ei-shop-chrome" aria-hidden="true">

@@ -27,6 +27,7 @@ import { ScrambleHoverText } from "./scrambleText";
 import { MediaCarousel } from "./MediaCarousel";
 import { CHAT_AVATAR, ContactChat, openContactChat } from "./ContactChat";
 import { PullToContinue } from "./PullToContinue";
+import { ReportArmenia2026 } from "../report/ReportArmenia2026";
 import { initAnalytics, trackPageView } from "../analytics/ga";
 import { useReadDepth } from "../analytics/readDepth";
 import { OctagonField } from "./OctagonField";
@@ -4989,6 +4990,7 @@ function useRoutePath() {
 }
 
 function resolveRoute(path: string): ReactNode {
+  if (path === "/report/design-armenia-2026") return <ReportArmenia2026 />;
   if (path === "/am/designer" || path === "/am/portfolio") return <DesignerPage />;
   const projectMatch = path.match(/^\/am\/projects\/([^/]+)$/);
   if (projectMatch) return <ProjectPage slug={projectMatch[1]} />;

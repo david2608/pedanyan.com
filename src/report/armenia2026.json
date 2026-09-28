@@ -1,0 +1,1308 @@
+{
+  "meta": {
+    "slug": "design-armenia-2026",
+    "path": "/report/design-armenia-2026",
+    "eyebrow": "State of Design in Armenia · 2026 report",
+    "title": "State of Design in Armenia 2026",
+    "h1": "Armenia lost 800 designers in a year. The ones who stayed are more senior, more remote and more product-focused.",
+    "snapshotDate": "28 Sep 2026",
+    "research": "Research: Pedanyan Design, September 2026.",
+    "footerSources": "Sources: ACA Tech Market Insights 2026, LinkedIn, Glassdoor, Paylab, Armtal, hh.ru, EVN Report, Armstat. Estimates are marked.",
+    "usdAmd": 368,
+    "sectorPalette": {
+      "iGaming": "#2F6FDB",
+      "Product/SaaS": "#E8683A",
+      "Bank/Telecom": "#1FA67A",
+      "Game studio": "#1C3A6B",
+      "Agency": "#8A8A8A"
+    },
+    "signal": {
+      "negative": "#C8453B",
+      "positive": "#1FA67A"
+    }
+  },
+  "chapters": [
+    {
+      "n": "00",
+      "id": "overview",
+      "title": "Overview",
+      "summary": "What the year did to the field, in one screen.",
+      "hero": "5,600",
+      "heroLabel": "designers in tech, end-2025",
+      "read": "6 min"
+    },
+    {
+      "n": "01",
+      "id": "people",
+      "title": "People",
+      "summary": "Fewer designers, older on average, mostly women.",
+      "hero": "−800",
+      "heroLabel": "designers in one year",
+      "read": "5 min"
+    },
+    {
+      "n": "02",
+      "id": "employers",
+      "title": "Employers & jobs",
+      "summary": "iGaming and banks hire Armenia's designers — not startups.",
+      "hero": "191",
+      "heroLabel": "design-function people at SoftConstruct",
+      "read": "5 min"
+    },
+    {
+      "n": "03",
+      "id": "salaries",
+      "title": "Salaries",
+      "summary": "Product designers earn twice what graphic designers do — and pay hasn't moved in a year.",
+      "hero": "1.2M AMD",
+      "heroLabel": "senior product designer, gross/month",
+      "read": "7 min"
+    },
+    {
+      "n": "04",
+      "id": "education",
+      "title": "Education & outlook",
+      "summary": "33 places teach design. None offers a UX degree.",
+      "hero": "33",
+      "heroLabel": "places teach design",
+      "read": "5 min"
+    }
+  ],
+  "overview": {
+    "hero": {
+      "stat": {
+        "value": "5,600",
+        "label": "designers in tech companies (end-2025)",
+        "delta": "−800 (−12.5%) vs 2024",
+        "deltaTone": "negative",
+        "conf": "REPORTED"
+      },
+      "small": [
+        {
+          "value": "58%",
+          "label": "women",
+          "conf": "REPORTED"
+        },
+        {
+          "value": "1.2M AMD",
+          "label": "senior product designer gross/month",
+          "conf": "ESTIMATE"
+        },
+        {
+          "value": "33 / 0",
+          "label": "places teach design / offer a UX degree",
+          "conf": "HARD"
+        }
+      ],
+      "matrix": {
+        "total": 6400,
+        "lost": 800,
+        "caption": "Each dot is one designer. 800 left the field in 2025."
+      }
+    },
+    "keyNumbers": [
+      {
+        "value": "6,400 → 5,600",
+        "label": "Designers in tech, 2024 → 2025",
+        "conf": "REPORTED"
+      },
+      {
+        "value": "7,500–9,500",
+        "label": "All designers incl. agencies & freelance",
+        "conf": "ESTIMATE"
+      },
+      {
+        "value": "30 / 19 / 0",
+        "label": "hh.ru designer vacancies / remote / showing salary",
+        "conf": "HARD",
+        "date": "28 Sep 2026"
+      },
+      {
+        "value": "9 · 7 · 4",
+        "label": "LinkedIn exact-title jobs: graphic · product · UX",
+        "conf": "HARD",
+        "date": "28 Sep 2026"
+      },
+      {
+        "value": "191",
+        "label": "Largest employer: SoftConstruct, design-function people",
+        "conf": "HARD",
+        "source": "LinkedIn"
+      },
+      {
+        "value": "43%",
+        "label": "iGaming share of designers at 33 largest firms",
+        "conf": "HARD",
+        "source": "LinkedIn"
+      },
+      {
+        "value": "387 → ~368",
+        "label": "USD/AMD, 2025 avg → 2026 avg — dram +5%",
+        "conf": "HARD"
+      },
+      {
+        "value": "5–6",
+        "label": "New AI-branded design courses, 2025–26",
+        "conf": "HARD"
+      }
+    ],
+    "patterns": [
+      {
+        "id": 1,
+        "cat": "People",
+        "claim": "Headcount falling",
+        "from": "~6,400 designers",
+        "to": "~5,600 (−800)",
+        "source": "ACA via Sputnik Armenia, 22 Feb 2026",
+        "conf": "HARD"
+      },
+      {
+        "id": 2,
+        "cat": "People",
+        "claim": "Production & graphic work shrinks faster than product design",
+        "from": "—",
+        "to": "Design −800 and marketing −2,000+ while engineering grew",
+        "source": "ACA; our inference",
+        "conf": "ESTIMATE"
+      },
+      {
+        "id": 3,
+        "cat": "Jobs",
+        "claim": "Title shift: UI/UX → Product Designer",
+        "from": "'UI/UX designer' standard",
+        "to": "Banks hire 'Product Designer' (Ameriabank, Nov 2025) and 'Senior Product Designer' (May 2026)",
+        "source": "myjob.am",
+        "conf": "REPORTED"
+      },
+      {
+        "id": 4,
+        "cat": "Jobs",
+        "claim": "Game studios are the most visible hirers",
+        "from": "—",
+        "to": "17 of 30 hh.ru designer vacancies are game design",
+        "source": "hh.ru, 28 Sep 2026",
+        "conf": "HARD"
+      },
+      {
+        "id": 5,
+        "cat": "Jobs",
+        "claim": "Remote is the default in open roles",
+        "from": "—",
+        "to": "19 of 30 vacancies remote",
+        "source": "hh.ru, 28 Sep 2026",
+        "conf": "HARD"
+      },
+      {
+        "id": 6,
+        "cat": "Jobs",
+        "claim": "Seniority bar rising",
+        "from": "Juniors 31.6% of tech workforce",
+        "to": "Most design vacancies ask 3+ years; all UX roles ask 3–6",
+        "source": "hh.ru; EVN Report May 2026",
+        "conf": "REPORTED"
+      },
+      {
+        "id": 7,
+        "cat": "Education",
+        "claim": "AI enters training before job titles",
+        "from": "AI as a topic",
+        "to": "Picsart 'AI UX/UI', Skillbox 'UX/UI + AI', TCO 'Graphic Design with AI'; no local 'AI designer' title",
+        "source": "school websites",
+        "conf": "HARD"
+      },
+      {
+        "id": 8,
+        "cat": "People",
+        "claim": "Relocant designers leaving",
+        "from": "Foreign tech staff −12% (2024)",
+        "to": "~3,750 IT specialists left in 2025, 69% RU/UA/BY",
+        "source": "PAN.am; Sputnik",
+        "conf": "REPORTED"
+      },
+      {
+        "id": 9,
+        "cat": "Jobs",
+        "claim": "Big local design employers shrinking",
+        "from": "Picsart 1,264 staff (2023)",
+        "to": "921 (Mar 2026), −27%",
+        "source": "Revelio Labs",
+        "conf": "REPORTED"
+      },
+      {
+        "id": 10,
+        "cat": "Money",
+        "claim": "Pay flat in AMD, worse for USD earners",
+        "from": "390.7 AMD/$ (Apr 2025)",
+        "to": "374.2 (Apr 2026), ~365 (Aug 2026)",
+        "source": "ArmBanks",
+        "conf": "HARD"
+      },
+      {
+        "id": 11,
+        "cat": "Money",
+        "claim": "Pay stays opaque",
+        "from": "—",
+        "to": "0 of 30 vacancies show a salary",
+        "source": "hh.ru, careercenter.am",
+        "conf": "HARD"
+      },
+      {
+        "id": 12,
+        "cat": "Education",
+        "claim": "Community grows and turns to AI",
+        "from": "UXSTORM meetup (Mar 2024)",
+        "to": "First Design Fest Yerevan (Aug 2025); AI Jam for UX/UI 2.0 (Dec 2025); Armenia Digital Awards 800+ entries",
+        "source": "event pages",
+        "conf": "REPORTED"
+      },
+      {
+        "id": 13,
+        "cat": "Education",
+        "claim": "Training supply up while jobs fall",
+        "from": "—",
+        "to": "HSE Yerevan added UX/UI program (2025); 33 providers",
+        "source": "Arminfo",
+        "conf": "REPORTED"
+      },
+      {
+        "id": 14,
+        "cat": "People",
+        "claim": "Profession is majority-female",
+        "from": "—",
+        "to": "58% women vs 40.1% in all tech",
+        "source": "ACA via Sputnik",
+        "conf": "REPORTED"
+      }
+    ],
+    "shifts": [
+      {
+        "shift": "Value of the role",
+        "from": "Producing screens, banners, SMM visuals",
+        "to": "Product thinking, research, systems; production absorbed by AI and templates"
+      },
+      {
+        "shift": "Entry into the field",
+        "from": "Bootcamp → junior job in months",
+        "to": "Bootcamp → long search; portfolio and AI fluency beat certificates"
+      },
+      {
+        "shift": "Job title",
+        "from": "UI/UX designer, graphic designer",
+        "to": "Product designer; visual/content designer; game UI and motion as niches"
+      },
+      {
+        "shift": "Who buys design",
+        "from": "Relocated tech teams, startups, agencies",
+        "to": "iGaming & game studios, bank digital teams, remote foreign employers"
+      },
+      {
+        "shift": "Pay structure",
+        "from": "Wide local band",
+        "to": "Two tiers: remote/foreign pays 1.5–2× local; strong dram erodes USD pay"
+      },
+      {
+        "shift": "Workplace",
+        "from": "Office / hybrid",
+        "to": "Remote-first in open roles"
+      },
+      {
+        "shift": "Community",
+        "from": "Occasional meetups",
+        "to": "Festivals, awards, AI-focused events"
+      }
+    ]
+  },
+  "people": {
+    "title": "Fewer designers, older on average, mostly women.",
+    "hero": {
+      "value": "5,600",
+      "delta": "−800",
+      "conf": "REPORTED",
+      "sub": "Designers working in Armenian tech companies, end-2025. ~7,500–9,500 including agencies, in-house marketing and freelancers (ESTIMATE)."
+    },
+    "headcount": {
+      "finding": "Designers fell by 800 in one year",
+      "unit": "Designers in Armenian tech companies",
+      "data": [
+        {
+          "year": "2024",
+          "value": 6400,
+          "conf": "REPORTED (implied: 5,600 + 800)"
+        },
+        {
+          "year": "2025",
+          "value": 5600,
+          "conf": "REPORTED"
+        }
+      ],
+      "source": "ACA Tech Market Insights 2026 via Sputnik Armenia, 22 Feb 2026. The 2024 figure is implied.",
+      "quote": {
+        "text": "It is possible that some of these tasks are now performed with AI tools.",
+        "by": "ACA Tech Market Insights 2026"
+      }
+    },
+    "scope": {
+      "finding": "Where the designers are: inside and outside tech",
+      "unit": "Designers, end-2025 · total 7,500–9,500",
+      "data": [
+        {
+          "scope": "In tech companies",
+          "low": 5600,
+          "high": 5600,
+          "conf": "REPORTED"
+        },
+        {
+          "scope": "Outside tech (agencies, in-house, freelance)",
+          "low": 2000,
+          "high": 4000,
+          "conf": "ESTIMATE"
+        }
+      ]
+    },
+    "specialties": {
+      "finding": "Product and graphic designers are the two largest groups",
+      "unit": "Designers by specialty, range · 2024 vs 2025",
+      "conf": "ESTIMATE",
+      "data": [
+        {
+          "specialty": "Product designers",
+          "share": "25–30%",
+          "y2024": [
+            1600,
+            1900
+          ],
+          "y2025": [
+            1400,
+            1700
+          ]
+        },
+        {
+          "specialty": "UX/UI designers",
+          "share": "20–25%",
+          "y2024": [
+            1300,
+            1600
+          ],
+          "y2025": [
+            1100,
+            1400
+          ]
+        },
+        {
+          "specialty": "Graphic / brand / marketing",
+          "share": "25–30%",
+          "y2024": [
+            1700,
+            2000
+          ],
+          "y2025": [
+            1400,
+            1700
+          ]
+        },
+        {
+          "specialty": "Motion / 3D / game / illustration",
+          "share": "15–20%",
+          "y2024": [
+            950,
+            1300
+          ],
+          "y2025": [
+            850,
+            1100
+          ]
+        }
+      ],
+      "method": "Global benchmark (UX Tools survey: product + UX/UI = 61% of digital designers) adjusted with Armenian vacancy samples (ITA Jobs, staff.am) that skew to graphic, game and motion."
+    },
+    "grades": {
+      "finding": "Most designers are mid-level",
+      "unit": "Share of designers and headcount, range",
+      "conf": "ESTIMATE",
+      "data": [
+        {
+          "grade": "Junior / intern",
+          "years": "0–2",
+          "share": [
+            25,
+            30
+          ],
+          "headcount": [
+            1400,
+            1700
+          ]
+        },
+        {
+          "grade": "Mid",
+          "years": "2–5",
+          "share": [
+            35,
+            40
+          ],
+          "headcount": [
+            2000,
+            2200
+          ]
+        },
+        {
+          "grade": "Senior",
+          "years": "5–8+",
+          "share": [
+            22,
+            27
+          ],
+          "headcount": [
+            1250,
+            1500
+          ]
+        },
+        {
+          "grade": "Lead / head / manager",
+          "years": "8+",
+          "share": [
+            5,
+            8
+          ],
+          "headcount": [
+            300,
+            450
+          ]
+        }
+      ]
+    },
+    "butterfly": {
+      "finding": "The market wants 3–6 years; a third of designers have less than 3.",
+      "unit": "% of designers (supply) vs % of vacancy requirements (demand)",
+      "supplyConf": "ESTIMATE",
+      "demandConf": "HARD",
+      "demandSource": "hh.ru, 28 Sep 2026, n=26",
+      "supply": [
+        {
+          "band": "<1 yr",
+          "value": 10
+        },
+        {
+          "band": "1–3 yrs",
+          "value": 30
+        },
+        {
+          "band": "3–5 yrs",
+          "value": 25
+        },
+        {
+          "band": "5–10 yrs",
+          "value": 25
+        },
+        {
+          "band": "10+ yrs",
+          "value": 10
+        }
+      ],
+      "demand": [
+        {
+          "band": "No experience",
+          "value": 12
+        },
+        {
+          "band": "1–3 yrs",
+          "value": 27
+        },
+        {
+          "band": "3–6 yrs",
+          "value": 46
+        },
+        {
+          "band": "6+ yrs",
+          "value": 15
+        }
+      ]
+    },
+    "gender": {
+      "finding": "Design is the most female field in Armenian tech",
+      "unit": "Share of women, %",
+      "conf": "REPORTED",
+      "data": [
+        {
+          "group": "Designers",
+          "value": 58
+        },
+        {
+          "group": "Marketing",
+          "value": 67
+        },
+        {
+          "group": "All tech",
+          "value": 40.1
+        }
+      ]
+    }
+  },
+  "employers": {
+    "title": "iGaming and banks hire Armenia's designers — not startups.",
+    "hero": {
+      "value": "191",
+      "label": "design-function people at SoftConstruct in Armenia, 3× the next employer",
+      "conf": "HARD",
+      "source": "LinkedIn, 28 Sep 2026"
+    },
+    "companies": {
+      "finding": "iGaming employs the most designers",
+      "unit": "People in the “Arts and Design” job function, Armenia",
+      "conf": "HARD",
+      "source": "LinkedIn company People pages, filter: location Armenia + job function “Arts and Design”, read 28 Sep 2026",
+      "caveat": "“Arts and Design” is LinkedIn's inferred job function (includes illustrators, video and brand creatives; some profiles are outdated). 32 companies ≈ 790 people ≈ 14% of all designers in tech.",
+      "data": [
+        {
+          "company": "SoftConstruct",
+          "sector": "iGaming",
+          "people": 191
+        },
+        {
+          "company": "Picsart",
+          "sector": "Product/SaaS",
+          "people": 63
+        },
+        {
+          "company": "Digitain",
+          "sector": "iGaming",
+          "people": 62
+        },
+        {
+          "company": "Ameriabank",
+          "sector": "Bank/Telecom",
+          "people": 62
+        },
+        {
+          "company": "VBET",
+          "sector": "iGaming",
+          "people": 39
+        },
+        {
+          "company": "Nekki",
+          "sector": "Game studio",
+          "people": 34
+        },
+        {
+          "company": "BetConstruct",
+          "sector": "iGaming",
+          "people": 29
+        },
+        {
+          "company": "Playrix",
+          "sector": "Game studio",
+          "people": 25
+        },
+        {
+          "company": "ACBA Bank",
+          "sector": "Bank/Telecom",
+          "people": 25
+        },
+        {
+          "company": "Team Telecom Armenia",
+          "sector": "Bank/Telecom",
+          "people": 21
+        },
+        {
+          "company": "EPAM",
+          "sector": "Product/SaaS",
+          "people": 20
+        },
+        {
+          "company": "TotoGaming",
+          "sector": "iGaming",
+          "people": 19
+        },
+        {
+          "company": "ServiceTitan",
+          "sector": "Product/SaaS",
+          "people": 18
+        },
+        {
+          "company": "Ardshinbank",
+          "sector": "Bank/Telecom",
+          "people": 18
+        },
+        {
+          "company": "Evocabank",
+          "sector": "Bank/Telecom",
+          "people": 18
+        },
+        {
+          "company": "Inecobank",
+          "sector": "Bank/Telecom",
+          "people": 17
+        },
+        {
+          "company": "Viva Armenia",
+          "sector": "Bank/Telecom",
+          "people": 14
+        },
+        {
+          "company": "Adobe",
+          "sector": "Product/SaaS",
+          "people": 14
+        },
+        {
+          "company": "Renderforest",
+          "sector": "Product/SaaS",
+          "people": 13
+        },
+        {
+          "company": "IDBank",
+          "sector": "Bank/Telecom",
+          "people": 12
+        },
+        {
+          "company": "Idram",
+          "sector": "Bank/Telecom",
+          "people": 12
+        },
+        {
+          "company": "Backbone Branding",
+          "sector": "Agency",
+          "people": 11
+        },
+        {
+          "company": "MY.GAMES",
+          "sector": "Game studio",
+          "people": 11
+        },
+        {
+          "company": "Krisp",
+          "sector": "Product/SaaS",
+          "people": 10
+        },
+        {
+          "company": "Ucraft",
+          "sector": "Product/SaaS",
+          "people": 6
+        },
+        {
+          "company": "Yandex",
+          "sector": "Product/SaaS",
+          "people": 6
+        },
+        {
+          "company": "Gaijin Entertainment",
+          "sector": "Game studio",
+          "people": 4
+        },
+        {
+          "company": "10Web",
+          "sector": "Product/SaaS",
+          "people": 4
+        },
+        {
+          "company": "Synergy International Systems",
+          "sector": "Product/SaaS",
+          "people": 4
+        },
+        {
+          "company": "EasyDMARC",
+          "sector": "Product/SaaS",
+          "people": 3
+        },
+        {
+          "company": "Grid Dynamics",
+          "sector": "Product/SaaS",
+          "people": 2
+        },
+        {
+          "company": "Plexonic",
+          "sector": "Game studio",
+          "people": 2
+        }
+      ]
+    },
+    "sectors": {
+      "finding": "43% of designers at big firms work in iGaming",
+      "unit": "Share of the 790 people at the 32 largest employers",
+      "conf": "HARD",
+      "data": [
+        {
+          "sector": "iGaming",
+          "companies": 5,
+          "people": 340,
+          "share": 43
+        },
+        {
+          "sector": "Bank/Telecom",
+          "companies": 9,
+          "people": 199,
+          "share": 25
+        },
+        {
+          "sector": "Product/SaaS",
+          "companies": 12,
+          "people": 163,
+          "share": 21
+        },
+        {
+          "sector": "Game studio",
+          "companies": 5,
+          "people": 76,
+          "share": 10
+        },
+        {
+          "sector": "Agency",
+          "companies": 1,
+          "people": 11,
+          "share": 1
+        }
+      ]
+    },
+    "outside": {
+      "finding": "86% of designers work outside the 32 biggest employers",
+      "unit": "Of 5,600 designers in tech",
+      "conf": "ESTIMATE",
+      "note": "Mixes LinkedIn company counts with the ACA total.",
+      "data": [
+        {
+          "group": "At the 32 largest employers",
+          "value": 790
+        },
+        {
+          "group": "Everywhere else",
+          "value": 4810
+        }
+      ]
+    },
+    "openRoles": {
+      "finding": "Plenty of 'designer' mentions, very few product and UX openings.",
+      "unit": "Open roles, snapshot 28 Sep 2026",
+      "conf": "HARD",
+      "linkedin": {
+        "broad": 215,
+        "exact": [
+          {
+            "title": "Graphic designer",
+            "value": 9
+          },
+          {
+            "title": "Product designer",
+            "value": 7
+          },
+          {
+            "title": "UX designer",
+            "value": 4
+          }
+        ]
+      },
+      "hh": {
+        "total": 30,
+        "game": 17,
+        "remote": 19,
+        "office": 11,
+        "withSalary": 0
+      },
+      "ita": "70+ design openings from 40+ companies"
+    },
+    "patternRefs": [
+      3,
+      4,
+      5,
+      6,
+      9
+    ]
+  },
+  "salaries": {
+    "title": "Product designers earn twice what graphic designers do — and pay hasn't moved in a year.",
+    "netNote": "Approximate take-home after 20% income tax, pension and health insurance.",
+    "netRates": {
+      "upTo500k": 0.745,
+      "above1M": 0.72
+    },
+    "hero": {
+      "value": "1.2M AMD",
+      "usd": "~$3,260",
+      "label": "typical senior product/UX designer, gross per month, 2026",
+      "conf": "ESTIMATE",
+      "small": "~500k AMD for a senior graphic designer"
+    },
+    "byGrade": {
+      "finding": "Product/UX pay pulls away after mid-level",
+      "unit": "Monthly gross, thousand AMD, 2026",
+      "conf": "ESTIMATE",
+      "source": "Compiled from Glassdoor Yerevan, Paylab.am, Armtal Salary Guide 2026. No Armenian survey publishes designer pay by grade.",
+      "data": [
+        {
+          "grade": "Junior",
+          "role": "Product / UX-UI",
+          "low": 180,
+          "mid": 280,
+          "high": 400
+        },
+        {
+          "grade": "Junior",
+          "role": "Graphic",
+          "low": 130,
+          "mid": 180,
+          "high": 250
+        },
+        {
+          "grade": "Mid",
+          "role": "Product / UX-UI",
+          "low": 400,
+          "mid": 600,
+          "high": 850
+        },
+        {
+          "grade": "Mid",
+          "role": "Graphic",
+          "low": 250,
+          "mid": 350,
+          "high": 460
+        },
+        {
+          "grade": "Senior",
+          "role": "Product / UX-UI",
+          "low": 850,
+          "mid": 1200,
+          "high": 1500
+        },
+        {
+          "grade": "Senior",
+          "role": "Graphic",
+          "low": 400,
+          "mid": 500,
+          "high": 650
+        },
+        {
+          "grade": "Lead / Head",
+          "role": "Product / UX-UI",
+          "low": 1300,
+          "mid": 1800,
+          "high": 2500
+        },
+        {
+          "grade": "Lead / Head",
+          "role": "Graphic",
+          "low": 550,
+          "mid": 700,
+          "high": 1000
+        }
+      ]
+    },
+    "otherRoles": {
+      "finding": "Other design roles",
+      "unit": "Monthly gross, AMD, 2026",
+      "conf": "REPORTED",
+      "data": [
+        {
+          "role": "Motion designer",
+          "low": 250000,
+          "mid": 620000,
+          "high": 725000,
+          "source": "Glassdoor"
+        },
+        {
+          "role": "Designer (generic)",
+          "low": 275000,
+          "mid": 626000,
+          "high": 919000,
+          "source": "Glassdoor"
+        },
+        {
+          "role": "UI/UX, all grades",
+          "low": 400000,
+          "mid": null,
+          "high": 1000000,
+          "source": "Armtal"
+        },
+        {
+          "role": "Product designer at Picsart",
+          "low": 667000,
+          "mid": null,
+          "high": 833000,
+          "source": "Glassdoor"
+        }
+      ],
+      "freelance": "Freelance Upwork $15–60/hr, typical $30 (Upwork)."
+    },
+    "extremes": {
+      "finding": "The extremes",
+      "unit": "Monthly gross, AMD, log scale",
+      "conf": "REPORTED",
+      "min": 75000,
+      "max": 3500000,
+      "pins": [
+        {
+          "value": 75000,
+          "label": "Minimum wage (floor)",
+          "source": ""
+        },
+        {
+          "value": 135000,
+          "label": "Junior graphic designer, 130–140k",
+          "source": "Paylab, lowest observed"
+        },
+        {
+          "value": 2000000,
+          "label": "UX designer, Semrush remote",
+          "source": "Glassdoor 2026"
+        },
+        {
+          "value": 2000000,
+          "label": "Product designer, Avito",
+          "source": "Glassdoor 2026"
+        },
+        {
+          "value": 3500000,
+          "label": "Remote UI/UX, 11 yrs",
+          "source": "salaries.am, 2021, historic"
+        }
+      ]
+    },
+    "tiers": {
+      "finding": "Employer tiers",
+      "unit": "Monthly gross, AMD",
+      "conf": "ESTIMATE",
+      "data": [
+        {
+          "tier": "EPAM",
+          "low": 760000,
+          "high": 1000000
+        },
+        {
+          "tier": "Local iGaming (Digitain, SoftConstruct)",
+          "low": 300000,
+          "high": 600000
+        }
+      ],
+      "note": "Foreign remote (Semrush, Avito) ≈ 1.5–2× local at the same grade."
+    },
+    "fx": {
+      "finding": "Flat pay, stronger dram",
+      "unit": "USD/AMD and average monthly salary, AMD",
+      "conf": "HARD",
+      "rates": [
+        {
+          "when": "Apr 2025",
+          "value": 390.7
+        },
+        {
+          "when": "2025 avg",
+          "value": 387.1
+        },
+        {
+          "when": "Apr 2026",
+          "value": 374.2
+        },
+        {
+          "when": "Aug 2026",
+          "value": 365
+        },
+        {
+          "when": "28 Sep 2026",
+          "value": 364
+        }
+      ],
+      "salaries": [
+        {
+          "what": "IT sector average",
+          "a": {
+            "when": "Jun 2024",
+            "value": 824000
+          },
+          "b": {
+            "when": "Nov 2025",
+            "value": 820000
+          },
+          "change": "flat"
+        },
+        {
+          "what": "National average",
+          "a": {
+            "when": "2025",
+            "value": 303000
+          },
+          "b": {
+            "when": "Jul 2026",
+            "value": 321000
+          },
+          "change": "+5.6%"
+        }
+      ],
+      "callout": "If you're paid in USD, the same salary buys ~5% fewer drams than a year ago."
+    },
+    "tax": [
+      "20% income tax (10% only on R&D wages at qualifying high-tech firms 2025–2031)",
+      "Pension 5–10%",
+      "New health-insurance deduction from Jan 2026 above 200k",
+      "IT freelancers can use 1% turnover tax until 2031"
+    ],
+    "taxNote": "Not tax advice."
+  },
+  "education": {
+    "title": "33 places teach design. None offers a UX degree.",
+    "hero": [
+      {
+        "value": "33 providers",
+        "conf": "HARD"
+      },
+      {
+        "value": "0 university UX/product degrees",
+        "conf": "HARD"
+      }
+    ],
+    "providersChart": {
+      "finding": "Digital design is taught in short private courses",
+      "unit": "Training providers by type, 2026",
+      "conf": "HARD",
+      "data": [
+        {
+          "type": "Universities",
+          "count": 6,
+          "note": "+1 unconfirmed — teach graphic/industrial, 0 UX degrees",
+          "teaches": "graphic"
+        },
+        {
+          "type": "Colleges",
+          "count": 1,
+          "note": "",
+          "teaches": "graphic"
+        },
+        {
+          "type": "Private academies & bootcamps",
+          "count": 21,
+          "note": "+4 small studios",
+          "teaches": "both"
+        },
+        {
+          "type": "Free programs",
+          "count": 2,
+          "note": "TUMO, Artoutik",
+          "teaches": "both"
+        },
+        {
+          "type": "Online schools with Armenian site",
+          "count": 2,
+          "note": "Skillbox, GeekBrains",
+          "teaches": "ux"
+        }
+      ],
+      "totals": {
+        "ux": 22,
+        "graphic": 22,
+        "motion": 7
+      }
+    },
+    "costs": {
+      "finding": "What it costs to become a designer",
+      "unit": "AMD",
+      "conf": "HARD",
+      "data": [
+        {
+          "what": "Private course",
+          "monthlyLow": 40000,
+          "monthlyHigh": 130000,
+          "months": "2–5",
+          "totalLow": 110000,
+          "totalHigh": 500000,
+          "usd": "~$280–1,300"
+        },
+        {
+          "what": "University BA",
+          "usdYearLow": 250,
+          "usdYearHigh": 800
+        },
+        {
+          "what": "RAU × HSE Communication Design",
+          "amdYear": 1800000
+        },
+        {
+          "what": "TUMO",
+          "free": true,
+          "note": "ages 12–18"
+        },
+        {
+          "what": "Skillbox",
+          "monthlyLow": 25000,
+          "monthlyHigh": 63000
+        }
+      ]
+    },
+    "providers": [
+      {
+        "provider": "Yerevan State Academy of Fine Arts",
+        "type": "University (Yerevan+Gyumri)",
+        "teaches": "Design, computer graphic design, industrial",
+        "price": "~$620/yr",
+        "notes": "BA+MA"
+      },
+      {
+        "provider": "National Univ. of Architecture & Construction",
+        "type": "University",
+        "teaches": "Graphic incl. web, animation",
+        "price": "~$800/yr",
+        "notes": "BA"
+      },
+      {
+        "provider": "National Polytechnic University",
+        "type": "University",
+        "teaches": "Graphic design, computer graphics",
+        "price": "—",
+        "notes": "BA"
+      },
+      {
+        "provider": "Russian-Armenian Univ. × HSE",
+        "type": "University",
+        "teaches": "Communication design",
+        "price": "1.8M AMD/yr",
+        "notes": "Russian, since 2023"
+      },
+      {
+        "provider": "Armenian Code Academy",
+        "type": "Academy",
+        "teaches": "UX/UI, Product Designer, Graphic",
+        "price": "75k AMD/mo (graphic)",
+        "notes": "17,000 grads all courses",
+        "disclosure": true
+      },
+      {
+        "provider": "Picsart Academy",
+        "type": "Academy",
+        "teaches": "AI UX/UI, AI Graphic Design",
+        "price": "59–65k AMD/mo",
+        "notes": "was free, now paid"
+      },
+      {
+        "provider": "UX Academy",
+        "type": "Academy",
+        "teaches": "UX, research, design systems, AI",
+        "price": "65–89k AMD/mo",
+        "notes": "widest UX curriculum"
+      },
+      {
+        "provider": "Umba Training",
+        "type": "Academy",
+        "teaches": "UX/UI, graphic",
+        "price": "65–85k AMD/mo",
+        "notes": "5,200+ completions"
+      },
+      {
+        "provider": "Colors Design School",
+        "type": "Academy",
+        "teaches": "Graphic, UI/UX, motion, web",
+        "price": "—",
+        "notes": "3,500+ grads"
+      },
+      {
+        "provider": "CC Academy",
+        "type": "Academy",
+        "teaches": "UI/UX, graphic, motion",
+        "price": "69–129k AMD/mo",
+        "notes": "3 languages"
+      },
+      {
+        "provider": "TCO Team",
+        "type": "Academy (Yerevan+Gyumri)",
+        "teaches": "UI/UX, Graphic with AI",
+        "price": "39–49k AMD/mo",
+        "notes": "cheapest in-person"
+      },
+      {
+        "provider": "TUMO",
+        "type": "Free center, 12–18",
+        "teaches": "Graphic, 3D, motion, UX lab",
+        "price": "free",
+        "notes": "~25,000 students/week all subjects"
+      },
+      {
+        "provider": "Skillbox.am",
+        "type": "Online",
+        "teaches": "UX/UI + AI",
+        "price": "~25–63k AMD/mo",
+        "notes": "Russian"
+      }
+    ],
+    "disclosure": "Davit Pedanyan teaches at Armenian Code Academy, one of the providers listed here.",
+    "supplyDemand": {
+      "finding": "Supply vs demand",
+      "unit": "Direction of travel, 2024 → 2026",
+      "conf": "ESTIMATE",
+      "up": "Training supply ↑ — 33 providers, 5–6 new AI courses, HSE new UX program (2025)",
+      "down": "Designer jobs ↓ — −800 designers; LinkedIn exact-title openings: product 7, UX 4, graphic 9"
+    },
+    "forSchools": [
+      "Teach product and AI-assisted workflows, not tool skills alone.",
+      "Build a junior bridge: real client projects and internships, because the market asks for 3+ years.",
+      "Prepare graduates for remote, game and iGaming roles, where most openings are."
+    ],
+    "gaps": [
+      {
+        "title": "2027 Pedanyan Design salary & grade survey",
+        "note": "join"
+      },
+      {
+        "title": "LinkedIn country total",
+        "note": ""
+      },
+      {
+        "title": "2023 baseline",
+        "note": ""
+      },
+      {
+        "title": "staff.am salary sample",
+        "note": ""
+      }
+    ]
+  },
+  "method": {
+    "confidence": [
+      {
+        "key": "HARD",
+        "text": "Measured by us from a named source we can point at."
+      },
+      {
+        "key": "REPORTED",
+        "text": "A published estimate by someone else, quoted as they published it."
+      },
+      {
+        "key": "ESTIMATE",
+        "text": "Our estimate, built from the sources named in the chart footer."
+      }
+    ],
+    "notes": [
+      "“2024 vs 2025” means end-2024 vs end-2025, because the main source (ACA, Feb 2026) describes 2025.",
+      "LinkedIn counts were read on 28 Sep 2026 from company People pages, filtered to location Armenia and job function “Arts and Design”.",
+      "USD figures use 368 AMD to the dollar, the 2026 average.",
+      "Davit Pedanyan teaches at Armenian Code Academy, one of the listed providers."
+    ]
+  },
+  "sources": [
+    "ACA Tech Market Insights 2026 via Sputnik Armenia (22 Feb 2026)",
+    "ACA Tech Market Insights 2025 via PAN.am (23 May 2025), EVN Report (3 Jun 2025)",
+    "EVN Report “Triple Shock” (13 May 2026)",
+    "LinkedIn company People pages (28 Sep 2026)",
+    "hh.ru Armenia (28 Sep 2026)",
+    "ITA Jobs",
+    "Glassdoor Yerevan (UX, product, senior product, graphic, motion)",
+    "Paylab.am",
+    "Armtal Salary Guide 2026",
+    "Armstat via ixbt.am / ARKA",
+    "exchange-rates.org, ArmBanks",
+    "KPMG, PwC tax summaries",
+    "Revelio Labs (Picsart)",
+    "Arminfo (HSE)",
+    "Provider websites",
+    "UX Tools survey, User Interviews UX Salary Report 2026"
+  ],
+  "cta": [
+    {
+      "title": "Get the full PDF",
+      "body": "The report as a file, with the data tables.",
+      "action": "email"
+    },
+    {
+      "title": "Take the 2027 designer survey",
+      "body": "Numbers from designers, not from job boards.",
+      "action": "email"
+    },
+    {
+      "title": "Study product design at Pedanyan Design",
+      "body": "Product thinking, AI-assisted workflows, real client projects.",
+      "action": "link"
+    }
+  ]
+}

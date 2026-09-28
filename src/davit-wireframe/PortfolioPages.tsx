@@ -3238,7 +3238,17 @@ function ProjectSectionBody({ project, section }: { project: PortfolioProject; s
                product page. The travelling object hands over inside it. */
             <EightImagesShop />
           ) : null}
-          {section.id === "editor" ? <EightImagesMaterialEditor /> : null}
+          {section.id === "editor" ? (
+            /* The editor demonstrates itself: it works through the map stack on
+               a timer while it is on screen. At normal reading speed the reader
+               scrolls past mid-demo, so the section holds - a tall track with a
+               sticky plate - long enough to watch a material get built. */
+            <div className="ei-editor-track">
+              <div className="ei-editor-pin">
+                <EightImagesMaterialEditor />
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
     );

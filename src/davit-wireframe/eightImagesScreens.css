@@ -677,3 +677,27 @@
 .ei-parts label.is-on:has(input:disabled):hover { background: var(--input); }
 
 .ei-parts[data-complete] label { cursor: pointer; }
+
+/* --- the hold on the material editor ---------------------------------------
+   Same mechanic the viewer section uses: a track taller than the screen with a
+   sticky plate inside it, so scrolling spends time here instead of passing
+   through. No pinning library, no layout thrash - the plate simply stays put
+   until the track runs out. */
+.ei-editor-track { height: 210vh; }
+
+.ei-editor-pin {
+  position: sticky;
+  /* clear of the fixed site header */
+  top: clamp(84px, 11vh, 132px);
+}
+
+@media (max-width: 900px) {
+  .ei-editor-track { height: 170vh; }
+}
+
+/* A hold the reader cannot scrub past is a hold they cannot leave, so with
+   reduced motion the section is an ordinary block again. */
+@media (prefers-reduced-motion: reduce) {
+  .ei-editor-track { height: auto; }
+  .ei-editor-pin { position: static; }
+}

@@ -94,6 +94,13 @@
   text-transform: uppercase;
 }
 
+/* With a mouse the hint is carried by the cursor the moment it is over the
+   object, so the caption under the hero is redundant. Touch has no cursor and
+   no hover, so there it stays. */
+@media (hover: hover) and (pointer: fine) {
+  .dw-ei-hero-hint { display: none; }
+}
+
 /* --- docks in the body of the case -----------------------------------------
    Prose sections hand the object a place in their right margin, so it stays
    alongside the argument instead of interrupting it. Below the two-column

@@ -709,5 +709,8 @@ export function EightImagesOrb() {
     if (document.hidden) settleRef.current?.();
   }, [checkedParts, material]);
 
-  return <div className={`ei-orb${ready ? " is-ready" : ""}`} ref={hostRef} aria-hidden="true" />;
+  /* The invitation to drag rides the cursor instead of sitting under the hero
+     as a caption: it is only true while the pointer is actually on the object,
+     and it follows it everywhere the object travels down the case. */
+  return <div className={`ei-orb${ready ? " is-ready" : ""}`} ref={hostRef} aria-hidden="true" data-cursor-label="drag it" />;
 }

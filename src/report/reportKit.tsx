@@ -6,14 +6,14 @@ import type { ReactNode } from "react";
    a chart card looks and behaves the same on page four as on page one.
 
    Two rules run through all of it:
-   - every number states how well it is known (MEASURED / REPORTED / ESTIMATE), and
+   - every number states how well it is known (HARD / REPORTED / ESTIMATE), and
      the pill is a link into the method section rather than decoration;
    - every chart is also a table. The table is visually hidden but present in the
      DOM, so a screen reader, a crawler and a reader with images off all get the
      numbers, not an empty box.
    ============================================================================= */
 
-export type Conf = "MEASURED" | "REPORTED" | "ESTIMATE";
+export type Conf = "HARD" | "REPORTED" | "ESTIMATE";
 
 export const REDUCED = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -181,9 +181,7 @@ export function ChartCard({
       canvas.height = Math.round(box.height * scale);
       const context = canvas.getContext("2d");
       if (context) {
-        /* The PNG is exported on the plate's own surface, not on white. */
-        const host = hostRef.current?.closest(".rp") as HTMLElement | null;
-        context.fillStyle = (host && getComputedStyle(host).getPropertyValue("--rp-panel").trim()) || "#161616";
+        context.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--rp-card") || "#ffffff";
         context.fillRect(0, 0, canvas.width, canvas.height);
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
         canvas.toBlob((out) => {

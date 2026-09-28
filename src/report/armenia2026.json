@@ -6,7 +6,7 @@
     "title": "State of Design in Armenia 2026",
     "h1": "Armenia lost 800 designers in a year. The ones who stayed are more senior, more remote and more product-focused.",
     "snapshotDate": "28 Sep 2026",
-    "research": "Research: Davit Pedanyan, September 2026.",
+    "research": "Research: Pedanyan Design, September 2026.",
     "footerSources": "Sources: ACA Tech Market Insights 2026, LinkedIn, Glassdoor, Paylab, Armtal, hh.ru, EVN Report, Armstat. Estimates are marked.",
     "usdAmd": 368,
     "sectorPalette": {
@@ -36,8 +36,8 @@
       "id": "people",
       "title": "People",
       "summary": "Fewer designers, older on average, mostly women.",
-      "hero": "46%",
-      "heroLabel": "of job ads ask for 3–6 years",
+      "hero": "−800",
+      "heroLabel": "designers in one year",
       "read": "5 min"
     },
     {
@@ -45,8 +45,8 @@
       "id": "employers",
       "title": "Employers & jobs",
       "summary": "iGaming and banks hire Armenia's designers — not startups.",
-      "hero": "~190",
-      "heroLabel": "design-function people at the largest employer",
+      "hero": "191",
+      "heroLabel": "design-function people at SoftConstruct",
       "read": "5 min"
     },
     {
@@ -91,7 +91,7 @@
         {
           "value": "33 / 0",
           "label": "places teach design / offer a UX degree",
-          "conf": "MEASURED"
+          "conf": "HARD"
         }
       ],
       "matrix": {
@@ -114,36 +114,36 @@
       {
         "value": "30 / 19 / 0",
         "label": "hh.ru designer vacancies / remote / showing salary",
-        "conf": "MEASURED",
+        "conf": "HARD",
         "date": "28 Sep 2026"
       },
       {
         "value": "9 · 7 · 4",
         "label": "LinkedIn exact-title jobs: graphic · product · UX",
-        "conf": "MEASURED",
+        "conf": "HARD",
         "date": "28 Sep 2026"
       },
       {
         "value": "191",
         "label": "Largest employer: SoftConstruct, design-function people",
-        "conf": "MEASURED",
+        "conf": "HARD",
         "source": "LinkedIn"
       },
       {
         "value": "43%",
         "label": "iGaming share of designers at 33 largest firms",
-        "conf": "MEASURED",
+        "conf": "HARD",
         "source": "LinkedIn"
       },
       {
         "value": "387 → ~368",
         "label": "USD/AMD, 2025 avg → 2026 avg — dram +5%",
-        "conf": "MEASURED"
+        "conf": "HARD"
       },
       {
         "value": "5–6",
         "label": "New AI-branded design courses, 2025–26",
-        "conf": "MEASURED"
+        "conf": "HARD"
       }
     ],
     "patterns": [
@@ -154,7 +154,7 @@
         "from": "~6,400 designers",
         "to": "~5,600 (−800)",
         "source": "ACA via Sputnik Armenia, 22 Feb 2026",
-        "conf": "MEASURED"
+        "conf": "HARD"
       },
       {
         "id": 2,
@@ -181,7 +181,7 @@
         "from": "—",
         "to": "17 of 30 hh.ru designer vacancies are game design",
         "source": "hh.ru, 28 Sep 2026",
-        "conf": "MEASURED"
+        "conf": "HARD"
       },
       {
         "id": 5,
@@ -190,7 +190,7 @@
         "from": "—",
         "to": "19 of 30 vacancies remote",
         "source": "hh.ru, 28 Sep 2026",
-        "conf": "MEASURED"
+        "conf": "HARD"
       },
       {
         "id": 6,
@@ -208,7 +208,7 @@
         "from": "AI as a topic",
         "to": "Picsart 'AI UX/UI', Skillbox 'UX/UI + AI', TCO 'Graphic Design with AI'; no local 'AI designer' title",
         "source": "school websites",
-        "conf": "MEASURED"
+        "conf": "HARD"
       },
       {
         "id": 8,
@@ -235,7 +235,7 @@
         "from": "390.7 AMD/$ (Apr 2025)",
         "to": "374.2 (Apr 2026), ~365 (Aug 2026)",
         "source": "ArmBanks",
-        "conf": "MEASURED"
+        "conf": "HARD"
       },
       {
         "id": 11,
@@ -244,7 +244,7 @@
         "from": "—",
         "to": "0 of 30 vacancies show a salary",
         "source": "hh.ru, careercenter.am",
-        "conf": "MEASURED"
+        "conf": "HARD"
       },
       {
         "id": 12,
@@ -316,6 +316,7 @@
     "title": "Fewer designers, older on average, mostly women.",
     "hero": {
       "value": "5,600",
+      "delta": "−800",
       "conf": "REPORTED",
       "sub": "Designers working in Armenian tech companies, end-2025. ~7,500–9,500 including agencies, in-house marketing and freelancers (ESTIMATE)."
     },
@@ -473,7 +474,7 @@
       "finding": "The market wants 3–6 years; a third of designers have less than 3.",
       "unit": "% of designers (supply) vs % of vacancy requirements (demand)",
       "supplyConf": "ESTIMATE",
-      "demandConf": "MEASURED",
+      "demandConf": "HARD",
       "demandSource": "hh.ru, 28 Sep 2026, n=26",
       "supply": [
         {
@@ -517,7 +518,7 @@
       ]
     },
     "gender": {
-      "finding": "Design is more female than tech overall — marketing more so",
+      "finding": "Design is the most female field in Armenian tech",
       "unit": "Share of women, %",
       "conf": "REPORTED",
       "data": [
@@ -539,17 +540,17 @@
   "employers": {
     "title": "iGaming and banks hire Armenia's designers — not startups.",
     "hero": {
-      "value": "~190",
-      "label": "people in LinkedIn’s “Arts and Design” function at the largest employer, about three times the next one",
-      "conf": "MEASURED",
+      "value": "191",
+      "label": "design-function people at SoftConstruct in Armenia, 3× the next employer",
+      "conf": "HARD",
       "source": "LinkedIn, 28 Sep 2026"
     },
     "companies": {
-      "finding": "iGaming carries the most design-function people",
-      "unit": "People in LinkedIn’s “Arts and Design” function, Armenia · rounded to the nearest ten",
-      "conf": "MEASURED",
+      "finding": "iGaming employs the most designers",
+      "unit": "People in the “Arts and Design” job function, Armenia",
+      "conf": "HARD",
       "source": "LinkedIn company People pages, filter: location Armenia + job function “Arts and Design”, read 28 Sep 2026",
-      "caveat": "“Arts and Design” is LinkedIn’s own inferred job function, not a job title. It includes illustrators, video and brand people, it misses anyone without a profile, and it keeps people who have left. Counts are rounded to the nearest ten and are approximate in both directions. 32 companies ≈ 790 people ≈ 14% of all designers in tech.",
+      "caveat": "“Arts and Design” is LinkedIn's inferred job function (includes illustrators, video and brand creatives; some profiles are outdated). 32 companies ≈ 790 people ≈ 14% of all designers in tech.",
       "data": [
         {
           "company": "SoftConstruct",
@@ -714,9 +715,9 @@
       ]
     },
     "sectors": {
-      "finding": "About two in five design-function people at big firms are in iGaming",
-      "unit": "Share of the ~790 people at the 32 largest employers",
-      "conf": "MEASURED",
+      "finding": "43% of designers at big firms work in iGaming",
+      "unit": "Share of the 790 people at the 32 largest employers",
+      "conf": "HARD",
       "data": [
         {
           "sector": "iGaming",
@@ -751,7 +752,7 @@
       ]
     },
     "outside": {
-      "finding": "About 86% of designers work outside the 32 biggest employers",
+      "finding": "86% of designers work outside the 32 biggest employers",
       "unit": "Of 5,600 designers in tech",
       "conf": "ESTIMATE",
       "note": "Mixes LinkedIn company counts with the ACA total.",
@@ -769,7 +770,7 @@
     "openRoles": {
       "finding": "Plenty of 'designer' mentions, very few product and UX openings.",
       "unit": "Open roles, snapshot 28 Sep 2026",
-      "conf": "MEASURED",
+      "conf": "HARD",
       "linkedin": {
         "broad": 215,
         "exact": [
@@ -973,7 +974,7 @@
     "fx": {
       "finding": "Flat pay, stronger dram",
       "unit": "USD/AMD and average monthly salary, AMD",
-      "conf": "MEASURED",
+      "conf": "HARD",
       "rates": [
         {
           "when": "Apr 2025",
@@ -1037,17 +1038,17 @@
     "hero": [
       {
         "value": "33 providers",
-        "conf": "MEASURED"
+        "conf": "HARD"
       },
       {
         "value": "0 university UX/product degrees",
-        "conf": "MEASURED"
+        "conf": "HARD"
       }
     ],
     "providersChart": {
       "finding": "Digital design is taught in short private courses",
       "unit": "Training providers by type, 2026",
-      "conf": "MEASURED",
+      "conf": "HARD",
       "data": [
         {
           "type": "Universities",
@@ -1089,7 +1090,7 @@
     "costs": {
       "finding": "What it costs to become a designer",
       "unit": "AMD",
-      "conf": "MEASURED",
+      "conf": "HARD",
       "data": [
         {
           "what": "Private course",
@@ -1221,7 +1222,7 @@
       "unit": "Direction of travel, 2024 → 2026",
       "conf": "ESTIMATE",
       "up": "Training supply ↑ — 33 providers, 5–6 new AI courses, HSE new UX program (2025)",
-      "down": "Designer jobs ↓ — the count fell last year; LinkedIn exact-title openings: product 7, UX 4, graphic 9"
+      "down": "Designer jobs ↓ — −800 designers; LinkedIn exact-title openings: product 7, UX 4, graphic 9"
     },
     "forSchools": [
       "Teach product and AI-assisted workflows, not tool skills alone.",
@@ -1230,44 +1231,43 @@
     ],
     "gaps": [
       {
-        "title": "Pay and grade, from designers themselves",
-        "note": "the one thing no public source has"
+        "title": "2027 Pedanyan Design salary & grade survey",
+        "note": "join"
       },
       {
-        "title": "A LinkedIn country total",
-        "note": "designers with a profile, counted once"
+        "title": "LinkedIn country total",
+        "note": ""
       },
       {
-        "title": "A 2023 baseline",
-        "note": "so the trend is three points, not two"
+        "title": "2023 baseline",
+        "note": ""
       },
       {
-        "title": "A staff.am salary sample",
-        "note": "the board we did not read"
+        "title": "staff.am salary sample",
+        "note": ""
       }
     ]
   },
   "method": {
     "confidence": [
       {
-        "key": "MEASURED",
+        "key": "HARD",
         "text": "Measured by us from a named source we can point at."
       },
       {
         "key": "REPORTED",
-        "text": "Somebody else published it. I am quoting them, with the date."
+        "text": "A published estimate by someone else, quoted as they published it."
       },
       {
         "key": "ESTIMATE",
-        "text": "Mine, built from the sources named in the chart footer."
+        "text": "Our estimate, built from the sources named in the chart footer."
       }
     ],
     "notes": [
       "“2024 vs 2025” means end-2024 vs end-2025, because the main source (ACA, Feb 2026) describes 2025.",
       "LinkedIn counts were read on 28 Sep 2026 from company People pages, filtered to location Armenia and job function “Arts and Design”.",
       "USD figures use 368 AMD to the dollar, the 2026 average.",
-      "Davit Pedanyan teaches at Armenian Code Academy, one of the listed providers.",
-      "LinkedIn company counts are rounded to the nearest ten on the page and shown exactly in the CSV. They are approximate in both directions: profiles go stale, and not everyone has one."
+      "Davit Pedanyan teaches at Armenian Code Academy, one of the listed providers."
     ]
   },
   "sources": [

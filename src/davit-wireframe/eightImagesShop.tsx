@@ -9,7 +9,9 @@ import "./eightImagesShop.css";
    6879:59359). The app-only affordances — device toggles, download, Edit — are
    left out, because this frame is the merchant's page, not the 8 Images app.
    What stays is what a shopper gets: the title block, the scale chip, and the
-   control strip of view thumbnails and named camera views. */
+   strip of named camera views. The shot thumbnails from the app strip are gone
+   on purpose: the model here is live, so there is nothing to thumbnail, and
+   four empty rectangles read as a broken UI rather than a quiet one. */
 const EI_PLAYER_VIEWS = ["3D view", "360 view", "Front", "Top"] as const;
 
 export function EightImagesPlayerChrome() {
@@ -24,17 +26,30 @@ export function EightImagesPlayerChrome() {
       </div>
 
       <div className="ei-player-controls">
-        <span className="ei-player-arrow">‹</span>
-        <ul className="ei-player-shots">
-          {[0, 1, 2, 3].map((i) => (
-            <li key={i} className={i === 3 ? "is-live" : undefined} />
-          ))}
-        </ul>
+        <span className="ei-player-arrow">
+          <svg viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5" /></svg>
+        </span>
         {EI_PLAYER_VIEWS.map((label, i) => (
           <span className={`ei-player-view${i === 0 ? " is-live" : ""}`} key={label}>{label}</span>
         ))}
-        <span className="ei-player-arrow">›</span>
-        <span className="ei-player-actions"><i /><i /></span>
+        <span className="ei-player-arrow">
+          <svg viewBox="0 0 24 24"><path d="M9.5 5.5 16 12l-6.5 6.5" /></svg>
+        </span>
+        <span className="ei-player-actions">
+          {/* orbit / reset, then fullscreen — the only two controls a shopper
+              needs that the drag gesture does not already give them */}
+          <i>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 5.5a6.5 6.5 0 1 1-5.6 3.2" />
+              <path d="M6 4.6v4.4h4.4" />
+            </svg>
+          </i>
+          <i>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 4.5H4.5V9M15 4.5H19.5V9M9 19.5H4.5V15M15 19.5H19.5V15" />
+            </svg>
+          </i>
+        </span>
       </div>
     </div>
   );

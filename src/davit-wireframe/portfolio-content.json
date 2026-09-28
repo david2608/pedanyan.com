@@ -444,8 +444,8 @@
           "headingGradient": "linear-gradient(93.372deg, rgb(32,65,235) 29.211%, rgb(115,52,241) 91.828%)",
           "paddingTop": "203px",
           "paddingBottom": "190px",
-          "title": "The brief",
-          "body": "<p>CloudChipr is a cloud-cost observability, management, and automation platform for engineering and finance teams.</p><p>My role was to turn complex cloud operations into an understandable MVP: teams could schedule workflows, send Slack alerts, create Jira tickets, and deactivate unused resources across AWS, GCP, and Azure.</p>"
+          "title": "About the project",
+          "body": "<p>Cloudchipr is a cloud costs observability, management and automation platform. It helps engineering and finance teams save time and money by automating cloud operations. With Cloudchipr, teams can schedule different automated workflows that send Slack alerts, build Tableau charts, create Jira tickets, and deactivate unused resources across all major cloud platforms. <strong>It’s like Zapier for cloud ops.</strong></p>"
         },
         {
           "id": "brand-construction",
@@ -516,7 +516,7 @@
           "paddingTop": "70px",
           "paddingBottom": "80px",
           "title": "How it started",
-          "body": "<p>Imagine being a UX designer exploring the world of cloud systems like AWS, GCP, and Azure. Sounds hard ha?</p><p>I joined a team of expert SRE and DevOps engineers when the project was <strong>just starting</strong>, moving from being a solo designer. Back then, all I had were <strong>a concept and a few rough mockups.</strong> As I was relatively new to this field, I decided to start with the basics – fundamental learning. This study covered a series of important steps that I needed to work through.</p>"
+          "body": "<p>Imagine being a UX designer exploring the world of cloud systems like AWS, GCP, and Azure. Sounds hard ha?</p><p>I joined a team of expert SRE and DevOps engineers when the project was <strong>just starting</strong>, moving from being a solo designer. Back then, all we had were <strong>a concept and a few rough mockups.</strong> As I was relatively new to this field, I decided to start with the basics – fundamental learning. This study covered a series of important steps that I needed to work through.</p>"
         },
         {
           "id": "field-study-photo",
@@ -636,7 +636,7 @@
           "paddingTop": "160px",
           "paddingBottom": "140px",
           "title": "The Problem",
-          "body": "<p>I have seen 1000s of 💸 per Hour of cloud waste paid for years just because:</p><p>Companies waste a large percentage of their cloud cost to pay for resources that are never used.<br>Developers forget to cleanup after tests.<br>Automation tools fail in the middle of execution and leave the cloud resources.<br>Finances and business do not have context whether the growing cloud cost is a waste.</p><p>Based on the personal research and information gathered from interviewing company’s founders and key stakeholders there is a clear need for a strong cost optimization platform that can effectively address the issue of wasting thousands of dollars per hour.</p>"
+          "body": "<p>We have seen 1000s of 💸 per Hour of cloud waste paid for years just because:</p><p>Companies waste a large percentage of their cloud cost to pay for resources that are never used.<br>Developers forget to cleanup after tests.<br>Automation tools fail in the middle of execution and leave the cloud resources.<br>Finances and business do not have context whether the growing cloud cost is a waste.</p><p>Based on the personal research and information gathered from interviewing company’s founders and key stakeholders there is a clear need for a strong cost optimization platform that can effectively address the issue of wasting thousands of dollars per hour.</p>"
         },
         {
           "id": "problem-discovered",
@@ -656,7 +656,7 @@
           "paddingTop": "100px",
           "paddingBottom": "110px",
           "title": "Competitor Analysis",
-          "body": "<p>When looking at other companies in the field, I did two kinds of analysis: direct and indirect competitors. For direct competitors, I checked out companies with similar products or services as mine. I looked at what they offer, how much they charge, and who they target. This helped me see how I compare in terms of strengths and weaknesses.</p><p>Indirect competitors were a bit different. These are companies that might not do exactly what I do, but they could still take customers away. I researched them to understand their potential impact on my market.</p><p>I did a lot of research, reading reports, and checking what customers say online. This gave me a good sense of what people like and don't like about my competitors. And I didn't just stop at that. I also looked into the technology they use and any unique things they offer. In the end, all this info helped me figure out where I stand compared to others and how I can stand out.</p>"
+          "body": "<p>When looking at other companies in the field, I did two kinds of analysis: direct and indirect competitors. For direct competitors, I checked out companies with similar products or services as ours. I looked at what they offer, how much they charge, and who they target. This helped me see how we compare in terms of strengths and weaknesses.</p><p>Indirect competitors were a bit different. These are companies that might not do exactly what we do, but they could still take customers away. I researched them to understand their potential impact on our market.</p><p>I did a lot of research, reading reports, and checking what customers say online. This gave me a good sense of what people like and don’t like about our competitors. And I didn't just stop at that. I also looked into the technology they use and any unique things they offer. In the end, all this info helped me figure out where we stand compared to others and how we can stand out.</p>"
         },
         {
           "id": "competitor-roi-visual",
@@ -682,7 +682,7 @@
           "paddingTop": "120px",
           "paddingBottom": "120px",
           "title": "To Design or Not to Design system?",
-          "body": "<p>The company has tasked me with determining whether to purchase license of on of the existing design systems or to create a new one. Beyond the pros and cons that contribute to this decision, there's an effective approach I've undertaken – calculating the Return on Investment (ROI) for developing my own design system. This analytical method provides a clear and strategic means of comprehending the optimal direction to take.</p><p><strong>Total ROI for One Project</strong><br>ROI = Cost Savings - Cost of Design System Implementation<br>$8000 - $20,000 = -$12,000</p><p>The decision was clear-cut. After thorough research among various available solutions, I concluded that MUI was the ideal choice.</p>"
+          "body": "<p>The company has tasked me with determining whether to purchase license of on of the existing design systems or to create a new one. Beyond the pros and cons that contribute to this decision, there's an effective approach I've undertaken – calculating the Return on Investment (ROI) for developing our own design system. This analytical method provides a clear and strategic means of comprehending the optimal direction to take.</p><p><strong>Total ROI for One Project</strong><br>ROI = Cost Savings - Cost of Design System Implementation<br>$8000 - $20,000 = -$12,000</p><p>The decision was clear-cut. After thorough research among various available solutions, we concluded that MUI was the ideal choice.</p>"
         },
         {
           "id": "design-system-visuals",
@@ -807,9 +807,9 @@
             "position": "center"
           },
           "textColor": "#ffffff",
-          "paddingTop": "300px",
-          "paddingBottom": "270px",
-          "title": "Company-reported impact at the time I left",
+          "paddingTop": "150px",
+          "paddingBottom": "150px",
+          "title": "On the moment I left the company",
           "items": [
             {
               "icon": "metric-saved",
@@ -839,8 +839,8 @@
           "textColor": "#111111",
           "paddingTop": "180px",
           "paddingBottom": "180px",
-          "title": "What I delivered",
-          "body": "<p class=\"dw-cloudchipr-outcome-lead\">From early validation to an MVP and a product design practice that could grow with the company.</p><div class=\"dw-cloudchipr-outcome-columns\"><section><p class=\"dw-cloudchipr-outcome-index\">01</p><h3>Early validation</h3><ul><li>A beta client <strong>reduced cloud spending by 30%</strong>, against an 8–15% target.</li><li><strong>$500K in savings</strong> was recorded during testing with SuperAnnotate, ActiveLoop, and Flux.</li></ul></section><section><p class=\"dw-cloudchipr-outcome-index\">02</p><h3>Product and leadership</h3><ul><li>Defined and designed the product <strong>MVP in six months.</strong></li><li>Progressed from <strong>solo designer to design lead</strong> over an 18-month engagement.</li><li>Built and led a <strong>four-designer team</strong>, establishing the product design practice.</li></ul></section></div>"
+          "title": "Overall Achievements",
+          "body": "<p>During 18 months working in CloudChipr:</p><ul><li>Overall $500K saved during testing for companies such as SuperAnnotate, ActiveLoop, Flux etc. (95k ARR in less than 1 month of operations.)</li><li>Successfully reduced cloud spending by 30% for a client during beta testing. The goal was 8–15%.</li><li>Started as a solo designer and finished as a design lead. Grew a team of 4 talented designers.</li><li>Understood and designed the entire product’s MVP in just 6 months.</li><li>Nailed all design operations inside the company.</li><li>Company became profitable in just 8 months.</li><li>Cloudchipr has raised a total of $1.3M in funding over 4 rounds.</li></ul>"
         },
         {
           "id": "feedback",
@@ -854,13 +854,14 @@
           "paddingTop": "165px",
           "paddingBottom": "130px",
           "title": "Feedback",
-          "quote": "Davit's journey within my company is impressive. He started as a solo designer and quickly rose to the position of Design Lead by recruiting and mentoring junior designers. He also took charge of creating the MVP for CloudChipr, showcasing his comprehensive understanding of the product. In his two years here, Davit consistently exhibited patience and responsibility. Truly invaluable member of my team.",
+          "quote": "Davit's journey within our company is impressive. He started as a solo designer and quickly rose to the position of Design Lead by recruiting and mentoring junior designers. He also took charge of creating the MVP for CloudChipr, showcasing his comprehensive understanding of the product. In his two years here, Davit consistently exhibited patience and responsibility. Truly invaluable member of our team.",
           "avatar": "viktor-avatar",
           "person": {
             "name": "Viktor Harutyunyan",
             "role": "Co-Founder and CPO at CloudChipr",
             "url": "https://www.linkedin.com/in/victorharutyunyan/"
-          }
+          },
+          "cta": "Ask Viktor more about me"
         },
         {
           "id": "portfolio-navigation",

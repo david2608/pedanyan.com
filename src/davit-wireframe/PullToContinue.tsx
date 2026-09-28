@@ -48,7 +48,24 @@ export function PullToContinue({
     setProgress(1);
     document.documentElement.classList.add("dw-page-leaving");
     onNavigate?.();
-    window.setTimeout(() => { window.location.href = href; }, 420);
+    /* Route through the SPA router rather than `location.href`. A document load
+       tears down everything mounted for the whole visit - including the
+       background-music iframe - so pulling from one case study into the next
+       used to cut the sound and start it over. The router listens on popstate. */
+    window.setTimeout(() => {
+      let sameOrigin = false;
+      try {
+        sameOrigin = new URL(href, window.location.href).origin === window.location.origin;
+      } catch {
+        sameOrigin = false;
+      }
+      if (!sameOrigin) {
+        window.location.href = href;
+        return;
+      }
+      window.history.pushState({}, "", href);
+      window.dispatchEvent(new PopStateEvent("popstate"));
+    }, 420);
   }, [href, onNavigate]);
 
   /* `go()` is a real navigation, so the browser would otherwise restore the

@@ -64,7 +64,7 @@ CustomEase.create(
 
 const BASE_DUST_SPEED = 0.08;
 const BASE_HERO_DUST_SPEED = 0.01;
-const DAVIT_LINKEDIN_URL = "https://am.linkedin.com/in/davit-pedanyan";
+const DAVIT_LINKEDIN_URL = "https://www.linkedin.com/in/davit-pedanyan/";
 
 // Homepage hero → animated numbers timing controls (seconds).
 // Edit these values to tune the complete numbers experience by hand.

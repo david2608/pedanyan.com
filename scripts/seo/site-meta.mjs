@@ -77,7 +77,7 @@ export const PERSON = {
      are excluded: a sameAs pointing at a site's homepage asserts nothing and
      weakens the entity. */
   sameAs: [
-    "https://am.linkedin.com/in/davit-pedanyan",
+    "https://www.linkedin.com/in/davit-pedanyan/",
     "https://medium.com/@pedanyandavid",
     "https://t.me/pedanyan"
   ],

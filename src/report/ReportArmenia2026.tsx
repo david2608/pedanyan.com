@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
+import "@fontsource/syne/600.css";
+import "@fontsource/syne/700.css";
 import data from "./armenia2026.json";
-import {
-  ChapterDivider, ChartCard, ConfPill, HeroStat, MethodDrawer, ShareChapter, StatRow, download, toCsv
-} from "./reportKit";
+import { ChapterDivider, ConfPill, MethodDrawer, download, toCsv } from "./reportKit";
 import { DotMatrix } from "./reportCharts";
 import { ReportPeople } from "./ReportPeople";
 import { ReportEmployers } from "./ReportEmployers";
@@ -11,14 +11,39 @@ import { ReportEducation } from "./ReportEducation";
 import "./report.css";
 
 /* =============================================================================
-   State of Design in Armenia 2026 — one page, five anchors.
+   State of Design in Armenia 2026 — one page, four chapters.
 
-   Everything the page says comes out of armenia2026.json. No figure is written
-   into this file: if a number is wrong it is wrong in one place, and the CSV a
-   reader downloads is the same object the chart drew.
+   Everything it says comes out of armenia2026.json. No figure is written into
+   this file: a wrong number is wrong in one place, and the CSV a reader
+   downloads is the object the chart drew.
+
+   The page is ordered so that a reader meets the strongest number first, is
+   told immediately what it does NOT prove, and only then is offered the
+   chapters. The admission is the second thing on the page on purpose.
    ============================================================================= */
 
 const CHAPTERS = data.chapters;
+const SURVEY = "https://docs.google.com/forms/d/e/1FAIpQLSeVAJGuzs_MpiPSYBSMMfjuLWL09SqAzi0iyI6Jv22ta0ZGgA/viewform";
+
+/* The six patterns no chapter charts. The other eight are told better by the
+   chapter that owns them, and repeating them here is what made the first
+   version feel like the same finding five times. */
+const LOOSE_PATTERNS = [2, 3, 7, 8, 9, 12];
+
+const UNKNOWNS = [
+  {
+    q: "Why the 800 left",
+    a: "Emigration, redundancy, a change of job title, or people who simply stopped updating a profile. The source counts the drop, not the reason."
+  },
+  {
+    q: "What designers actually earn, by grade",
+    a: "No Armenian survey publishes it, and zero of the thirty open vacancies show a salary. Chapter 3 is our estimate, and says so on every chart."
+  },
+  {
+    q: "How many left design for another profession",
+    a: "Nobody tracks it. It is the first question of the 2027 survey."
+  }
+];
 
 function useScrollSpy(ids: string[]) {
   const [live, setLive] = useState(ids[0]);
@@ -30,9 +55,8 @@ function useScrollSpy(ids: string[]) {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
       setPast(window.scrollY > window.innerHeight * 0.6);
-      /* The live chapter is the last one whose divider has crossed a third of
-         the screen — measured on the elements themselves rather than tracked
-         with an observer, so it cannot disagree with what is on screen. */
+      /* Measured on the elements themselves rather than through an observer, so
+         the live chapter can never disagree with what is on screen. */
       let current = ids[0];
       ids.forEach((id) => {
         const node = document.getElementById(id);
@@ -55,19 +79,18 @@ function useScrollSpy(ids: string[]) {
 export function ReportArmenia2026() {
   const ids = useMemo(() => CHAPTERS.map((chapter) => chapter.id), []);
   const { live, progress, past } = useScrollSpy(ids);
-  const [filter, setFilter] = useState<"All" | "People" | "Jobs" | "Money" | "Education">("All");
 
-  /* A hash in the URL has to land on the section even though the page mounts
-     with its charts still empty and its height still growing. */
+  /* A hash has to land on its section even though the page mounts with its
+     charts empty and its height still growing. */
   useEffect(() => {
     if (!window.location.hash) return;
     const target = document.querySelector(window.location.hash);
     if (!target) return;
-    const settle = window.setTimeout(() => target.scrollIntoView({ block: "start" }), 120);
+    const settle = window.setTimeout(() => target.scrollIntoView({ block: "start" }), 140);
     return () => window.clearTimeout(settle);
   }, []);
 
-  const patterns = data.overview.patterns.filter((pattern) => filter === "All" || pattern.cat === filter);
+  const patterns = data.overview.patterns.filter((pattern) => LOOSE_PATTERNS.includes(pattern.id));
 
   return (
     <div className="rp">
@@ -78,128 +101,85 @@ export function ReportArmenia2026() {
               <i>{chapter.n}</i>{chapter.title}
             </a>
           ))}
+          <a href="#method">Method</a>
         </div>
         <span className="rp-progress" style={{ width: `${progress * 100}%` }} />
       </nav>
 
-      {/* --- hero ------------------------------------------------------------ */}
+      {/* --- 00 masthead ------------------------------------------------------ */}
+      <div className="rp-shell">
+        <header className="rp-masthead">
+          <span><b>State of Design in Armenia</b> · 2026</span>
+          <span>Research: Pedanyan Design · September 2026</span>
+          <span>22 min · Every figure marked</span>
+        </header>
+      </div>
+
+      {/* --- 01 the number ---------------------------------------------------- */}
       <header className="rp-hero" id="overview">
         <div className="rp-shell">
-          <p className="rp-eyebrow">{data.meta.eyebrow}</p>
-          <h1 className="rp-text">{data.meta.h1}</h1>
-          <div className="rp-hero-stat">
-            <HeroStat
-              value={data.overview.hero.stat.value}
-              label={data.overview.hero.stat.label}
-              delta={data.overview.hero.stat.delta}
-              deltaTone="negative"
-              conf={data.overview.hero.stat.conf}
-            />
-            <ul className="rp-hero-small">
-              {data.overview.hero.small.map((item) => (
-                <li key={item.label}>
-                  <b>{item.value}</b>
-                  <span>{item.label}</span>
-                  <ConfPill conf={item.conf} />
-                </li>
-              ))}
-            </ul>
+          <div className="rp-hero-grid">
+            <h1>{data.meta.h1}</h1>
+            <div className="rp-hero-number">
+              <span className="rp-statement-big">{data.overview.hero.stat.value}</span>
+              <span className="rp-hero-row">
+                <span className="rp-delta" data-tone="negative">{data.overview.hero.stat.delta}</span>
+                <ConfPill conf={data.overview.hero.stat.conf} />
+              </span>
+              <span className="rp-hero-label">{data.overview.hero.stat.label}</span>
+            </div>
           </div>
-        </div>
 
-        <div className="rp-shell rp-hero-matrix">
-          <DotMatrix total={data.overview.hero.matrix.total} lost={data.overview.hero.matrix.lost} />
-          <p className="rp-caption">{data.overview.hero.matrix.caption}</p>
+          <div className="rp-matrix-wrap">
+            <DotMatrix total={data.overview.hero.matrix.total} lost={data.overview.hero.matrix.lost} />
+            <p className="rp-caption">{data.overview.hero.matrix.caption}</p>
+          </div>
         </div>
       </header>
 
-      {/* --- key numbers ----------------------------------------------------- */}
-      <section className="rp-section" aria-labelledby="key-numbers">
+      {/* --- 02 what we could not determine ----------------------------------- */}
+      <section className="rp-section" aria-labelledby="unknowns">
         <div className="rp-shell">
-          <h2 id="key-numbers" className="rp-section-title">Key numbers</h2>
-          <StatRow items={data.overview.keyNumbers} />
-        </div>
-      </section>
-
-      {/* --- patterns -------------------------------------------------------- */}
-      <section className="rp-section" aria-labelledby="patterns">
-        <div className="rp-shell">
-          <h2 id="patterns" className="rp-section-title">14 patterns, 2024 → 2026</h2>
-          <div className="rp-chips" role="tablist" aria-label="Filter patterns">
-            {(["All", "People", "Jobs", "Money", "Education"] as const).map((chip) => (
-              <button
-                key={chip}
-                type="button"
-                role="tab"
-                aria-selected={filter === chip}
-                className={`rp-chip${filter === chip ? " is-on" : ""}`}
-                onClick={() => setFilter(chip)}
-              >
-                {chip}
-              </button>
-            ))}
-          </div>
-          <div className="rp-patterns">
-            {patterns.map((pattern) => (
-              <article className="rp-pattern" key={pattern.id}>
-                <span className="rp-pattern-n">{String(pattern.id).padStart(2, "0")}</span>
-                <h3>{pattern.claim}</h3>
-                <p className="rp-pattern-move">
-                  <span>{pattern.from}</span>
-                  <em aria-hidden="true">→</em>
-                  <span>{pattern.to}</span>
-                </p>
-                <footer>
-                  <span>{pattern.source}</span>
-                  <ConfPill conf={pattern.conf} />
-                </footer>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --- shift table ----------------------------------------------------- */}
-      <section className="rp-section" aria-labelledby="shifts">
-        <div className="rp-shell">
-          <div className="rp-section-head">
-            <h2 id="shifts" className="rp-section-title">What changed</h2>
-            <span className="rp-herostat-row">
-              <span className="rp-card-unit">Our interpretation</span>
-              <ConfPill conf="ESTIMATE" />
-            </span>
-          </div>
-          <div className="rp-shifts">
-            {data.overview.shifts.map((row) => (
-              <div className="rp-shift" key={row.shift}>
-                <span className="rp-shift-name">{row.shift}</span>
-                <span className="rp-shift-from">{row.from}</span>
-                <span className="rp-shift-arrow" aria-hidden="true" />
-                <span className="rp-shift-to">{row.to}</span>
+          <p className="rp-eyebrow" id="unknowns">What this report does not know</p>
+          <div className="rp-ruled">
+            {UNKNOWNS.map((row, index) => (
+              <div className="rp-row" key={row.q}>
+                <span className="rp-row-n">{String(index + 1).padStart(2, "0")}</span>
+                <span className="rp-row-lead">{row.q}</span>
+                <span className="rp-row-body">{row.a}</span>
+                <span className="rp-row-meta" />
               </div>
             ))}
           </div>
+          <p style={{ marginTop: 26, maxWidth: "62ch" }}>
+            One more thing worth saying out loud: Pedanyan Design sells design courses, and this
+            report says the job market shrank. That is the one claim our own interest argues
+            against. Davit Pedanyan also teaches at Armenian Code Academy, one of the providers
+            listed in Chapter 4.
+          </p>
         </div>
       </section>
 
-      {/* --- chapter cards --------------------------------------------------- */}
-      <section className="rp-section" aria-labelledby="chapters">
+      {/* --- 03 contents ------------------------------------------------------ */}
+      <section className="rp-section" aria-labelledby="contents">
         <div className="rp-shell">
-          <h2 id="chapters" className="rp-section-title">Four chapters</h2>
-          <div className="rp-chaptercards">
+          <p className="rp-eyebrow" id="contents">Four chapters</p>
+          <div className="rp-ruled rp-contents">
             {CHAPTERS.slice(1).map((chapter) => (
-              <a className="rp-chaptercard" key={chapter.id} href={`#${chapter.id}`}>
-                <span className="rp-divider-n">{chapter.n}</span>
-                <h3>{chapter.title}</h3>
-                <p>{chapter.summary}</p>
-                <span className="rp-chaptercard-hero">{chapter.hero}<i>{chapter.heroLabel}</i></span>
+              <a href={`#${chapter.id}`} key={chapter.id}>
+                <div className="rp-row">
+                  <span className="rp-row-n">{chapter.n}</span>
+                  <span className="rp-row-lead">{chapter.title}</span>
+                  <span className="rp-row-body">{chapter.summary}</span>
+                  <span className="rp-contents-hero">{chapter.hero}</span>
+                </div>
               </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* --- chapters -------------------------------------------------------- */}
+      {/* --- 04–07 the chapters ----------------------------------------------- */}
       {CHAPTERS.slice(1).map((chapter) => (
         <section className="rp-section" key={chapter.id} style={{ paddingTop: 0 }}>
           <ChapterDivider {...chapter} />
@@ -210,10 +190,66 @@ export function ReportArmenia2026() {
         </section>
       ))}
 
-      {/* --- method, sources, CTA -------------------------------------------- */}
+      {/* --- 08 the loose patterns -------------------------------------------- */}
+      <section className="rp-section" id="patterns">
+        <div className="rp-shell">
+          <p className="rp-eyebrow">Six patterns no chart in this report proves</p>
+          <div className="rp-ruled">
+            {patterns.map((pattern) => (
+              <div className="rp-row" key={pattern.id}>
+                <span className="rp-row-n">{String(pattern.id).padStart(2, "0")}</span>
+                <span className="rp-row-lead">{pattern.claim}</span>
+                <span className="rp-row-body">
+                  {pattern.from !== "—" ? <em style={{ opacity: 0.6, fontStyle: "normal" }}>{pattern.from} → </em> : null}
+                  {pattern.to}
+                </span>
+                <span className="rp-row-meta">
+                  {pattern.source} <ConfPill conf={pattern.conf} />
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- 09 what changed --------------------------------------------------- */}
+      <section className="rp-section" id="shifts">
+        <div className="rp-shell">
+          <p className="rp-eyebrow">What changed · our interpretation <ConfPill conf="ESTIMATE" /></p>
+          <div className="rp-ruled">
+            {data.overview.shifts.map((row) => (
+              <div className="rp-row" key={row.shift}>
+                <span className="rp-row-n" />
+                <span className="rp-row-lead">{row.shift}</span>
+                <span className="rp-row-body" style={{ opacity: 0.62 }}>{row.from}</span>
+                <span className="rp-row-body">{row.to}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- 10 gaps ----------------------------------------------------------- */}
+      <section className="rp-section" id="gaps">
+        <div className="rp-shell">
+          <p className="rp-eyebrow">Gaps, and next year</p>
+          <div className="rp-ruled">
+            {data.education.gaps.map((gap) => (
+              <div className="rp-row" key={gap.title}>
+                <span className="rp-row-n">□</span>
+                <span className="rp-row-lead">{gap.title}</span>
+                <span className="rp-row-body">{gap.note}</span>
+                <span className="rp-row-meta" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- 11 method and sources --------------------------------------------- */}
       <section className="rp-section" id="method">
         <div className="rp-shell">
-          <h2 className="rp-section-title">Method</h2>
+          <p className="rp-eyebrow">Method</p>
           <div className="rp-method">
             <ul className="rp-conf-key">
               {data.method.confidence.map((item) => (
@@ -237,21 +273,39 @@ export function ReportArmenia2026() {
             </button>
           </div>
 
-          <h2 className="rp-section-title" style={{ marginTop: "72px" }}>Sources</h2>
-          <ol className="rp-sources">
-            {data.sources.map((source) => <li key={source}>{source}</li>)}
-          </ol>
+          <p className="rp-eyebrow" style={{ marginTop: 78 }}>Sources</p>
+          <ul className="rp-sources">
+            {data.sources.map((source) => <li key={source}><span>{source}</span></li>)}
+          </ul>
         </div>
       </section>
 
-      <section className="rp-section rp-cta">
-        <div className="rp-shell rp-cta-grid">
-          {data.cta.map((card) => (
-            <article key={card.title}>
-              <h3>{card.title}</h3>
-              <p>{card.body}</p>
-            </article>
-          ))}
+      {/* --- 12 three exits ---------------------------------------------------- */}
+      <section className="rp-section" id="next" style={{ paddingBottom: 0 }}>
+        <div className="rp-shell">
+          <p className="rp-eyebrow">Where to go from here</p>
+        </div>
+        <div className="rp-shell">
+          <div className="rp-exits">
+            <a className="rp-exit" href={SURVEY} target="_blank" rel="noreferrer">
+              <span className="rp-exit-who">If you design in Armenia</span>
+              <h3>Answer the 2027 survey</h3>
+              <p>Twenty questions, five minutes, anonymous. Pay by grade, tools, who left the profession — the things this report could not count.</p>
+              <span className="rp-exit-go">Take the survey →</span>
+            </a>
+            <a className="rp-exit" href="#employers">
+              <span className="rp-exit-who">If you are hiring</span>
+              <h3>What the market pays, and who you are bidding against</h3>
+              <p>Chapter 2 has the employer counts, Chapter 3 the bands. Both say how well they are known.</p>
+              <span className="rp-exit-go">Read chapter 2 →</span>
+            </a>
+            <a className="rp-exit" href="#education">
+              <span className="rp-exit-who">If you are choosing a course</span>
+              <h3>What it costs, and what it leads to</h3>
+              <p>Thirty-three providers, their prices, and what the market actually asks of a junior.</p>
+              <span className="rp-exit-go">Read chapter 4 →</span>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -262,9 +316,10 @@ export function ReportArmenia2026() {
         </div>
       </footer>
 
+      {/* The share control lives on each chapter divider, where it copies that
+          chapter's own link. One floating button is enough here. */}
       <div className={`rp-float${past ? " is-on" : ""}`}>
-        <ShareChapter anchor={live} />
-        <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Back to top</button>
+        <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Top</button>
       </div>
     </div>
   );

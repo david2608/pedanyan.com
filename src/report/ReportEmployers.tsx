@@ -136,7 +136,7 @@ export function ReportEmployers() {
         <div className="rp-meters">
           <Meter value={E.openRoles.hh.game} of={E.openRoles.hh.total} label="hh.ru vacancies that are game design" color="var(--rp-game)" />
           <Meter value={E.openRoles.hh.remote} of={E.openRoles.hh.total} label="remote rather than office" color="var(--rp-bank)" />
-          <Meter value={E.openRoles.hh.withSalary} of={E.openRoles.hh.total} label="showing a salary" color="var(--rp-neg)" />
+          <Meter value={E.openRoles.hh.withSalary} of={E.openRoles.hh.total} label="showing a salary" color="var(--rp-loss)" />
         </div>
 
         <div style={{ marginTop: 30 }}>

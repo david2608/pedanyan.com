@@ -181,7 +181,9 @@ export function ChartCard({
       canvas.height = Math.round(box.height * scale);
       const context = canvas.getContext("2d");
       if (context) {
-        context.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--rp-card") || "#ffffff";
+        /* The PNG is exported on the plate's own surface, not on white. */
+        const host = hostRef.current?.closest(".rp") as HTMLElement | null;
+        context.fillStyle = (host && getComputedStyle(host).getPropertyValue("--rp-panel").trim()) || "#161616";
         context.fillRect(0, 0, canvas.width, canvas.height);
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
         canvas.toBlob((out) => {

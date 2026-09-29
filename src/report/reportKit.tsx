@@ -6,14 +6,14 @@ import type { ReactNode } from "react";
    a chart card looks and behaves the same on page four as on page one.
 
    Two rules run through all of it:
-   - every number states how well it is known (HARD / REPORTED / ESTIMATE), and
+   - every number states how well it is known (MEASURED / REPORTED / ESTIMATE), and
      the pill is a link into the method section rather than decoration;
    - every chart is also a table. The table is visually hidden but present in the
      DOM, so a screen reader, a crawler and a reader with images off all get the
      numbers, not an empty box.
    ============================================================================= */
 
-export type Conf = "HARD" | "REPORTED" | "ESTIMATE";
+export type Conf = "MEASURED" | "REPORTED" | "ESTIMATE";
 
 export const REDUCED = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;

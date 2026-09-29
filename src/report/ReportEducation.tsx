@@ -106,7 +106,7 @@ export function ReportEducation() {
           </div>
         </div>
 
-        <p className="rp-disclosure">{E.disclosure} <ConfPill conf="HARD" /></p>
+        <p className="rp-disclosure">{E.disclosure} <ConfPill conf="MEASURED" /></p>
 
         <div className="rp-table-scroll">
           <table className="rp-table">

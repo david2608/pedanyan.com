@@ -33,7 +33,7 @@ const LOOSE_PATTERNS = [2, 3, 7, 8, 9, 12];
 const UNKNOWNS = [
   { q: "Why the number fell", a: "Emigration, redundancy, a change of title, or a profile nobody updated. The source counts the drop, not the reason." },
   { q: "What designers earn, by grade", a: "No survey publishes it and no vacancy shows it. Chapter 3 is our estimate." },
-  { q: "How many left design for another profession", a: "Nobody tracks it. It is the first question of the 2027 survey." }
+  { q: "How many left design for another profession", a: "Nobody tracks it, here or anywhere." }
 ];
 
 function useScrollSpy(ids: string[]) {
@@ -101,7 +101,7 @@ export function ReportArmenia2026() {
       <div className="rp-shell">
         <header className="rp-masthead">
           <span><b>State of Design in Armenia</b> · 2026</span>
-          <span>Research: Pedanyan Design · September 2026</span>
+          <span>Research: Davit Pedanyan · September 2026</span>
           <span>22 min · Every figure marked</span>
         </header>
       </div>
@@ -128,7 +128,27 @@ export function ReportArmenia2026() {
         </div>
       </header>
 
-      {/* --- 02 what we could not determine ----------------------------------- */}
+      {/* --- 02 intro ---------------------------------------------------------- */}
+      <section className="rp-section rp-intro">
+        <div className="rp-shell">
+          <div className="rp-text">
+          <p>
+            This is a count, not an opinion. For a month I gathered everything about designers in
+            Armenia that could be counted from public sources — company pages, job boards, salary
+            sites, the websites of every place that teaches design — and put it in one place,
+            because nobody had.
+          </p>
+          <p>
+            Every figure says how well it is known. <b>Measured</b> means I counted it myself from a
+            named source. <b>Reported</b> means somebody else published it and I am quoting them.
+            <b> Estimate</b> means it is mine, built from the sources in the chart's footer. Where I
+            have nothing, the page says so rather than filling the gap.
+          </p>
+          </div>
+        </div>
+      </section>
+
+      {/* --- 03 what we could not determine ----------------------------------- */}
       <section className="rp-section" aria-labelledby="unknowns">
         <div className="rp-shell">
           <p className="rp-eyebrow" id="unknowns">What this report does not know</p>
@@ -143,14 +163,14 @@ export function ReportArmenia2026() {
             ))}
           </div>
           <p style={{ marginTop: 34, maxWidth: "54ch" }}>
-            And our own interest, stated: Pedanyan Design sells design courses, and this report
-            says the market shrank. Davit Pedanyan teaches at Armenian Code Academy, one of the
-            providers in Chapter 4.
+            And my own interest, stated: I teach design and sell courses, and this report says the
+            market shrank — the one claim my own interest argues against. I also teach at Armenian
+            Code Academy, one of the providers in Chapter 4.
           </p>
         </div>
       </section>
 
-      {/* --- 03 contents ------------------------------------------------------ */}
+      {/* --- 04 contents ------------------------------------------------------ */}
       <section className="rp-section" aria-labelledby="contents">
         <div className="rp-shell">
           <p className="rp-eyebrow" id="contents">Four chapters</p>
@@ -169,7 +189,7 @@ export function ReportArmenia2026() {
         </div>
       </section>
 
-      {/* --- 04–07 the chapters ----------------------------------------------- */}
+      {/* --- 05–08 the chapters ----------------------------------------------- */}
       {CHAPTERS.slice(1).map((chapter) => (
         <section className="rp-section" key={chapter.id} style={{ paddingTop: 0 }}>
           <ChapterDivider {...chapter} />

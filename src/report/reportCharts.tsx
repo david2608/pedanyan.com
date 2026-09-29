@@ -224,18 +224,27 @@ export function Slope({
   const top = Math.max(a.value, b.value);
   const y = (value: number) => 20 + (1 - value / top) * 150;
 
+  /* The svg is stretched to the full width, which turns any <circle> inside it
+     into an ellipse. The line can take that; the end points cannot, so they are
+     drawn as elements over the top instead of inside the stretched coordinate
+     space. */
   return (
     <div className="rp-slope" ref={ref}>
-      <svg viewBox="0 0 400 210" preserveAspectRatio="none" role="presentation">
-        <line x1="0" y1={y(top)} x2="400" y2={y(top)} className="rp-grid" />
-        <line x1="0" y1="190" x2="400" y2="190" className="rp-grid" />
-        <line
-          x1="70" y1={y(a.value)} x2="330" y2={seen ? y(b.value) : y(a.value)}
-          stroke={tone} strokeWidth="2" className="rp-slope-line"
+      <div className="rp-slope-plot">
+        <svg viewBox="0 0 400 210" preserveAspectRatio="none" role="presentation">
+          <line x1="0" y1={y(top)} x2="400" y2={y(top)} className="rp-grid" />
+          <line x1="0" y1="190" x2="400" y2="190" className="rp-grid" />
+          <line
+            x1="70" y1={y(a.value)} x2="330" y2={seen ? y(b.value) : y(a.value)}
+            stroke={tone} strokeWidth="2" vectorEffect="non-scaling-stroke" className="rp-slope-line"
+          />
+        </svg>
+        <span className="rp-plot-dot" style={{ left: "17.5%", top: `${(y(a.value) / 210) * 100}%`, background: tone }} />
+        <span
+          className="rp-plot-dot"
+          style={{ left: "82.5%", top: `${((seen ? y(b.value) : y(a.value)) / 210) * 100}%`, background: tone, transition: "top 600ms cubic-bezier(0.22,1,0.36,1)" }}
         />
-        <circle cx="70" cy={y(a.value)} r="5" fill={tone} />
-        <circle cx="330" cy={seen ? y(b.value) : y(a.value)} r="5" fill={tone} className="rp-slope-end" />
-      </svg>
+      </div>
       <div className="rp-slope-ends">
         <span><b>{print(a.value)}</b><i>{a.label}</i>{a.note ? <em>{a.note}</em> : null}</span>
         <span><b>{print(b.value)}</b><i>{b.label}</i>{b.note ? <em>{b.note}</em> : null}</span>
@@ -527,15 +536,17 @@ export function MiniLine({
 
   return (
     <div className="rp-miniline" ref={ref}>
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation">
-        <path d={path} fill="none" stroke={tone} strokeWidth="2" vectorEffect="non-scaling-stroke"
-              style={{ strokeDasharray: 400, strokeDashoffset: seen ? 0 : 400, transition: "stroke-dashoffset 700ms ease" }} />
+      <div className="rp-miniline-plot">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation">
+          <path d={path} fill="none" stroke={tone} strokeWidth="2" vectorEffect="non-scaling-stroke"
+                style={{ strokeDasharray: 400, strokeDashoffset: seen ? 0 : 400, transition: "stroke-dashoffset 700ms ease" }} />
+        </svg>
+        {/* Same reason as the slope: circles inside a stretched viewBox come out
+            as ellipses, so the readings sit over the plot rather than in it. */}
         {points.map((point, index) => (
-          <circle key={point.when} cx={x(index)} cy={y(point.value)} r="1.6" fill={tone} vectorEffect="non-scaling-stroke">
-            <title>{`${point.when}: ${print(point.value)}`}</title>
-          </circle>
+          <span key={point.when} className="rp-plot-dot is-small" style={{ left: `${x(index)}%`, top: `${y(point.value)}%`, background: tone }} title={`${point.when}: ${print(point.value)}`} />
         ))}
-      </svg>
+      </div>
       <div className="rp-miniline-labels">
         {points.map((point) => (
           <span key={point.when}><b>{print(point.value)}</b><i>{point.when}</i></span>

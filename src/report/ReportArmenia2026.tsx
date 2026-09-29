@@ -31,18 +31,9 @@ const SURVEY = "https://docs.google.com/forms/d/e/1FAIpQLSeVAJGuzs_MpiPSYBSMMfju
 const LOOSE_PATTERNS = [2, 3, 7, 8, 9, 12];
 
 const UNKNOWNS = [
-  {
-    q: "Why the 800 left",
-    a: "Emigration, redundancy, a change of job title, or people who simply stopped updating a profile. The source counts the drop, not the reason."
-  },
-  {
-    q: "What designers actually earn, by grade",
-    a: "No Armenian survey publishes it, and zero of the thirty open vacancies show a salary. Chapter 3 is our estimate, and says so on every chart."
-  },
-  {
-    q: "How many left design for another profession",
-    a: "Nobody tracks it. It is the first question of the 2027 survey."
-  }
+  { q: "Why the 800 left", a: "Emigration, redundancy, a change of title, or a profile nobody updated. The source counts the drop, not the reason." },
+  { q: "What designers earn, by grade", a: "No survey publishes it and no vacancy shows it. Chapter 3 is our estimate." },
+  { q: "How many left design for another profession", a: "Nobody tracks it. It is the first question of the 2027 survey." }
 ];
 
 function useScrollSpy(ids: string[]) {
@@ -151,11 +142,10 @@ export function ReportArmenia2026() {
               </div>
             ))}
           </div>
-          <p style={{ marginTop: 26, maxWidth: "62ch" }}>
-            One more thing worth saying out loud: Pedanyan Design sells design courses, and this
-            report says the job market shrank. That is the one claim our own interest argues
-            against. Davit Pedanyan also teaches at Armenian Code Academy, one of the providers
-            listed in Chapter 4.
+          <p style={{ marginTop: 34, maxWidth: "54ch" }}>
+            And our own interest, stated: Pedanyan Design sells design courses, and this report
+            says the market shrank. Davit Pedanyan teaches at Armenian Code Academy, one of the
+            providers in Chapter 4.
           </p>
         </div>
       </section>
@@ -290,19 +280,19 @@ export function ReportArmenia2026() {
             <a className="rp-exit" href={SURVEY} target="_blank" rel="noreferrer">
               <span className="rp-exit-who">If you design in Armenia</span>
               <h3>Answer the 2027 survey</h3>
-              <p>Twenty questions, five minutes, anonymous. Pay by grade, tools, who left the profession — the things this report could not count.</p>
+              <p>Five minutes, anonymous. The part this report could not count.</p>
               <span className="rp-exit-go">Take the survey →</span>
             </a>
             <a className="rp-exit" href="#employers">
               <span className="rp-exit-who">If you are hiring</span>
-              <h3>What the market pays, and who you are bidding against</h3>
-              <p>Chapter 2 has the employer counts, Chapter 3 the bands. Both say how well they are known.</p>
+              <h3>Who you are bidding against</h3>
+              <p>Every employer we could count, and what the bands look like.</p>
               <span className="rp-exit-go">Read chapter 2 →</span>
             </a>
             <a className="rp-exit" href="#education">
               <span className="rp-exit-who">If you are choosing a course</span>
               <h3>What it costs, and what it leads to</h3>
-              <p>Thirty-three providers, their prices, and what the market actually asks of a junior.</p>
+              <p>Thirty-three providers, their prices, and what the market asks of a junior.</p>
               <span className="rp-exit-go">Read chapter 4 →</span>
             </a>
           </div>

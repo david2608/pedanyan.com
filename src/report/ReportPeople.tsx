@@ -42,6 +42,7 @@ export function ReportPeople() {
         <HeroStat
           value={P.hero.value}
           label="Designers working in Armenian tech companies, end-2025"
+          delta={P.hero.delta}
           conf={P.hero.conf}
           sub={P.hero.sub}
         />
@@ -143,7 +144,7 @@ export function ReportPeople() {
         unit={P.gender.unit}
         conf={P.gender.conf}
         source="ACA Tech Market Insights 2026 via Sputnik Armenia"
-        method="Three separate published figures for three populations, each read as the share of women. They are not one survey of one group, and design is not the most female field here — marketing is."
+        method="Three separate published figures for three populations, each read as the share of women. They are not from one survey of one group."
         rows={P.gender.data}
         csvName="people-gender"
       >

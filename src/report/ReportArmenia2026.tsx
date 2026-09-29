@@ -4,6 +4,10 @@ import {
   ChapterDivider, ChartCard, ConfPill, HeroStat, MethodDrawer, ShareChapter, StatRow, download, toCsv
 } from "./reportKit";
 import { DotMatrix } from "./reportCharts";
+import { ReportPeople } from "./ReportPeople";
+import { ReportEmployers } from "./ReportEmployers";
+import { ReportSalaries } from "./ReportSalaries";
+import { ReportEducation } from "./ReportEducation";
 import "./report.css";
 
 /* =============================================================================
@@ -197,7 +201,13 @@ export function ReportArmenia2026() {
 
       {/* --- chapters -------------------------------------------------------- */}
       {CHAPTERS.slice(1).map((chapter) => (
-        <ChapterDivider key={chapter.id} {...chapter} />
+        <section className="rp-section" key={chapter.id} style={{ paddingTop: 0 }}>
+          <ChapterDivider {...chapter} />
+          {chapter.id === "people" ? <ReportPeople /> : null}
+          {chapter.id === "employers" ? <ReportEmployers /> : null}
+          {chapter.id === "salaries" ? <ReportSalaries /> : null}
+          {chapter.id === "education" ? <ReportEducation /> : null}
+        </section>
       ))}
 
       {/* --- method, sources, CTA -------------------------------------------- */}

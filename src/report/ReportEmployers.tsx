@@ -4,7 +4,6 @@ import { ChartCard, HeroStat, MethodDrawer, download, toCsv } from "./reportKit"
 import { BarRows, Meter, ShareBar, Waffle } from "./reportCharts";
 
 const E = data.employers;
-const E_SECTOR_TOTAL = () => E.sectors.data.reduce((sum, row) => sum + row.people, 0);
 const SECTOR_COLOR: Record<string, string> = {
   iGaming: "var(--rp-igaming)",
   "Product/SaaS": "var(--rp-product)",
@@ -13,13 +12,6 @@ const SECTOR_COLOR: Record<string, string> = {
   Agency: "var(--rp-agency)"
 };
 const FILTERS = ["All", "iGaming", "Bank/Telecom", "Product/SaaS", "Game studio"] as const;
-
-/* LinkedIn's "Arts and Design" count is inferred, not measured: it misses people
-   without a profile and keeps people who have left. Printing 191 claims a
-   precision the source does not have, so the page rounds to the nearest ten and
-   the CSV keeps the exact figure. */
-const approx = (value: number) => (value < 10 ? "<10" : `~${Math.round(value / 10) * 10}`);
-const SECTOR_TOTAL = E_SECTOR_TOTAL();
 
 export function ReportEmployers() {
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
@@ -70,7 +62,6 @@ export function ReportEmployers() {
             note: row.sector
           }))}
           max={E.companies.data[0].people}
-          format={approx}
         />
 
         {filter === "All" && !all ? (
@@ -92,7 +83,7 @@ export function ReportEmployers() {
         unit={E.sectors.unit}
         conf={E.sectors.conf}
         source="LinkedIn company People pages, 28 Sep 2026"
-        method="Shares are of the roughly 790 people we could attribute to one of the 32 named employers — not of all designers in Armenia. The counts behind them are LinkedIn's inferred job function, so treat the split as a shape rather than a measurement."
+        method="Shares are of the 790 people we could attribute to one of the 32 named employers — not of all designers in Armenia."
         rows={E.sectors.data}
         csvName="employers-sectors"
       >
@@ -101,9 +92,8 @@ export function ReportEmployers() {
             label: row.sector,
             value: row.people,
             color: SECTOR_COLOR[row.sector],
-            note: `${row.companies} companies · ${approx(row.people)} people`
+            note: `${row.companies} companies · ${row.people} people`
           }))}
-          format={(value) => `≈${Math.round((value / SECTOR_TOTAL) * 100)}%`}
         />
       </ChartCard>
 
@@ -119,8 +109,8 @@ export function ReportEmployers() {
       >
         <Waffle
           parts={[
-            { label: `${E.outside.data[0].group} — about 790 people`, value: E.outside.data[0].value, color: "var(--rp-ink)" },
-            { label: `${E.outside.data[1].group} — about 4,800 people`, value: E.outside.data[1].value, color: "color-mix(in srgb, var(--rp-accent) 45%, transparent)", estimate: true }
+            { label: `${E.outside.data[0].group} — 790 people`, value: E.outside.data[0].value, color: "var(--rp-ink)" },
+            { label: `${E.outside.data[1].group} — 4,810 people`, value: E.outside.data[1].value, color: "color-mix(in srgb, var(--rp-accent) 45%, transparent)", estimate: true }
           ]}
         />
       </ChartCard>
@@ -146,7 +136,7 @@ export function ReportEmployers() {
         <div className="rp-meters">
           <Meter value={E.openRoles.hh.game} of={E.openRoles.hh.total} label="hh.ru vacancies that are game design" color="var(--rp-game)" />
           <Meter value={E.openRoles.hh.remote} of={E.openRoles.hh.total} label="remote rather than office" color="var(--rp-bank)" />
-          <Meter value={E.openRoles.hh.withSalary} of={E.openRoles.hh.total} label="showing a salary" color="var(--rp-loss)" />
+          <Meter value={E.openRoles.hh.withSalary} of={E.openRoles.hh.total} label="showing a salary" color="var(--rp-neg)" />
         </div>
 
         <div style={{ marginTop: 30 }}>

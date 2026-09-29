@@ -212,7 +212,7 @@ export function ShareBar({
 /** Two points and the line between them. For a year-on-year change the slope is
  *  the finding; a two-bar chart makes the reader compute it. */
 export function Slope({
-  a, b, format, tone = "var(--rp-neg)"
+  a, b, format, tone = "var(--rp-loss)"
 }: {
   a: { label: string; value: number; note?: string };
   b: { label: string; value: number; note?: string };

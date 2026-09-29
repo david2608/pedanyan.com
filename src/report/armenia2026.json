@@ -36,8 +36,8 @@
       "id": "people",
       "title": "People",
       "summary": "Fewer designers, older on average, mostly women.",
-      "hero": "−800",
-      "heroLabel": "designers in one year",
+      "hero": "46%",
+      "heroLabel": "of job ads ask for 3–6 years",
       "read": "5 min"
     },
     {
@@ -45,8 +45,8 @@
       "id": "employers",
       "title": "Employers & jobs",
       "summary": "iGaming and banks hire Armenia's designers — not startups.",
-      "hero": "191",
-      "heroLabel": "design-function people at SoftConstruct",
+      "hero": "~190",
+      "heroLabel": "design-function people at the largest employer",
       "read": "5 min"
     },
     {
@@ -316,7 +316,6 @@
     "title": "Fewer designers, older on average, mostly women.",
     "hero": {
       "value": "5,600",
-      "delta": "−800",
       "conf": "REPORTED",
       "sub": "Designers working in Armenian tech companies, end-2025. ~7,500–9,500 including agencies, in-house marketing and freelancers (ESTIMATE)."
     },
@@ -518,7 +517,7 @@
       ]
     },
     "gender": {
-      "finding": "Design is the most female field in Armenian tech",
+      "finding": "Design is more female than tech overall — marketing more so",
       "unit": "Share of women, %",
       "conf": "REPORTED",
       "data": [
@@ -540,17 +539,17 @@
   "employers": {
     "title": "iGaming and banks hire Armenia's designers — not startups.",
     "hero": {
-      "value": "191",
-      "label": "design-function people at SoftConstruct in Armenia, 3× the next employer",
+      "value": "~190",
+      "label": "people in LinkedIn’s “Arts and Design” function at the largest employer, about three times the next one",
       "conf": "HARD",
       "source": "LinkedIn, 28 Sep 2026"
     },
     "companies": {
-      "finding": "iGaming employs the most designers",
-      "unit": "People in the “Arts and Design” job function, Armenia",
+      "finding": "iGaming carries the most design-function people",
+      "unit": "People in LinkedIn’s “Arts and Design” function, Armenia · rounded to the nearest ten",
       "conf": "HARD",
       "source": "LinkedIn company People pages, filter: location Armenia + job function “Arts and Design”, read 28 Sep 2026",
-      "caveat": "“Arts and Design” is LinkedIn's inferred job function (includes illustrators, video and brand creatives; some profiles are outdated). 32 companies ≈ 790 people ≈ 14% of all designers in tech.",
+      "caveat": "“Arts and Design” is LinkedIn’s own inferred job function, not a job title. It includes illustrators, video and brand people, it misses anyone without a profile, and it keeps people who have left. Counts are rounded to the nearest ten and are approximate in both directions. 32 companies ≈ 790 people ≈ 14% of all designers in tech.",
       "data": [
         {
           "company": "SoftConstruct",
@@ -715,8 +714,8 @@
       ]
     },
     "sectors": {
-      "finding": "43% of designers at big firms work in iGaming",
-      "unit": "Share of the 790 people at the 32 largest employers",
+      "finding": "About two in five design-function people at big firms are in iGaming",
+      "unit": "Share of the ~790 people at the 32 largest employers",
       "conf": "HARD",
       "data": [
         {
@@ -752,7 +751,7 @@
       ]
     },
     "outside": {
-      "finding": "86% of designers work outside the 32 biggest employers",
+      "finding": "About 86% of designers work outside the 32 biggest employers",
       "unit": "Of 5,600 designers in tech",
       "conf": "ESTIMATE",
       "note": "Mixes LinkedIn company counts with the ACA total.",
@@ -1222,7 +1221,7 @@
       "unit": "Direction of travel, 2024 → 2026",
       "conf": "ESTIMATE",
       "up": "Training supply ↑ — 33 providers, 5–6 new AI courses, HSE new UX program (2025)",
-      "down": "Designer jobs ↓ — −800 designers; LinkedIn exact-title openings: product 7, UX 4, graphic 9"
+      "down": "Designer jobs ↓ — the count fell last year; LinkedIn exact-title openings: product 7, UX 4, graphic 9"
     },
     "forSchools": [
       "Teach product and AI-assisted workflows, not tool skills alone.",
@@ -1267,7 +1266,8 @@
       "“2024 vs 2025” means end-2024 vs end-2025, because the main source (ACA, Feb 2026) describes 2025.",
       "LinkedIn counts were read on 28 Sep 2026 from company People pages, filtered to location Armenia and job function “Arts and Design”.",
       "USD figures use 368 AMD to the dollar, the 2026 average.",
-      "Davit Pedanyan teaches at Armenian Code Academy, one of the listed providers."
+      "Davit Pedanyan teaches at Armenian Code Academy, one of the listed providers.",
+      "LinkedIn company counts are rounded to the nearest ten on the page and shown exactly in the CSV. They are approximate in both directions: profiles go stale, and not everyone has one."
     ]
   },
   "sources": [

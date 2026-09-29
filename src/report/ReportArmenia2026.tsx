@@ -31,7 +31,7 @@ const SURVEY = "https://docs.google.com/forms/d/e/1FAIpQLSeVAJGuzs_MpiPSYBSMMfju
 const LOOSE_PATTERNS = [2, 3, 7, 8, 9, 12];
 
 const UNKNOWNS = [
-  { q: "Why the 800 left", a: "Emigration, redundancy, a change of title, or a profile nobody updated. The source counts the drop, not the reason." },
+  { q: "Why the number fell", a: "Emigration, redundancy, a change of title, or a profile nobody updated. The source counts the drop, not the reason." },
   { q: "What designers earn, by grade", a: "No survey publishes it and no vacancy shows it. Chapter 3 is our estimate." },
   { q: "How many left design for another profession", a: "Nobody tracks it. It is the first question of the 2027 survey." }
 ];

@@ -24,6 +24,10 @@ import "./report.css";
 
 const CHAPTERS = data.chapters;
 const SURVEY = "https://docs.google.com/forms/d/e/1FAIpQLSeVAJGuzs_MpiPSYBSMMfjuLWL09SqAzi0iyI6Jv22ta0ZGgA/viewform";
+const LINKEDIN = "https://www.linkedin.com/in/davit-pedanyan";
+/* Set to the handle URL once Davit confirms it. Rendered only when present —
+   a social row with a dead link is worse than a social row with one link. */
+const INSTAGRAM: string | null = null;
 
 /* The six patterns no chapter charts. The other eight are told better by the
    chapter that owns them, and repeating them here is what made the first
@@ -315,6 +319,42 @@ export function ReportArmenia2026() {
               <p>Thirty-three providers, their prices, and what the market asks of a junior.</p>
               <span className="rp-exit-go">Read chapter 4 →</span>
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* --- 13 who counted it ------------------------------------------------ */}
+      <section className="rp-section rp-follow" id="follow">
+        <div className="rp-shell">
+          <p className="rp-eyebrow">Who counted it</p>
+          <div className="rp-follow-grid">
+            <div className="rp-text">
+              <p>
+                Davit Pedanyan designs products in Yerevan and teaches design here. This count
+                began as a question nobody could answer for him and turned into a month of
+                opening company pages one at a time. Next year it is meant to be a shorter job,
+                because the survey will do the part a public page cannot.
+              </p>
+            </div>
+            <ul className="rp-follow-links">
+              <li>
+                <a href={LINKEDIN} target="_blank" rel="noreferrer">
+                  <b>LinkedIn</b><span>The 2027 count as it is gathered, number by number</span>
+                </a>
+              </li>
+              {INSTAGRAM ? (
+                <li>
+                  <a href={INSTAGRAM} target="_blank" rel="noreferrer">
+                    <b>Instagram</b><span>The charts, one at a time</span>
+                  </a>
+                </li>
+              ) : null}
+              <li>
+                <a href="https://pedanyan.com/?utm_source=report&utm_medium=pdf">
+                  <b>pedanyan.com</b><span>The design work behind the research</span>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </section>

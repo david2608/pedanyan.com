@@ -644,3 +644,67 @@ a.rp-pill:hover { border-color: currentColor; }
 .rp-intro { padding-block: clamp(56px, 6vw, 96px) 0; }
 .rp-intro p + p { margin-top: 22px; }
 .rp-intro b { color: var(--rp-ink); font-weight: 600; }
+
+/* --- who counted it -------------------------------------------------------- */
+
+.rp-follow { border-top: 1px solid var(--rp-rule); }
+.rp-follow-grid { display: grid; gap: 34px; margin-top: 26px; }
+@media (min-width: 880px) { .rp-follow-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr); gap: 56px; } }
+.rp-follow-links { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; align-content: start; }
+.rp-follow-links li { border-top: 1px solid var(--rp-rule-soft); }
+.rp-follow-links li:last-child { border-bottom: 1px solid var(--rp-rule-soft); }
+.rp-follow-links a { display: grid; gap: 5px; padding-block: 17px; text-decoration: none; }
+.rp-follow-links b { color: var(--rp-ink); font-family: var(--rp-mono); font-size: 12.5px; font-weight: 400; letter-spacing: 0.04em; }
+.rp-follow-links span { color: var(--rp-body); font-size: 15.5px; line-height: 1.5; }
+.rp-follow-links a:hover b { color: var(--rp-accent); }
+
+/* =============================================================================
+   Print / PDF
+   The PDF is the report without its instruments: no nav, no filters, no export
+   buttons, every drawer already open, and each chapter starting on its own
+   page. The page is already light, so nothing has to be re-coloured — only the
+   things a reader cannot click on paper are removed.
+   ============================================================================= */
+
+@media print {
+  .rp-nav, .rp-float, .rp-progress,
+  .rp-tools, .rp-tool, .rp-help,
+  .rp-toggle, .rp-chip, .rp-checker, .rp-checker-row { display: none !important; }
+
+  .rp { --rp-ink: #141414; }
+  .rp, .rp-shell { max-width: none; }
+  .rp-section { padding-block: 28px; }
+
+  /* Drawers print as open prose, with no disclosure triangle. */
+  .rp-drawer > summary { list-style: none; font-weight: 600; }
+  .rp-drawer > summary::-webkit-details-marker { display: none; }
+  .rp-drawer > .rp-drawer-body { display: block !important; }
+
+  /* Nothing sticky on paper. */
+  .rp-nav, .rp-editor-pin, [style*="position: sticky"] { position: static !important; }
+
+  /* A chapter opens a page; a chart is never split across two. */
+  .rp-divider { break-before: page; page-break-before: always; }
+  .rp-card, .rp-herostat, .rp-quote, .rp-statrow, .rp-exit,
+  .rp-drawer, .rp-meters, .rp-fx, figure, table { break-inside: avoid; page-break-inside: avoid; }
+  h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+
+  /* The pills link into the method section; on paper they are just labels. */
+  .rp-pill, .rp-exit, a { text-decoration: none; }
+
+  .rp-follow { break-inside: avoid; }
+
+  /* The site's own chrome does not belong on a printed page. */
+  body:has(.rp) .dw-header,
+  body:has(.rp) .dw-progress,
+  body:has(.rp) .dw-cursor,
+  body:has(.rp) .dw-cursor-label,
+  body:has(.rp) .dw-fixed-socials,
+  body:has(.rp) .dw-fixed-music-control { display: none !important; }
+
+  /* On screen the 800 fade out as you scroll; on paper nothing scrolls, so the
+     loss is drawn rather than performed — otherwise the chart prints as 5,600
+     identical dots and the caption carries the whole finding alone. */
+  .rp-matrix { --gone: 0 !important; }
+  .rp-dot { fill-opacity: 0.3; }
+}

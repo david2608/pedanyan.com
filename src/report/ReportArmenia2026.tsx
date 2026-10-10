@@ -25,9 +25,7 @@ import "./report.css";
 const CHAPTERS = data.chapters;
 const SURVEY = "https://docs.google.com/forms/d/e/1FAIpQLSeVAJGuzs_MpiPSYBSMMfjuLWL09SqAzi0iyI6Jv22ta0ZGgA/viewform";
 const LINKEDIN = "https://www.linkedin.com/in/davit-pedanyan";
-/* Set to the handle URL once Davit confirms it. Rendered only when present —
-   a social row with a dead link is worse than a social row with one link. */
-const INSTAGRAM: string | null = null;
+const INSTAGRAM: string | null = "https://www.instagram.com/pedanyan";
 
 /* The six patterns no chapter charts. The other eight are told better by the
    chapter that owns them, and repeating them here is what made the first

@@ -1,5 +1,5 @@
 /* Personal page — redesigned: identity + all rewards on top, latest badge hero, upcoming in columns */
-:is(#s-profile-old, .pv-screen) { --pshadow: 0 4px 24px rgba(8,8,8,0.07); }
+#s-profile { --pshadow: 0 4px 24px rgba(8,8,8,0.07); }
 .prof__inner { position: relative; padding: 118px 16px 150px; display: flex; flex-direction: column; gap: 14px; }
 .prof__grid { top: 0; }
 .pcard { position: relative; background: #fff; border-radius: 28px; box-shadow: var(--pshadow); }
@@ -81,7 +81,7 @@
 .pitem__name { font: 400 12px/16px var(--font-text); color: var(--sys-typo-title); }
 .pitem__pts { font: 510 11px/14px var(--font-text); color: var(--sys-typo-subtitle); font-variant-numeric: tabular-nums; }
 .pgroup.is-locked .pitem { opacity: .55; }
-@media (prefers-reduced-motion: reduce) { :is(#s-profile-old, .pv-screen) * { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { #s-profile * { animation: none !important; } }
 
 /* Badge info drawer */
 #o-badge-info .pbs { padding: 10px 20px 0; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
@@ -116,14 +116,14 @@
 .prof-navedit__ic img { position: absolute; left: 9.37%; top: 9.37%; }
 
 /* ---------- Toast · Figma Toast Message component (3010:255083 / 3010:256145) ---------- */
-:is(#s-profile-old, .pv-screen) .ptoast {
+#s-profile .ptoast {
   position: absolute; left: 16px; right: 16px; bottom: 98px; z-index: 35;
   display: flex; align-items: center; gap: 4px; padding: 12px 8px 12px 14px;
   background: #fff; border: 1px solid #f8f9fa; /* system-gray/gray-1 */ border-radius: 16px;
   box-shadow: 0 4px 32px -6px rgba(8,8,8,0.12); /* color/alpha/gray/gray-12% */
   opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity .2s, transform .25s cubic-bezier(.2,.8,.2,1);
 }
-:is(#s-profile-old, .pv-screen) .ptoast.is-shown { opacity: 1; transform: none; pointer-events: auto; }
+#s-profile .ptoast.is-shown { opacity: 1; transform: none; pointer-events: auto; }
 .ptoast__label { flex: 1 0 0; min-width: 0; display: flex; align-items: center; gap: 12px; }
 .ptoast__ic { width: 24px; height: 24px; flex-shrink: 0; display: none; }
 .ptoast.is-success .ptoast__ic--ok, .ptoast.is-error .ptoast__ic--err { display: block; }
@@ -134,19 +134,19 @@
 /* ---------- Badge image states · Figma 3010:258268 (Loading / Default / Failed) ----------
    .pm gets .is-img-loading until the <img> loads (neutral circle holds the slot, pulses slate-50 ↔ slate-130),
    .is-img-failed on error (slate-50 circle + repeat glyph). Set by js/screens/30-profile.js. */
-:is(#s-profile-old, .pv-screen) .pm, #o-badge-info .pm { --pm-in: 0px; }
-:is(#s-profile-old, .pv-screen) .pm--md { --pm-in: 7px; }
-:is(#s-profile-old, .pv-screen) .pm.is-img-loading::after, :is(#s-profile-old, .pv-screen) .pm.is-img-failed::after,
+#s-profile .pm, #o-badge-info .pm { --pm-in: 0px; }
+#s-profile .pm--md { --pm-in: 7px; }
+#s-profile .pm.is-img-loading::after, #s-profile .pm.is-img-failed::after,
 #o-badge-info .pm.is-img-loading::after, #o-badge-info .pm.is-img-failed::after {
   content: ""; position: absolute; inset: var(--pm-in); border-radius: 200px; background-color: #f4f4f5; /* color/slate/slate-50 */
 }
-:is(#s-profile-old, .pv-screen) .pm.is-img-loading::after, #o-badge-info .pm.is-img-loading::after { animation: pmSkel 1s ease-in-out infinite alternate; }
-:is(#s-profile-old, .pv-screen) .pm.is-img-loading img:not(.pm__retry), :is(#s-profile-old, .pv-screen) .pm.is-img-failed img:not(.pm__retry),
+#s-profile .pm.is-img-loading::after, #o-badge-info .pm.is-img-loading::after { animation: pmSkel 1s ease-in-out infinite alternate; }
+#s-profile .pm.is-img-loading img:not(.pm__retry), #s-profile .pm.is-img-failed img:not(.pm__retry),
 #o-badge-info .pm.is-img-loading img:not(.pm__retry), #o-badge-info .pm.is-img-failed img:not(.pm__retry) { opacity: 0; }
 /* Failed glyph (assets/pedit-repeat.svg, 36px in an 88px slot ≈ 41%) — injected by JS */
-:is(#s-profile-old, .pv-screen) .pm .pm__retry, #o-badge-info .pm .pm__retry {
+#s-profile .pm .pm__retry, #o-badge-info .pm .pm__retry {
   display: none; position: absolute; z-index: 1; left: 50%; top: 50%; width: 41%; height: 41%; transform: translate(-50%, -50%); border-radius: 0;
 }
-:is(#s-profile-old, .pv-screen) .pm.is-img-failed .pm__retry, #o-badge-info .pm.is-img-failed .pm__retry { display: block; }
+#s-profile .pm.is-img-failed .pm__retry, #o-badge-info .pm.is-img-failed .pm__retry { display: block; }
 #o-badge-info .pm.is-img-failed { cursor: pointer; }
 @keyframes pmSkel { from { background-color: #f4f4f5; } to { background-color: #e5e6e8; /* color/slate/slate-130 */ } }

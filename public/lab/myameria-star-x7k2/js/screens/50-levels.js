@@ -1,28 +1,57 @@
-/* Levels flow glue — theme completion → back to the Education home, demo hash entries and ?age=NN.
-   The home itself (tabs, locked level, unlock modals + animation) lives in 24-home-levels.js.
-   Live rules: App.state.age (default 10, ?age=12 to try the 12+ flow), App.state.l1Done, App.state.pendingUnlock. */
+/* Levels flow — overlays (o-level-locked / o-level-new / o-two-levels), theme completion,
+   demo hash entry points and ?age=12 flow. The home screens themselves (all options and states)
+   are rendered by 20-home.js from App.state.level2Unlocked; App.state.homeOpt = last home option. */
 (function () {
+  const OVERLAYS = ['o-level-locked', 'o-level-new', 'o-two-levels'];
+
+  function unlockLevel2() {
+    App.state.level2Unlocked = true;
+    App.go(App.state.homeOpt || 's-home');
+  }
+
+  // Read entry params *before* app.js routes on location.hash (app:ready fires first).
   const params = new URLSearchParams(location.search);
   const age = parseInt(params.get('age'), 10);
+  let pendingOverlay = null;
+  let pendingAgeVariant = false;
 
   document.addEventListener('app:ready', () => {
     if (!isNaN(age)) App.state.age = age;
 
-    // Demo hash entries (kept from the previous build): #o-level-locked, #o-level-new, #o-level-new-age, #o-two-levels
+    // Demo hash: #o-level-locked, #o-level-new, #o-level-new-age, #o-two-levels → s-home + overlay
     const h = location.hash.slice(1);
-    const map = { 'o-level-locked': 's-home-u11-l2', 'o-level-new': 's-home-u11done', 'o-level-new-age': 's-home-turned12', 'o-two-levels': 's-home-o11' };
-    if (map[h]) history.replaceState(null, '', location.pathname + location.search + '#' + map[h]);
+    if (h === 'o-level-new-age') { pendingOverlay = 'o-level-new'; pendingAgeVariant = true; }
+    else if (OVERLAYS.includes(h)) pendingOverlay = h;
+    if (pendingOverlay) history.replaceState(null, '', location.pathname + location.search + '#s-home');
 
-    // Theme completion "Վերադառնալ" → level 1 is finished in this demo → level 2 unlocks on the live home
+    // CTA "Լավ" in o-level-new / o-two-levels
+    document.querySelectorAll('.js-lvl-unlock').forEach((b) => b.addEventListener('click', unlockLevel2));
+
+    // Theme completion CTA → home + "new level" modal
     const next = document.querySelector('#s-theme-complete .js-tc-next');
     if (next) next.addEventListener('click', () => {
-      const wasOpen = App.state.age >= 12;
-      App.state.l1Done = true;
-      App.state.level2Unlocked = true;
-      if (!wasOpen) App.state.pendingUnlock = 'done';
-      App.go('s-home');
+      App.go(App.state.homeOpt || 's-home');
+      document.getElementById('o-level-new').classList.remove('is-age');
+      App.open('o-level-new');
     });
+
+    // Theme completion close (✕) → back to the home option the user came from
     const close = document.querySelector('#s-theme-complete .js-tc-close');
-    if (close) close.addEventListener('click', () => App.go('s-home'));
+    if (close) close.addEventListener('click', () => App.go(App.state.homeOpt || 's-home'));
+
+    const screen = document.getElementById('s-home');
+    if (!screen) return;
+
+    let ageShown = false;
+    screen.addEventListener('screen:enter', () => {
+      if (pendingOverlay) {
+        const id = pendingOverlay; pendingOverlay = null;
+        document.getElementById('o-level-new').classList.toggle('is-age', pendingAgeVariant);
+        setTimeout(() => App.open(id), 0);
+      } else if (!ageShown && App.state.age > 11 && !App.state.level2Unlocked) {
+        setTimeout(() => App.open('o-two-levels'), 0);
+      }
+      if (App.state.age > 11) ageShown = true;
+    });
   });
 })();

@@ -79,7 +79,7 @@
   };
 
   document.addEventListener('app:ready', () => {
-    const screen = document.getElementById('s-profile-old');
+    const screen = document.getElementById('s-profile');
     if (!screen) return;
     screen.querySelector('.js-earned').innerHTML = BADGES.earned
       .map((b) => `<button class="pm pearn js-badge" data-badge="${b.id}" aria-label="${b.name}"><img src="${b.img}" alt=""></button>`).join('');

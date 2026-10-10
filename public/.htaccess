@@ -9,6 +9,11 @@ RewriteEngine On
 # (-Indexes above keeps a folder without index.html from being listed.)
 DirectorySlash Off
 
+# Every route folder and every /lab/ bundle answers from index.html. With
+# DirectorySlash Off this is the only thing that makes a request ending in /
+# serve the page instead of 403-ing on a listing.
+DirectoryIndex index.html
+
 # ===========================================================================
 # 1. ONE CANONICAL ORIGIN
 # ---------------------------------------------------------------------------
@@ -43,9 +48,28 @@ RewriteRule ^securion/?$                      /am/projects/securion [L,R=301]
 RewriteRule ^material-exchange-photo-lab/?$   /am/projects/material-exchange-photo-lab [L,R=301]
 RewriteRule ^hotel-apartments/?$              /am/projects/hotel-apartments [L,R=301]
 
-# Serve the language homepage directly so LiteSpeed does not alternate between
-# its directory slash and the canonical slashless URL.
-RewriteRule ^am/?$ /am/index.html [L]
+# ===========================================================================
+# 2b. /lab/ - RAW STATIC PROTOTYPES
+# ---------------------------------------------------------------------------
+# Everything under /lab/ is a self-contained bundle dropped in as-is: plain
+# HTML whose links are directory-relative (css/..., js/..., assets/...). That
+# makes the trailing slash load-bearing. The site-wide rule below strips it,
+# and /lab/<name> would then resolve every relative path one level too high -
+# 300-odd 404s and a blank screen. So /lab/ opts out and does the opposite:
+# the slashless form 301s TO the slash, and nothing rewrites it afterwards.
+#
+# These pages are unlisted, not private. No sitemap, no link from any page,
+# noindex in the markup and in the header below - but the URL is the only
+# thing between them and a reader who has it. Anything that must not be seen
+# by a stranger needs a password, not an unguessable path.
+# ===========================================================================
+# /lab/ itself has no index, so Apache would answer 403 - which tells a prober
+# the folder exists. 404 says nothing.
+RewriteRule ^lab/?$ - [R=404,L]
+
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(lab/.+[^/])$ /$1/ [L,R=301]
+RewriteRule ^lab/ - [L]
 
 # A trailing slash makes /am/portfolio/ a second URL for /am/portfolio, so
 # every slash address 301s to the slashless one (query string kept) ...
@@ -65,6 +89,10 @@ RewriteRule ^(.+)$ /$1/index.html [L]
 # artwork for long. Prerendered HTML must revalidate every time or a visitor
 # keeps yesterday's page after a deploy.
 # ===========================================================================
+<IfModule mod_setenvif.c>
+  SetEnvIf Request_URI "^/lab/" LAB_PATH=1
+</IfModule>
+
 <IfModule mod_headers.c>
   <FilesMatch "\.(?:js|css|woff2)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
@@ -79,10 +107,21 @@ RewriteRule ^(.+)$ /$1/index.html [L]
     Header set Cache-Control "public, max-age=3600"
   </FilesMatch>
 
-  # NOTHING here sets X-Robots-Tag. A stray `X-Robots-Tag: noindex` on shared
-  # hosting is one of the few ways to be invisible to every engine at once
-  # while every on-page check still looks perfect, so this line exists to make
-  # its absence deliberate and greppable.
+  # X-Robots-Tag is set in EXACTLY ONE place: /lab/. A stray
+  # `X-Robots-Tag: noindex` on shared hosting is one of the few ways to be
+  # invisible to every engine at once while every on-page check still looks
+  # perfect, so it is tied to an env var that only the /lab/ prefix sets and
+  # no other URL on the site can inherit it. Grep for LAB_PATH to see the
+  # whole blast radius.
+  Header set X-Robots-Tag "noindex, nofollow, noarchive" env=LAB_PATH
+
+  # A prototype under /lab/ is replaced in place - no content hash in the
+  # filename - so the year-long immutable rule above would leave a reviewer
+  # looking at last week's build. This FilesMatch is last, so it wins the
+  # merge for those files and only when LAB_PATH is set.
+  <FilesMatch ".*">
+    Header set Cache-Control "no-cache" env=LAB_PATH
+  </FilesMatch>
 </IfModule>
 
 <IfModule mod_deflate.c>
@@ -92,6 +131,16 @@ RewriteRule ^(.+)$ /$1/index.html [L]
 <IfModule mod_mime.c>
   AddType application/xml .xml
   AddType text/plain .txt
+
+  # Stated rather than assumed: a bundle dropped into /lab/ brings its own
+  # fonts and SVG icons, and an SVG served as text/plain renders as source.
+  AddType image/svg+xml .svg
+  AddType image/webp .webp
+  AddType image/avif .avif
+  AddType font/woff2 .woff2
+  AddType application/json .json
+  AddType text/css .css
+  AddType application/javascript .js
 </IfModule>
 
 # ===========================================================================

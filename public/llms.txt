@@ -43,6 +43,7 @@ This site is his portfolio: eleven product design case studies written as decisi
 
 ## Pages
 
+- [State of Design in Armenia 2026 — Pedanyan Design](https://pedanyan.com/report/design-armenia-2026): How many designers work in Armenia, who employs them, what they are paid and where they are trained. 2026 report by Pedanyan Design, with every figure sourced and marked measured, reported or estimated.
 - [Davit Pedanyan — Product Designer and Design Leader, Armenia](https://pedanyan.com/): Product designer, design leader and educator from Armenia. Product design, design strategy, DesignOps and design systems for startup and enterprise teams.
 - [Work — Case Studies by Davit Pedanyan](https://pedanyan.com/am/portfolio): Eleven product design case studies: the decisions behind each one, what changed, and the trade-offs. Fintech, insurance, cloud and marketplace products.
 - [Davit Pedanyan — Designer Profile, Experience and Practice](https://pedanyan.com/am/designer): Twenty years of product design across fintech, insurance and enterprise platforms, and nine years teaching design in Armenia.

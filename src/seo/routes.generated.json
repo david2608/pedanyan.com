@@ -72,6 +72,14 @@
   },
   "routes": [
     {
+      "path": "/report/design-armenia-2026",
+      "title": "State of Design in Armenia 2026 — Pedanyan Design",
+      "description": "How many designers work in Armenia, who employs them, what they are paid and where they are trained. 2026 report by Pedanyan Design, with every figure sourced and marked measured, reported or estimated.",
+      "type": "Article",
+      "priority": "0.9",
+      "changefreq": "yearly"
+    },
+    {
       "path": "/",
       "title": "Davit Pedanyan — Product Designer and Design Leader, Armenia",
       "description": "Product designer, design leader and educator from Armenia. Product design, design strategy, DesignOps and design systems for startup and enterprise teams.",

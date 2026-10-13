@@ -3680,6 +3680,20 @@ html:not(.dw-home-loader-revealing):not(.dw-home-loader-done) .dw-home-shell .dw
   line-height: 1.18;
 }
 
+/* The feature slot was styled but never rendered. As a pinned link it needs
+   the states a link has, and a marker that says why it is sitting above the
+   archive instead of in it. */
+.dw-public-journal-feature.is-pinned {
+  text-decoration: none;
+  color: inherit;
+  padding: 26px 0 32px;
+  border-top: 1px solid var(--dw-rule, rgba(17, 17, 17, 0.12));
+  border-bottom: 1px solid var(--dw-rule, rgba(17, 17, 17, 0.12));
+  transition: opacity 180ms ease;
+}
+.dw-public-journal-feature.is-pinned:hover { opacity: .72; }
+.dw-public-journal-feature.is-pinned .dw-public-journal-link { display: block; margin-top: 14px; }
+
 .dw-public-journal-feature {
   display: grid;
   grid-template-columns: minmax(120px, 2fr) minmax(0, 6fr) minmax(220px, 4fr);

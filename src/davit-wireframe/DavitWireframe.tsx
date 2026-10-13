@@ -28,6 +28,7 @@ import { MediaCarousel } from "./MediaCarousel";
 import { CHAT_AVATAR, ContactChat, openContactChat } from "./ContactChat";
 import { PullToContinue } from "./PullToContinue";
 import { ReportArmenia2026 } from "../report/ReportArmenia2026";
+import { FirstBriefPage } from "../first-brief/FirstBriefPage";
 import { initAnalytics, trackPageView } from "../analytics/ga";
 import { useReadDepth } from "../analytics/readDepth";
 import { OctagonField } from "./OctagonField";
@@ -4477,6 +4478,16 @@ export function PublicMediaGridPageSection() {
           <p>I organise formats, moderate discussions, teach, write, and join the conversations that help Armenia’s design community get sharper and more connected.</p>
         </header>
 
+        {/* Pinned above the archive, because First Brief is the one thing on this
+            page a reader can still act on. It reuses .dw-public-journal-feature,
+            which was already designed and styled for exactly this slot and had
+            never been used. */}
+        <a className="dw-public-journal-feature is-pinned" href="/am/first-brief" data-cursor-label="open it">
+          <div><p>Pinned / open now</p></div>
+          <h2>First Brief</h2>
+          <p>One real project, one junior designer, four to eight weeks, reviewed every week. A business gets the work; a designer gets a first case.<span className="dw-public-journal-link">Read how it works →</span></p>
+        </a>
+
         <section className="dw-public-journal-grid" aria-label="Public work archive">
           {archiveEntries.map((entry, index) => {
             const videoId = "videoId" in entry ? entry.videoId : undefined;
@@ -4991,6 +5002,7 @@ function useRoutePath() {
 
 function resolveRoute(path: string): ReactNode {
   if (path === "/report/design-armenia-2026") return <ReportArmenia2026 />;
+  if (path === "/am/first-brief") return <FirstBriefPage />;
   if (path === "/am/designer" || path === "/am/portfolio") return <DesignerPage />;
   const projectMatch = path.match(/^\/am\/projects\/([^/]+)$/);
   if (projectMatch) return <ProjectPage slug={projectMatch[1]} />;

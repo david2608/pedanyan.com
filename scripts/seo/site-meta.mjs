@@ -147,6 +147,15 @@ export const STATIC_ROUTES = [
     changefreq: "monthly"
   },
   {
+    path: "/am/first-brief",
+    title: "First Brief — One Real Project for a Junior Designer in Armenia",
+    description:
+      "First Brief pairs a small Armenian business with a junior designer for one defined project: 4\u20138 weeks, up to 15 hours a week, reviewed weekly by Davit Pedanyan. The business gets finished work, the designer gets a first real case.",
+    type: "WebPage",
+    priority: "0.8",
+    changefreq: "monthly"
+  },
+  {
     path: "/am/public-work",
     title: "Talks, Events and Writing — Davit Pedanyan",
     description:

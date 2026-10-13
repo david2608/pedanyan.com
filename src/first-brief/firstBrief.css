@@ -1,0 +1,141 @@
+/* =============================================================================
+   First Brief — the programme page.
+
+   The page has one job: make two people who are already looking for each other
+   see that the other one is standing right there. So the whole layout is a
+   pair. Two columns that mirror each other for the deadlock, two columns for
+   what each side gives and gets, two doors at the end. The only places the page
+   breaks the pair are the four steps and the rules — the parts where the two
+   sides are already in the same room.
+
+   It borrows the site's tokens (Syne display, mono labels, #f6f6f6 surfaces,
+   30px radius, 1800px shell) rather than inventing a second system, and keeps
+   one accent for the moments where the two sides meet.
+   ============================================================================= */
+
+.fb {
+  --fb-bg: #ffffff;
+  --fb-surface: #f6f6f6;
+  --fb-rule: rgba(17, 17, 17, 0.12);
+  --fb-rule-soft: rgba(17, 17, 17, 0.07);
+  --fb-ink: #111111;
+  --fb-body: #646464;
+  --fb-muted: #8c8c8c;
+  --fb-accent: #1f6f4a;          /* the one colour, used only where the two sides meet */
+  --fb-accent-wash: #eef7f2;
+
+  --fb-display: "Syne", system-ui, sans-serif;
+  --fb-text: "Archivo", system-ui, sans-serif;
+  --fb-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  --fb-shell: min(calc(100% - 48px), 1800px);
+  --fb-pad: clamp(72px, 9vw, 150px);
+
+  background: var(--fb-bg);
+  color: var(--fb-body);
+  font-family: var(--fb-text);
+}
+
+.fb-shell { width: var(--fb-shell); margin-inline: auto; }
+.fb-section { padding-block: var(--fb-pad); }
+.fb-section + .fb-section { border-top: 1px solid var(--fb-rule-soft); }
+
+.fb-eyebrow {
+  margin: 0 0 28px;
+  font-family: var(--fb-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--fb-muted);
+}
+
+.fb .fb-shell h1, .fb .fb-shell h2, .fb .fb-shell h3 { font-family: var(--fb-display); color: var(--fb-ink); margin: 0; text-wrap: balance; }
+.fb p { margin: 0; line-height: 1.6; }
+.fb strong { color: var(--fb-ink); font-weight: 600; }
+
+/* --- hero ------------------------------------------------------------------ */
+
+.fb-hero { padding-block: clamp(80px, 9vw, 150px) clamp(56px, 6vw, 96px); }
+/* Weight 400 at ~72px matches the public-work and portfolio heroes. At 700/92
+   it read as a different website. */
+.fb .fb-hero h1 { font-weight: 400; font-size: clamp(34px, 4.1vw, 72px); line-height: 1.0; letter-spacing: -0.015em; max-width: 24ch; }
+.fb .fb-hero-lead { margin-top: clamp(26px, 2.8vw, 44px); max-width: 56ch; font-size: clamp(18px, 1.5vw, 24px); line-height: 1.5; }
+.fb-hero-name { color: var(--fb-accent); }
+
+/* --- the deadlock: two columns that say the same thing from both sides ----- */
+
+.fb-pair { display: grid; gap: 1px; background: var(--fb-rule); border: 1px solid var(--fb-rule); border-radius: 30px; overflow: hidden; }
+@media (min-width: 900px) { .fb-pair { grid-template-columns: 1fr 1fr; } }
+.fb-pair > div { background: var(--fb-bg); padding: clamp(28px, 3.4vw, 52px); display: grid; gap: 14px; align-content: start; }
+.fb .fb-pair h3 { font-size: clamp(22px, 2.3vw, 32px); line-height: 1.12; }
+.fb-pair .fb-who { font-family: var(--fb-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--fb-muted); }
+.fb-pair p { max-width: 46ch; }
+
+.fb-knot {
+  margin-top: clamp(28px, 3vw, 44px); padding: clamp(24px, 2.6vw, 40px);
+  background: var(--fb-accent-wash); border-radius: 30px;
+}
+.fb-knot p { max-width: 70ch; font-size: clamp(17px, 1.5vw, 21px); color: var(--fb-ink); }
+
+/* --- the four steps -------------------------------------------------------- */
+
+.fb-steps { display: grid; gap: 0; margin-top: 8px; }
+.fb-step {
+  display: grid; gap: 10px; padding-block: clamp(26px, 2.6vw, 40px);
+  border-top: 1px solid var(--fb-rule-soft);
+}
+.fb-step:last-child { border-bottom: 1px solid var(--fb-rule-soft); }
+@media (min-width: 820px) {
+  .fb-step { grid-template-columns: 80px minmax(220px, 0.85fr) minmax(0, 1.3fr); gap: clamp(20px, 3vw, 56px); align-items: start; }
+}
+.fb-step-n { font-family: var(--fb-mono); font-size: 13px; color: var(--fb-accent); padding-top: .35em; }
+.fb .fb-step h3 { font-size: clamp(20px, 1.9vw, 27px); line-height: 1.16; }
+.fb-step p { max-width: 58ch; }
+
+/* --- what each side gets --------------------------------------------------- */
+
+.fb-gets { display: grid; gap: clamp(20px, 2.4vw, 36px); }
+@media (min-width: 900px) { .fb-gets { grid-template-columns: 1fr 1fr; } }
+.fb-get { padding: clamp(28px, 3.2vw, 50px); background: var(--fb-surface); border-radius: 30px; display: grid; gap: 18px; align-content: start; }
+.fb .fb-get h3 { font-size: clamp(20px, 1.9vw, 27px); }
+.fb-get ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.fb-get li { position: relative; padding-left: 22px; line-height: 1.55; }
+.fb-get li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 1.5px; background: var(--fb-accent); }
+
+/* --- the rules ------------------------------------------------------------- */
+
+.fb-rules { margin-top: 8px; display: grid; gap: 0; counter-reset: fbrule; }
+.fb-rule-row {
+  display: grid; gap: 6px clamp(20px, 3vw, 48px); padding-block: clamp(20px, 2vw, 30px);
+  border-top: 1px solid var(--fb-rule-soft); counter-increment: fbrule;
+}
+.fb-rule-row:last-child { border-bottom: 1px solid var(--fb-rule-soft); }
+@media (min-width: 760px) { .fb-rule-row { grid-template-columns: 60px minmax(0, 1fr); align-items: baseline; } }
+.fb-rule-row::before {
+  content: counter(fbrule, decimal-leading-zero);
+  font-family: var(--fb-mono); font-size: 12px; color: var(--fb-muted);
+}
+.fb-rule-row p { color: var(--fb-ink); max-width: 76ch; }
+
+/* --- the two doors --------------------------------------------------------- */
+
+.fb-doors { display: grid; gap: clamp(20px, 2.4vw, 36px); }
+@media (min-width: 900px) { .fb-doors { grid-template-columns: 1fr 1fr; } }
+.fb-door {
+  display: grid; gap: 16px; align-content: start; padding: clamp(32px, 3.6vw, 56px);
+  background: var(--fb-surface); border-radius: 30px; text-decoration: none; color: inherit;
+  transition: background 180ms ease, transform 180ms ease;
+}
+.fb-door:hover { background: var(--fb-accent-wash); }
+.fb-door:active { transform: translateY(1px); }
+.fb-door .fb-who { font-family: var(--fb-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--fb-muted); }
+.fb .fb-door h3 { font-size: clamp(22px, 2.2vw, 32px); line-height: 1.12; }
+.fb-door p { max-width: 42ch; }
+.fb-door-go { font-family: var(--fb-mono); font-size: 13px; color: var(--fb-accent); }
+
+.fb-foot { padding-block: clamp(40px, 5vw, 80px); border-top: 1px solid var(--fb-rule-soft); }
+.fb-foot p { font-family: var(--fb-mono); font-size: 12.5px; line-height: 1.7; color: var(--fb-muted); max-width: 70ch; }
+.fb-foot a { color: var(--fb-muted); }
+
+@media (prefers-reduced-motion: reduce) { .fb-door { transition: none; } }
+
+/* the one inline link in the body, in the accent */
+.fb-pair a { color: var(--fb-accent); text-decoration: none; font-family: var(--fb-mono); font-size: 13px; }
+.fb-pair a:hover { text-decoration: underline; }

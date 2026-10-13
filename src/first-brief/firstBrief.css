@@ -114,99 +114,27 @@
 }
 .fb-rule-row p { color: var(--fb-ink); max-width: 76ch; }
 
-/* --- registration, on the page --------------------------------------------- */
-/* The two doors became two tabs. Same card, same radius, same accent wash on
-   hover — but the door now opens in place: the chosen form is embedded right
-   under it, so the terms and the sign-up are one page. */
+/* --- the two doors --------------------------------------------------------- */
 
-.fb-reg .fb-reg-title {
-  font-size: clamp(25px, 2.6vw, 40px); line-height: 1.1; max-width: 26ch;
-  margin-bottom: clamp(26px, 3vw, 44px);
+.fb-doors { display: grid; gap: clamp(20px, 2.4vw, 36px); }
+@media (min-width: 900px) { .fb-doors { grid-template-columns: 1fr 1fr; } }
+.fb-door {
+  display: grid; gap: 16px; align-content: start; padding: clamp(32px, 3.6vw, 56px);
+  background: var(--fb-surface); border-radius: 30px; text-decoration: none; color: inherit;
+  transition: background 180ms ease, transform 180ms ease;
 }
-
-.fb-tabs { display: grid; gap: clamp(12px, 1.4vw, 20px); }
-@media (min-width: 760px) { .fb-tabs { grid-template-columns: 1fr 1fr; } }
-.fb-tab {
-  appearance: none; -webkit-appearance: none; cursor: pointer; text-align: left;
-  display: grid; gap: 10px; align-content: start;
-  padding: clamp(22px, 2.4vw, 34px);
-  background: var(--fb-surface); border: 1px solid transparent; border-radius: 30px;
-  font: inherit; color: inherit;
-  transition: background 180ms ease, border-color 180ms ease;
-}
-.fb-tab:hover { background: var(--fb-accent-wash); }
-.fb-tab.is-on { background: var(--fb-accent-wash); border-color: var(--fb-accent); }
-.fb-tab:focus-visible { outline: 2px solid var(--fb-accent); outline-offset: 3px; }
-.fb-tab .fb-who {
-  font-family: var(--fb-mono); font-size: 12px; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--fb-muted);
-}
-.fb-tab.is-on .fb-who { color: var(--fb-accent); }
-.fb-tab-title {
-  font-family: var(--fb-display); font-size: clamp(20px, 2vw, 28px); line-height: 1.12;
-  color: var(--fb-ink);
-}
-
-.fb-reg-panel {
-  margin-top: clamp(20px, 2.4vw, 36px);
-  display: grid; gap: clamp(20px, 2.4vw, 36px); align-items: start;
-}
-@media (min-width: 1040px) {
-  .fb-reg-panel { grid-template-columns: minmax(260px, 340px) minmax(0, 1fr); }
-}
-
-.fb-reg-aside {
-  display: grid; gap: 14px; align-content: start;
-  padding: clamp(24px, 2.6vw, 36px); background: var(--fb-surface); border-radius: 30px;
-}
-/* The form is over a thousand pixels tall and the aside is a third of that, so
-   on desktop the aside rides down beside it instead of leaving a column of
-   white. Below 1040px they are stacked and sticky would be wrong. */
-@media (min-width: 1040px) {
-  .fb-reg-aside { position: sticky; top: clamp(16px, 7vh, 96px); }
-}
-.fb .fb-reg-aside h3 { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.16; }
-.fb .fb-reg-aside p { max-width: 38ch; }
-.fb .fb-reg-need { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-.fb .fb-reg-need li { position: relative; padding-left: 22px; line-height: 1.5; font-size: 15px; }
-.fb .fb-reg-need li::before {
-  content: ""; position: absolute; left: 0; top: .62em;
-  width: 8px; height: 1.5px; background: var(--fb-accent);
-}
-.fb .fb-reg-fallback { font-family: var(--fb-mono); font-size: 12.5px; color: var(--fb-muted); }
-.fb .fb-reg-fallback a { color: var(--fb-accent); text-decoration: none; }
-.fb .fb-reg-fallback a:hover { text-decoration: underline; }
-
-/* Google supplies its own white page inside the frame, so the frame carries the
-   border and the radius and nothing else. */
-.fb-reg-frame {
-  border: 1px solid var(--fb-rule); border-radius: 30px; overflow: hidden; background: #fff;
-}
-.fb-reg-frame iframe {
-  display: block; width: 100%; border: 0;
-  height: clamp(740px, 92vh, 1240px);
-}
-
-/* --- the two anchors that point at it -------------------------------------- */
-
-.fb .fb-hero-cta { margin-top: clamp(22px, 2.2vw, 34px); }
-.fb .fb-hero-cta a {
-  font-family: var(--fb-mono); font-size: 13px; color: var(--fb-accent); text-decoration: none;
-}
-.fb .fb-hero-cta a:hover { text-decoration: underline; }
-
-.fb .fb-rules-note {
-  margin-top: clamp(20px, 2vw, 30px);
-  font-family: var(--fb-mono); font-size: 12.5px; line-height: 1.7; color: var(--fb-muted);
-}
-.fb .fb-rules-note a { color: var(--fb-accent); text-decoration: none; }
-.fb .fb-rules-note a:hover { text-decoration: underline; }
+.fb-door:hover { background: var(--fb-accent-wash); }
+.fb-door:active { transform: translateY(1px); }
+.fb-door .fb-who { font-family: var(--fb-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--fb-muted); }
+.fb .fb-door h3 { font-size: clamp(22px, 2.2vw, 32px); line-height: 1.12; }
+.fb-door p { max-width: 42ch; }
+.fb-door-go { font-family: var(--fb-mono); font-size: 13px; color: var(--fb-accent); }
 
 .fb-foot { padding-block: clamp(40px, 5vw, 80px); border-top: 1px solid var(--fb-rule-soft); }
 .fb-foot p { font-family: var(--fb-mono); font-size: 12.5px; line-height: 1.7; color: var(--fb-muted); max-width: 70ch; }
 .fb-foot a { color: var(--fb-muted); }
 
-@media (prefers-reduced-motion: reduce) { .fb-tab { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .fb-door { transition: none; } }
 
 /* the one inline link in the body, in the accent */
 .fb-pair a { color: var(--fb-accent); text-decoration: none; font-family: var(--fb-mono); font-size: 13px; }

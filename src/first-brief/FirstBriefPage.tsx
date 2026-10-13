@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "@fontsource/syne/600.css";
 import "@fontsource/syne/700.css";
 import "./firstBrief.css";
@@ -14,26 +13,10 @@ import "./firstBrief.css";
 
    The forms carry the deadline. The page does not, so it does not go stale the
    day the first wave closes.
-
-   Registration happens on the page. Both Google Forms are embedded in the
-   #apply section, one per tab, so a visitor reads the eight rules and then
-   signs up without leaving — which is the whole point of having a page to send
-   people to. Only the active tab's iframe is mounted, so the page loads one
-   form, not two. /am/first-brief#designers opens the designer tab directly.
    ============================================================================= */
 
-/* The canonical form URLs, resolved from the forms.gle short links. The long
-   form is what Google will embed; ?embedded=true drops its own page chrome. */
-const FORM_COMPANIES =
-  "https://docs.google.com/forms/d/e/1FAIpQLScOtNT_XL8L6HqoEXDKhJQmp4-gXz-2yQMhFRQQMMUCDb9QlA/viewform";
-const FORM_DESIGNERS =
-  "https://docs.google.com/forms/d/e/1FAIpQLScddIpiwbse_YGgOO6bIqcCvXq7vY2ywjOL7aTqaBEQw6GXEw/viewform";
-
-/* The short links stay for the "open in a new tab" fallback: they are the ones
-   already in circulation on LinkedIn. */
-const SHARE_COMPANIES = "https://forms.gle/mwpZ76QXiPJqjLsD7";
-const SHARE_DESIGNERS = "https://forms.gle/Y2hesaXGyuTmv5tL7";
-
+const FORM_COMPANIES = "https://forms.gle/mwpZ76QXiPJqjLsD7";
+const FORM_DESIGNERS = "https://forms.gle/Y2hesaXGyuTmv5tL7";
 const REPORT = "/report/design-armenia-2026";
 
 const STEPS = [
@@ -66,63 +49,7 @@ const RULES = [
   "Not a replacement for a paid designer: no full-time hours, no open-ended internship."
 ];
 
-type Side = "companies" | "designers";
-
-const SIDES: Record<Side, {
-  who: string;
-  tab: string;
-  asideTitle: string;
-  asideBody: string;
-  need: string[];
-  form: string;
-  share: string;
-  frameTitle: string;
-}> = {
-  companies: {
-    who: "If you run a business",
-    tab: "Send a project",
-    asideTitle: "What the form asks",
-    asideBody:
-      "What should exist at the end, who gives the feedback, and whether you accept the eight rules above. About ten minutes.",
-    need: [
-      "The project in one sentence.",
-      "One named contact who answers within 48 hours.",
-      "Yes or no to the eight rules.",
-      "Whether you can cover a stipend, transport or lunch."
-    ],
-    form: FORM_COMPANIES,
-    share: SHARE_COMPANIES,
-    frameTitle: "First Brief — registration form for companies"
-  },
-  designers: {
-    who: "If you are a junior designer",
-    tab: "Put your name in",
-    asideTitle: "What the form asks",
-    asideBody:
-      "A portfolio link and a one-page CV, both opening without a login. Everything else the form asks for, you already know.",
-    need: [
-      "A portfolio link anyone can open.",
-      "A one-page CV, no login.",
-      "The kind of project you want to work on.",
-      "LinkedIn, if you have one."
-    ],
-    form: FORM_DESIGNERS,
-    share: SHARE_DESIGNERS,
-    frameTitle: "First Brief — registration form for junior designers"
-  }
-};
-
-/* Arriving at #designers (or #designer) opens the designer tab, so one link can
-   be sent to a class and another to a company. */
-function initialSide(): Side {
-  if (typeof window === "undefined") return "companies";
-  return window.location.hash.toLowerCase().startsWith("#designer") ? "designers" : "companies";
-}
-
 export function FirstBriefPage() {
-  const [side, setSide] = useState<Side>(initialSide);
-  const active = SIDES[side];
-
   return (
     <div className="fb">
       {/* --- the problem, stated as the two people who have it ---------------- */}
@@ -139,9 +66,6 @@ export function FirstBriefPage() {
             First Brief puts one real project in front of one junior designer, for four to eight
             weeks, with me reviewing the work every week. The business gets the thing it needed.
             The designer gets the first entry on a CV that has none.
-          </p>
-          <p className="fb-hero-cta">
-            <a href="#apply">Read the terms, then register on this page →</a>
           </p>
         </div>
       </header>
@@ -249,11 +173,6 @@ export function FirstBriefPage() {
               </div>
             ))}
           </div>
-          <p className="fb-rules-note">
-            These are the terms. The form asks you to accept them before anything else.
-            {" "}
-            <a href="#apply">Register below →</a>
-          </p>
         </div>
       </section>
 
@@ -282,64 +201,29 @@ export function FirstBriefPage() {
         </div>
       </section>
 
-      {/* --- registration, on the page ------------------------------------------ */}
-      <section className="fb-section fb-reg" id="apply">
+      {/* --- the two doors ------------------------------------------------------ */}
+      <section className="fb-section" id="apply">
         <div className="fb-shell">
-          <p className="fb-eyebrow">Register</p>
-          <h2 className="fb-reg-title">Two ways in. Both start on this page.</h2>
-
-          <div className="fb-tabs" role="tablist" aria-label="Choose how you are joining">
-            {(Object.keys(SIDES) as Side[]).map((key) => (
-              <button
-                key={key}
-                type="button"
-                role="tab"
-                id={`fb-tab-${key}`}
-                aria-controls={`fb-panel-${key}`}
-                aria-selected={side === key}
-                className={"fb-tab" + (side === key ? " is-on" : "")}
-                onClick={() => setSide(key)}
-              >
-                <span className="fb-who">{SIDES[key].who}</span>
-                <span className="fb-tab-title">{SIDES[key].tab}</span>
-              </button>
-            ))}
-          </div>
-
-          <div
-            className="fb-reg-panel"
-            role="tabpanel"
-            id={`fb-panel-${side}`}
-            aria-labelledby={`fb-tab-${side}`}
-          >
-            <aside className="fb-reg-aside">
-              <h3>{active.asideTitle}</h3>
-              <p>{active.asideBody}</p>
-              <ul className="fb-reg-need">
-                {active.need.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <p className="fb-reg-fallback">
-                Form not loading?
-                {" "}
-                <a href={active.share} target="_blank" rel="noreferrer">
-                  Open it in a new tab ↗
-                </a>
+          <p className="fb-eyebrow">Two ways in</p>
+          <div className="fb-doors">
+            <a className="fb-door" href={FORM_COMPANIES} target="_blank" rel="noreferrer">
+              <span className="fb-who">If you run a business</span>
+              <h3>Send a project</h3>
+              <p>
+                The form asks what should exist at the end, who gives feedback, and whether you
+                accept the eight rules. Ten minutes.
               </p>
-            </aside>
-
-            <div className="fb-reg-frame">
-              {/* Only the open tab is mounted, so the page loads one form, not two. */}
-              <iframe
-                key={side}
-                title={active.frameTitle}
-                src={`${active.form}?embedded=true`}
-                loading="lazy"
-              >
-                Loading…
-              </iframe>
-            </div>
+              <span className="fb-door-go">Submit a brief →</span>
+            </a>
+            <a className="fb-door" href={FORM_DESIGNERS} target="_blank" rel="noreferrer">
+              <span className="fb-who">If you are a junior designer</span>
+              <h3>Put your name in</h3>
+              <p>
+                Bring a portfolio link and a one-page CV, both opening without a login. Everything
+                else the form asks for, you already know.
+              </p>
+              <span className="fb-door-go">Apply →</span>
+            </a>
           </div>
         </div>
       </section>
@@ -350,7 +234,6 @@ export function FirstBriefPage() {
             First Brief is run by Davit Pedanyan, Yerevan. It is not an agency and not an
             internship programme. Designers' profiles are shared with partner companies only with
             their consent, and work is shown publicly only where both sides agreed to it.
-            Registration runs on Google Forms; what you type there goes to Google and to me.
           </p>
         </div>
       </footer>

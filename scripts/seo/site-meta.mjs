@@ -156,15 +156,6 @@ export const STATIC_ROUTES = [
     changefreq: "monthly"
   },
   {
-    path: "/am/school",
-    title: "Design Generalist — A 5-Month Course for Working Designers in Yerevan",
-    description:
-      "Design Generalist is a five-month, in-person course in Yerevan for working designers: one discipline you have never touched, an AI workflow, an app you ship yourself, and a real client brief. 21 weeks, 42 lessons, 12\u201315 people, taught by Davit Pedanyan.",
-    type: "Course",
-    priority: "0.9",
-    changefreq: "monthly"
-  },
-  {
     path: "/am/public-work",
     title: "Talks, Events and Writing — Davit Pedanyan",
     description:

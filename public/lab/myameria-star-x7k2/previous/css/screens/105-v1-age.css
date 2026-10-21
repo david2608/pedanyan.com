@@ -1,0 +1,49 @@
+/* V1 · 05 Age input, empty state (206:34362) + 06 Age input (206:34355) */
+.v1o-age__field {
+  position: absolute; left: 0; top: 200px; width: 360px; height: 112px; z-index: 2;
+  display: block; padding: 0; background: none; border: 0; cursor: text;
+}
+.v1o-age__empty, .v1o-age__value {
+  position: absolute; top: 10px; transform: translateX(-50%); white-space: nowrap; text-align: center;
+  font: 700 56px/1.362 var(--v1o-font);
+}
+.v1o-age__empty { left: 179.5px; color: var(--v1o-ink-3); }
+/* "10" is SF Pro Bold in Figma */
+.v1o-age__value { left: 50%; color: var(--v1o-ink); font: 700 56px/normal var(--font-display); display: none; }
+.v1o-age__line {
+  position: absolute; left: 119.5px; top: 92px; width: 120px; height: 3px; border-radius: 100px;
+  background: var(--v1o-line); transition: background-color .15s;
+}
+.v1o-age__hint {
+  position: absolute; left: 179.5px; top: 312px; transform: translateX(-50%); white-space: nowrap;
+  font: 400 13px/1.362 var(--v1o-font); color: var(--v1o-ink-3); text-align: center;
+}
+.v1o-age.is-filled .v1o-age__empty, .v1o-age.is-filled .v1o-age__hint { display: none; }
+.v1o-age.is-filled .v1o-age__value { display: block; }
+.v1o-age.is-filled .v1o-age__line, .v1o-age.is-kb .v1o-age__line { left: 120px; background: var(--v1o-green-dark); }
+
+/* Keyboard / Default · Android numeric keypad */
+.v1o-kb {
+  position: absolute; left: 0; top: 550px; width: 360px; z-index: 20;
+  display: flex; flex-direction: column; gap: 4px; align-items: center; justify-content: flex-end;
+  padding: 9px 6px 0; border-radius: 20px 20px 0 0; background: #eff0f1;  /* color/slate/slate-100 */
+  transform: translateY(100%); visibility: hidden;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), visibility 0s linear .25s;
+}
+.v1o-kb.is-open { transform: none; visibility: visible; transition: transform .25s cubic-bezier(.2,.8,.2,1), visibility 0s; }
+.v1o-kb__row { display: flex; gap: 5px; align-items: center; justify-content: center; width: 100%; padding: 2px 0; }
+.v1o-kb__row:first-child { padding: 0; }
+.v1o-kb__nav { width: 348px; height: 45px; flex-shrink: 0; }
+.v1o-key {
+  flex: 1 0 0; min-width: 1px; height: 42px; border-radius: 46px; background: #fff;
+  display: flex; align-items: center; justify-content: center; padding: 2px 0 0;
+  font: 400 26px/normal var(--v1o-roboto); color: #1b1b1d; text-align: center;
+  transition: filter .1s;
+}
+.v1o-key > span { display: block; padding-bottom: 2px; }
+.v1o-key:active { filter: brightness(.92); }
+.v1o-key--fn { background: var(--v1o-line); padding: 0; }   /* slate-150 */
+.v1o-key--fn2 { background: #cccfd3; padding: 0; }           /* slate-250 */
+.v1o-key--go { background: #a8f57c; padding: 8px 0; }        /* green-150 */
+.v1o-age:not(.is-filled) .v1o-key--go { opacity: .5; }
+.v1o-age.is-filled .v1o-key--go { opacity: 1; }

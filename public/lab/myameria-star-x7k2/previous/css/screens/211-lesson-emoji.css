@@ -1,0 +1,123 @@
+/* ==========================================================
+   Emoji game (prefix le-) · intro 3005:133208 · game 3005:111277…118411
+   Sheet scaffold comes from lc- (css/screens/215-lesson-complete.css).
+   ========================================================== */
+:root {
+  --le-orange-100: #fff2dc;     /* color/orange/orange-100 */
+  --le-orange-830: #653f02;     /* color/orange/orange-830 */
+  --le-page-bg: #f3f4f5;        /* system-background/default/page/bbackground */
+  --le-gray-3: #edf0f3;         /* system-gray/gray-3 */
+  --le-green-800: #1d4e01;      /* color/green-primary/green-800 */
+  --le-red-650: #7e0f0f;        /* color/red/red-650 */
+}
+
+/* ---------- shared: emoji row ---------- */
+.le-emojis { display: flex; align-items: center; filter: drop-shadow(0 8px 9px rgba(8,8,8,0.2)); }
+.le-emojis img { flex-shrink: 0; object-fit: cover; }
+
+/* ---------- Intro (Quiz 1 · top 88) ---------- */
+.le-intro { position: absolute; left: 0.5px; top: 88px; width: 393px; display: flex; flex-direction: column; gap: 8px; padding-bottom: 32px; }
+.le-intro__q { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 8px 16px 20px; }
+.le-intro__title { width: 100%; text-align: center; font: 700 22px/32px var(--font-display); letter-spacing: var(--ls); color: var(--sys-typo-title); }
+.le-intro__box {
+  position: relative; width: 100%; padding: 22px 12px; border-radius: 30px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(to bottom, #f7fff1, #e7ffd6);
+  box-shadow: 0 10px 24px -14px rgba(80,110,60,0.35), inset 0 0 0 1.5px rgba(147,236,96,0.5);
+}
+.le-intro__box .le-emojis { align-items: flex-start; }
+.le-rules { list-style: none; margin: 0; padding: 0 18px; display: flex; flex-direction: column; gap: 18px; }
+.le-rules li { display: flex; gap: 12px; align-items: flex-start; }
+.le-rules li:nth-child(3) { height: 15px; }
+.le-rules__dot { flex-shrink: 0; width: 8px; height: 8px; margin-top: 7px; border-radius: 4px; background: var(--color-green-450); }
+.le-rules li > span:last-child { flex: 1 0 0; font: 510 15px/22px var(--font-text); color: var(--sys-typo-title); }
+
+/* ---------- Game: progress ring (nav right, 48px at 14/14 inside 76px button) ---------- */
+.le-nav-right { height: 76px; padding: 0 2px 0 8px; }
+.le-ring { position: relative; width: 48px; height: 48px; margin: 14px; flex-shrink: 0; }
+.le-ring__bg { position: absolute; left: -18px; top: -16px; }
+.le-ring__q { position: absolute; left: 50%; top: 50%; width: 42.928px; height: 42.928px; margin: -21.464px 0 0 -21.464px; }
+.le-ring__arc { position: absolute; }
+.le-ring__arc img { display: block; width: 100%; height: 100%; }
+.le-ring__txt {
+  position: absolute; left: calc(50% + 0.5px); top: calc(50% - 10px); transform: translateX(-50%);
+  font: 510 13px/20px var(--font-text); letter-spacing: var(--ls); color: var(--le-orange-830); white-space: nowrap;
+}
+.le-ring__txt span { color: rgba(101,63,2,0.55); }
+
+/* ---------- Game: main column (pt 88 · Quiz 2) ---------- */
+.le-main { position: absolute; left: 0.5px; top: 88px; width: 393px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.le-main__emojis { margin: 8px 0 32px; }
+.le-card {
+  width: 361px; padding: 8px; display: flex; flex-direction: column; gap: 12px; overflow: hidden;
+  background: #fff; border: 1px solid rgba(8,8,8,0.04); border-radius: 20px;
+  box-shadow: 0 4px 20px -10px rgba(8,8,8,0.2);
+}
+.le-hint { display: flex; gap: 12px; align-items: center; }
+.le-hint__ic { flex-shrink: 0; width: 48px; height: 48px; padding: 8px; border-radius: 12px; background: var(--le-orange-100); display: flex; align-items: center; justify-content: center; }
+.le-hint__text { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.le-hint__label { font: 400 13px/20px var(--font-text); letter-spacing: var(--ls); color: var(--sys-typo-subtitle); }
+.le-hint__body { font: 400 15px/22px var(--font-text); letter-spacing: var(--ls); color: var(--sys-typo-title); }
+
+/* answer tiles */
+.le-slots { display: flex; flex-wrap: wrap; justify-content: space-between; row-gap: 4px; }
+.le-slot {
+  position: relative; width: 44px; height: 44px; flex-shrink: 0; overflow: hidden;
+  border-radius: 12px; border: 1px solid var(--le-page-bg); background: var(--le-page-bg);
+  display: flex; align-items: center; justify-content: center;
+  font: 590 16px/24px var(--font-display); letter-spacing: var(--ls); color: var(--sys-typo-title);
+  transition: background-color .15s;
+}
+.le-slot.is-active::before {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 1.5px; height: 16px; margin: -8px 0 0 -0.75px;
+  border-radius: 6px; background: var(--sys-icon-primary); animation: leBlink 1s steps(1) infinite;
+}
+.le-slot.is-picked::after { content: ""; position: absolute; inset: -1px; background: rgba(8,8,8,0.1); }
+@keyframes leBlink { 50% { opacity: 0; } }
+.le-game[data-state="right"] .le-slot { background: var(--color-green-50); }
+.le-game[data-state="wrong"] .le-slot { background: var(--color-red-50); }
+.le-slot.is-pop { animation: lePop .18s ease; }
+@keyframes lePop { from { transform: scale(.86); } to { transform: none; } }
+
+/* validation toasts */
+.le-toast { display: none; width: 345px; padding: 14px; border-radius: 12px; flex-direction: column; gap: 2px; }
+.le-toast__title { font: 510 15px/22px var(--font-text); letter-spacing: var(--ls); white-space: nowrap; }
+.le-toast__body { font: 400 13px/20px var(--font-text); letter-spacing: var(--ls); }
+.le-toast--right { background: var(--color-green-50); }
+.le-toast--right .le-toast__title { color: var(--le-green-800); }
+.le-toast--right .le-toast__body { color: var(--sys-typo-subtitle); }
+.le-toast--right .le-toast__body b { font-weight: 590; color: var(--sys-typo-brand-green-6); }
+.le-toast--wrong { background: var(--color-red-50); }
+.le-toast--wrong .le-toast__title { color: var(--le-red-650); }
+.le-toast--wrong .le-toast__body { color: rgba(85,6,6,0.55); }
+.le-game[data-state="right"] .le-toast--right,
+.le-game[data-state="wrong"] .le-toast--wrong { display: flex; animation: fadeIn .2s ease both; }
+
+/* ---------- Letters tray (Page footer · white, radius 24, top shadow) ---------- */
+.le-tray, .le-finish {
+  position: absolute; left: calc(50% - 0.39px); bottom: 0; width: 393px; transform: translateX(-50%); z-index: 4;
+  display: flex; flex-direction: column; gap: 16px; padding-top: 20px; overflow: hidden;
+  background: #fff; border-radius: 24px; box-shadow: 0 -4px 36px -16px rgba(8,8,8,0.2);
+}
+.le-finish { display: none; }
+.le-game[data-state="right"] .le-tray, .le-game[data-state="wrong"] .le-tray { display: none; }
+.le-game[data-state="right"] .le-finish, .le-game[data-state="wrong"] .le-finish { display: flex; }
+.le-tray__inner { padding: 0 16px; display: flex; flex-direction: column; gap: 16px; }
+.le-tray__head { display: flex; align-items: center; gap: 12px; padding-left: 8px; }
+.le-tray__titles { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; }
+.le-tray__title { height: 24px; display: flex; align-items: center; font: 510 18px/26px var(--font-display); letter-spacing: var(--ls); color: var(--sys-typo-title); white-space: nowrap; }
+.le-tray__sub { font: 400 13px/20px var(--font-text); letter-spacing: var(--ls); color: var(--sys-typo-subtitle); white-space: nowrap; }
+.le-reset { flex-shrink: 0; padding: 8px; border-radius: 12px; display: flex; }
+.le-reset:active { background: var(--le-page-bg); }
+.le-keys { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; align-content: flex-start; min-height: 104px; }
+.le-key { width: 44px; height: 48px; flex-shrink: 0; transition: opacity .15s, transform .1s; }
+.le-key img { width: 44px; height: 48px; }
+.le-key:active { transform: scale(.94); }
+.le-key.is-used { opacity: .3; pointer-events: none; }
+.le-tray__action { padding: 0 16px; display: flex; }
+.le-next {
+  width: 100%; padding: 16px 24px; border-radius: 16px; background: var(--le-gray-3);
+  display: flex; align-items: center; justify-content: center;
+  font: 510 16px/24px var(--font-text); letter-spacing: var(--ls); color: var(--sys-typo-disabled); cursor: default;
+}
+.le-finish .btn > span { font: 510 15px/22px var(--font-text); }

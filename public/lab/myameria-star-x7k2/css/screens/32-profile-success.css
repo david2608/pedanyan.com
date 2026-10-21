@@ -1,0 +1,32 @@
+/* Profile saved · 3001:79760  (+ shared result layout used by 33-profile-error) */
+.prof-result {
+  position: absolute; left: 50%; top: 50%; width: 393px; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+}
+.prof-result__illu { flex-shrink: 0; }
+.prof-result__text { width: 320px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.prof-result__title { width: 100%; font: 700 24px/36px var(--font-display); letter-spacing: var(--ls); color: rgba(1,6,15,0.85); }
+.prof-result__desc { width: 100%; font: 400 16px/24px var(--font-text); letter-spacing: 0.32px; color: rgba(1,6,15,0.5); }
+
+/* Success illustration (Success=End, 9:135510) — layered vectors */
+.succ-illu { position: relative; width: 150px; height: 140px; flex-shrink: 0; }
+.succ-illu img { display: block; width: 100%; height: 100%; }
+.succ-illu__blob, .succ-illu__v4, .succ-illu__v5, .succ-illu__v7 { position: absolute; display: flex; align-items: center; justify-content: center; container-type: size; }
+.succ-illu__blob > div, .succ-illu__v4 > div, .succ-illu__v5 > div, .succ-illu__v7 > div { flex: none; position: relative; }
+.succ-illu__blob { inset: 3.43% 8.42% 4.07% 4.84%; }
+.succ-illu__blob > div { width: hypot(77.6631cqw, 22.5082cqh); height: hypot(-22.3369cqw, 77.4918cqh); transform: rotate(16.09deg) skewX(-0.06deg); }
+.succ-illu__art { position: absolute; top: 25%; bottom: 25%; left: 24%; right: 28.67%; overflow: hidden; }
+.succ-illu__v4 { inset: 5.21% 5.78% 4.35% 4.95%; }
+.succ-illu__v4 > div { width: hypot(79.7174cqw, -20.3484cqh); height: hypot(20.2826cqw, 79.6516cqh); transform: rotate(-14.3deg); }
+.succ-illu__v5 { inset: 13.4% 7.39% 8.02% 16.33%; }
+.succ-illu__v5 > div { width: hypot(83.8279cqw, -15.567cqh); height: hypot(16.1721cqw, 84.433cqh); transform: rotate(-10.68deg); }
+.succ-illu__v6 { position: absolute; inset: 8.76% 9.25% 7.9% 8.41%; }
+.succ-illu__v7 { inset: 6.13% 30.76% 21.29% -0.46%; }
+.succ-illu__v7 > div { width: hypot(78.9594cqw, -19.6091cqh); height: hypot(21.0406cqw, 80.3909cqh); transform: rotate(-14.3deg); }
+.succ-illu__v8, .succ-illu__v9, .succ-illu__group, .succ-illu__e1595 { position: absolute; }
+.succ-illu__v8 { inset: 37.14% 42.25% 49.6% 49.3%; }
+.succ-illu__v9 { inset: 54.28% 45.98% 43.79% 52.11%; }
+.succ-illu__group { inset: -8.06% -29.1% 72.01% 89.03%; }
+.succ-illu__e1595 { inset: 2.46% -280.48% -52.66% 232.09%; }
+.succ-illu__check { position: absolute; left: calc(50% + 0.5px); top: 50%; width: 22px; height: 18px; transform: translate(-50%, -50%); }
+.succ-illu__check > div { position: absolute; inset: -11.11% -9.09% -1.78% -9.09%; }

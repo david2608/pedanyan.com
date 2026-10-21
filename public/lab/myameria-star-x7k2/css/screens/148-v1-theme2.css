@@ -1,0 +1,19 @@
+/* V1 · Theme 2 (frames 48–62) — only what the V1 kit doesn't cover. Prefix: v1t2- */
+
+/* ---- 48 Module themes: completed theme row (gray card + check + "Կրկնել") ---- */
+.v1-theme.v1t2-theme-done { background: var(--v1-gray-bg); }
+.v1t2-theme-done__label { display: flex; align-items: flex-start; gap: 6px; }
+.v1t2-theme-done .v1-theme__label { color: var(--v1-green-ink); }
+.v1t2-theme-done .v1-theme__title { color: var(--v1-ink); }
+.v1t2-theme-done .v1-theme__meta { color: var(--v1-ink-2); }
+.v1t2-redo { display: flex; align-items: center; gap: 6px; font: 500 14px/19px var(--v1-font); color: var(--v1-ink-2); }
+.v1t2-redo__ic { width: 16px; height: 16px; display: flex; transform: rotate(-90deg); }
+
+/* ---- 49 Inside the Themes: all steps upcoming, titles in primary ink ---- */
+.v1t2-steps .v1-step__text b { color: var(--v1-ink); }
+
+/* ---- 50/51 Reel: no poster, plain dark card ---- */
+.v1-reel.v1t2-reel { background: var(--v1-ink); }
+
+/* ---- 62 Theme complete: uses 147-v1-theme-complete.css (v1tc-). Figma 62 also draws the unlock card at x=19 ---- */
+#v1-62 .v1tc-unlock { transform: translateX(3px); }

@@ -1,0 +1,114 @@
+/* Onboarding · Benefits pager (first screen) — 3 swipeable benefit slides + pagination.
+   Ameria navigation + tab bar stay visible (shared .onb styles in 10-onb-welcome.css). */
+.obn { --obn-top: 110px; }
+.obn .onb-bg { background: linear-gradient(180deg, #f1fde9 0%, #ffffff 62%); }
+
+/* skip (nav right) */
+.obn-skip { margin: 4px 16px 4px 0; padding: 8px 4px; font: 510 15px/22px var(--font-text); letter-spacing: var(--ls); color: var(--sys-typo-subtitle); white-space: nowrap; }
+.obn-skip:active { color: var(--sys-typo-title); }
+.obn.is-last .obn-skip { visibility: hidden; }
+
+/* pager track */
+.obn-pager {
+  position: absolute; left: 0; right: 0; top: var(--obn-top); bottom: 238px; z-index: 1;
+  display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.obn-pager::-webkit-scrollbar { display: none; }
+.obn-slide { position: relative; flex: 0 0 100%; height: 100%; scroll-snap-align: center; scroll-snap-stop: always; }
+.obn-art { position: absolute; left: 0; right: 0; top: 0; height: 270px; }
+.obn-text { position: absolute; left: 28px; right: 28px; top: 276px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.obn-text .onb-title { font-size: 26px; line-height: 34px; }
+.obn-text .onb-lead { max-width: 320px; }
+.obn-slide .obn-text > * { opacity: 0; transform: translateY(10px); transition: opacity .4s ease, transform .45s cubic-bezier(.2,.8,.2,1); }
+.obn-slide.is-on .obn-text > * { opacity: 1; transform: none; }
+.obn-slide.is-on .obn-text > :nth-child(2) { transition-delay: .06s; }
+.obn-slide.is-on .obn-text > :nth-child(3) { transition-delay: .12s; }
+
+/* pagination */
+.obn-dots { position: absolute; left: 0; right: 0; bottom: 214px; z-index: 2; display: flex; justify-content: center; gap: 6px; }
+.obn-dot { width: 8px; height: 8px; border-radius: 8px; background: rgba(8,8,8,.12); transition: width .35s cubic-bezier(.2,.8,.2,1), background-color .25s; }
+.obn-dot.is-on { width: 28px; background: var(--color-green-450); }
+.obn .page-footer__actions .btn span { transition: opacity .15s; }
+
+/* ---------- Slide 1 · Financial education ---------- */
+.obn-halo { position: absolute; left: 50%; top: 50%; width: 290px; height: 290px; margin: -145px 0 0 -145px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(191,254,154,.85) 0%, rgba(191,254,154,.25) 48%, rgba(191,254,154,0) 70%); }
+.obn-hero { position: absolute; left: 50%; top: 50%; width: 220px; height: 220px; margin: -112px 0 0 -110px; object-fit: contain;
+  filter: drop-shadow(0 18px 22px rgba(216,143,26,.22)); }
+.obn-slide.is-on .obn-hero { animation: obnHeroIn .7s cubic-bezier(.2,1.3,.4,1) both, onbBob 3.4s ease-in-out .7s infinite; }
+.obn-mod {
+  position: absolute; width: 66px; height: 66px; border-radius: 22px; display: flex; align-items: center; justify-content: center;
+  background: #fff; box-shadow: 0 10px 24px rgba(67,158,15,.16); opacity: 0;
+}
+.obn-mod img { width: 50px; height: 50px; object-fit: contain; }
+.obn-mod--1 { left: 34px;  top: 26px;  --r: -10deg; }
+.obn-mod--2 { right: 34px; top: 40px;  --r: 9deg; }
+.obn-mod--3 { left: 42px;  bottom: 22px; --r: 7deg; }
+.obn-mod--4 { right: 40px; bottom: 34px; --r: -7deg; }
+.obn-slide.is-on .obn-mod { animation: obnPop .5s cubic-bezier(.2,1.4,.4,1) forwards, onbFloat 4s ease-in-out infinite; }
+.obn-slide.is-on .obn-mod--1 { animation-delay: .25s, .8s; } .obn-slide.is-on .obn-mod--2 { animation-delay: .35s, 1.4s; }
+.obn-slide.is-on .obn-mod--3 { animation-delay: .45s, 2s; }  .obn-slide.is-on .obn-mod--4 { animation-delay: .55s, 2.6s; }
+.obn-mod__lbl { position: absolute; bottom: -9px; left: 50%; transform: translateX(-50%); padding: 1px 7px; border-radius: 100px; background: var(--color-green-250);
+  font: 590 10px/14px var(--font-text); color: var(--sys-typo-brand-green-6); white-space: nowrap; }
+
+/* ---------- Slide 2 · Fun & game-based ---------- */
+.obn-cards { position: absolute; left: 50%; top: 58px; width: 0; height: 230px; }
+.obn-card {
+  position: absolute; left: -66px; top: 20px; width: 132px; height: 172px; padding: 12px 10px 10px; border-radius: 24px; background: #fff;
+  display: flex; flex-direction: column; align-items: center; gap: 8px; box-shadow: 0 16px 34px -14px rgba(9,51,93,.35);
+  transform-origin: 50% 120%; opacity: 0;
+}
+.obn-card__ic { width: 76px; height: 76px; border-radius: 22px; display: flex; align-items: center; justify-content: center; }
+.obn-card__ic img { width: 64px; height: 64px; object-fit: contain; }
+.obn-card__t { font: 590 15px/20px var(--font-display); color: var(--sys-typo-title); }
+.obn-card__d { font: 400 11px/14px var(--font-text); color: var(--sys-typo-subtitle); text-align: center; }
+.obn-card--a .obn-card__ic { background: var(--color-blue-50); }
+.obn-card--b .obn-card__ic { background: var(--color-orange-230); }
+.obn-card--c .obn-card__ic { background: var(--color-green-50); }
+.obn-slide.is-on .obn-card { animation: obnDeal .6s cubic-bezier(.2,1.2,.4,1) forwards; }
+.obn-card--a { --to: translate(-96px, 14px) rotate(-14deg); }
+.obn-card--c { --to: translate(96px, 14px) rotate(14deg); }
+.obn-card--b { --to: translate(0, -6px) rotate(0deg); z-index: 2; }
+.obn-slide.is-on .obn-card--a { animation-delay: .15s; } .obn-slide.is-on .obn-card--c { animation-delay: .3s; } .obn-slide.is-on .obn-card--b { animation-delay: .45s; }
+.obn-medal { position: absolute; right: 52px; top: 26px; width: 74px; height: 74px; border-radius: 50%; z-index: 3; opacity: 0;
+  box-shadow: 0 0 0 4px #fff, 0 0 0 7px var(--color-green-350), 0 12px 24px rgba(67,158,15,.3); }
+.obn-medal img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.obn-slide.is-on .obn-medal { animation: obnPop .55s cubic-bezier(.2,1.5,.4,1) .9s forwards, obnWiggle 3s ease-in-out 1.6s infinite; }
+.obn-xp { position: absolute; left: 44px; top: 48px; z-index: 3; opacity: 0; color: #123200; }
+.obn-slide.is-on .obn-xp { animation: obnPop .5s cubic-bezier(.2,1.5,.4,1) 1.1s forwards, onbFloat 3.2s ease-in-out 1.6s infinite; }
+
+/* ---------- Slide 3 · AMP = real money ---------- */
+.obn-coin { position: absolute; left: 50%; top: 22px; width: 150px; height: 150px; margin-left: -75px; z-index: 2; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 14px 22px rgba(93,190,46,.35)); }
+.obn-coin img { width: 112px; height: 112px; }
+.obn-slide.is-on .obn-coin { animation: obnHeroIn .7s cubic-bezier(.2,1.3,.4,1) both, obnFloatY 3.2s ease-in-out .9s infinite; }
+.obn-drop { position: absolute; top: 0; width: 34px; height: 34px; opacity: 0; z-index: 1; }
+.obn-drop img { width: 100%; height: 100%; opacity: .9; }
+.obn-drop--1 { left: 70px; } .obn-drop--2 { right: 74px; width: 28px; height: 28px; } .obn-drop--3 { left: 118px; width: 24px; height: 24px; } .obn-drop--4 { right: 116px; width: 30px; height: 30px; }
+.obn-slide.is-on .obn-drop { animation: obnFall 2.4s cubic-bezier(.5,0,.8,.6) infinite; }
+.obn-slide.is-on .obn-drop--2 { animation-delay: .6s; } .obn-slide.is-on .obn-drop--3 { animation-delay: 1.2s; } .obn-slide.is-on .obn-drop--4 { animation-delay: 1.8s; }
+.obn-rate { position: absolute; left: 50%; top: 186px; transform: translateX(-50%); z-index: 3; display: flex; align-items: center; gap: 8px; padding: 8px 14px 8px 8px;
+  border-radius: 100px; background: #fff; box-shadow: 0 10px 26px rgba(8,8,8,.1); white-space: nowrap; opacity: 0; }
+
+.obn-rate__eq { font: 590 14px/20px var(--font-display); color: var(--sys-typo-subtitle); }
+.obn-rate__amd { font: 700 14px/20px var(--font-display); color: var(--sys-typo-title); }
+.obn-slide.is-on .obn-rate { animation: obnRise .5s cubic-bezier(.2,1.2,.4,1) .6s forwards; }
+.obn-gain { position: absolute; z-index: 3; opacity: 0; }
+.obn-gain--1 { left: 40px; top: 120px; } .obn-gain--2 { right: 36px; top: 84px; }
+.obn-slide.is-on .obn-gain { animation: obnGain 2.6s ease-out 1s infinite; }
+.obn-slide.is-on .obn-gain--2 { animation-delay: 2.2s; }
+
+@keyframes obnHeroIn { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+@keyframes obnPop { from { opacity: 0; transform: scale(.4) rotate(0deg); } to { opacity: 1; transform: scale(1) rotate(var(--r, 0deg)); } }
+@keyframes obnDeal { from { opacity: 0; transform: translate(0, 60px) rotate(0deg) scale(.8); } to { opacity: 1; transform: var(--to); } }
+@keyframes obnWiggle { 0%, 100% { transform: rotate(0); } 10% { transform: rotate(-10deg); } 20% { transform: rotate(8deg); } 30% { transform: rotate(0); } }
+@keyframes obnSpin { 0%, 55% { transform: rotateY(0); } 80%, 100% { transform: rotateY(360deg); } }
+@keyframes obnFall { 0% { opacity: 0; transform: translateY(-10px) rotate(0); } 15% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(150px) rotate(200deg) scale(.6); } }
+@keyframes obnRise { from { opacity: 0; transform: translate(-50%, 16px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes obnGain { 0% { opacity: 0; transform: translateY(10px) scale(.8); } 15% { opacity: 1; transform: none; } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(-34px); } }
+@media (prefers-reduced-motion: reduce) { .obn * { animation: none !important; opacity: 1 !important; transition: none !important; } }
+
+.obn-xp img { width: 18px; height: 18px; }
+.obn-halo { background: radial-gradient(circle, rgba(191,254,154,.7) 0%, rgba(191,254,154,.2) 48%, rgba(191,254,154,0) 70%); }
+
+@keyframes obnFloatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }

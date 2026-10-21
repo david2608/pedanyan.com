@@ -1,0 +1,2019 @@
+<!doctype html><html><head><title>MyAmeria Star</title><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+
+<style>:root{color-scheme:dark} html,body{height:100%;background:#1e1e1e}</style>
+<link rel="stylesheet" href="css/tokens.css?v=202610191438">
+  <link rel="stylesheet" href="css/base.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/10-onb-welcome.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/11-onb-intro.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/12-onb-avatar.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/13-onb-start.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/14-onb-benefits.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/20-home.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/21-home-opt2.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/22-home-opt3.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/24-home-levels.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/30-profile.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/31-avatar-sheet.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/34-profile-v2.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/32-profile-success.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/33-profile-error.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/40-badges.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/41-badges-list.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/42-profile-loading.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/43-avatar-loading.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/44-error.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/50-level-modals.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/51-theme-complete.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/200-lesson-module.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/201-lesson-reel.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/211-lesson-emoji.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/215-lesson-complete.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/220-lesson-quiz.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/221-lesson-quiz-done.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/230-lesson-cw-intro.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/231-lesson-cw.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/233-lesson-module-done.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/300-g.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/15-onb-task.css?v=202610191438">
+
+  <aside class="flow-nav"></aside>
+  <main class="device" id="device">
+<!-- ===== Onboarding · 1 · Benefits pager (3 slides + pagination). Replaces Welcome / What to expect / Ready (archived below). ===== -->
+<section class="screen onb obn" id="s-onb-benefits" data-title="1 · Benefits (3 slides)" data-group="Onboarding">
+  <div class="onb-bg"></div>
+  <div class="grid-bg"></div>
+
+  <div class="obn-pager" aria-roledescription="carousel">
+    <!-- 1 · Financial education -->
+    <div class="obn-slide" aria-roledescription="slide" aria-label="1 / 3">
+      <div class="obn-art" aria-hidden="true">
+        <span class="obn-halo"></span>
+        <img class="obn-hero" src="assets/v1-star-barev.png" alt="">
+      </div>
+      <div class="obn-text">
+        <span class="onb-pill">Ֆինանսական կրթություն</span>
+        <h1 class="onb-title">Սովորիր կառավարել փողը</h1>
+        <p class="onb-lead">Կարճ ու հասկանալի դասեր փողի, խնայողության և ծախսերի մասին՝ հատուկ քո տարիքի համար</p>
+      </div>
+    </div>
+
+    <!-- 2 · Fun, game-based learning -->
+    <div class="obn-slide" aria-roledescription="slide" aria-label="2 / 3">
+      <div class="obn-art" aria-hidden="true">
+        <span class="obn-halo"></span>
+        <div class="obn-cards">
+          <span class="obn-card obn-card--a"><span class="obn-card__ic"><img src="assets/lvl-ic-reel.png" alt=""></span><span class="obn-card__t">Ռիլ</span><span class="obn-card__d">1 րոպեանոց տեսանյութ</span></span>
+          <span class="obn-card obn-card--c"><span class="obn-card__ic"><img src="assets/onb-ic-game.png" alt=""></span><span class="obn-card__t">Մինի խաղ</span><span class="obn-card__d">Էմոջի, խաչբառ</span></span>
+          <span class="obn-card obn-card--b"><span class="obn-card__ic"><img src="assets/lvl-ic-quiz.png" alt=""></span><span class="obn-card__t">Քուիզ</span><span class="obn-card__d">Ստուգիր քեզ</span></span>
+        </div>
+        <span class="obn-medal"><img src="assets/badge-traveler.png" alt=""></span>
+        <span class="obn-xp"><img src="assets/onb-ic-badge.png" width="18" height="18" alt="">Նոր բեյջ</span>
+      </div>
+      <div class="obn-text">
+        <span class="onb-pill">Խաղային ուսուցում</span>
+        <h1 class="onb-title">Սովորիր՝ խաղալով</h1>
+        <p class="onb-lead">Դիտիր ռիլեր, անցիր քուիզեր, խաղա մինի խաղեր և հավաքիր բեյջեր․ ամեն թեման՝ մոտ 5 րոպե</p>
+      </div>
+    </div>
+
+    <!-- 3 · AMP = real money -->
+    <div class="obn-slide" aria-roledescription="slide" aria-label="3 / 3">
+      <div class="obn-art" aria-hidden="true">
+        <span class="obn-halo"></span>
+        <span class="obn-coin"><img src="assets/prof-amp-20.svg" alt=""></span>
+        <span class="obn-gain obn-gain--1">+100 AMP</span>
+        <span class="obn-gain obn-gain--2">+20 AMP</span>
+        <span class="obn-rate"><span class="obn-rate__amp"><img src="assets/prof-amp-16.svg" width="16" height="16" alt="">1 AMP</span><span class="obn-rate__eq">=</span><span class="obn-rate__amd">1 ֏</span></span>
+      </div>
+      <div class="obn-text">
+        <span class="onb-pill">AMP միավորներ</span>
+        <h1 class="onb-title">Վաստակիր իրական գումար</h1>
+        <p class="onb-lead">Յուրաքանչյուր ավարտված քայլի համար ստանում ես AMP (Ameria Points), որոնք իրական գումար են</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="obn-dots" role="tablist" aria-label="Էջեր">
+    <button class="obn-dot" aria-label="1"></button><button class="obn-dot" aria-label="2"></button><button class="obn-dot" aria-label="3"></button>
+  </div>
+
+  <div class="page-heading onb-head">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"><div data-include="back-btn"></div></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"><button class="obn-skip js-obn-skip">Բաց թողնել</button></div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer__actions"><button class="btn btn--primary js-obn-next"><span>Շարունակել</span></button></div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+
+<!-- ===== ARCHIVE · Onboarding · Welcome (replaced by the benefits pager) ===== -->
+<section class="screen onb onb-welcome" id="s-onb-welcome" data-title="Welcome" data-group="Archive · Onboarding">
+  <div class="onb-bg"></div>
+  <div class="grid-bg"></div>
+
+  <div class="onb-welcome__stage">
+    <div class="onb-halo"></div>
+    <span class="onb-chip onb-chip--tl"><img src="assets/lvl-ic-reel.png" alt=""></span>
+    <span class="onb-chip onb-chip--tr"><img src="assets/lvl-ic-quiz.png" alt=""></span>
+    <span class="onb-chip onb-chip--bl"><img src="assets/onb-ic-game.png" alt=""></span>
+    <span class="onb-chip onb-chip--br"><img src="assets/onb-ic-bulb.png" alt=""></span>
+    <img class="onb-welcome__hero" src="assets/v1-star-barev.png" alt="">
+    <span class="onb-spark onb-spark--1"></span><span class="onb-spark onb-spark--2"></span><span class="onb-spark onb-spark--3"></span>
+  </div>
+
+  <div class="onb-welcome__text">
+    <span class="onb-pill">Ֆինանսական գրագիտություն</span>
+    <h1 class="onb-title onb-title--xl">Բարև՛</h1>
+    <p class="onb-lead">Միասին կբացահայտենք փողի աշխարհը՝ քայլ առ քայլ</p>
+  </div>
+
+  <div class="page-heading onb-head">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"><div data-include="back-btn"></div></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer__actions"><button class="btn btn--primary" data-go="s-onb-intro"><span>Շարունակել</span></button></div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+
+<!-- ===== Onboarding · What to expect (redesigned: one screen, no scroll) ===== -->
+<section class="screen onb onb-intro" id="s-onb-intro" data-title="What to expect" data-group="Archive · Onboarding">
+  <div class="onb-bg"></div>
+  <div class="grid-bg"></div>
+
+  <div class="onb-intro__body">
+    <div class="onb-intro__head">
+      <h1 class="onb-title">Ի՞նչ է քեզ սպասվում</h1>
+      <p class="onb-lead">4 մոդուլ · ամեն թեման՝ մոտ 5 րոպե</p>
+    </div>
+
+    <ol class="onb-steps">
+      <li class="onb-step">
+        <span class="onb-step__ic"><img src="assets/lvl-ic-reel.png" alt=""></span>
+        <div class="onb-step__txt"><p class="onb-step__t">Դիտիր կարճ ռիլեր</p><p class="onb-step__d">1 րոպեանոց տեսանյութեր փողի մասին</p></div>
+      </li>
+      <li class="onb-step">
+        <span class="onb-step__ic"><img src="assets/lvl-ic-quiz.png" alt=""></span>
+        <div class="onb-step__txt"><p class="onb-step__t">Անցիր քուիզեր</p><p class="onb-step__d">Ստուգիր գիտելիքներդ և վաստակիր AMP</p></div>
+      </li>
+      <li class="onb-step">
+        <span class="onb-step__ic"><img src="assets/onb-ic-game.png" alt=""></span>
+        <div class="onb-step__txt"><p class="onb-step__t">Խաղա մինի խաղեր</p><p class="onb-step__d">Էմոջի հանելուկներ և խաչբառեր</p></div>
+      </li>
+      <li class="onb-step">
+        <span class="onb-step__ic"><img src="assets/onb-ic-badge.png" alt=""></span>
+        <div class="onb-step__txt"><p class="onb-step__t">Հավաքիր բեյջեր</p><p class="onb-step__d">Յուրաքանչյուր մոդուլի համար՝ նոր բեյջ</p></div>
+      </li>
+      <li class="onb-step">
+        <span class="onb-step__ic"><img src="assets/onb-ic-lamp.png" alt=""></span>
+        <div class="onb-step__txt"><p class="onb-step__t">Կիրառիր կյանքում</p><p class="onb-step__d">Հմտություններ ամեն օրվա համար</p></div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="page-heading onb-head">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"><div data-include="back-btn"></div></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer__actions"><button class="btn btn--primary" data-go="s-onb-avatar"><span>Շարունակել</span></button></div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+
+<!-- ===== Onboarding · 2 · Gamified profile setup — empty state (no MyAmeria avatar), nickname + avatar.
+     Form logic: js/screens/12-onb-avatar.js (App.ProfileForm, shared with the edit sheet on the personal page).
+     State copies (data-pa-clone) are filled from this markup. ===== -->
+<section class="screen onb onb-pa" id="s-onb-avatar" data-title="2 · Gamified profile" data-group="Onboarding" data-pa-mode="live">
+  <div class="onb-bg"></div>
+  <div class="grid-bg"></div>
+  <div class="scroll">
+    <div class="pa pf">
+      <div class="pa-intro">
+        <span class="pa-kicker"><img src="assets/amp-coin.svg" width="16" height="16" alt="">Խաղային պրոֆիլ</span>
+        <h1 class="pa-h1">Ստեղծիր քո խաղային պրոֆիլը</h1>
+        <p class="pa-lead">Ընտրիր կերպար և մականուն․ դրանցով կխաղաս, կհավաքես բեյջեր և AMP</p>
+      </div>
+
+      <div data-pf-part="form"></div>
+    </div>
+  </div>
+
+  <div class="page-heading onb-head">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"><div data-include="back-btn"></div></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <p class="pa-cta-hint js-pa-cta-hint">Ընտրիր կերպար և մականուն՝ շարունակելու համար</p>
+    <div class="page-footer__actions"><button class="btn btn--primary pa-cta js-onb-avatar-cta" aria-disabled="true"><span>Սկսել</span></button></div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+
+<!-- Shared profile-form template (preview card + nickname field + avatar grid) — used by onboarding and the edit sheet -->
+<template id="tpl-profile-form">
+  <div class="pa-preview" data-filled="false">
+    <span class="pa-preview__av">
+      <span class="pa-preview__ph" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="12" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M5 30c1.6-6 6.2-9 12-9s10.4 3 12 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <img class="js-pa-photo" alt="">
+      <span class="pa-preview__burst" aria-hidden="true"></span>
+    </span>
+    <div class="pa-preview__info">
+      <p class="pa-preview__name js-pa-name">Քո մականունը</p>
+      <p class="pa-preview__meta"><img src="assets/prof-amp-14.svg" width="14" height="14" alt=""><b class="js-pa-amp">0</b> AMP<span class="pa-preview__dot"></span><span class="js-pa-level">Սկսնակ</span></p>
+    </div>
+    <span class="pa-preview__tag">Նախադիտում</span>
+  </div>
+  <div class="pa-preview pa-preview--skel" aria-hidden="true">
+    <span class="pa-skel pa-skel--photo"></span>
+    <span class="pa-card__bars"><span class="pa-skel pa-skel--bar"></span><span class="pa-skel pa-skel--bar is-short"></span></span>
+  </div>
+
+  <div class="pa-block pa-nick" data-state="default">
+    <label class="pa-label"><span>Մականուն</span><em>*</em></label>
+    <div class="pa-field">
+      <div class="pa-field__box">
+        <input class="pa-field__input js-pa-nick" type="text" placeholder="Օր․՝ Ani_2014" maxlength="20"
+               autocomplete="nickname" autocapitalize="off" spellcheck="false" aria-describedby="">
+        <span class="pa-field__trail">
+          <span class="pa-field__spin" aria-hidden="true"></span>
+          <span class="pa-field__ok" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#93EC60"/><path d="M6.6 11.3l2.6 2.6c.4.4 1 .4 1.4 0l4.8-5" stroke="#0A1C00" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="pa-field__err" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#FF5B5B"/><path d="M11 6.2v6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="15.6" r="1.1" fill="#fff"/></svg></span>
+          <button class="pa-field__clear js-pa-clear" type="button" aria-label="Մաքրել"><img src="assets/onb-pa-ic-clear.svg" width="24" height="24" alt=""></button>
+        </span>
+      </div>
+      <p class="pa-field__note"><span class="pa-field__note-ic" aria-hidden="true"></span><span class="pa-field__msg js-pa-note" aria-live="polite">3–20 նիշ՝ հայերեն կամ լատինատառ, թվեր, _</span><span class="pa-field__count js-pa-count">0/20</span></p>
+    </div>
+  </div>
+
+  <div class="pa-block pa-avatars">
+    <div class="pa-label pa-label--row"><span>Ընտրիր կերպարը<em>*</em></span><span class="pa-label__hint js-pa-av-hint">Հպիր կերպարին</span></div>
+    <div class="pa-grid js-pa-grid" role="radiogroup" aria-label="Կերպար"></div>
+    <div class="pa-empty">
+      <div class="pa-empty__visual" aria-hidden="true">
+        <div class="pa-empty__card">
+          <span class="pa-empty__av pa-empty__av--l"><span class="pa-disc is-blue"><img src="assets/prof-av-05.png" alt=""></span></span>
+          <span class="pa-empty__av pa-empty__av--r"><span class="pa-disc is-blue"><img src="assets/prof-av-07.png" alt=""></span></span>
+          <span class="pa-empty__av pa-empty__av--c"><span class="pa-disc is-blue"><img src="assets/prof-av-01.png" alt=""></span></span>
+        </div>
+        <img class="pa-empty__fade" src="assets/onb-pa-err-fade.png" alt="">
+      </div>
+      <div class="pa-empty__text">
+        <p class="pa-empty__title">Չհաջողվեց բեռնել կերպարները</p>
+        <p class="pa-empty__lead">Ստուգիր կապը և փորձիր կրկին։</p>
+      </div>
+      <button class="pa-empty__reload js-pa-reload" type="button">Վերաբեռնել</button>
+    </div>
+  </div>
+</template>
+<!-- ===== Onboarding · First task (easy money math → first AMP) — added on top of the copy's flow ===== -->
+<section class="screen onb ot" id="s-onb-task" data-ot="onboarding" data-title="3 · First task (+50 AMP)" data-group="Onboarding">
+  <div class="onb-bg"></div>
+  <div class="grid-bg"></div>
+  <div class="scroll">
+    <div class="pa">
+      <div class="pa-intro">
+        <span class="pa-kicker"><img src="assets/amp-coin.svg" width="16" height="16" alt="">Առաջին առաջադրանք</span>
+        <h1 class="pa-h1">Լուծիր և ստացիր առաջին AMP-ները</h1>
+        <p class="pa-lead">Մեկ հեշտ խնդիր փողի մասին</p>
+      </div>
+      <div class="ot-card">
+        <span class="ot-reward"><img src="assets/amp-coin.svg" width="20" height="20" alt=""><span class="js-ot-reward">+50 AMP</span></span>
+        <div class="ot-scene js-ot-scene" aria-hidden="true"></div>
+        <p class="ot-q js-ot-q"></p>
+        <div class="ot-opts js-ot-opts"></div>
+        <p class="ot-fb js-ot-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+  <div class="ot-burst js-ot-burst" aria-hidden="true"></div>
+  <div class="page-heading onb-head">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"><div data-include="back-btn"></div></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+<!-- ===== Onboarding · Ready to start (rocket launch animation) ===== -->
+<section class="screen onb onb-start" id="s-onb-start" data-title="4 · Rocket (auto → Education)" data-group="Onboarding">
+  <div class="onb-bg"></div>
+  <div class="grid-bg"></div>
+
+  <div class="onb-start__stage">
+    <div class="onb-halo"></div>
+    <div class="onb-rocket">
+      <img class="onb-rocket__img" src="assets/onb-start-rocket.png" alt="">
+      <span class="onb-rocket__flame"></span>
+    </div>
+    <span class="onb-smoke onb-smoke--1"></span><span class="onb-smoke onb-smoke--2"></span><span class="onb-smoke onb-smoke--3"></span>
+  </div>
+
+  <div class="onb-start__text">
+    <h1 class="onb-title">Թռչում ենք</h1>
+    <p class="onb-lead">Քո առաջին AMP-ները արդեն ճանապարհին են</p>
+  </div>
+
+  <div class="page-heading onb-head">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"><div data-include="back-btn"></div></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+
+
+
+<!-- ===== Onboarding · Ready to start (rocket launch animation) ===== -->
+
+
+<!-- ===== Onboarding · Gamified profile states. Each shell is filled with a copy of #s-onb-avatar by js/screens/12-onb-avatar.js ===== -->
+<section class="screen onb onb-pa" id="s-onb-avatar-empty" data-title="Profile · empty (first visit)" data-group="Onboarding · profile states" data-pa-clone data-pa-mode="empty"></section>
+<section class="screen onb onb-pa" id="s-onb-avatar-picked" data-title="Profile · avatar picked" data-group="Onboarding · profile states" data-pa-clone data-pa-mode="picked"></section>
+<section class="screen onb onb-pa" id="s-onb-avatar-invalid" data-title="Profile · nickname too short" data-group="Onboarding · profile states" data-pa-clone data-pa-mode="invalid"></section>
+<section class="screen onb onb-pa" id="s-onb-avatar-taken" data-title="Profile · nickname taken" data-group="Onboarding · profile states" data-pa-clone data-pa-mode="taken"></section>
+<section class="screen onb onb-pa" id="s-onb-avatar-valid" data-title="Profile · all valid (CTA on)" data-group="Onboarding · profile states" data-pa-clone data-pa-mode="valid"></section>
+<section class="screen onb onb-pa" id="s-onb-avatar-loading" data-title="Profile · loading" data-group="Onboarding · profile states" data-pa-clone data-pa-mode="loading"></section>
+<section class="screen onb onb-pa" id="s-onb-avatar-partial" data-title="Profile · some avatars failed" data-group="Onboarding · profile states" data-pa-clone data-pa-mode="partial"></section>
+<section class="screen onb onb-pa" id="s-onb-avatar-error" data-title="Profile · avatars failed to load" data-group="Onboarding · profile states" data-pa-clone data-pa-mode="error"></section>
+
+<!-- ===== Components · avatar + nickname field states (spec board) ===== -->
+<section class="screen onb onb-pa" id="s-pa-states" data-title="Avatar & field states (spec)" data-group="Onboarding · profile states">
+  <div class="onb-bg"></div>
+  <div class="grid-bg"></div>
+  <div class="scroll">
+    <div class="pst pf">
+      <p class="pst-h">Կերպարի վիճակներ</p>
+      <p class="pst-sub">Avatar tile · same component in onboarding and in “Edit profile”</p>
+      <div class="pst-card js-pst-avs"></div>
+      <p class="pst-h">Մականունի դաշտ</p>
+      <p class="pst-sub">No red / green fills — outline, trailing icon and helper text carry the state</p>
+      <div class="pst-card js-pst-fields"></div>
+    </div>
+  </div>
+  <div class="page-heading onb-head">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"><div data-include="back-btn"></div></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Components</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== Education home (Figma section 3010:209237 "Module page") =====
+     Cards are rendered by js/screens/20-home.js from data-hm-opt / data-hm-stage.
+     data-hm-stage omitted = live state (App.lesson + App.state.level2Unlocked). -->
+<!-- ===== Education home · levels with tabs (based on "Option 2 · tilted cards"). Markup + logic: js/screens/24-home-levels.js
+     Rules: under 11 → level 1 open, level 2 locked · 12+ → both open · under 11 + level 1 passed → level 2 opens · turns 12 → level 2 opens.
+     data-lv = live | u11 | o11 | u11done | turned12 ===== -->
+<section class="screen lv-screen" id="s-home" data-title="Live (age 10 · follows the flow)" data-group="Education home" data-lv="live"></section>
+<section class="screen lv-screen lv-v2" id="s-home-v2" data-title="Live · v2 (profile + tabs hidden)" data-group="Education home" data-lv="live"></section>
+<section class="screen lv-screen" id="s-home-u11" data-title="A · Under 11 — level 2 locked" data-group="Education home" data-lv="u11"></section>
+<section class="screen lv-screen" id="s-home-u11-l2" data-title="A · Under 11 — tapping the locked tab" data-group="Education home" data-lv="u11" data-lv-tab="1"></section>
+<section class="screen lv-screen" id="s-home-o11" data-title="B · 12+ — both levels open" data-group="Education home" data-lv="o11"></section>
+<section class="screen lv-screen" id="s-home-u11done" data-title="C · Under 11, level 1 passed → unlocked" data-group="Education home" data-lv="u11done"></section>
+<section class="screen lv-screen" id="s-home-turned12" data-title="D · Turned 12 before finishing → unlocked" data-group="Education home" data-lv="turned12"></section>
+<!-- ===== Daily money-math task (from the Education home card) ===== -->
+<section class="screen onb ot ot--daily" id="s-math" data-ot="daily" data-title="Daily math task (+20 AMP)" data-group="Education home">
+  <div class="onb-bg"></div>
+  <div class="grid-bg"></div>
+  <div class="scroll">
+    <div class="pa">
+      <div class="pa-intro">
+        <span class="pa-kicker"><img src="assets/amp-coin.svg" width="16" height="16" alt="">Օրվա խնդիրը</span>
+        <h1 class="pa-h1">Հաշվիր և վաստակիր AMP</h1>
+        <p class="pa-lead js-ot-count">Լուծիր և վաստակիր AMP</p>
+      </div>
+      <div class="ot-card">
+        <span class="ot-reward"><img src="assets/amp-coin.svg" width="20" height="20" alt=""><span class="js-ot-reward">+20 AMP</span></span>
+        <div class="ot-scene js-ot-scene" aria-hidden="true"></div>
+        <p class="ot-q js-ot-q"></p>
+        <div class="ot-opts js-ot-opts"></div>
+        <p class="ot-fb js-ot-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+  <div class="ot-burst js-ot-burst" aria-hidden="true"></div>
+  <div class="page-heading onb-head">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"><div data-include="back-btn"></div></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+
+
+<!-- ARCHIVE · Option 1 · 2-column grid · 3010:216592 (live: also 3010:233390 / 3010:224315) -->
+<section class="screen hm-screen" id="s-home-o1" data-title="Option 1 · 2-column grid" data-group="Archive · Education home" data-hm-opt="1">
+  <div class="grid-bg"></div>
+  <div class="scroll hm hm--o1">
+      <!-- Profile card · 3010:218527 -->
+      <div class="hm__profile">
+        <button class="profile-card" data-go="s-profile">
+          <span class="profile-card__avatar">
+            <span class="profile-card__img"><img src="assets/avatar-anush.png" alt=""></span>
+          </span>
+          <span class="profile-card__text">
+            <span class="t-h5-bold c-title js-user-name">Anush</span>
+            <span class="t-footnote c-subtitle">Financial Traveler</span>
+          </span>
+          <img class="profile-card__chev" src="assets/ic-arrow-right.svg" width="24" height="24" alt="">
+        </button>
+      </div>
+    <div class="hm__levels js-hm-levels"></div>
+  </div>
+  <div class="page-heading is-gradient">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+<!-- Option 1 · after module 1 · 3010:233390 -->
+<section class="screen hm-screen" id="s-home-progress" data-title="Option 1 · module 1 done" data-group="Archive · Education home" data-hm-opt="1" data-hm-stage="progress">
+  <div class="grid-bg"></div>
+  <div class="scroll hm hm--o1">
+      <!-- Profile card · 3010:218527 -->
+      <div class="hm__profile">
+        <button class="profile-card" data-go="s-profile">
+          <span class="profile-card__avatar">
+            <span class="profile-card__img"><img src="assets/avatar-anush.png" alt=""></span>
+          </span>
+          <span class="profile-card__text">
+            <span class="t-h5-bold c-title js-user-name">Anush</span>
+            <span class="t-footnote c-subtitle">Financial Traveler</span>
+          </span>
+          <img class="profile-card__chev" src="assets/ic-arrow-right.svg" width="24" height="24" alt="">
+        </button>
+      </div>
+    <div class="hm__levels js-hm-levels"></div>
+  </div>
+  <div class="page-heading is-gradient">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+<!-- Option 1 · level 2 unlocked · 3010:224315 -->
+<section class="screen hm-screen" id="s-home-unlocked" data-title="Option 1 · level 2 open" data-group="Archive · Education home" data-hm-opt="1" data-hm-stage="unlocked">
+  <div class="grid-bg"></div>
+  <div class="scroll hm hm--o1">
+      <!-- Profile card · 3010:218527 -->
+      <div class="hm__profile">
+        <button class="profile-card" data-go="s-profile">
+          <span class="profile-card__avatar">
+            <span class="profile-card__img"><img src="assets/avatar-anush.png" alt=""></span>
+          </span>
+          <span class="profile-card__text">
+            <span class="t-h5-bold c-title js-user-name">Anush</span>
+            <span class="t-footnote c-subtitle">Financial Traveler</span>
+          </span>
+          <img class="profile-card__chev" src="assets/ic-arrow-right.svg" width="24" height="24" alt="">
+        </button>
+      </div>
+    <div class="hm__levels js-hm-levels"></div>
+  </div>
+  <div class="page-heading is-gradient">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+
+<!-- Option 2 · tilted cards · 3010:209238 (live) -->
+<section class="screen hm-screen" id="s-home-o2" data-title="Option 2 · tilted cards" data-group="Archive · Education home" data-hm-opt="2">
+  <div class="grid-bg"></div>
+  <div class="scroll hm hm--o2">
+    <div class="hm2__frame">
+      <!-- Profile card · 3010:218527 -->
+      <div class="hm__profile">
+        <button class="profile-card" data-go="s-profile">
+          <span class="profile-card__avatar">
+            <span class="profile-card__img"><img src="assets/avatar-anush.png" alt=""></span>
+          </span>
+          <span class="profile-card__text">
+            <span class="t-h5-bold c-title js-user-name">Anush</span>
+            <span class="t-footnote c-subtitle">Financial Traveler</span>
+          </span>
+          <img class="profile-card__chev" src="assets/ic-arrow-right.svg" width="24" height="24" alt="">
+        </button>
+      </div>
+      <div class="hm__levels js-hm-levels"></div>
+    </div>
+  </div>
+  <div class="page-heading is-gradient">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+<!-- Option 2 · 3010:212316 -->
+<section class="screen hm-screen" id="s-home-o2-progress" data-title="Option 2 · module 1 done" data-group="Archive · Education home" data-hm-opt="2" data-hm-stage="progress">
+  <div class="grid-bg"></div>
+  <div class="scroll hm hm--o2">
+    <div class="hm2__frame">
+      <!-- Profile card · 3010:218527 -->
+      <div class="hm__profile">
+        <button class="profile-card" data-go="s-profile">
+          <span class="profile-card__avatar">
+            <span class="profile-card__img"><img src="assets/avatar-anush.png" alt=""></span>
+          </span>
+          <span class="profile-card__text">
+            <span class="t-h5-bold c-title js-user-name">Anush</span>
+            <span class="t-footnote c-subtitle">Financial Traveler</span>
+          </span>
+          <img class="profile-card__chev" src="assets/ic-arrow-right.svg" width="24" height="24" alt="">
+        </button>
+      </div>
+      <div class="hm__levels js-hm-levels"></div>
+    </div>
+  </div>
+  <div class="page-heading is-gradient">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+<!-- Option 2 · 3010:214454 -->
+<section class="screen hm-screen" id="s-home-o2-unlocked" data-title="Option 2 · level 2 open" data-group="Archive · Education home" data-hm-opt="2" data-hm-stage="unlocked">
+  <div class="grid-bg"></div>
+  <div class="scroll hm hm--o2">
+    <div class="hm2__frame">
+      <!-- Profile card · 3010:218527 -->
+      <div class="hm__profile">
+        <button class="profile-card" data-go="s-profile">
+          <span class="profile-card__avatar">
+            <span class="profile-card__img"><img src="assets/avatar-anush.png" alt=""></span>
+          </span>
+          <span class="profile-card__text">
+            <span class="t-h5-bold c-title js-user-name">Anush</span>
+            <span class="t-footnote c-subtitle">Financial Traveler</span>
+          </span>
+          <img class="profile-card__chev" src="assets/ic-arrow-right.svg" width="24" height="24" alt="">
+        </button>
+      </div>
+      <div class="hm__levels js-hm-levels"></div>
+    </div>
+  </div>
+  <div class="page-heading is-gradient">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+
+<!-- Option 3 · list · 3010:235574 (live) -->
+<section class="screen hm-screen" id="s-home-o3" data-title="Option 3 · list" data-group="Archive · Education home" data-hm-opt="3">
+  <div class="grid-bg"></div>
+  <div class="scroll hm hm--o3">
+      <!-- Profile card · 3010:218527 -->
+      <div class="hm__profile">
+        <button class="profile-card" data-go="s-profile">
+          <span class="profile-card__avatar">
+            <span class="profile-card__img"><img src="assets/avatar-anush.png" alt=""></span>
+          </span>
+          <span class="profile-card__text">
+            <span class="t-h5-bold c-title js-user-name">Anush</span>
+            <span class="t-footnote c-subtitle">Financial Traveler</span>
+          </span>
+          <img class="profile-card__chev" src="assets/ic-arrow-right.svg" width="24" height="24" alt="">
+        </button>
+      </div>
+    <div class="hm__levels js-hm-levels"></div>
+  </div>
+  <div class="page-heading is-gradient">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+<!-- Option 3 · 3010:238742 -->
+<section class="screen hm-screen" id="s-home-o3-progress" data-title="Option 3 · module 1 done" data-group="Archive · Education home" data-hm-opt="3" data-hm-stage="progress">
+  <div class="grid-bg"></div>
+  <div class="scroll hm hm--o3">
+      <!-- Profile card · 3010:218527 -->
+      <div class="hm__profile">
+        <button class="profile-card" data-go="s-profile">
+          <span class="profile-card__avatar">
+            <span class="profile-card__img"><img src="assets/avatar-anush.png" alt=""></span>
+          </span>
+          <span class="profile-card__text">
+            <span class="t-h5-bold c-title js-user-name">Anush</span>
+            <span class="t-footnote c-subtitle">Financial Traveler</span>
+          </span>
+          <img class="profile-card__chev" src="assets/ic-arrow-right.svg" width="24" height="24" alt="">
+        </button>
+      </div>
+    <div class="hm__levels js-hm-levels"></div>
+  </div>
+  <div class="page-heading is-gradient">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+<!-- Option 3 · 3010:240925 -->
+<section class="screen hm-screen" id="s-home-o3-unlocked" data-title="Option 3 · level 2 open" data-group="Archive · Education home" data-hm-opt="3" data-hm-stage="unlocked">
+  <div class="grid-bg"></div>
+  <div class="scroll hm hm--o3">
+      <!-- Profile card · 3010:218527 -->
+      <div class="hm__profile">
+        <button class="profile-card" data-go="s-profile">
+          <span class="profile-card__avatar">
+            <span class="profile-card__img"><img src="assets/avatar-anush.png" alt=""></span>
+          </span>
+          <span class="profile-card__text">
+            <span class="t-h5-bold c-title js-user-name">Anush</span>
+            <span class="t-footnote c-subtitle">Financial Traveler</span>
+          </span>
+          <img class="profile-card__chev" src="assets/ic-arrow-right.svg" width="24" height="24" alt="">
+        </button>
+      </div>
+    <div class="hm__levels js-hm-levels"></div>
+  </div>
+  <div class="page-heading is-gradient">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+
+<!-- ===== Personal page v2 · header + nav from the approved Figma option (1870:64150) mixed with the test version.
+     Badge layouts to compare (no per-badge progress: a badge is earned, not earned yet, or locked). Markup + logic: js/screens/34-profile-v2.js ===== -->
+<section class="screen pv-screen" id="s-profile" data-title="A · Latest + grid (mix)" data-group="Personal page · badge layouts" data-pv="a"></section>
+<section class="screen pv-screen" id="s-profile-b" data-title="B · Showcase + shelves" data-group="Personal page · badge layouts" data-pv="b"></section>
+<section class="screen pv-screen" id="s-profile-c" data-title="C · Badge path" data-group="Personal page · badge layouts" data-pv="c"></section>
+
+<!-- Personal page · states (all built on layout A) -->
+<section class="screen pv-screen" id="s-profile-loading" data-title="Loading (skeleton)" data-group="Personal page · states" data-pv="skel"></section>
+<section class="screen pv-screen" id="s-profile-saved" data-title="Profile saved · success toast" data-group="Personal page · states" data-pv="a" data-pv-toast="success"></section>
+<section class="screen pv-screen" id="s-profile-save-error" data-title="Profile not saved · error toast" data-group="Personal page · states" data-pv="a" data-pv-toast="error"></section>
+<section class="screen pv-screen" id="s-profile-edit" data-title="Edit profile (drawer)" data-group="Personal page · states" data-pv="a" data-pv-sheet="ready"></section>
+<section class="screen pv-screen" id="s-profile-edit-loading" data-title="Edit profile · loading" data-group="Personal page · states" data-pv="a" data-pv-sheet="loading"></section>
+<section class="screen pv-screen" id="s-badge-earned" data-title="Badge drawer · earned" data-group="Personal page · states" data-pv="a" data-pv-badge="traveler"></section>
+<section class="screen pv-screen" id="s-badge-todo" data-title="Badge drawer · not earned yet" data-group="Personal page · states" data-pv="a" data-pv-badge="saver"></section>
+<section class="screen pv-screen" id="s-badge-locked" data-title="Badge drawer · locked level" data-group="Personal page · states" data-pv="a" data-pv-badge="keeper"></section>
+
+<!-- Badge drawer — merges the old "Badge" and "Badge · details list" pages into one bottom sheet -->
+<div class="overlay" id="o-badge-info">
+  <div class="sheet bd">
+    <div class="bd__nav">
+      <div class="bd__nav-side"><button class="avs__close" data-close aria-label="Փակել"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button></div>
+      <div class="bd__nav-center"><span class="nav-bar__title">Բեյջ</span></div>
+      <div class="bd__nav-side"></div>
+    </div>
+    <div class="bd__body">
+      <div class="bd-hero js-bd-hero"></div>
+      <div class="bd-id">
+        <p class="bd-id__k js-bd-kicker">ՄՈԴՈՒԼ 1 ԲԵՅՋ</p>
+        <p class="bd-id__n js-bd-name">«Ֆինանսների ճանապարհորդ»</p>
+        <span class="chip chip--s js-bd-status">Վաստակած</span>
+      </div>
+      <div class="bd-rows js-bd-rows"></div>
+      <div class="bd-text js-bd-text"></div>
+    </div>
+    <div class="bd__footer">
+      <div class="avs__actions"><button class="avs__btn avs__btn--primary js-bd-cta"><span class="avs__btn-label">Լավ</span></button></div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Edit profile bottom sheet — reuses the onboarding profile form: same avatar + nickname states (12-onb-avatar.js / .css) ===== -->
+<div class="overlay" id="o-avatar-sheet">
+  <div class="sheet avs">
+    <div class="avs__nav">
+      <div class="avs__nav-left"><button class="avs__close" data-close aria-label="Փակել"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button></div>
+      <div class="avs__nav-center"><span class="nav-bar__title">Խմբագրել պրոֆիլը</span></div>
+      <div class="avs__nav-right"></div>
+    </div>
+    <div class="avs__body pf"><div data-pf-part="form"></div></div>
+    <div class="avs__footer">
+      <p class="pa-cta-hint js-avs-hint">Փոխիր կերպարը կամ մականունը</p>
+      <div class="avs__actions">
+        <button class="avs__btn avs__btn--primary js-avs-save" aria-disabled="true"><span class="avs__btn-label">Պահպանել</span><span class="avs__spin" aria-hidden="true"></span></button>
+      </div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Page can't be loaded · Figma 3001:84185 ===== -->
+<section class="screen" id="s-error" data-title="Error · page can't load" data-group="Personal page · states">
+  <!-- Empty (Reload) state · 3001:84193 -->
+  <div class="err">
+    <div class="err__top">
+      <div class="err__visual">
+        <div class="err__stage">
+          <span class="err__frame"></span>
+          <span class="err__card-wrap" style="left:147.56px;top:45.58px"><span class="err__card" style="transform:rotate(8deg)"><img src="assets/badge-traveler.png" alt=""><span class="err__skel"></span></span></span>
+          <span class="err__card-wrap" style="left:20.08px;top:45.57px"><span class="err__card" style="transform:rotate(-8deg)"><img src="assets/badge-traveler.png" alt=""><span class="err__skel"></span></span></span>
+          <span class="err__card err__card--mid"><span class="err__rot"><img src="assets/badge-traveler.png" alt=""></span><span class="err__skel"></span></span>
+        </div>
+        <img class="err__fade" src="assets/state-fade.png" alt="">
+      </div>
+      <div class="err__text">
+        <p class="err__title">Հնարավոր չէ բեռնել Անձնական էջը</p>
+        <p class="err__desc">Խնդրում ենք ստուգել ձեր ցանցային կապը, այնուհետև սեղմել «Վերաբեռնել» կոճակը։</p>
+      </div>
+    </div>
+    <button class="err__btn" data-go="s-profile-loading"><span>Վերաբեռնել</span></button>
+  </div>
+
+  <div class="page-heading">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"><div data-include="back-btn"></div></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Անձնական էջ</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Levels · overlays (Figma section "Transition" 3001:64589) ===== -->
+
+<!-- Level locked · 3001:70738 › Alert 3001:71606 -->
+<div class="overlay lvl-alert" id="o-level-locked">
+  <div class="dialog lvl-dialog" role="dialog" aria-modal="true" aria-labelledby="lvl-locked-title">
+    <div class="lvl-visual">
+      <div class="lvl-books">
+        <img class="lvl-book lvl-book--2" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--3" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--5" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--6" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--7" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--4" src="assets/lvl-book.png" alt="">
+        <div class="lvl-books__veil"></div>
+        <img class="lvl-book lvl-book--1" src="assets/lvl-book.png" alt="">
+      </div>
+      <span class="lvl-lockfx" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path class="shackle" d="M7.5 11V8.5a5.5 5.5 0 0 1 11 0V11" stroke="#3b4148" stroke-width="2.4" stroke-linecap="round"/><rect x="4.5" y="11" width="17" height="12.5" rx="3.6" fill="#3b4148"/><circle cx="13" cy="17.2" r="1.9" fill="#fff"/></svg></span>
+      <div class="lvl-text">
+        <p class="lvl-text__title" id="lvl-locked-title">Առաջադեմը դեռ փակ է</p>
+        <p class="lvl-text__body">Այն կբացվի, երբ ավարտես Սկսնակ մակարդակը։</p>
+      </div>
+    </div>
+    <div class="lvl-footer">
+      <button class="lvl-btn" data-close><span>Լավ</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- New level unlocked · 3001:68114 › Alert 3001:68981 (after finishing level 1)
+     variant .is-age · 3001:66325 › Alert 3001:67192 (user turned 12) -->
+<div class="overlay lvl-alert" id="o-level-new" data-static>
+  <div class="dialog lvl-dialog" role="dialog" aria-modal="true" aria-labelledby="lvl-new-title">
+    <div class="lvl-visual">
+      <div class="lvl-books">
+        <img class="lvl-book lvl-book--2" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--3" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--5" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--6" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--7" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--4" src="assets/lvl-book.png" alt="">
+        <div class="lvl-books__veil"></div>
+        <img class="lvl-book lvl-book--1" src="assets/lvl-book.png" alt="">
+      </div>
+      <span class="lvl-lockfx" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path class="shackle" d="M7.5 11V8.5a5.5 5.5 0 0 1 11 0V11" stroke="#3b4148" stroke-width="2.4" stroke-linecap="round"/><rect x="4.5" y="11" width="17" height="12.5" rx="3.6" fill="#3b4148"/><circle cx="13" cy="17.2" r="1.9" fill="#fff"/></svg></span><span class="lvl-burst" aria-hidden="true"><i style="--x:-90px;--y:-40px;background:#93ec60"></i><i style="--x:80px;--y:-60px;background:#ffb847"></i><i style="--x:-60px;--y:50px;background:#359afe"></i><i style="--x:100px;--y:30px;background:#ff5b5b"></i><i style="--x:-110px;--y:0px;background:#ffb847"></i><i style="--x:40px;--y:-90px;background:#359afe"></i><i style="--x:10px;--y:70px;background:#93ec60"></i><i style="--x:-20px;--y:-80px;background:#ff5b5b"></i></span>
+      <div class="lvl-text">
+        <p class="lvl-text__title" id="lvl-new-title">Նոր մակարդակ բացվեց</p>
+        <p class="lvl-text__body lvl-only-done">Դու ավարտեցիր Սկսնակը, և քեզ համար բացվեց Առաջադեմ մակարդակը։</p>
+        <p class="lvl-text__body lvl-only-age">Դու արդեն 12 տարեկան ես։ Այժմ բաց է նաև Առաջադեմը, իսկ Սկսնակում քո առաջընթացը պահպանված է։</p>
+      </div>
+    </div>
+    <div class="lvl-footer">
+      <button class="lvl-btn js-lvl-unlock"><span>Դիտել նոր մակարդակը</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- Two levels (user over 11) · 3001:67212 › Alert 3001:68079 -->
+<div class="overlay lvl-alert" id="o-two-levels" data-static>
+  <div class="dialog lvl-dialog lvl-dialog--two" role="dialog" aria-modal="true" aria-labelledby="lvl-two-title">
+    <div class="lvl-visual">
+      <div class="lvl-books">
+        <img class="lvl-book lvl-book--2" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--3" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--5" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--6" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--7" src="assets/lvl-book.png" alt="">
+        <img class="lvl-book lvl-book--4" src="assets/lvl-book.png" alt="">
+        <div class="lvl-books__veil"></div>
+        <img class="lvl-book lvl-book--1" src="assets/lvl-book.png" alt="">
+      </div>
+      <div class="lvl-text">
+        <p class="lvl-text__title" id="lvl-two-title">Երկու մակարդակ</p>
+        <p class="lvl-text__body">Հնարավորություն ունես անցնել երկու մակարդակն էլ՝ երբ ցանկանաս։ Խորհուրդ է տրվում սկսել առաջին մակարդակից։</p>
+      </div>
+    </div>
+    <div class="lvl-levels">
+      <div class="lvl-level">
+        <img src="assets/lvl-num-01.svg" width="35.8324" height="19.9999" alt="01">
+        <div class="lvl-level__text">
+          <p class="lvl-level__title">Սկսնակ Մակարդակ</p>
+          <p class="lvl-level__desc">Սկսնակ մակարդակ, որտեղ դու կստանաս բավականին շատ հետաքրքիր գիտելիքներ։</p>
+        </div>
+      </div>
+      <div class="lvl-level">
+        <img src="assets/lvl-num-02.svg" width="41.5143" height="20" alt="02">
+        <div class="lvl-level__text">
+          <p class="lvl-level__title">Առաջադեմ Մակարդակ</p>
+          <p class="lvl-level__desc">Առաջադեմ մակարդակ, որտեղ դու կստանաս ավելի խորը գիտելիքներ։</p>
+        </div>
+      </div>
+    </div>
+    <div class="lvl-footer">
+      <button class="lvl-btn js-lvl-unlock"><span>Սկսել Սկսնակից</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Theme completion page · Figma 3001:71626 (sheet 3001:72726 + content 3001:73480); stats rows updated to 3010:220493 ===== -->
+<section class="screen" id="s-theme-complete" data-title="Theme completion" data-group="Education home · modals & completion">
+  <!-- dimmed page behind the sheet -->
+  <div class="grid-bg"></div>
+  <div data-include="status-bar"></div>
+  <div class="tc-dim"></div>
+
+  <!-- Organism / Bottom sheet new · 3001:72727 -->
+  <div class="tc-sheet">
+    <div class="tc-deco" aria-hidden="true">
+      <img class="tc-star" src="assets/lvl-star-a.svg" width="27.4861" height="20.7011" style="left:278px;top:83px;transform:matrix(0.8049,-0.5935,0.5935,0.8049,-2.659,16.029)" alt="">
+      <img class="tc-star" src="assets/lvl-star-b.svg" width="39.4586" height="29.7184" style="left:39px;top:166px;transform:matrix(0.8049,-0.5935,0.5935,0.8049,-3.817,23.011)" alt="">
+      <img class="tc-star" src="assets/lvl-star-c.svg" width="33.5944" height="25.3017" style="left:41px;top:331px;transform:matrix(0.8049,-0.5935,0.5935,0.8049,-3.249,19.592)" alt="">
+      <img class="tc-star" src="assets/lvl-star-v1.svg" width="41.7363" height="31.9863" style="left:316.181px;top:226.083px;transform:matrix(0.8049,-0.5935,0.5935,0.8049,-9.181,18.686)" alt="">
+      <img class="tc-star" src="assets/lvl-star-v2.svg" width="26.1386" height="20.0324" style="left:103.75px;top:105.81px;transform:matrix(0.8049,-0.5935,0.5935,0.8049,-5.75,11.703)" alt="">
+      <img class="tc-star" src="assets/lvl-star-v3.svg" width="39.82" height="30.5177" style="left:279.759px;top:315.804px;transform:matrix(0.8049,-0.5935,0.5935,0.8049,-8.759,17.828)" alt="">
+      <span class="tc-dot tc-dot--red" style="left:33px;top:87px;width:14px;height:14px"></span>
+      <span class="tc-dot tc-dot--red" style="left:238px;top:252px;width:8px;height:8px"></span>
+      <span class="tc-dot tc-dot--red" style="left:196px;top:83px;width:8px;height:8px"></span>
+      <span class="tc-dot tc-dot--red" style="left:174px;top:331px;width:8px;height:8px"></span>
+      <span class="tc-dot tc-dot--green" style="left:315px;top:149px;width:10px;height:10px"></span>
+      <span class="tc-dot tc-dot--amber" style="left:114px;top:298px;width:12px;height:12px"></span>
+      <span class="tc-dot tc-dot--amber" style="left:367px;top:79px;width:12px;height:12px"></span>
+      <span class="tc-dot tc-dot--blue" style="left:98px;top:220px;width:12px;height:12px"></span>
+      <span class="tc-dot tc-dot--blue" style="left:371px;top:188px;width:8px;height:8px"></span>
+      <span class="tc-dot tc-dot--yellow" style="left:353px;top:317px;width:14px;height:14px"></span>
+      <span class="tc-dot tc-dot--yellow" style="left:30px;top:266px;width:14px;height:14px"></span>
+    </div>
+    <div class="grid-bg tc-sheet__grid"></div>
+    <img class="tc-ellipse" src="assets/lvl-ellipse92.svg" width="618.854" height="618.854" alt="">
+
+    <!-- Nav Bar · 3001:73465 -->
+    <div class="tc-nav">
+      <div class="tc-nav__side">
+        <button class="tc-close js-tc-close" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button>
+      </div>
+      <div class="tc-nav__center"><span class="nav-bar__title">Մոդուլ 1</span></div>
+      <div class="tc-nav__side"></div>
+    </div>
+
+    <!-- Badge · 3001:73479 -->
+    <img class="tc-badge" src="assets/lvl-badge.png" alt="Ֆինանսների ճանապարհորդ">
+  </div>
+
+  <!-- Content · 3001:73480 -->
+  <div class="tc-content">
+    <div class="tc-info">
+      <div class="tc-info__text">
+        <div class="tc-info__head">
+          <p class="tc-cap">Մոդուլ 1 · Ավարտված է</p>
+          <p class="tc-title">Հիանալի Աշխատա՛նք</p>
+        </div>
+        <p class="tc-cap">Կանխիկ vs Անկանխիկ գումար</p>
+      </div>
+
+      <div class="tc-stats">
+        <div class="tc-stats__card">
+          <div class="tc-stats__outline"></div>
+          <div class="tc-row" style="top:8.03px">
+            <span class="tc-row__cur"><img src="assets/tc2-currency.svg" width="19.9967" height="20" alt=""></span>
+            <span class="tc-row__label">Միավորներ</span>
+          </div>
+          <div class="tc-row" style="top:65.25px">
+            <span class="tc-row__ava tc-row__ava--quiz"><span class="tc-row__img" style="left:0.56px;top:0.87px"><img src="assets/lvl-ic-quiz.png" style="left:0.29%;top:0.29%" alt=""></span></span>
+            <span class="tc-row__label">Քուիզ</span>
+          </div>
+          <div class="tc-row" style="top:122.46px">
+            <span class="tc-row__ava tc-row__ava--reel"><span class="tc-row__img" style="left:-0.44px;top:-0.34px"><img src="assets/lvl-ic-reel.png" style="left:0;top:0" alt=""></span></span>
+            <span class="tc-row__label">Ռիլ</span>
+          </div>
+        </div>
+        <img class="tc-stats__fade" src="assets/state-fade.png" alt="">
+        <div class="tc-pill" style="left:238px;top:10px"><img class="tc-pill__d1" src="assets/lvl-pill-dot-big.svg" width="10.9171" height="10.9171" alt=""><img class="tc-pill__d2" src="assets/lvl-pill-dot-small.svg" width="5.91006" height="5.91006" alt=""><span class="tc-pill__body" style="left:10.73px">+ 578</span></div>
+        <div class="tc-pill" style="left:237px;top:67px"><img class="tc-pill__d1" src="assets/lvl-pill-dot-big.svg" width="10.9171" height="10.9171" alt=""><img class="tc-pill__d2" src="assets/lvl-pill-dot-small.svg" width="5.91006" height="5.91006" alt=""><span class="tc-pill__body is-fixed" style="left:11px">9/10</span></div>
+        <div class="tc-pill" style="left:237.42px;top:129.99px"><img class="tc-pill__d1" src="assets/lvl-pill-dot-big.svg" width="10.9171" height="10.9171" alt=""><img class="tc-pill__d2" src="assets/lvl-pill-dot-small.svg" width="5.91006" height="5.91006" alt=""><span class="tc-pill__body is-fixed" style="left:10.58px">4/4</span></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div class="page-footer__actions"><button class="btn btn--primary js-tc-next"><span>Վերադառնալ Մոդուլի Էջ</span></button></div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Lesson · Module page "Մոդուլ 1 · Փող" · Figma 3005:91758 (+ states 3005:94068, 3005:92916, 3005:135565, 3005:139396, 3005:136634, 3005:137611, 3005:138509) =====
+     Theme cards are rendered by js/screens/200-lesson-module.js from App.lesson (js/screens/200-lesson-state.js). -->
+<section class="screen lm" id="s-l-module" data-title="Module 1 · Money" data-group="Lesson · Module">
+  <div class="grid-bg"></div>
+  <div class="scroll lm__scroll">
+    <div class="lm__content">
+      <div class="lm__hero">
+        <span class="lm__hero-img"><img src="assets/module3-icon.png" alt=""></span>
+        <h1 class="lm__hero-title">Փող</h1>
+      </div>
+      <div class="lm__themes js-lm-themes"></div>
+    </div>
+  </div>
+
+  <div class="page-heading lm__heading">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left">
+        <button class="lm__back" data-go="s-home" aria-label="Back">
+          <span class="ic24"><img src="assets/ic-arrow-left-shape.svg" width="7.10276" height="12.0916" alt=""></span>
+        </button>
+      </div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Մոդուլ 1</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="home-indicator" class="home-indicator--abs"></div>
+</section>
+
+<!-- ===== Lesson · Reel player (bottom sheet over the module page) · Figma 3005:96354 (initial), 3005:95226 (playing), 3005:97477 (ended) ===== -->
+<section class="screen lr" id="s-l-reel" data-title="Reel player" data-group="Lesson · Module">
+  <!-- dimmed snapshot of the module page (filled by js on enter) -->
+  <div class="lr__bg lm js-lr-bg" aria-hidden="true"></div>
+  <div class="lr__dim"></div>
+  <div data-include="status-bar" class="lr__status"></div>
+
+  <div class="lr__sheet" data-state="idle">
+    <div class="lr__body">
+      <div class="lr__video">
+        <img class="lr__poster" src="assets/lm-reel-poster.png" alt="">
+        <div class="lr__player">
+          <div class="lr__track"><div class="lr__fill js-lr-fill"></div></div>
+          <div class="lr__controls">
+            <button class="lr__play js-lr-play" aria-label="Play">
+              <img class="lr__ic-play" src="assets/lm-reel-play.svg" width="28" height="28" alt="">
+              <span class="lr__ic-pause"><img src="assets/lm-reel-pause.svg" width="21.0002" height="21" alt=""></span>
+            </button>
+            <span class="lr__time js-lr-time">01:00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lr__nav">
+      <div class="lr__nav-side">
+        <button class="lr__close js-lr-close" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button>
+      </div>
+      <div class="lr__nav-center"><span class="nav-bar__title js-lr-title">Ռիլ</span></div>
+      <div class="lr__nav-side"></div>
+    </div>
+
+    <div class="lr__footer">
+      <div class="lr__actions"><button class="btn lr__cta js-lr-done" disabled><span>Վերջացնել Դասը</span></button></div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Exit dialog · Figma 3005:98601 (Alert 3005:99724) -->
+<div class="overlay lr-exit" id="o-l-reel-exit" data-static>
+  <div class="lr-alert" role="alertdialog" aria-labelledby="lr-alert-title">
+    <div class="lr-alert__content">
+      <p class="lr-alert__title" id="lr-alert-title">Ավարտե՞լ դասը</p>
+      <p class="lr-alert__msg">Դու դիտել ես Ռիլը, բայց դասը դեռ ավարտված չէ։ Սեղմիր “Ավարտել Դասը”՝ առաջընթացդ պահպանելու համար։</p>
+    </div>
+    <div class="lr-alert__buttons">
+      <button class="lr-alert__btn js-lr-exit-nosave">Ավարտել առանց պահպանելու</button>
+      <button class="lr-alert__btn js-lr-exit-save">Ավարտել Դասը</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Emoji game intro · Figma 3005:133208 (sheet 3005:134309) ===== -->
+<section class="screen lc-screen" id="s-l-emoji-intro" data-title="Emoji game intro" data-group="Lesson · Emoji game">
+  <div class="grid-bg"></div>
+  <div class="lc-dim"></div>
+  <div data-include="status-bar" class="lc-sb"></div>
+  <div class="lc-sheet">
+    <div class="lc-nav">
+      <div class="lc-nav__side"><button class="lc-close" data-go="s-l-module" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button></div>
+      <div class="lc-nav__center"><span class="nav-bar__title">Ինտերակտիվ Խաղ</span></div>
+      <div class="lc-nav__side lc-nav__side--right"></div>
+    </div>
+
+    <div class="le-intro">
+      <div class="le-intro__q">
+        <p class="le-intro__title">Բյուջեի Խնայատուփեր</p>
+        <div class="le-intro__box">
+          <div class="le-emojis">
+            <img src="assets/le-intro-e1.png" width="89.496" height="89.496" style="margin-top:0.098px" alt="">
+            <img src="assets/v1-riddle1-e2.png" width="89.693" height="89.693" alt="">
+            <img src="assets/v1-riddle1-e3.png" width="89.693" height="89.693" alt="">
+          </div>
+        </div>
+      </div>
+      <ul class="le-rules">
+        <li><span class="le-rules__dot"></span><span>Նայիր էմոջիներին</span></li>
+        <li><span class="le-rules__dot"></span><span>Հպիր տառերին</span></li>
+        <li><span class="le-rules__dot"></span><span>Լրացրու դատարկ վանդակները</span></li>
+        <li><span class="le-rules__dot"></span><span>Դժվա՞ր է։ Բացիր հուշումը</span></li>
+      </ul>
+    </div>
+
+    <div class="page-footer lc-footer">
+      <div class="page-footer__actions"><button class="btn btn--primary" data-go="s-l-emoji"><span>Սկսել Խաղը</span></button></div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Emoji game (interactive) · Figma 3005:111277 empty · 112460 typing · 113645 almost filled ·
+       114834/116022 tapped tile (deleted, active) · 117217 right / 118411 wrong (auto-validation) ===== -->
+<section class="screen lc-screen le-game" id="s-l-emoji" data-title="Emoji game" data-group="Lesson · Emoji game" data-state="typing">
+  <div class="grid-bg"></div>
+  <div class="lc-dim"></div>
+  <div data-include="status-bar" class="lc-sb"></div>
+  <div class="lc-sheet lc-sheet--65">
+    <!-- Nav bar 76px: close · title · progress ring -->
+    <div class="lc-nav lc-nav--76">
+      <div class="lc-nav__side"><button class="lc-close" data-go="s-l-module" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button></div>
+      <div class="lc-nav__center"><span class="nav-bar__title">Էմոջի Խաղ</span></div>
+      <div class="lc-nav__side lc-nav__side--right le-nav-right">
+        <div class="le-ring" aria-label="1/4">
+          <img class="le-ring__bg" src="assets/le-prog-ring.svg" width="84" height="84" alt="">
+          <span class="le-ring__q" style="transform:scaleY(-1)"><span class="le-ring__arc" style="inset:54.53% 0.7% 0.44% 52.86%"><img src="assets/le-prog-e1.svg" alt=""></span></span>
+          <span class="le-ring__q" style="transform:rotate(90deg) scaleY(-1)"><span class="le-ring__arc" style="inset:52.92% 0.44% 0.54% 53.55%"><img src="assets/le-prog-e2.svg" alt=""></span></span>
+          <span class="le-ring__q" style="transform:rotate(180deg) scaleY(-1)"><span class="le-ring__arc" style="inset:53.63% 0.55% 0.83% 55.24%"><img src="assets/le-prog-e3.svg" alt=""></span></span>
+          <span class="le-ring__q" style="transform:rotate(-90deg) scaleY(-1)"><span class="le-ring__arc" style="inset:55.25% 0.83% 0.68% 54.45%"><img src="assets/le-prog-e4.svg" alt=""></span></span>
+          <p class="le-ring__txt">1<span>/4</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="le-main">
+      <div class="le-emojis le-main__emojis">
+        <img src="assets/le-intro-e1.png" width="89.496" height="89.496" style="margin-top:0.098px" alt="">
+        <img src="assets/v1-riddle1-e2.png" width="89.693" height="89.693" alt="">
+        <img src="assets/v1-riddle1-e3.png" width="89.693" height="89.693" alt="">
+      </div>
+      <div class="le-card">
+        <div class="le-hint">
+          <span class="le-hint__ic"><img src="assets/le-ic-bulb.svg" width="24" height="24" alt=""></span>
+          <div class="le-hint__text">
+            <p class="le-hint__label">Հուշում</p>
+            <p class="le-hint__body">Օգտագործում ենք ապրանքներ ձեռք բերելու և ծառայություններից օգտվելու համար։</p>
+          </div>
+        </div>
+        <div class="le-slots js-le-slots"></div>
+        <div class="le-toast le-toast--right">
+          <p class="le-toast__title">Ճիշտ պատասխան</p>
+          <p class="le-toast__body"><b>Կանխիկ</b> թղթադրամներ ու մետաղադրամներ, որոնք կարող ես պահել ձեռքում և տալ վաճառողին անմիջապես</p>
+        </div>
+        <div class="le-toast le-toast--wrong">
+          <p class="le-toast__title">Պատասխանը սխալ է:</p>
+          <p class="le-toast__body">Կանխիկ գումարը կարող ես բռնել ու պահել ձեռքումդ։</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letters tray (typing) -->
+    <div class="le-tray">
+      <div class="le-tray__inner">
+        <div class="le-tray__head">
+          <div class="le-tray__titles">
+            <p class="le-tray__title">Letters</p>
+            <p class="le-tray__sub">Tap on letters to fill the word.</p>
+          </div>
+          <button class="le-reset js-le-reset" aria-label="Reset"><img src="assets/le-ic-reset.svg" width="24" height="24" alt=""></button>
+        </div>
+        <div class="le-keys js-le-keys"></div>
+      </div>
+      <div class="le-tray__action"><button class="le-next" disabled><span>Հաջորդ Բառը</span></button></div>
+      <div data-include="home-indicator"></div>
+    </div>
+
+    <!-- Finish footer (validated) -->
+    <div class="le-finish">
+      <div class="le-tray__action"><button class="btn btn--primary js-le-finish"><span>Ավարտել Խաղը</span></button></div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Emoji game complete · Figma 3005:86276 (theme 1, "+100") / 3005:90205 (theme 3, "100") ===== -->
+<section class="screen lc-screen" id="s-l-emoji-done" data-title="Emoji game complete" data-group="Lesson · Emoji game">
+  <div class="grid-bg"></div>
+  <div class="lc-dim"></div>
+  <div data-include="status-bar" class="lc-sb"></div>
+  <div class="lc-sheet">
+    <div class="lc-nav">
+      <div class="lc-nav__side"><button class="lc-close" data-go="s-l-module" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button></div>
+      <div class="lc-nav__center"><span class="nav-bar__title">Ինտերակտիվ Խաղ</span></div>
+      <div class="lc-nav__side lc-nav__side--right"></div>
+    </div>
+    <div class="lc-body">
+      <img class="lc-hero" src="assets/lc-trophy.png" alt="">
+      <div class="lc-text is-muted">
+        <div class="lc-text__head">
+          <p class="lc-kicker">Էմոջի Խաղ</p>
+          <p class="lc-title">Էմոջի խաղը ավարտվա՛ծ է</p>
+        </div>
+        <p class="lc-sub">Բոլոր բառերը գուշակված են</p>
+      </div>
+      <div class="lc-stats is-muted" style="justify-content:center">
+        <div class="lc-stat lc-stat--single">
+          <span class="lc-stat__icon js-le-done-star1"><img src="assets/amp-coin.svg" alt=""></span>
+          <span class="lc-stat__icon js-le-done-star3" hidden><img src="assets/amp-coin.svg" alt=""></span>
+          <span class="lc-stat__label">AMP</span>
+          <span class="lc-stat__value js-le-done-pts">+100</span>
+          <span class="lc-stat__bar"></span>
+        </div>
+      </div>
+    </div>
+    <img class="lc-confetti" src="assets/lc-confetti.svg" width="320.021" height="153" alt="">
+    <div class="page-footer lc-footer">
+      <div class="page-footer__actions"><button class="btn btn--primary js-le-done-cta"><span>Ավարտել Թեման</span></button></div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Theme 1 complete · Figma 3005:87053 ===== -->
+<section class="screen lc-screen" id="s-l-theme1-done" data-title="Theme 1 complete" data-group="Lesson · Emoji game">
+  <div class="grid-bg"></div>
+  <div class="lc-dim"></div>
+  <div data-include="status-bar" class="lc-sb"></div>
+  <div class="lc-sheet">
+    <div class="lc-nav">
+      <div class="lc-nav__side"><button class="lc-close" data-go="s-l-module" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button></div>
+      <div class="lc-nav__center"><span class="nav-bar__title">Մոդուլ 1</span></div>
+      <div class="lc-nav__side lc-nav__side--right"></div>
+    </div>
+    <div class="lc-body">
+      <img class="lc-hero lc-hero--120" src="assets/lc-party.png" alt="">
+      <div class="lc-text">
+        <div class="lc-text__head">
+          <p class="lc-kicker">Թեմա 1 · Ավարտված է</p>
+          <p class="lc-title">Հիանալի Աշխատա՛նք</p>
+        </div>
+        <p class="lc-sub">Ի՞նչ է փողը</p>
+      </div>
+      <div class="lc-stats">
+        <div class="lc-stat">
+          <span class="lc-stat__icon"><img src="assets/amp-coin.svg" alt=""></span>
+          <span class="lc-stat__label">AMP</span><span class="lc-stat__value">100</span><span class="lc-stat__bar"></span>
+        </div>
+        <div class="lc-stat">
+          <span class="lc-stat__icon"><img src="assets/lvl-ic-reel.png" alt=""></span>
+          <span class="lc-stat__label">Ռիլ</span><span class="lc-stat__value">1/1</span><span class="lc-stat__bar"></span>
+        </div>
+        <div class="lc-stat lc-stat--shadow2">
+          <span class="lc-stat__icon"><img src="assets/onb-ic-game.png" alt=""></span>
+          <span class="lc-stat__label">Խաղ</span><span class="lc-stat__value">1/1</span><span class="lc-stat__bar"></span>
+        </div>
+      </div>
+    </div>
+    <img class="lc-confetti" src="assets/lc-confetti.svg" width="320.021" height="153" alt="">
+    <div class="page-footer lc-footer">
+      <div class="page-footer__actions"><button class="btn btn--primary" data-go="s-l-module"><span>Վերադառնալ Մոդուլի Էջ</span></button></div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Theme 2 complete · Figma 3005:87845 ===== -->
+<section class="screen lc-screen" id="s-l-theme2-done" data-title="Theme 2 complete" data-group="Lesson · Emoji game">
+  <div class="grid-bg"></div>
+  <div class="lc-dim"></div>
+  <div data-include="status-bar" class="lc-sb"></div>
+  <div class="lc-sheet">
+    <div class="lc-nav">
+      <div class="lc-nav__side"><button class="lc-close" data-go="s-l-module" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button></div>
+      <div class="lc-nav__center"><span class="nav-bar__title">Մոդուլ 1</span></div>
+      <div class="lc-nav__side lc-nav__side--right"></div>
+    </div>
+    <div class="lc-body">
+      <img class="lc-hero lc-hero--120" src="assets/lc-party.png" alt="">
+      <div class="lc-text">
+        <div class="lc-text__head">
+          <p class="lc-kicker">Թեմա 2 · Ավարտված է</p>
+          <p class="lc-title">Հիանալի Աշխատա՛նք</p>
+        </div>
+        <p class="lc-sub">Ինչպե՞ս է առաջացել փողը</p>
+      </div>
+      <div class="lc-stats">
+        <div class="lc-stat">
+          <span class="lc-stat__icon"><img src="assets/amp-coin.svg" alt=""></span>
+          <span class="lc-stat__label">AMP</span><span class="lc-stat__value">100</span><span class="lc-stat__bar"></span>
+        </div>
+        <div class="lc-stat">
+          <span class="lc-stat__icon"><img src="assets/lvl-ic-reel.png" alt=""></span>
+          <span class="lc-stat__label">Ռիլ</span><span class="lc-stat__value">2/2</span><span class="lc-stat__bar"></span>
+        </div>
+        <div class="lc-stat">
+          <span class="lc-stat__icon"><img src="assets/lvl-ic-quiz.png" alt=""></span>
+          <span class="lc-stat__label">Քուիզ</span><span class="lc-stat__value">1/1</span><span class="lc-stat__bar"></span>
+        </div>
+      </div>
+    </div>
+    <img class="lc-confetti" src="assets/lc-confetti.svg" width="320.021" height="153" alt="">
+    <div class="page-footer lc-footer">
+      <div class="page-footer__actions"><button class="btn btn--primary" data-go="s-l-module"><span>Վերադառնալ Մոդուլի Էջ</span></button></div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Theme 3 complete · Figma 3005:88637 ===== -->
+<section class="screen lc-screen" id="s-l-theme3-done" data-title="Theme 3 complete" data-group="Lesson · Emoji game">
+  <div class="grid-bg"></div>
+  <div class="lc-dim"></div>
+  <div data-include="status-bar" class="lc-sb"></div>
+  <div class="lc-sheet">
+    <div class="lc-nav">
+      <div class="lc-nav__side"><button class="lc-close" data-go="s-l-module" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button></div>
+      <div class="lc-nav__center"><span class="nav-bar__title">Մոդուլ 1</span></div>
+      <div class="lc-nav__side lc-nav__side--right"></div>
+    </div>
+    <div class="lc-body">
+      <img class="lc-hero lc-hero--120" src="assets/lc-party.png" alt="">
+      <div class="lc-text">
+        <div class="lc-text__head">
+          <p class="lc-kicker">Թեմա 3 · Ավարտված է</p>
+          <p class="lc-title">Հիանալի Աշխատա՛նք</p>
+        </div>
+        <p class="lc-sub">Ի՞նչ է կանխիկ փողը</p>
+      </div>
+      <div class="lc-stats">
+        <div class="lc-stat">
+          <span class="lc-stat__icon"><img src="assets/amp-coin.svg" alt=""></span>
+          <span class="lc-stat__label">AMP</span><span class="lc-stat__value">100</span><span class="lc-stat__bar"></span>
+        </div>
+        <div class="lc-stat">
+          <span class="lc-stat__icon"><img src="assets/lvl-ic-reel.png" alt=""></span>
+          <span class="lc-stat__label">Ռիլ</span><span class="lc-stat__value">2/2</span><span class="lc-stat__bar"></span>
+        </div>
+        <div class="lc-stat">
+          <span class="lc-stat__icon"><img src="assets/onb-ic-game.png" alt=""></span>
+          <span class="lc-stat__label">Խաղ</span><span class="lc-stat__value">1/1</span><span class="lc-stat__bar"></span>
+        </div>
+      </div>
+    </div>
+    <img class="lc-confetti" src="assets/lc-confetti.svg" width="320.021" height="153" alt="">
+    <div class="page-footer lc-footer">
+      <div class="page-footer__actions"><button class="btn btn--primary" data-go="s-l-module"><span>Վերադառնալ Մոդուլի Էջ</span></button></div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Lesson · Quiz (interactive) · Figma Q1 3005:99733 / Q2 3005:100885 / Q3 3005:102037
+     states: correct 3005:103189 · 3005:104347 · 3005:106655  wrong 3005:107809 · 3005:108965 · 3005:110121
+     Rendered from the QUESTIONS array in js/screens/220-lesson-quiz.js ===== -->
+<section class="screen lq" id="s-l-quiz" data-title="Quiz" data-group="Lesson · Quiz">
+  <!-- dimmed page behind the bottom sheet -->
+  <div class="grid-bg"></div>
+  <div data-include="status-bar"></div>
+  <div class="lq-dim"></div>
+
+  <!-- Organism / Bottom sheet new · Content 3005:100834 -->
+  <div class="lq-sheet">
+    <div class="lq-sheet__scroll">
+      <!-- Quiz N · 3005:100836 -->
+      <div class="lq-quiz">
+        <div class="lq-question">
+          <div class="lq-emoji" aria-hidden="true">
+            <span class="lq-emoji__face lq-emoji__face--thinking">🤔</span>
+            <span class="lq-emoji__face lq-emoji__face--success">😊</span>
+            <span class="lq-emoji__face lq-emoji__face--error">😞</span>
+          </div>
+          <p class="lq-question__text js-lq-text"></p>
+        </div>
+        <div class="lq-options js-lq-options" role="list"></div>
+      </div>
+    </div>
+
+    <!-- Nav Bar · 3005:100867 -->
+    <div class="lq-nav">
+      <div class="lq-nav__side">
+        <button class="lq-close" data-open="o-l-quiz-exit" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button>
+      </div>
+      <div class="lq-nav__center"><span class="nav-bar__title">Քուիզ</span></div>
+      <div class="lq-nav__side lq-nav__side--right">
+        <!-- counter ring · 3005:100874 -->
+        <div class="lq-counter">
+          <img class="lq-counter__bg" src="assets/lq-counter-bg.svg" width="84" height="84" alt="">
+          <svg class="lq-counter__ring js-lq-ring" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"></svg>
+          <p class="lq-counter__txt"><span class="js-lq-num">1</span><span class="lq-counter__total">/<span class="js-lq-total">3</span></span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page footer · 3005:100881 -->
+    <div class="page-footer lq-footer">
+      <div class="page-footer__actions">
+        <button class="btn btn--primary lq-cta js-lq-cta" disabled><span class="js-lq-cta-label">Հաջորդ Քուիզը</span></button>
+      </div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Quiz exit alert "Wait, don't go" · Figma 3005:105501 (Alert 3005:106653) ===== -->
+<div class="overlay lq-alert" id="o-l-quiz-exit" data-static>
+  <div class="lq-alert__box" role="alertdialog" aria-labelledby="lq-alert-title">
+    <div class="lq-alert__content">
+      <p class="lq-alert__title" id="lq-alert-title">Wait, don't go!</p>
+      <p class="lq-alert__msg">If you leave now, your answers won't be saved — you'll have to start the quiz over.</p>
+    </div>
+    <div class="lq-alert__buttons">
+      <button class="lq-alert__btn" data-go="s-l-module">Quit</button>
+      <button class="lq-alert__btn" data-close>Keep playing</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Lesson · Quiz complete (100%) · Figma 3005:90981 (Content 3005:91717, footer 3005:91754) ===== -->
+<section class="screen lq-end" id="s-l-quiz-done" data-title="Quiz complete" data-group="Lesson · Quiz">
+  <div class="grid-bg"></div>
+  <div data-include="status-bar"></div>
+  <div class="lq-dim"></div>
+
+  <div class="lq-end__sheet">
+    <img class="lq-end__confetti" src="assets/lc-confetti.svg" width="320.021" height="153" alt="">
+    <div class="lq-end__scroll">
+      <!-- Question · 3005:91725 -->
+      <div class="lq-end__body">
+        <img class="lq-end__trophy" src="assets/lc-trophy.png" width="96" height="95" alt="">
+        <div class="lq-end__texts lq-end__texts--done">
+          <div class="lq-end__head">
+            <p class="lq-end__kicker">Քուիզ</p>
+            <p class="lq-end__title">Քուիզը ավարտվա՛ծ է</p>
+          </div>
+          <p class="lq-end__sub">Բոլոր պատասխանները ճիշտ են</p>
+        </div>
+        <div class="lq-star-card lq-star-card--done">
+          <span class="lq-star-card__circle"><img src="assets/amp-coin.svg" width="40" height="40" alt=""></span>
+          <span class="lq-star-card__label">AMP</span>
+          <span class="lq-star-card__value">100</span>
+          <span class="lq-star-card__bar"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lq-end__nav">
+      <div class="lq-nav__side">
+        <button class="lq-close lq-close--end" data-go="s-l-module" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button>
+      </div>
+      <div class="lq-nav__center"><span class="nav-bar__title">Ինտերակտիվ Խաղ</span></div>
+      <div class="lq-nav__side"></div>
+    </div>
+
+    <div class="page-footer lq-footer">
+      <div class="page-footer__actions">
+        <button class="btn btn--primary lq-cta"><span>Ավարտել Թեման</span></button>
+      </div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Lesson · Quiz result (<100%) · Figma 3005:143878 (80), variants 3005:144668 (80) / 3005:144697 (60)
+     Title / score / texts are filled from App.state.quizScore + App.state.quizBest by js/screens/220-lesson-quiz.js ===== -->
+<section class="screen lq-end" id="s-l-quiz-result" data-title="Quiz result" data-group="Lesson · Quiz">
+  <div class="grid-bg"></div>
+  <div data-include="status-bar"></div>
+  <div class="lq-dim"></div>
+
+  <div class="lq-end__sheet">
+    <img class="lq-end__confetti" src="assets/lc-confetti.svg" width="320.021" height="153" alt="">
+    <div class="lq-end__scroll lq-end__scroll--result">
+      <!-- Question · 3005:144622 -->
+      <div class="lq-end__body">
+        <img class="lq-end__trophy" src="assets/lc-trophy.png" width="96" height="95" alt="">
+        <div class="lq-end__texts">
+          <div class="lq-end__head">
+            <p class="lq-end__kicker">Քուիզ</p>
+            <p class="lq-end__title js-lqr-title">Լավ արդյունք</p>
+          </div>
+          <p class="lq-end__sub js-lqr-sub">5 հարցից 4-ը ճիշտ են</p>
+        </div>
+        <div class="lq-star-card">
+          <span class="lq-star-card__circle"><img src="assets/amp-coin.svg" width="40" height="40" alt=""></span>
+          <span class="lq-star-card__label">AMP</span>
+          <span class="lq-star-card__value js-lqr-score">80</span>
+          <span class="lq-star-card__bar"></span>
+        </div>
+        <!-- best score · 3005:144637 -->
+        <div class="lq-info-card">
+          <span class="lq-info-card__circle"><span class="lq-info-card__star"><img src="assets/amp-coin.svg" alt=""></span></span>
+          <span class="lq-info-card__texts">
+            <span class="lq-info-card__title">Քո լավագույն արդյունքը՝ <span class="js-lqr-best">80</span></span>
+            <span class="lq-info-card__sub">Կրկնելիս պահվում է ամենաբարձրը</span>
+          </span>
+        </div>
+        <!-- try again · 3005:144644 -->
+        <div class="lq-info-card">
+          <span class="lq-info-card__circle"><span class="lq-info-card__star"><img src="assets/amp-coin.svg" alt=""></span></span>
+          <span class="lq-info-card__texts">
+            <span class="lq-info-card__title">Փորձիր նորից՝ 100-ի հասնելու համար</span>
+            <span class="lq-info-card__sub">Միավորները չեն պակասում</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lq-end__nav">
+      <div class="lq-nav__side">
+        <button class="lq-close lq-close--end" data-go="s-l-module" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button>
+      </div>
+      <div class="lq-nav__center"><span class="nav-bar__title">Ինտերակտիվ Խաղ</span></div>
+      <div class="lq-nav__side"></div>
+    </div>
+
+    <!-- Page footer · 3005:144661 -->
+    <div class="page-footer lq-footer">
+      <div class="page-footer__actions lq-footer__stack">
+        <button class="lq-retry" data-go="s-l-quiz">
+          <img src="assets/lq-ic-repeat.svg" width="24" height="24" alt="">
+          <span>Կրկնել՝ ավելի բարձր միավորի համար</span>
+        </button>
+        <button class="btn btn--primary lq-cta"><span>Ավարտել Թեման</span></button>
+      </div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Lesson · Crossword intro · Figma 3005:134358 (bottom sheet over the module page) ===== -->
+<section class="screen lc-screen" id="s-l-cw-intro" data-title="Crossword intro" data-group="Lesson · Crossword">
+  <div class="grid-bg"></div>
+  <div class="lc-dim"></div>
+  <div data-include="status-bar" class="lc-sb"></div>
+  <div class="lc-sheet">
+    <div class="lc-nav">
+      <div class="lc-nav__side"><button class="lc-close" data-go="s-l-module" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button></div>
+      <div class="lc-nav__center"><span class="nav-bar__title">Ինտերակտիվ Խաղ</span></div>
+      <div class="lc-nav__side lc-nav__side--right"></div>
+    </div>
+
+    <!-- Quiz 1 · 3005:135471 -->
+    <div class="lx-intro">
+      <div class="lx-intro__q">
+        <p class="lx-intro__title">Խաչբառ</p>
+        <!-- Background · 3005:135478 -->
+        <div class="lx-intro__card">
+          <div class="lx-mini">
+            <!-- unique cells of the preview grid (pitch 36.4) -->
+            <span class="lx-mtile" style="left:0;top:36px"><span class="lx-num"><span>1</span><img class="lx-dir lx-dir--r" src="assets/lx-union-a.svg" width="4.41627" height="5.78418" alt=""></span></span>
+            <span class="lx-mtile" style="left:36.4px;top:36px"><span class="lx-num"><span>2</span><img class="lx-dir lx-dir--d" src="assets/lx-union-a.svg" width="4.41627" height="5.78418" alt=""></span></span>
+            <span class="lx-mtile" style="left:72.8px;top:36px"></span>
+            <span class="lx-mtile" style="left:109.2px;top:36px"></span>
+            <span class="lx-mtile" style="left:145.6px;top:36px"></span>
+            <span class="lx-mtile" style="left:182px;top:36px"></span>
+            <span class="lx-mtile" style="left:109px;top:0"><span class="lx-num"><span>3</span><img class="lx-dir lx-dir--d" src="assets/lx-union-a.svg" width="4.41627" height="5.78418" alt=""></span></span>
+            <span class="lx-mtile" style="left:109px;top:72.8px"><img class="lx-mstar" src="assets/amp-coin.svg" alt=""></span>
+            <span class="lx-mtile" style="left:37px;top:72.4px"></span>
+            <span class="lx-mtile" style="left:37px;top:108.8px"><img class="lx-mstar" src="assets/amp-coin.svg" alt=""></span>
+          </div>
+        </div>
+      </div>
+      <!-- Options safe area · 3005:135524 -->
+      <ul class="lx-rules">
+        <li><span class="lx-rules__dot"></span><span class="lx-rules__txt">Ընտրիր հարցը ցուցակից</span></li>
+        <li><span class="lx-rules__dot"></span><span class="lx-rules__txt">Հավաքիր բառը տառերով</span></li>
+        <li><span class="lx-rules__dot"></span><span class="lx-rules__txt lx-rules__txt--alt">Խաչվող տառերը հուշում են</span></li>
+        <li><span class="lx-rules__dot"></span><span class="lx-rules__txt">Դժվա՞ր է։ Բացիր տառ՝ օգտագործելով AMP</span></li>
+      </ul>
+    </div>
+
+    <div class="page-footer lc-footer">
+      <div class="page-footer__actions"><button class="btn btn--primary" data-go="s-l-cw"><span>Սկսել Խաղը</span></button></div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Lesson · Crossword (interactive) · Figma 3005:122245 (start), 3005:123476 (word selected + keyboard),
+     3005:124690 / 125904 / 127118 / 128332 (typing → auto validation, wrong = red), 3005:129546 / 130760 / 131975 (star hint → correct = green)
+     Grid, clues and states are rendered by js/screens/231-lesson-cw.js ===== -->
+<section class="screen lx-dimpage lx" id="s-l-cw" data-title="Crossword" data-group="Lesson · Crossword">
+  <div class="grid-bg"></div>
+  <div class="lc-dim"></div>
+  <div data-include="status-bar" class="lc-sb"></div>
+
+  <!-- Organism / Bottom sheet new › Bottom sheet · 3005:123344 (top 54) -->
+  <div class="lx-sheet">
+    <!-- scrolling area · 3005:123346 -->
+    <div class="lx-scroll">
+      <div class="lx-game">
+        <!-- Cross word · 3005:123348 (361×255) -->
+        <div class="lx-board js-lx-board"></div>
+        <!-- Questions · 3005:123429 -->
+        <div class="lx-clues js-lx-clues">
+          <div class="lx-clues__group" data-dir="down">
+            <p class="lx-clues__label">Ուղղահայաց</p>
+            <div class="lx-clues__list js-lx-list-down"></div>
+          </div>
+          <div class="lx-clues__group" data-dir="across">
+            <p class="lx-clues__label">Հորիզոնական</p>
+            <div class="lx-clues__list js-lx-list-across"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top bar · 3005:123456 -->
+    <div class="lx-top">
+      <div class="lx-nav">
+        <div class="lx-nav__side"><button class="lc-close" data-go="s-l-module" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button></div>
+        <div class="lx-nav__center"><span class="nav-bar__title">Խաչբառ</span></div>
+        <div class="lx-nav__side lx-nav__side--right">
+          <!-- timer · 3005:123463 -->
+          <div class="lx-timer">
+            <img class="lx-timer__bg" src="assets/lx-timer-bg.svg" width="78" height="78" alt="">
+            <img class="lx-timer__track" src="assets/lx-timer-track.svg" width="42" height="42" alt="">
+            <img class="lx-timer__arc" src="assets/lx-timer-arc.svg" width="41.5375" height="41.967" alt="">
+            <span class="lx-timer__txt js-lx-time">9:59</span>
+          </div>
+        </div>
+      </div>
+      <!-- Segmented controll / Three items · 3005:123468 -->
+      <div class="lx-seg" role="tablist">
+        <span class="lx-seg__thumb"></span>
+        <button class="lx-seg__item is-active" data-tab="all"><span>Բոլորը <span class="js-lx-cnt-all">0</span>/5</span></button>
+        <button class="lx-seg__item" data-tab="down"><span>Ուղղահայաց <span class="js-lx-cnt-down">0</span>/3</span></button>
+        <button class="lx-seg__item" data-tab="across"><span>Հորիզոնական <span class="js-lx-cnt-across">0</span>/2</span></button>
+      </div>
+    </div>
+
+    <!-- clue bar above the keyboard · 3005:124680 -->
+    <div class="lx-cluebar">
+      <div class="lx-cluebar__main">
+        <img class="lx-cluebar__ic js-lx-bar-ic" src="assets/lx-num-4.svg" width="40" height="40" alt="">
+        <p class="lx-cluebar__txt js-lx-bar-txt"></p>
+      </div>
+      <div class="lx-cluebar__sw">
+        <button class="lx-arrow js-lx-prev" aria-label="Previous"><img class="lx-arrow__on" src="assets/ic-arrow-left-shape.svg" width="7.10276" height="12.0916" alt=""><img class="lx-arrow__off" src="assets/lx-arrow-dis.svg" width="7.10276" height="12.0916" alt=""></button>
+        <button class="lx-arrow lx-arrow--next js-lx-next" aria-label="Next"><img class="lx-arrow__on" src="assets/ic-arrow-left-shape.svg" width="7.10276" height="12.0916" alt=""><img class="lx-arrow__off" src="assets/lx-arrow-dis.svg" width="7.10276" height="12.0916" alt=""></button>
+      </div>
+    </div>
+
+    <!-- Organism / Page footer · 3005:123474 -->
+    <div class="page-footer lx-footer">
+      <div class="page-footer__actions"><button class="btn lx-finish js-lx-finish" disabled><span>Ավարտել Խաղը</span></button></div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+
+  <!-- iOS Keyboard · 3005:124689 (393×332 at y 520) -->
+  <div class="lx-kb" aria-hidden="true">
+    <div class="lx-kb__sugg">
+      <span class="lx-kb__s">“The”</span><span class="lx-kb__sep"></span><span class="lx-kb__s">the</span><span class="lx-kb__sep"></span><span class="lx-kb__s">to</span>
+    </div>
+    <div class="lx-kb__keys">
+      <div class="lx-kb__row">
+        <button class="lx-key" data-k="q">q</button><button class="lx-key" data-k="w">w</button><button class="lx-key" data-k="e">e</button><button class="lx-key" data-k="r">r</button><button class="lx-key" data-k="t">t</button><button class="lx-key" data-k="y">y</button><button class="lx-key" data-k="u">u</button><button class="lx-key" data-k="i">i</button><button class="lx-key" data-k="o">o</button><button class="lx-key" data-k="p">p</button>
+      </div>
+      <div class="lx-kb__row lx-kb__row--2">
+        <button class="lx-key" data-k="a">a</button><button class="lx-key" data-k="s">s</button><button class="lx-key" data-k="d">d</button><button class="lx-key" data-k="f">f</button><button class="lx-key" data-k="g">g</button><button class="lx-key" data-k="h">h</button><button class="lx-key" data-k="j">j</button><button class="lx-key" data-k="k">k</button><button class="lx-key" data-k="l">l</button>
+      </div>
+      <div class="lx-kb__row lx-kb__row--3">
+        <button class="lx-key lx-key--fn lx-key--shift" data-fn="shift" aria-label="Shift"><img src="assets/lx-kb-shift.png" alt=""></button>
+        <div class="lx-kb__mid">
+          <button class="lx-key" data-k="z">z</button><button class="lx-key" data-k="x">x</button><button class="lx-key" data-k="c">c</button><button class="lx-key" data-k="v">v</button><button class="lx-key" data-k="b">b</button><button class="lx-key" data-k="n">n</button><button class="lx-key" data-k="m">m</button>
+        </div>
+        <button class="lx-key lx-key--fn" data-fn="del" aria-label="Delete"><img src="assets/lx-kb-delete.png" alt=""></button>
+      </div>
+      <div class="lx-kb__row lx-kb__row--4">
+        <button class="lx-key lx-key--123" data-fn="shift">123</button>
+        <button class="lx-key lx-key--space" data-fn="space" aria-label="Space"></button>
+        <button class="lx-key lx-key--ret" data-fn="done" aria-label="Done"><img src="assets/lx-kb-return.png" alt=""></button>
+      </div>
+    </div>
+    <img class="lx-kb__emoji" src="assets/lx-kb-emoji.svg" width="26.8" height="26.8" alt="">
+    <img class="lx-kb__mic" src="assets/lx-kb-mic.png" alt="">
+  </div>
+</section>
+
+<!-- ===== Lesson · Crossword complete · Figma 3005:89428 ("Խաչբառը ավարտվա՛ծ է", star +100) — lc- completion kit ===== -->
+<section class="screen lc-screen" id="s-l-cw-done" data-title="Crossword complete" data-group="Lesson · Crossword">
+  <div class="grid-bg"></div>
+  <div class="lc-dim"></div>
+  <div data-include="status-bar" class="lc-sb"></div>
+  <div class="lc-sheet">
+    <div class="lc-nav">
+      <div class="lc-nav__side"><button class="lc-close" data-go="s-l-module" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button></div>
+      <div class="lc-nav__center"><span class="nav-bar__title">Ինտերակտիվ Խաղ</span></div>
+      <div class="lc-nav__side lc-nav__side--right"></div>
+    </div>
+    <div class="lc-body">
+      <img class="lc-hero" src="assets/lc-trophy.png" alt="">
+      <div class="lc-text is-muted">
+        <div class="lc-text__head">
+          <p class="lc-kicker">Խաչբառ</p>
+          <p class="lc-title">Խաչբառը ավարտվա՛ծ է</p>
+        </div>
+        <p class="lc-sub">Բոլոր բառերը լուծված են</p>
+      </div>
+      <div class="lc-stats is-muted" style="justify-content:center">
+        <div class="lc-stat lc-stat--single">
+          <span class="lc-stat__icon"><img src="assets/amp-coin.svg" alt=""></span>
+          <span class="lc-stat__label">AMP</span>
+          <span class="lc-stat__value">+100</span>
+          <span class="lc-stat__bar"></span>
+        </div>
+      </div>
+    </div>
+    <img class="lc-confetti" src="assets/lc-confetti.svg" width="320.021" height="153" alt="">
+    <div class="page-footer lc-footer">
+      <div class="page-footer__actions"><button class="btn btn--primary js-lx-done-cta"><span>Ավարտել Թեման</span></button></div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Lesson · Crossword result (<100%) · same frame as quiz result 3005:143878 (flow "If the user didn't score 100%")
+     reuses the quiz-result look (lq-end classes from 221-lesson-quiz-done.css) with crossword texts; filled by js/screens/231-lesson-cw.js ===== -->
+<section class="screen lq-end" id="s-l-cw-result" data-title="Crossword result" data-group="Lesson · Crossword">
+  <div class="grid-bg"></div>
+  <div data-include="status-bar"></div>
+  <div class="lq-dim"></div>
+
+  <div class="lq-end__sheet">
+    <img class="lq-end__confetti" src="assets/lc-confetti.svg" width="320.021" height="153" alt="">
+    <div class="lq-end__scroll lq-end__scroll--result">
+      <div class="lq-end__body">
+        <img class="lq-end__trophy" src="assets/lc-trophy.png" width="96" height="95" alt="">
+        <div class="lq-end__texts">
+          <div class="lq-end__head">
+            <p class="lq-end__kicker">Խաչբառ</p>
+            <p class="lq-end__title js-lxr-title">Լավ արդյունք</p>
+          </div>
+          <p class="lq-end__sub js-lxr-sub">5 բառից 4-ը ճիշտ են</p>
+        </div>
+        <div class="lq-star-card">
+          <span class="lq-star-card__circle"><img src="assets/amp-coin.svg" width="40" height="40" alt=""></span>
+          <span class="lq-star-card__label">AMP</span>
+          <span class="lq-star-card__value js-lxr-score">80</span>
+          <span class="lq-star-card__bar"></span>
+        </div>
+        <div class="lq-info-card">
+          <span class="lq-info-card__circle"><span class="lq-info-card__star"><img src="assets/amp-coin.svg" alt=""></span></span>
+          <span class="lq-info-card__texts">
+            <span class="lq-info-card__title">Քո լավագույն արդյունքը՝ <span class="js-lxr-best">80</span></span>
+            <span class="lq-info-card__sub">Կրկնելիս պահվում է ամենաբարձրը</span>
+          </span>
+        </div>
+        <div class="lq-info-card">
+          <span class="lq-info-card__circle"><span class="lq-info-card__star"><img src="assets/amp-coin.svg" alt=""></span></span>
+          <span class="lq-info-card__texts">
+            <span class="lq-info-card__title">Փորձիր նորից՝ 100-ի հասնելու համար</span>
+            <span class="lq-info-card__sub">Միավորները չեն պակասում</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lq-end__nav">
+      <div class="lq-nav__side">
+        <button class="lq-close lq-close--end" data-go="s-l-module" aria-label="Close"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button>
+      </div>
+      <div class="lq-nav__center"><span class="nav-bar__title">Ինտերակտիվ Խաղ</span></div>
+      <div class="lq-nav__side"></div>
+    </div>
+
+    <div class="page-footer lq-footer">
+      <div class="page-footer__actions lq-footer__stack">
+        <button class="lq-retry" data-go="s-l-cw">
+          <img src="assets/lq-ic-repeat.svg" width="24" height="24" alt="">
+          <span>Կրկնել՝ ավելի բարձր միավորի համար</span>
+        </button>
+        <button class="btn btn--primary lq-cta js-lxr-cta"><span>Ավարտել Թեման</span></button>
+      </div>
+      <div data-include="home-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Lesson · Module complete · Figma 3005:143076 (badge «Ֆինանսների ճանապարհորդ») ===== -->
+<section class="screen lx-md" id="s-l-module-done" data-title="Module complete" data-group="Lesson · Crossword">
+  <div class="grid-bg"></div>
+  <img class="lx-md__confetti" src="assets/lc-confetti.svg" width="320.021" height="153" alt="">
+
+  <div class="scroll">
+    <!-- Question · 3005:143816 (top 152) -->
+    <div class="lx-md__body">
+      <span class="lx-md__badge"><img src="assets/lx-md-badge.png" alt=""><img src="assets/lvl-badge.png" alt=""></span>
+      <div class="lx-md__texts">
+        <div class="lx-md__head">
+          <p class="lx-md__kicker">Մոդուլ 1 · Ավարտված է</p>
+          <p class="lx-md__title">«Ֆինանսների ճանապարհորդ»</p>
+        </div>
+        <p class="lx-md__kicker">Փող և գործարքներ</p>
+      </div>
+      <div class="lx-md__grid">
+        <div class="lx-mstat"><span class="lx-mstat__ic"><img src="assets/onb-ic-bulb.png" alt=""></span><span class="lx-mstat__label">Թեմա</span><span class="lx-mstat__val">4/4</span><span class="lx-mstat__bar"></span></div>
+        <div class="lx-mstat"><span class="lx-mstat__ic"><img src="assets/amp-coin.svg" alt=""></span><span class="lx-mstat__label">AMP</span><span class="lx-mstat__val">100</span><span class="lx-mstat__bar"></span></div>
+        <div class="lx-mstat"><span class="lx-mstat__ic"><img src="assets/lvl-ic-reel.png" alt=""></span><span class="lx-mstat__label">Ռիլ</span><span class="lx-mstat__val">7/7</span><span class="lx-mstat__bar"></span></div>
+        <div class="lx-mstat"><span class="lx-mstat__ic"><img src="assets/lvl-ic-quiz.png" alt=""></span><span class="lx-mstat__label">Քուիզ</span><span class="lx-mstat__val">2/2</span><span class="lx-mstat__bar"></span></div>
+        <div class="lx-mstat"><span class="lx-mstat__ic"><img src="assets/onb-ic-game.png" alt=""></span><span class="lx-mstat__label">Խաղ</span><span class="lx-mstat__val">3/3</span><span class="lx-mstat__bar"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-heading">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"><button class="lx-md__back" data-go="s-l-module" aria-label="Back"><span class="ic24"><img src="assets/ic-arrow-left-shape.svg" width="7.10276" height="12.0916" alt=""></span></button></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Մոդուլ 1</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <div class="page-footer__actions"><button class="btn btn--primary js-lx-md-cta"><span>Վերադառնալ Մոդուլի Էջ</span></button></div>
+    <div data-include="home-indicator"></div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     V3 · Gamified concept (test) — path home, lesson with instant feedback,
+     celebration, weekly goal + quests, AMP savings jar.
+     Ideas from Duolingo / Noom (path), Brilliant / Imprint (feedback),
+     LinkedIn games / Sweatcoin (streak, weekly rewards), Cash App / PayPal (goal jar).
+     ===================================================================== -->
+
+<!-- 1 · Path home -->
+<section class="screen g" id="s-g-home" data-title="Path home" data-group="V3 · Gamified">
+  <div class="g-bg"></div>
+  <div class="scroll g-home">
+    <div class="g-home__inner">
+      <div class="g-unit g-unit--1">
+        <div><p class="g-unit__k">ՄՈԴՈՒԼ 1</p><p class="g-unit__t">Փող և գործարքներ</p></div>
+        <button class="g-unit__btn" data-go="s-g-quests" aria-label="Quests">📋</button>
+      </div>
+      <div class="g-path js-g-path"></div>
+      <div class="g-unit g-unit--2 is-locked">
+        <div><p class="g-unit__k">ՄՈԴՈՒԼ 2</p><p class="g-unit__t">Եկամուտներ և ծախսեր</p></div>
+        <span class="g-unit__btn">🔒</span>
+      </div>
+      <div class="g-path g-path--locked js-g-path2"></div>
+    </div>
+  </div>
+
+  <!-- floating card for the tapped node -->
+  <div class="g-pop js-g-pop" hidden>
+    <p class="g-pop__k js-g-pop-k">Ռիլ</p>
+    <p class="g-pop__t js-g-pop-t">Ինչպե՞ս է առաջացել փողը</p>
+    <button class="g-pop__btn js-g-pop-btn">Սկսել · +20 AMP</button>
+  </div>
+
+  <div class="page-heading g-head">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"><div data-include="back-btn"></div></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Education</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+    <div class="g-stats">
+      <button class="g-chip" data-go="s-g-quests"><span class="g-chip__ic">🔥</span><b class="js-g-week">2/3</b><small>շաբաթ</small></button>
+      <button class="g-chip" data-go="s-profile"><span class="g-chip__ic"><img class="g-amp" src="assets/amp-coin.svg" alt="AMP"></span><b class="js-g-stars">1 587</b><small>AMP</small></button>
+      <button class="g-chip g-chip--jar" data-go="s-g-jar"><span class="g-chip__ic">🐷</span><b class="js-g-jar">12 400</b><small>AMD</small></button>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+
+<!-- 2 · Lesson (quiz) with instant feedback -->
+<section class="screen g" id="s-g-lesson" data-title="Lesson · instant feedback" data-group="V3 · Gamified">
+  <div class="g-lesson__top">
+    <div data-include="status-bar"></div>
+    <div class="g-lesson__bar">
+      <button class="g-x" data-open="o-g-exit" aria-label="Close">✕</button>
+      <div class="g-progress"><span class="js-g-prog"></span></div>
+      <span class="g-lesson__stars"><img class="g-amp" src="assets/amp-coin.svg" alt="AMP"> <b class="js-g-earn">0</b></span>
+    </div>
+  </div>
+  <div class="g-lesson__body">
+    <div class="g-lesson__guide">
+      <img src="assets/v1-star-barev.png" alt="">
+      <p class="g-bubble js-g-q">Նշվածներից ո՞րն է կանխիկ գումար։</p>
+    </div>
+    <div class="g-opts js-g-opts"></div>
+  </div>
+  <div class="g-lesson__foot">
+    <button class="btn btn--primary js-g-check" disabled><span>Ստուգել</span></button>
+  </div>
+  <!-- feedback panel -->
+  <div class="g-fb js-g-fb">
+    <div class="g-fb__head"><span class="g-fb__ic js-g-fb-ic">✓</span><p class="g-fb__t js-g-fb-t">Ճիշտ է՛</p><span class="g-fb__xp js-g-fb-xp">+10 AMP</span></div>
+    <p class="g-fb__why js-g-fb-why" hidden></p>
+    <div class="g-fb__btns">
+      <button class="g-fb__whybtn js-g-why">Ինչու՞</button>
+      <button class="btn btn--primary js-g-next"><span>Շարունակել</span></button>
+    </div>
+    <div data-include="home-indicator"></div>
+  </div>
+</section>
+
+<div class="overlay" id="o-g-exit">
+  <div class="dialog g-exit">
+    <img src="assets/v1-star-barev.png" alt="">
+    <p class="g-exit__t">Սպասի՛ր, դուրս չգաս</p>
+    <p class="g-exit__d">Մնաց ընդամենը մի քանի հարց։ Եթե հիմա դուրս գաս, վաստակած AMP-ները չեն պահպանվի։</p>
+    <button class="btn btn--primary" data-close><span>Շարունակել դասը</span></button>
+    <button class="btn btn--ghost" data-go="s-g-home"><span>Դուրս գալ</span></button>
+  </div>
+</div>
+
+<!-- 3 · Celebration -->
+<section class="screen g g-done" id="s-g-done" data-title="Lesson complete" data-group="V3 · Gamified">
+  <div class="g-done__bg"></div>
+  <div class="g-confetti js-g-confetti"></div>
+  <div data-include="status-bar"></div>
+  <div class="g-done__body">
+    <img class="g-done__hero" src="assets/v1-star-barev.png" alt="">
+    <p class="g-done__t">Հիանալի՛ է</p>
+    <p class="g-done__d">Դասն ավարտված է։ Դու պատասխանեցիր <b class="js-g-acc">3/3</b> հարցի։</p>
+    <div class="g-rewards">
+      <div class="g-rw"><span><img class="g-amp" src="assets/amp-coin.svg" alt="AMP"></span><b class="js-g-rw-stars">+30</b><small>AMP</small></div>
+      <div class="g-rw g-rw--amp"><span>🐷</span><b>+300</b><small>AMD խոզուկին</small></div>
+      <div class="g-rw"><span>🎯</span><b class="js-g-rw-acc">100%</b><small>ճշտություն</small></div>
+    </div>
+    <div class="g-weekcard">
+      <div class="g-weekcard__row"><p>Շաբաթական նպատակ</p><b class="js-g-wk">3/3</b></div>
+      <div class="g-days js-g-days"></div>
+      <p class="g-weekcard__hint js-g-wk-hint">Նպատակը կատարված է․ շաբաթվա 🎁 սնդուկը բաց է</p>
+    </div>
+  </div>
+  <div class="page-footer g-done__foot">
+    <div class="page-footer__actions g-col">
+      <button class="btn btn--primary" data-go="s-g-home"><span>Շարունակել</span></button>
+      <button class="btn btn--ghost js-g-share"><span>Ուղարկել մայրիկին 💌</span></button>
+    </div>
+    <div data-include="home-indicator"></div>
+  </div>
+</section>
+
+<!-- 4 · Weekly goal + quests -->
+<section class="screen g" id="s-g-quests" data-title="Weekly goal & quests" data-group="V3 · Gamified">
+  <div class="g-bg"></div>
+  <div class="scroll"><div class="g-page">
+    <div class="pcard g-goal">
+      <div class="g-ring js-g-ring"><b class="js-g-ring-n">2/3</b><small>դաս</small></div>
+      <div class="g-goal__txt">
+        <p class="g-goal__t">Այս շաբաթվա նպատակը</p>
+        <p class="g-goal__d">Անցիր 3 դաս մինչև կիրակի և բացիր 🎁 սնդուկը</p>
+        <p class="g-goal__shield">🛡 2 պաշտպանիչ · բաց թողած օրը չի կորչի</p>
+      </div>
+    </div>
+    <div class="pcard g-week"><div class="g-days js-g-days2"></div></div>
+
+    <p class="g-h">Առաջադրանքներ</p>
+    <div class="g-quests js-g-quests"></div>
+
+    <div class="pcard g-chest">
+      <span class="g-chest__ic">🎁</span>
+      <div><p class="g-chest__t">Շաբաթվա սնդուկ</p><p class="g-chest__d">Կատարիր բոլոր առաջադրանքները և ստացիր +500 AMD խոզուկիդ մեջ</p></div>
+    </div>
+  </div></div>
+  <div class="page-heading is-gradient">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"><div data-include="back-btn"></div></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Առաջադրանքներ</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+</section>
+
+<!-- 5 · AMP savings jar -->
+<section class="screen g" id="s-g-jar" data-title="Savings jar (AMP)" data-group="V3 · Gamified">
+  <div class="g-bg"></div>
+  <div class="scroll"><div class="g-page">
+    <div class="pcard g-jarcard">
+      <p class="g-jar__goal">🚲 Նոր հեծանիվ</p>
+      <div class="g-jar">
+        <div class="g-jar__lid"></div>
+        <div class="g-jar__glass"><div class="g-jar__fill js-g-fill"><i></i><i></i><i></i></div></div>
+        <span class="g-coin g-coin--1">֏</span><span class="g-coin g-coin--2">֏</span><span class="g-coin g-coin--3">֏</span>
+      </div>
+      <p class="g-jar__sum"><b class="js-g-saved">12 400</b> / 40 000 AMD</p>
+      <div class="pgroup__bar g-jar__bar"><span class="js-g-bar"></span></div>
+      <p class="g-jar__left js-g-left">Մնաց 27 600 AMD · մոտ 9 շաբաթ</p>
+    </div>
+
+    <p class="g-h">Որտեղից է գալիս</p>
+    <div class="pcard g-src">
+      <div class="g-src__row"><span class="g-src__ic"><img class="g-amp" src="assets/amp-coin.svg" alt="AMP"></span><div><p>Դասերից (AMP)</p><small>Յուրաքանչյուր դաս՝ +300 AMD</small></div><b class="js-g-src-amp">8 400</b></div>
+      <div class="g-src__row"><span class="g-src__ic">👩</span><div><p>Մայրիկը ավելացրեց</p><small>Կրկնապատկում է քո AMP-ն</small></div><b>4 000</b></div>
+    </div>
+    <p class="g-note">1 AMP = 1 AMD։ Գումարը պահվում է քո MyAmeria խնայողական հաշվում։</p>
+  </div></div>
+  <div class="page-heading is-gradient">
+    <div data-include="status-bar"></div>
+    <div class="nav-bar is-fixed-sides">
+      <div class="nav-bar__left"><div data-include="back-btn"></div></div>
+      <div class="nav-bar__center"><span class="nav-bar__title">Իմ խոզուկը</span></div>
+      <div class="nav-bar__right"></div>
+    </div>
+  </div>
+  <div class="page-footer g-jar__foot">
+    <div class="page-footer__actions"><button class="btn btn--primary js-g-ask"><span>Խնդրել ծնողին ավելացնել</span></button></div>
+  </div>
+  <div data-include="tabbar" data-active="education"></div>
+  <div class="g-toast js-g-toast" hidden>💌 Հարցումն ուղարկվեց մայրիկին</div>
+</section>
+
+  </main>
+  <script src="js/app.js?v=202610191438"></script>
+  <script src="js/screens/12-onb-avatar.js?v=202610191438"></script>
+  <script src="js/screens/13-onb-start.js?v=202610191438"></script>
+  <script src="js/screens/14-onb-benefits.js?v=202610191438"></script>
+  <script src="js/screens/20-home.js?v=202610191438"></script>
+  <script src="js/screens/24-home-levels.js?v=202610191438"></script>
+    <script src="js/screens/31-avatar-sheet.js?v=202610191438"></script>
+  <script src="js/screens/34-profile-v2.js?v=202610191438"></script>
+    <script src="js/screens/50-levels.js?v=202610191438"></script>
+  <script src="js/screens/200-lesson-module.js?v=202610191438"></script>
+  <script src="js/screens/200-lesson-state.js?v=202610191438"></script>
+  <script src="js/screens/201-lesson-reel.js?v=202610191438"></script>
+  <script src="js/screens/211-lesson-emoji.js?v=202610191438"></script>
+  <script src="js/screens/220-lesson-quiz.js?v=202610191438"></script>
+  <script src="js/screens/231-lesson-cw.js?v=202610191438"></script>
+  <script src="js/screens/300-g.js?v=202610191438"></script>
+  <script src="js/screens/15-onb-task.js?v=202610191438"></script>
+  <script src="js/screens/25-amp-reward.js?v=202610191438"></script>
+
+
+</body></html>

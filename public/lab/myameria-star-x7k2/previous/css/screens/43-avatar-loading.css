@@ -1,0 +1,25 @@
+/* Avatar sheet skeleton loading · 3001:82359 */
+.al__grid { top: 19px; }
+.al__dim { position: absolute; inset: 0; background: rgba(8,8,8,0.55); z-index: 3; } /* sys/icon/one-color/secondary */
+#s-avatar-loading .status-bar { position: absolute; top: 0; left: 0; }
+.al-sheet { position: absolute; left: 0; right: 0; top: 70px; bottom: 0; z-index: 4; background: #fff; border-radius: 32px 32px 0 0; overflow: hidden; }
+.al-sheet__scroll { position: absolute; inset: 0; overflow-y: auto; scrollbar-width: none; }
+.al-sheet__scroll::-webkit-scrollbar { display: none; }
+.al-sheet__inner { position: relative; height: 819px; }   /* Figma sheet height (frame 889) */
+.al-avatars { position: absolute; left: 16px; top: 112px; width: 361px; display: grid; grid-template-columns: repeat(3, 107.223px); gap: 20px; }
+.al-c { width: 107px; height: 107px; margin: 0.11px; border-radius: 200px; }
+.al-field {
+  position: absolute; left: 15px; top: 636px; width: 359px; height: 52px; padding: 16px 20px; border-radius: 12px;
+  background: var(--slate-50); font: 400 15px/normal var(--font-text); color: #34383e; white-space: nowrap;
+}
+.al-nav { position: absolute; left: 0; right: 0; top: 0; height: 76px; display: flex; align-items: center; background: rgba(255,255,255,0.75); }
+.al-nav__left, .al-nav__right { flex: 0 0 88px; height: 76px; display: flex; align-items: center; }
+.al-nav__left { padding: 0 2px; }
+.al-nav__center { flex: 1 0 0; display: flex; justify-content: center; padding: 16px 8px; }
+.al-close { padding: 14px; display: flex; }
+.al-btn {
+  flex: 1 0 0; min-width: 0; height: 56px; border-radius: 20px; display: flex; align-items: center; justify-content: center;
+  font: 510 16px/normal var(--font-text); color: var(--sys-typo-title); white-space: nowrap;
+}
+.al-btn--ghost { border: 1px solid #ebecee; }
+.al-btn--cta { background: var(--color-green-350); }

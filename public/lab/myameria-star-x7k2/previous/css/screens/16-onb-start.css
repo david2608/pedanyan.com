@@ -1,0 +1,48 @@
+/* Onboarding · Ready to start — rocket shakes, launches, then the CTA appears */
+.onb-start__stage { position: absolute; left: 0; right: 0; top: 150px; height: 360px; overflow: visible; }
+.onb-rocket { position: absolute; left: 50%; top: 60px; width: 220px; margin-left: -110px; z-index: 2; }
+.onb-rocket__img { width: 220px; height: 220px; object-fit: contain; display: block; }
+.onb-rocket__flame {
+  position: absolute; left: 50%; top: 190px; width: 34px; height: 60px; margin-left: -17px; border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+  background: radial-gradient(ellipse at 50% 20%, #fff6c4 0%, #ffd056 35%, #ff8a2b 70%, rgba(255,90,40,0) 100%);
+  opacity: 0; transform-origin: 50% 0;
+}
+.onb-smoke { position: absolute; left: 50%; top: 270px; width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle, #f2f4f6 0%, rgba(242,244,246,.8) 50%, rgba(242,244,246,0) 72%); filter: blur(4px); opacity: 0; z-index: 1; }
+.onb-smoke--1 { margin-left: -90px; } .onb-smoke--2 { margin-left: -35px; width: 80px; height: 80px; } .onb-smoke--3 { margin-left: 20px; }
+.onb-start__text { position: absolute; left: 32px; right: 32px; top: 530px; display: flex; flex-direction: column; gap: 8px; text-align: center; }
+.onb-start__footer .page-footer__actions { transition: opacity .4s ease, transform .4s ease; }
+
+/* Animation (runs each time the screen opens: .is-launching is added by JS) */
+.onb-start.is-launching .onb-rocket { animation: rkShake .9s linear 0s 1, rkLaunch 1s cubic-bezier(.55,0,.85,.35) .9s forwards; }
+.onb-start.is-launching .onb-rocket__flame { animation: rkFlame .12s ease-in-out .3s infinite alternate, rkFlameOn .3s ease .3s forwards; }
+.onb-start.is-launching .onb-smoke { animation: rkSmoke 1.4s ease-out .75s forwards; }
+.onb-start.is-launching .onb-smoke--2 { animation-delay: .85s; } .onb-start.is-launching .onb-smoke--3 { animation-delay: .8s; }
+.onb-start.is-launching .onb-halo { animation: rkHalo 1.9s ease forwards; }
+.onb-start .onb-start__footer .page-footer__actions { opacity: 0; transform: translateY(16px); pointer-events: none; }
+.onb-start.is-ready .onb-start__footer .page-footer__actions { opacity: 1; transform: none; pointer-events: auto; }
+
+@keyframes rkShake {
+  0%,100% { transform: translate(0,0) rotate(0); }
+  10% { transform: translate(-2px,1px) rotate(-2deg); } 20% { transform: translate(2px,-1px) rotate(2deg); }
+  30% { transform: translate(-3px,0) rotate(-3deg); }   40% { transform: translate(3px,1px) rotate(3deg); }
+  50% { transform: translate(-3px,-1px) rotate(-2deg); } 60% { transform: translate(3px,0) rotate(3deg); }
+  70% { transform: translate(-2px,1px) rotate(-3deg); } 80% { transform: translate(2px,-1px) rotate(2deg); }
+  90% { transform: translate(-1px,0) rotate(-1deg); }
+}
+@keyframes rkLaunch { 0% { transform: translateY(0) scale(1); } 15% { transform: translateY(12px) scale(1.02); } 100% { transform: translateY(-900px) scale(.85); } }
+@keyframes rkFlameOn { to { opacity: 1; } }
+@keyframes rkFlame { from { transform: scaleY(.85) scaleX(1.05); } to { transform: scaleY(1.25) scaleX(.9); } }
+@keyframes rkSmoke { 0% { opacity: 0; transform: scale(.3) translateY(0); } 25% { opacity: .9; } 100% { opacity: 0; transform: scale(1.8) translateY(30px); } }
+@keyframes rkHalo { 0%, 50% { opacity: 1; } 100% { opacity: .35; } }
+.onb-start__stage { top: 110px; height: 330px; }
+.onb-rocket { top: 40px; }
+.onb-start__text { top: 450px; }
+
+/* After the launch the rocket flies back in from below and stays, gently floating */
+.onb-start.is-ready .onb-rocket { animation: rkReturn .85s cubic-bezier(.2,.9,.3,1.15) both, rkBob 2.6s ease-in-out .85s infinite; }
+.onb-start.is-ready .onb-rocket__flame { animation: rkFlame .14s ease-in-out infinite alternate, rkFlameOut .5s ease .7s both; opacity: 1; }
+.onb-start.is-ready .onb-halo { animation: none; opacity: 1; transition: opacity .6s ease; }
+.onb-start.is-ready .onb-start__footer .page-footer__actions { transition-delay: .6s; }
+@keyframes rkReturn { 0% { transform: translateY(620px) scale(.85); } 100% { transform: translateY(0) scale(1); } }
+@keyframes rkBob { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-10px) rotate(1.5deg); } }
+@keyframes rkFlameOut { to { opacity: 0; } }

@@ -1,0 +1,30 @@
+/* Education home · Option 2 (tilted cards) · Figma 3010:209238 / 3010:212316 / 3010:214454.
+   Content frame 3010:211172 is 393×2328.6 at top −42 (pt 282 · pb 56); profile card sits inside it at 164 (= page 122). */
+.hm2__frame { position: relative; margin-top: -42px; padding: 282px 0 56px; margin-bottom: 101.35px; }
+.hm--o2 .hm__profile { position: absolute; top: 164px; left: 0; right: 0; z-index: 1; }
+.hm--o2 .hm__levels { position: relative; display: flex; flex-direction: column; gap: 16px; }
+/* paths are positioned in frame coordinates → offset by the frame padding */
+.hm2-path { position: absolute; pointer-events: none; display: flex; align-items: center; justify-content: center; margin-top: -282px; }
+.hm2-path img { flex: none; }
+.hm2-path--14 { left: 14.71px; width: 254.967px; height: 257.895px; }
+.hm2-path--14 img { transform: rotate(90deg) scaleY(-1); }
+.hm2-path--12 { left: 178px; width: 170.037px; height: 218.608px; }
+.hm2-path--12 img { transform: rotate(90deg); }
+.hm2-path--13 { left: -7.89px; width: 302.287px; height: 302.287px; }
+.hm2-path--13 img { transform: rotate(-135deg); }
+
+.hm--o2 .hm-level { position: relative; gap: 12px; }
+.hm--o2 .hm-level__head { padding: 0 16px; }
+.hm--o2 .hm-level__cards { display: flex; flex-direction: column; gap: 12px; }
+.hm2-mod { display: flex; flex-direction: column; padding: 0 32px; }
+.hm2-mod--left { align-items: flex-start; }
+.hm2-mod--right { align-items: flex-end; }
+/* the box mimics the rotated card's bounding box (±6° on a 210px card) */
+.hm2-mod__box { display: flex; align-items: center; justify-content: center; padding: 10.4px 10.5px; }
+.hm--o2 .hm-card { width: 210px; flex: none; }
+.hm--o2 .hm-card--red   { border: 1px solid #f5f5f5; box-shadow: 12px 16px 40px -18px var(--alpha-red-dark-850-10); }
+.hm--o2 .hm-card--green { border: 1px solid #f5f5f5; box-shadow: 12px 16px 40px -18px rgba(56,137,8,0.3); }
+/* locked 03/04 show English placeholder copy (Title/H6 Medium, placeholder + disabled colors), body not dimmed */
+.hm--o2 .hm-card.is-ph .hm-card__body { opacity: 1; }
+.hm--o2 .hm-card.is-ph .hm-card__title { font: 510 18px/26px var(--font-display); color: var(--sys-typo-placeholder); text-transform: none; }
+.hm--o2 .hm-card.is-ph .hm-card__desc { color: var(--sys-typo-disabled); }

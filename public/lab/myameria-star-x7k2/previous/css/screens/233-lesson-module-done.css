@@ -1,0 +1,31 @@
+/* ==========================================================
+   Lesson · Module complete (prefix lx-md) · Figma 3005:143076
+   ========================================================== */
+.screen.lx-md { background: linear-gradient(to bottom, var(--lx-orange-200) 0, #fff 204px); }
+.lx-md__confetti { position: absolute; left: 36px; top: 131px; z-index: 1; pointer-events: none; }
+.lx-md .scroll { z-index: 2; }
+.lx-md__body { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 160px 16px 140px; }
+.lx-md__badge { position: relative; width: 120px; height: 120px; flex-shrink: 0; animation: lxBadge .55s cubic-bezier(.3,1.5,.5,1) both; }
+.lx-md__badge img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+@keyframes lxBadge { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+.lx-md__texts { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.lx-md__head { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.lx-md__kicker { font: 400 13px/normal var(--font-text); color: #5b6066; white-space: nowrap; }
+.lx-md__title { width: 100%; white-space: nowrap; font: 700 22px/32px var(--font-display); letter-spacing: var(--ls); color: var(--sys-typo-title); }
+.lx-md__grid { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; align-items: start; }
+.lx-mstat {
+  padding: 20px; border-radius: 24px; background: #fff; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  box-shadow: 0 4px 20px -10px rgba(8,8,8,0.2), 0 4px 52px -16px rgba(0,0,0,0.25);
+}
+.lx-mstat__ic {
+  width: 56px; height: 56px; padding: 8px; border-radius: 45px; overflow: hidden; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(to bottom, rgba(233,251,223,0.4), rgba(195,245,168,0.4));
+}
+.lx-mstat__ic img { width: 40px; height: 40px; object-fit: cover; }
+.lx-mstat__label { font: 400 13px/normal var(--font-text); color: #5b6066; white-space: nowrap; }
+.lx-mstat__val { font: 700 18px/normal var(--font-display); color: #080808; white-space: nowrap; }
+.lx-mstat__bar { width: 35px; height: 5px; border-radius: 100px; background: #88df56; flex-shrink: 0; }
+.lx-md__back { margin: 4px 0; padding: 12px; border-radius: 100px; display: flex; }
+.lx-md__back .ic24 { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }

@@ -1,0 +1,32 @@
+/* Page can't be loaded · 3001:84185 */
+.err {
+  position: absolute; left: 0; top: calc(50% - 40px); width: 393px; transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+.err__top { width: 100%; display: flex; flex-direction: column; gap: 4px; }
+.err__visual { position: relative; width: 100%; height: 217px; }
+.err__stage { position: absolute; left: 65.15px; bottom: 0.72px; width: 256px; height: 195px; }
+.err__frame {
+  position: absolute; left: calc(50% - 0.14px); top: 0; width: 255.718px; height: 195.723px; transform: translateX(-50%);
+  border: 2px solid #f2f3f3; border-radius: 24.092px 24.092px 0 0;   /* background/page/surface */
+}
+.err__card-wrap { position: absolute; width: 98.663px; height: 108.025px; display: flex; align-items: center; justify-content: center; }
+.err__card {
+  flex: none; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 16px 14px;
+  background: #fff; border-radius: 16px; box-shadow: inset 0 0 0 1px #f1f1f1;
+  filter: drop-shadow(0 23px 4.5px rgba(171,171,171,0.01)) drop-shadow(0 13px 4px rgba(171,171,171,0.05)) drop-shadow(0 6px 3px rgba(171,171,171,0.09)) drop-shadow(0 1px 1.5px rgba(171,171,171,0.1));
+}
+.err__card img { width: 54px; height: 54px; flex-shrink: 0; }
+.err__card--mid { position: absolute; left: 50%; top: 38.32px; transform: translateX(-50%); }
+.err__rot { width: 57.827px; height: 57.827px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.err__rot img { transform: rotate(-4.22deg); }
+.err__skel { width: 45px; height: 13px; border-radius: 3.686px; background: rgba(10,10,11,0.06); flex-shrink: 0; }
+.err__fade { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 31.137px; object-fit: cover; }
+.err__text { display: flex; flex-direction: column; gap: 10px; align-items: center; padding: 0 16px; text-align: center; }
+.err__title { width: 100%; font: 700 20px/28px var(--font-display); letter-spacing: var(--ls); color: rgba(15,15,16,0.85); }
+.err__desc { width: 100%; font: 400 15px/22px var(--font-text); letter-spacing: var(--ls); color: rgba(15,15,16,0.5); }
+.err__btn { padding: 12px 16px; border-radius: var(--radius-xm); }
+.err__btn span {
+  display: block; font: 510 16px/24px var(--font-text); letter-spacing: var(--ls); color: #0a1c00; white-space: nowrap;
+  text-decoration: underline; text-decoration-skip-ink: none; text-underline-position: from-font;
+}

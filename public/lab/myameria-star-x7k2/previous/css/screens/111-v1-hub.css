@@ -1,0 +1,54 @@
+/* V1 · 11 Learning hub (206:32371) + 81 Learning hub after module (206:32401) */
+.v1o-back {
+  position: absolute; left: 0; top: 52px; z-index: 5; padding: 10px; border-radius: 100px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.v1o-back:active { background: rgba(15,15,16,.06); }
+.v1o-mods { position: absolute; left: 16px; width: 328px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.v1o-mod { width: 100%; text-align: left; }
+/* current module (Frame · f4f4f5) */
+.v1o-mod.is-active {
+  display: flex; flex-direction: column; gap: 8px; align-items: flex-start; overflow: hidden;
+  padding: 12px 20px; border-radius: 16px; background: var(--v1o-surface); transition: transform .1s, filter .15s;
+}
+.v1o-mod.is-active:active { transform: scale(.985); filter: brightness(.97); }
+.v1o-mod.is-active .v1o-mod__t { width: 100%; font: 500 15px/1.362 var(--v1o-font); color: var(--v1o-ink); }
+.v1o-mod__bar { position: relative; display: block; width: 100%; height: 6px; }
+.v1o-mod__bar::before { content: ""; position: absolute; left: 0; top: 0; width: 288px; height: 6px; border-radius: 100px; background: var(--v1o-track); }
+.v1o-mod__bar i { position: absolute; left: 0; top: 0; height: 6px; border-radius: 100px; background: var(--v1o-green-dark); }
+.v1o-mod__s { width: 100%; font: 400 12px/1.362 var(--v1o-font); color: var(--v1o-ink-2); }
+/* locked module */
+.v1o-mod.is-locked {
+  display: flex; align-items: center; justify-content: space-between; padding: 10px;
+  border-radius: 12px; box-shadow: inset 0 0 0 1px var(--v1o-line); /* Figma inside stroke (not in layout) */
+}
+.v1o-mod__col { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; width: 260px; flex-shrink: 0; }
+.v1o-mod__lt { width: 100%; font: 400 14px/1.362 var(--v1o-font); color: var(--v1o-ink-2); }
+.v1o-mod__ls { width: 100%; font: 400 12px/1.362 var(--v1o-font); color: var(--v1o-ink-3); }
+.v1o-mod__lock { white-space: nowrap; font: 400 13px/1.362 var(--v1o-font); color: var(--v1o-ink-3); }
+/* completed module (81) */
+.v1o-mod.is-done {
+  display: flex; gap: 6px; align-items: center; overflow: hidden;
+  padding: 14px 20px; border-radius: 16px; background: var(--v1o-surface);
+}
+.v1o-mod.is-done .v1o-mod__col { flex: 1 0 0; min-width: 1px; width: auto; gap: 6px; }
+.v1o-mod.is-done .v1o-mod__t { width: 100%; font: 500 16px/1.362 var(--v1o-font); color: var(--v1o-ink); }
+.v1o-mod__redo { display: flex; gap: 6px; align-items: center; font: 500 14px/1.362 var(--v1o-font); color: var(--v1o-ink-2); white-space: nowrap; }
+.v1o-mod__reload { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; }
+.v1o-mod__reload img { transform: rotate(-90deg); }
+.v1o-mod__check { position: relative; flex-shrink: 0; width: 30px; height: 30px; border-radius: 22px; overflow: hidden; }
+.v1o-mod__check img { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+
+/* badges row (81) */
+.v1o-hub-sub { position: absolute; left: 16px; top: 130px; white-space: nowrap; font: 500 14px/1.362 var(--v1o-font); color: var(--v1o-ink-2); }
+.v1o-badges { position: absolute; left: 16px; top: 157px; display: flex; gap: 10px; align-items: flex-start; }
+.v1o-badge { display: flex; flex-direction: column; gap: 8px; align-items: center; flex-shrink: 0; }
+.v1o-badge__img { position: relative; width: 56px; height: 56px; border-radius: 28px; display: flex; align-items: center; justify-content: center; }
+.v1o-badge__img img { width: 57px; height: 56px; flex-shrink: 0; }
+.v1o-badge__ph {
+  width: 56px; height: 56px; border-radius: 28px; background: var(--v1o-surface); border: 1.5px dashed var(--v1o-ink-3);
+  display: flex; align-items: center; justify-content: center;
+}
+.v1o-badge__ph b { font: 700 8px/normal var(--v1o-font); color: var(--v1o-ink-3); }
+.v1o-badge__l { width: 100%; text-align: center; font: 400 10px/1.362 var(--v1o-font); color: var(--v1o-ink-3); white-space: nowrap; }
+.v1o-badge.is-earned .v1o-badge__l { color: var(--v1o-ink); }

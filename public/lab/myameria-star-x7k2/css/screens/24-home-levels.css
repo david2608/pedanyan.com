@@ -1,0 +1,172 @@
+/* Education home · levels with tabs — built on "Option 2 · tilted cards" (21-home-opt2.css card + path styles).
+   One tab per level; the locked level shows how to unlock it; unlock moments get a modal + tab animation.
+   Rendered by js/screens/24-home-levels.js. */
+.lv-screen { background: #fff; }
+.lv { padding-top: 110px; }
+
+/* ---------- Pinned block: profile container (Figma "Current avatar" 1870:83155) + level tabs ---------- */
+.lv-pin { position: sticky; top: 0; z-index: 6; display: flex; flex-direction: column; gap: 16px; padding: 12px 16px 16px;
+  background: linear-gradient(to bottom, #fff 0, #fff calc(100% - 14px), rgba(255,255,255,0)); }
+.lv-me { width: 100%; display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 40px; text-align: left;
+  background: #fff; box-shadow: 0 0 32px -8px rgba(8,8,8,.1); transition: transform .12s; }
+.lv-me:active { transform: scale(.98); }
+.lv-me__av { width: 88px; height: 88px; flex-shrink: 0; border-radius: 100px; border: 1.5px solid rgba(122,122,122,.2); overflow: hidden;
+  background: linear-gradient(to bottom, #e9fbdf, #c3f5a8); }
+.lv-me__av img { width: 100%; height: 100%; object-fit: cover; object-position: center bottom; }
+.lv-me__id { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.lv-me__name { font: 700 22px/32px var(--font-display); letter-spacing: var(--ls); color: var(--sys-typo-title); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lv-me__amp { display: flex; align-items: center; gap: 4px; font: 510 13px/20px var(--font-text); letter-spacing: -.1px; color: #080808; }
+.lv-me__amp span { font-weight: 400; color: rgba(8,8,8,.3); }
+.lv-me__chev { flex-shrink: 0; }
+
+/* ---------- Level tabs: the active tab owns its own white surface (always aligned with its content) ---------- */
+.lv-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 20px; background: #f4f4f5; }
+.lv-tab { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; height: 56px; padding: 0 8px; border-radius: 16px; text-align: center; transition: background-color .25s, box-shadow .25s; }
+.lv-tab.is-active { background: #fff; box-shadow: 0 4px 14px rgba(8,8,8,.08); }
+.lv-tab__row { display: flex; align-items: center; justify-content: center; gap: 6px; }
+.lv-tab__num { position: relative; width: 24px; height: 20px; flex-shrink: 0; border-radius: 7px; display: flex; align-items: center; justify-content: center; background: #c1fc9f; font: 700 11px/1 var(--font-display); color: #123200; }
+.lv-tab[data-tab="1"] .lv-tab__num { background: #dcecff; color: #0d4d8c; }
+.lv-tab__txt { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; }
+.lv-tab__t { font: 590 15px/20px var(--font-display); letter-spacing: var(--ls); color: var(--sys-typo-title); white-space: nowrap; }
+.lv-tab__s { font: 400 12px/16px var(--font-text); color: var(--sys-typo-subtitle); white-space: nowrap; }
+.lv-tab:not(.is-active) .lv-tab__t { color: var(--sys-typo-subtitle); }
+.lv-tab__lock { position: absolute; inset: 0; border-radius: 7px; background: #e5e6e8; display: none; align-items: center; justify-content: center; }
+.lv-tab.is-locked .lv-tab__n { visibility: hidden; }
+.lv-tab.is-locked .lv-tab__lock, .lv-tab.is-unlocking .lv-tab__lock { display: flex; }
+.lv-tab__lock svg { overflow: visible; }
+.lv-tab__lock .shackle { transform-origin: 9.5px 8px; }
+/* "ՆՈՐ" = Figma chip, selected style (compact) */
+.lv-tab__new { position: absolute; right: 6px; top: -9px; display: none; }
+.lv-tab.has-new .lv-tab__new { display: inline-flex; animation: lvPop .45s cubic-bezier(.2,1.6,.4,1); }
+.lv-tab.is-unlocking .lv-tab__lock { animation: lvLockShake .5s ease-in-out, lvLockOut .4s ease-in .95s forwards; }
+.lv-tab.is-unlocking .lv-tab__lock .shackle { animation: lvShackle .35s ease-out .5s forwards; }
+.lv-tab.is-unlocking::after { content: ""; position: absolute; inset: -2px; border-radius: 18px; box-shadow: 0 0 0 3px rgba(147,236,96,.9); animation: lvGlow 1.4s ease-out .9s both; pointer-events: none; }
+.lv-tab.is-unlocking .lv-tab__num { animation: lvNumIn .5s cubic-bezier(.2,1.6,.4,1) 1s both; }
+.lv-tab.is-shake { animation: lvShake .4s; }
+@keyframes lvLockShake { 0%,100% { transform: rotate(0); } 20% { transform: rotate(-16deg); } 40% { transform: rotate(14deg); } 60% { transform: rotate(-10deg); } 80% { transform: rotate(6deg); } }
+@keyframes lvShackle { to { transform: translateY(-3px) rotate(-38deg); } }
+@keyframes lvLockOut { to { transform: translateY(-16px) scale(.4); opacity: 0; } }
+@keyframes lvGlow { 0% { opacity: 0; } 25% { opacity: 1; } 100% { opacity: 0; transform: scale(1.06); } }
+@keyframes lvNumIn { from { transform: scale(.5); } to { transform: none; } }
+@keyframes lvShake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(4px); } 75% { transform: translateX(-2px); } }
+@keyframes lvPop { from { transform: scale(.2); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* ---------- Panels ---------- */
+.lv-panels { position: relative; overflow: hidden; padding-top: 4px; }
+.lv-panel { display: none; padding-bottom: 150px; }
+.lv-panel.is-active { display: block; animation: lvPanelIn .42s cubic-bezier(.2,.9,.3,1) both; }
+.lv-panels[data-dir="back"] .lv-panel.is-active { animation-name: lvPanelBack; }
+@keyframes lvPanelIn { from { opacity: 0; transform: translateX(36px); } to { opacity: 1; transform: none; } }
+@keyframes lvPanelBack { from { opacity: 0; transform: translateX(-36px); } to { opacity: 1; transform: none; } }
+
+/* status note — white container (same style as the profile container) */
+.lv-note { margin: 0 16px 16px; padding: 12px 16px 12px 12px; border-radius: 32px; display: flex; gap: 12px; align-items: center; background: #fff; box-shadow: 0 0 32px -8px rgba(8,8,8,.1); }
+.lv-note__ic { width: 56px; height: 56px; flex-shrink: 0; border-radius: 100px; background: #f4f4f5; display: flex; align-items: center; justify-content: center; }
+.lv-note__ic img { width: 42px; height: 42px; object-fit: contain; }
+.lv-note__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.lv-note__t { font: 590 15px/20px var(--font-display); letter-spacing: var(--ls); color: var(--sys-typo-title); }
+.lv-note__d { font: 400 13px/18px var(--font-text); color: var(--sys-typo-subtitle); text-wrap: pretty; }
+.lv-note__bar { display: flex; align-items: center; gap: 8px; margin-top: 6px; font: 510 12px/16px var(--font-text); color: var(--sys-typo-title); font-variant-numeric: tabular-nums; }
+.lv-note__bar i { flex: 1; height: 6px; border-radius: 6px; background: #eceef0; overflow: hidden; }
+.lv-note__bar i b { display: block; height: 100%; border-radius: 6px; background: var(--color-green-450); transform-origin: left; animation: lvBar .9s cubic-bezier(.2,.9,.3,1) .2s both; }
+@keyframes lvBar { from { transform: scaleX(0); } }
+
+/* locked level — one white container, no gray blocks: lock, what unlocks it, module steps, CTA */
+.lv-lock { margin: 0 16px 16px; padding: 16px; border-radius: 32px; background: #fff; box-shadow: 0 0 32px -8px rgba(8,8,8,.1); display: flex; flex-direction: column; gap: 16px; }
+.lv-lock__head { display: flex; align-items: center; gap: 12px; }
+.lv-lock__ic { width: 56px; height: 56px; flex-shrink: 0; border-radius: 100px; background: #f4f4f5; display: flex; align-items: center; justify-content: center; }
+.lv-lock__ic svg { overflow: visible; }
+.lv-lock__t { font: 700 18px/24px var(--font-display); letter-spacing: var(--ls); color: var(--sys-typo-title); }
+.lv-lock__d { font: 400 13px/18px var(--font-text); color: var(--sys-typo-subtitle); }
+.lv-steps { display: flex; align-items: center; padding: 0 4px; }
+.lv-steps i { flex: 1; height: 2px; margin: 0 6px; border-radius: 2px; background: repeating-linear-gradient(90deg, #d7dbe0 0 5px, transparent 5px 9px); }
+.lv-step { width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1.5px dashed #c9ced4;
+  font: 700 13px/1 var(--font-display); color: rgba(8,8,8,.35); }
+.lv-step.is-done { border: 0; background: #93ec60; color: #123200; }
+.lv-step.is-cur { border: 2px solid #93ec60; color: #123200; animation: lvCur 2s ease-in-out infinite; }
+@keyframes lvCur { 0%,100% { box-shadow: 0 0 0 0 rgba(147,236,96,.0); } 50% { box-shadow: 0 0 0 5px rgba(147,236,96,.3); } }
+.lv-lock__p { margin-top: -6px; text-align: center; font: 510 13px/18px var(--font-text); color: var(--sys-typo-subtitle); }
+.lv-lock .btn { padding: 14px 20px; border-radius: 16px; }
+
+/* level header inside a panel */
+.lv .hm-level__head { padding: 0 16px; }
+.lv .hm-level { gap: 12px; }
+.lv .hm2-path { margin-top: 0; }
+.lv .hm-level__cards { position: relative; }
+.lv-panel.is-locked .hm-level__cards { pointer-events: auto; }
+.lv-panel.is-locked .hm-level__cards::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0) 0, rgba(255,255,255,.55) 60%); pointer-events: none; }
+/* cards deal in when a panel opens */
+.lv-panel.is-active .hm2-mod__box { animation: lvCardIn .5s cubic-bezier(.2,1.2,.4,1) both; }
+.lv-panel.is-active .hm2-mod:nth-child(2) .hm2-mod__box { animation-delay: .05s; }
+.lv-panel.is-active .hm2-mod:nth-child(3) .hm2-mod__box { animation-delay: .12s; }
+.lv-panel.is-active .hm2-mod:nth-child(4) .hm2-mod__box { animation-delay: .19s; }
+.lv-panel.is-active .hm2-mod:nth-child(5) .hm2-mod__box { animation-delay: .26s; }
+@keyframes lvCardIn { from { opacity: 0; transform: translateY(26px) scale(.94); } to { opacity: 1; transform: none; } }
+/* the active module breathes so the next step is obvious */
+.lv .hm-card.is-active { animation: lvActive 2.6s ease-in-out 1s infinite; }
+@keyframes lvActive { 0%,100% { box-shadow: 0 16px 40px -18px var(--hm-blue-shadow), 0 0 0 0 rgba(147,236,96,0); } 50% { box-shadow: 0 16px 40px -18px var(--hm-blue-shadow), 0 0 0 6px rgba(147,236,96,.35); } }
+.lv .hm-card--orange.is-active { animation-name: lvActiveO; }
+@keyframes lvActiveO { 0%,100% { box-shadow: 12px 16px 40px -18px var(--hm-orange-shadow), 0 0 0 0 rgba(147,236,96,0); } 50% { box-shadow: 12px 16px 40px -18px var(--hm-orange-shadow), 0 0 0 6px rgba(147,236,96,.4); } }
+.lv-start { position: absolute; z-index: 2; left: 50%; top: -14px; transform: translateX(-50%); }
+.hm-card { position: relative; overflow: visible; }
+.hm-card .hm-card__body { overflow: hidden; }
+.lv .hm-card.is-done .hm-card__icon::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: rgba(147,236,96,.0); }
+.lv-done { position: absolute; right: 10px; top: 12px; width: 24px; height: 24px; }
+.lv .hm-card.is-shake { animation: lvShake .4s !important; }
+.lv .hm-card.is-lvl .hm-card__title, .lv .hm-card.is-locked .hm-card__title { color: var(--sys-typo-placeholder); }
+
+/* toast */
+.lv-toast__ic { display: flex; }
+.lv-toast { position: absolute; left: 16px; right: 16px; bottom: 140px; z-index: 40; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 16px; background: #1f2328; color: #fff;
+  font: 400 14px/20px var(--font-text); box-shadow: 0 10px 30px rgba(8,8,8,.25); opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity .2s, transform .25s cubic-bezier(.2,.8,.2,1); }
+.lv-toast.is-shown { opacity: 1; transform: none; }
+
+/* scenario chip in the header (prototype only — makes the shown rule obvious) */
+.lv-scn { position: absolute; left: 16px; right: 16px; top: 100px; z-index: 21; display: none; }
+
+/* ---------- Level modals: motion (reuses the Figma alerts in 50-level-modals.css) ---------- */
+.lvl-alert.is-open .lvl-dialog { animation: lvDlg .45s cubic-bezier(.2,1.3,.4,1) both; }
+@keyframes lvDlg { from { transform: translateY(-50%) scale(.85); opacity: 0; } to { transform: translateY(-50%); opacity: 1; } }
+.lvl-alert.is-open .lvl-book { animation: lvBook .55s cubic-bezier(.2,1.5,.4,1) both; }
+.lvl-alert.is-open .lvl-book--2 { animation-delay: .12s; } .lvl-alert.is-open .lvl-book--3 { animation-delay: .18s; } .lvl-alert.is-open .lvl-book--5 { animation-delay: .24s; }
+.lvl-alert.is-open .lvl-book--6 { animation-delay: .3s; } .lvl-alert.is-open .lvl-book--7 { animation-delay: .36s; } .lvl-alert.is-open .lvl-book--4 { animation-delay: .42s; }
+.lvl-alert.is-open .lvl-book--1 { animation: lvBookMain .7s cubic-bezier(.2,1.5,.4,1) .1s both, lvFloat 3s ease-in-out .9s infinite; }
+@keyframes lvBook { from { opacity: 0; scale: .3; } to { opacity: 1; scale: 1; } }
+@keyframes lvBookMain { from { opacity: 0; scale: .5; } to { opacity: 1; scale: 1; } }
+@keyframes lvFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+.lvl-alert.is-open .lvl-text > * { animation: lvTxt .4s ease .35s both; }
+@keyframes lvTxt { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+/* lock badge on the visual: closed (locked dialog) / swinging open (new level dialog) */
+.lvl-lockfx { position: absolute; left: 50%; top: 46px; z-index: 3; width: 56px; height: 56px; margin-left: -28px; border-radius: 50%; background: #fff;
+  box-shadow: 0 8px 20px rgba(8,8,8,.18); display: flex; align-items: center; justify-content: center; }
+.lvl-lockfx svg { overflow: visible; }
+.lvl-lockfx .shackle { transform-origin: 13px 13px; }
+#o-level-locked.is-open .lvl-lockfx { animation: lvLockShake .6s ease-in-out .5s; }
+#o-level-new.is-open .lvl-lockfx { animation: lvLockShake .5s ease-in-out .5s, lvLockAway .5s ease-in 1.5s forwards; }
+#o-level-new.is-open .lvl-lockfx .shackle { animation: lvShackleBig .4s ease-out 1.05s forwards; }
+@keyframes lvShackleBig { to { transform: translateY(-5px) rotate(-40deg); } }
+@keyframes lvLockAway { to { transform: translateY(-30px) scale(.3); opacity: 0; } }
+.lvl-burst { position: absolute; left: 50%; top: 120px; z-index: 2; width: 0; height: 0; }
+.lvl-burst i { position: absolute; width: 8px; height: 8px; border-radius: 3px; opacity: 0; }
+#o-level-new.is-open .lvl-burst i { animation: lvConf 1.1s cubic-bezier(.2,.8,.3,1) 1.6s both; }
+@keyframes lvConf { 0% { opacity: 1; transform: translate(0,0) rotate(0); } 100% { opacity: 0; transform: translate(var(--x), var(--y)) rotate(260deg); } }
+.lvl-btn--ghost { background: transparent; color: var(--sys-typo-subtitle); margin-top: 4px; }
+.lvl-dialog--two .lvl-level { opacity: 1; }
+#o-two-levels.is-open .lvl-level { animation: lvTxt .4s ease both; }
+#o-two-levels.is-open .lvl-level:nth-child(1) { animation-delay: .45s; } #o-two-levels.is-open .lvl-level:nth-child(2) { animation-delay: .6s; }
+@media (prefers-reduced-motion: reduce) { .lv *, .lvl-alert * { animation: none !important; } }
+
+/* ---------- Collapsed pin (scrolling down) ---------- */
+.lv-pin { transition: gap .3s ease, padding .3s ease; }
+.lv-me, .lv-me__av, .lv-me__id, .lv-me__name, .lv-tab, .lv-tab__s { transition: all .3s cubic-bezier(.3,.7,.3,1); }
+.lv-tab__s { max-height: 16px; overflow: hidden; }
+.lv-pin.is-mini { gap: 8px; padding: 6px 16px 10px; }
+.lv-pin.is-mini .lv-me { padding: 6px 12px 6px 6px; box-shadow: 0 0 20px -8px rgba(8,8,8,.12); }
+.lv-pin.is-mini .lv-me__av { width: 44px; height: 44px; }
+.lv-pin.is-mini .lv-me__id { flex-direction: row; align-items: center; justify-content: space-between; gap: 8px; }
+.lv-pin.is-mini .lv-me__name { font-size: 17px; line-height: 22px; }
+.lv-pin.is-mini .lv-tab { height: 40px; }
+.lv-pin.is-mini .lv-tab__s { max-height: 0; opacity: 0; }
+/* v2: no pinned profile/tabs block */
+.lv-v2 .lv-pin { display: none; }
+.lv .hm-daily { display: none !important; }

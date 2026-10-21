@@ -1,0 +1,113 @@
+/* ==========================================================
+   V1 · Theme 1 — Emoji riddle (24 onboard · 25–32 riddles) + blank reels (33, 34)
+   Figma: 206:33841, 206:33751, 206:34249, 206:33772, 206:34275, 206:33796, 206:34304,
+          206:33817, 206:34328, 206:33639, 206:33654
+   Uses the V1 kit (css/screens/100-v1-kit.css). Riddle-only styles, prefix v1r-.
+
+   Riddle markup:
+   <section class="screen v1 v1r" data-answer="Կ Ա Ն Խ Ի Կ">   (space separated; "ՈՒ" = one slot)
+     .v1r-pic > .v1r-pic__row > img (44×44)      emoji card 328×150 at top 92
+     .v1r-label / .v1r-hint                         ՀՈՒՇՈՒՄ + hint
+     .v1r-slots > .v1r-slot (.is-ok / .is-bad)      answer slots, top 320
+     .v1r-kb[data-kb]                               keyboard, expanded by js/screens/124-v1-riddle.js
+   "Answered" frames: add data-static on the section + .is-kb (keyboard open on the symbols page).
+   ========================================================== */
+
+:root {
+  --v1r-kb-bg: #eff0f1;        /* color/slate/slate-100 */
+  --v1r-kb-fn: #dddfe2;        /* color/slate/slate-150 */
+  --v1r-kb-bar-btn: #d2d5d9;   /* color/slate/slate-200 */
+  --v1r-kb-pill: #b3b8bf;      /* color/slate/slate-350 */
+  --v1r-kb-return: #a8f57c;    /* color/green-primary/green-150 */
+  --v1r-kb-ink: #0e0f11;       /* color/slate/slate-980 */
+  --v1r-kb-divider: #dbdde3;   /* M3/ref/neutral/Neutral 95 */
+  --v1r-pic-bg: #f8f9fa;
+}
+
+/* ---------- 24 onboard ---------- */
+.v1 .v1r-onb-desc { margin-top: 8px; }
+.v1r-onb-img {
+  display: block; width: 328px; height: 150px; margin-top: 40px; border-radius: 16px;
+  object-fit: cover; background: var(--v1r-pic-bg);
+}
+
+/* ---------- Riddle ---------- */
+.v1r-pic {
+  position: absolute; left: 16px; top: 92px; width: 328px; height: 150px; border-radius: 16px;
+  background: var(--v1r-pic-bg); display: flex; align-items: center; justify-content: center;
+}
+.v1r-pic__row { display: flex; align-items: center; }
+.v1r-pic__row img { display: block; flex-shrink: 0; width: 44px; height: 44px; }
+.v1r-pic__row img.is-wide { height: 29px; }
+
+.v1r-label {
+  position: absolute; left: 179.5px; top: 262px; transform: translateX(-50%); white-space: nowrap;
+  font: 700 11px/15px var(--v1-font); color: var(--v1-muted); text-align: center;
+}
+.v1r-hint {
+  position: absolute; left: 180px; top: 281px; transform: translateX(-50%); white-space: nowrap;
+  font: 400 14px/19px var(--v1-font); color: var(--v1-ink-2); text-align: center;
+}
+
+.v1r-slots { position: absolute; left: 16px; top: 320px; width: 328px; display: flex; gap: 4px; cursor: pointer; }
+.v1r-slot {
+  flex: 1 0 0; min-width: 1px; height: 52px; border-radius: 10px; background: #fff;
+  box-shadow: inset 0 0 0 1px var(--v1-gray-stroke);
+  display: flex; align-items: center; justify-content: center; padding: 14px 0 11px;
+  font: 700 20px/27px var(--v1-font); color: var(--v1-green-ink); text-align: center; white-space: nowrap;
+  transition: background-color .15s, box-shadow .15s;
+}
+.v1r-slot.is-ok  { background: var(--v1-green-bg); box-shadow: inset 0 0 0 2px var(--v1-green-stroke); }
+.v1r-slot.is-bad { background: var(--v1-red-bg); box-shadow: inset 0 0 0 2px var(--v1-red); }
+.v1r-slot.is-next { box-shadow: inset 0 0 0 2px var(--v1-green-stroke); }
+.v1r[data-static] .v1r-slots { cursor: default; }
+
+/* answered frames: CTA frame sits at top 683 (58px tall), behind the keyboard */
+.v1r-footer--kb { bottom: 59px; }
+.v1r-footer--kb .v1-btn { height: 58px; }
+
+/* ---------- Keyboard (Keyboard / Default · 360 wide, slate-100) ---------- */
+.v1r-kb {
+  position: absolute; left: 0; bottom: 0; width: 360px; z-index: 40;
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 11px;
+  padding: 9px 6px; background: var(--v1r-kb-bg);
+  font-family: "V1 Roboto", Roboto, var(--v1-font);
+  transform: translateY(100%); visibility: hidden;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), visibility 0s .25s;
+}
+.v1r.is-kb .v1r-kb { transform: none; visibility: visible; transition: transform .25s cubic-bezier(.2,.8,.2,1), visibility 0s; }
+.v1r-kb__bar { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 4px; }
+.v1r-kb__bar img { display: block; }
+.v1r-kb__bar-back { display: flex; align-items: center; justify-content: center; border-radius: 20px; background: var(--v1r-kb-bar-btn); }
+.v1r-kb__gif { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+.v1r-kb__divider { width: 1px; height: 19px; background: var(--v1r-kb-divider); }
+.v1r-kb__page { width: 100%; display: flex; flex-direction: column; gap: 11px; }
+.v1r-kb[data-page="abc"] .v1r-kb__page--sym,
+.v1r-kb[data-page="sym"] .v1r-kb__page--abc { display: none; }
+.v1r-kb__row { width: 100%; display: flex; align-items: center; justify-content: center; gap: 5px; }
+.v1r-kb__row--fn { padding: 0 6px; }
+
+.v1r-key {
+  flex: 0 1 30px; min-width: 0; height: 42px; border-radius: 6px; background: #fff;
+  display: flex; align-items: center; justify-content: center; padding: 0;
+  font: 400 22px/26px "V1 Roboto", Roboto, var(--v1-font); color: var(--v1r-kb-ink); text-align: center;
+  transition: background-color .1s;
+}
+.v1r-key:active { background: var(--v1r-kb-fn); }
+.v1r-key--at { padding-bottom: 6px; }          /* Figma: "@" key has an extra 6px bottom pad */
+.v1r-key--hy { font: 500 18px/24px var(--v1-font); }
+.v1r-key--fn { flex: 0 0 46px; background: var(--v1r-kb-fn); padding: 0; }
+.v1r-key--fn:active { background: var(--v1r-kb-pill); }
+.v1r-key--narrow { flex: 0 0 30px; }
+.v1r-key--dim { background: var(--v1r-kb-fn); color: #000; }
+.v1r-key--space { flex: 1 0 0; }
+.v1r-key--pill {
+  flex: 0 0 46px; border-radius: 30px; background: var(--v1r-kb-pill); padding: 8px 0;
+  font: 500 15px/18px "V1 Roboto", Roboto, var(--v1-font); color: #000;
+}
+.v1r-key--return { flex: 0 0 47px; border-radius: 30px; background: var(--v1r-kb-return); padding: 8px 0; }
+.v1r-key--return:active { background: var(--v1-green); }
+.v1r-key img { display: block; }
+
+/* ---------- Blank reels (33, 34): no poster, #0f0f10 card ---------- */
+.v1-reel.v1r-reel-blank { background: #0f0f10; }

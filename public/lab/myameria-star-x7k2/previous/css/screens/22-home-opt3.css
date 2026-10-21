@@ -1,0 +1,4 @@
+/* Education home · Option 3 (full-width list) · Figma 3010:235574 / 3010:238742 / 3010:240925.
+   List 3010:237570 at top 224 (16px sides), levels 16px apart, cards 15px apart; page 2734 tall. */
+.hm--o3 .hm__levels { padding: 0 16px 172px; display: flex; flex-direction: column; gap: 16px; }
+.hm--o3 .hm-level__cards { display: flex; flex-direction: column; gap: 15px; }

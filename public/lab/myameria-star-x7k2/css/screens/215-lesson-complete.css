@@ -1,0 +1,117 @@
+/* ==========================================================
+   Lesson completion kit (prefix lc-) · Emoji agent
+   Figma: 3005:86276 (emoji game done), 3005:87053 / 87845 / 88637 (theme 1/2/3 done)
+   REUSABLE by other lesson agents (quiz-done, cw-done, module-done …).
+
+   Scaffold (dim page + bottom sheet, 393×852):
+     <section class="screen lc-screen" …>
+       <div class="grid-bg"></div>
+       <div class="lc-dim"></div>                       overlay rgba(8,8,8,.55) over the page
+       <div data-include="status-bar" class="lc-sb"></div>   status bar on top of the dim
+       <div class="lc-sheet [lc-sheet--65]">             sheet: top 62 (default) / 65, radius 32, orange→white gradient
+         <div class="lc-nav">                            56px nav row (lc-nav--76 = 76px row with 10px top offset)
+           <div class="lc-nav__side"><button class="lc-close" data-go="s-l-module"><img src="assets/lvl-ic-close.svg" width="28" height="28" alt=""></button></div>
+           <div class="lc-nav__center"><span class="nav-bar__title">Title</span></div>
+           <div class="lc-nav__side lc-nav__side--right"></div>
+         </div>
+         <div class="lc-body">                           column at top 88 · pt 8 · px 16 · gap 20
+           <img class="lc-hero" src="assets/lc-trophy.png">   96×95 (lc-hero--120 = 120×120, e.g. lc-party.png)
+           <div class="lc-text">
+             <div class="lc-text__head"><p class="lc-kicker">Kicker</p><p class="lc-title">Title</p></div>
+             <p class="lc-sub">Subtitle</p>
+           </div>
+           <div class="lc-stats">                        row of stat cards (gap 10, cards flex:1)
+             <div class="lc-stat"> (lc-stat--single = fixed 100px card)
+               <span class="lc-stat__icon"><img src="assets/amp-coin.svg" alt=""></span>
+               <span class="lc-stat__label">AMP</span>
+               <span class="lc-stat__value">100</span>
+               <span class="lc-stat__bar"></span>
+             </div> …
+           </div>
+         </div>
+         <img class="lc-confetti" src="assets/lc-confetti.svg" width="320.021" height="153" alt="">
+         <div class="page-footer lc-footer"> … .btn.btn--primary … <div data-include="home-indicator"></div></div>
+       </div>
+     </section>
+   Modifiers: .lc-text.is-muted → kicker/sub/label in placeholder color (game-done look),
+              default = #5b6066 labels and #080808 values (theme-done look).
+   Sprite icon: <span class="lc-stat__icon"><span class="lc-sprite"><img src=… style="width:…%;height:…%;left:…%;top:…%"></span></span>
+   Assets: lc-trophy.png, lc-party.png, lc-confetti.svg, amp-coin.svg (star), lvl-ic-reel.png (reel),
+           lvl-ic-quiz.png (quiz), onb-ic-game.png (game), lvl-ic-close.svg (close).
+   ========================================================== */
+:root {
+  --color-orange-200: #ffe6be;   /* color/orange/orange-200 */
+  --lc-gray-text: #5b6066;       /* label gray on theme-done */
+  --lc-dim: rgba(8,8,8,0.55);    /* sys/icon/one-color/secondary (sheet overlay) */
+}
+
+/* page behind the sheet (module page with orange header), dimmed by .lc-dim */
+.screen.lc-screen { background: linear-gradient(to bottom, var(--color-orange-200) 0, #fff 34.6%); }
+.lc-dim { position: absolute; inset: 0; background: var(--lc-dim); z-index: 3; }
+.lc-sb { position: absolute; top: 0; left: 0; z-index: 4; }
+
+.lc-sheet {
+  position: absolute; left: 0; top: 62px; width: 393px; height: 790px; z-index: 5; overflow: hidden;
+  border-radius: 32px;
+  background: linear-gradient(to bottom, var(--color-orange-200) 0%, #fff 24%);
+}
+.lc-sheet--65 { top: 65px; height: 787px; }
+
+/* Nav bar inside the sheet (Anchor sheet sub-molecules: 88px sides, 14px-padded 28px buttons) */
+.lc-nav {
+  position: absolute; left: 0; right: 0; top: 0; z-index: 3; height: 56px; display: flex; align-items: center;
+  -webkit-backdrop-filter: blur(25px); backdrop-filter: blur(25px);
+}
+.lc-nav--76 { height: 76px; }
+.lc-nav--76 > .lc-nav__side:first-child, .lc-nav--76 > .lc-nav__center { align-self: flex-start; margin-top: 10px; }
+.lc-nav__side { flex: 0 0 88px; height: 56px; display: flex; align-items: center; padding: 0 2px; }
+.lc-nav__side--right { justify-content: flex-end; }
+.lc-nav__center { flex: 1 0 0; min-width: 0; height: 56px; padding: 0 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.lc-close { padding: 14px; display: flex; }
+.lc-close img { width: 28px; height: 28px; }
+
+/* Content column ("Question" frame) */
+.lc-body {
+  position: absolute; left: 0; top: 88px; width: 393px; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 8px 16px 20px;
+}
+.lc-hero { width: 96px; height: 95px; object-fit: cover; flex-shrink: 0; }
+.lc-hero--120 { width: 120px; height: 120px; }
+
+.lc-text { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.lc-text__head { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.lc-kicker, .lc-sub { font: 400 13px/16px var(--font-text); color: var(--lc-gray-text); white-space: nowrap; }
+.lc-sub { width: 100%; white-space: normal; }
+.lc-title { width: 100%; font: 700 22px/32px var(--font-display); letter-spacing: var(--ls); color: var(--sys-typo-title); }
+.lc-text.is-muted .lc-kicker, .lc-text.is-muted .lc-sub { color: var(--sys-typo-placeholder); }
+
+/* Stat cards */
+.lc-stats { width: 100%; display: flex; gap: 10px; align-items: flex-start; }
+.lc-stat {
+  flex: 1 0 0; min-width: 0; padding: 20px; border-radius: 24px; background: #fff; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  box-shadow: 0 4px 52px -16px rgba(0,0,0,0.25);
+}
+.lc-stat--single { flex: 0 0 100px; width: 100px; box-shadow: 0 4px 20px -10px rgba(8,8,8,0.2), 0 4px 52px -16px rgba(0,0,0,0.25); }
+.lc-stat--shadow2 { box-shadow: 0 4px 20px -10px rgba(8,8,8,0.2), 0 4px 52px -16px rgba(0,0,0,0.25); }
+.lc-stat__icon {
+  width: 56px; height: 56px; padding: 8px; border-radius: 45px; overflow: hidden; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(to bottom, rgba(233,251,223,0.4), rgba(195,245,168,0.4));
+}
+.lc-stat__icon img { width: 40px; height: 40px; }
+/* cropped sprite inside a 40px icon slot: <span class="lc-sprite"><img style="width/height/left/top in %"></span> */
+.lc-sprite { position: relative; width: 40px; height: 40px; overflow: hidden; flex-shrink: 0; }
+.lc-stat__icon .lc-sprite img { position: absolute; max-width: none; }
+.lc-stat__icon[hidden] { display: none; }
+.lc-stat__label { font: 400 13px/16px var(--font-text); color: var(--lc-gray-text); white-space: nowrap; }
+.lc-stat__value { font: 700 18px/21px var(--font-text); color: #080808; white-space: nowrap; }
+.lc-stat__bar { width: 35px; height: 5px; border-radius: 100px; background: var(--color-green-400); flex-shrink: 0; }
+.lc-stats.is-muted .lc-stat__label { color: var(--sys-typo-placeholder); }
+.lc-stats.is-muted .lc-stat__value { color: var(--sys-typo-title); }
+
+.lc-confetti { position: absolute; left: calc(50% - 0.49px); top: 67px; transform: translateX(-50%); z-index: 2; pointer-events: none; }
+
+/* Footer pinned to the sheet bottom (reuses .page-footer gradient + .btn) */
+.lc-footer { z-index: 4; }
+.lc-footer .btn > span { font: 510 15px/22px var(--font-text); }

@@ -1,0 +1,28 @@
+/* V1 · 07 Avatar (206:33726) */
+.v1o-avgrid {
+  position: absolute; left: 16px; top: 186px; width: 328px;
+  display: grid; grid-template-columns: repeat(3, 90px); column-gap: 29px; row-gap: 29px;
+}
+.v1o-av {
+  position: relative; width: 90px; height: 90px; padding: 8px; overflow: hidden;
+  display: flex; align-items: flex-start; justify-content: center;
+  border: 0; border-radius: 45px; background: var(--v1o-grad-blue);
+  transition: transform .1s;
+}
+.v1o-av.is-green { background: var(--v1o-grad-green); }
+.v1o-av.is-tall { padding: 10px 8px; }
+.v1o-av::after { /* Figma inside stroke: drawn over content, no layout impact */
+  content: ""; position: absolute; inset: 0; border-radius: 45px; border: 1px solid var(--v1o-line); pointer-events: none;
+}
+.v1o-av.is-selected::after { border: 3px solid var(--v1o-green); }
+.v1o-av img { width: 82px; height: 82px; flex-shrink: 0; object-fit: cover; pointer-events: none; }
+.v1o-av:active { transform: scale(.96); }
+.v1o-name {
+  position: absolute; left: 16px; top: 575px; width: 328px; height: 52px;
+  display: flex; align-items: center; padding: 16px 20px; border-radius: 12px; background: var(--v1o-surface); cursor: text;
+}
+.v1o-name__input {
+  width: 100%; border: 0; outline: 0; background: transparent; padding: 0;
+  font: 400 15px/1.362 var(--v1o-font); color: var(--v1o-ink);
+}
+.v1o-name__input::placeholder { color: var(--v1o-ink-2); opacity: 1; }

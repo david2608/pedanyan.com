@@ -1,0 +1,53 @@
+/* ==========================================================
+   Lesson · Crossword (prefix lx-) — intro + shared tile atoms
+   Figma: 3005:134358 (intro sheet)
+   Reuses the lc- sheet scaffold from 215-lesson-complete.css.
+   ========================================================== */
+:root {
+  --lx-orange-200: #ffe6be;   /* color/orange/orange-200 */
+  --lx-orange-100: #fff2dc;   /* input tile active bg */
+  --lx-orange-450: #efa939;   /* input tile active border */
+  --lx-orange-830: #653f02;   /* color/orange/orange-830 (timer text) */
+  --lx-red-400: #ff5e5e;      /* color/red/red-400 */
+  --lx-red-50: #ffeded;
+  --lx-green-150: #eaffdd;    /* color/green-primary/green-150 */
+  --lx-green-450: #6dce35;    /* color/green-primary/green-450 */
+  --lx-gray-10: rgba(8,8,8,0.1);  /* color/alpha/gray/gray-10% */
+  --lx-gray-3: #edf0f3;       /* system-gray/gray-3 */
+}
+
+/* page behind the dim = module page (orange → white heading gradient) */
+.screen.lx-dimpage { background: linear-gradient(to bottom, var(--lx-orange-200) 0, #fff 204px); }
+
+/* ---------- shared tile atoms ---------- */
+.lx-num {
+  position: absolute; left: 4px; top: 4px; width: 23.4px; display: flex; align-items: center; justify-content: space-between;
+  font: 510 10px/13.436px var(--font-text); letter-spacing: -0.084px; color: var(--sys-typo-placeholder); pointer-events: none;
+}
+.lx-num > span { height: 8px; display: flex; align-items: center; }
+.lx-dir { width: 4.416px; height: 5.784px; flex-shrink: 0; }
+.lx-dir--r { transform: rotate(90deg); margin-right: 0.68px; }
+.lx-dir--d { transform: rotate(180deg); }
+
+/* ---------- intro body (Quiz 1 · top 88 in the sheet) ---------- */
+.lx-intro { position: absolute; left: 0.5px; top: 88px; width: 393px; display: flex; flex-direction: column; gap: 8px; align-items: center; padding-bottom: 32px; z-index: 1; }
+.lx-intro__q { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 8px 16px 20px; }
+.lx-intro__title { width: 100%; text-align: center; font: 700 22px/32px var(--font-display); letter-spacing: var(--ls); color: var(--sys-typo-title); }
+.lx-intro__card {
+  position: relative; width: 100%; padding: 28px 12px 22px; border-radius: 30px;
+  background: linear-gradient(to bottom, #f7fff1, #e7ffd6);
+  box-shadow: 0 10px 24px -14px rgba(80,110,60,0.35), inset 0 0 0 1.5px rgba(147,236,96,0.5);
+  display: flex; justify-content: center;
+}
+.lx-mini { position: relative; width: 215.4px; height: 142px; }
+.lx-mtile {
+  position: absolute; width: 33.4px; height: 33.4px; border-radius: 8.397px; overflow: hidden;
+  background: #fff; border: 1px solid var(--lx-gray-10);
+}
+.lx-mstar { position: absolute; left: 50%; top: 50%; width: 24.861px; height: 22.756px; transform: translate(-50%, -50%); object-fit: contain; object-position: bottom; opacity: .87; }
+
+.lx-rules { list-style: none; margin: 0; width: 100%; padding: 0 18px; display: flex; flex-direction: column; gap: 18px; }
+.lx-rules li { display: flex; gap: 12px; align-items: flex-start; }
+.lx-rules__dot { width: 8px; height: 8px; margin-top: 7px; border-radius: 4px; background: var(--lx-green-450); flex-shrink: 0; }
+.lx-rules__txt { flex: 1 0 0; min-width: 0; font: 510 15px/22px var(--font-text); color: var(--sys-typo-title); }
+.lx-rules__txt--alt { font: 400 16px/normal var(--font-text); color: #34383e; }

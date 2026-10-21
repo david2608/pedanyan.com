@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Vector">
+<circle id="Ellipse 39" cx="10" cy="10" r="10" fill="#FFAE38"/>
+<g id="Union">
+<path d="M10 15.5C10.4142 15.5 10.75 15.1642 10.75 14.75C10.75 14.3358 10.4142 14 10 14C9.58579 14 9.25 14.3358 9.25 14.75C9.25 15.1642 9.58579 15.5 10 15.5Z" fill="#3B2402"/>
+<path d="M10 12.5C10.4142 12.5 10.75 12.1642 10.75 11.75L10.75 5.25C10.75 4.83579 10.4142 4.5 10 4.5C9.58579 4.5 9.25 4.83579 9.25 5.25L9.25 11.75C9.25 12.1642 9.58579 12.5 10 12.5Z" fill="#3B2402"/>
+</g>
+</g>
+</svg>

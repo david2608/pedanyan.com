@@ -1,0 +1,35 @@
+/* Profile skeleton loading · Figma 3010:257210 */
+:root { --slate-50: #f4f4f5; /* color/slate/slate-50 */ --slate-130: #e5e6e8; /* color/slate/slate-130 */ }
+/* legacy .skel tint still used by s-avatar-loading (43) */
+#s-profile-loading .skel, #s-avatar-loading .skel { background: var(--slate-50); }
+
+.pls { display: block; flex-shrink: 0; background: var(--slate-50); border-radius: 6px; animation: plsPulse 1s ease-in-out infinite alternate; }
+@keyframes plsPulse { from { background-color: var(--slate-50); } to { background-color: var(--slate-130); } }
+@media (prefers-reduced-motion: reduce) { .pls { animation: none; } }
+
+.plx { position: relative; padding: 126px 0 160px; display: flex; flex-direction: column; }
+.plx__grid { top: 74px; }
+
+/* 3010:258262 — centred avatar + two lines */
+.plx-me { position: relative; align-self: center; width: 144px; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.pls-c88 { width: 88.183px; height: 88.183px; border-radius: 200px; }
+.plx-me__lines { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.pls-l120 { width: 120px; height: 10px; }
+.pls-l80 { width: 80px; height: 10px; }
+
+/* 3010:258158 */
+.plx-title { position: relative; margin-top: 16px; padding: 0 24px; font: 510 18px/26px var(--font-display); letter-spacing: var(--ls); color: var(--sys-typo-subtitle); white-space: nowrap; }
+
+/* 3010:258160 / 3010:258203 */
+.pls-group { position: relative; margin-top: 16px; padding: 0 16px; display: flex; flex-direction: column; gap: 16px; }
+.pls-group__head { display: flex; align-items: center; justify-content: space-between; }
+.pls-group__title { font: 590 16px/24px var(--font-display); letter-spacing: var(--ls); color: var(--sys-typo-title); white-space: nowrap; }
+.pls-group__pts { display: flex; align-items: center; gap: 6px; padding: 8px 10px; border-radius: 10px; }
+.pls-c18 { width: 18.037px; height: 18.037px; border-radius: 200px; }
+.pls-b69 { width: 69px; height: 19px; }
+.pls-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 142px; gap: 16px; }
+.pls-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.pls-c78 { width: 78px; height: 78px; margin: 0.08px; border-radius: 200px; }
+.pls-lines { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.pls-l66 { width: 66px; height: 10px; }
+.pls-lfull { width: 100%; height: 10px; }

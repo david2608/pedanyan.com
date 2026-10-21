@@ -1,0 +1,93 @@
+/* ==========================================================
+   MyAmeria Star — Design tokens (from Figma variables)
+   File: rpNgyMtPu7Wk8yPMpc1xXc  ·  UI Kit page 9:2
+   ========================================================== */
+:root {
+  /* ---------- Primitive colors ---------- */
+  --color-green-250: #bffe9a;
+  --color-green-350: #93ec60;            /* Green primary / CTA background */
+  --color-green-400: #88df56;
+  --color-green-450: #6dce35;
+  --color-green-50:  #eaffdd;
+  --color-orange-150: #ffedcf;
+  --color-orange-230: #ffe0af;
+  --color-orange-400: #ffb847;
+  --color-orange-450: #efa939;
+  --color-red-50: #ffeded;
+  --color-blue-50: #d4eaff;
+  --color-blue-gray-400: #a7aaae;
+  --color-gray-9: #f2f4f6;
+  --color-natural-gray-10: #fffefe;
+  --color-natural-gray-30: #f9f9f9;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --white-alpha-750: rgba(255,255,255,0.75);
+
+  --alpha-gray-8:  rgba(8,8,8,0.08);
+  --alpha-gray-12: rgba(8,8,8,0.12);
+  --alpha-gray-15: rgba(8,8,8,0.15);
+  --alpha-red-bright-15: rgba(255,72,72,0.15);
+  --alpha-red-dark-850-10: rgba(59,4,4,0.10);
+
+  /* ---------- Semantic (sys) ---------- */
+  --sys-typo-title:       rgba(8,8,8,0.85);
+  --sys-typo-subtitle:    rgba(8,8,8,0.55);
+  --sys-typo-placeholder: rgba(8,8,8,0.30);
+  --sys-typo-disabled:    rgba(8,8,8,0.15);
+  --sys-typo-brand-green-6: #183e02;
+
+  --sys-icon-primary:    rgba(8,8,8,0.85);
+  --sys-icon-tertiary:   rgba(8,8,8,0.32);
+  --sys-icon-quaternary: rgba(8,8,8,0.15);
+  --sys-icon-inverse:    #ffffff;
+  --sys-icon2-shape1-enabled: rgba(8,8,8,0.80);
+  --sys-icon2-shape2-enabled: rgba(8,8,8,0.45);
+  --sys-icon2-shape3-enabled: rgba(8,8,8,0.15);
+  --sys-icon2-shape1-select:  #102d00;
+  --sys-icon2-shape2-select:  #93ec60;
+
+  --bg-page: #ffffff;
+  --cta-bg: var(--color-green-350);
+
+  /* ---------- Radius ---------- */
+  --radius-xm: 10px;
+  --radius-l: 12px;
+  --radius-xl: 16px;
+  --radius-3xl: 20px;
+  --radius-4xl: 24px;
+  --radius-full: 100px;
+
+  /* ---------- Spacing ---------- */
+  --sp-0: 0px; --sp-2: 2px; --sp-4: 4px; --sp-6: 6px; --sp-8: 8px;
+  --sp-12: 12px; --sp-16: 16px; --sp-20: 20px; --sp-24: 24px; --sp-32: 32px; --sp-72: 72px;
+  --page-margin: 16px;
+
+  /* ---------- Shadows / effects ---------- */
+  --shadow-card: 0 4px 22px var(--alpha-gray-8);
+  --shadow-tabbar: 0 0 32px rgba(67,158,15,0.16);
+  --blur-xs: 16px;
+
+  /* ---------- Typography ---------- */
+  --font-text: "SF Pro Text", "SF Pro", -apple-system, BlinkMacSystemFont, "SF Armenian", "Noto Sans Armenian", "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: "SF Pro Display", "SF Pro", -apple-system, BlinkMacSystemFont, "SF Armenian", "Noto Sans Armenian", "Segoe UI", Roboto, Arial, sans-serif;
+  --ls: -0.1px;
+}
+
+/* Typography styles (Figma text styles) */
+.t-h3-bold     { font: 700 28px/36px var(--font-display); letter-spacing: var(--ls); }
+.t-h4-bold     { font: 700 24px/32px var(--font-display); letter-spacing: var(--ls); }
+.t-h5-bold     { font: 700 20px/28px var(--font-display); letter-spacing: var(--ls); }
+.t-h6-medium   { font: 510 18px/26px var(--font-display); letter-spacing: var(--ls); }
+.t-headline-m  { font: 590 16px/24px var(--font-display); letter-spacing: var(--ls); }
+.t-body-m      { font: 400 16px/24px var(--font-text); letter-spacing: var(--ls); }
+.t-body-m-med  { font: 510 15px/22px var(--font-text); letter-spacing: var(--ls); }
+.t-label-big-med { font: 510 15px/22px var(--font-text); letter-spacing: var(--ls); }
+.t-label-small-med { font: 510 13px/20px var(--font-text); letter-spacing: var(--ls); }
+.t-label-small   { font: 400 13px/20px var(--font-text); letter-spacing: var(--ls); }
+.t-footnote      { font: 400 13px/20px var(--font-text); letter-spacing: var(--ls); }
+.t-caption-s-med { font: 510 11px/16px var(--font-text); letter-spacing: var(--ls); }
+
+.c-title { color: var(--sys-typo-title); }
+.c-subtitle { color: var(--sys-typo-subtitle); }
+.c-placeholder { color: var(--sys-typo-placeholder); }
+.c-disabled { color: var(--sys-typo-disabled); }

@@ -1,0 +1,22 @@
+/* Badge page · 3001:79738 (+ shared by s-badges-list · 3001:84130) */
+.bdg { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 126px 16px 16px; }
+
+/* Top visual · 3001:79747 */
+.bdg-hero { position: relative; display: block; width: 361px; height: 232px; flex-shrink: 0; text-align: center; }
+.bdg-hero__deco { position: absolute; left: 32px; top: -15px; width: 297px; height: 211px; }
+.bdg-hero__lock { position: absolute; width: 56px; height: 56px; }
+.bdg-hero__veil {
+  position: absolute; left: 50%; top: -15px; width: 393px; height: 265px; transform: translateX(-50%);
+  border-radius: 23.796px; background: rgba(255,255,255,0.56);
+  -webkit-backdrop-filter: blur(1px); backdrop-filter: blur(1px);  /* Figma bg-blur 2 */
+}
+.bdg-hero__main { position: absolute; left: calc(50% + 0.5px); top: calc(50% + 0.5px); width: 150px; height: 150px; transform: translate(-50%,-50%); }
+.bdg-hero__title {
+  position: absolute; left: 0; bottom: -8px; width: 361px; display: flex; align-items: center; justify-content: center;
+  padding: 48px 32px 8px; background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 51.923%);
+}
+.bdg-hero__title span { flex: 1 0 0; min-width: 0; font: 800 28px/34px var(--font-display); letter-spacing: var(--ls); color: #000; text-align: center; }
+
+/* Paragraph · 3001:79759 */
+.bdg-text { width: 361px; font: 400 15px/22px var(--font-text); letter-spacing: var(--ls); color: var(--sys-typo-title); }
+.bdg-text b { font-weight: 700; }

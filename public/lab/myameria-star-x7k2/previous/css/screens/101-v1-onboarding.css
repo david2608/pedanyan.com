@@ -1,0 +1,111 @@
+/* ==========================================================
+   V1 · Onboarding (01–10) + shared v1o- helpers used by 105–111, 181
+   Figma section 17:29188 · frames 360×800
+   ========================================================== */
+@font-face { font-family: "Noto Sans Armenian"; font-style: normal; font-display: swap; font-weight: 400; src: url(../../../assets/fonts/noto-sans-armenian-armenian-400-normal.woff2) format("woff2"); unicode-range: U+0308, U+0530-058F, U+2010, U+2024, U+25CC, U+FB13-FB17; }
+@font-face { font-family: "Noto Sans Armenian"; font-style: normal; font-display: swap; font-weight: 500; src: url(../../../assets/fonts/noto-sans-armenian-armenian-500-normal.woff2) format("woff2"); unicode-range: U+0308, U+0530-058F, U+2010, U+2024, U+25CC, U+FB13-FB17; }
+@font-face { font-family: "Noto Sans Armenian"; font-style: normal; font-display: swap; font-weight: 600; src: url(../../../assets/fonts/noto-sans-armenian-armenian-600-normal.woff2) format("woff2"); unicode-range: U+0308, U+0530-058F, U+2010, U+2024, U+25CC, U+FB13-FB17; }
+@font-face { font-family: "Noto Sans Armenian"; font-style: normal; font-display: swap; font-weight: 700; src: url(../../../assets/fonts/noto-sans-armenian-armenian-700-normal.woff2) format("woff2"); unicode-range: U+0308, U+0530-058F, U+2010, U+2024, U+25CC, U+FB13-FB17; }
+@font-face { font-family: "Noto Sans Armenian"; font-style: normal; font-display: swap; font-weight: 400; src: url(../../../assets/fonts/noto-sans-armenian-latin-400-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Noto Sans Armenian"; font-style: normal; font-display: swap; font-weight: 500; src: url(../../../assets/fonts/noto-sans-armenian-latin-500-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Noto Sans Armenian"; font-style: normal; font-display: swap; font-weight: 600; src: url(../../../assets/fonts/noto-sans-armenian-latin-600-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Noto Sans Armenian"; font-style: normal; font-display: swap; font-weight: 700; src: url(../../../assets/fonts/noto-sans-armenian-latin-700-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Roboto"; font-style: normal; font-display: swap; font-weight: 400; src: url(../../../assets/fonts/roboto-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Roboto"; font-style: normal; font-display: swap; font-weight: 500; src: url(../../../assets/fonts/roboto-latin-500-normal.woff2) format("woff2"); }
+
+:root {
+  --v1o-font: "Noto Sans Armenian", var(--font-text);
+  --v1o-roboto: "Roboto", var(--font-text);
+  --v1o-ink: #0f0f10;         /* text primary */
+  --v1o-ink-2: #34383e;       /* text secondary */
+  --v1o-ink-3: #a4aab1;       /* text tertiary / disabled */
+  --v1o-line: #dddfe2;        /* color/slate/slate-150 */
+  --v1o-surface: #f4f4f5;
+  --v1o-track: #e5e6e8;
+  --v1o-green: #93ec60;       /* green primary */
+  --v1o-green-dark: #88df56;
+  --v1o-on-green: #123200;
+  --v1o-grad-blue: linear-gradient(to bottom, #e8f4ff, #d1e9ff);
+  --v1o-grad-green: linear-gradient(to bottom, #e9fbdf, #c3f5a8);
+}
+
+.screen.v1o { background: #fff; font-family: var(--v1o-font); color: var(--v1o-ink); letter-spacing: 0; }
+.v1o p { margin: 0; }
+.v1o .v1o-abs { position: absolute; }
+
+/* ---- Android status bar (.Building Blocks/status-bar · 52px) ---- */
+.v1o-sb {
+  position: absolute; left: 0; top: 0; width: 360px; height: 52px; z-index: 30;
+  display: flex; align-items: flex-end; justify-content: space-between; padding: 10px 24px;
+}
+.v1o-sb__time { font: 500 14px/20px var(--v1o-roboto); letter-spacing: .14px; color: #1d1b20; white-space: nowrap; }
+.v1o-sb__icons { position: relative; width: 46px; height: 17px; }
+.v1o-sb__icons img { position: absolute; top: 0; }
+.v1o-sb__wifi { left: 0; }
+.v1o-sb__signal { left: 16px; }
+.v1o-sb__batt { left: 38px; top: 1px !important; }
+.v1o-sb__cam { position: absolute; left: 50%; top: 18px; transform: translateX(-50%); }
+
+/* ---- Navigation handle (.Building Blocks/navigation · 24px) ---- */
+.v1o-handle { position: absolute; left: -.16px; bottom: 0; width: 360px; height: 24px; z-index: 40; pointer-events: none; }
+.v1o-handle::after {
+  content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 108px; height: 4px; border-radius: 12px; background: #080808;
+}
+
+/* ---- Primary CTA (Frame · 328×56) ---- */
+.v1o-cta {
+  position: absolute; left: 16px; top: 704px; width: 328px; height: 56px; z-index: 5;
+  display: flex; align-items: center; justify-content: center; padding: 18px 24px; overflow: hidden;
+  border-radius: 20px; background: var(--v1o-green);
+  font: 500 16px/1.362 var(--v1o-font); color: var(--v1o-on-green); white-space: nowrap; text-align: center;
+  transition: background-color .15s, color .15s, transform .1s;
+}
+.v1o-cta:active { transform: scale(.98); }
+.v1o-cta[disabled] { background: var(--v1o-track); color: var(--v1o-ink-3); pointer-events: none; }
+
+/* ---- Pager dots (top 670) ---- */
+.v1o-dots { position: absolute; left: 50%; top: 670px; transform: translateX(-50%); display: flex; gap: 8px; align-items: center; }
+.v1o-dots i { display: block; width: 8px; height: 8px; border-radius: 100px; background: var(--v1o-line); }
+.v1o-dots i.is-on { width: 24px; background: var(--v1o-green); }
+
+/* ---- Headings ---- */
+.v1o-title { font: 700 22px/1.362 var(--v1o-font); color: var(--v1o-ink); white-space: nowrap; }
+.v1o-title--center { position: absolute; top: 92px; left: 50%; transform: translateX(-50%); text-align: center; }
+.v1o-title--left { position: absolute; top: 92px; left: 16px; }
+.v1o-lead { font: 400 14px/1.362 var(--v1o-font); color: var(--v1o-ink-2); white-space: nowrap; }
+
+/* ---- Hero (icon + title + text) · 01 / 08 / 10 ---- */
+.v1o-hero { position: absolute; top: 92px; display: flex; flex-direction: column; gap: 20px; align-items: center; }
+.v1o-hero__text { width: 100%; display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: center; }
+.v1o-hero__h { width: 100%; font: 700 24px/1.362 var(--v1o-font); color: var(--v1o-ink); }
+.v1o-hero__p { width: 100%; font: 400 16px/1.362 var(--v1o-font); color: var(--v1o-ink-2); }
+.v1o-hero__disc { position: relative; flex-shrink: 0; }
+.v1o-hero__disc img { position: absolute; left: 0; top: 0; }
+.v1o-hero__glyph { position: absolute; transform: translateX(-50%); white-space: nowrap; line-height: normal; text-align: center; }
+
+/* 01 Welcome */
+.v1o-welcome { left: calc(50% + .5px); transform: translateX(-50%); width: 283px; }
+.v1o-welcome__star { width: 145px; height: 144px; object-fit: cover; }
+/* 08 Ready */
+.v1o-ready { left: 38px; width: 283px; }
+.v1o-ready .v1o-hero__disc { width: 88px; height: 88px; }
+.v1o-ready .v1o-hero__glyph { left: 44px; top: 26px; font: 700 30px/normal var(--font-display); color: var(--v1o-on-green); }
+/* 10 Notifications */
+.v1o-notif { left: 27px; width: 306px; }
+.v1o-notif .v1o-hero__disc { width: 104px; height: 104px; }
+.v1o-notif .v1o-hero__glyph { left: 51.5px; top: 30px; font: 400 38px/normal var(--font-display); color: var(--v1o-ink); }
+.v1o-notif .v1o-hero__h { font-size: 22px; }
+.v1o-notif .v1o-hero__p { width: 276px; }
+
+/* ---- Icon list · 02 / 03 / 04 ---- */
+.v1o-list { position: absolute; left: 16px; top: 142px; width: 328px; display: flex; flex-direction: column; gap: 24px; }
+.v1o-row { display: flex; gap: 16px; align-items: center; width: 100%; }
+.v1o-row__ic { position: relative; flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; overflow: hidden; background: var(--v1o-grad-blue); }
+.v1o-row__ic.is-green { background: var(--v1o-grad-green); }
+.v1o-row__ic img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.v1o-row__ic span { position: absolute; }
+.v1o-row__text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.v1o-row__t { font: 500 16px/1.362 var(--v1o-font); color: var(--v1o-ink); white-space: nowrap; }
+.v1o-row__s { font: 400 13px/1.362 var(--v1o-font); color: var(--v1o-ink-2); white-space: nowrap; }
+.v1o-how-note { position: absolute; top: 346px; left: calc(50% + .5px); transform: translateX(-50%); text-align: center; }

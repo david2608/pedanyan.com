@@ -1,0 +1,64 @@
+/* Levels · alert overlays — Figma 3001:71606 / 3001:68981 / 3001:67192 / 3001:68079 */
+:root {
+  --sys-typo-brand-6-on-bg: #0a1c00; /* system-typography/brand-6-on-background */
+}
+
+/* Backdrop: "Materials/Dark/Background/Regular" = rgba(37,37,37,.82) + #8c8c8c (overlay blend).
+   Overlay blend is linear for these values → flattened to an exact single layer. */
+.overlay.lvl-alert { background: rgba(42,42,42,0.8024); }
+
+.lvl-dialog { height: 365px; border-radius: var(--radius-4xl); background: #fff; }
+.lvl-dialog--two { height: 559px; }
+
+/* Top visual · 361×232 @ top 39 */
+.lvl-visual { position: absolute; left: 0; top: 39px; width: 361px; height: 232px; }
+.lvl-dialog--two .lvl-visual { top: 39.5px; }
+.lvl-books { position: absolute; left: 32px; top: -15px; width: 297px; height: 211px; }
+.lvl-book { position: absolute; object-fit: cover; }
+.lvl-book--2 { left: 209.445px; top: -19.055px; width: 68px;     height: 68px;     transform: rotate(30deg); }
+.lvl-book--3 { left: 240.918px; top: 45.418px;  width: 97.909px; height: 97.909px; transform: rotate(-30deg); }
+.lvl-book--5 { left: -18.997px; top: 65.503px;  width: 97.909px; height: 97.909px; transform: rotate(15deg); }
+.lvl-book--6 { left: -2.625px;  top: -10.125px; width: 74.53px;  height: 74.53px;  transform: rotate(-15deg); }
+.lvl-book--7 { left: 52.375px;  top: 132.875px; width: 74.53px;  height: 74.53px;  transform: rotate(-15deg); }
+.lvl-book--4 { left: 191.922px; top: 125.412px; width: 97.909px; height: 97.909px; transform: rotate(15deg); }
+.lvl-book--1 { left: 61px; top: -1.5px; width: 176px; height: 176px; }
+.lvl-books__veil {
+  position: absolute; left: -32px; top: -24.5px; width: 361px; height: 265px; border-radius: 23.796px;
+  background: rgba(255,255,255,0.56); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
+}
+
+.lvl-text {
+  position: absolute; left: 0; bottom: -8px; width: 361px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 48px 32px 8px; text-align: center;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 51.923%);
+}
+.lvl-text__title { width: 100%; font: 800 28px/34px var(--font-display); letter-spacing: var(--ls); color: #000; }
+.lvl-text__body { width: 100%; font: 400 13px/20px var(--font-text); letter-spacing: var(--ls); color: var(--sys-typo-subtitle); }
+
+/* o-level-new variants */
+#o-level-new .lvl-only-age { display: none; }
+#o-level-new.is-age .lvl-only-age { display: block; }
+#o-level-new.is-age .lvl-only-done { display: none; }
+
+/* Two levels list · 3001:68097 */
+.lvl-levels { position: absolute; left: 16px; top: 311.5px; width: 329px; display: flex; flex-direction: column; gap: 16px; }
+.lvl-level { display: flex; gap: 20px; align-items: flex-start; }
+.lvl-level > img { flex-shrink: 0; }
+.lvl-level__text { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.lvl-level__title { font: 510 15px/22px var(--font-text); letter-spacing: var(--ls); color: #1e1e1e; white-space: nowrap; }
+.lvl-level__desc { font: 400 13px/20px var(--font-text); letter-spacing: var(--ls); color: var(--sys-typo-subtitle); }
+
+/* Footer · Button primary (12px radius / 48px) */
+.lvl-footer {
+  position: absolute; left: 0; bottom: 8px; width: 361px; padding: 32px 16px 8px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 15%);
+}
+.lvl-btn {
+  width: 100%; display: flex; align-items: center; justify-content: center;
+  padding: 12px 16px; border-radius: var(--radius-l); background: var(--cta-bg); overflow: hidden;
+  font: 510 15px/24px var(--font-text); letter-spacing: var(--ls); color: var(--sys-typo-brand-6-on-bg);
+  transition: filter .15s, transform .1s;
+}
+.lvl-btn > span { white-space: nowrap; }
+.lvl-btn:active { transform: scale(.98); filter: brightness(.96); }

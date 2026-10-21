@@ -1,0 +1,263 @@
+/* ==========================================================
+   V1 KIT — shared components for the V1 flow (360×800 Android frames)
+   Figma section 17:29188 "V1". Owner: V1 kit agent. Other agents: USE, don't edit.
+   Reference frames: 12 Module themes 206:32455 · 13 Inside the Themes 206:33477 ·
+   14 Reel 206:33594 · 16 Quiz 206:32542 · 17 Quiz, correct 206:32863 · 19 (wrong) 206:33450
+
+   Font: Noto Sans Armenian (local woff2 in assets/fonts) → var(--v1-font). Line-height = Figma
+   "auto" for this font (1.362), rounded to whole px like Figma: 12→16, 14→19, 15→20, 16→22, 18→25, 22→30).
+   Roboto: status-bar clock only.
+
+   ---------- SCREEN SHELL ----------
+   <section class="screen v1" id="v1-NN" data-w="360" data-h="800" data-title="NN Name" data-group="V1 · …">
+     <div data-v1-include="status-bar"></div>          ← expanded by js/screens/100-v1-kit.js
+     <div class="v1-topbar">                            ← 44px bar at top:52 (back btn + optional centered title)
+       <button class="v1-back" data-back aria-label="Back"><img src="assets/v1-ic-back.svg" width="24" height="24" alt=""></button>
+       <p class="v1-topbar__title">Հարց 1/4</p>      ← optional (quiz counter, 14px medium #a4aab1)
+     </div>
+     <div class="v1-page" style="--top:103px"> …content… </div>   ← absolutely positioned content column
+                                                       (left/right 16px, starts at --top; default 92px)
+     <div class="v1-footer"> [toast] <button class="v1-btn" data-go="v1-NN">CTA</button> </div>
+     <div data-v1-include="nav-handle"></div>           ← Android gesture handle (24px, bottom)
+   </section>
+   Includes also: <span data-v1-include="back-btn"></span> → the .v1-back button above.
+
+   ---------- TEXT ----------
+   .v1-h1        22px bold #0f0f10 (page title)           .v1-h2   18px bold (quiz question)
+   .v1-sub       14px regular #34383e                    .v1-text-muted  #a4aab1
+   Stacks: .v1-stack (column) with gap modifiers .v1-gap-8 / -10 / -16 / -40
+
+   ---------- PROGRESS ----------
+   <div class="v1-progress"><span style="width:6px"></span></div>   6px track #f8f9fa, fill #7dd64a (set width)
+
+   ---------- BUTTONS / FOOTER ----------
+   <div class="v1-footer">…</div>  bottom-anchored column (left/right 16, bottom 40, gap 20) — holds toast + CTA
+   .v1-btn       328×56 green CTA (#93ec60, r20, 16px medium #123200)
+   .v1-btn[disabled] / .v1-btn.is-disabled → gray (#e5e6e8 / #a4aab1)
+   .v1-check     marks a quiz's check button: kit JS enables it when an option is picked
+                 (<button class="v1-btn v1-check" disabled data-go="v1-17">Հաջորդ հարցը</button>)
+
+   ---------- QUIZ ----------
+   <div class="v1-options">                                  column, gap 16
+     <button class="v1-option">Մետաղադրամներ</button>      default: #f4f4f5, 1px #dddfe2, r16, 16px medium
+   </div>
+   States: .is-selected (green fill #e9f9dc + 2px #88df56) — picked / picked-and-correct
+           .is-correct  (white + 2px #88df56) — revealed right answer
+           .is-wrong    (#fdecec + 2px #f5222d) — picked wrong answer
+   JS: clicking a .v1-option in a screen selects it (single choice) and enables that screen's .v1-check.
+       Selection resets on screen:enter. Add data-static to .v1-options to disable (feedback frames).
+
+   ---------- FEEDBACK TOAST ("Quiz, correct" frames) ----------
+   <div class="v1-toast">                          (variant .v1-toast--warn for "close, see right answer")
+     <img class="v1-toast__icon" src="assets/prof-ic-check.svg" width="20" height="20" alt="">  (warn: v1-ic-warning.svg)
+     <div class="v1-toast__body">
+       <p class="v1-toast__title">Ճիշտ է</p>
+       <p class="v1-toast__text">Անկանխիկ գումարը …</p>
+     </div>
+   </div>
+   Put it inside .v1-footer before the CTA (20px gap like Figma).
+
+   ---------- REEL / VIDEO ----------
+   <div class="v1-reel" style="--top:96px">           327×460 r16 poster, centered play, progress
+     <img class="v1-reel__poster" src="assets/v1-reel-01-poster.jpeg" alt="">
+     <button class="v1-reel__play" aria-label="Play"><img src="assets/v1-reel-play.svg" width="64" height="64" alt=""></button>
+     <div class="v1-reel__bar"><span style="width:110px"></span></div>
+   </div>
+   (kit JS: tapping .v1-reel toggles .is-playing → hides play button, animates the bar)
+   Caption below: <div class="v1-reel-caption"><p class="v1-reel-caption__title">…</p><p class="v1-reel-caption__meta">…</p></div>
+
+   ---------- MODULE THEME ROWS (12 Module themes) ----------
+   <div class="v1-themes">                                column, gap 16
+     <button class="v1-theme is-active" data-go="v1-13">   .is-active green / default = locked gray
+       <span class="v1-theme__label">Թեմա 1</span>
+       <span class="v1-theme__title">Կանխիկ vs Անկանխիկ գումար</span>
+       <span class="v1-theme__meta">2 ռիլ · 1 քուիզ</span>
+     </button>
+     <div class="v1-theme is-locked">…</div>
+   </div>
+
+   ---------- STEP LIST (13 Inside the Themes) ----------
+   <ol class="v1-steps">
+     <li class="v1-step is-done">   <span class="v1-step__dot"><img src="assets/v1-step-done.svg" width="36" height="36" alt=""></span>
+                                    <span class="v1-step__text"><b>Ռիլ 1 · …</b><small>60 վրկ</small></span></li>
+     <li class="v1-step is-current"><span class="v1-step__dot">3</span> …</li>
+     <li class="v1-step">           <span class="v1-step__dot">4</span> …</li>   (locked/upcoming)
+   </ol>   36px dots, 30px connectors (#e5e6e8); text column vertically centred on the dot.
+   ========================================================== */
+
+@font-face { font-family: "V1 Noto Armenian"; font-weight: 400; font-display: swap; src: url(../../../assets/fonts/noto-sans-armenian-armenian-400-normal.woff2) format("woff2"); unicode-range: U+0308,U+0530-058F,U+2010,U+2024,U+25CC,U+FB13-FB17; }
+@font-face { font-family: "V1 Noto Armenian"; font-weight: 500; font-display: swap; src: url(../../../assets/fonts/noto-sans-armenian-armenian-500-normal.woff2) format("woff2"); unicode-range: U+0308,U+0530-058F,U+2010,U+2024,U+25CC,U+FB13-FB17; }
+@font-face { font-family: "V1 Noto Armenian"; font-weight: 600; font-display: swap; src: url(../../../assets/fonts/noto-sans-armenian-armenian-600-normal.woff2) format("woff2"); unicode-range: U+0308,U+0530-058F,U+2010,U+2024,U+25CC,U+FB13-FB17; }
+@font-face { font-family: "V1 Noto Armenian"; font-weight: 700; font-display: swap; src: url(../../../assets/fonts/noto-sans-armenian-armenian-700-normal.woff2) format("woff2"); unicode-range: U+0308,U+0530-058F,U+2010,U+2024,U+25CC,U+FB13-FB17; }
+@font-face { font-family: "V1 Noto Armenian"; font-weight: 400; font-display: swap; src: url(../../../assets/fonts/noto-sans-armenian-latin-400-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0329,U+2000-2023,U+2025-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "V1 Noto Armenian"; font-weight: 500; font-display: swap; src: url(../../../assets/fonts/noto-sans-armenian-latin-500-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0329,U+2000-2023,U+2025-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "V1 Noto Armenian"; font-weight: 600; font-display: swap; src: url(../../../assets/fonts/noto-sans-armenian-latin-600-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0329,U+2000-2023,U+2025-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "V1 Noto Armenian"; font-weight: 700; font-display: swap; src: url(../../../assets/fonts/noto-sans-armenian-latin-700-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0329,U+2000-2023,U+2025-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "V1 Roboto"; font-weight: 400; font-display: swap; src: url(../../../assets/fonts/roboto-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "V1 Roboto"; font-weight: 500; font-display: swap; src: url(../../../assets/fonts/roboto-latin-500-normal.woff2) format("woff2"); }
+
+:root {
+  --v1-font: "V1 Noto Armenian", "Noto Sans Armenian", var(--font-text);
+  --v1-ink: #0f0f10;          /* text primary */
+  --v1-ink-2: #34383e;        /* text secondary */
+  --v1-muted: #a4aab1;        /* text tertiary / disabled */
+  --v1-green: #93ec60;        /* Color/Green Primary/Green 180 — CTA */
+  --v1-green-ink: #123200;    /* Color/Green Primary/Green 900 */
+  --v1-green-stroke: #88df56;
+  --v1-green-bg: #e9f9dc;
+  --v1-green-progress: #7dd64a;
+  --v1-gray-bg: #f4f4f5;
+  --v1-gray-stroke: #dddfe2;
+  --v1-gray-line: #e5e6e8;
+  --v1-track: #f8f9fa;
+  --v1-red: #f5222d;
+  --v1-red-bg: #fdecec;
+}
+
+/* ---------- Shell ---------- */
+.screen.v1 { background: #fff; font-family: var(--v1-font); color: var(--v1-ink); line-height: 1.362; letter-spacing: 0; }
+.v1 p { margin: 0; }
+
+/* Status bar (.Building Blocks/status-bar · 52px, Android) */
+.v1-statusbar {
+  position: absolute; top: 0; left: 0; width: 100%; height: 52px; z-index: 5;
+  display: flex; align-items: flex-end; justify-content: space-between; padding: 10px 24px;
+}
+.v1-statusbar__time {
+  font: 500 14px/20px "V1 Roboto", Roboto, var(--font-text); letter-spacing: .14px; color: #1d1b20;
+  font-feature-settings: "lnum" 1, "pnum" 1;
+}
+.v1-statusbar__icons { position: relative; width: 46px; height: 17px; flex-shrink: 0; }
+.v1-statusbar__icons img { position: absolute; top: 0; }
+.v1-statusbar__icons .sb-wifi { left: 0; }
+.v1-statusbar__icons .sb-signal { left: 16px; }
+.v1-statusbar__icons .sb-battery { left: 38px; top: 1px; }
+.v1-statusbar__camera { position: absolute; left: 50%; top: 18px; transform: translateX(-50%); }
+
+/* Android nav handle (.Building Blocks/navigation · 24px) */
+.v1-handle { position: absolute; left: 0; bottom: 0; width: 100%; height: 24px; z-index: 30; pointer-events: none; }
+.v1-handle::after {
+  content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 108px; height: 4px; border-radius: 12px; background: #080808;
+}
+
+/* Top bar: back button (Molecule / Button / Icon · 44×44) + centered title */
+.v1-topbar { position: absolute; top: 52px; left: 0; width: 100%; height: 44px; z-index: 5; }
+.v1-back {
+  position: absolute; left: 0; top: 0; width: 44px; height: 44px; padding: 10px; border-radius: 100px;
+  display: flex; align-items: center; justify-content: center;
+}
+.v1-back:active { background: rgba(2,14,35,.06); }
+.v1-topbar__title {
+  position: absolute; left: calc(50% - .5px); top: 12px; transform: translateX(-50%); white-space: nowrap;
+  font: 500 14px/19px var(--v1-font); color: var(--v1-muted); text-align: center;
+}
+
+/* Content column */
+.v1-page { position: absolute; top: var(--top, 92px); left: 16px; width: 328px; display: flex; flex-direction: column; }
+.v1-stack { display: flex; flex-direction: column; align-items: stretch; }
+.v1-gap-8 { gap: 8px; } .v1-gap-10 { gap: 10px; } .v1-gap-16 { gap: 16px; } .v1-gap-40 { gap: 40px; }
+
+/* Text */
+.v1-h1 { font: 700 22px/30px var(--v1-font); color: var(--v1-ink); }
+.v1-h2 { font: 700 18px/25px var(--v1-font); color: var(--v1-ink); }
+.v1-sub { font: 400 14px/19px var(--v1-font); color: var(--v1-ink-2); }
+.v1-text-muted { color: var(--v1-muted); }
+
+/* Progress (6px) */
+.v1-progress { position: relative; height: 6px; width: 100%; border-radius: 100px; background: var(--v1-track); flex-shrink: 0; }
+.v1-progress > span { position: absolute; left: 0; top: 0; height: 6px; min-width: 6px; border-radius: 100px; background: var(--v1-green-progress); }
+
+/* ---------- CTA / footer ---------- */
+.v1-footer {
+  position: absolute; left: 16px; right: 16px; bottom: 40px; z-index: 10;
+  display: flex; flex-direction: column; gap: 20px;   /* toast → CTA gap in Figma = 20 */
+}
+.v1-btn {
+  width: 100%; height: 56px; display: flex; align-items: center; justify-content: center; padding: 18px 24px;
+  border-radius: 20px; background: var(--v1-green); overflow: hidden;
+  font: 500 16px/22px var(--v1-font); color: var(--v1-green-ink); text-align: center; white-space: nowrap;
+  transition: background-color .2s, color .2s, transform .1s;
+}
+.v1-btn:active { transform: scale(.98); }
+.v1-btn[disabled], .v1-btn.is-disabled { background: var(--v1-gray-line); color: var(--v1-muted); pointer-events: none; }
+
+/* ---------- Quiz options ---------- */
+.v1-options { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+.v1-option {
+  width: 100%; display: flex; align-items: center; padding: 19px 20px; border-radius: 16px; text-align: left;
+  background: var(--v1-gray-bg); box-shadow: inset 0 0 0 1px var(--v1-gray-stroke);
+  font: 500 16px/22px var(--v1-font); color: var(--v1-ink);
+  transition: background-color .15s, box-shadow .15s;
+}
+.v1-option.is-selected { background: var(--v1-green-bg); box-shadow: inset 0 0 0 2px var(--v1-green-stroke); }
+.v1-option.is-correct  { background: #fff; box-shadow: inset 0 0 0 2px var(--v1-green-stroke); }
+.v1-option.is-wrong    { background: var(--v1-red-bg); box-shadow: inset 0 0 0 2px var(--v1-red); }
+.v1-options[data-static] .v1-option { cursor: default; }
+
+/* ---------- Feedback toast (Toast Message) ---------- */
+.v1-toast {
+  display: flex; align-items: flex-start; gap: 10px; width: 100%;
+  padding: 16px 16px 16px 14px; border-radius: 20px; background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(2,14,35,.04),   /* inside stroke (doesn't shift content, like Figma) */
+              95px 72px 33px 0 rgba(201,197,197,0), 61px 46px 31px 0 rgba(201,197,197,.03),
+              34px 26px 26px 0 rgba(201,197,197,.11), 15px 12px 19px 0 rgba(201,197,197,.19),
+              4px 3px 10px 0 rgba(201,197,197,.22);
+  animation: v1ToastIn .3s ease both;
+}
+.v1-toast__icon { flex-shrink: 0; width: 24px; height: 24px; padding: 2px; box-sizing: border-box; }
+.v1-toast__body { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.v1-toast__title { font: 500 15px/20px var(--v1-font); color: var(--v1-green-ink); }
+.v1-toast__text { font: 400 12px/16px var(--v1-font); color: var(--v1-green-ink); }
+.v1-toast--warn .v1-toast__text { font: 400 14px/22px var(--v1-font); letter-spacing: .25px; color: rgba(8,8,8,.85); }
+@keyframes v1ToastIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Reel / video ---------- */
+.v1-reel {
+  position: absolute; top: var(--top, 96px); left: 16px; width: 327px; height: 460px;
+  border-radius: 16px; overflow: hidden; background: #1d1b20; cursor: pointer;
+}
+.v1-reel__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.v1-reel__play { position: absolute; left: 132px; top: 183px; width: 64px; height: 64px; border-radius: 32px;
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); transition: opacity .2s, transform .2s; }
+.v1-reel__bar { position: absolute; left: 20px; top: 428px; width: 287px; height: 4px; border-radius: 100px; background: #3f3f44; overflow: hidden; }
+.v1-reel__bar > span { display: block; height: 4px; border-radius: 100px; background: var(--v1-green); }
+.v1-reel.is-playing .v1-reel__play { opacity: 0; transform: scale(.8); }
+.v1-reel.is-playing .v1-reel__bar > span { width: 100% !important; transition: width 60s linear; }
+.v1-reel-caption { position: absolute; top: var(--top, 576px); left: 16px; width: 328px; display: flex; flex-direction: column; gap: 8px; }
+.v1-reel-caption__title { font: 500 16px/22px var(--v1-font); color: var(--v1-ink); }
+.v1-reel-caption__meta { font: 400 14px/19px var(--v1-font); color: var(--v1-muted); }
+
+/* ---------- Module theme rows ---------- */
+.v1-themes { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+.v1-theme {
+  width: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 6px;
+  padding: 14px 20px; border-radius: 16px; overflow: hidden; text-align: left;
+  background: var(--v1-gray-bg); color: var(--v1-muted);
+}
+.v1-theme__label { font: 500 12px/16px var(--v1-font); white-space: nowrap; }
+.v1-theme__title { font: 500 16px/22px var(--v1-font); }
+.v1-theme__meta  { font: 400 12px/16px var(--v1-font); }
+.v1-theme.is-active { background: var(--v1-green-bg); box-shadow: inset 0 0 0 2px var(--v1-green-stroke); }
+.v1-theme.is-active .v1-theme__label { color: var(--v1-green-ink); }
+.v1-theme.is-active .v1-theme__title { color: var(--v1-ink); }
+.v1-theme.is-active .v1-theme__meta  { color: var(--v1-ink-2); }
+.v1-theme.is-done { background: #fff; box-shadow: inset 0 0 0 1px var(--v1-gray-stroke); color: var(--v1-ink-2); }
+
+/* ---------- Step list (theme contents) ---------- */
+.v1-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 30px; position: relative; }
+.v1-step { position: relative; height: 36px; display: flex; align-items: center; gap: 16px; }
+.v1-step + .v1-step::before {   /* connector from previous dot */
+  content: ""; position: absolute; left: 17px; top: -30px; width: 2px; height: 30px; background: var(--v1-gray-line);
+}
+.v1-step__dot {
+  flex-shrink: 0; width: 36px; height: 36px; border-radius: 26px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font: 700 15px/20px var(--v1-font); background: var(--v1-gray-bg); color: var(--v1-muted);
+}
+.v1-step.is-done .v1-step__dot { background: none; border-radius: 12px; }
+.v1-step.is-current .v1-step__dot { background: none; box-shadow: inset 0 0 0 2px var(--v1-green); color: var(--v1-green-ink); }
+.v1-step__text { width: 276px; display: flex; flex-direction: column; gap: 1px; }
+.v1-step__text b { font: 500 14px/19px var(--v1-font); color: var(--v1-ink-2); }
+.v1-step__text small { font: 400 12px/16px var(--v1-font); color: var(--v1-muted); }
+.v1-step.is-done .v1-step__text b, .v1-step.is-current .v1-step__text b { color: var(--v1-ink); }

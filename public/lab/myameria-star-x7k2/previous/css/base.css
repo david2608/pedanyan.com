@@ -1,0 +1,214 @@
+/* ==========================================================
+   Base layout + shared components (Figma UI Kit)
+   ========================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: #1e1e1e;
+  font-family: var(--font-text);
+  color: var(--sys-typo-title);
+  -webkit-font-smoothing: antialiased;
+  display: flex; align-items: center; justify-content: center;
+}
+p, h1, h2, h3, h4 { margin: 0; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+img { display: block; max-width: none; }
+input { font: inherit; }
+
+/* ---------- Device (iPhone 15/16 · 393×852) ---------- */
+.device {
+  position: relative; width: 393px; height: 852px; overflow: hidden;
+  background: var(--bg-page); border-radius: 48px;
+  box-shadow: 0 0 0 10px #0b0b0b, 0 30px 80px rgba(0,0,0,.5);
+  isolation: isolate;
+}
+/* ---------- Phone / app mode: no mockup, real full screen ----------
+   Enabled by js/app.js on touch phones (html.is-app). The design (393 or 360 wide)
+   is scaled to the exact phone width and stretched to the full height. The drawn
+   status bar and home indicator are hidden so the phone's real ones show instead. */
+html.is-app, html.is-app body { padding: 0 !important; margin: 0; height: 100%; overflow: hidden; background: var(--bg-page, #fff); }
+html.is-app body { display: block; }
+html.is-app .flow-nav { display: none; }
+html.is-app .flow-nav.is-open {
+  display: block; position: fixed; inset: 0; width: auto; border-radius: 0; z-index: 1000;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px calc(env(safe-area-inset-bottom, 0px) + 24px);
+  font-size: 15px; -webkit-overflow-scrolling: touch;
+}
+html.is-app .flow-nav button { padding: 10px 12px; font-size: 15px; }
+html.is-app .flow-nav h3 { font-size: 13px; margin-top: 18px; }
+html.is-app .flow-nav__close {
+  position: sticky; top: 0; float: right; width: 40px !important; height: 40px; padding: 0 !important;
+  border-radius: 20px !important; background: #3a3a3a !important; color: #fff !important; font-size: 18px !important;
+  text-align: center !important; z-index: 1;
+}
+.app-menu-btn {
+  position: fixed; z-index: 999; left: 10px; bottom: calc(env(safe-area-inset-bottom, 0px) + 6px);
+  width: 34px; height: 34px; border-radius: 17px; background: rgba(30,30,30,.55); color: #fff;
+  font-size: 17px; line-height: 34px; text-align: center; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+html.is-app .device { position: fixed; left: 0; top: 0; border-radius: 0; box-shadow: none; transform-origin: 0 0; }
+html.is-app .sb-time, html.is-app .sb-island, html.is-app .sb-levels,
+html.is-app .v1o-sb > *, html.is-app .v1-statusbar > *, html.is-app .lr__status > * { visibility: hidden; }
+html.is-app .home-indicator::after { display: none; }
+html.is-app .v1o-handle, html.is-app .v1-handle { visibility: hidden; }
+
+/* ---------- Screens / router ---------- */
+.screen {
+  position: absolute; inset: 0; background: var(--bg-page);
+  display: none; overflow: hidden;
+}
+.screen.is-active { display: block; animation: screenIn .28s ease both; }
+.screen.is-back   { animation-name: screenBack; }
+@keyframes screenIn   { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes screenBack { from { transform: translateX(-24px); opacity: 0; } to { transform: none; opacity: 1; } }
+.scroll { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
+.scroll::-webkit-scrollbar { display: none; }
+
+/* ---------- Squared group background (26px grid, 0.2px quaternary stroke) ---------- */
+.grid-bg {
+  position: absolute; left: -64px; top: 0; width: 520px; height: 852px; pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(8,8,8,.032) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(8,8,8,.032) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+/* ---------- Status bar (Page Heading / Atoms · 54px) ---------- */
+.status-bar { position: relative; height: 54px; width: 100%; z-index: 2; }
+.status-bar .sb-time {
+  position: absolute; top: 18.34px; left: 0; width: 35.75%; text-align: center;
+  font: 590 17px/22px var(--font-text); color: var(--sys-icon-primary);
+}
+.status-bar .sb-island {
+  position: absolute; top: 11px; left: 50%; transform: translateX(-50%);
+  width: 125px; height: 37px; border-radius: 42px; background: #000;
+}
+.status-bar .sb-levels { position: absolute; top: 0; bottom: 0; left: 64.25%; right: 0; }
+.status-bar .sb-cell  { position: absolute; top: 23.53px; left: calc(50% - 30.65px - 9.6px); width: 19.2px; height: 12.23px; }
+.status-bar .sb-wifi  { position: absolute; top: 23.64px; left: calc(50% - 4.98px - 8.57px); width: 17.14px; height: 12.33px; }
+.status-bar .sb-batt  { position: absolute; top: 23px; left: calc(50% + 23.25px - 12.5px); width: 25px; height: 13px;
+  border: 1px solid var(--sys-icon-primary); border-radius: 4.3px; opacity: .35; }
+.status-bar .sb-batt-fill { position: absolute; top: 25px; left: calc(50% + 23.25px - 10.5px); width: 21px; height: 9px;
+  border-radius: 2.5px; background: var(--sys-icon-primary); }
+.status-bar .sb-cap { position: absolute; top: 27.78px; left: calc(50% + 37.41px - .66px); width: 1.33px; height: 4.08px; }
+.status-bar.is-dark .sb-time { color: #fff; }
+
+/* ---------- Page heading (status bar + nav bar) ---------- */
+.page-heading {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+  display: flex; flex-direction: column; align-items: center;
+  border-radius: 0 0 12px 12px;
+}
+.page-heading.is-gradient { background: linear-gradient(to bottom, #fff 80%, rgba(255,255,255,0)); }
+.page-heading.is-white { background: #fff; }
+.nav-bar {
+  width: 100%; height: 56px; display: flex; align-items: center;
+  -webkit-backdrop-filter: blur(25px); backdrop-filter: blur(25px);
+}
+.nav-bar__left, .nav-bar__right { flex: 1 0 0; min-width: 0; height: 56px; display: flex; align-items: center; }
+.nav-bar__right { justify-content: flex-end; }
+.nav-bar__center {
+  flex: 0 0 auto; max-width: 60%; padding: 4px 8px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-bar__title { font: 590 16px/24px var(--font-display); letter-spacing: var(--ls); color: var(--sys-typo-title); white-space: nowrap; }
+.nav-bar.is-fixed-sides .nav-bar__left, .nav-bar.is-fixed-sides .nav-bar__right { flex: 0 0 88px; }
+.nav-bar.is-fixed-sides .nav-bar__center { flex: 1 0 0; max-width: none; }
+.icon-btn {
+  margin: 4px 0 4px 16px; padding: 8px; border-radius: 100px; background: var(--white-alpha-750);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.icon-btn .ic24 { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+
+/* ---------- Primary button (Button / Brand) ---------- */
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  padding: 16px 24px; border-radius: 16px; overflow: hidden; width: 100%;
+  font: 510 15px/22px var(--font-text); letter-spacing: var(--ls); color: var(--sys-typo-title);
+  transition: filter .15s, transform .1s;
+}
+.btn > span { height: 24px; display: inline-flex; align-items: center; white-space: nowrap; }
+.btn--primary { background: var(--cta-bg); }
+.btn--secondary { background: var(--color-gray-9); }
+.btn--ghost { background: transparent; }
+.btn:active { transform: scale(.98); filter: brightness(.96); }
+.btn[disabled] { opacity: .4; pointer-events: none; }
+
+/* ---------- Page footer (gradient + action + home indicator) ---------- */
+.page-footer {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 20;
+  display: flex; flex-direction: column; gap: 16px; padding-top: 20px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 10%);
+}
+.page-footer__actions { padding: 0 16px; display: flex; gap: 8px; }
+.home-indicator { position: relative; height: 21px; width: 100%; flex-shrink: 0; }
+.home-indicator::after {
+  content: ""; position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%);
+  width: 139px; height: 5px; border-radius: 100px; background: #000;
+}
+.home-indicator--abs { position: absolute; bottom: 0; left: 0; z-index: 60; }
+
+/* ---------- Tab bar (Molecule / Tab bar / Grouped) ---------- */
+.tabbar {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 133px; z-index: 30;
+  display: flex; flex-direction: column; align-items: center; gap: 16px; padding-top: 24px;
+  pointer-events: none;
+}
+.tabbar__bar {
+  position: relative; width: 368px; padding: 5px 0; display: flex; border-radius: 24px;
+  background: rgba(255,255,255,0.01); box-shadow: var(--shadow-tabbar); pointer-events: auto;
+}
+.tabbar__bg { position: absolute; inset: 0 -0.01%; width: 100%; height: 100%; }
+.tabbar__group { position: relative; flex: 1 0 0; min-width: 0; display: flex; gap: 65px; align-items: center; padding: 2px; border-radius: 32px; }
+.tabbar__half { flex: 1 0 0; min-width: 0; display: flex; gap: 1px; align-items: center; }
+.tab { min-width: 0; overflow: visible;
+  position: relative; flex: 1 0 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  gap: 2px; padding: 8px; border-radius: 36px;
+}
+.tab__icon { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+.tab__label { width: 75px; text-align: center; font: 510 11px/16px var(--font-text); letter-spacing: var(--ls); color: var(--color-blue-gray-400); }
+.tab.is-active .tab__label { color: var(--sys-typo-brand-green-6); }
+.tab--home .tab__label { color: var(--sys-typo-placeholder); }
+.tab__dot { position: absolute; left: 48.5px; top: 11px; width: 8px; height: 8px; display: none; }
+.tabbar__qr {
+  position: absolute; left: calc(50% - 0.5px); top: calc(50% - 16px); width: 60px; height: 60px;
+  transform: translate(-50%, -50%);
+}
+.tabbar__qr img { position: absolute; left: -25%; top: -18.33%; width: 150%; height: 150%; }
+
+/* ---------- Overlay / modal / bottom sheet ---------- */
+.overlay {
+  position: absolute; inset: 0; z-index: 50; display: none;
+  background: rgba(8,8,8,0.55);
+}
+.overlay.is-open { display: block; animation: fadeIn .2s ease both; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.sheet {
+  position: absolute; left: 0; right: 0; bottom: 0; background: #fff;
+  border-radius: 24px 24px 0 0; animation: sheetUp .3s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes sheetUp { from { transform: translateY(100%); } to { transform: none; } }
+.dialog {
+  position: absolute; left: 16px; right: 16px; top: 50%; transform: translateY(-50%);
+  background: #fff; border-radius: 24px; overflow: hidden; animation: pop .25s ease both;
+}
+@keyframes pop { from { transform: translateY(-50%) scale(.94); opacity: 0; } to { transform: translateY(-50%); opacity: 1; } }
+
+/* ---------- Skeleton ---------- */
+.skel { background: var(--color-gray-9); border-radius: 8px; position: relative; overflow: hidden; }
+.skel::after {
+  content: ""; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent);
+  animation: shimmer 1.3s infinite;
+}
+@keyframes shimmer { to { transform: translateX(100%); } }
+
+/* ---------- Dev flow navigator (outside the device) ---------- */
+.flow-nav {
+  position: fixed; left: 16px; top: 16px; bottom: 16px; width: 230px; overflow: auto;
+  background: #2a2a2a; color: #ddd; border-radius: 16px; padding: 12px; font: 12px/1.4 var(--font-text);
+}
+.flow-nav h3 { font: 600 12px/1.4 var(--font-text); color: #93ec60; margin: 10px 4px 4px; text-transform: uppercase; letter-spacing: .04em; }
+.flow-nav button { display: block; width: 100%; text-align: left; padding: 6px 8px; border-radius: 8px; color: #ddd; }
+.flow-nav button:hover, .flow-nav button.is-current { background: #3a3a3a; color: #fff; }
+@media (max-width: 900px) { .flow-nav { display: none; } }

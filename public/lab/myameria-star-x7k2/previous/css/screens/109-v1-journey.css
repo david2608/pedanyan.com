@@ -1,0 +1,11 @@
+/* V1 · 09 Journey (206:32333) — vertical module path */
+.v1o-jr { position: absolute; left: 24px; top: 190px; width: 312px; display: flex; flex-direction: column; }
+.v1o-jr__step { position: relative; height: 48px; }
+.v1o-jr__ic { position: absolute; left: 0; top: 0; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
+.v1o-jr__ic img { position: absolute; left: 0; top: 0; width: 48px; height: 48px; }
+.v1o-jr__ic.is-badge { overflow: hidden; }
+.v1o-jr__ic b { position: relative; font: 700 10px/normal var(--font-display); color: var(--v1o-ink-2); }
+.v1o-jr__t { position: absolute; left: 64px; top: 2px; white-space: nowrap; font: 500 16px/1.362 var(--v1o-font); color: var(--v1o-ink-2); }
+.v1o-jr__step.is-current .v1o-jr__t { color: var(--v1o-ink); }
+.v1o-jr__s { position: absolute; left: 64px; top: 26px; white-space: nowrap; font: 400 13px/1.362 var(--v1o-font); color: var(--v1o-ink-2); }
+.v1o-jr__line { display: block; width: 2px; height: 52px; margin: 4px 0 4px 23px; background: var(--v1o-line); }

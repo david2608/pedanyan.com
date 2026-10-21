@@ -268,3 +268,12 @@ html.is-app .v1o-handle, html.is-app .v1-handle { visibility: hidden; }
 .device.with-tabbar .home-indicator::after { display: none; }
 .device.with-tabbar .tabbar--global .home-indicator::after { display: block; }
 html.is-app .device.with-tabbar .tabbar--global .home-indicator::after { display: none; }
+
+/* lesson sheets were drawn at a fixed phone height: end them above the shared tab bar */
+.screen.has-auto-tab :is(.lq-sheet, .lc-sheet, .lx-sheet, .tc-sheet, .lq-end__sheet, .lr__sheet) { height: auto; bottom: 0; }
+/* reel: video slightly shorter so the button fits under it, face and caption still visible */
+.screen.has-auto-tab .lr__video { height: 492px; }
+.screen.has-auto-tab .lr__poster { object-position: center 45%; }
+/* module complete: smaller badge so the results list and button fit */
+.screen.has-auto-tab .tc-badge { width: 124px; height: 124px; left: 134.5px; top: 84px; }
+.screen.has-auto-tab .tc-content { top: 272px; height: auto; bottom: 0; }

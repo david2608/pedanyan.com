@@ -2,16 +2,17 @@
 
 <style>:root{color-scheme:dark} html,body{height:100%;background:#1e1e1e}</style>
 <link rel="stylesheet" href="css/tokens.css?v=202610191438">
-  <link rel="stylesheet" href="css/base.css?v=202610191438">
+  <link rel="stylesheet" href="css/base.css?v=202610212115">
   <link rel="stylesheet" href="css/screens/10-onb-welcome.css?v=202610191438">
   <link rel="stylesheet" href="css/screens/11-onb-intro.css?v=202610191438">
   <link rel="stylesheet" href="css/screens/12-onb-avatar.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/12-onb-avatar-v2.css?v=202610212115">
   <link rel="stylesheet" href="css/screens/13-onb-start.css?v=202610191438">
   <link rel="stylesheet" href="css/screens/14-onb-benefits.css?v=202610191438">
   <link rel="stylesheet" href="css/screens/20-home.css?v=202610191438">
   <link rel="stylesheet" href="css/screens/21-home-opt2.css?v=202610191438">
   <link rel="stylesheet" href="css/screens/22-home-opt3.css?v=202610191438">
-  <link rel="stylesheet" href="css/screens/24-home-levels.css?v=202610191438">
+  <link rel="stylesheet" href="css/screens/24-home-levels.css?v=202610212115">
   <link rel="stylesheet" href="css/screens/30-profile.css?v=202610191438">
   <link rel="stylesheet" href="css/screens/31-avatar-sheet.css?v=202610191438">
   <link rel="stylesheet" href="css/screens/34-profile-v2.css?v=202610191438">
@@ -51,7 +52,6 @@
         <img class="obn-hero" src="assets/v1-star-barev.png" alt="">
       </div>
       <div class="obn-text">
-        <span class="onb-pill">Ֆինանսական կրթություն</span>
         <h1 class="onb-title">Սովորիր կառավարել փողը</h1>
         <p class="onb-lead">Կարճ ու հասկանալի դասեր փողի, խնայողության և ծախսերի մասին՝ հատուկ քո տարիքի համար</p>
       </div>
@@ -70,7 +70,6 @@
         <span class="obn-xp"><img src="assets/onb-ic-badge.png" width="18" height="18" alt="">Նոր բեյջ</span>
       </div>
       <div class="obn-text">
-        <span class="onb-pill">Խաղային ուսուցում</span>
         <h1 class="onb-title">Սովորիր՝ խաղալով</h1>
         <p class="onb-lead">Դիտիր ռիլեր, անցիր քուիզեր, խաղա մինի խաղեր և հավաքիր բեյջեր․ ամեն թեման՝ մոտ 5 րոպե</p>
       </div>
@@ -86,7 +85,6 @@
         <span class="obn-rate"><span class="obn-rate__amp"><img src="assets/prof-amp-16.svg" width="16" height="16" alt="">1 AMP</span><span class="obn-rate__eq">=</span><span class="obn-rate__amd">1 ֏</span></span>
       </div>
       <div class="obn-text">
-        <span class="onb-pill">AMP միավորներ</span>
         <h1 class="onb-title">Վաստակիր իրական գումար</h1>
         <p class="onb-lead">Յուրաքանչյուր ավարտված քայլի համար ստանում ես AMP (Ameria Points), որոնք իրական գումար են</p>
       </div>
@@ -204,7 +202,6 @@
   <div class="scroll">
     <div class="pa pf">
       <div class="pa-intro">
-        <span class="pa-kicker"><img src="assets/amp-coin.svg" width="16" height="16" alt="">Խաղային պրոֆիլ</span>
         <h1 class="pa-h1">Ստեղծիր քո խաղային պրոֆիլը</h1>
         <p class="pa-lead">Ընտրիր կերպար և մականուն․ դրանցով կխաղաս, կհավաքես բեյջեր և AMP</p>
       </div>
@@ -228,6 +225,51 @@
   <div data-include="tabbar" data-active="education"></div>
 </section>
 
+<!-- ===== Onboarding · Profile setup V2 · Ameria UI kit + alternate avatar navigation ===== -->
+<section class="screen" id="s-onb-avatar-v2" data-title="Gamified profile · V2" data-group="Onboarding" data-no-tabbar>
+  <div class="onb-bg"></div>
+  <div class="grid-bg"></div>
+  <div class="pa2-scroll">
+    <header class="pa2-topbar">
+      <div data-include="status-bar"></div>
+      <div class="pa2-nav">
+        <button class="pa2-icon" type="button" data-back aria-label="Փակել"><span aria-hidden="true">×</span></button>
+        <span class="pa2-nav-title">Education</span>
+        <button class="pa2-icon pa2-done" type="button" data-pa2-done aria-label="Պատրաստ է"><span aria-hidden="true">✓</span></button>
+      </div>
+    </header>
+
+    <div class="pa2-intro">
+      <h1 class="pa-h1">Ստեղծիր քո խաղային պրոֆիլը</h1>
+      <p class="pa-lead">Ընտրիր կերպար և մականուն․ դրանցով կխաղաս, կհավաքես բեյջեր և AMP</p>
+    </div>
+
+    <div class="pa2-hero" aria-live="polite">
+      <div class="pa2-orbit"></div>
+      <div class="pa2-portrait js-pa2-portrait" aria-label="Ընտրված կերպարի նախադիտում"><span class="pa2-avatar-placeholder" aria-hidden="true"><svg width="38" height="38" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="13" r="7" stroke="currentColor" stroke-width="2"/><path d="M5 34c1.8-7 6.5-10.5 14-10.5S31.2 27 33 34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></div>
+      <div class="pa2-hero-name js-pa2-hero-name">Քո մականունը</div>
+      <div class="pa2-hero-meta"><img src="assets/prof-amp-14.svg" width="16" height="16" alt=""><b>0</b> AMP <span></span> Սկսնակ</div>
+    </div>
+
+    <section class="pa2-section pa2-picker">
+      <div class="pa2-section-head"><h2 class="pa2-title">Ընտրիր կերպարը</h2></div>
+      <div class="pa2-choices js-pa2-choices" role="radiogroup" aria-label="Կերպարներ"></div>
+      <p class="pa2-empty js-pa2-empty" hidden>Դեռ կերպար չես ընտրել։ Ընտրիր կերպարների ցանկից։</p>
+    </section>
+
+    <section class="pa2-section pa2-username">
+      <h2 class="pa2-title">Ընտրիր մականուն</h2>
+      <label class="pa2-field-label" for="pa2-username">Մականուն <em>*</em></label>
+      <div class="pa2-input-wrap"><input id="pa2-username" class="js-pa2-username" type="text" maxlength="20" autocomplete="nickname" autocapitalize="off" spellcheck="false" placeholder="Օր․՝ Ani_2014"><span class="js-pa2-status-icon" aria-hidden="true"></span></div>
+      <p class="pa2-feedback js-pa2-feedback" aria-live="polite"><span class="js-pa2-message">3–20 նիշ՝ հայերեն կամ լատինատառ, թվեր, _</span><span class="pa2-length js-pa2-length">0/20</span></p>
+      <div class="pa2-suggestions js-pa2-suggestions" hidden></div>
+    </section>
+    <div class="pa2-bottom-space"></div>
+  </div>
+  <footer class="pa2-footer"><p class="js-pa2-footer-note">Ընտրիր կերպար և մականուն՝ շարունակելու համար</p><button class="pa2-continue" type="button" data-pa2-continue aria-disabled="true"><span>Սկսել</span></button></footer>
+  <div class="pa2-toast" role="status" aria-live="polite"></div>
+</section>
+
 <!-- Shared profile-form template (preview card + nickname field + avatar grid) — used by onboarding and the edit sheet -->
 <template id="tpl-profile-form">
   <div class="pa-preview" data-filled="false">
@@ -240,7 +282,6 @@
       <p class="pa-preview__name js-pa-name">Քո մականունը</p>
       <p class="pa-preview__meta"><img src="assets/prof-amp-14.svg" width="14" height="14" alt=""><b class="js-pa-amp">0</b> AMP<span class="pa-preview__dot"></span><span class="js-pa-level">Սկսնակ</span></p>
     </div>
-    <span class="pa-preview__tag">Նախադիտում</span>
   </div>
   <div class="pa-preview pa-preview--skel" aria-hidden="true">
     <span class="pa-skel pa-skel--photo"></span>
@@ -265,7 +306,7 @@
   </div>
 
   <div class="pa-block pa-avatars">
-    <div class="pa-label pa-label--row"><span>Ընտրիր կերպարը<em>*</em></span><span class="pa-label__hint js-pa-av-hint">Հպիր կերպարին</span></div>
+    <div class="pa-label pa-label--row"><span>Ընտրիր կերպարը<em>*</em></span></div>
     <div class="pa-grid js-pa-grid" role="radiogroup" aria-label="Կերպար"></div>
     <div class="pa-empty">
       <div class="pa-empty__visual" aria-hidden="true">
@@ -1998,10 +2039,11 @@
   </main>
   <script src="js/app.js?v=202610191438"></script>
   <script src="js/screens/12-onb-avatar.js?v=202610191438"></script>
+  <script src="js/screens/12-onb-avatar-v2.js?v=202610212115"></script>
   <script src="js/screens/13-onb-start.js?v=202610191438"></script>
   <script src="js/screens/14-onb-benefits.js?v=202610191438"></script>
   <script src="js/screens/20-home.js?v=202610191438"></script>
-  <script src="js/screens/24-home-levels.js?v=202610191438"></script>
+  <script src="js/screens/24-home-levels.js?v=202610212115"></script>
     <script src="js/screens/31-avatar-sheet.js?v=202610191438"></script>
   <script src="js/screens/34-profile-v2.js?v=202610191438"></script>
     <script src="js/screens/50-levels.js?v=202610191438"></script>

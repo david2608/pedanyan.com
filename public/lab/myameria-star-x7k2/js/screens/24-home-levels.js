@@ -82,7 +82,13 @@
     if (c.reason === 'age') return ['', `<img src="${A}lc-party.png" alt="">`, 'Բացվեց, քանի որ դարձար 12', 'Այժմ հասանելի են երկու մակարդակները։ Ընտրիր՝ որտեղից շարունակել։', ''];
     return ['', `<img src="${A}onb-start-rocket.png" alt="">`, 'Ավելի խորը թեմաներ', 'Այս մակարդակը քո տարիքի համար է։ Սկսիր առաջին մոդուլից։', ''];
   }
-  const noteHtml = (n) => n ? `<div class="lv-note lv-note--${n[0]}"><span class="lv-note__ic">${n[1]}</span><div class="lv-note__body"><p class="lv-note__t">${n[2]}</p><p class="lv-note__d">${n[3]}</p>${n[4]}</div></div>` : '';
+  const noteDismissKey = 'myameria-star-level-note-dismissed';
+  let noteDismissedInMemory = false;
+  const isNoteDismissed = () => {
+    try { return noteDismissedInMemory || localStorage.getItem(noteDismissKey) === '1'; }
+    catch (_) { return noteDismissedInMemory; }
+  };
+  const noteHtml = (n) => n && !isNoteDismissed() ? `<div class="lv-note lv-note--${n[0]}"><span class="lv-note__ic">${n[1]}</span><div class="lv-note__body"><p class="lv-note__t">${n[2]}</p><p class="lv-note__d">${n[3]}</p>${n[4]}</div><button class="lv-note__close js-lv-note-close" type="button" aria-label="Փակել">×</button></div>` : '';
 
   function lockHtml(c) {
     return `<div class="lv-lock">
@@ -184,6 +190,12 @@
     function shake(el) { el.classList.remove('is-shake'); void el.offsetWidth; el.classList.add('is-shake'); }
 
     screen.addEventListener('click', (e) => {
+      if (e.target.closest('.js-lv-note-close')) {
+        noteDismissedInMemory = true;
+        try { localStorage.setItem(noteDismissKey, '1'); } catch (_) {}
+        e.target.closest('.lv-note')?.remove();
+        return;
+      }
       const t = e.target.closest('.lv-tab');
       if (t) {
         const i = +t.dataset.tab;

@@ -96,7 +96,9 @@ export function ReportArmenia2026() {
           ))}
           <a href="#method">Method</a>
         </div>
-        <span className="rp-progress" style={{ width: `${progress * 100}%` }} />
+        <span className="rp-progress-track" aria-hidden="true">
+          <span className="rp-progress" style={{ height: `${progress * 100}%` }} />
+        </span>
       </nav>
 
       {/* --- 00 masthead ------------------------------------------------------ */}

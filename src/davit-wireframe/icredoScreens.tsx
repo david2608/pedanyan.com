@@ -15,8 +15,8 @@ import "./icredoCase.css";
 
 export type IcredoScreenId = "calculator" | "chat-amount" | "chat-plan" | "summary" | "checking" | "kyc" | "loans";
 
-const BOT = "Կրեդո";
-const USER = "Տիրան";
+const BOT = "Credo";
+const USER = "Tiran";
 
 /* ------------------------------------------------------------- primitives */
 
@@ -148,13 +148,13 @@ function Composer({ shown, chips, picked = -1, placeholder }: { shown: boolean; 
 
 /** The "before": Credo's web calculator, reconstructed. Nine fields, one button. */
 function CalculatorScreen({ active }: { active: boolean }) {
-  const fields = ["Վարկի գումար", "Ժամկետ (ամիս)", "Վարկի նպատակ", "Ամսական եկամուտ", "Գործատու", "Պաշտոն", "Հեռախոս", "ID քարտի համար", "Համավարկառու"];
+  const fields = ["Loan amount", "Term (months)", "Loan purpose", "Monthly income", "Employer", "Position", "Phone", "ID card number", "Co-borrower"];
   const shown = useStepper(active, fields.length + 1, 130, 200);
   return (
     <div className="ic-screen ic-calc">
       <StatusBar />
       <div className="ic-urlbar" aria-hidden="true"><i /><span>credo.am/calculator</span></div>
-      <p className="ic-calc-title">Վարկի հաշվիչ</p>
+      <p className="ic-calc-title">Loan calculator</p>
       <div className="ic-calc-form">
         {fields.map((label, i) => (
           <label className={`ic-field${shown > i ? " is-in" : ""}`} key={label}>
@@ -162,10 +162,10 @@ function CalculatorScreen({ active }: { active: boolean }) {
             <i />
           </label>
         ))}
-        <span className={`ic-calc-check${shown > 8 ? " is-in" : ""}`}><i /> Համաձայն եմ պայմաններին</span>
-        <span className={`ic-calc-check${shown > 8 ? " is-in" : ""}`}><i /> Համաձայն եմ տվյալների մշակմանը</span>
+        <span className={`ic-calc-check${shown > 8 ? " is-in" : ""}`}><i /> I accept the terms</span>
+        <span className={`ic-calc-check${shown > 8 ? " is-in" : ""}`}><i /> I accept data processing</span>
       </div>
-      <span className={`ic-cta is-grey${shown > 9 ? " is-in" : ""}`}>Հաշվել</span>
+      <span className={`ic-cta is-grey${shown > 9 ? " is-in" : ""}`}>Calculate</span>
       <HomeBar />
     </div>
   );
@@ -179,13 +179,13 @@ function ChatAmountScreen({ active }: { active: boolean }) {
       <StatusBar />
       <div className="ic-head"><Wordmark /><IconButton kind="close" /></div>
       <div className="ic-thread">
-        <Msg who="bot" shown={shown >= 1}>Որքա՞ն գումար է քեզ պետք</Msg>
-        <Msg who="user" shown={shown >= 2}>1,000,000 դրամ</Msg>
+        <Msg who="bot" shown={shown >= 1}>How much do you need?</Msg>
+        <Msg who="user" shown={shown >= 2}>1,000,000 AMD</Msg>
         <Typing shown={shown === 3} />
-        <Msg who="bot" shown={shown >= 4}>Ընտրեք, թե ինչպես եք ուզում հաշվարկել վարկը՝</Msg>
+        <Msg who="bot" shown={shown >= 4}>Choose how you want the loan calculated</Msg>
       </div>
       <Dots active={2} />
-      <Composer shown={shown >= 5} chips={["Ըստ Ամսավճարի", "Ըստ Ժամկետի"]} picked={shown >= 6 ? 0 : -1} placeholder="Ընտրեք կամ մուտքագրեք" />
+      <Composer shown={shown >= 5} chips={["By monthly payment", "By term"]} picked={shown >= 6 ? 0 : -1} placeholder="Choose or type" />
       <HomeBar />
     </div>
   );
@@ -199,17 +199,17 @@ function ChatPlanScreen({ active }: { active: boolean }) {
       <StatusBar />
       <div className="ic-head"><Wordmark /><IconButton kind="close" /></div>
       <div className="ic-thread">
-        <Msg who="bot" shown={shown >= 1} label={false}>Ընտրեք, թե ինչպես եք ուզում հաշվարկել վարկը՝</Msg>
+        <Msg who="bot" shown={shown >= 1} label={false}>Choose how you want the loan calculated</Msg>
         <Msg who="user" shown={shown >= 2}>
-          <strong>Ըստ Ամսավճարի</strong>
-          Դուք նշում եք, թե որքան գումար եք պատրաստ վճարել ամեն ամիս, և մենք հաշվարկում ենք՝ ինչ ժամկետով և ինչ պայմաններով կարող եք ստանալ վարկը:
+          <strong>By monthly payment</strong>
+          You say what you can pay each month, and we work out the term and the conditions you can have the loan on.
         </Msg>
         <Typing shown={shown === 3} />
-        <Msg who="bot" shown={shown >= 4}>Ընտրեք կամ մուտքագրեք, ձեզ հարմար առաջնային ամսեկան վճարի չափը:</Msg>
-        <Msg who="user" shown={shown >= 6}>50,000 դրամ</Msg>
+        <Msg who="bot" shown={shown >= 4}>Choose or type the monthly payment that suits you.</Msg>
+        <Msg who="user" shown={shown >= 6}>50,000 AMD</Msg>
       </div>
       <Dots active={2} />
-      <Composer shown={shown >= 5} chips={["50,000 ֏", "100,000 ֏", "250,000 ֏", "500,000 ֏"]} picked={shown >= 6 ? 0 : -1} placeholder="Մուտքագրեք վճարի չափը" />
+      <Composer shown={shown >= 5} chips={["50,000 AMD", "100,000 AMD", "250,000 AMD", "500,000 AMD"]} picked={shown >= 6 ? 0 : -1} placeholder="Enter the payment amount" />
       <HomeBar />
     </div>
   );
@@ -218,16 +218,16 @@ function ChatPlanScreen({ active }: { active: boolean }) {
 /** 02-summary.svg → 03-details.svg: the loan in five lines, three consents, one button. */
 function SummaryScreen({ active }: { active: boolean }) {
   const rows: Array<[string, string]> = [
-    ["Վարկի գումար:", "1,000,000 դրամ"],
-    ["Ժամկետ:", "24 ամիս"],
-    ["Ամսական վճար:", "47,073 դրամ"],
-    ["Վարկի տեսակ:", "Անգրավ"],
-    ["Փաստացի տոկոսադրույք:", "12% տարեկան"]
+    ["Loan amount:", "1,000,000 AMD"],
+    ["Term:", "24 months"],
+    ["Monthly payment:", "47,073 AMD"],
+    ["Loan type:", "Unsecured"],
+    ["Effective rate:", "12% per year"]
   ];
   const consents = [
-    <>Ծանոթ եմ պայմաններին<a>Տեսնել պայմանները</a></>,
-    <>Ծանոթացել և համաձայն եմ անձնական տվյալների հարցման պայմաններին</>,
-    <>Տեղեկացում, որ համաձայն է բազաների ստուգումների հետ</>
+    <>I have read the terms<a>See the terms</a></>,
+    <>I have read and accept the terms for requesting my personal data</>,
+    <>I agree to checks against the credit databases</>
   ];
   // 1 card, 3 consents ticking, 1 button turning blue
   const shown = useStepper(active, 5, 560, 300);
@@ -249,8 +249,8 @@ function SummaryScreen({ active }: { active: boolean }) {
         ))}
       </ul>
       <div className="ic-composer is-in is-flat">
-        <div className="ic-chips"><span>Փոխել գումարը</span><span>Փոխել ժամկետը</span><span>Փոխել տեսակը</span></div>
-        <span className={`ic-cta${shown >= 5 ? " is-in" : " is-grey is-in"}`}>Դիմել</span>
+        <div className="ic-chips"><span>Change amount</span><span>Change term</span><span>Change type</span></div>
+        <span className={`ic-cta${shown >= 5 ? " is-in" : " is-grey is-in"}`}>Apply</span>
       </div>
       <HomeBar />
     </div>
@@ -271,8 +271,8 @@ function CheckingScreen({ active }: { active: boolean }) {
           ))}
           <Mark className="ic-spinner-mark" />
         </div>
-        <p className="ic-checking-title">Ստուգում ենք քո վարկային տվյալները</p>
-        <p className="ic-checking-sub">Կատարում ենք վարկային պատմության ստուգում: Սա կտևի ընդամենը մի քանի վայրկյան</p>
+        <p className="ic-checking-title">Checking your credit record</p>
+        <p className="ic-checking-sub">Running a credit history check. It takes only a few seconds</p>
       </div>
       <HomeBar />
     </div>
@@ -289,8 +289,8 @@ function KycScreen({ active }: { active: boolean }) {
       <div className="ic-kyc-head">
         <IconButton kind="back" />
         <div className="ic-kyc-copy">
-          <p className="ic-kyc-title">ID քարտ</p>
-          <p className="ic-kyc-sub">Լուսանկարեք ձեր ID քարտը և համոզվեք, որ բոլոր տվյալները հստակ տեսանելի են:</p>
+          <p className="ic-kyc-title">ID card</p>
+          <p className="ic-kyc-sub">Photograph your ID card and make sure every detail is clearly readable.</p>
         </div>
         <span className="ic-ring" style={{ ["--ring" as string]: ring / 3 }}><span>{ring}/3</span></span>
       </div>
@@ -304,7 +304,7 @@ function KycScreen({ active }: { active: boolean }) {
           <IconButton kind="trash" />
         </div>
       </div>
-      <span className={`ic-cta is-in${shown >= 3 ? "" : " is-grey"}`}>Հաստատել</span>
+      <span className={`ic-cta is-in${shown >= 3 ? "" : " is-grey"}`}>Confirm</span>
       <HomeBar />
     </div>
   );
@@ -315,9 +315,9 @@ function LoansScreen({ active }: { active: boolean }) {
   const shown = useStepper(active, 3, 380, 300);
   type Loan = { name: string; id: string; remaining: string; progress: string; next?: string; late?: boolean; repaid?: boolean };
   const loans: Loan[] = [
-    { name: "Անգրավ վարկ", id: "N00101984", remaining: "847,300 դրամ", progress: "17%", next: "47,073 դրամ / 25.05.26" },
-    { name: "Ապառիկ", id: "N00097412", remaining: "236,500 դրամ", progress: "62%", next: "39,400 դրամ / 10.05.26", late: true },
-    { name: "Անգրավ վարկ", id: "N00081153", remaining: "500,000 դրամ", progress: "100%", repaid: true }
+    { name: "Unsecured loan", id: "N00101984", remaining: "847,300 AMD", progress: "17%", next: "47,073 AMD / 25.05.26" },
+    { name: "Instalment", id: "N00097412", remaining: "236,500 AMD", progress: "62%", next: "39,400 AMD / 10.05.26", late: true },
+    { name: "Unsecured loan", id: "N00081153", remaining: "500,000 AMD", progress: "100%", repaid: true }
   ];
   const LoanCard = ({ index, loan }: { index: number; loan: Loan }) => (
     <div className={`ic-card ic-loan${shown > index ? " is-in" : ""}${loan.repaid ? " is-repaid" : ""}`}>
@@ -326,19 +326,19 @@ function LoansScreen({ active }: { active: boolean }) {
           <strong>{loan.name}</strong>
           <small>{loan.id}</small>
         </div>
-        <span className={`ic-pill${loan.repaid ? " is-grey" : ""}`}>{loan.repaid ? "Մարված է" : "Ակտիվ է"}</span>
+        <span className={`ic-pill${loan.repaid ? " is-grey" : ""}`}>{loan.repaid ? "Repaid" : "Active"}</span>
       </div>
-      <div className="ic-loan-row"><span>{loan.repaid ? "Վարկը մարված է:" : "Մնացել է:"}</span><strong>{loan.remaining}</strong></div>
+      <div className="ic-loan-row"><span>{loan.repaid ? "Loan repaid:" : "Remaining:"}</span><strong>{loan.remaining}</strong></div>
       <span className="ic-bar"><i style={{ width: shown > index ? loan.progress : "0%" }} /></span>
       {loan.repaid ? null : (
         <>
-          <div className="ic-loan-row"><span>Հաջորդ վճարում:</span><strong>{loan.next}</strong></div>
-          {loan.late ? <span className="ic-loan-late">Դուք ունեք ուշացում</span> : null}
+          <div className="ic-loan-row"><span>Next payment:</span><strong>{loan.next}</strong></div>
+          {loan.late ? <span className="ic-loan-late">You are overdue</span> : null}
         </>
       )}
       <span className="ic-loan-divider" />
       <div className="ic-loan-actions">
-        <span className={`ic-btn${loan.repaid ? " is-grey" : ""}`}>{loan.repaid ? "Մանրամասներ" : "Վարկի Մարում"}</span>
+        <span className={`ic-btn${loan.repaid ? " is-grey" : ""}`}>{loan.repaid ? "Details" : "Repay loan"}</span>
         {loan.repaid ? null : <IconButton kind="eye" />}
       </div>
     </div>
@@ -348,16 +348,16 @@ function LoansScreen({ active }: { active: boolean }) {
       <StatusBar />
       <div className="ic-head is-left"><Wordmark /><IconButton kind="bell" /></div>
       <div className="ic-loans-tools">
-        <span className="ic-filter">Տեսակավորել: <b>Բոլորը</b> <svg viewBox="0 0 10 6"><path d="m1 1 4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /></svg></span>
+        <span className="ic-filter">Sort: <b>All</b> <svg viewBox="0 0 10 6"><path d="m1 1 4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /></svg></span>
         <span className="ic-loans-tools-right"><IconButton kind="calendar" /><IconButton kind="plus" /></span>
       </div>
       <div className="ic-loans-list">
         {loans.map((loan, index) => <LoanCard index={index} loan={loan} key={loan.id} />)}
       </div>
       <nav className="ic-tabs" aria-hidden="true">
-        <span><svg viewBox="0 0 20 20"><path d="M3 9.5 10 3l7 6.5V17H3V9.5Z" /><path d="M8 17v-5h4v5" fill="#fff" /></svg>Գլխավոր</span>
-        <span className="is-active"><svg viewBox="0 0 20 20"><rect x="3" y="2" width="14" height="16" rx="2.5" /><path d="M7 6h6M7 9.5h6M7 13h3" stroke="#fff" strokeWidth="1.4" strokeLinecap="round" /></svg>Իմ Վարկերը</span>
-        <span><svg viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.5" /><path d="M3.5 17.5a6.5 6.5 0 0 1 13 0Z" /></svg>Պրոֆիլ</span>
+        <span><svg viewBox="0 0 20 20"><path d="M3 9.5 10 3l7 6.5V17H3V9.5Z" /><path d="M8 17v-5h4v5" fill="#fff" /></svg>Home</span>
+        <span className="is-active"><svg viewBox="0 0 20 20"><rect x="3" y="2" width="14" height="16" rx="2.5" /><path d="M7 6h6M7 9.5h6M7 13h3" stroke="#fff" strokeWidth="1.4" strokeLinecap="round" /></svg>My loans</span>
+        <span><svg viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.5" /><path d="M3.5 17.5a6.5 6.5 0 0 1 13 0Z" /></svg>Profile</span>
       </nav>
     </div>
   );
@@ -418,27 +418,27 @@ export function IcredoStoryPlate() {
   }, []);
   // 1 form settles, 2 chat rises, 3 bot asks, 4 typing, 5 user answers, 6 bot follows up, 7 chips
   const shown = useStepper(active, 7, 700, 500);
-  const fields = ["Վարկի գումար", "Ժամկետ", "Նպատակ", "Ամսական եկամուտ", "Գործատու", "Պաշտոն", "Հեռախոս", "ID քարտ", "Համավարկառու"];
+  const fields = ["Loan amount", "Term", "Purpose", "Monthly income", "Employer", "Position", "Phone", "ID card", "Co-borrower"];
   return (
     <div className={`ic-story${active ? " is-active" : ""}`} ref={ref} aria-hidden="true">
       <div className={`ic-ui ic-story-form${shown >= 1 ? " is-in" : ""}${shown >= 2 ? " is-back" : ""}`}>
-        <p className="ic-story-form-title">Վարկի հաշվիչ</p>
+        <p className="ic-story-form-title">Loan calculator</p>
         <div className="ic-story-fields">
           {fields.map((label) => (
             <span key={label}><small>{label}</small><i /></span>
           ))}
         </div>
-        <span className="ic-cta is-grey is-in">Հաշվել</span>
+        <span className="ic-cta is-grey is-in">Calculate</span>
       </div>
       <div className={`ic-ui ic-story-chat${shown >= 2 ? " is-in" : ""}`}>
         <header className="ic-story-chat-head"><Mark /><span>{BOT}</span><i className="ic-story-online" /></header>
         <div className="ic-thread">
-          <Msg who="bot" shown={shown >= 3} label={false}>Որքա՞ն գումար է քեզ պետք</Msg>
+          <Msg who="bot" shown={shown >= 3} label={false}>How much do you need?</Msg>
           <Typing shown={shown === 4} />
-          <Msg who="user" shown={shown >= 5}>1,000,000 դրամ</Msg>
-          <Msg who="bot" shown={shown >= 6}>Ընտրեք, թե ինչպես եք ուզում հաշվարկել վարկը՝</Msg>
+          <Msg who="user" shown={shown >= 5}>1,000,000 AMD</Msg>
+          <Msg who="bot" shown={shown >= 6}>Choose how you want the loan calculated</Msg>
         </div>
-        <div className={`ic-chips is-inline${shown >= 7 ? " is-in" : ""}`}><span>Ըստ Ամսավճարի</span><span>Ըստ Ժամկետի</span></div>
+        <div className={`ic-chips is-inline${shown >= 7 ? " is-in" : ""}`}><span>By monthly payment</span><span>By term</span></div>
       </div>
     </div>
   );

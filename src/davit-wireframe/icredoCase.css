@@ -341,7 +341,10 @@
 .ic-composer { margin: auto -0.4em 1.2em; padding: 0.93em; border-radius: 1.07em; background: #fff; box-shadow: 0 -0.27em 1.6em rgba(4, 31, 52, 0.09), 0 0.4em 1.2em rgba(4, 31, 52, 0.05); opacity: 0; transform: translateY(10px); transition: opacity 320ms, transform 360ms; }
 .ic-composer.is-in { opacity: 1; transform: none; }
 .ic-composer.is-flat { margin-top: auto; }
-.ic-chips { display: flex; gap: 0.53em; margin-bottom: 0.93em; overflow: hidden; }
+/* The row used to clip what did not fit, which was safe while the labels were
+   Armenian and short. "By monthly payment" is twice the width of "Ըստ
+   Ամսավճարի", and a clipped chip reads as a bug, so the row wraps now. */
+.ic-chips { display: flex; flex-wrap: wrap; gap: 0.53em; margin-bottom: 0.93em; }
 .ic-chips span { flex: 1 0 auto; padding: 0.53em 0.8em; border: 1px solid var(--p-line); border-radius: 999px; color: var(--p-ink); font-size: 0.87em; text-align: center; white-space: nowrap; transition: background 200ms, color 200ms, border-color 200ms; }
 .ic-chips span.is-picked { background: var(--p-blue); border-color: var(--p-blue); color: #fff; }
 .ic-input { display: flex; align-items: center; justify-content: space-between; gap: 0.6em; padding-left: 0.27em; }

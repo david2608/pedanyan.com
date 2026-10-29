@@ -3,6 +3,13 @@
    opens the daily task (s-math). Runs after 24-home-levels.js re-renders on screen:enter. */
 (function () {
   const fmt = (n) => n.toLocaleString('de-DE');
+  const DAILY_KEY = 'myameria-daily-math-completed-on';
+  const dayKey = (date = new Date()) => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  const completedToday = () => {
+    try { return localStorage.getItem(DAILY_KEY) === dayKey(); }
+    catch (_) { return false; }
+  };
+  const tomorrowLabel = () => new Date(Date.now() + 86400000).toLocaleDateString('hy-AM', { day: 'numeric', month: 'long' });
   document.addEventListener('app:ready', () => {
     if (App.state.amp == null) App.state.amp = 0;
     document.querySelectorAll('.lv-screen').forEach((home) => {
@@ -24,9 +31,11 @@
           home.insertAdjacentHTML('beforeend', '<div class="hm-toast js-hm-toast"><img src="assets/amp-coin.svg" alt=""><span></span></div>');
           card = home.querySelector('.js-hm-daily');
         }
-        const done = App.state.mathDone || 0;
-        card.classList.toggle('is-done', done > 0);
-        card.querySelector('.js-hm-daily-d').textContent = done ? `Լուծված է՝ ${done} · ևս մեկը՞` : 'Հաշվիր փողը և վաստակիր';
+        const doneToday = completedToday();
+        card.disabled = doneToday;
+        card.classList.toggle('is-done', doneToday);
+        card.querySelector('.js-hm-daily-d').textContent = doneToday ? `Այսօրվա խնդիրը լուծված է · նորը՝ ${tomorrowLabel()}` : 'Հաշվիր փողը և վաստակիր';
+        card.querySelector('.hm-daily__amp span').textContent = doneToday ? '✓' : '+20';
         const add = home.id === 's-home' ? (App.state.pendingAmp || 0) : 0;
         const from = base + App.state.amp;
         num.textContent = fmt(from);

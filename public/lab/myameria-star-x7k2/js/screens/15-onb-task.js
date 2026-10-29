@@ -15,6 +15,15 @@
     { a: ['🍎', '150 ֏'], op: '×', b: ['🛒', '4 հատ'], q: 'Մեկ խնձորն արժե 150 ֏։', ask: 'Որքա՞ն արժե 4 խնձորը։',
       opts: ['450', '600', '550', '154'], right: '600', hint: 'Բազմապատկիր՝ 150 × 4' },
   ];
+  const DAILY_KEY = 'myameria-daily-math-completed-on';
+  const dayKey = () => { const d = new Date(); return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; };
+  const completedToday = () => {
+    try { return localStorage.getItem(DAILY_KEY) === dayKey(); }
+    catch (_) { return false; }
+  };
+  const markDailyComplete = () => {
+    try { localStorage.setItem(DAILY_KEY, dayKey()); } catch (_) {}
+  };
   const wallet = ([ic, v], cls = '') => `<span class="ot-wallet ${cls}"><span class="ot-wallet__ic">${ic}</span><b>${v}</b></span>`;
 
   function mountTask(s, { reward, pick, next }) {
@@ -37,6 +46,10 @@
       if (b.dataset.v !== task.right) {
         b.classList.remove('is-wrong'); void b.offsetWidth; b.classList.add('is-wrong');
         fb.className = 'ot-fb js-ot-fb is-wrong'; fb.textContent = 'Գրեթե՛։ ' + task.hint;
+        return;
+      }
+      if (s.id === 's-math' && completedToday()) {
+        fb.className = 'ot-fb js-ot-fb is-wrong'; fb.textContent = 'Այսօրվա խնդիրը արդեն լուծված է․ նոր խնդիրը կլինի վաղը։';
         return;
       }
       opts.querySelectorAll('.is-wrong').forEach((x) => x.classList.remove('is-wrong'));
@@ -74,7 +87,11 @@
         daily.querySelector('.js-ot-count').textContent = `Խնդիր ${Math.min(done + 1, n)}/${n} · լուծիր և վաստակիր AMP`;
         return BANK[qi % n];
       },
-      next: () => { qi++; App.state.mathDone = (App.state.mathDone || 0) + 1; daily._later(() => App.go('s-home'), 1500); },
+      next: () => {
+        markDailyComplete();
+        qi++; App.state.mathDone = (App.state.mathDone || 0) + 1;
+        daily._later(() => App.go('s-home'), 1500);
+      },
     });
   });
 

@@ -330,7 +330,11 @@
     }
 
     const md = document.getElementById('s-l-module-done');
-    if (md) $(md, '.js-lx-md-cta').addEventListener('click', () => { App.state.level2Unlocked = true; App.go('s-home'); });
+    if (md) $(md, '.js-lx-md-cta').addEventListener('click', () => {
+      App.markModulePassed?.(App.state.moduleToComplete || 0);
+      delete App.state.moduleToComplete;
+      App.go('s-home');
+    });
   }
 
   document.addEventListener('app:ready', () => { init(); initEnds(); });

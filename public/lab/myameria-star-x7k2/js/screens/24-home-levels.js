@@ -25,18 +25,45 @@
   const LOCK = (s = 14) => `<svg width="${s}" height="${s}" viewBox="0 0 19 19" fill="none"><path class="shackle" d="M5.5 8V6a4 4 0 0 1 8 0v2" stroke="#4a5058" stroke-width="1.8" stroke-linecap="round"/><rect x="3.5" y="8" width="12" height="9" rx="2.6" fill="#4a5058"/><circle cx="9.5" cy="12.4" r="1.4" fill="#fff"/></svg>`;
   const CHECK = `<svg class="lv-done" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#93EC60"/><path d="M7 12.4l3 3 6.5-6.6" stroke="#0A1C00" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
+  const PASS_KEY = 'myameria-module-pass-dates-v1';
+  const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+  const demoPasses = (count) => Array.from({ length: count }, (_, i) => Date.now() - (count - i - 1) * WEEK_MS);
   const SCN = {
-    u11: { age: 10, l1Done: false, p: 1 },
-    o11: { age: 13, l1Done: false, p: 0, first: 'two' },
-    u11done: { age: 10, l1Done: true, p: 4, pending: 'done' },
-    turned12: { age: 12, l1Done: false, p: 2, pending: 'age' },
+    u11: { age: 10, l1Done: false, p: 1, passes: demoPasses(1) },
+    o11: { age: 13, l1Done: false, p: 0, passes: [], first: 'two' },
+    u11done: { age: 10, l1Done: true, p: 4, passes: demoPasses(4), pending: 'done' },
+    turned12: { age: 12, l1Done: false, p: 2, passes: demoPasses(2), pending: 'age' },
   };
+  function readPasses() {
+    try { return JSON.parse(localStorage.getItem(PASS_KEY) || '[]'); }
+    catch (_) { return []; }
+  }
+  function writePass(index, at = Date.now()) {
+    const passes = readPasses();
+    if (!passes[index]) passes[index] = at;
+    try { localStorage.setItem(PASS_KEY, JSON.stringify(passes)); } catch (_) {}
+    return passes;
+  }
+  function countdownParts(at) {
+    const left = Math.max(0, at - Date.now());
+    const day = 24 * 60 * 60 * 1000;
+    const hour = 60 * 60 * 1000;
+    if (left >= day) return { value: Math.floor(left / day), unit: 'օր' };
+    if (left >= hour) return { value: Math.ceil(left / hour), unit: 'ժամ' };
+    return { value: Math.max(1, Math.ceil(left / 60000)), unit: 'րոպե' };
+  }
+  App.markModulePassed = (index) => writePass(index);
 
   function liveCtx() {
     const L = App.lesson;
     const st = App.state;
-    const p = st.l1Done ? 4 : (L && L.step >= L.keys.length ? 1 : 0);
-    return { age: st.age || 10, l1Done: !!st.l1Done, p, pending: st.pendingUnlock || null, first: st.age >= 12 && !st.twoSeen ? 'two' : null, live: true };
+    let passes = readPasses();
+    if (L && L.step >= L.keys.length && !passes[0]) passes = writePass(0);
+    const passed = passes.findIndex((at, i) => !at || (i > 0 && !passes[i - 1]));
+    const savedCount = passed < 0 ? passes.length : passed;
+    const l1Done = !!st.l1Done || savedCount >= 4;
+    const p = l1Done ? 4 : Math.max(savedCount, L && L.step >= L.keys.length ? 1 : 0);
+    return { age: st.age || 10, l1Done, p, passes, pending: st.pendingUnlock || null, first: st.age >= 12 && !st.twoSeen ? 'two' : null, live: true };
   }
 
   /* ---------- markup ---------- */
@@ -105,7 +132,14 @@
     const sts = states(c, li, open);
     const done = sts.filter((s) => s === 'done').length;
     const locked = li === 1 && !open;
-    const cards = lv.mods.map((d, i) => `<div class="hm2-mod hm2-mod--${d.side}"><div class="hm2-mod__box">${card(d, sts[i], li, i)}</div></div>`).join('');
+    const cards = lv.mods.map((d, i) => {
+      const due = li === 0 && i === c.p && i > 0 && c.passes?.[i - 1] ? c.passes[i - 1] + WEEK_MS : null;
+      const state = due && Date.now() < due ? 'locked' : sts[i];
+      const remaining = due ? countdownParts(due) : null;
+      const unitFrom = { օր: 'օրից', ժամ: 'ժամից', րոպե: 'րոպեից' }[remaining?.unit];
+      const release = state === 'locked' && remaining ? `<div class="hm2-mod__release" data-release-at="${due}" aria-label="Մինչև հաջորդ մոդուլը՝ ${remaining.value} ${remaining.unit}"><span class="hm2-mod__release-label">Հաջորդ մոդուլը</span><span class="hm2-mod__release-value"><b>${remaining.value}</b><span>${unitFrom}</span></span></div>` : '';
+      return `<div class="hm2-mod hm2-mod--${d.side}"><div class="hm2-mod__box">${card(d, state, li, i)}</div>${release}</div>`;
+    }).join('');
     return `<div class="lv-panel${locked ? ' is-locked' : ''}" data-panel="${li}">
       ${locked ? '' : noteHtml(note(c, li, open))}
       <div class="hm-level${locked ? ' is-locked' : ''}">
@@ -173,6 +207,17 @@
       if (name) screen.querySelectorAll('.js-user-name').forEach((n) => (n.textContent = name));
       if (av) screen.querySelectorAll('.js-user-avatar').forEach((i) => (i.src = av));
     }
+    function updateCountdowns() {
+      const expired = [...screen.querySelectorAll('.hm2-mod__release')].some((el) => Number(el.dataset.releaseAt) <= Date.now());
+      if (expired) { render(); return; }
+      screen.querySelectorAll('.hm2-mod__release').forEach((el) => {
+        const parts = countdownParts(Number(el.dataset.releaseAt));
+        const unitFrom = { օր: 'օրից', ժամ: 'ժամից', րոպե: 'րոպեից' }[parts.unit];
+        el.querySelector('.hm2-mod__release-value b').textContent = parts.value;
+        el.querySelector('.hm2-mod__release-value span').textContent = unitFrom;
+        el.setAttribute('aria-label', `Մինչև հաջորդ մոդուլը՝ ${parts.value} ${parts.unit}`);
+      });
+    }
     function setTab(i, { silent = false } = {}) {
       const dir = i < active ? 'back' : 'fwd';
       active = i;
@@ -210,10 +255,40 @@
       const [li, i] = cd.dataset.card.split('-').map(Number);
       const st = cd.dataset.st;
       if (st === 'lvl') { shake(cd.parentElement); return App.open('o-level-locked'); }
-      if (st === 'locked') { shake(cd.parentElement); return toast(`Նախ ավարտիր ${LEVELS[li].mods[i - 1].n}-րդ մոդուլը`); }
-      if (st === 'active' && li === 0 && i > 0 && c.live) return App.go('s-theme-complete');
+      if (st === 'locked') {
+        shake(cd.parentElement);
+        const due = li === 0 && i === c.p && c.passes?.[i - 1] ? c.passes[i - 1] + WEEK_MS : null;
+        if (due && Date.now() < due) {
+          const remaining = countdownParts(due);
+          return toast(`Հաջորդ մոդուլը հասանելի կլինի ${remaining.value} ${remaining.unit}-ից`);
+        }
+        return toast(`Նախ ավարտիր ${LEVELS[li].mods[i - 1].n}-րդ մոդուլը`);
+      }
+      if (st === 'active' && li === 0 && i > 0 && c.live) {
+        App.state.moduleToComplete = i;
+        const done = document.getElementById('s-theme-complete');
+        done.querySelector('.tc-nav__center .nav-bar__title').textContent = `Մոդուլ ${i + 1}`;
+        done.querySelector('.tc-info__head .tc-cap').textContent = `Մոդուլ ${i + 1} · Ավարտված է`;
+        done.querySelector('.tc-info__text > .tc-cap').textContent = LEVELS[li].mods[i].t;
+        return App.go('s-theme-complete');
+      }
       App.go('s-l-module');
     });
+
+    document.addEventListener('click', (e) => {
+      const button = e.target.closest('#s-theme-complete .js-tc-next');
+      const index = App.state.moduleToComplete;
+      if (!button || !Number.isInteger(index)) return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      writePass(index);
+      delete App.state.moduleToComplete;
+      if (index === 3) {
+        App.state.l1Done = true;
+        App.state.level2Unlocked = true;
+        if ((App.state.age || 10) < 12) App.state.pendingUnlock = 'done';
+      }
+      App.go('s-home');
+    }, true);
 
     /** unlock moment: modal → (ack) → tab animation → switch to level 2 */
     function playUnlock() {
@@ -249,6 +324,7 @@
 
     screen.addEventListener('screen:enter', () => {
       bindCollapse();
+      if (!screen.__moduleCountdown) screen.__moduleCountdown = setInterval(updateCountdowns, 60 * 1000);
       screen.querySelector('.lv-pin')?.classList.remove('is-mini');
       const scn = screen.dataset.lv;
       c = scn === 'live' ? liveCtx() : { ...SCN[scn] };

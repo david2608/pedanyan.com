@@ -111,6 +111,14 @@
 .lv-start { position: absolute; z-index: 2; left: 50%; top: -14px; transform: translateX(-50%); }
 .hm-card { position: relative; overflow: visible; }
 .hm-card .hm-card__body { overflow: hidden; }
+.lv .hm2-mod { position: relative; }
+.lv .hm2-mod__release { position: absolute; z-index: 2; top: 50%; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 82px; color: #285d13; text-align: center; transform: translateY(-50%); pointer-events: none; }
+.lv .hm2-mod--right .hm2-mod__release { left: 30px; }
+.lv .hm2-mod--left .hm2-mod__release { right: 30px; }
+.lv .hm2-mod__release-label { font: 500 10px/13px var(--font-text); color: #596451; }
+.lv .hm2-mod__release-value { display: flex; align-items: baseline; gap: 3px; white-space: nowrap; }
+.lv .hm2-mod__release-value b { font: 650 20px/22px var(--font-display); }
+.lv .hm2-mod__release-value span { font: 550 11px/14px var(--font-text); }
 .lv .hm-card.is-done .hm-card__icon::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: rgba(147,236,96,.0); }
 .lv-done { position: absolute; right: 10px; top: 12px; width: 24px; height: 24px; }
 .lv .hm-card.is-shake { animation: lvShake .4s !important; }
@@ -170,4 +178,3 @@
 .lv-pin.is-mini .lv-tab__s { max-height: 0; opacity: 0; }
 /* v2: no pinned profile/tabs block */
 .lv-v2 .lv-pin { display: none; }
-.lv .hm-daily { display: none !important; }

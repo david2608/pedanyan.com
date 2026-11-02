@@ -159,6 +159,12 @@
   display: grid; gap: 14px; align-content: start;
   padding: clamp(24px, 2.6vw, 36px); background: var(--fb-surface); border-radius: 30px;
 }
+/* The form is over a thousand pixels tall and the aside is a third of that, so
+   on desktop the aside rides down beside it instead of leaving a column of
+   white. Below 1040px they are stacked and sticky would be wrong. */
+@media (min-width: 1040px) {
+  .fb-reg-aside { position: sticky; top: clamp(16px, 7vh, 96px); }
+}
 .fb .fb-reg-aside h3 { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.16; }
 .fb .fb-reg-aside p { max-width: 38ch; }
 .fb .fb-reg-need { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }

@@ -1,0 +1,318 @@
+/* =============================================================================
+   Design Generalist — /am/school
+
+   Reference lock. Primary direction: staggered typographic theatre — words as
+   the object, hairline rules instead of cards, labels beside arrow circles
+   instead of filled pills, whole-field colour changes instead of inset panels.
+   Borrowed from the GSAP site Davit pointed at: the counter used as a graphic
+   and the full-width closing band. Rejected from both: the dark-by-default
+   canvas (this site is light, and a black page would read as somebody else's),
+   and the card grid (the site's 30px cards belong to the case studies).
+
+   So: two black fields — the opening stage and the closing band — and chalk,
+   white and ink between them. One accent, used large or on black and never on
+   small body copy, where it would not carry enough contrast.
+   ============================================================================= */
+
+.sc {
+  --sc-ink: #111111;
+  --sc-canvas: #ffffff;
+  --sc-chalk: #f6f6f6;
+  --sc-stage: #0d0d0d;
+  --sc-body: #646464;
+  --sc-muted: #8c8c8c;
+  --sc-accent: #ff4a12;
+  --sc-rule: rgba(17, 17, 17, 0.14);
+  --sc-rule-soft: rgba(17, 17, 17, 0.08);
+  --sc-rule-dark: rgba(255, 255, 255, 0.2);
+
+  --sc-display: "Syne", system-ui, sans-serif;
+  --sc-text: "Archivo", system-ui, sans-serif;
+  --sc-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  --sc-shell: min(calc(100% - 48px), 1800px);
+  --sc-pad: clamp(78px, 9vw, 160px);
+
+  background: var(--sc-canvas);
+  color: var(--sc-body);
+  font-family: var(--sc-text);
+  overflow-x: clip;
+}
+
+.sc-shell { width: var(--sc-shell); margin-inline: auto; }
+.sc-section { padding-block: var(--sc-pad); }
+.sc-chalk { background: var(--sc-chalk); }
+.sc p { margin: 0; line-height: 1.6; }
+.sc strong { color: var(--sc-ink); font-weight: 600; }
+
+.sc .sc-eyebrow {
+  margin: 0 0 clamp(20px, 2.2vw, 34px);
+  font-family: var(--sc-mono); font-size: 12px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--sc-muted);
+}
+.sc .sc-shell h1, .sc .sc-shell h2, .sc .sc-shell h3 {
+  font-family: var(--sc-display); color: var(--sc-ink); margin: 0; text-wrap: balance;
+}
+.sc .sc-head {
+  font-weight: 400; font-size: clamp(26px, 3vw, 48px); line-height: 1.08;
+  letter-spacing: -0.015em; max-width: 22ch;
+}
+.sc .sc-aside {
+  font-family: var(--sc-mono); font-size: 12.5px; line-height: 1.7; color: var(--sc-muted);
+  max-width: 62ch;
+}
+
+/* --- the action: a label beside an arrow circle, never a filled pill ------- */
+
+.sc-act {
+  display: inline-flex; align-items: center; gap: clamp(14px, 1.4vw, 22px);
+  text-decoration: none; color: var(--sc-ink);
+  font-family: var(--sc-mono); font-size: clamp(13px, 1.1vw, 15px);
+  letter-spacing: .1em; text-transform: uppercase;
+}
+.sc-act i {
+  display: grid; place-items: center; flex: none;
+  width: clamp(54px, 4.4vw, 72px); aspect-ratio: 1;
+  border: 1px solid currentColor; border-radius: 50%;
+  transition: background 200ms ease, color 200ms ease, transform 200ms ease;
+}
+.sc-act svg { width: 46%; height: 46%; }
+.sc-act:hover i { background: var(--sc-accent); border-color: var(--sc-accent); color: #fff; transform: translateX(4px); }
+.sc-act.is-light { color: #ffffff; }
+.sc-act:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 6px; }
+
+/* --- the stage ------------------------------------------------------------- */
+
+.sc-stage {
+  background: var(--sc-stage); color: #ffffff;
+  padding-block: clamp(90px, 11vw, 190px) clamp(56px, 6vw, 104px);
+  min-height: min(92vh, 1040px);
+  display: grid; align-content: center;
+}
+.sc-stage .sc-eyebrow { color: rgba(255, 255, 255, 0.55); }
+
+/* The two words are the object. They stagger — first left, second pushed
+   right — so the pair reads as one sculpture rather than a centred headline. */
+.sc-stage-type { display: grid; gap: 0; }
+/* Three classes, because .sc .sc-shell h1 carries an id-free 0,2,1 and would
+   otherwise paint the stage words ink-on-black. */
+.sc .sc-stage .sc-stage-type {
+  font-family: var(--sc-display); font-weight: 600; color: #ffffff;
+  font-size: clamp(50px, 11.5vw, 190px); line-height: 0.92; letter-spacing: -0.03em;
+}
+.sc-stage-line { display: block; }
+.sc-stage-line.is-b { margin-left: clamp(0px, 14vw, 300px); }
+.sc-stage-word { display: inline-block; overflow: hidden; padding-bottom: 0.06em; }
+
+.sc-stage-foot {
+  margin-top: clamp(40px, 5vw, 86px);
+  display: grid; gap: clamp(28px, 3vw, 48px); align-items: end;
+}
+@media (min-width: 1000px) { .sc-stage-foot { grid-template-columns: minmax(0, 1fr) auto; } }
+.sc .sc-stage-lead {
+  max-width: 44ch; color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(17px, 1.5vw, 23px); line-height: 1.5;
+}
+.sc-stage-act { display: grid; gap: 14px; justify-items: start; }
+@media (min-width: 1000px) { .sc-stage-act { justify-items: end; text-align: right; } }
+.sc .sc-stage-note {
+  font-family: var(--sc-mono); font-size: 12px; line-height: 1.6;
+  color: rgba(255, 255, 255, 0.5); max-width: 34ch;
+}
+
+/* --- the numbers ----------------------------------------------------------- */
+
+.sc-numbers { padding-block: clamp(40px, 4.4vw, 76px); border-bottom: 1px solid var(--sc-rule-soft); }
+.sc-num-rail {
+  display: grid; gap: clamp(20px, 2.4vw, 40px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 720px) { .sc-num-rail { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .sc-num-rail { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+.sc-num { display: grid; gap: 4px; align-content: start; }
+.sc-num strong {
+  font-family: var(--sc-display); font-weight: 600; color: var(--sc-ink);
+  font-size: clamp(34px, 3.6vw, 58px); line-height: 1; letter-spacing: -0.02em;
+}
+.sc-num span {
+  font-family: var(--sc-mono); font-size: 11.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--sc-muted);
+}
+.sc .sc-num-where {
+  margin-top: clamp(22px, 2.2vw, 34px);
+  font-family: var(--sc-mono); font-size: 12px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--sc-accent);
+}
+
+/* --- the manifesto --------------------------------------------------------- */
+
+.sc .sc-big {
+  font-family: var(--sc-display); color: var(--sc-ink);
+  font-size: clamp(32px, 6.4vw, 108px); line-height: 1.02; letter-spacing: -0.03em;
+  font-weight: 600;
+}
+.sc .sc-big.is-light { font-weight: 400; color: var(--sc-muted); }
+.sc-manifesto .sc-big + .sc-big { margin-left: clamp(0px, 7vw, 150px); }
+.sc-manifesto-pocket {
+  margin-top: clamp(30px, 3.4vw, 56px);
+  display: grid; gap: 16px; max-width: 58ch;
+  margin-left: auto;
+}
+.sc .sc-manifesto-pocket p { font-size: clamp(16px, 1.25vw, 19px); }
+
+/* --- the ticker ------------------------------------------------------------ */
+
+.sc-ticker {
+  border-block: 1px solid var(--sc-rule-soft);
+  padding-block: clamp(16px, 1.8vw, 30px);
+  overflow: hidden;
+}
+.sc-ticker-run {
+  display: flex; white-space: nowrap; width: max-content;
+  font-family: var(--sc-display); font-weight: 400; color: var(--sc-ink);
+  font-size: clamp(30px, 4.4vw, 76px); line-height: 1.1; letter-spacing: -0.01em;
+}
+.sc-ticker-run i { color: var(--sc-accent); font-style: normal; padding-inline: 0.25em; }
+
+/* --- ruled rows: the page's one container ---------------------------------- */
+
+.sc-rows { display: grid; margin-top: clamp(26px, 2.8vw, 44px); }
+.sc-row {
+  padding-block: clamp(20px, 2.1vw, 32px);
+  border-top: 1px solid var(--sc-rule-soft);
+}
+.sc-rows .sc-row:last-child { border-bottom: 1px solid var(--sc-rule-soft); }
+.sc .sc-row-plain p { color: var(--sc-ink); font-size: clamp(16px, 1.35vw, 21px); max-width: 72ch; }
+
+.sc-row-count { display: grid; gap: 6px clamp(20px, 3vw, 54px); }
+@media (min-width: 760px) { .sc-row-count { grid-template-columns: 64px minmax(0, 1fr); align-items: baseline; } }
+.sc-row-n { font-family: var(--sc-mono); font-size: 12px; color: var(--sc-accent); }
+.sc .sc-row-count p { color: var(--sc-ink); font-size: clamp(16px, 1.4vw, 22px); max-width: 60ch; }
+
+/* --- the programme --------------------------------------------------------- */
+
+.sc-programme-head {
+  display: grid; gap: clamp(24px, 2.6vw, 40px); align-items: start;
+}
+@media (min-width: 980px) { .sc-programme-head { grid-template-columns: minmax(0, 1fr) auto; } }
+.sc .sc-count {
+  display: flex; align-items: baseline; gap: 10px;
+  font-family: var(--sc-display); font-weight: 600; line-height: 1;
+  position: sticky; top: clamp(16px, 9vh, 120px);
+}
+.sc-count-now { font-size: clamp(44px, 5.4vw, 96px); color: var(--sc-accent); letter-spacing: -0.03em; }
+.sc-count-of { font-size: clamp(18px, 1.8vw, 30px); color: var(--sc-muted); }
+
+.sc-blocks { display: grid; margin-top: clamp(30px, 3.2vw, 52px); }
+.sc-block {
+  display: grid; gap: 10px clamp(22px, 3.4vw, 64px);
+  border-top: 1px solid var(--sc-rule);
+}
+.sc-blocks .sc-block:last-child { border-bottom: 1px solid var(--sc-rule); }
+@media (min-width: 860px) { .sc-block { grid-template-columns: 86px minmax(0, 1fr); } }
+.sc-block-n {
+  font-family: var(--sc-mono); font-size: 13px; color: var(--sc-accent); padding-top: .5em;
+}
+.sc-block-body { display: grid; gap: 12px; }
+.sc .sc-block-body h3 {
+  font-weight: 600; font-size: clamp(24px, 2.8vw, 44px); line-height: 1.08; letter-spacing: -0.02em;
+}
+.sc .sc-block-meta {
+  font-family: var(--sc-mono); font-size: 12px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--sc-muted);
+}
+.sc .sc-block-meta i { color: var(--sc-accent); font-style: normal; padding-inline: 4px; }
+.sc .sc-block-covers { max-width: 70ch; font-size: clamp(15px, 1.2vw, 18px); }
+.sc .sc-block-leave {
+  color: var(--sc-ink); font-size: clamp(15px, 1.2vw, 18px); max-width: 60ch;
+}
+.sc .sc-block-leave span {
+  font-family: var(--sc-mono); font-size: 11px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--sc-accent); margin-right: 10px;
+}
+
+/* --- how a lesson works ---------------------------------------------------- */
+
+.sc-lesson { display: grid; gap: clamp(28px, 3vw, 56px); align-items: start; }
+@media (min-width: 960px) { .sc-lesson { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.sc-lesson-body { display: grid; gap: 18px; max-width: 54ch; }
+.sc-lesson-bar { display: flex; height: 10px; overflow: hidden; }
+.sc-lesson-bar .is-theory { flex: 1; background: var(--sc-accent); }
+.sc-lesson-bar .is-practice { flex: 5; background: var(--sc-ink); }
+/* Each half of the key is one wrapping unit, so a narrow column never strands
+   a swatch at the end of the line above its label. */
+.sc .sc-lesson-key {
+  display: grid; gap: 8px;
+  font-family: var(--sc-mono); font-size: 11.5px; line-height: 1.5; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--sc-muted);
+}
+.sc-lesson-key span { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 10px; align-items: baseline; }
+.sc-lesson-key i { width: 16px; height: 4px; display: block; transform: translateY(-0.35em); }
+.sc-lesson-key i.is-theory { background: var(--sc-accent); }
+.sc-lesson-key i.is-practice { background: var(--sc-ink); }
+
+/* --- who teaches ----------------------------------------------------------- */
+
+.sc-teacher { display: grid; gap: clamp(24px, 2.6vw, 48px); align-items: start; }
+@media (min-width: 960px) { .sc-teacher { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); } }
+.sc-teacher-body { display: grid; gap: 16px; max-width: 62ch; }
+.sc .sc-teacher-body p { font-size: clamp(16px, 1.25vw, 19px); }
+.sc .sc-teacher-link a {
+  font-family: var(--sc-mono); font-size: 13px; color: var(--sc-ink); text-decoration: none;
+  border-bottom: 1px solid var(--sc-accent); padding-bottom: 2px;
+}
+
+/* --- price ----------------------------------------------------------------- */
+
+.sc-price-grid { display: grid; gap: clamp(26px, 3vw, 56px); align-items: start; }
+@media (min-width: 960px) { .sc-price-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); } }
+.sc .sc-price-figure {
+  font-family: var(--sc-display); font-weight: 600; color: var(--sc-ink);
+  font-size: clamp(42px, 5.6vw, 96px); line-height: 0.98; letter-spacing: -0.03em;
+}
+.sc .sc-price-figure span {
+  display: block; margin-top: 12px;
+  font-family: var(--sc-mono); font-weight: 400; font-size: 12px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--sc-accent);
+}
+.sc-price-grid .sc-rows { margin-top: 0; }
+.sc-price-act { margin-top: clamp(30px, 3.2vw, 54px); }
+
+/* --- questions -------------------------------------------------------------- */
+
+.sc-faq { display: grid; gap: 8px clamp(22px, 3.4vw, 64px); }
+@media (min-width: 860px) { .sc-faq { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: start; } }
+.sc .sc-faq h3 { font-weight: 600; font-size: clamp(18px, 1.6vw, 25px); line-height: 1.15; }
+.sc .sc-faq p { max-width: 62ch; font-size: clamp(15px, 1.2vw, 18px); }
+
+/* --- the closing band -------------------------------------------------------- */
+
+.sc-close {
+  background: var(--sc-stage); color: rgba(255, 255, 255, 0.72);
+  padding-block: clamp(70px, 8vw, 150px) clamp(32px, 3.4vw, 56px);
+}
+.sc-close .sc-eyebrow { color: var(--sc-accent); }
+.sc .sc-close-q {
+  font-family: var(--sc-display); font-weight: 600; color: #ffffff;
+  font-size: clamp(30px, 4.6vw, 80px); line-height: 1; letter-spacing: -0.04em;
+  max-width: 18ch;
+}
+.sc-close-act {
+  margin-top: clamp(32px, 3.4vw, 58px);
+  display: grid; gap: clamp(18px, 2vw, 30px); align-items: center;
+}
+@media (min-width: 860px) { .sc-close-act { grid-template-columns: auto minmax(0, 1fr); } }
+.sc-close-rule { margin-top: clamp(48px, 6vw, 110px); height: 1px; background: var(--sc-rule-dark); }
+.sc .sc-close-foot {
+  margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px;
+  font-family: var(--sc-mono); font-size: 11.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: rgba(255, 255, 255, 0.4);
+}
+
+/* --- reduced motion ---------------------------------------------------------- */
+/* The page's resting state is its final state — nothing here is hidden waiting
+   for a timeline — so reduced motion only has to stop the transitions. */
+@media (prefers-reduced-motion: reduce) {
+  .sc-act i { transition: none; }
+  .sc .sc-count { position: static; }
+}

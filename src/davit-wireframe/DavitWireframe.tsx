@@ -4,7 +4,7 @@ import { CustomEase } from "gsap/CustomEase";
 import { Observer } from "gsap/Observer";
 import { applyHead } from "../seo/head";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ExternalLink, Menu, MessageCircle, Play, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink, Menu, MessageCircle, Play, X } from "lucide-react";
 import {
   Shader,
   Dither,
@@ -29,6 +29,7 @@ import { CHAT_AVATAR, ContactChat, openContactChat } from "./ContactChat";
 import { PullToContinue } from "./PullToContinue";
 import { ReportArmenia2026 } from "../report/ReportArmenia2026";
 import { FirstBriefPage } from "../first-brief/FirstBriefPage";
+import { SchoolPage } from "../school/SchoolPage";
 import { initAnalytics, trackPageView } from "../analytics/ga";
 import { useReadDepth } from "../analytics/readDepth";
 import { OctagonField } from "./OctagonField";
@@ -657,6 +658,19 @@ const publicArchiveEntries = [
     url: "https://www.youtube.com/watch?v=HBzUonXgdow"
   },
   {
+    slug: "digital-shifts-ai-designers-job",
+    year: "2026",
+    publishedAt: "2026-10-08",
+    type: "Podcast / AI & design",
+    title: "AI Is Rewriting the Designer’s Job — Digital Shifts E056.",
+    description: "A conversation with Davit Pedanyan about how AI is changing the work of designers and what remains distinctly human in product design.",
+    image: "/public-work/digital-shifts-e056.jpg",
+    imageAlt: "Davit Pedanyan on Digital Shifts episode 56, AI Is Rewriting the Designer’s Job",
+    videoId: "Rjc0rLv2WnM",
+    videoStart: 997,
+    url: "https://www.youtube.com/watch?v=Rjc0rLv2WnM&t=997s"
+  },
+  {
     slug: "how2b-ui-ux-designer",
     year: "2024",
     publishedAt: "2024-12-24",
@@ -701,6 +715,17 @@ const publicArchiveEntries = [
     imageAlt: "Artwork from Davit Pedanyan's Medium essay about music and UX design",
     externalUrl: "https://medium.com/@pedanyandavid/patterns-rhythm-and-flow-lessons-from-music-in-ux-design-4085bd68137f"
   }
+];
+
+const FIRST_BRIEF_BUSINESS_FORM = "https://forms.gle/mwpZ76QXiPJqjLsD7";
+const FIRST_BRIEF_DESIGNER_FORM = "https://forms.gle/Y2hesaXGyuTmv5tL7";
+const firstBriefBusinessSlides = [
+  ...Array.from({ length: 7 }, (_, index) => ({
+    type: "image" as const,
+    src: `/public-work/first-brief/slide-${String(index + 1).padStart(2, "0")}.jpg`,
+    alt: `First Brief LinkedIn presentation, slide ${index + 1} of 7`
+  })),
+  { type: "cta" as const }
 ];
 
 // Hover label per public piece — each names what that specific article holds.
@@ -1319,7 +1344,7 @@ function WireframeChrome() {
 const navCursorLabels: Record<string, string> = {
   "/am/designer": "Explore portfolio",
   "/am/public-work": "About my role in community",
-  "/am/school": "Will be ready soon"
+  "/am/school": "Design Generalist, the course"
 };
 
 export function SiteHeader({ activePage }: { activePage?: PageKey }) {
@@ -2597,7 +2622,7 @@ export function HomePathCardsSection() {
           next.
         </h2>
         <div className="dw-home-path-grid">
-          {websiteContent.home.pathCards.filter((card) => card.href !== "/am/school").map((card) => (
+          {websiteContent.home.pathCards.map((card) => (
             <NavAnchor className="dw-home-path-card" href={card.href} key={card.title}>
               <span className="dw-path-dot" aria-hidden="true" />
               <h3>{card.title}</h3>
@@ -4430,11 +4455,19 @@ function LegacyPublicMediaGridPageSection() {
 export function PublicMediaGridPageSection() {
   const [activePodcast, setActivePodcast] = useState<(typeof publicArchiveEntries)[number] | null>(null);
   const [activeArchiveYear, setActiveArchiveYear] = useState<string>("2026");
+  const [businessSlideIndex, setBusinessSlideIndex] = useState(0);
+  const businessCarouselRef = useRef<HTMLDivElement | null>(null);
+  const businessSlidesRef = useRef<Array<HTMLDivElement | null>>([]);
   const archiveEntries = [...publicArchiveEntries].sort((a, b) => {
     const dateFor = (entry: (typeof publicArchiveEntries)[number]) => entry.publishedAt ?? `${entry.year}-01-01`;
     return dateFor(b).localeCompare(dateFor(a));
   });
   const archiveYears = [...new Set(archiveEntries.map((entry) => entry.year))];
+
+  const goToBusinessSlide = (index: number) => {
+    setBusinessSlideIndex(index);
+    businessSlidesRef.current[index]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  };
 
   useEffect(() => {
     let frame = 0;
@@ -4478,15 +4511,68 @@ export function PublicMediaGridPageSection() {
           <p>I organise formats, moderate discussions, teach, write, and join the conversations that help Armenia’s design community get sharper and more connected.</p>
         </header>
 
-        {/* Pinned above the archive, because First Brief is the one thing on this
-            page a reader can still act on. It reuses .dw-public-journal-feature,
-            which was already designed and styled for exactly this slot and had
-            never been used. */}
-        <a className="dw-public-journal-feature is-pinned" href="/am/first-brief" data-cursor-label="open it">
-          <div><p>Pinned / open now</p></div>
-          <h2>First Brief</h2>
-          <p>One real project, one junior designer, four to eight weeks, reviewed every week. A business gets the work; a designer gets a first case.<span className="dw-public-journal-link">Read how it works →</span></p>
-        </a>
+        <section className="dw-public-journal-feature is-pinned dw-first-brief-carousel" aria-label="Most relevant for businesses">
+          <header className="dw-first-brief-carousel-head">
+            <p>Most relevant for businesses</p>
+            <div className="dw-first-brief-carousel-controls">
+              <span aria-live="polite">{String(businessSlideIndex + 1).padStart(2, "0")} / {String(firstBriefBusinessSlides.length).padStart(2, "0")}</span>
+              <button type="button" aria-label="Previous First Brief slide" disabled={businessSlideIndex === 0} onClick={() => goToBusinessSlide(Math.max(0, businessSlideIndex - 1))}>
+                <ChevronLeft size={19} aria-hidden="true" />
+              </button>
+              <button type="button" aria-label="Next First Brief slide" disabled={businessSlideIndex === firstBriefBusinessSlides.length - 1} onClick={() => goToBusinessSlide(Math.min(firstBriefBusinessSlides.length - 1, businessSlideIndex + 1))}>
+                <ChevronRight size={19} aria-hidden="true" />
+              </button>
+            </div>
+          </header>
+          <div
+            ref={businessCarouselRef}
+            className="dw-first-brief-carousel-viewport"
+            aria-label="First Brief slides and registration"
+            onScroll={(event) => {
+              const viewport = event.currentTarget.getBoundingClientRect();
+              const center = viewport.left + viewport.width / 2;
+              let nearestIndex = businessSlideIndex;
+              let nearestDistance = Number.POSITIVE_INFINITY;
+              businessSlidesRef.current.forEach((slide, index) => {
+                if (!slide) return;
+                const rect = slide.getBoundingClientRect();
+                const distance = Math.abs(rect.left + rect.width / 2 - center);
+                if (distance < nearestDistance) {
+                  nearestDistance = distance;
+                  nearestIndex = index;
+                }
+              });
+              if (nearestIndex !== businessSlideIndex) setBusinessSlideIndex(nearestIndex);
+            }}
+          >
+            <div className="dw-first-brief-carousel-track">
+              {firstBriefBusinessSlides.map((slide, index) => (
+                <div ref={(node) => { businessSlidesRef.current[index] = node; }} className={`dw-first-brief-carousel-page${index === businessSlideIndex ? " is-active" : ""}`} key={slide.type === "image" ? slide.src : "registration-cta"}>
+                  {slide.type === "image" ? (
+                    <figure>
+                      <img src={slide.src} alt={slide.alt} loading={index < 2 ? "eager" : "lazy"} />
+                    </figure>
+                  ) : (
+                    <div className="dw-first-brief-carousel-cta">
+                      <p>First Brief · Armenia</p>
+                      <h2>Ready to take part?</h2>
+                      <div className="dw-first-brief-carousel-cta-actions">
+                        <a href={FIRST_BRIEF_DESIGNER_FORM} target="_blank" rel="noreferrer">I’m a designer <ExternalLink size={15} aria-hidden="true" /></a>
+                        <a href={FIRST_BRIEF_BUSINESS_FORM} target="_blank" rel="noreferrer">I have a project <ExternalLink size={15} aria-hidden="true" /></a>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="dw-first-brief-carousel-progress" aria-label="Choose a First Brief slide">
+            {firstBriefBusinessSlides.map((slide, index) => (
+              <button key={slide.type === "image" ? slide.src : "registration-cta"} type="button" aria-label={`Show slide ${index + 1} of ${firstBriefBusinessSlides.length}`} aria-current={index === businessSlideIndex ? "step" : undefined} className={index === businessSlideIndex ? "is-active" : undefined} onClick={() => goToBusinessSlide(index)} />
+            ))}
+          </div>
+          <a className="dw-first-brief-carousel-link" href="/am/first-brief" data-cursor-label="see the programme">See how First Brief works <span aria-hidden="true">→</span></a>
+        </section>
 
         <section className="dw-public-journal-grid" aria-label="Public work archive">
           {archiveEntries.map((entry, index) => {
@@ -4537,7 +4623,7 @@ export function PublicMediaGridPageSection() {
           <div className="dw-public-podcast-modal-frame" onClick={(event) => event.stopPropagation()}>
             <button className="dw-public-podcast-close" type="button" onClick={() => setActivePodcast(null)} aria-label="Close video"><X size={21} /></button>
             <iframe
-              src={`https://www.youtube-nocookie.com/embed/${activePodcast.videoId}?autoplay=1`}
+              src={`https://www.youtube-nocookie.com/embed/${activePodcast.videoId}?autoplay=1${"videoStart" in activePodcast ? `&start=${activePodcast.videoStart}` : ""}`}
               title={activePodcast.title}
               allow="autoplay; encrypted-media; picture-in-picture"
               allowFullScreen
@@ -5016,7 +5102,7 @@ function resolveRoute(path: string): ReactNode {
   if (legacyProjects[path]) return <ProjectPage slug={legacyProjects[path]} />;
   if (path === "/am/design-talent") return <DesignTalentPage />;
   if (path === "/am/story") return <PublicWorkPage />;
-  if (path === "/am/school") return <HomePage />;
+  if (path === "/am/school") return <SchoolPage />;
   const publicArticleMatch = path.match(/^\/am\/public-work\/([^/]+)$/);
   if (publicArticleMatch) return <PublicArticlePage slug={publicArticleMatch[1]} />;
   if (path === "/am/public-work") return <PublicWorkPage />;

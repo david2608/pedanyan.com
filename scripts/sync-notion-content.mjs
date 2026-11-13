@@ -66,7 +66,7 @@ const defaultContent = {
       },
       {
         title: "Want to learn design?",
-        text: "I teach beginners to research, critique, design interfaces, and explain their decisions.",
+        text: "Design Generalist: five months for working designers who are tired of having only one discipline.",
         cta: "Explore the school",
         href: "/am/school"
       },

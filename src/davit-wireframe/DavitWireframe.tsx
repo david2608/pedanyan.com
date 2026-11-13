@@ -29,6 +29,7 @@ import { CHAT_AVATAR, ContactChat, openContactChat } from "./ContactChat";
 import { PullToContinue } from "./PullToContinue";
 import { ReportArmenia2026 } from "../report/ReportArmenia2026";
 import { FirstBriefPage } from "../first-brief/FirstBriefPage";
+import { SchoolPage } from "../school/SchoolPage";
 import { initAnalytics, trackPageView } from "../analytics/ga";
 import { useReadDepth } from "../analytics/readDepth";
 import { OctagonField } from "./OctagonField";
@@ -4510,15 +4511,68 @@ export function PublicMediaGridPageSection() {
           <p>I organise formats, moderate discussions, teach, write, and join the conversations that help Armenia’s design community get sharper and more connected.</p>
         </header>
 
-        {/* Pinned above the archive, because First Brief is the one thing on this
-            page a reader can still act on. It reuses .dw-public-journal-feature,
-            which was already designed and styled for exactly this slot and had
-            never been used. */}
-        <a className="dw-public-journal-feature is-pinned" href="/am/first-brief" data-cursor-label="open it">
-          <div><p>Pinned / open now</p></div>
-          <h2>First Brief</h2>
-          <p>One real project, one junior designer, four to eight weeks, reviewed every week. A business gets the work; a designer gets a first case.<span className="dw-public-journal-link">Read how it works →</span></p>
-        </a>
+        <section className="dw-public-journal-feature is-pinned dw-first-brief-carousel" aria-label="Most relevant for businesses">
+          <header className="dw-first-brief-carousel-head">
+            <p>Most relevant for businesses</p>
+            <div className="dw-first-brief-carousel-controls">
+              <span aria-live="polite">{String(businessSlideIndex + 1).padStart(2, "0")} / {String(firstBriefBusinessSlides.length).padStart(2, "0")}</span>
+              <button type="button" aria-label="Previous First Brief slide" disabled={businessSlideIndex === 0} onClick={() => goToBusinessSlide(Math.max(0, businessSlideIndex - 1))}>
+                <ChevronLeft size={19} aria-hidden="true" />
+              </button>
+              <button type="button" aria-label="Next First Brief slide" disabled={businessSlideIndex === firstBriefBusinessSlides.length - 1} onClick={() => goToBusinessSlide(Math.min(firstBriefBusinessSlides.length - 1, businessSlideIndex + 1))}>
+                <ChevronRight size={19} aria-hidden="true" />
+              </button>
+            </div>
+          </header>
+          <div
+            ref={businessCarouselRef}
+            className="dw-first-brief-carousel-viewport"
+            aria-label="First Brief slides and registration"
+            onScroll={(event) => {
+              const viewport = event.currentTarget.getBoundingClientRect();
+              const center = viewport.left + viewport.width / 2;
+              let nearestIndex = businessSlideIndex;
+              let nearestDistance = Number.POSITIVE_INFINITY;
+              businessSlidesRef.current.forEach((slide, index) => {
+                if (!slide) return;
+                const rect = slide.getBoundingClientRect();
+                const distance = Math.abs(rect.left + rect.width / 2 - center);
+                if (distance < nearestDistance) {
+                  nearestDistance = distance;
+                  nearestIndex = index;
+                }
+              });
+              if (nearestIndex !== businessSlideIndex) setBusinessSlideIndex(nearestIndex);
+            }}
+          >
+            <div className="dw-first-brief-carousel-track">
+              {firstBriefBusinessSlides.map((slide, index) => (
+                <div ref={(node) => { businessSlidesRef.current[index] = node; }} className={`dw-first-brief-carousel-page${index === businessSlideIndex ? " is-active" : ""}`} key={slide.type === "image" ? slide.src : "registration-cta"}>
+                  {slide.type === "image" ? (
+                    <figure>
+                      <img src={slide.src} alt={slide.alt} loading={index < 2 ? "eager" : "lazy"} />
+                    </figure>
+                  ) : (
+                    <div className="dw-first-brief-carousel-cta">
+                      <p>First Brief · Armenia</p>
+                      <h2>Ready to take part?</h2>
+                      <div className="dw-first-brief-carousel-cta-actions">
+                        <a href={FIRST_BRIEF_DESIGNER_FORM} target="_blank" rel="noreferrer">I’m a designer <ExternalLink size={15} aria-hidden="true" /></a>
+                        <a href={FIRST_BRIEF_BUSINESS_FORM} target="_blank" rel="noreferrer">I have a project <ExternalLink size={15} aria-hidden="true" /></a>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="dw-first-brief-carousel-progress" aria-label="Choose a First Brief slide">
+            {firstBriefBusinessSlides.map((slide, index) => (
+              <button key={slide.type === "image" ? slide.src : "registration-cta"} type="button" aria-label={`Show slide ${index + 1} of ${firstBriefBusinessSlides.length}`} aria-current={index === businessSlideIndex ? "step" : undefined} className={index === businessSlideIndex ? "is-active" : undefined} onClick={() => goToBusinessSlide(index)} />
+            ))}
+          </div>
+          <a className="dw-first-brief-carousel-link" href="/am/first-brief" data-cursor-label="see the programme">See how First Brief works <span aria-hidden="true">→</span></a>
+        </section>
 
         <section className="dw-public-journal-grid" aria-label="Public work archive">
           {archiveEntries.map((entry, index) => {

@@ -102,3 +102,11 @@
 #o-avatar-sheet.is-saving .avs__btn--primary { border-radius: 16px; color: #0a1c00; pointer-events: none; }
 #o-avatar-sheet.is-saving .avs__spin { display: block; }
 #o-avatar-sheet.is-saving .avs__body { pointer-events: none; }
+
+/* v2 — the sheet hosts the shared profile form (.pf) from onboarding */
+#o-avatar-sheet .avs__body { align-items: stretch; gap: 0; padding: 92px 16px 170px; }
+#o-avatar-sheet .avs__body .pf-form { gap: 20px; }
+#o-avatar-sheet .avs__footer { gap: 10px; padding-top: 28px; background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 28px); }
+#o-avatar-sheet .avs__btn[aria-disabled="true"] { background: #edf0f3; color: rgba(8,8,8,.3); }
+#o-avatar-sheet .avs__btn[aria-disabled="true"]:active { transform: none; filter: none; }
+#o-avatar-sheet .avs__btn.is-ready { animation: paReady .5s cubic-bezier(.2,1.5,.4,1); }

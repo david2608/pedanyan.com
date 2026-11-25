@@ -37,21 +37,17 @@
           <span class="tab__icon">${icon}</span>
           <span class="tab__label">${label}</span>
         </button>`;
+      // Figma "Page footer" (1870:76095): solid white footer, tab pill + separate scan button, home indicator
       return `
       <nav class="tabbar">
-        <div class="tabbar__bar">
-          <img class="tabbar__bg" src="${A}tabbar-bg.svg" alt="">
-          <div class="tabbar__group">
-            <div class="tabbar__half">
-              ${tab('home', 'Home', `<img src="${A}tab-home.svg" width="20" height="20" alt="">`)}
-              ${tab('services', 'Services', `<img src="${A}tab-services.svg" width="24" height="24" alt="">`)}
-            </div>
-            <div class="tabbar__half">
-              ${tab('education', 'Education', `<img src="${A}tab-education-active.svg" width="24" height="24" alt="">`, 'data-go="s-home"')}
-              ${tab('history', 'History', `<img src="${A}tab-history.svg" width="18" height="20.499" alt="">`)}
-            </div>
-            <button class="tabbar__qr" aria-label="Scan QR"><img src="${A}tab-qr-button.svg" alt=""></button>
+        <div class="tabbar__row">
+          <div class="tabbar__pill">
+            ${tab('home', 'Home', `<img src="${A}tab-home.svg" width="20" height="20" alt="">`)}
+            ${tab('services', 'Services', `<img src="${A}tab-services.svg" width="24" height="24" alt="">`)}
+            ${tab('education', 'Education', `<img src="${A}tab-education-active.svg" width="24" height="24" alt="">`, 'data-go="s-home"')}
+            ${tab('history', 'History', `<img src="${A}tab-history.svg" width="18" height="20.499" alt="">`)}
           </div>
+          <button class="tabbar__qr" aria-label="Scan QR"><span class="tabbar__qr-in"><img src="${A}tab-qr-button.svg" alt=""></span></button>
         </div>
         <div class="home-indicator"></div>
       </nav>`;
@@ -105,6 +101,13 @@
       if (!back && App.current && !replace) stack.push(App.current);
       const dev = document.getElementById('device');
       if (dev) { dev.dataset.w = next.dataset.w || 393; dev.dataset.h = next.dataset.h || 852; fitDevice(); }
+      // web-app shell: every screen gets the tab bar; screens without their own use the shared one
+      if (dev) {
+        const own = !!next.querySelector(':scope .tabbar:not(.tabbar--global)');
+        const noTabbar = next.hasAttribute('data-no-tabbar');
+        next.classList.toggle('has-auto-tab', !own && !noTabbar);
+        dev.classList.toggle('with-tabbar', !noTabbar);
+      }
       next.classList.add('is-active');
       next.classList.toggle('is-back', back);
       next.querySelectorAll('.scroll').forEach((s) => (s.scrollTop = 0));
@@ -134,12 +137,19 @@
   function buildFlowNav() {
     const nav = document.querySelector('.flow-nav');
     if (!nav) return;
-    let group = null, html = '<h3 style="color:#fff">MyAmeria Star · Flow</h3>';
-    document.querySelectorAll('.screen').forEach((s) => {
-      if (s.dataset.group !== group) { group = s.dataset.group; html += `<h3>${group}</h3>`; }
+    let group = null, html = '<h3 style="color:#fff">MyAmeria Star · Flow</h3><button class="flow-nav__cmp" data-prev>⇄ Same screen in the previous version</button>';
+    // Archived screens (data-group starting with "Archive") are kept but listed at the very bottom.
+    const all = [...document.querySelectorAll('.screen')];
+    const isArc = (s) => /^Archive/.test(s.dataset.group || '');
+    const ordered = all.filter((s) => !isArc(s)).concat(all.filter(isArc));
+    let arcShown = false;
+    ordered.forEach((s) => {
+      if (isArc(s) && !arcShown) { arcShown = true; html += '<p class="flow-nav__arc">Archive · kept for later</p>'; }
+      if (s.dataset.group !== group) { group = s.dataset.group; html += `<h3${isArc(s) ? ' class="is-arc"' : ''}>${group}</h3>`; }
       html += `<button data-go="${s.id}">${s.dataset.title || s.id}</button>`;
     });
     nav.innerHTML = html;
+    nav.addEventListener('click', (e) => { if (e.target.closest('[data-prev]')) { e.stopPropagation(); location.href = 'previous/index.html' + (App.current ? '#' + App.current : ''); } });
     if (isApp) {
       // Phone: the screen list becomes a full-screen sheet opened by a small floating button.
       nav.insertAdjacentHTML('afterbegin', '<button class="flow-nav__close" aria-label="Close">✕</button>');
@@ -154,6 +164,8 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    const devEl = document.getElementById('device');
+    if (devEl) devEl.insertAdjacentHTML('beforeend', '<div data-include="tabbar" class="tabbar--global" data-active="education"></div>');
     expandIncludes(document);
     buildFlowNav();
     document.dispatchEvent(new Event('app:ready'));

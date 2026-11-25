@@ -29,7 +29,7 @@ import { CHAT_AVATAR, ContactChat, openContactChat } from "./ContactChat";
 import { PullToContinue } from "./PullToContinue";
 import { ReportArmenia2026 } from "../report/ReportArmenia2026";
 import { FirstBriefPage } from "../first-brief/FirstBriefPage";
-import { SchoolPage } from "../school/SchoolPage";
+import { SchoolPage as SchoolLandingPage } from "../school/SchoolPage";
 import { initAnalytics, trackPageView } from "../analytics/ga";
 import { useReadDepth } from "../analytics/readDepth";
 import { OctagonField } from "./OctagonField";
@@ -5000,7 +5000,7 @@ export function StoryPage() {
   );
 }
 
-export function SchoolPage() {
+function SchoolPage() {
   return <ComingSoonPage title="School" activePage="school" />;
 }
 
@@ -5102,7 +5102,7 @@ function resolveRoute(path: string): ReactNode {
   if (legacyProjects[path]) return <ProjectPage slug={legacyProjects[path]} />;
   if (path === "/am/design-talent") return <DesignTalentPage />;
   if (path === "/am/story") return <PublicWorkPage />;
-  if (path === "/am/school") return <SchoolPage />;
+  if (path === "/am/school") return <SchoolLandingPage />;
   const publicArticleMatch = path.match(/^\/am\/public-work\/([^/]+)$/);
   if (publicArticleMatch) return <PublicArticlePage slug={publicArticleMatch[1]} />;
   if (path === "/am/public-work") return <PublicWorkPage />;

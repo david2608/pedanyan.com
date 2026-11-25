@@ -12,6 +12,6 @@
     });
     const name = sec.querySelector('.v1o-name__input');
     name.addEventListener('input', () => { if (window.App) App.state.name = name.value.trim(); });
-    if (window.App) App.state.avatar = App.state.avatar || grid.querySelector('.is-selected').dataset.avatar;
+    // (no default avatar is written to App.state any more — the gamified profile starts empty)
   });
 })();

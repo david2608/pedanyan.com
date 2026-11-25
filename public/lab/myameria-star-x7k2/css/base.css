@@ -211,4 +211,69 @@ html.is-app .v1o-handle, html.is-app .v1-handle { visibility: hidden; }
 .flow-nav h3 { font: 600 12px/1.4 var(--font-text); color: #93ec60; margin: 10px 4px 4px; text-transform: uppercase; letter-spacing: .04em; }
 .flow-nav button { display: block; width: 100%; text-align: left; padding: 6px 8px; border-radius: 8px; color: #ddd; }
 .flow-nav button:hover, .flow-nav button.is-current { background: #3a3a3a; color: #fff; }
+.flow-nav__arc { margin: 22px 4px 4px; padding-top: 12px; border-top: 1px solid #444; font: 600 11px/1.4 var(--font-text); color: #8a8a8a; text-transform: uppercase; letter-spacing: .06em; }
+.flow-nav h3.is-arc { color: #9a9a9a; }
 @media (max-width: 900px) { .flow-nav { display: none; } }
+
+/* ---------- Chip · Figma "Chip new / molecule / single select" (11:17235) ----------
+   h38 · padding 10/14 · radius 20 · Label M Medium 13/20 +0.2
+   default: #f4f4f5 (on primary) or white (on secondary) + subtitle text · selected: green-130 #c1fc9f + green-900 #123200
+   Every chip-like label in the new screens maps onto this component (compact = same style, 28px tall, for labels inside cards). */
+.chip, .onb-pill, .pa-kicker, .pa-preview__tag, .pv-chip, .pv-stat, .lv-tab__new, .lv-start, .obn-xp, .obn-gain, .obn-rate__amp, .pst-tag, .pbs__status, .pv-next {
+  display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 38px; padding: 10px 14px; border-radius: 20px;
+  background: #f4f4f5; color: rgba(15,15,16,.5); font: 510 13px/20px var(--font-text); letter-spacing: .2px; white-space: nowrap; box-shadow: none;
+  text-transform: none;
+}
+.chip.is-selected, .onb-pill, .pa-kicker, .pv-chip--g, .pv-stat--earned, .lv-tab__new, .lv-start, .obn-gain, .obn-rate__amp, .pv-next,
+#o-badge-info .pbs__status { background: #c1fc9f; color: #123200; }
+.chip--white, .pa-preview__tag, .obn-xp { background: #fff; }
+/* compact (inside cards / on top of other elements) */
+.chip--s, .pa-preview__tag, .pv-chip, .pv-stat, .lv-tab__new, .lv-start, .pv-next, .pst-tag, .obn-gain { height: 28px; padding: 4px 12px; font-size: 12px; line-height: 20px; }
+.chip img, .pa-kicker img, .obn-rate__amp img { width: 16px; height: 16px; }
+.pa-preview__tag, .obn-xp, .lv-tab__new, .lv-start, .pv-next { box-shadow: 0 2px 10px rgba(8,8,8,.1); }
+#o-badge-info.is-todo .pbs__status, #o-badge-info.is-locked .pbs__status { background: #f4f4f5; color: rgba(15,15,16,.5); }
+
+/* ---------- Tab bar v2 · Figma "Page footer" 1870:76095 ----------
+   Solid white footer (nothing scrolls visibly underneath), pale-grey pill with 4 tabs (selected = #ededed backplate),
+   separate 62px scan button, home indicator. */
+.tabbar { height: 127px; padding-top: 20px; gap: 0; background: #fff; pointer-events: auto; justify-content: flex-start;
+  box-shadow: 0 -10px 24px -14px rgba(8,8,8,.18); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+.tabbar__row { width: 100%; display: flex; align-items: center; gap: 16px; padding: 0 24px 24px; }
+.tabbar__pill { flex: 1; min-width: 0; display: flex; padding: 4px; border-radius: 296px; background: #f7f7f7; box-shadow: inset 0 0 0 .5px rgba(8,8,8,.04); }
+.tabbar__pill .tab { flex: 1 0 0; min-width: 0; height: 54px; padding: 6px 4px 7px; gap: 1px; justify-content: center; border-radius: 100px; }
+.tabbar__pill .tab.is-active { background: #ededed; }
+.tabbar__pill .tab__icon { width: 28px; height: 28px; }
+.tabbar__pill .tab__label { width: auto; font: 400 10px/16px var(--font-text); letter-spacing: -.1px; color: rgba(8,8,8,.35); }
+.tabbar__pill .tab.is-active .tab__label { font-weight: 510; color: #183e02; }
+.tabbar .tabbar__qr { position: relative; left: auto; top: auto; transform: none; width: 62px; height: 62px; flex-shrink: 0; border-radius: 32px; background: #f7f7f7;
+  display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: inset 0 0 0 .5px rgba(8,8,8,.04); }
+.tabbar__qr-in { position: relative; width: 56px; height: 56px; border-radius: 32px; overflow: hidden; box-shadow: 0 4px 24px -12px #6dce35; }
+.tabbar .tabbar__qr img { position: absolute; left: -14px; top: -10.27px; width: 84px; height: 84px; }
+
+/* compare link to the previous build */
+.flow-nav .flow-nav__cmp { margin: 2px 0 6px; background: #1f3313; color: #c1fc9f; }
+.flow-nav .flow-nav__cmp:hover { background: #2a4519; color: #fff; }
+
+/* ---------- Web-app shell: shared tab bar on screens that don't draw their own ---------- */
+.tabbar.tabbar--global { display: none; z-index: 60; }
+/* the shared bar sits above everything; per-screen copies stay only as layout spacers */
+.screen .tabbar:not(.tabbar--global) { visibility: hidden; }
+/* drawers and dialogs open above the tab bar, never over it */
+.device.with-tabbar .overlay { bottom: 127px; }
+.device.with-tabbar .tabbar.tabbar--global { display: flex; }
+.screen.has-auto-tab { bottom: 127px; }
+.screen.has-auto-tab .home-indicator { height: 12px; }
+.screen.has-auto-tab .home-indicator::after { display: none; }
+/* only the tab bar draws the home indicator */
+.device.with-tabbar .home-indicator::after { display: none; }
+.device.with-tabbar .tabbar--global .home-indicator::after { display: block; }
+html.is-app .device.with-tabbar .tabbar--global .home-indicator::after { display: none; }
+
+/* lesson sheets were drawn at a fixed phone height: end them above the shared tab bar */
+.screen.has-auto-tab :is(.lq-sheet, .lc-sheet, .lx-sheet, .tc-sheet, .lq-end__sheet, .lr__sheet) { height: auto; bottom: 0; }
+/* reel: video slightly shorter so the button fits under it, face and caption still visible */
+.screen.has-auto-tab .lr__video { height: 492px; }
+.screen.has-auto-tab .lr__poster { object-position: center 45%; }
+/* module complete: smaller badge so the results list and button fit */
+.screen.has-auto-tab .tc-badge { width: 124px; height: 124px; left: 134.5px; top: 84px; }
+.screen.has-auto-tab .tc-content { top: 272px; height: auto; bottom: 0; }

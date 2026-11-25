@@ -48,6 +48,9 @@ RewriteRule ^securion/?$                      /am/projects/securion [L,R=301]
 RewriteRule ^material-exchange-photo-lab/?$   /am/projects/material-exchange-photo-lab [L,R=301]
 RewriteRule ^hotel-apartments/?$              /am/projects/hotel-apartments [L,R=301]
 
+# Keep the language homepage out of the generic slash redirect on LiteSpeed.
+RewriteRule ^am/?$ /index.html [L]
+
 # ===========================================================================
 # 2b. /lab/ - RAW STATIC PROTOTYPES
 # ---------------------------------------------------------------------------
